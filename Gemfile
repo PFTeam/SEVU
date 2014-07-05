@@ -38,3 +38,12 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+
+#Gemas Agregadas
+gem 'simple_form'
+gem 'bcrypt'
+gem 'will_paginate', '~> 3.0'
+gem 'validates_timeliness', '~> 3.0'
+gem 'sidekiq'
+gem 'capybara'
+
