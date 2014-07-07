@@ -1,2 +1,0 @@
-module ProyectoTipoNotificacionsHelper
-end

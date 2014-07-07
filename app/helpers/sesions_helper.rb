@@ -1,2 +1,0 @@
-module SesionsHelper
-end
