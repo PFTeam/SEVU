@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Fechainicio:</strong>
+  <%= @sesion.fechaInicio %>
+</p>
+
+<p>
+  <strong>Fechafin:</strong>
+  <%= @sesion.fechaFin %>
+</p>
+
+<p>
+  <strong>Usuario:</strong>
+  <%= @sesion.usuario %>
+</p>
+
+<%= link_to 'Edit', edit_sesion_path(@sesion) %> |
+<%= link_to 'Back', sesions_path %>

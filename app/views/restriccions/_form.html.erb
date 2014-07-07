@@ -1,0 +1,33 @@
+<%= form_for(@restriccion) do |f| %>
+  <% if @restriccion.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@restriccion.errors.count, "error") %> prohibited this restriccion from being saved:</h2>
+
+      <ul>
+      <% @restriccion.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :fechaDesde %><br>
+    <%= f.date_select :fechaDesde %>
+  </div>
+  <div class="field">
+    <%= f.label :fechaHasta %><br>
+    <%= f.date_select :fechaHasta %>
+  </div>
+  <div class="field">
+    <%= f.label :esActiva %><br>
+    <%= f.check_box :esActiva %>
+  </div>
+  <div class="field">
+    <%= f.label :tipo_proyecto_id %><br>
+    <%= f.text_field :tipo_proyecto_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,31 @@
+<h1>Listing experiencia</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Tieneexperiencia</th>
+      <th>Cantidadexperiencia</th>
+      <th>Habilidad</th>
+      <th>Voluntario</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @experiencia.each do |experiencium| %>
+      <tr>
+        <td><%= experiencium.tieneExperiencia %></td>
+        <td><%= experiencium.cantidadExperiencia %></td>
+        <td><%= experiencium.habilidad %></td>
+        <td><%= experiencium.voluntario %></td>
+        <td><%= link_to 'Show', experiencium %></td>
+        <td><%= link_to 'Edit', edit_experiencium_path(experiencium) %></td>
+        <td><%= link_to 'Destroy', experiencium, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Experiencium', new_experiencium_path %>

@@ -1,0 +1,2 @@
+module AsistenciaEventoPublicosHelper
+end

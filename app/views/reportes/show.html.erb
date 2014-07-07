@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Fechacreacion:</strong>
+  <%= @reporte.fechaCreacion %>
+</p>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @reporte.descripcion %>
+</p>
+
+<p>
+  <strong>Asignacion actividad:</strong>
+  <%= @reporte.asignacion_actividad %>
+</p>
+
+<%= link_to 'Edit', edit_reporte_path(@reporte) %> |
+<%= link_to 'Back', reportes_path %>

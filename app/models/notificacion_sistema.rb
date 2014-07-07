@@ -1,0 +1,2 @@
+class NotificacionSistema < Notificacion
+end

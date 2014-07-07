@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nombre: MyString
+  breveDescripcion: MyText
+  fechaInicio: 2014-07-06
+  fechaFin: 2014-07-06
+  antecedentes: MyText
+  justificacionProyecto: MyText
+  cantidadBeneficiariosDirectos: 
+  cantidadBeneficiariosIndirectos: 
+  justificacionImpacto: MyText
+  localizacionGeografica: MyText
+  tipo_proyecto_id: 
+  necesidad_id: 
+
+two:
+  nombre: MyString
+  breveDescripcion: MyText
+  fechaInicio: 2014-07-06
+  fechaFin: 2014-07-06
+  antecedentes: MyText
+  justificacionProyecto: MyText
+  cantidadBeneficiariosDirectos: 
+  cantidadBeneficiariosIndirectos: 
+  justificacionImpacto: MyText
+  localizacionGeografica: MyText
+  tipo_proyecto_id: 
+  necesidad_id: 

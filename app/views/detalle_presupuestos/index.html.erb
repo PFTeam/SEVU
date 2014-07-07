@@ -1,0 +1,33 @@
+<h1>Listing detalle_presupuestos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Titulo</th>
+      <th>Descripcion</th>
+      <th>Monto</th>
+      <th>Presupuesto</th>
+      <th>Concepto gasto</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @detalle_presupuestos.each do |detalle_presupuesto| %>
+      <tr>
+        <td><%= detalle_presupuesto.titulo %></td>
+        <td><%= detalle_presupuesto.descripcion %></td>
+        <td><%= detalle_presupuesto.monto %></td>
+        <td><%= detalle_presupuesto.presupuesto %></td>
+        <td><%= detalle_presupuesto.concepto_gasto %></td>
+        <td><%= link_to 'Show', detalle_presupuesto %></td>
+        <td><%= link_to 'Edit', edit_detalle_presupuesto_path(detalle_presupuesto) %></td>
+        <td><%= link_to 'Destroy', detalle_presupuesto, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Detalle presupuesto', new_detalle_presupuesto_path %>

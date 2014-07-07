@@ -1,0 +1,29 @@
+<h1>Listing asistencia_evento_publicos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Fechacreacion</th>
+      <th>Evento publico</th>
+      <th>Usuario</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @asistencia_evento_publicos.each do |asistencia_evento_publico| %>
+      <tr>
+        <td><%= asistencia_evento_publico.fechaCreacion %></td>
+        <td><%= asistencia_evento_publico.evento_publico %></td>
+        <td><%= asistencia_evento_publico.usuario %></td>
+        <td><%= link_to 'Show', asistencia_evento_publico %></td>
+        <td><%= link_to 'Edit', edit_asistencia_evento_publico_path(asistencia_evento_publico) %></td>
+        <td><%= link_to 'Destroy', asistencia_evento_publico, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Asistencia evento publico', new_asistencia_evento_publico_path %>

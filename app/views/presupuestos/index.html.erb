@@ -1,0 +1,35 @@
+<h1>Listing presupuestos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Fechapresentacion</th>
+      <th>Montototal</th>
+      <th>Aprobado</th>
+      <th>Proyecto</th>
+      <th>Restriccion</th>
+      <th>Usuario</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @presupuestos.each do |presupuesto| %>
+      <tr>
+        <td><%= presupuesto.fechaPresentacion %></td>
+        <td><%= presupuesto.montoTotal %></td>
+        <td><%= presupuesto.aprobado %></td>
+        <td><%= presupuesto.proyecto %></td>
+        <td><%= presupuesto.restriccion %></td>
+        <td><%= presupuesto.usuario %></td>
+        <td><%= link_to 'Show', presupuesto %></td>
+        <td><%= link_to 'Edit', edit_presupuesto_path(presupuesto) %></td>
+        <td><%= link_to 'Destroy', presupuesto, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Presupuesto', new_presupuesto_path %>

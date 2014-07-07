@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  tieneExperiencia: false
+  cantidadExperiencia: 
+  habilidad_id: 
+  voluntario_id: 
+
+two:
+  tieneExperiencia: false
+  cantidadExperiencia: 
+  habilidad_id: 
+  voluntario_id: 

@@ -1,0 +1,37 @@
+<%= form_for(@asignacion_rol_sistema) do |f| %>
+  <% if @asignacion_rol_sistema.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@asignacion_rol_sistema.errors.count, "error") %> prohibited this asignacion_rol_sistema from being saved:</h2>
+
+      <ul>
+      <% @asignacion_rol_sistema.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :fechaAsignacion %><br>
+    <%= f.date_select :fechaAsignacion %>
+  </div>
+  <div class="field">
+    <%= f.label :esActual %><br>
+    <%= f.check_box :esActual %>
+  </div>
+  <div class="field">
+    <%= f.label :descripcion %><br>
+    <%= f.text_area :descripcion %>
+  </div>
+  <div class="field">
+    <%= f.label :usuario_id %><br>
+    <%= f.text_field :usuario_id %>
+  </div>
+  <div class="field">
+    <%= f.label :rol_id %><br>
+    <%= f.text_field :rol_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

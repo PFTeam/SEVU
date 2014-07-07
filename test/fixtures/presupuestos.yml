@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fechaPresentacion: 2014-07-06
+  montoTotal: 
+  aprobado: false
+  proyecto_id: 
+  restriccion_id: 
+  usuario_id: 
+
+two:
+  fechaPresentacion: 2014-07-06
+  montoTotal: 
+  aprobado: false
+  proyecto_id: 
+  restriccion_id: 
+  usuario_id: 

@@ -1,0 +1,2 @@
+module TipoTransaccionsHelper
+end

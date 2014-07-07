@@ -1,0 +1,17 @@
+<%= form_for(@notificacion_sistema) do |f| %>
+  <% if @notificacion_sistema.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@notificacion_sistema.errors.count, "error") %> prohibited this notificacion_sistema from being saved:</h2>
+
+      <ul>
+      <% @notificacion_sistema.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

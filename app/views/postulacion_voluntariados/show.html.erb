@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Fechapostulacion:</strong>
+  <%= @postulacion_voluntariado.fechaPostulacion %>
+</p>
+
+<p>
+  <strong>Aceptado:</strong>
+  <%= @postulacion_voluntariado.aceptado %>
+</p>
+
+<p>
+  <strong>Proyecto:</strong>
+  <%= @postulacion_voluntariado.proyecto %>
+</p>
+
+<p>
+  <strong>Usuario:</strong>
+  <%= @postulacion_voluntariado.usuario %>
+</p>
+
+<%= link_to 'Edit', edit_postulacion_voluntariado_path(@postulacion_voluntariado) %> |
+<%= link_to 'Back', postulacion_voluntariados_path %>

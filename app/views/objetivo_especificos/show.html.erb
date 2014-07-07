@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Titulo:</strong>
+  <%= @objetivo_especifico.titulo %>
+</p>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @objetivo_especifico.descripcion %>
+</p>
+
+<p>
+  <strong>Objetivo general:</strong>
+  <%= @objetivo_especifico.objetivo_general %>
+</p>
+
+<%= link_to 'Edit', edit_objetivo_especifico_path(@objetivo_especifico) %> |
+<%= link_to 'Back', objetivo_especificos_path %>

@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  proyecto_id: 
+  tipo_notificacion_id: 
+
+two:
+  proyecto_id: 
+  tipo_notificacion_id: 

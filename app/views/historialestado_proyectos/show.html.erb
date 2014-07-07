@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Fechacambioestado:</strong>
+  <%= @historialestado_proyecto.fechaCambioEstado %>
+</p>
+
+<p>
+  <strong>Esactual:</strong>
+  <%= @historialestado_proyecto.esActual %>
+</p>
+
+<p>
+  <strong>Estado proyecto:</strong>
+  <%= @historialestado_proyecto.estado_proyecto %>
+</p>
+
+<p>
+  <strong>Proyecto:</strong>
+  <%= @historialestado_proyecto.proyecto %>
+</p>
+
+<%= link_to 'Edit', edit_historialestado_proyecto_path(@historialestado_proyecto) %> |
+<%= link_to 'Back', historialestado_proyectos_path %>

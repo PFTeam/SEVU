@@ -1,0 +1,2 @@
+class NotificacionEmail < Notificacion
+end

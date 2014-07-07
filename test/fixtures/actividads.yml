@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nombre: MyString
+  descripcion: MyText
+  duracion: 
+  duracionReal: 
+  fechaEstimadaInicio: 2014-07-06
+  fechaRealInicio: 2014-07-06
+  estrategiasIntervencion: MyString
+  metodologiasIntervencion: MyText
+  mecanismoEvaluacion: MyText
+  resultadosEsperados: MyText
+  objetivo_especifico_id: 
+  proyecto_id: 
+  tipo_actividad_id: 
+
+two:
+  nombre: MyString
+  descripcion: MyText
+  duracion: 
+  duracionReal: 
+  fechaEstimadaInicio: 2014-07-06
+  fechaRealInicio: 2014-07-06
+  estrategiasIntervencion: MyString
+  metodologiasIntervencion: MyText
+  mecanismoEvaluacion: MyText
+  resultadosEsperados: MyText
+  objetivo_especifico_id: 
+  proyecto_id: 
+  tipo_actividad_id: 

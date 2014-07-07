@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Fechacambioestado:</strong>
+  <%= @asignacion_rol_proyecto.fechaCambioEstado %>
+</p>
+
+<p>
+  <strong>Esactual:</strong>
+  <%= @asignacion_rol_proyecto.esActual %>
+</p>
+
+<p>
+  <strong>Rol:</strong>
+  <%= @asignacion_rol_proyecto.rol %>
+</p>
+
+<p>
+  <strong>Proyecto:</strong>
+  <%= @asignacion_rol_proyecto.proyecto %>
+</p>
+
+<p>
+  <strong>Usuario:</strong>
+  <%= @asignacion_rol_proyecto.usuario %>
+</p>
+
+<%= link_to 'Edit', edit_asignacion_rol_proyecto_path(@asignacion_rol_proyecto) %> |
+<%= link_to 'Back', asignacion_rol_proyectos_path %>
