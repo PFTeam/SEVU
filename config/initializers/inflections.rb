@@ -19,7 +19,8 @@
 #Inflector.inflections.clear
 
 #Inflecciones español
-ActiveSupport::Inflector.inflections(:es) do |inflect|
+ActiveSupport::Inflector.inflections do |inflect|
+    inflect.clear :all
     inflect.plural(/$/, 's')
     inflect.plural(/([^aeéiou])$/i, '\1es')
     inflect.plural(/([aeiou]s)$/i, '\1')
