@@ -1,0 +1,25 @@
+<%= form_for(@organizacion_externa_proyecto) do |f| %>
+  <% if @organizacion_externa_proyecto.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@organizacion_externa_proyecto.errors.count, "error") %> prohibited this organizacion_externa_proyecto from being saved:</h2>
+
+      <ul>
+      <% @organizacion_externa_proyecto.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :organizacion_externa_id %><br>
+    <%= f.text_field :organizacion_externa_id %>
+  </div>
+  <div class="field">
+    <%= f.label :proyecto_id %><br>
+    <%= f.text_field :proyecto_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

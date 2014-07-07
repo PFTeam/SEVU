@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140707035924) do
+ActiveRecord::Schema.define(version: 20140707043436) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -354,6 +354,16 @@ ActiveRecord::Schema.define(version: 20140707035924) do
   end
 
   add_index "objetivo_generales", ["proyecto_id"], name: "index_objetivo_generales_on_proyecto_id", using: :btree
+
+  create_table "organizacion_externa_proyectos", force: true do |t|
+    t.integer  "organizacion_externa_id"
+    t.integer  "proyecto_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "organizacion_externa_proyectos", ["organizacion_externa_id"], name: "index_organizacion_externa_proyectos_on_organizacion_externa_id", using: :btree
+  add_index "organizacion_externa_proyectos", ["proyecto_id"], name: "index_organizacion_externa_proyectos_on_proyecto_id", using: :btree
 
   create_table "organizacion_externas", force: true do |t|
     t.string   "sigla"
