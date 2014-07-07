@@ -1,2 +1,0 @@
-class NotificacionEmail < Notificacion
-end

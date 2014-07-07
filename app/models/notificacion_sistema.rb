@@ -1,2 +1,0 @@
-class NotificacionSistema < Notificacion
-end
