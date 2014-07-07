@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Fechadesde:</strong>
+  <%= @restriccion.fechaDesde %>
+</p>
+
+<p>
+  <strong>Fechahasta:</strong>
+  <%= @restriccion.fechaHasta %>
+</p>
+
+<p>
+  <strong>Esactiva:</strong>
+  <%= @restriccion.esActiva %>
+</p>
+
+<p>
+  <strong>Tipo proyecto:</strong>
+  <%= @restriccion.tipo_proyecto %>
+</p>
+
+<%= link_to 'Edit', edit_restriccion_path(@restriccion) %> |
+<%= link_to 'Back', restricciones_path %>

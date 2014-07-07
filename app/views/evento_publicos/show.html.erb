@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @evento_publico.nombre %>
+</p>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @evento_publico.descripcion %>
+</p>
+
+<p>
+  <strong>Fecharealizacion:</strong>
+  <%= @evento_publico.fechaRealizacion %>
+</p>
+
+<p>
+  <strong>Usuario:</strong>
+  <%= @evento_publico.usuario %>
+</p>
+
+<%= link_to 'Edit', edit_evento_publico_path(@evento_publico) %> |
+<%= link_to 'Back', evento_publicos_path %>

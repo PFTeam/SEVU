@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Titulo:</strong>
+  <%= @concepto_gasto.titulo %>
+</p>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @concepto_gasto.descripcion %>
+</p>
+
+<%= link_to 'Edit', edit_concepto_gasto_path(@concepto_gasto) %> |
+<%= link_to 'Back', concepto_gastos_path %>

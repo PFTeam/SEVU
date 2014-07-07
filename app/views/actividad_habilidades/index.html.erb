@@ -1,0 +1,27 @@
+<h1>Listing actividad_habilidades</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Actividad</th>
+      <th>Habilidad</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @actividad_habilidades.each do |actividad_habilidad| %>
+      <tr>
+        <td><%= actividad_habilidad.actividad %></td>
+        <td><%= actividad_habilidad.habilidad %></td>
+        <td><%= link_to 'Show', actividad_habilidad %></td>
+        <td><%= link_to 'Edit', edit_actividad_habilidad_path(actividad_habilidad) %></td>
+        <td><%= link_to 'Destroy', actividad_habilidad, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Actividad habilidad', new_actividad_habilidad_path %>

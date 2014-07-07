@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fechaCambioEstado: 2014-07-07
+  esActual: false
+  rol_id: 
+  proyecto_id: 
+  usuario_id: 
+
+two:
+  fechaCambioEstado: 2014-07-07
+  esActual: false
+  rol_id: 
+  proyecto_id: 
+  usuario_id: 

@@ -1,0 +1,31 @@
+<h1>Listing necesidades</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Descripcion</th>
+      <th>Fechacreacion</th>
+      <th>Ambitoaplicacion</th>
+      <th>Usuario</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @necesidades.each do |necesidad| %>
+      <tr>
+        <td><%= necesidad.descripcion %></td>
+        <td><%= necesidad.fechaCreacion %></td>
+        <td><%= necesidad.ambitoAplicacion %></td>
+        <td><%= necesidad.usuario %></td>
+        <td><%= link_to 'Show', necesidad %></td>
+        <td><%= link_to 'Edit', edit_necesidad_path(necesidad) %></td>
+        <td><%= link_to 'Destroy', necesidad, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Necesidad', new_necesidad_path %>

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  vigente: false
+  fechaAsignacion: 2014-07-07
+  actividad_id: 
+  usuario_id: 
+
+two:
+  vigente: false
+  fechaAsignacion: 2014-07-07
+  actividad_id: 
+  usuario_id: 

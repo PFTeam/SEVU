@@ -1,0 +1,31 @@
+<h1>Listing asignacion_rol_predefinidos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Fechaasignacion</th>
+      <th>Esactual</th>
+      <th>Privilegio</th>
+      <th>Rol</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @asignacion_rol_predefinidos.each do |asignacion_rol_predefinido| %>
+      <tr>
+        <td><%= asignacion_rol_predefinido.fechaAsignacion %></td>
+        <td><%= asignacion_rol_predefinido.esActual %></td>
+        <td><%= asignacion_rol_predefinido.privilegio %></td>
+        <td><%= asignacion_rol_predefinido.rol %></td>
+        <td><%= link_to 'Show', asignacion_rol_predefinido %></td>
+        <td><%= link_to 'Edit', edit_asignacion_rol_predefinido_path(asignacion_rol_predefinido) %></td>
+        <td><%= link_to 'Destroy', asignacion_rol_predefinido, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Asignacion rol predefinido', new_asignacion_rol_predefinido_path %>

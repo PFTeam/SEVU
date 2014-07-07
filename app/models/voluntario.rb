@@ -1,0 +1,2 @@
+class Voluntario < Usuario
+end

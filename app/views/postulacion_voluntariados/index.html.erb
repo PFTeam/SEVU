@@ -1,0 +1,31 @@
+<h1>Listing postulacion_voluntariados</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Fechapostulacion</th>
+      <th>Aceptado</th>
+      <th>Proyecto</th>
+      <th>Usuario</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @postulacion_voluntariados.each do |postulacion_voluntariado| %>
+      <tr>
+        <td><%= postulacion_voluntariado.fechaPostulacion %></td>
+        <td><%= postulacion_voluntariado.aceptado %></td>
+        <td><%= postulacion_voluntariado.proyecto %></td>
+        <td><%= postulacion_voluntariado.usuario %></td>
+        <td><%= link_to 'Show', postulacion_voluntariado %></td>
+        <td><%= link_to 'Edit', edit_postulacion_voluntariado_path(postulacion_voluntariado) %></td>
+        <td><%= link_to 'Destroy', postulacion_voluntariado, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Postulacion voluntariado', new_postulacion_voluntariado_path %>

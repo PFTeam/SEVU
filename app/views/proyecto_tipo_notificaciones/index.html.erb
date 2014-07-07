@@ -1,0 +1,27 @@
+<h1>Listing proyecto_tipo_notificaciones</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Proyecto</th>
+      <th>Tipo notificacion</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @proyecto_tipo_notificaciones.each do |proyecto_tipo_notificacion| %>
+      <tr>
+        <td><%= proyecto_tipo_notificacion.proyecto %></td>
+        <td><%= proyecto_tipo_notificacion.tipo_notificacion %></td>
+        <td><%= link_to 'Show', proyecto_tipo_notificacion %></td>
+        <td><%= link_to 'Edit', edit_proyecto_tipo_notificacion_path(proyecto_tipo_notificacion) %></td>
+        <td><%= link_to 'Destroy', proyecto_tipo_notificacion, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Proyecto tipo notificacion', new_proyecto_tipo_notificacion_path %>

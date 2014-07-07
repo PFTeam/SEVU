@@ -1,0 +1,29 @@
+<h1>Listing privilegios</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Descripcion</th>
+      <th>Tipo privilegio</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @privilegios.each do |privilegio| %>
+      <tr>
+        <td><%= privilegio.nombre %></td>
+        <td><%= privilegio.descripcion %></td>
+        <td><%= privilegio.tipo_privilegio %></td>
+        <td><%= link_to 'Show', privilegio %></td>
+        <td><%= link_to 'Edit', edit_privilegio_path(privilegio) %></td>
+        <td><%= link_to 'Destroy', privilegio, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Privilegio', new_privilegio_path %>

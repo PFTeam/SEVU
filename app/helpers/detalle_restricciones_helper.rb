@@ -1,0 +1,2 @@
+module DetalleRestriccionesHelper
+end

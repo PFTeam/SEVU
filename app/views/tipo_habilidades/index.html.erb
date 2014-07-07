@@ -1,0 +1,27 @@
+<h1>Listing tipo_habilidades</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Descripcion</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tipo_habilidades.each do |tipo_habilidad| %>
+      <tr>
+        <td><%= tipo_habilidad.nombre %></td>
+        <td><%= tipo_habilidad.descripcion %></td>
+        <td><%= link_to 'Show', tipo_habilidad %></td>
+        <td><%= link_to 'Edit', edit_tipo_habilidad_path(tipo_habilidad) %></td>
+        <td><%= link_to 'Destroy', tipo_habilidad, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Tipo habilidad', new_tipo_habilidad_path %>

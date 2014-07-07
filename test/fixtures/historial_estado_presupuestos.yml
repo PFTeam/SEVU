@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  esActual: false
+  fechaCambioEstado: 2014-07-07
+  presupuesto_id: 
+  estado_presupuesto_id: 
+
+two:
+  esActual: false
+  fechaCambioEstado: 2014-07-07
+  presupuesto_id: 
+  estado_presupuesto_id: 

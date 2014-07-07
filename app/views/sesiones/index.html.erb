@@ -1,0 +1,29 @@
+<h1>Listing sesiones</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Fechainicio</th>
+      <th>Fechafin</th>
+      <th>Usuario</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sesiones.each do |sesion| %>
+      <tr>
+        <td><%= sesion.fechaInicio %></td>
+        <td><%= sesion.fechaFin %></td>
+        <td><%= sesion.usuario %></td>
+        <td><%= link_to 'Show', sesion %></td>
+        <td><%= link_to 'Edit', edit_sesion_path(sesion) %></td>
+        <td><%= link_to 'Destroy', sesion, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Sesion', new_sesion_path %>

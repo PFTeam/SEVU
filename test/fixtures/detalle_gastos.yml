@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  titulo: MyString
+  descripcion: MyText
+  monto: 1.5
+  concepto_gasto_id: 
+  informe_gastos_id: 
+  voluntario_id: 
+  comprobante_id: 
+
+two:
+  titulo: MyString
+  descripcion: MyText
+  monto: 1.5
+  concepto_gasto_id: 
+  informe_gastos_id: 
+  voluntario_id: 
+  comprobante_id: 
