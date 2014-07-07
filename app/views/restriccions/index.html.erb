@@ -1,0 +1,31 @@
+<h1>Listing restriccions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Fechadesde</th>
+      <th>Fechahasta</th>
+      <th>Esactiva</th>
+      <th>Tipo proyecto</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @restriccions.each do |restriccion| %>
+      <tr>
+        <td><%= restriccion.fechaDesde %></td>
+        <td><%= restriccion.fechaHasta %></td>
+        <td><%= restriccion.esActiva %></td>
+        <td><%= restriccion.tipo_proyecto %></td>
+        <td><%= link_to 'Show', restriccion %></td>
+        <td><%= link_to 'Edit', edit_restriccion_path(restriccion) %></td>
+        <td><%= link_to 'Destroy', restriccion, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Restriccion', new_restriccion_path %>

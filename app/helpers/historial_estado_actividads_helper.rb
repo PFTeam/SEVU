@@ -1,0 +1,2 @@
+module HistorialEstadoActividadsHelper
+end

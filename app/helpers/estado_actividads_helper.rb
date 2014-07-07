@@ -1,0 +1,2 @@
+module EstadoActividadsHelper
+end

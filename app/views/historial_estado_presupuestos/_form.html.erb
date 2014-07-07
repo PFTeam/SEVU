@@ -1,0 +1,33 @@
+<%= form_for(@historial_estado_presupuesto) do |f| %>
+  <% if @historial_estado_presupuesto.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@historial_estado_presupuesto.errors.count, "error") %> prohibited this historial_estado_presupuesto from being saved:</h2>
+
+      <ul>
+      <% @historial_estado_presupuesto.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :esActual %><br>
+    <%= f.check_box :esActual %>
+  </div>
+  <div class="field">
+    <%= f.label :fechaCambioEstado %><br>
+    <%= f.date_select :fechaCambioEstado %>
+  </div>
+  <div class="field">
+    <%= f.label :presupuesto_id %><br>
+    <%= f.text_field :presupuesto_id %>
+  </div>
+  <div class="field">
+    <%= f.label :estado_presupuesto_id %><br>
+    <%= f.text_field :estado_presupuesto_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

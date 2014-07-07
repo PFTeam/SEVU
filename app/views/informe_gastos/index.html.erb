@@ -1,0 +1,27 @@
+<h1>Listing informe_gastos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Montototal</th>
+      <th>Proyecto</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @informe_gastos.each do |informe_gasto| %>
+      <tr>
+        <td><%= informe_gasto.montoTotal %></td>
+        <td><%= informe_gasto.proyecto %></td>
+        <td><%= link_to 'Show', informe_gasto %></td>
+        <td><%= link_to 'Edit', edit_informe_gasto_path(informe_gasto) %></td>
+        <td><%= link_to 'Destroy', informe_gasto, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Informe gasto', new_informe_gasto_path %>

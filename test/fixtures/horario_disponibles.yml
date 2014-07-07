@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  diaSemana: MyString
+  horaDesde: 2014-07-07
+  horaHasta: 2014-07-07
+  voluntario_id: 
+
+two:
+  diaSemana: MyString
+  horaDesde: 2014-07-07
+  horaHasta: 2014-07-07
+  voluntario_id: 

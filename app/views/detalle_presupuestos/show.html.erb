@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Titulo:</strong>
+  <%= @detalle_presupuesto.titulo %>
+</p>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @detalle_presupuesto.descripcion %>
+</p>
+
+<p>
+  <strong>Monto:</strong>
+  <%= @detalle_presupuesto.monto %>
+</p>
+
+<p>
+  <strong>Presupuesto:</strong>
+  <%= @detalle_presupuesto.presupuesto %>
+</p>
+
+<p>
+  <strong>Concepto gasto:</strong>
+  <%= @detalle_presupuesto.concepto_gasto %>
+</p>
+
+<%= link_to 'Edit', edit_detalle_presupuesto_path(@detalle_presupuesto) %> |
+<%= link_to 'Back', detalle_presupuestos_path %>

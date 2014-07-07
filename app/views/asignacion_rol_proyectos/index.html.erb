@@ -1,0 +1,33 @@
+<h1>Listing asignacion_rol_proyectos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Fechacambioestado</th>
+      <th>Esactual</th>
+      <th>Rol</th>
+      <th>Proyecto</th>
+      <th>Usuario</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @asignacion_rol_proyectos.each do |asignacion_rol_proyecto| %>
+      <tr>
+        <td><%= asignacion_rol_proyecto.fechaCambioEstado %></td>
+        <td><%= asignacion_rol_proyecto.esActual %></td>
+        <td><%= asignacion_rol_proyecto.rol %></td>
+        <td><%= asignacion_rol_proyecto.proyecto %></td>
+        <td><%= asignacion_rol_proyecto.usuario %></td>
+        <td><%= link_to 'Show', asignacion_rol_proyecto %></td>
+        <td><%= link_to 'Edit', edit_asignacion_rol_proyecto_path(asignacion_rol_proyecto) %></td>
+        <td><%= link_to 'Destroy', asignacion_rol_proyecto, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Asignacion rol proyecto', new_asignacion_rol_proyecto_path %>

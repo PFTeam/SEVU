@@ -1,0 +1,29 @@
+<h1>Listing notificacion_emails</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Destinatario</th>
+      <th>Remitente</th>
+      <th>Asunto</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @notificacion_emails.each do |notificacion_email| %>
+      <tr>
+        <td><%= notificacion_email.destinatario %></td>
+        <td><%= notificacion_email.remitente %></td>
+        <td><%= notificacion_email.asunto %></td>
+        <td><%= link_to 'Show', notificacion_email %></td>
+        <td><%= link_to 'Edit', edit_notificacion_email_path(notificacion_email) %></td>
+        <td><%= link_to 'Destroy', notificacion_email, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Notificacion email', new_notificacion_email_path %>
