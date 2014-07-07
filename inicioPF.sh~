@@ -13,7 +13,7 @@ rails generate scaffold EstadoPresupuesto nombre:string
 rails generate scaffold EstadoUsuario nombre:string
 rails generate scaffold ConceptoGasto titulo:string descripcion:text
 rails generate scaffold TipoPrivilegio nombre:string descripcion:text
-rails generate scaffold Usuario nombreUsuario:string contrasenia:string apellidoNombre:string email:string direccion:string fechaRegistro:date
+
 rails generate scaffold Voluntario legajo:int --parent=Usuario
 rails generate scaffold Necesidad descripcion:text fechaCreacion:date ambitoAplicacion:text usuario:references
 rails generate scaffold Proyecto nombre:string breveDescripcion:text fechaInicio:date fechaFin:date antecedentes:text justificacionProyecto:text cantidadBeneficiariosDirectos:int cantidadBeneficiariosIndirectos:int justificacionImpacto:text  localizacionGeografica:text tipo_proyecto:references necesidad:references
