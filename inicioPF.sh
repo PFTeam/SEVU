@@ -54,7 +54,6 @@ rails generate scaffold Presupuesto fechaPresentacion:date montoTotal:integer ap
 rails generate scaffold HistorialEstadoPresupuesto esActual:boolean fechaCambioEstado:date presupuesto:references estado_presupuesto:references
 rails generate scaffold DetallePresupuesto titulo:string descripcion:text monto:float presupuesto:references concepto_gasto:references
 
-#Agregados
-rails generate scaffold OrganizacionExternaProyecto organizacion_externa:references proyecto:references
+
 
 
