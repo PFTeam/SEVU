@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  resources :organizacion_externa_proyectos
-
   resources :detalle_presupuestos
 
   resources :historial_estado_presupuestos
