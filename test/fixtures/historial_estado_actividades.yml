@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fechaCambioEstado: 2014-07-14 20:53:52
+  esActual: false
+  actividad_id: 
+  estado_actividad_id: 
+
+two:
+  fechaCambioEstado: 2014-07-14 20:53:52
+  esActual: false
+  actividad_id: 
+  estado_actividad_id: 

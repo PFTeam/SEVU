@@ -1,0 +1,31 @@
+<h1>Listing historial_estado_presupuestos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Esactual</th>
+      <th>Fechacambioestado</th>
+      <th>Presupuesto</th>
+      <th>Estado presupuesto</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @historial_estado_presupuestos.each do |historial_estado_presupuesto| %>
+      <tr>
+        <td><%= historial_estado_presupuesto.esActual %></td>
+        <td><%= historial_estado_presupuesto.fechaCambioEstado %></td>
+        <td><%= historial_estado_presupuesto.presupuesto %></td>
+        <td><%= historial_estado_presupuesto.estado_presupuesto %></td>
+        <td><%= link_to 'Show', historial_estado_presupuesto %></td>
+        <td><%= link_to 'Edit', edit_historial_estado_presupuesto_path(historial_estado_presupuesto) %></td>
+        <td><%= link_to 'Destroy', historial_estado_presupuesto, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Historial estado presupuesto', new_historial_estado_presupuesto_path %>

@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Fechacambioestado:</strong>
+  <%= @historial_estado_usuario.fechaCambioEstado %>
+</p>
+
+<p>
+  <strong>Esactual:</strong>
+  <%= @historial_estado_usuario.esActual %>
+</p>
+
+<p>
+  <strong>Usuario:</strong>
+  <%= @historial_estado_usuario.usuario %>
+</p>
+
+<p>
+  <strong>Estado usuario:</strong>
+  <%= @historial_estado_usuario.estado_usuario %>
+</p>
+
+<%= link_to 'Edit', edit_historial_estado_usuario_path(@historial_estado_usuario) %> |
+<%= link_to 'Back', historial_estado_usuarios_path %>

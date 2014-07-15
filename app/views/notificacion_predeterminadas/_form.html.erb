@@ -1,0 +1,25 @@
+<%= form_for(@notificacion_predeterminada) do |f| %>
+  <% if @notificacion_predeterminada.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@notificacion_predeterminada.errors.count, "error") %> prohibited this notificacion_predeterminada from being saved:</h2>
+
+      <ul>
+      <% @notificacion_predeterminada.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :proyecto_id %><br>
+    <%= f.text_field :proyecto_id %>
+  </div>
+  <div class="field">
+    <%= f.label :tipo_notificacion_id %><br>
+    <%= f.text_field :tipo_notificacion_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

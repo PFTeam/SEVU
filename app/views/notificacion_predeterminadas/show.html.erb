@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Proyecto:</strong>
+  <%= @notificacion_predeterminada.proyecto %>
+</p>
+
+<p>
+  <strong>Tipo notificacion:</strong>
+  <%= @notificacion_predeterminada.tipo_notificacion %>
+</p>
+
+<%= link_to 'Edit', edit_notificacion_predeterminada_path(@notificacion_predeterminada) %> |
+<%= link_to 'Back', notificacion_predeterminadas_path %>

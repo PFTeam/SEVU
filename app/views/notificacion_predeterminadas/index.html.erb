@@ -1,0 +1,27 @@
+<h1>Listing notificacion_predeterminadas</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Proyecto</th>
+      <th>Tipo notificacion</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @notificacion_predeterminadas.each do |notificacion_predeterminada| %>
+      <tr>
+        <td><%= notificacion_predeterminada.proyecto %></td>
+        <td><%= notificacion_predeterminada.tipo_notificacion %></td>
+        <td><%= link_to 'Show', notificacion_predeterminada %></td>
+        <td><%= link_to 'Edit', edit_notificacion_predeterminada_path(notificacion_predeterminada) %></td>
+        <td><%= link_to 'Destroy', notificacion_predeterminada, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Notificacion predeterminada', new_notificacion_predeterminada_path %>

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @tipo_habilidad.nombre %>
+</p>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @tipo_habilidad.descripcion %>
+</p>
+
+<%= link_to 'Edit', edit_tipo_habilidad_path(@tipo_habilidad) %> |
+<%= link_to 'Back', tipo_habilidades_path %>

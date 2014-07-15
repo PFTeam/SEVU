@@ -1,0 +1,69 @@
+<%= form_for(@actividad) do |f| %>
+  <% if @actividad.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@actividad.errors.count, "error") %> prohibited this actividad from being saved:</h2>
+
+      <ul>
+      <% @actividad.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nombre %><br>
+    <%= f.text_field :nombre %>
+  </div>
+  <div class="field">
+    <%= f.label :descripcion %><br>
+    <%= f.text_area :descripcion %>
+  </div>
+  <div class="field">
+    <%= f.label :duracion %><br>
+    <%= f.number_field :duracion %>
+  </div>
+  <div class="field">
+    <%= f.label :duracionReal %><br>
+    <%= f.number_field :duracionReal %>
+  </div>
+  <div class="field">
+    <%= f.label :fechaEstimadaInicio %><br>
+    <%= f.date_select :fechaEstimadaInicio %>
+  </div>
+  <div class="field">
+    <%= f.label :fechaRealInicio %><br>
+    <%= f.date_select :fechaRealInicio %>
+  </div>
+  <div class="field">
+    <%= f.label :estrategiasIntervencion %><br>
+    <%= f.text_field :estrategiasIntervencion %>
+  </div>
+  <div class="field">
+    <%= f.label :metodologiasIntervencion %><br>
+    <%= f.text_area :metodologiasIntervencion %>
+  </div>
+  <div class="field">
+    <%= f.label :mecanismoEvaluacion %><br>
+    <%= f.text_area :mecanismoEvaluacion %>
+  </div>
+  <div class="field">
+    <%= f.label :resultadosEsperados %><br>
+    <%= f.text_area :resultadosEsperados %>
+  </div>
+  <div class="field">
+    <%= f.label :objetivo_especifico_id %><br>
+    <%= f.text_field :objetivo_especifico_id %>
+  </div>
+  <div class="field">
+    <%= f.label :proyecto_id %><br>
+    <%= f.text_field :proyecto_id %>
+  </div>
+  <div class="field">
+    <%= f.label :tipo_actividad_id %><br>
+    <%= f.text_field :tipo_actividad_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

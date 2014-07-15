@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Destinatario:</strong>
+  <%= @notificacion_email.destinatario %>
+</p>
+
+<p>
+  <strong>Remitente:</strong>
+  <%= @notificacion_email.remitente %>
+</p>
+
+<p>
+  <strong>Asunto:</strong>
+  <%= @notificacion_email.asunto %>
+</p>
+
+<%= link_to 'Edit', edit_notificacion_email_path(@notificacion_email) %> |
+<%= link_to 'Back', notificacion_emailes_path %>

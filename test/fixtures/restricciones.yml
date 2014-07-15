@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fechaDesde: 2014-07-14 20:54:05
+  fechaHasta: 2014-07-14 20:54:05
+  esActiva: false
+  tipo_proyecto_id: 
+
+two:
+  fechaDesde: 2014-07-14 20:54:05
+  fechaHasta: 2014-07-14 20:54:05
+  esActiva: false
+  tipo_proyecto_id: 

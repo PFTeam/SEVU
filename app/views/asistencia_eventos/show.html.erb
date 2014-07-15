@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Fechacreacion:</strong>
+  <%= @asistencia_evento.fechaCreacion %>
+</p>
+
+<p>
+  <strong>Evento publico:</strong>
+  <%= @asistencia_evento.evento_publico %>
+</p>
+
+<p>
+  <strong>Usuario:</strong>
+  <%= @asistencia_evento.usuario %>
+</p>
+
+<%= link_to 'Edit', edit_asistencia_evento_path(@asistencia_evento) %> |
+<%= link_to 'Back', asistencia_eventos_path %>

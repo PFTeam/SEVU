@@ -1,0 +1,33 @@
+<%= form_for(@experiencia) do |f| %>
+  <% if @experiencia.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@experiencia.errors.count, "error") %> prohibited this experiencia from being saved:</h2>
+
+      <ul>
+      <% @experiencia.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :tieneExperiencia %><br>
+    <%= f.check_box :tieneExperiencia %>
+  </div>
+  <div class="field">
+    <%= f.label :cantidadExperiencia %><br>
+    <%= f.number_field :cantidadExperiencia %>
+  </div>
+  <div class="field">
+    <%= f.label :habilidad_id %><br>
+    <%= f.text_field :habilidad_id %>
+  </div>
+  <div class="field">
+    <%= f.label :voluntario_id %><br>
+    <%= f.text_field :voluntario_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

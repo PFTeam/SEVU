@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Diasemana:</strong>
+  <%= @horario_disponibl.diaSemana %>
+</p>
+
+<p>
+  <strong>Horadesde:</strong>
+  <%= @horario_disponibl.horaDesde %>
+</p>
+
+<p>
+  <strong>Horahasta:</strong>
+  <%= @horario_disponibl.horaHasta %>
+</p>
+
+<p>
+  <strong>Voluntario:</strong>
+  <%= @horario_disponibl.voluntario %>
+</p>
+
+<%= link_to 'Edit', edit_horario_disponibl_path(@horario_disponibl) %> |
+<%= link_to 'Back', horario_disponibles_path %>

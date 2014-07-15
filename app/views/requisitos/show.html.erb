@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Actividad:</strong>
+  <%= @requisito.actividad %>
+</p>
+
+<p>
+  <strong>Habilidad:</strong>
+  <%= @requisito.habilidad %>
+</p>
+
+<%= link_to 'Edit', edit_requisito_path(@requisito) %> |
+<%= link_to 'Back', requisitos_path %>

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Fechaasignacion:</strong>
+  <%= @asignacion_funcion.fechaAsignacion %>
+</p>
+
+<p>
+  <strong>Esactual:</strong>
+  <%= @asignacion_funcion.esActual %>
+</p>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @asignacion_funcion.descripcion %>
+</p>
+
+<p>
+  <strong>Usuario:</strong>
+  <%= @asignacion_funcion.usuario %>
+</p>
+
+<p>
+  <strong>Rol:</strong>
+  <%= @asignacion_funcion.rol %>
+</p>
+
+<%= link_to 'Edit', edit_asignacion_funcion_path(@asignacion_funcion) %> |
+<%= link_to 'Back', asignacion_funciones_path %>

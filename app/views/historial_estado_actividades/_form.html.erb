@@ -1,0 +1,33 @@
+<%= form_for(@historial_estado_actividad) do |f| %>
+  <% if @historial_estado_actividad.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@historial_estado_actividad.errors.count, "error") %> prohibited this historial_estado_actividad from being saved:</h2>
+
+      <ul>
+      <% @historial_estado_actividad.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :fechaCambioEstado %><br>
+    <%= f.datetime_select :fechaCambioEstado %>
+  </div>
+  <div class="field">
+    <%= f.label :esActual %><br>
+    <%= f.check_box :esActual %>
+  </div>
+  <div class="field">
+    <%= f.label :actividad_id %><br>
+    <%= f.text_field :actividad_id %>
+  </div>
+  <div class="field">
+    <%= f.label :estado_actividad_id %><br>
+    <%= f.text_field :estado_actividad_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

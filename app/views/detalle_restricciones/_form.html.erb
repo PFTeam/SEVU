@@ -1,0 +1,41 @@
+<%= form_for(@detalle_restriccion) do |f| %>
+  <% if @detalle_restriccion.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@detalle_restriccion.errors.count, "error") %> prohibited this detalle_restriccion from being saved:</h2>
+
+      <ul>
+      <% @detalle_restriccion.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :esActiva %><br>
+    <%= f.check_box :esActiva %>
+  </div>
+  <div class="field">
+    <%= f.label :fechaDesde %><br>
+    <%= f.datetime_select :fechaDesde %>
+  </div>
+  <div class="field">
+    <%= f.label :fechaHasta %><br>
+    <%= f.datetime_select :fechaHasta %>
+  </div>
+  <div class="field">
+    <%= f.label :montoMax %><br>
+    <%= f.text_field :montoMax %>
+  </div>
+  <div class="field">
+    <%= f.label :restriccion_id %><br>
+    <%= f.text_field :restriccion_id %>
+  </div>
+  <div class="field">
+    <%= f.label :concepto_gasto_id %><br>
+    <%= f.text_field :concepto_gasto_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

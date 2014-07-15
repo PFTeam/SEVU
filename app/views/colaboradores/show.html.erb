@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Organizacion externa:</strong>
+  <%= @colaborador.organizacion_externa %>
+</p>
+
+<p>
+  <strong>Proyecto:</strong>
+  <%= @colaborador.proyecto %>
+</p>
+
+<%= link_to 'Edit', edit_colaborador_path(@colaborador) %> |
+<%= link_to 'Back', colaboradores_path %>

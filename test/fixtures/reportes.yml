@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fechaCreacion: 2014-07-14 20:53:58
+  descripcion: MyText
+  asignacion_actividad_id: 
+
+two:
+  fechaCreacion: 2014-07-14 20:53:58
+  descripcion: MyText
+  asignacion_actividad_id: 
