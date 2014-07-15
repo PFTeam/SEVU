@@ -20,7 +20,10 @@ module SEVU
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
     config.time_zone = 'Buenos Aires'
-    config.i18n.default_locale = :es
+   
+   
+   #LOCALE 
+   # config.i18n.default_locale = :es #DISABLED
 
   end
 end
