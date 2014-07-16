@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140715190631) do
+ActiveRecord::Schema.define(version: 20140716031642) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -339,6 +339,9 @@ ActiveRecord::Schema.define(version: 20140715190631) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "type"
+    t.string   "destinatario"
+    t.string   "asunto"
+    t.string   "remitente"
   end
 
   add_index "notificaciones", ["evento_publico_id"], name: "index_notificaciones_on_evento_publico_id", using: :btree
@@ -558,6 +561,8 @@ ActiveRecord::Schema.define(version: 20140715190631) do
     t.datetime "fechaRegistro"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "legajo"
+    t.string   "type"
   end
 
 end
