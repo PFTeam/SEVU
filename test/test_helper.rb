@@ -7,6 +7,11 @@ class ActiveSupport::TestCase
   #
   # Note: You'll currently still have to declare fixtures explicitly in integration tests
   # -- they do not yet inherit this setting
+  set_fixture_class comprobantes: Comprobante
+  set_fixture_class reportes: Reporte
+  set_fixture_class horario_disponibles: HorarioDisponible
+
+
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
