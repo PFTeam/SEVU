@@ -14,3 +14,11 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+//= require bootstrap-datapicker
+//= require bootstrap
+//= require_tree flot
+//= require jquery-1.10.2
+//= require morris-0.4.3
+//= require raphael-min
+//= require_tree morris
+//= require_tree tablesorter
