@@ -12,4 +12,11 @@
  *
  *= require_tree .
  *= require_self
+
+  *= require datepicker
+*= require bootstrap
+*= require morris-0.4.3.min
+*= require sb-admin 
+
+
  */

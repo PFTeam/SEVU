@@ -22,4 +22,14 @@ class Proyecto < ActiveRecord::Base
   has_many :usuarios, :through => :asignacion_roles
 
   has_one :presupuesto
+
+
+  def director
+    'Director Controlador'
+  end
+
+
+
+
+
 end
