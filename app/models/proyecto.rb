@@ -23,8 +23,9 @@ class Proyecto < ActiveRecord::Base
 
   has_one :presupuesto
 
- # scope :director, -> { where( asignacion_roles.rol.nombreRol 'Director') }
-
+  def self.participando usu
+    Proyecto.joins(:asignacion_roles).where('asignacion_roles.usuario_id' => usu)
+  end
 
   def director
     self.asignacion_roles.each do |asignacion|
@@ -33,9 +34,6 @@ class Proyecto < ActiveRecord::Base
       end
     end
   end
-
-
-
 
 
 end

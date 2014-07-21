@@ -62,7 +62,10 @@ class ProyectosController < ApplicationController
     end
   end
 
-
+  def mis_proyectos
+    params[:usuario]=Usuario.find(7) #TODO: Obtener usuario real cuando este la sesion implementada
+    @proyectos = Proyecto.participando(params[:usuario])
+  end
 
 
 
