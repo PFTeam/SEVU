@@ -23,9 +23,15 @@ class Proyecto < ActiveRecord::Base
 
   has_one :presupuesto
 
+ # scope :director, -> { where( asignacion_roles.rol.nombreRol 'Director') }
+
 
   def director
-    'Director Controlador'
+    self.asignacion_roles.each do |asignacion|
+      if (asignacion.rol.nombre.to_s == 'Director') and (asignacion.rol.tipo_rol.nombre == 'Proyecto')   #TODO: Hacerlo menos hardcodeado?
+        return asignacion.usuario
+      end
+    end
   end
 
 
