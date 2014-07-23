@@ -25,7 +25,7 @@ class Proyecto < ActiveRecord::Base
 
 
   def self.activos
-    Proyecto.joins(:historial_estado_proyectos).where('historial_estado_proyectos.esActual' => 'True' and 'historial_estado_proyectos.estado_proyecto.nombre' => 'Activo')
+    Proyecto.joins(:historial_estado_proyectos).where('historial_estado_proyectos.esActual' => 'True').joins(:estado_proyectos).where( 'estado_proyectos.nombre' => 'Activo')
     
   end
 
