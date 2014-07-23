@@ -23,6 +23,12 @@ class Proyecto < ActiveRecord::Base
 
   has_one :presupuesto
 
+
+  def self.activos
+    Proyecto.joins(:historial_estado_proyectos).where('historial_estado_proyectos.esActual' => 'True' and 'historial_estado_proyectos.estado_proyecto.nombre' => 'Activo')
+    
+  end
+
   def self.participando usu
     Proyecto.joins(:asignacion_roles).where('asignacion_roles.usuario_id' => usu)
   end

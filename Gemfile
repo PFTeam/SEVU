@@ -46,4 +46,3 @@ gem 'will_paginate', '~> 3.0'
 gem 'validates_timeliness', '~> 3.0'
 gem 'sidekiq'
 gem 'capybara'
-
