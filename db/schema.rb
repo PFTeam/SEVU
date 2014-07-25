@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140716031642) do
+ActiveRecord::Schema.define(version: 20140725041803) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,7 +90,6 @@ ActiveRecord::Schema.define(version: 20140716031642) do
   add_index "asignacion_roles", ["usuario_id"], name: "index_asignacion_roles_on_usuario_id", using: :btree
 
   create_table "asistencia_eventos", force: true do |t|
-    t.datetime "fechaCreacion"
     t.integer  "evento_publico_id"
     t.integer  "usuario_id"
     t.datetime "created_at"
@@ -294,11 +293,11 @@ ActiveRecord::Schema.define(version: 20140716031642) do
 
   create_table "necesidades", force: true do |t|
     t.text     "descripcion"
-    t.datetime "fechaCreacion"
     t.text     "ambitoAplicacion"
     t.integer  "usuario_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "titulo"
   end
 
   add_index "necesidades", ["usuario_id"], name: "index_necesidades_on_usuario_id", using: :btree
@@ -306,7 +305,6 @@ ActiveRecord::Schema.define(version: 20140716031642) do
   create_table "notas", force: true do |t|
     t.string   "titulo"
     t.text     "descripcion"
-    t.datetime "fechaCreacion"
     t.integer  "voluntario_id"
     t.integer  "usuario_id"
     t.datetime "created_at"
@@ -441,7 +439,6 @@ ActiveRecord::Schema.define(version: 20140716031642) do
   add_index "proyectos", ["tipo_proyecto_id"], name: "index_proyectos_on_tipo_proyecto_id", using: :btree
 
   create_table "reportes", force: true do |t|
-    t.datetime "fechaCreacion"
     t.text     "descripcion"
     t.integer  "asignacion_actividad_id"
     t.datetime "created_at"
