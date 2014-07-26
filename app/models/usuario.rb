@@ -24,5 +24,8 @@ class Usuario < ActiveRecord::Base
   has_many :notificacion_enviadas, :class_name => "Notificacion"
   has_many :necesidades
 
+  def to_s
+    apellidoNombre
+  end
 
 end

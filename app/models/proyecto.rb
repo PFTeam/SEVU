@@ -23,6 +23,7 @@ class Proyecto < ActiveRecord::Base
 
   has_one :presupuesto
 
+  accepts_nested_attributes_for :historial_estado_proyectos, :asignacion_roles
 
   def self.activos
   #  Proyecto.joins(:historial_estado_proyectos).where('historial_estado_proyectos.esActual' => 'True').includes(:estado_proyectos).where('estado_proyectos.nombre' => 'Activo')
@@ -39,9 +40,20 @@ class Proyecto < ActiveRecord::Base
     self.asignacion_roles.each do |asignacion|
       if (asignacion.rol.nombre.to_s == 'Director') and (asignacion.rol.tipo_rol.nombre == 'Proyecto')   #TODO: Hacerlo menos hardcodeado?
         return asignacion.usuario
+      else
+        return nil
       end
     end
   end
 
+  def coordinador
+    self.asignacion_roles.each do |asignacion|
+      if (asignacion.rol.nombre.to_s == 'Coordinador') and (asignacion.rol.tipo_rol.nombre == 'Proyecto')   #TODO: Hacerlo menos hardcodeado?
+        return asignacion.usuario
+      else
+        return nil
+      end
+    end
+  end
 
 end
