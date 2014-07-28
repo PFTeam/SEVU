@@ -9,4 +9,16 @@ class Presupuesto < ActiveRecord::Base
   has_many :detalle_presupuestos
   has_many :concepto_gastos, :through => :detalle_presupuestos
 
+  def estado_actual #Devuelve el estado actual del proyecto
+    #self.historial_estado_presupuestos.where('
+    #no esta terminado porque faltan atributos importantes
+  end
+
+  def monto_total
+    self.detalle_presupuestos.each do |detalle|
+      sum = sum + detalle.monto
+    end
+    return sum
+  end
+
 end
