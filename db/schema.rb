@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140725051126) do
+ActiveRecord::Schema.define(version: 20140728234028) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,7 +40,6 @@ ActiveRecord::Schema.define(version: 20140725051126) do
 
   create_table "asignacion_actividades", force: true do |t|
     t.boolean  "vigente"
-    t.datetime "fechaAsignacion"
     t.integer  "actividad_id"
     t.integer  "usuario_id"
     t.datetime "created_at"
@@ -51,7 +50,6 @@ ActiveRecord::Schema.define(version: 20140725051126) do
   add_index "asignacion_actividades", ["usuario_id"], name: "index_asignacion_actividades_on_usuario_id", using: :btree
 
   create_table "asignacion_funciones", force: true do |t|
-    t.datetime "fechaAsignacion"
     t.boolean  "esActual"
     t.text     "descripcion"
     t.integer  "usuario_id"
@@ -64,7 +62,6 @@ ActiveRecord::Schema.define(version: 20140725051126) do
   add_index "asignacion_funciones", ["usuario_id"], name: "index_asignacion_funciones_on_usuario_id", using: :btree
 
   create_table "asignacion_rol_predefinidos", force: true do |t|
-    t.datetime "fechaAsignacion"
     t.boolean  "esActual"
     t.integer  "privilegio_id"
     t.integer  "rol_id"
@@ -76,7 +73,6 @@ ActiveRecord::Schema.define(version: 20140725051126) do
   add_index "asignacion_rol_predefinidos", ["rol_id"], name: "index_asignacion_rol_predefinidos_on_rol_id", using: :btree
 
   create_table "asignacion_roles", force: true do |t|
-    t.datetime "fechaCambioEstado"
     t.boolean  "esActual"
     t.integer  "rol_id"
     t.integer  "proyecto_id"
@@ -224,8 +220,6 @@ ActiveRecord::Schema.define(version: 20140725051126) do
   add_index "habilidades", ["tipo_habilidad_id"], name: "index_habilidades_on_tipo_habilidad_id", using: :btree
 
   create_table "historial_estado_actividades", force: true do |t|
-    t.datetime "fechaCambioEstado"
-    t.boolean  "esActual"
     t.integer  "actividad_id"
     t.integer  "estado_actividad_id"
     t.datetime "created_at"
@@ -236,8 +230,6 @@ ActiveRecord::Schema.define(version: 20140725051126) do
   add_index "historial_estado_actividades", ["estado_actividad_id"], name: "index_historial_estado_actividades_on_estado_actividad_id", using: :btree
 
   create_table "historial_estado_presupuestos", force: true do |t|
-    t.boolean  "esActual"
-    t.datetime "fechaCambioEstado"
     t.integer  "presupuesto_id"
     t.integer  "estado_presupuesto_id"
     t.datetime "created_at"
@@ -248,8 +240,6 @@ ActiveRecord::Schema.define(version: 20140725051126) do
   add_index "historial_estado_presupuestos", ["presupuesto_id"], name: "index_historial_estado_presupuestos_on_presupuesto_id", using: :btree
 
   create_table "historial_estado_proyectos", force: true do |t|
-    t.datetime "fechaCambioEstado"
-    t.boolean  "esActual"
     t.integer  "estado_proyecto_id"
     t.integer  "proyecto_id"
     t.datetime "created_at"
@@ -260,8 +250,6 @@ ActiveRecord::Schema.define(version: 20140725051126) do
   add_index "historial_estado_proyectos", ["proyecto_id"], name: "index_historial_estado_proyectos_on_proyecto_id", using: :btree
 
   create_table "historial_estado_usuarios", force: true do |t|
-    t.datetime "fechaCambioEstado"
-    t.boolean  "esActual"
     t.integer  "usuario_id"
     t.integer  "estado_usuario_id"
     t.datetime "created_at"
