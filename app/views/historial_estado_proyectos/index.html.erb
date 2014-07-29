@@ -14,8 +14,6 @@
   <tbody>
     <% @historial_estado_proyectos.each do |historial_estado_proyecto| %>
       <tr>
-        <td><%= historial_estado_proyecto.fechaCambioEstado %></td>
-        <td><%= historial_estado_proyecto.esActual %></td>
         <td><%= historial_estado_proyecto.estado_proyecto %></td>
         <td><%= historial_estado_proyecto.proyecto %></td>
         <td><%= link_to 'Show', historial_estado_proyecto %></td>

@@ -27,10 +27,9 @@ class Proyecto < ActiveRecord::Base
   accepts_nested_attributes_for :historial_estado_proyectos, :asignacion_roles
 
   def self.activos
-  #  Proyecto.joins(:historial_estado_proyectos).where('historial_estado_proyectos.esActual' => 'True').includes(:estado_proyectos).where('estado_proyectos.nombre' => 'Activo')
-    
-    Proyecto.includes(:historial_estado_proyectos, :estado_proyectos).where('historial_estado_proyectos.esActual' => 'True','estado_proyectos.nombre' => 'Activo')
-    
+    #TODO: No devuelve solo los que el último estado es 'Activo'
+    Proyecto.includes(:estado_proyectos).where('estado_proyectos.nombre' => 'Activo').includes(:historial_estado_proyectos)
+
   end
 
   def self.participando usu

@@ -3,7 +3,6 @@
 <table>
   <thead>
     <tr>
-      <th>Fechacreacion</th>
       <th>Descripcion</th>
       <th>Asignacion actividad</th>
       <th colspan="3"></th>
@@ -13,7 +12,6 @@
   <tbody>
     <% @reportes.each do |report| %>
       <tr>
-        <td><%= report.fechaCreacion %></td>
         <td><%= report.descripcion %></td>
         <td><%= report.asignacion_actividad %></td>
         <td><%= link_to 'Show', report %></td>

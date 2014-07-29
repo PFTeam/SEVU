@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140728234028) do
+ActiveRecord::Schema.define(version: 20140729014113) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -244,6 +244,7 @@ ActiveRecord::Schema.define(version: 20140728234028) do
     t.integer  "proyecto_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "esActual"
   end
 
   add_index "historial_estado_proyectos", ["estado_proyecto_id"], name: "index_historial_estado_proyectos_on_estado_proyecto_id", using: :btree
