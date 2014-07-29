@@ -20,7 +20,8 @@ class Proyecto < ActiveRecord::Base
 
   has_many :asignacion_roles
   has_many :usuarios, :through => :asignacion_roles
-
+  has_many :roles, :through => :asignacion_roles
+  
   has_one :presupuesto
 
   accepts_nested_attributes_for :historial_estado_proyectos, :asignacion_roles

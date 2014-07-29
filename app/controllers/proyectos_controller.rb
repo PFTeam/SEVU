@@ -16,6 +16,23 @@ class ProyectosController < ApplicationController
   # GET /proyectos/new
   def new
     @proyecto = Proyecto.new
+    @tipoProyectos = TipoProyecto.all
+
+    #TODO: En vez de esto, que sea por autocompletado
+    @usuarios = Usuario.all
+
+    #TODO: pasar solo estados posibles, segun el actual
+    @estadosPosibles = EstadoProyecto.all
+
+    unless @proyecto.necesidad_id.nil?
+      @necesidades = @proyecto.necesidad
+      @beneficiario = Necesidad.find(@proyecto.necesidad_id).usuario
+    else
+      @necesidades = Necesidad.all
+    end
+
+    @proyecto.asignacion_roles.build
+    @proyecto.historial_estado_proyectos.build
   end
 
   # GET /proyectos/1/edit
@@ -26,7 +43,7 @@ class ProyectosController < ApplicationController
   # POST /proyectos.json
   def create
     @proyecto = Proyecto.new(proyecto_params)
-
+    @proyecto.asignacion_roles.first.rol = (Rol.find_by(nombre: 'Director'))
     respond_to do |format|
       if @proyecto.save
         format.html { redirect_to @proyecto, notice: 'Proyecto was successfully created.' }
@@ -77,6 +94,6 @@ class ProyectosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def proyecto_params
-      params.require(:proyecto).permit(:nombre, :breveDescripcion, :fechaInicio, :fechaFin, :antecedentes, :justificacionProyecto, :cantidadBeneficiariosDirectos, :cantidadBeneficiariosIndirectos, :justificacionImpacto, :localizacionGeografica, :tipo_proyecto_id, :necesidad_id)
+      params.require(:proyecto).permit(:nombre, :breveDescripcion, :fechaInicio, :fechaFin, :antecedentes, :justificacionProyecto, :cantidadBeneficiariosDirectos, :cantidadBeneficiariosIndirectos, :justificacionImpacto, :localizacionGeografica, :tipo_proyecto_id, :necesidad_id, historial_estado_proyectos_attributes:[:id, :estado_proyecto_id], asignacion_roles_attributes:[:id, :usuario_id, :rol_id])
     end
 end

@@ -19,169 +19,83 @@
 
   <div class="row">
 
-    <div class="col-md-6">
+    <div class="col-lg-6">
 
-              <!-- <label><h2>Titulo del Proyecto</h2></label></br> -->
-          <%= f.input :nombre%>
+          <h2><%= f.input :nombre, :label => 'Título del Proyecto', :placeholder => 'título del proyecto...' %></h2>
+
+        
+          <label>
+              <h2><%= f.label 'Descripción del Proyecto' %></h2>
+          </label>
+          
  
+          <!-- #TODO: Agregar el span @ -->
+          <%= f.simple_fields_for :asignacion_roles do |asignacion| %>
+            <%= asignacion.input :usuario_id, collection: @usuarios %>
+          <%end%>
+    
+  
+          <%= f.input :breveDescripcion,:as => :text, :input_html => {:rows => 10}, :label => 'Breve Descripción', :placeholder => 'descripción del proyecto...'  %>
+          
+          <!-- #TODO: Sale como textarea??? -->
+          <%= f.input :localizacionGeografica, :label => 'Localización Geográfica', :placeholder => 'localización...' %>
+        
+          <%= f.input :cantidadBeneficiariosDirectos, :label => 'Cantidad de Beneficiarios Directos', :placeholder => 'beneficiarios directos...' %>          
 
-          <label>
-              <h2>Descripción del Proyecto</h2>
-          </label>
-                  <br>
-          <label>
-              Coordinador del Proyecto
-          </label>
-          <div class="field input-group">
-              <span class="input-group-addon">@</span>
-              <input type="text" class="form-control" placeholder="Nombre de Usuario">
-          </div>
+          <%= f.input :cantidadBeneficiariosIndirectos, :label => 'Cantidad de Beneficiarios Indirectos', :placeholder => 'beneficiarios indirectos...' %> 
+          
+          
+          <h2><%= f.input :tipo_proyecto_id, collection: @tipoProyectos, :label => 'Tipo de Proyecto' %></h2>
 
-          <label>
-              Director del Proyecto
-          </label>
-          <div class="field input-group">
-              <span class="input-group-addon">@</span>
-              <input type="text" class="form-control" placeholder="Nombre de Usuario">
-          </div>
-
-          <label>Breve Descripción    </label> 
-              <textarea class="form-control" placeholder="Enter text" rows="10"></textarea>
-          </div>
-
-
-          <div class="field"><label>Localización Geográfica</label>
-              <input class="form-control">
-              <div class="field">
-                  <label>Cantidad de Beneficiarios Directos</label>
-                  <input class="form-control">
-                  <div class="form-group">
-                      <label>Cantidad de Beneficiarios Indirectos</label>
-                      <input class="form-control">
-                  </div>
-              </div>
-
-
-
-
-              <h2>Tipo de Proyecto</h2>
-              <p>
-              <span class="form-group">
-                  <select name="select2" class="form-control">
-                      <option>Voluntariado</option>
-                      <option>Extensión</option>
-                  </select>
-              </span>
-              </p>
-
-              <button type="button" class="btn btn-primary btn-lg pull-left">IMPRIMIR</button>
-          </div>
 
     </div> 
 
 
     <div class="col-lg-6">
-      <button type="button" class="btn btn-primary btn-lg pull-right">GUARDAR</button>
+      <%= f.button :submit, :class => 'btn btn-primary btn-lg pull-right', :value => 'GUARDAR' %>
 
-          <div class="field">
-             <label><h2>Necesidad</h2></label>
-             <a href="/necesidades/#">Link a Necesidad</a>       
-          </div> 
+      <label><h2>Necesidad</h2></label>
+      <!-- #TODO: Que muestre las necesidades si no tiene ninguna y cuando elija muestre los datos de la misma y el usuario  -->
+      <%= f.input :necesidad_id, collection: @necesidades, :label => 'Título Necesidad' %>
+      
+      <!-- #TODO: Agregar jquerry o js para que muestre la descripción de la necesidad -->
+      <% if (:necesidad_id != nil) then %>
+      <!-- #TODO: arreglar label
+        <%= f.label :necesidad_id,:as => :text, :readonly => true, :input_html => {:rows => 10}, :label => 'Breve Descripción', :placeholder => 'descripción de la necesidad...'  %>
+      <% end %>
+      
+      
+      
+      <!-- #TODO: Obtención y manejo del beneficiario null -->
+      <% if (@beneficiario != nil) then %>
+        <label><h3>Datos Beneficiario:</h3></label>
+      
+        <%= f.input @beneficiario.apellidoNombre, :label => 'Apellido y Nombre', :readonly => true %>
+        <!-- #TODO: Cuando selecciona una necesidad obtener esa -->      
+        <%= f.input @necesidades.first.cargoResponsable, :label => 'Apellido y Nombre', :readonly => true %>
+      
+        <%= f.input @beneficiario.telefono, :label => 'Número de Contacto', :readonly => true %>
+      
+        <%= f.input @beneficiario.email, :label => 'Email', :readonly => true %>
+      
+        <%= f.input @beneficiario.fax, :label => 'Fax', :readonly => true %>
 
-          <label>Titulo Necesidad</label>
-              <input class="form-control">
-              <div class="field">
-                  <label>Breve Descripción    </label>
-                  <textarea class="form-control" placeholder="Enter text" rows="10"></textarea>
-                  <button type="button" class="btn btn-primary btn-sm">Agregar</button>
-              </div>
-              <label><h3>Datos Beneficiario:</h3></label>
-              <p>
-                   <label>Apellido y Nombre</label>
-                   <input class="form-control" disabled> 
-
-                   <label>Cargo</label>
-                   <input class="form-control" disabled> 
-
-                   <label>Número Contacto</label>
-                   <input class="form-control" disabled> 
-
-                   <label>Email</label>
-                   <input class="form-control" disabled>
-
-                   <label>Fax</label>
-                   <input class="form-control" disabled> 
-              </p>
-
-              <p>
-                  <button type="button" class="btn btn-primary btn-lg">CANCELAR PROYECTO</button> 
-              </p>
-              <button type="button" class="btn btn-primary btn-lg">TERMINAR PROYECTO</button>
-              <button type="button" class="btn btn-primary btn-lg">SUSPENDER PROYECTO</button> 
-
-        <fieldset disabled>
-              <div class="form-group"></div>
-        </fieldset>
-
+      <% end %>         
+              
+        
+        
+      <%= f.simple_fields_for :historial_estado_proyectos do |historial| %>
+        
+        <%= historial.input :estado_proyecto_id, collection: @estadosPosibles %>
+        
+      <%end%>
+       
+  
+        
     </div>
 
   </div><!-- /.row -->
 
-    <%=   f.association :necesidad %>
-        
----------------------------------------
- 
 
-  <div class="field">
-    <%= f.label :nombre %><br>
-    <%= f.text_field :nombre %>
-  </div>
-  <div class="field">
-    <%= f.label :breveDescripcion %><br>
-    <%= f.text_area :breveDescripcion %>
-  </div>
-  <div class="field">
-    <%= f.label :fechaInicio %><br>
-    <%= f.date_select :fechaInicio %>
-  </div>
-  <div class="field">
-    <%= f.label :fechaFin %><br>
-    <%= f.date_select :fechaFin %>
-  </div>
-  <div class="field">
-    <%= f.label :antecedentes %><br>
-    <%= f.text_area :antecedentes %>
-  </div>
-  <div class="field">
-    <%= f.label :justificacionProyecto %><br>
-    <%= f.text_area :justificacionProyecto %>
-  </div>
-  <div class="field">
-    <%= f.label :cantidadBeneficiariosDirectos %><br>
-    <%= f.number_field :cantidadBeneficiariosDirectos %>
-  </div>
-  <div class="field">
-    <%= f.label :cantidadBeneficiariosIndirectos %><br>
-    <%= f.number_field :cantidadBeneficiariosIndirectos %>
-  </div>
-  <div class="field">
-    <%= f.label :justificacionImpacto %><br>
-    <%= f.text_area :justificacionImpacto %>
-  </div>
-  <div class="field">
-    <%= f.label :localizacionGeografica %><br>
-    <%= f.text_area :localizacionGeografica %>
-  </div>
-  <div class="field">
-    <%= f.label :tipo_proyecto_id %><br>
-    <%= f.text_field :tipo_proyecto_id %>
-  </div>
-  <div class="field">
-    <%= f.label :necesidad_id %><br>
-    <%= f.text_field :necesidad_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
 
 <% end %>
