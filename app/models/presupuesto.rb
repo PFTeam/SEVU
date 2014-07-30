@@ -15,10 +15,6 @@ class Presupuesto < ActiveRecord::Base
   end
 
   def monto_total
-    self.detalle_presupuestos.each do |detalle|
-      sum = sum + detalle.monto
-    end
-    return sum
+    detalle_presupuestos.sum(:monto)
   end
-
 end
