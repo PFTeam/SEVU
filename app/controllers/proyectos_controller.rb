@@ -1,4 +1,5 @@
 class ProyectosController < ApplicationController
+  #layout 'proyectos'
   before_action :set_proyecto, only: [:show, :edit, :update, :destroy]
 
   # GET /proyectos

@@ -61,6 +61,11 @@ class NecesidadesController < ApplicationController
     end
   end
 
+  def mis_necesidades
+    params[:current_user] = Usuario.find(7)
+    @necesidades = Necesidad.where('usuario_id' => params[:current_user])
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_necesidad
