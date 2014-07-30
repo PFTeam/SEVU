@@ -37,6 +37,11 @@ class ProyectosController < ApplicationController
 
   # GET /proyectos/1/edit
   def edit
+    @necesidades = Necesidad.all
+    @usuarios = Usuario.all
+    @tipoProyectos = TipoProyecto.all
+    @estadosPosibles = EstadoProyecto.all
+    @beneficiario = @proyecto.necesidad.usuario
   end
 
   # POST /proyectos

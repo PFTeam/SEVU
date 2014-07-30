@@ -54,7 +54,7 @@
     <div class="col-lg-6">
       <%= f.button :submit, :class => 'btn btn-primary btn-lg pull-right', :value => 'GUARDAR' %>
 
-      <label><h2>Necesidad</h2></label>
+      <h2>Necesidad</h2>
       <!-- #TODO: Que muestre las necesidades si no tiene ninguna y cuando elija muestre los datos de la misma y el usuario  -->
       <%= f.input :necesidad_id, collection: @necesidades, :label => 'Título Necesidad' %>
       
@@ -67,26 +67,27 @@
       
       
       <!-- #TODO: Obtención y manejo del beneficiario null -->
-      <% if (@beneficiario != nil) then %>
+      <% if (@beneficiario != nil) %>
         <label><h3>Datos Beneficiario:</h3></label>
+       <!-- #TODO: Mostrar correctamente los datos del beneficiario -->
+        <% f.simple_fields_for @beneficiario do |u| %>
+          <%= u.input :apellidoNombre, :label => 'Apellido y Nombre', :readonly => true %>
+          <!-- #TODO: Cuando selecciona una necesidad obtener esa -->      
+          <%= u.input :telefono, :label => 'Número de Contacto', :readonly => true %>
       
-        <%= f.input @beneficiario.apellidoNombre, :label => 'Apellido y Nombre', :readonly => true %>
-        <!-- #TODO: Cuando selecciona una necesidad obtener esa -->      
-        <%= f.input @necesidades.first.cargoResponsable, :label => 'Apellido y Nombre', :readonly => true %>
+          <%= u.input :email, :label => 'Email', :readonly => true %>
       
-        <%= f.input @beneficiario.telefono, :label => 'Número de Contacto', :readonly => true %>
-      
-        <%= f.input @beneficiario.email, :label => 'Email', :readonly => true %>
-      
-        <%= f.input @beneficiario.fax, :label => 'Fax', :readonly => true %>
-
+          <%= u.input :fax, :label => 'Fax', :readonly => true %>
+        <% end %>
+      <% else %>
+         No hay beneficiario asignado.
       <% end %>         
               
         
         
       <%= f.simple_fields_for :historial_estado_proyectos do |historial| %>
         
-        <%= historial.input :estado_proyecto_id, collection: @estadosPosibles %>
+        <h2> <%= historial.input :estado_proyecto_id, collection: @estadosPosibles %> </h2>
         
       <%end%>
        
