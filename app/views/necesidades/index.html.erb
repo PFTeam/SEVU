@@ -1,8 +1,54 @@
 <h1>Listing necesidades</h1>
 
+
+<div class="row">
+  <div class="col-lg-12">
+    <% @necesidades.each do |necesidad| %>
+
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title"> <%= link_to necesidad.titulo, necesidad %></h3>
+              </div>
+              <div class="panel-body">
+                
+                <label>Descripción de la Necesidad</label>
+                <p> 
+                  <%= necesidad.descripcion %>
+                </p>
+                <label>Ámbito de Aplicación</label>
+                <p>
+                  <%= necesidad.ambitoAplicacion %>
+                </p>
+                <label>Nombre Responsable</label>
+                <p> 
+                  <%= necesidad.usuario %>
+                </p>
+                <label>Número de Contacto</label>
+                <p> 
+                  <%= necesidad.usuario do |usu| %>
+                   <%= usu.telefono %>
+                  <%end%>
+                </p>
+
+                <button type="button" class="btn btn-primary btn-lg"><%= link_to necesidad.proyecto.to_s, necesidad.proyecto %></button>
+                </p>
+                
+                            
+                
+              </div>
+            </div>
+          
+  
+    <% end %>      
+  </div>
+</div>
+
+
+
 <table>
   <thead>
     <tr>
+      <th>Título</th>
       <th>Descripcion</th>
       <th>Fechacreacion</th>
       <th>Ambitoaplicacion</th>
@@ -14,7 +60,9 @@
   <tbody>
     <% @necesidades.each do |necesidad| %>
       <tr>
+        <td><%= necesidad.titulo %></td>
         <td><%= necesidad.descripcion %></td>
+        <th><%= necesidad.created_at.to_formatted_s(:long) %></th>
         <td><%= necesidad.ambitoAplicacion %></td>
         <td><%= necesidad.usuario %></td>
         <td><%= link_to 'Show', necesidad %></td>
