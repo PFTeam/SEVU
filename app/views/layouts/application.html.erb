@@ -148,20 +148,10 @@
 <!------------------------>
 
         <div class="collapse navbar-collapse navbar-ex1-collapse">
-          <ul class="nav navbar-nav side-nav">
-            <li>
-              <%= link_to 'Crear Proyectos', new_proyecto_path %>
-            </li>
-            <li>
-              <%= link_to 'Visualizar Proyectos', proyectos_path %>
-            </li>
-            <li>
-              <%= link_to 'Mis Proyectos', proyectos_mis_proyectos_path %>
-            </li>
-          <li><a href="cargarPlanificacionReal.html"></i>Evaluar Presupuestos</a></li>
-          </ul>    
-      
-
+          <% case controller_name 
+               when 'proyectos'%><%= render '/shared/menu_proyecto' %>
+               <% when 'necesidades' %><%= render '/shared/menu_necesidad' %>
+          <% end %>
         </div><!-- /.navbar-collapse -->
 
 

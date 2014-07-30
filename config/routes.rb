@@ -106,6 +106,7 @@ Rails.application.routes.draw do
   resources :estado_proyectos
 
   get 'mis_proyectos', :as => 'proyectos/mis_proyectos', :controller => :proyectos
+  get 'mis_necesidades', :as => 'necesidades/mis_necesidades', :controller => :necesidades
 
 
   # The priority is based upon order of creation: first created -> highest priority.
