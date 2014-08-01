@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/zpaulovics/datetimepicker-rails.git
+  revision: ff3700d6197f64cadff316ee1b1666eed3adf06a
+  branch: master
+  submodules: true
+  specs:
+    datetimepicker-rails (3.0.3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -148,6 +156,7 @@ DEPENDENCIES
   bcrypt
   capybara
   coffee-rails (~> 4.0.0)
+  datetimepicker-rails (>= 3.0.0)!
   jbuilder (~> 2.0)
   jquery-rails
   pg
