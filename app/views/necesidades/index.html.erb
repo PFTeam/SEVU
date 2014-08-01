@@ -21,13 +21,14 @@
                 </p>
                 <label>Nombre Responsable</label>
                 <p> 
+
+                <!-- #TODO: mostrar nombre --> 
                   <%= necesidad.usuario %>
                 </p>
                 <label>Número de Contacto</label>
                 <p> 
-                  <%= necesidad.usuario do |usu| %>
-                   <%= usu.telefono %>
-                  <%end%>
+                <!-- #TODO: mostrar telefono --> 
+                  <%= necesidad.usuario %>
                 </p>
 
                 <button type="button" class="btn btn-primary btn-lg"><%= link_to necesidad.proyecto.to_s, necesidad.proyecto %></button>
