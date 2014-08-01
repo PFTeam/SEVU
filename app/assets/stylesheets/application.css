@@ -16,7 +16,7 @@
   *= require datepicker
 *= require bootstrap
 *= require morris-0.4.3.min
-*= require sb-admin 
-
+*= require sb-admin
+*= require bootstrap-datetimepicker
 
  */

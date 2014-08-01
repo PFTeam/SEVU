@@ -14,7 +14,6 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
-//= require bootstrap-datepicker
 //= require bootstrap
 //= require_tree ../../../vendor/assets/javascripts/flot
 //= require jquery-1.10.2
@@ -22,3 +21,4 @@
 //= require raphael-min
 //= require_tree ../../../vendor/assets/javascripts/morris
 //= require_tree ../../../vendor/assets/javascripts/tablesorter
+//= require bootstrap-datetimepicker

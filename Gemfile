@@ -46,3 +46,10 @@ gem 'will_paginate', '~> 3.0'
 gem 'validates_timeliness', '~> 3.0'
 gem 'sidekiq'
 gem 'capybara'
+
+
+#Datepicker
+gem 'datetimepicker-rails', '>= 3.0.0', :git => 'git://github.com/zpaulovics/datetimepicker-rails.git',  \
+      :branch => 'master', :submodules => true
+
+
