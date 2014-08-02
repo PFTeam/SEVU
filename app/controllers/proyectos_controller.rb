@@ -41,7 +41,7 @@ class ProyectosController < ApplicationController
     @necesidades = Necesidad.all
     @usuarios = Usuario.all
     @tipoProyectos = TipoProyecto.all
-    @estadosPosibles = EstadoProyecto.all
+    @estadosPosibles = EstadoProyecto.estados_posibles @proyecto.estado_proyectos.last
     @beneficiario = @proyecto.necesidad.usuario
   end
 

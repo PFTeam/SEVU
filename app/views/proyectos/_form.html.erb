@@ -87,6 +87,7 @@
       <%= f.input :fechaInicio, :as => :date, :label => 'Fecha Inicio' %>
       <%= f.input :fechaFin, :as => :date, :label => 'Fecha Fin' %>
 
+      <!-- #TODO:más de un historial muestra varias veces, solo quiero el último. -->
       <%= f.simple_fields_for :historial_estado_proyectos do |historial| %>
         
         <h2> <%= historial.input :estado_proyecto_id, collection: @estadosPosibles %> </h2>
