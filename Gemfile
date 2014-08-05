@@ -17,7 +17,7 @@ gem 'coffee-rails', '~> 4.0.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+#gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
@@ -46,10 +46,18 @@ gem 'will_paginate', '~> 3.0'
 gem 'validates_timeliness', '~> 3.0'
 gem 'sidekiq'
 gem 'capybara'
-
+gem 'unicorn'
 
 #Datepicker
 gem 'datetimepicker-rails', '>= 3.0.0', :git => 'git://github.com/zpaulovics/datetimepicker-rails.git',  \
       :branch => 'master', :submodules => true
+#Autocompletar
+gem 'jquery-ui-rails'
 
 
+#Para ajax
+gem 'SrBuj'
+
+
+
+# pry, pry-byebug  para debug
