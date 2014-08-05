@@ -10,7 +10,6 @@ class Presupuesto < ActiveRecord::Base
   has_many :concepto_gastos, :through => :detalle_presupuestos
 
   def estado_actual #Devuelve el estado actual del proyecto
-    #self.historial_estado_presupuestos.where('
     #no esta terminado porque faltan atributos importantes
   end
 
