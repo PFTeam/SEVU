@@ -12,11 +12,11 @@
  *
  *= require_tree .
  *= require_self
-
-  *= require datepicker
+*= require jquery-ui
 *= require bootstrap
 *= require morris-0.4.3.min
 *= require sb-admin
 *= require bootstrap-datetimepicker
-
+*= require SrBuj
+  *= require datepicker
  */
