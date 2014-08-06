@@ -22,27 +22,44 @@ class ProyectosController < ApplicationController
     #TODO: En vez de esto, que sea por autocompletado
     @usuarios = Usuario.all
 
-    #TODO: pasar solo estados posibles, segun el actual
-    @estadosPosibles = EstadoProyecto.all
+    @estadosPosibles = [EstadoProyecto.find_by(nombre: 'Creado')]
 
-    unless @proyecto.necesidad_id.nil?
-      @necesidades = @proyecto.necesidad
-      @beneficiario = Necesidad.find(@proyecto.necesidad_id).usuario
-    else
+    if params[:n].present?
+      @necesidades = Necesidad.find_by(nombre: params[:n])
+    end
+
+    if params[:q].present?
+      @usuario = Usuario.find_by(apellidoNombre: params[:q])
+    end
+
+    if @Proyecto.necesidad_id.nil?
       @necesidades = Necesidad.all
+    else
+      @necesidades = @proyecto.necesidad
+      @beneficiario = @proyecto.necesidad.usuario
     end
 
     @proyecto.asignacion_roles.build
     @proyecto.historial_estado_proyectos.build
+    @proyecto.organizacion_externas.build
   end
 
   # GET /proyectos/1/edit
   def edit
+
     @necesidades = Necesidad.all
     @usuarios = Usuario.all
     @tipoProyectos = TipoProyecto.all
-    @estadosPosibles = EstadoProyecto.estados_posibles @proyecto.estado_proyectos.last
+    @estadosPosibles = EstadoProyecto.estados_posibles @proyecto.historial_estado_proyectos.last.estado_proyecto
     @beneficiario = @proyecto.necesidad.usuario
+    respond_to do |format|
+      format.js {render partial: 'edit', content_type: 'text/html'}
+    end
+
+   
+   # @proyecto.asignacion_roles.build
+   # @proyecto.historial_estado_proyectos.build
+   # @proyecto.organizacion_externas.build
   end
 
   # POST /proyectos
@@ -50,6 +67,17 @@ class ProyectosController < ApplicationController
   def create
     @proyecto = Proyecto.new(proyecto_params)
     @proyecto.asignacion_roles.first.rol = (Rol.find_by(nombre: 'Director'))
+
+
+    #TODO: para no crear una organizacion existente. NO FUNCIONA
+    @proyecto.colaboradores.each do |colaborador|
+      if orgExistente = OrganizacionExterna.find_by(denominacion: colaborador.organizacion_externa.denominacion)
+        colaborador.organizacion_externa_id = orgExistente.id
+      end
+    end
+
+    #TODO: solucionar lo de abajo para que no diga que tengo proyecto blank
+    @proyecto.historial_estado_proyectos.last.proyecto = @proyecto
     respond_to do |format|
       if @proyecto.save
         format.html { redirect_to @proyecto, notice: 'Proyecto was successfully created.' }
@@ -68,6 +96,7 @@ class ProyectosController < ApplicationController
       if @proyecto.update(proyecto_params)
         format.html { redirect_to @proyecto, notice: 'Proyecto was successfully updated.' }
         format.json { render :show, status: :ok, location: @proyecto }
+        format.js   { render partial: 'proyecto_show', content_type: 'text/html' }
       else
         format.html { render :edit }
         format.json { render json: @proyecto.errors, status: :unprocessable_entity }
@@ -91,7 +120,6 @@ class ProyectosController < ApplicationController
   end
 
 
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_proyecto
@@ -100,6 +128,6 @@ class ProyectosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def proyecto_params
-      params.require(:proyecto).permit(:nombre, :breveDescripcion, :fechaInicio, :fechaFin, :antecedentes, :justificacionProyecto, :cantidadBeneficiariosDirectos, :cantidadBeneficiariosIndirectos, :justificacionImpacto, :localizacionGeografica, :tipo_proyecto_id, :necesidad_id, historial_estado_proyectos_attributes:[:id, :estado_proyecto_id], asignacion_roles_attributes:[:id, :usuario_id, :rol_id])
+      params.require(:proyecto).permit(:nombre, :breveDescripcion, :fechaInicio, :fechaFin, :antecedentes, :justificacionProyecto, :cantidadBeneficiariosDirectos, :cantidadBeneficiariosIndirectos, :justificacionImpacto, :localizacionGeografica, :tipo_proyecto_id, :necesidad_id, historial_estado_proyectos_attributes:[:id, :estado_proyecto_id], asignacion_roles_attributes:[:id, :usuario_id, :rol_id], organizacion_externas_attributes:[:id, :denominacion, :sigla, :cuit, :fax, :telefono, :direccion, :cargoResponsable, :numeroContactoResponsable, :nombreResponsable])
     end
 end

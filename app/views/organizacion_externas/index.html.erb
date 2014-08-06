@@ -1,41 +1,73 @@
 <h1>Listing organizacion_externas</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Sigla</th>
-      <th>Denominacion</th>
-      <th>Cuit</th>
-      <th>Direccion</th>
-      <th>Fax</th>
-      <th>Telefono</th>
-      <th>Nombreresponsable</th>
-      <th>Cargoresponsable</th>
-      <th>Numerocontactoresponsable</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<% @organizacion_externas.each do |organizacion_externa| %>
 
-  <tbody>
-    <% @organizacion_externas.each do |organizacion_externa| %>
-      <tr>
-        <td><%= organizacion_externa.sigla %></td>
-        <td><%= organizacion_externa.denominacion %></td>
-        <td><%= organizacion_externa.cuit %></td>
-        <td><%= organizacion_externa.direccion %></td>
-        <td><%= organizacion_externa.fax %></td>
-        <td><%= organizacion_externa.telefono %></td>
-        <td><%= organizacion_externa.nombreResponsable %></td>
-        <td><%= organizacion_externa.cargoResponsable %></td>
-        <td><%= organizacion_externa.numeroContactoResponsable %></td>
-        <td><%= link_to 'Show', organizacion_externa %></td>
-        <td><%= link_to 'Edit', edit_organizacion_externa_path(organizacion_externa) %></td>
-        <td><%= link_to 'Destroy', organizacion_externa, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<table class="table table-hover table-striped tablesorter">
+                <thead>
+                  <tr>
+                    <th class="col-lg-3"></th>
+                    <th class="col-lg-9" ></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Denominación</td>
+                    <td><%= organizacion_externa.denominacion %></td>
+                    
+                  </tr>
+                  <tr>
+                    <td>Sigla</td>
+                    <td><%= organizacion_externa.sigla %></td>
+                  </tr>
 
+                  <tr>
+                    <td>CUIT</td>
+                    <td><%= organizacion_externa.cuit %></td>
+                  </tr>
+                  <tr>
+                    
+                    <td>Fax</td>
+                    <td><%= organizacion_externa.fax %></td>
+                    
+                  </tr>
+                  
+                  <tr>
+                    
+                    <td>Teléfono</td>
+                    <td><%= organizacion_externa.telefono %></td>
+                    
+                  </tr>
+
+                  <tr>
+                    <td>Dirección</td>
+                    <td><%= organizacion_externa.direccion %></td>
+                  </tr>   
+
+                  <tr>
+                    <td>Cargo Responsable</td>
+                    <td><%= organizacion_externa.cargoResponsable %></td> 
+                  </tr>
+                  
+                  <tr>
+                    <td>Nro de Contacto</td>
+                    <td><%= organizacion_externa.numeroContactoResponsable %></td>
+                  </tr>
+                  
+
+                  <tr>
+                    <td>Responsable</td>
+                    <td><%= organizacion_externa.nombreResponsable %></td>
+                  </tr>                  
+
+                </tbody>
+                <%= link_to 'Show', organizacion_externa %>
+                <%= link_to 'Edit', edit_organizacion_externa_path(organizacion_externa) %>
+                <%= link_to 'Destroy', organizacion_externa, method: :delete, data: { confirm: 'Are you sure?' } %>
+                
+        </table>
+  
+<% end %>
 <br>
 
 <%= link_to 'New Organizacion externa', new_organizacion_externa_path %>

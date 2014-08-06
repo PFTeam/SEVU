@@ -5,7 +5,7 @@ class Proyecto < ActiveRecord::Base
 
   has_many :objetivo_generales
 
-  has_many :proyecto_tipo_notificaciones
+  has_many :notificacion_predeterminadas
   has_many :tipo_notificaciones, :through => :notificacion_predeterminadas
 
 
@@ -21,10 +21,13 @@ class Proyecto < ActiveRecord::Base
   has_many :asignacion_roles
   has_many :usuarios, :through => :asignacion_roles
   has_many :roles, :through => :asignacion_roles
-  
+ 
+  has_many :organizacion_externas, :through => :colaboradores
+  has_many :colaboradores
+
   has_one :presupuesto
 
-  accepts_nested_attributes_for :historial_estado_proyectos, :asignacion_roles
+  accepts_nested_attributes_for :historial_estado_proyectos, :asignacion_roles, :organizacion_externas
 
   validates :nombre, :uniqueness => { :message => 'No pueden existir dos proyectos con el mismo nombre', :case_sensitive => false  }, :length => { :maximum => 250 }, :presence => true
   validates :fechaInicio, :presence => true
@@ -37,8 +40,7 @@ class Proyecto < ActiveRecord::Base
 
   def self.activos
     #TODO: No devuelve solo los que el último estado es 'Activo'
-    Proyecto.includes(:estado_proyectos).where('estado_proyectos.nombre' => 'Activo').includes(:historial_estado_proyectos)
-
+     Proyecto.includes(:estado_proyectos, :historial_estado_proyectos).joins(historial_estado_proyectos: :estado_proyecto).where('estado_proyectos.nombre =?', 'Creado')
   end
 
   def self.participando usu

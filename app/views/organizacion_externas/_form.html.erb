@@ -1,4 +1,4 @@
-<%= form_for(@organizacion_externa) do |f| %>
+<%= simple_form_for(@organizacion_externa) do |f| %>
   <% if @organizacion_externa.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@organizacion_externa.errors.count, "error") %> prohibited this organizacion_externa from being saved:</h2>
@@ -11,43 +11,68 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :sigla %><br>
-    <%= f.text_field :sigla %>
-  </div>
-  <div class="field">
-    <%= f.label :denominacion %><br>
-    <%= f.text_field :denominacion %>
-  </div>
-  <div class="field">
-    <%= f.label :cuit %><br>
-    <%= f.text_field :cuit %>
-  </div>
-  <div class="field">
-    <%= f.label :direccion %><br>
-    <%= f.text_field :direccion %>
-  </div>
-  <div class="field">
-    <%= f.label :fax %><br>
-    <%= f.text_field :fax %>
-  </div>
-  <div class="field">
-    <%= f.label :telefono %><br>
-    <%= f.text_field :telefono %>
-  </div>
-  <div class="field">
-    <%= f.label :nombreResponsable %><br>
-    <%= f.text_field :nombreResponsable %>
-  </div>
-  <div class="field">
-    <%= f.label :cargoResponsable %><br>
-    <%= f.text_field :cargoResponsable %>
-  </div>
-  <div class="field">
-    <%= f.label :numeroContactoResponsable %><br>
-    <%= f.text_field :numeroContactoResponsable %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
+          
+  <table class="table table-hover table-striped tablesorter">
+                <thead>
+                  <tr>
+                    <th class="col-lg-3"></th>
+                    <th class="col-lg-9" ></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Denominación</td>
+                    <td><%= f.input :denominacion,:label => false %></td>
+                    
+                  </tr>
+                  <tr>
+                    <td>Sigla</td>
+                    <td><%= f.input :sigla,:label => false %></td>
+                  </tr>
+
+                  <tr>
+                    <td>CUIT</td>
+                    <td><%= f.input :cuit,:label => false %></td>
+                  </tr>
+                  <tr>
+                    
+                    <td>Fax</td>
+                    <td><%= f.input :fax,:label => false %></td>
+                    
+                  </tr>
+                  
+                  <tr>
+                    
+                    <td>Teléfono</td>
+                    <td><%= f.input :telefono,:label => false %></td>
+                    
+                  </tr>
+
+                  <tr>
+                    <td>Dirección</td>
+                    <td><%= f.input :direccion,:label => false %></td>
+                  </tr>   
+
+                  <tr>
+                    <td>Cargo Responsable</td>
+                    <td><%= f.input :cargoResponsable,:label => false %></td> 
+                  </tr>
+                  
+                  <tr>
+                    <td>Nro de Contacto</td>
+                    <td><%= f.input :numeroContactoResponsable,:label => false %></td>
+                  </tr>
+                  
+
+                  <tr>
+                    <td>Responsable</td>
+                    <td><%= f.input :nombreResponsable,:label => false %></td>
+                  </tr>                  
+
+                </tbody>
+        </table>
+      
+      <%= f.button :submit, :class => 'btn btn-primary btn-lg pull-right', :value => 'GUARDAR' %>
 <% end %>

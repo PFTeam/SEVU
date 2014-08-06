@@ -2,8 +2,8 @@
 <html>
 <head>
   <title>S.E.V.U</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track', 'bootstrap' => true %>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application', 'bootstrap' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -185,5 +185,7 @@
           !------------------------>  
        </div><!-- /#page-wrapper -->
   </div><!-- /#wrapper -->
+  <!-- Modal -->
+  <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div><!-- /.modal -->
 </body>
 </html>

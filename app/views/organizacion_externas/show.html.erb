@@ -1,49 +1,68 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Sigla:</strong>
-  <%= @organizacion_externa.sigla %>
-</p>
 
-<p>
-  <strong>Denominacion:</strong>
-  <%= @organizacion_externa.denominacion %>
-</p>
 
-<p>
-  <strong>Cuit:</strong>
-  <%= @organizacion_externa.cuit %>
-</p>
 
-<p>
-  <strong>Direccion:</strong>
-  <%= @organizacion_externa.direccion %>
-</p>
+<table class="table table-hover table-striped tablesorter">
+                <thead>
+                  <tr>
+                    <th class="col-lg-3"></th>
+                    <th class="col-lg-9" ></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Denominación</td>
+                    <td><%= @organizacion_externa.denominacion %></td>
+                    
+                  </tr>
+                  <tr>
+                    <td>Sigla</td>
+                    <td><%= @organizacion_externa.sigla %></td>
+                  </tr>
 
-<p>
-  <strong>Fax:</strong>
-  <%= @organizacion_externa.fax %>
-</p>
+                  <tr>
+                    <td>CUIT</td>
+                    <td><%= @organizacion_externa.cuit %></td>
+                  </tr>
+                  <tr>
+                    
+                    <td>Fax</td>
+                    <td><%= @organizacion_externa.fax %></td>
+                    
+                  </tr>
+                  
+                  <tr>
+                    
+                    <td>Teléfono</td>
+                    <td><%= @organizacion_externa.telefono %></td>
+                    
+                  </tr>
 
-<p>
-  <strong>Telefono:</strong>
-  <%= @organizacion_externa.telefono %>
-</p>
+                  <tr>
+                    <td>Dirección</td>
+                    <td><%= @organizacion_externa.direccion %></td>
+                  </tr>   
 
-<p>
-  <strong>Nombreresponsable:</strong>
-  <%= @organizacion_externa.nombreResponsable %>
-</p>
+                  <tr>
+                    <td>Cargo Responsable</td>
+                    <td><%= @organizacion_externa.cargoResponsable %></td> 
+                  </tr>
+                  
+                  <tr>
+                    <td>Nro de Contacto</td>
+                    <td><%= @organizacion_externa.numeroContactoResponsable %></td>
+                  </tr>
+                  
 
-<p>
-  <strong>Cargoresponsable:</strong>
-  <%= @organizacion_externa.cargoResponsable %>
-</p>
+                  <tr>
+                    <td>Responsable</td>
+                    <td><%= @organizacion_externa.nombreResponsable %></td>
+                  </tr>                  
 
-<p>
-  <strong>Numerocontactoresponsable:</strong>
-  <%= @organizacion_externa.numeroContactoResponsable %>
-</p>
+                </tbody>
+                <%= link_to 'Edit', edit_organizacion_externa_path(@organizacion_externa) %> |
+        </table>
 
-<%= link_to 'Edit', edit_organizacion_externa_path(@organizacion_externa) %> |
 <%= link_to 'Back', organizacion_externas_path %>
