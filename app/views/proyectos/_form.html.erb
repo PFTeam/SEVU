@@ -21,44 +21,44 @@
 
     <div class="col-lg-6">
 
-          <h2><%= f.input :nombre, :label => 'Título del Proyecto', :placeholder => 'título del proyecto...' %></h2>
 
-        
+
+          <h2><%= f.input:nombre , :label => 'Título del Proyecto', :placeholder => 'título del proyecto...' %></h2>
+
           <label>
               <h2><%= f.label 'Descripción del Proyecto' %></h2>
           </label>
-          
- 
+
+
           <!-- #TODO: Agregar el span @ -->
           <%= f.simple_fields_for :asignacion_roles do |asignacion| %>
-            <%= asignacion.input :usuario_id, collection: @usuarios %>
+            <%= asignacion.input :usuario_id, collection: @usuarios, :label => 'Director del Proyecto' %>
           <%end%>
+          
     
   
           <%= f.input :breveDescripcion,:as => :text, :input_html => {:rows => 10}, :label => 'Breve Descripción', :placeholder => 'descripción del proyecto...'  %>
           
-          <!-- #TODO: Sale como textarea??? -->
-          <%= f.input :localizacionGeografica, :label => 'Localización Geográfica', :placeholder => 'localización...' %>
-        
-          <%= f.input :cantidadBeneficiariosDirectos, :label => 'Cantidad de Beneficiarios Directos', :placeholder => 'beneficiarios directos...' %>          
+          <%= f.input :antecedentes,:as => :text, :input_html => {:rows => 10}, :label => 'Antecedentes Proyecto', :placeholder => 'escriba sobre los antecedentes del mismo'  %>
+          
+          <%= f.input :justificacionProyecto,:as => :text, :input_html => {:rows => 10}, :label => 'Justificación', :placeholder => 'justificación del proyecto...'  %>
+    
 
-          <%= f.input :cantidadBeneficiariosIndirectos, :label => 'Cantidad de Beneficiarios Indirectos', :placeholder => 'beneficiarios indirectos...' %> 
-          
-          
           <h2><%= f.input :tipo_proyecto_id, collection: @tipoProyectos, :label => 'Tipo de Proyecto' %></h2>
 
 
     </div> 
-
+   
 
     <div class="col-lg-6">
       <%= f.button :submit, :class => 'btn btn-primary btn-lg pull-right', :value => 'GUARDAR' %>
 
+     
       <h2>Necesidad</h2>
       <!-- #TODO: Que muestre las necesidades si no tiene ninguna y cuando elija muestre los datos de la misma y el usuario  -->
       <%= f.input :necesidad_id, collection: @necesidades, :label => 'Título Necesidad' %>
       
-      <!-- #TODO: Agregar jquerry o js para que muestre la descripción de la necesidad -->
+      <!-- #TODO: Agregar js para que muestre la descripción de la necesidad -->
       <% if (:necesidad_id != nil) then %>
       <!-- #TODO: arreglar label
         <%= f.label :necesidad_id,:as => :text, :readonly => true, :input_html => {:rows => 10}, :label => 'Breve Descripción', :placeholder => 'descripción de la necesidad...'  %>
@@ -83,21 +83,40 @@
          No hay beneficiario asignado.
       <% end %>         
               
-        
+        <!-- #TODO: Hacer funcionar datepicker -->
       <%= f.input :fechaInicio, :as => :date, :label => 'Fecha Inicio' %>
       <%= f.input :fechaFin, :as => :date, :label => 'Fecha Fin' %>
 
+         
+     <!-- #TODO: Sale como textarea??? -->
+      <%= f.input :localizacionGeografica, :label => 'Localización Geográfica', :placeholder => 'localización...' %>
+
+      <%= f.input :cantidadBeneficiariosDirectos, :label => 'Cantidad de Beneficiarios Directos', :placeholder => 'beneficiarios directos...' %>          
+
+      <%= f.input :cantidadBeneficiariosIndirectos, :label => 'Cantidad de Beneficiarios Indirectos', :placeholder => 'beneficiarios indirectos...' %> 
+
+      <%= f.input :justificacionImpacto,:as => :text, :input_html => {:rows => 10}, :label => 'Justificación del impacto', :placeholder => 'justifique el impacto del proyecto...'  %>
+
+         
+         
+         
       <!-- #TODO:más de un historial muestra varias veces, solo quiero el último. -->
-      <%= f.simple_fields_for :historial_estado_proyectos do |historial| %>
-        
+      <%= f.simple_fields_for :historial_estado_proyectos do |historial| %>       
         <h2> <%= historial.input :estado_proyecto_id, collection: @estadosPosibles %> </h2>
-        
       <%end%>
        
   
         
     </div>
 
+    <div class="col-lg-12">
+      
+    <%= render partial: "organizacion_externa.html.erb", locals: { f: f } %>    
+  
+    <button type="button" class="btn btn-primary btn-sm">Agregar</button>
+    </div>
+    
+    
   </div><!-- /.row -->
 
 

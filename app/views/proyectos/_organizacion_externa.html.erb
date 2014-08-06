@@ -1,0 +1,67 @@
+
+<%= f.simple_fields_for :organizacion_externas do |organizacion| %>
+<div class="duplicatable_nested_form"> 
+  <table class="table table-hover table-striped tablesorter">
+                <thead>
+                  <tr>
+                    <th class="col-lg-3"></th>
+                    <th class="col-lg-9"></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Denominación</td>
+                    <td><%= organizacion.input :denominacion,:label => false %></td>
+                    
+                  </tr>
+                  <tr>
+                    <td>Sigla</td>
+                    <td><%= organizacion.input :sigla,:label => false %></td>
+                  </tr>
+
+                  <tr>
+                    <td>CUIT</td>
+                    <td><%= organizacion.input :cuit,:label => false %></td>
+                  </tr>
+                  <tr>
+                    
+                    <td>Fax</td>
+                    <td><%= organizacion.input :fax,:label => false %></td>
+                    
+                  </tr>
+                  
+                  <tr>
+                    
+                    <td>Teléfono</td>
+                    <td><%= organizacion.input :telefono,:label => false %></td>
+                    
+                  </tr>
+
+                  <tr>
+                    <td>Dirección</td>
+                    <td><%= organizacion.input :direccion,:label => false %></td>
+                  </tr>   
+
+                  <tr>
+                    <td>Cargo Responsable</td>
+                    <td><%= organizacion.input :cargoResponsable,:label => false %></td> 
+                  </tr>
+                  
+                  <tr>
+                    <td>Nro de Contacto</td>
+                    <td><%= organizacion.input :numeroContactoResponsable,:label => false %></td>
+                  </tr>
+                  
+
+                  <tr>
+                    <td>Responsable</td>
+                    <td><%= organizacion.input :nombreResponsable,:label => false %></td>
+                  </tr>                  
+
+                </tbody>
+        </table>
+   </div>   
+
+<% end %>
+<%= link_to 'Agregar Organizacion', '', :class => 'duplicate_nested_form'%>

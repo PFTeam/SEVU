@@ -1,10 +1,4 @@
-<%= simple_form_for(@proyecto,
-  wrapper_mappings: {
-    check_boxes: :vertical_radio_and_checkboxes,
-    radio_buttons: :vertical_radio_and_checkboxes,
-    file: :vertical_file_input,
-    boolean: :vertical_boolean
-  }) do |f| %>
+<%= simple_form_for(@proyecto, html: { remote: true, data: {target: dom_id(@proyecto), error: 'modal', modal: true, replace: true } }) do |f| %>
   <% if @proyecto.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@proyecto.errors.count, "error") %> prohibited this proyecto from being saved:</h2>
@@ -12,7 +6,7 @@
       <ul>
       <% @proyecto.errors.full_messages.each do |message| %>
         <li><%= message %></li>
-      <% end %>
+      <% end %> 
       </ul>
     </div>
   <% end %>
@@ -21,83 +15,51 @@
 
     <div class="col-lg-6">
 
-          <h2><%= f.input :nombre, :label => 'Título del Proyecto', :placeholder => 'título del proyecto...' %></h2>
 
-        
+
+          <h2><%= f.input:nombre , :label => 'Título del Proyecto', :placeholder => 'título del proyecto...' %></h2>
+
           <label>
               <h2><%= f.label 'Descripción del Proyecto' %></h2>
           </label>
-          
- 
-          <!-- #TODO: Agregar el span @ -->
-          <%= f.simple_fields_for :asignacion_roles do |asignacion| %>
-            <%= asignacion.input :usuario_id, collection: @usuarios %>
-          <%end%>
-    
-  
+
           <%= f.input :breveDescripcion,:as => :text, :input_html => {:rows => 10}, :label => 'Breve Descripción', :placeholder => 'descripción del proyecto...'  %>
           
-          <!-- #TODO: Sale como textarea??? -->
-          <%= f.input :localizacionGeografica, :label => 'Localización Geográfica', :placeholder => 'localización...' %>
-        
-          <%= f.input :cantidadBeneficiariosDirectos, :label => 'Cantidad de Beneficiarios Directos', :placeholder => 'beneficiarios directos...' %>          
-
-          <%= f.input :cantidadBeneficiariosIndirectos, :label => 'Cantidad de Beneficiarios Indirectos', :placeholder => 'beneficiarios indirectos...' %> 
+          <%= f.input :antecedentes,:as => :text, :input_html => {:rows => 10}, :label => 'Antecedentes Proyecto', :placeholder => 'escriba sobre los antecedentes del mismo'  %>
           
-          
-          <h2><%= f.input :tipo_proyecto_id, collection: @tipoProyectos, :label => 'Tipo de Proyecto' %></h2>
+          <%= f.input :justificacionProyecto,:as => :text, :input_html => {:rows => 10}, :label => 'Justificación', :placeholder => 'justificación del proyecto...'  %>
+    
 
 
     </div> 
-
+   
 
     <div class="col-lg-6">
       <%= f.button :submit, :class => 'btn btn-primary btn-lg pull-right', :value => 'GUARDAR' %>
 
-      <h2>Necesidad</h2>
-      <!-- #TODO: Que muestre las necesidades si no tiene ninguna y cuando elija muestre los datos de la misma y el usuario  -->
-      <%= f.input :necesidad_id, collection: @necesidades, :label => 'Título Necesidad' %>
-      
-      <!-- #TODO: Agregar jquerry o js para que muestre la descripción de la necesidad -->
-      <% if (:necesidad_id != nil) then %>
-      <!-- #TODO: arreglar label
-        <%= f.label :necesidad_id,:as => :text, :readonly => true, :input_html => {:rows => 10}, :label => 'Breve Descripción', :placeholder => 'descripción de la necesidad...'  %>
-      <% end %>
-      
-      
-      
-      <!-- #TODO: Obtención y manejo del beneficiario null -->
-      <% if (@beneficiario != nil) %>
-        <label><h3>Datos Beneficiario:</h3></label>
-       <!-- #TODO: Mostrar correctamente los datos del beneficiario -->
-        <% f.simple_fields_for @beneficiario do |u| %>
-          <%= u.input :apellidoNombre, :label => 'Apellido y Nombre', :readonly => true %>
-          <!-- #TODO: Cuando selecciona una necesidad obtener esa -->      
-          <%= u.input :telefono, :label => 'Número de Contacto', :readonly => true %>
-      
-          <%= u.input :email, :label => 'Email', :readonly => true %>
-      
-          <%= u.input :fax, :label => 'Fax', :readonly => true %>
-        <% end %>
-      <% else %>
-         No hay beneficiario asignado.
-      <% end %>         
-              
-        
+     
+    
+        <!-- #TODO: Hacer funcionar datepicker -->
       <%= f.input :fechaInicio, :as => :date, :label => 'Fecha Inicio' %>
       <%= f.input :fechaFin, :as => :date, :label => 'Fecha Fin' %>
 
-      <!-- #TODO:más de un historial muestra varias veces, solo quiero el último. -->
-      <%= f.simple_fields_for :historial_estado_proyectos do |historial| %>
-        
-        <h2> <%= historial.input :estado_proyecto_id, collection: @estadosPosibles %> </h2>
-        
-      <%end%>
-       
+         
+     <!-- #TODO: Sale como textarea??? -->
+      <%= f.input :localizacionGeografica, :label => 'Localización Geográfica', :placeholder => 'localización...' %>
+
+      <%= f.input :cantidadBeneficiariosDirectos, :label => 'Cantidad de Beneficiarios Directos', :placeholder => 'beneficiarios directos...' %>          
+
+      <%= f.input :cantidadBeneficiariosIndirectos, :label => 'Cantidad de Beneficiarios Indirectos', :placeholder => 'beneficiarios indirectos...' %> 
+
+      <%= f.input :justificacionImpacto,:as => :text, :input_html => {:rows => 10}, :label => 'Justificación del impacto', :placeholder => 'justifique el impacto del proyecto...'  %>
+
+         
   
         
     </div>
 
+   
+    
   </div><!-- /.row -->
 
 
