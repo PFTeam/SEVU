@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140801054314) do
+ActiveRecord::Schema.define(version: 20140811132924) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -248,7 +248,6 @@ ActiveRecord::Schema.define(version: 20140801054314) do
     t.integer  "proyecto_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "esActual"
   end
 
   add_index "historial_estado_proyectos", ["estado_proyecto_id"], name: "index_historial_estado_proyectos_on_estado_proyecto_id", using: :btree
@@ -555,6 +554,10 @@ ActiveRecord::Schema.define(version: 20140801054314) do
     t.string   "type"
     t.string   "telefono"
     t.string   "fax"
+    t.string   "foto_file_name"
+    t.string   "foto_content_type"
+    t.integer  "foto_file_size"
+    t.datetime "foto_updated_at"
   end
 
 end

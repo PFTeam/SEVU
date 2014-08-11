@@ -47,6 +47,9 @@ gem 'validates_timeliness', '~> 3.0'
 gem 'sidekiq'
 gem 'capybara'
 gem 'unicorn'
+gem 'paperclip'
+#gem 'thoughtbot-paperclip'
+
 
 #Datepicker
 gem 'datetimepicker-rails', '>= 3.0.0', :git => 'git://github.com/zpaulovics/datetimepicker-rails.git',  \

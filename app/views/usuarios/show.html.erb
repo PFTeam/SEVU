@@ -1,7 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Nombreusuario:</strong>
+  <!-- Foto -->
+  <%= image_tag @usuario.foto.url(:small) %>
+</p>
+<p>
+  <strong>Nombre de usuario:</strong>
   <%= @usuario.nombreUsuario %>
 </p>
 
@@ -11,7 +15,7 @@
 </p>
 
 <p>
-  <strong>Apellidonombre:</strong>
+  <strong>Apellido y nombre:</strong>
   <%= @usuario.apellidoNombre %>
 </p>
 
@@ -26,7 +30,7 @@
 </p>
 
 <p>
-  <strong>Fecharegistro:</strong>
+  <strong>Fecha registro:</strong>
   <%= @usuario.fechaRegistro %>
 </p>
 

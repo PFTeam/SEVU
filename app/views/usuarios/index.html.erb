@@ -3,6 +3,7 @@
 <table>
   <thead>
     <tr>
+      <th>Foto</th>
       <th>Nombreusuario</th>
       <th>Contrasenia</th>
       <th>Apellidonombre</th>
@@ -15,7 +16,8 @@
 
   <tbody>
     <% @usuarios.each do |usuario| %>
-      <tr>
+      <!-- TODO: redimensionar imagen -->
+      <td><%= image_tag usuario.foto.url(:thumb) %></td>
         <td><%= usuario.nombreUsuario %></td>
         <td><%= usuario.contrasenia %></td>
         <td><%= usuario.apellidoNombre %></td>
@@ -24,7 +26,7 @@
         <td><%= usuario.fechaRegistro %></td>
         <td><%= link_to 'Show', usuario %></td>
         <td><%= link_to 'Edit', edit_usuario_path(usuario) %></td>
-        <td><%= link_to 'Destroy', usuario, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', usuario, method: :delete, data: { confirm: 'Esta seguro?' } %></td>
       </tr>
     <% end %>
   </tbody>

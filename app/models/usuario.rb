@@ -1,5 +1,5 @@
 class Usuario < ActiveRecord::Base
-
+  
   has_many :postulaciones
   has_many :asignacion_roles
   has_many :asistencia_eventos
@@ -23,6 +23,20 @@ class Usuario < ActiveRecord::Base
   has_many :notificacion_recibidas, :class_name => "Notificacion"
   has_many :notificacion_enviadas, :class_name => "Notificacion"
   has_many :necesidades
+
+  has_attached_file :foto,
+    :styles => {
+        :larger => '400x400#',
+        :medium => "200x200#",
+        :small => "150x150#",
+        :thumb => ["32x32#", :png] },
+    :default_url => '/system/usuarios/fotos/missing.jpg',
+    :url  => "/assets/usuarios/:id/:style/:basename.:extension",
+    :path => ":rails_root/public/assets/usuarios/:id/:style/:basename.:extension"
+    
+  validates_attachment_presence :foto
+  validates_attachment_size :foto, :less_than => 4.megabytes
+  validates_attachment_content_type :foto, :content_type => ['image/jpeg', 'image/png']
 
   def to_s
     apellidoNombre
