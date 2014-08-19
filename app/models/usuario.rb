@@ -40,11 +40,6 @@ class Usuario < ActiveRecord::Base
 
   def to_s
     apellidoNombre
-  end
-  
-  def to_s
-    password
   end  
-
 
 end
