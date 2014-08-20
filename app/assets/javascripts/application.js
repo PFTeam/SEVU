@@ -1,8 +1,9 @@
 //= require jquery
-//= require SrBuj
+//= require jquery-ui
 //= require jquery_ujs
+//= require SrBuj
 //= require_tree .
-//= require bootstrap
+//= require ../../../vendor/assets/javascripts/bootstrap
 //= require_tree ../../../vendor/assets/javascripts/flot
 //= require raphael-min
 //= require_tree ../../../vendor/assets/javascripts/tablesorter
