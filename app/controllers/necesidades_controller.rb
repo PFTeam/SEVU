@@ -4,7 +4,8 @@ class NecesidadesController < ApplicationController
   # GET /necesidades
   # GET /necesidades.json
   def index
-    @necesidades = Necesidad.all
+    #@necesidades = Necesidad.all
+    @necesidades = Necesidad.page(params[:page]).search query: params[:q]
   end
 
   # GET /necesidades/1
@@ -25,12 +26,14 @@ class NecesidadesController < ApplicationController
   # POST /necesidades.json
   def create
     @necesidad = Necesidad.new(necesidad_params)
-
+    #TODO: Agregar usuario creador
     respond_to do |format|
       if @necesidad.save
+        format.js { render 'new', notice: 'La necesidad fue creada satisfactoriamente', content_type: 'text/html' }
         format.html { redirect_to @necesidad, notice: 'Necesidad was successfully created.' }
         format.json { render :show, status: :created, location: @necesidad }
       else
+        format.js { render 'new', status: :unprocessable_entity }
         format.html { render :new }
         format.json { render json: @necesidad.errors, status: :unprocessable_entity }
       end
@@ -74,6 +77,6 @@ class NecesidadesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def necesidad_params
-      params.require(:necesidad).permit(:descripcion, :fechaCreacion, :ambitoAplicacion, :usuario_id)
+      params.require(:necesidad).permit(:titulo, :descripcion, :fechaCreacion, :ambitoAplicacion, :usuario_id)
     end
 end

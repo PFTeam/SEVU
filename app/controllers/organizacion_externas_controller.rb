@@ -4,7 +4,7 @@ class OrganizacionExternasController < ApplicationController
   # GET /organizacion_externas
   # GET /organizacion_externas.json
   def index
-    @organizacion_externas = OrganizacionExterna.all
+    @organizacion_externas = OrganizacionExterna.page(params[:page]).search query: params[:q]
   end
 
   # GET /organizacion_externas/1
@@ -28,8 +28,10 @@ class OrganizacionExternasController < ApplicationController
 
     respond_to do |format|
       if @organizacion_externa.save
+        format.js {render partial: 'proyectos/crear_organizacion_externa', content_type: 'text/html'}
         format.html { redirect_to @organizacion_externa, notice: 'Organizacion externa was successfully created.' }
         format.json { render :show, status: :created, location: @organizacion_externa }
+
       else
         format.html { render :new }
         format.json { render json: @organizacion_externa.errors, status: :unprocessable_entity }

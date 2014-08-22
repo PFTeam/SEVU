@@ -3,5 +3,10 @@
     display: block;
     font-size: .75em;
     color: #999;
+    z-index: 2000;
   }
 }
+
+ul.ui-autocomplete.ui-menu {
+    z-index: 2000;
+  }

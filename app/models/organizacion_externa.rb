@@ -7,4 +7,17 @@ class OrganizacionExterna < ActiveRecord::Base
   validates :nombreResponsable, :length => { :maximum => 250 }
   validates :cargoResponsable, :length => { :maximum => 250 }
   validates :numeroContactoResponsable, :length => { :maximum => 250 }
+
+  def to_s
+    denominacion
+  end
+
+  def self.search query: nil, limit: false
+    result = OrganizacionExterna.order 'denominacion ASC'
+    if query.present?
+      result = result.where "#{table_name}.denominacion ILIKE ?", "%#{query.strip}%"
+    end
+
+    limit ? result.limit(10) : result
+  end
 end
