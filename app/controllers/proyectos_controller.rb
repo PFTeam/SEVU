@@ -24,15 +24,8 @@ class ProyectosController < ApplicationController
 
     @estadosPosibles = [EstadoProyecto.find_by(nombre: 'Creado')]
 
-    if params[:n].present?
-      @necesidades = Necesidad.find_by(nombre: params[:n])
-    end
 
-    if params[:q].present?
-      @usuario = Usuario.find_by(apellidoNombre: params[:q])
-    end
-
-    if @Proyecto.necesidad_id.nil?
+    if @proyecto.necesidad_id.nil?
       @necesidades = Necesidad.all
     else
       @necesidades = @proyecto.necesidad
@@ -47,11 +40,14 @@ class ProyectosController < ApplicationController
   # GET /proyectos/1/edit
   def edit
 
+    @tipoProyectos = TipoProyecto.all
     @necesidades = Necesidad.all
     @usuarios = Usuario.all
     @tipoProyectos = TipoProyecto.all
-    @estadosPosibles = EstadoProyecto.estados_posibles @proyecto.historial_estado_proyectos.last.estado_proyecto
-    @beneficiario = @proyecto.necesidad.usuario
+   # if @proyecto.historial_estado_proyectos.last.nil?
+    #  @estadosPosibles = EstadoProyecto.estados_posibles @proyecto.historial_estado_proyectos.last.estado_proyecto
+   # end
+      #@beneficiario = @proyecto.necesidad.usuario
     respond_to do |format|
       format.js {render partial: 'edit', content_type: 'text/html'}
     end
@@ -66,7 +62,7 @@ class ProyectosController < ApplicationController
   # POST /proyectos.json
   def create
     @proyecto = Proyecto.new(proyecto_params)
-    @proyecto.asignacion_roles.first.rol = (Rol.find_by(nombre: 'Director'))
+    #@proyecto.asignacion_roles.first.rol = (Rol.find_by(nombre: 'Director'))
 
 
     #TODO: para no crear una organizacion existente. NO FUNCIONA
@@ -77,7 +73,7 @@ class ProyectosController < ApplicationController
     end
 
     #TODO: solucionar lo de abajo para que no diga que tengo proyecto blank
-    @proyecto.historial_estado_proyectos.last.proyecto = @proyecto
+    #@proyecto.historial_estado_proyectos.last.proyecto = @proyecto
     respond_to do |format|
       if @proyecto.save
         format.html { redirect_to @proyecto, notice: 'Proyecto was successfully created.' }
@@ -98,7 +94,9 @@ class ProyectosController < ApplicationController
         format.json { render :show, status: :ok, location: @proyecto }
         format.js   { render partial: 'proyecto_show', content_type: 'text/html' }
       else
-        format.html { render :edit }
+        #format.js {render partial: 'edit_form'}
+        format.js { render partial: 'edit', status: :unprocessable_entity }
+        format.html { render partial: 'edit', status: :unprocessable_entity }
         format.json { render json: @proyecto.errors, status: :unprocessable_entity }
       end
     end
@@ -119,6 +117,16 @@ class ProyectosController < ApplicationController
     @proyectos = Proyecto.participando(params[:usuario])
   end
 
+  def crear_organizacion_externa
+   @organizacion_externa = OrganizacionExterna.new
+   render partial: 'crear_organizacion_externa', content_type: 'text/html' 
+  end
+
+  def agregar_organizacion_externa
+    #@proyecto = Proyecto.find(params[:id])
+   @colaborador = Colaborador.build(proyecto_id: @proyecto.id)
+   render partial: 'agregar_organizacion_externa', content_type: 'text/html' 
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -1,0 +1,82 @@
+
+
+<div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+              <h1>Agregar Organizacion Externa</h1>
+        </div>
+        <div class="modal-body">
+          <%= simple_form_for(@organizacion_externa, html: { remote: true, data: {error: 'modal', modal: false, replace: true } }) do |f| %>
+
+          <table class="table table-hover table-striped tablesorter">
+                          <thead>
+                            <tr>
+                              <th class="col-lg-3"></th>
+                              <th class="col-lg-9" ></th>
+                              <th></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>Denominación</td>
+                              <td><%= f.input :denominacion,:label => false %></td>
+
+                            </tr>
+                            <tr>
+                              <td>Sigla</td>
+                              <td><%= f.input :sigla,:label => false %></td>
+                            </tr>
+
+                            <tr>
+                              <td>CUIT</td>
+                              <td><%= f.input :cuit,:label => false %></td>
+                            </tr>
+                            <tr>
+
+                              <td>Fax</td>
+                              <td><%= f.input :fax,:label => false %></td>
+
+                            </tr>
+
+                            <tr>
+
+                              <td>Teléfono</td>
+                              <td><%= f.input :telefono,:label => false %></td>
+
+                            </tr>
+
+                            <tr>
+                              <td>Dirección</td>
+                              <td><%= f.input :direccion,:label => false %></td>
+                            </tr>   
+
+                            <tr>
+                              <td>Cargo Responsable</td>
+                              <td><%= f.input :cargoResponsable,:label => false %></td> 
+                            </tr>
+
+                            <tr>
+                              <td>Nro de Contacto</td>
+                              <td><%= f.input :numeroContactoResponsable,:label => false %></td>
+                            </tr>
+
+
+                            <tr>
+                              <td>Responsable</td>
+                              <td><%= f.input :nombreResponsable,:label => false %></td>
+                            </tr>                  
+
+                          </tbody>
+                  </table>
+
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <%= f.button :submit, :class => 'btn btn-primary', :value => 'GUARDAR' %>
+                </div>
+            <% end %>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog --
+
+
+

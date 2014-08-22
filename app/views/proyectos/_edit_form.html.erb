@@ -17,11 +17,8 @@
 
 
 
-          <h2><%= f.input:nombre , :label => 'Título del Proyecto', :placeholder => 'título del proyecto...' %></h2>
+          <%= f.input:nombre , :label => 'Título del Proyecto', :placeholder => 'título del proyecto...' %>
 
-          <label>
-              <h2><%= f.label 'Descripción del Proyecto' %></h2>
-          </label>
 
           <%= f.input :breveDescripcion,:as => :text, :input_html => {:rows => 10}, :label => 'Breve Descripción', :placeholder => 'descripción del proyecto...'  %>
           
@@ -35,9 +32,9 @@
    
 
     <div class="col-lg-6">
-      <%= f.button :submit, :class => 'btn btn-primary btn-lg pull-right', :value => 'GUARDAR' %>
 
      
+          <%= f.input :tipo_proyecto_id, collection: @tipoProyectos, :label => 'Tipo de Proyecto' %>
     
         <!-- #TODO: Hacer funcionar datepicker -->
       <%= f.input :fechaInicio, :as => :date, :label => 'Fecha Inicio' %>
@@ -62,6 +59,11 @@
     
   </div><!-- /.row -->
 
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <%= f.button :submit, :class => 'btn btn-primary', :value => 'Guardar' %>
+        </div>
 
 
 <% end %>
+

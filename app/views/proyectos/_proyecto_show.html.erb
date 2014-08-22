@@ -1,61 +1,71 @@
 <div id="<%= dom_id(@proyecto) %>">
-  <p>
-    <strong>Nombre:</strong>
-    <%= @proyecto.nombre %>
-  </p>
 
-  <p>
-    <strong>Brevedescripcion:</strong>
-    <%= @proyecto.breveDescripcion %>
-  </p>
+  <div class="row">
 
-  <p>
-    <strong>Fechainicio:</strong>
-    <%= @proyecto.fechaInicio %>
-  </p>
+    <div class="col-lg-6">
 
-  <p>
-    <strong>Fechafin:</strong>
-    <%= @proyecto.fechaFin %>
-  </p>
 
-  <p>
-    <strong>Antecedentes:</strong>
-    <%= @proyecto.antecedentes %>
-  </p>
+      <p>
+      <strong>Título del Proyecto</strong>:</br>
+        <%= @proyecto.nombre%>
+      </p>
+      <p>
+          <strong>Breve Descripción</strong>:</br>
+          <%= @proyecto.breveDescripcion  %>
+      </p>
+      <p>
+          <strong>Antecedentes Proyecto</strong>:</br>
+          <%= @proyecto.antecedentes %>
+      </p>
+      <p>
+          <br><strong>Justificación</strong>:</br>
+          <%= @proyecto.justificacionProyecto %>
+      </p>
 
-  <p>
-    <strong>Justificacionproyecto:</strong>
-    <%= @proyecto.justificacionProyecto %>
-  </p>
 
-  <p>
-    <strong>Cantidadbeneficiariosdirectos:</strong>
-    <%= @proyecto.cantidadBeneficiariosDirectos %>
-  </p>
+    </div> 
+   
 
-  <p>
-    <strong>Cantidadbeneficiariosindirectos:</strong>
-    <%= @proyecto.cantidadBeneficiariosIndirectos %>
-  </p>
+    <div class="col-lg-6">
 
-  <p>
-    <strong>Justificacionimpacto:</strong>
-    <%= @proyecto.justificacionImpacto %>
-  </p>
-
-  <p>
-    <strong>Localizaciongeografica:</strong>
-    <%= @proyecto.localizacionGeografica %>
-  </p>
-
-  <p>
-    <strong>Tipo proyecto:</strong>
-    <%= @proyecto.tipo_proyecto %>
-  </p>
-
-  <p>
-    <strong>Necesidad:</strong>
-    <%= @proyecto.necesidad %>
-  </p>
+          <p> 
+            <strong>Tipo de Proyecto</strong>:</br>
+            <%=  @proyecto.tipo_proyecto %>
+          </p>
+          <p>
+            <strong>Fecha Inicio</strong>:</br>
+            <%= @proyecto.fechaInicio %>
+          </p>
+          <p>
+            <strong>Fecha Fin</strong>:</br>
+            <%= @proyecto.fechaFin %>
+          </p>
+          <p>
+            <strong>Localización Geográfica</strong>:</br>
+            <%= @proyecto.localizacionGeografica %>
+          </p>
+          <p>
+            <strong>Cantidad de Beneficiarios Directos</strong>:</br>
+            <%= @proyecto.cantidadBeneficiariosDirectos %>
+          </p>
+          <p>
+            <strong>Cantidad de Beneficiarios Indirectos</strong>:</br>
+            <%= @proyecto.cantidadBeneficiariosIndirectos %> 
+          </p>
+          <p>
+            <strong>Justificación del Impacto</strong>:</br>
+            <%= @proyecto.justificacionImpacto %>
+          </p>
+          <p>
+            <strong>Justificación del Impacto</strong>:</br>
+            <%= @proyecto.historial_estado_proyectos.last.estado_proyecto %>
+          </p>
+    </div>
+  </div><!-- /.row -->
+<div class="modal-footer">
 </div>
+
+
+
+
+

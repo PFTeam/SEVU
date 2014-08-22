@@ -14,6 +14,7 @@ class ColaboradoresController < ApplicationController
 
   # GET /colaboradores/new
   def new
+    @organizacionesExternas = OrganizacionExterna.all
     @colaborador = Colaborador.new
   end
 
@@ -28,6 +29,7 @@ class ColaboradoresController < ApplicationController
 
     respond_to do |format|
       if @colaborador.save
+        format.js { render 'show', notice: 'El Colaborador fue agregado satisfactoriamente', content_type: 'text/html' }
         format.html { redirect_to @colaborador, notice: 'Colaborador was successfully created.' }
         format.json { render :show, status: :created, location: @colaborador }
       else
@@ -69,6 +71,6 @@ class ColaboradoresController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def colaborador_params
-      params.require(:colaborador).permit(:organizacion_externa_id, :proyecto_id)
+      params.require(:colaborador).permit(:organizacion_externa_id, :proyecto_id )
     end
 end
