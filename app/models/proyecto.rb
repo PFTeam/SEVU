@@ -29,14 +29,21 @@ class Proyecto < ActiveRecord::Base
 
   accepts_nested_attributes_for :historial_estado_proyectos, :asignacion_roles, :organizacion_externas
 
+  before_validation :default_to_zero_if_necessary, :on => :create
+
   validates :nombre, :uniqueness => { :message => 'No pueden existir dos proyectos con el mismo nombre', :case_sensitive => false  }, :length => { :maximum => 250 }, :presence => true
   validates :fechaInicio, :presence => true
   validates :fechaFin, :presence => true
-  validates :cantidadBeneficiariosDirectos, :numericality => { :only_integer => true , :greater_than => 0}
-  validates :cantidadBeneficiariosIndirectos, :numericality => { :only_integer => true , :greater_than => 0}
+  validates :cantidadBeneficiariosDirectos, :numericality => { :only_integer => true , :greater_equal_than => 0}
+  validates :cantidadBeneficiariosIndirectos, :numericality => { :only_integer => true , :greater_equal_than => 0}
   validates :localizacionGeografica, :length => { :maximum => 250 }
   validates :tipo_proyecto, :presence => true
-  validates :necesidad, :presence => true
+
+
+  def default_to_zero_if_necessary
+        self.cantidadBeneficiariosIndirectos = 0 if self.cantidadBeneficiariosIndirectos.blank?
+        self.cantidadBeneficiariosDirectos = 0 if self.cantidadBeneficiariosDirectos.blank?
+  end
 
   def self.activos
     #TODO: No devuelve solo los que el último estado es 'Activo'

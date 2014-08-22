@@ -69,7 +69,9 @@ Rails.application.routes.draw do
 
   resources :historial_estado_proyectos
 
-  resources :proyectos
+  resources :proyectos do
+    resources :asignacion_roles
+  end
 
   resources :necesidades
 
@@ -108,7 +110,7 @@ Rails.application.routes.draw do
   get 'mis_proyectos', :as => 'proyectos/mis_proyectos', :controller => :proyectos
   get 'mis_necesidades', :as => 'necesidades/mis_necesidades', :controller => :necesidades
 
-
+  get 'crear_organizacion_externa', :controller => :proyectos
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -9,5 +9,8 @@ class Rol < ActiveRecord::Base
   has_many :asignacion_funciones
   has_many :usuarios, :through => :asignacion_funciones
 
+  def to_s
+    nombre
+  end
 
 end

@@ -3,10 +3,8 @@
 <table>
   <thead>
     <tr>
-      <th>Fechacambioestado</th>
-      <th>Esactual</th>
+      <th>Fecha Asignación</th>
       <th>Rol</th>
-      <th>Proyecto</th>
       <th>Usuario</th>
       <th colspan="3"></th>
     </tr>
@@ -15,10 +13,8 @@
   <tbody>
     <% @asignacion_roles.each do |asignacion_rol| %>
       <tr>
-        <td><%= asignacion_rol.fechaCambioEstado %></td>
-        <td><%= asignacion_rol.esActual %></td>
+        <td><%= asignacion_rol.created_at.to_formatted_s(:rfc822)  %></td>
         <td><%= asignacion_rol.rol %></td>
-        <td><%= asignacion_rol.proyecto %></td>
         <td><%= asignacion_rol.usuario %></td>
         <td><%= link_to 'Show', asignacion_rol %></td>
         <td><%= link_to 'Edit', edit_asignacion_rol_path(asignacion_rol) %></td>
