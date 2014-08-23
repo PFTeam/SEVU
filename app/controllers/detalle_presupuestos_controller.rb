@@ -10,15 +10,19 @@ class DetallePresupuestosController < ApplicationController
   # GET /detalle_presupuestos/1
   # GET /detalle_presupuestos/1.json
   def show
+    @detalle_presupuestos = DetallePresupuesto.all
   end
 
   # GET /detalle_presupuestos/new
   def new
     @detalle_presupuesto = DetallePresupuesto.new
+    @concepto_gastos = ConceptoGasto.all
   end
 
   # GET /detalle_presupuestos/1/edit
   def edit
+    @detalle_presupuesto = DetallePresupuesto.new
+    @concepto_gastos = ConceptoGasto.all 
   end
 
   # POST /detalle_presupuestos
