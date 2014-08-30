@@ -28,7 +28,7 @@ class PresupuestosController < ApplicationController
 
     respond_to do |format|
       if @presupuesto.save
-        format.html { redirect_to @presupuesto, notice: 'Presupuesto was successfully created.' }
+        format.html { redirect_to @presupuesto, notice: 'El Presupuesto fue creado exitosamente.' }
         format.json { render :show, status: :created, location: @presupuesto }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class PresupuestosController < ApplicationController
   def update
     respond_to do |format|
       if @presupuesto.update(presupuesto_params)
-        format.html { redirect_to @presupuesto, notice: 'Presupuesto was successfully updated.' }
+        format.html { redirect_to @presupuesto, notice: 'El Presupuesto fue creado exitosamente.' }
         format.json { render :show, status: :ok, location: @presupuesto }
       else
         format.html { render :edit }
@@ -60,6 +60,34 @@ class PresupuestosController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def gestionar_presupuesto
+    @presupuesto = Presupuesto.find(params[:id])
+    @detalles_presupuesto = DetallePresupuesto.where(presupuesto_id: params[:id]).order(:monto).reverse_order
+    @presupuesto.montoTotal = @detalles_presupuesto.sum(:monto)
+    
+    ConceptoGasto.all.each do |concept|                   #
+      flag = 0                                            #
+      @detalles_presupuesto.each do |det|                 #
+        if det.concepto_gasto == concept then             #
+          @conceptos = @conceptos.to_a.push concept       #  
+          flag = 1                                        #
+        end                                               #
+      end                                                 # Esto es para traer los conceptos que son usados solamente
+      if flag == 0 then                                   #
+        @conceptos_no_usados = @conceptos_no_usados.to_a.push concept
+      end                                                 #
+     end                                                  #
+    if !@conceptos.nil? then                              #
+      @conceptos = @conceptos.uniq                        #
+    end                                                   #
+    if !@conceptos_no_usados.nil? then                    #
+      @conceptos_no_usados = @conceptos_no_usados.uniq    #
+    end                                                   #
+
+    #@conceptos = ConceptoGasto.all                 # Esto era para buscar todos los conceptos
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

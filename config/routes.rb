@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
   resources :colaboradores
 
-  resources :detalle_presupuestos
+  resources :detalle_presupuestos#, only: [:index, :show, :edit, :update, :destroy]
 
   resources :historial_estado_presupuestos
 
-  resources :presupuestos
+  resources :presupuestos do
+    resources :detalle_presupuestos#, only: [:new, :create]
+  end
 
   resources :detalle_gastos
 
@@ -31,11 +33,15 @@ Rails.application.routes.draw do
 
   resources :evento_publicos
 
-  resources :informe_gastos
+  resources :informe_gastos do
+    resources :detalle_gastos #, only: [:new, :create]
+  end
 
   resources :detalle_restricciones
 
-  resources :restricciones
+  resources :restricciones do
+    resources :detalle_restricciones #, only: [:new, :create]
+  end
 
   resources :postulaciones
 
@@ -111,6 +117,9 @@ Rails.application.routes.draw do
   get 'mis_necesidades', :as => 'necesidades/mis_necesidades', :controller => :necesidades
 
   get 'crear_organizacion_externa', :controller => :proyectos
+
+  get 'gestionar_presupuesto/:id' => 'presupuestos#gestionar_presupuesto', :as => 'gestionar_presupuesto'
+  #get 'gestionarPresupuesto', :controller => :presupuestos
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
