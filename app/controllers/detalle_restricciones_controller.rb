@@ -1,4 +1,7 @@
 class DetalleRestriccionesController < ApplicationController
+  before_action :set_restriccion, only: [:new, :create, :edit, :update, :destroy]
+  #before_action :set_restriccion_detalle_restriccion, only:[:show, :edit, :update, :destroy]
+ 
   before_action :set_detalle_restriccion, only: [:show, :edit, :update, :destroy]
 
   # GET /detalle_restricciones
@@ -15,20 +18,23 @@ class DetalleRestriccionesController < ApplicationController
   # GET /detalle_restricciones/new
   def new
     @detalle_restriccion = DetalleRestriccion.new
+    @concepto_gastos = ConceptoGasto.all
   end
 
   # GET /detalle_restricciones/1/edit
   def edit
+    @concepto_gastos = ConceptoGasto.all
   end
 
   # POST /detalle_restricciones
   # POST /detalle_restricciones.json
   def create
-    @detalle_restriccion = DetalleRestriccion.new(detalle_restriccion_params)
+    @detalle_restriccion = @restriccion.detalle_restricciones.new(detalle_restriccion_params)
 
     respond_to do |format|
       if @detalle_restriccion.save
-        format.html { redirect_to @detalle_restriccion, notice: 'Detalle restriccion was successfully created.' }
+        format.html { redirect_to gestionar_restricciones_path}
+        #format.html { redirect_to @detalle_restriccion, notice: 'Detalle restriccion was successfully created.' }
         format.json { render :show, status: :created, location: @detalle_restriccion }
       else
         format.html { render :new }
@@ -67,6 +73,13 @@ class DetalleRestriccionesController < ApplicationController
       @detalle_restriccion = DetalleRestriccion.find(params[:id])
     end
 
+    def set_restriccion
+      @restriccion = Restriccion.find params[:restriccion_id]
+    end  
+
+    def set_restriccion_detalle_restriccion
+      @detalle_restriccion = @restriccion.detalle_restriccion.find(params[:id])
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def detalle_restriccion_params
       params.require(:detalle_restriccion).permit(:esActiva, :fechaDesde, :fechaHasta, :montoMax, :restriccion_id, :concepto_gasto_id)

@@ -1,33 +1,86 @@
-<%= form_for(@restriccion) do |f| %>
+<%= simple_form_for(@restriccion,
+    wrapper_mappings: {
+    check_boxes: :horizontal_radio_and_checkboxes,
+    radio_buttons: :horizontal_radio_and_checkboxes,
+    file: :horizontal_file_input,
+    boolean: :horizontal_boolean
+  }) do |f| %>
   <% if @restriccion.errors.any? %>
+    <div class="col-lg-12" align="center">
     <div id="error_explanation">
-      <h2><%= pluralize(@restriccion.errors.count, "error") %> prohibited this restriccion from being saved:</h2>
-
+      <h2><%= pluralize(@restriccion.errors.count, "Error") %> en la creacion del detalle:</h2>
       <ul>
       <% @restriccion.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
     </div>
+  </div>
   <% end %>
+  <div class="row" align="center">
+    <div class="col-lg-3" align="center"></div>
+      <div class="col-lg-6" align="center">
+       <!--<div class="form-inputs">
+         
+         <%#= f.input :titulo, :label => 'Título', :placeholder => 'Título del gasto...' %>
+      
+         <br></br>-->
+         <label> Tipo de Proyecto </label>
+         <%= f.collection_select(:tipo_proyecto_id, @tipos_proyecto, :id, :nombre, {prompt: "Tipo de Proyecto..."}, {class: "form-control"}) %>
+         <%#= f.collection_select(:detalle_presupuesto, :concepto_gasto_id, Concepto_gasto.all, :id, :titulo, prompt: true) %>
+         <%#= f.input :concepto_gasto_id, collection: @concepto_gastos, :label => 'Concepto o rubro' %>
+         
+         <br></br>
+         <!--
+         <%#= f.input :descripcion,:as => :text, :input_html => {:rows => 6}, :label => 'Breve Descripción', :placeholder => 'Descripción del gasto...'  %>   
+         
+         <br></br>
+         
+         <%#= f.input :monto, wrapper: :horizontal_input_group do %>
+           <span class="input-group-addon">$</span>
+           <%#= f.input_field :monto, class: "form-control" %>
+         <%# end %>      
+         <br></br>
+         -->
+       </div>
+     </div>
+   </div>
+   
+   <div align="center">
+     <%= f.button :submit, :class => 'btn btn-primary btn-lg center', :value => 'Confirmar' %>
+   </div>
+
+<% end %>
+<%#= form_for(@restriccion) do |f| %>
+  <%# if @restriccion.errors.any? %>
+<!--    <div id="error_explanation">
+      <h2><%#= pluralize(@restriccion.errors.count, "error") %> prohibited this restriccion from being saved:</h2>
+
+      <ul>
+      <%# @restriccion.errors.full_messages.each do |message| %>
+        <li><%#= message %></li>
+      <%# end %>
+      </ul>
+    </div>
+  <%# end %>
 
   <div class="field">
-    <%= f.label :fechaDesde %><br>
-    <%= f.datetime_select :fechaDesde %>
+    <%#= f.label :fechaDesde %><br>
+    <%#= f.datetime_select :fechaDesde %>
   </div>
   <div class="field">
-    <%= f.label :fechaHasta %><br>
-    <%= f.datetime_select :fechaHasta %>
+    <%#= f.label :fechaHasta %><br>
+    <%#= f.datetime_select :fechaHasta %>
   </div>
   <div class="field">
-    <%= f.label :esActiva %><br>
-    <%= f.check_box :esActiva %>
+    <%#= f.label :esActiva %><br>
+    <%#= f.check_box :esActiva %>
   </div>
   <div class="field">
-    <%= f.label :tipo_proyecto_id %><br>
-    <%= f.text_field :tipo_proyecto_id %>
+    <%#= f.label :tipo_proyecto_id %><br>
+    <%#= f.text_field :tipo_proyecto_id %>
   </div>
   <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+    <%#= f.submit %>
+  </div>-->
+<%# end %>

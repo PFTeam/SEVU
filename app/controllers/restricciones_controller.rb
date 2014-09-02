@@ -15,6 +15,7 @@ class RestriccionesController < ApplicationController
   # GET /restricciones/new
   def new
     @restriccion = Restriccion.new
+    @tipos_proyecto = TipoProyecto.all
   end
 
   # GET /restricciones/1/edit
@@ -28,7 +29,8 @@ class RestriccionesController < ApplicationController
 
     respond_to do |format|
       if @restriccion.save
-        format.html { redirect_to @restriccion, notice: 'Restriccion was successfully created.' }
+        format.html {redirect_to gestionar_restricciones_path}
+        #format.html { redirect_to @restriccion, notice: 'Restriccion was successfully created.' }
         format.json { render :show, status: :created, location: @restriccion }
       else
         format.html { render :new }
@@ -59,6 +61,37 @@ class RestriccionesController < ApplicationController
       format.html { redirect_to restricciones_url, notice: 'Restriccion was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def gestionar_restricciones
+    @restricciones = Restriccion.all #find(params[:id])
+    #@detalles_restriccion = DetalleRestriccion.where(restriccion_id: params[:id])#.order(:monto).reverse_order
+    #@presupuesto.montoTotal = @detalles_presupuesto.sum(:monto)
+    
+    #@restricciones.each do |restric|
+    #  @tipos_proyecto.to_a.push restric.tipo_proyecto
+    #end
+
+    #TipoProyecto.all.each do |tproy|                   #
+    #  flag = 0                                            #
+    #  @detalles_restriccion.each do |det|                 #
+    #    if det.restriccion.tipo_proyecto ==  then             #
+    #      @conceptos = @conceptos.to_a.push concept       #  
+    #      flag = 1                                        #
+    #    end                                               #
+    #  end                                                 # Esto es para traer los conceptos que son usados solamente
+    #  if flag == 0 then                                   #
+    #    @conceptos_no_usados = @conceptos_no_usados.to_a.push concept
+    #  end                                                 #
+    # end                                                  #
+    #if !@conceptos.nil? then                              #
+    #  @conceptos = @conceptos.uniq                        #
+    #end                                                   #
+    #if !@conceptos_no_usados.nil? then                    #
+    #  @conceptos_no_usados = @conceptos_no_usados.uniq    #
+    #end                                                   #
+
+ 
   end
 
   private
