@@ -6,16 +6,21 @@
     boolean: :horizontal_boolean
   }) do |f| %>
   <% if @detalle_presupuesto.errors.any? %>
-    <div class="col-lg-12" align="center">
-    <div id="error_explanation">
-      <h2><%= pluralize(@detalle_presupuesto.errors.count, "Error") %> en la creacion del detalle:</h2>
-      <ul>
-      <% @detalle_presupuesto.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <div class="col-lg-12">
+      <div class="col-lg-4"></div>
+        <div id="error_explanation" class="col-lg-4">
+          <div class="alert alert-danger">
+            <a class="close" data-dismiss="alert">x</a>
+            <strong><%= pluralize(@detalle_presupuesto.errors.count, "Error") %> en la creacion del detalle:</strong>
+            <ul>
+              <% @detalle_presupuesto.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
   <% end %>
   <div class="row" align="center">
     <div class="col-lg-3" align="center"></div>
@@ -27,8 +32,6 @@
          <br></br>
          <label> Concepto o Rubro </label>
          <%= f.collection_select(:concepto_gasto_id, @concepto_gastos, :id, :titulo, {prompt: "Concepto..."}, {class: "form-control"}) %>
-         <%#= f.collection_select(:detalle_presupuesto, :concepto_gasto_id, Concepto_gasto.all, :id, :titulo, prompt: true) %>
-         <%#= f.input :concepto_gasto_id, collection: @concepto_gastos, :label => 'Concepto o rubro' %>
          
          <br></br>
          

@@ -1,5 +1,5 @@
 class DetalleRestriccionesController < ApplicationController
-  before_action :set_restriccion, only: [:new, :create, :edit, :update, :destroy]
+  before_action :set_restriccion, only: [:new, :create]
   #before_action :set_restriccion_detalle_restriccion, only:[:show, :edit, :update, :destroy]
  
   before_action :set_detalle_restriccion, only: [:show, :edit, :update, :destroy]
@@ -30,12 +30,12 @@ class DetalleRestriccionesController < ApplicationController
   # POST /detalle_restricciones.json
   def create
     @detalle_restriccion = @restriccion.detalle_restricciones.new(detalle_restriccion_params)
-
+    @concepto_gastos = ConceptoGasto.all
     respond_to do |format|
       if @detalle_restriccion.save
         format.html { redirect_to gestionar_restricciones_path}
         #format.html { redirect_to @detalle_restriccion, notice: 'Detalle restriccion was successfully created.' }
-        format.json { render :show, status: :created, location: @detalle_restriccion }
+        #format.json { render :show, status: :created, location: @detalle_restriccion }
       else
         format.html { render :new }
         format.json { render json: @detalle_restriccion.errors, status: :unprocessable_entity }
@@ -48,8 +48,9 @@ class DetalleRestriccionesController < ApplicationController
   def update
     respond_to do |format|
       if @detalle_restriccion.update(detalle_restriccion_params)
-        format.html { redirect_to @detalle_restriccion, notice: 'Detalle restriccion was successfully updated.' }
-        format.json { render :show, status: :ok, location: @detalle_restriccion }
+        format.html { redirect_to gestionar_restricciones_path, notice: 'Actualizado correctamente'}
+        #format.html { redirect_to @detalle_restriccion, notice: 'Detalle restriccion was successfully updated.' }
+        #format.json { render :show, status: :ok, location: @detalle_restriccion }
       else
         format.html { render :edit }
         format.json { render json: @detalle_restriccion.errors, status: :unprocessable_entity }

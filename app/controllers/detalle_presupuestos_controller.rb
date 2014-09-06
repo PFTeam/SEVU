@@ -32,6 +32,7 @@ class DetallePresupuestosController < ApplicationController
   # POST /detalle_presupuestos.json
   def create
    # @detalle_presupuesto = DetallePresupuesto.new(detalle_presupuesto_params)
+    @concepto_gastos = ConceptoGasto.all
     @detalle_presupuesto = @presupuesto.detalle_presupuestos.new(detalle_presupuesto_params)
     respond_to do |format|
       if @detalle_presupuesto.save
