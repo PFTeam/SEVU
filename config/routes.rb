@@ -101,7 +101,9 @@ Rails.application.routes.draw do
 
   resources :tipo_roles
 
-  resources :tipo_habilidades
+  resources :tipo_habilidades do
+    resources :habilidades
+  end
 
   resources :tipo_actividades
 
@@ -121,6 +123,9 @@ Rails.application.routes.draw do
   get 'gestionar_presupuesto/:id' => 'presupuestos#gestionar_presupuesto', :as => 'gestionar_presupuesto'
 
   get 'gestionar_restricciones' => 'restricciones#gestionar_restricciones', :as => 'gestionar_restricciones'
+
+  get 'gestionar_habilidades' => 'tipo_habilidades#gestionar_habilidades', :as => 'gestionar_habilidades'
+
   #get 'gestionarPresupuesto', :controller => :presupuestos
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

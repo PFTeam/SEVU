@@ -28,8 +28,9 @@ class TipoHabilidadesController < ApplicationController
 
     respond_to do |format|
       if @tipo_habilidad.save
-        format.html { redirect_to @tipo_habilidad, notice: 'Tipo habilidad was successfully created.' }
-        format.json { render :show, status: :created, location: @tipo_habilidad }
+        format.html { redirect_to gestionar_habilidades_path }
+        #format.html { redirect_to @tipo_habilidad, notice: 'Tipo habilidad was successfully created.' }
+        #format.json { render :show, status: :created, location: @tipo_habilidad }
       else
         format.html { render :new }
         format.json { render json: @tipo_habilidad.errors, status: :unprocessable_entity }
@@ -42,8 +43,9 @@ class TipoHabilidadesController < ApplicationController
   def update
     respond_to do |format|
       if @tipo_habilidad.update(tipo_habilidad_params)
-        format.html { redirect_to @tipo_habilidad, notice: 'Tipo habilidad was successfully updated.' }
-        format.json { render :show, status: :ok, location: @tipo_habilidad }
+        format.html { redirect_to gestionar_habilidades_path }
+        #format.html { redirect_to @tipo_habilidad, notice: 'Tipo habilidad was successfully updated.' }
+        #format.json { render :show, status: :ok, location: @tipo_habilidad }
       else
         format.html { render :edit }
         format.json { render json: @tipo_habilidad.errors, status: :unprocessable_entity }
@@ -59,6 +61,10 @@ class TipoHabilidadesController < ApplicationController
       format.html { redirect_to tipo_habilidades_url, notice: 'Tipo habilidad was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+  
+  def gestionar_habilidades
+    @tipos_habilidades = TipoHabilidad.all
   end
 
   private

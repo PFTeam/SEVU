@@ -38,13 +38,24 @@
                         <p><%= number_with_precision(detalle.montoMax, :precision => 2) %></li></p>
                         <label> Fecha de Inicio </label>
                         <p><%= detalle.fechaDesde.strftime("%d/%m/%Y") %>
+                        <div align="center">
+                          <%= link_to(
+                            detalle.esActiva ? 'Desactivar' : 'Activar',
+                            detalle_restriccion_path(detalle, detalle_restriccion: { esActiva: !detalle.esActiva }),
+                            class: "btn #{detalle.esActiva ? 'btn-success' : 'btn-default'}",
+                            data: { method: :put }
+                          ) %>
+                        </div>
                       </div>
                     </div>
                   </div>
                 <% end %>
                 <div align="center"> 
                   <br></br>
-                  <%= link_to "Agregar detalle", new_restriccion_detalle_restriccion_path(restriccion), class: "btn btn-primary btn-lg" %> 
+                  <%= link_to "Agregar detalle", 
+                    new_restriccion_detalle_restriccion_path(restriccion), 
+                    class: "btn btn-primary btn-lg" 
+                  %> 
                 </div>
               </div>
             </div>

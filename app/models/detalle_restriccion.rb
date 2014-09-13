@@ -18,7 +18,7 @@ class DetalleRestriccion < ActiveRecord::Base
   private
 
   def default_values
-    self.esActiva ||= true
+    self.esActiva = true if self.esActiva.nil?
     self.fechaDesde ||= Date.today
   end
 end
