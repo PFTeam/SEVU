@@ -6,5 +6,18 @@ class Habilidad < ActiveRecord::Base
 
   has_many :experiencias
   has_many :voluntarios, :through => :experiencias
+  
+  validates_presence_of :tipo_habilidad, :nombre, :descripcion, message: "es un campo obligatorio"
+
+  validates :nombre,
+    :length => {
+        :maximum => 255,
+        :message => "tiene demasiados caracteres (maximo 255)"
+  }
+    
+  validates :nombre, uniqueness: {
+    message: "- Ya existe una habilidad con ese nombre",
+    case_sensitive: false
+  }
 
 end

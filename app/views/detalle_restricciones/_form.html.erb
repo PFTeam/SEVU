@@ -6,44 +6,37 @@
     boolean: :horizontal_boolean
   }) do |f| %>
   <% if @detalle_restriccion.errors.any? %>
-    <div class="col-lg-12" align="center">
-    <div id="error_explanation">
-      <h2><%= pluralize(@detalle_restriccion.errors.count, "Error") %> en la creacion del detalle:</h2>
-      <ul>
-      <% @detalle_restriccion.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <div class="col-lg-12">
+      <div class="col-lg-4"></div>
+        <div id="error_explanation" class="col-lg-4">
+          <div class="alert alert-danger">
+            <a class="close" data-dismiss="alert">x</a>
+            <strong><%= pluralize(@detalle_restriccion.errors.count, "Error") %> en la creacion del detalle:</strong>
+            <ul>
+              <% @detalle_restriccion.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
   <% end %>
   <div class="row" align="center">
     <div class="col-lg-3" align="center"></div>
       <div class="col-lg-6" align="center">
-       <!--<div class="form-inputs">
-         
-         <%#= f.input :titulo, :label => 'Título', :placeholder => 'Título del gasto...' %>
-      
-         <br></br>-->
+         <br></br>
          <label> Concepto o rubro </label>
         <%= f.collection_select(:concepto_gasto_id, @concepto_gastos, :id, :titulo, {prompt: "Concepto..."}, {class: "form-control"}) %>
+         
+         <br></br>
+         
+         <br></br>
 
-         <%#= f.collection_select(:tipo_proyecto_id, @tipos_proyecto, :id, :titulo, {prompt: "Tipo de Proyecto..."}, {class: "form-control"}) %>
-         <%#= f.collection_select(:detalle_presupuesto, :concepto_gasto_id, Concepto_gasto.all, :id, :titulo, prompt: true) %>
-         <%#= f.input :concepto_gasto_id, collection: @concepto_gastos, :label => 'Concepto o rubro' %>
-         
-         <br></br>
-         <!--
-         <%#= f.input :descripcion,:as => :text, :input_html => {:rows => 6}, :label => 'Breve Descripción', :placeholder => 'Descripción del gasto...'  %>   
-         
-         <br></br>
-         -->
          <%= f.input :montoMax, wrapper: :horizontal_input_group do %>
            <span class="input-group-addon">Monto maximo $</span>
            <%= f.input_field :montoMax, class: "form-control" %>
-         <% end %><!--      
-         <br></br>
-         -->
+         <% end %>
        </div>
      </div>
    </div>
@@ -53,44 +46,3 @@
    </div>
 
 <% end %>
-<%#= form_for(@detalle_restriccion) do |f| %>
-  <%# if @detalle_restriccion.errors.any? %>
-<!--    <div id="error_explanation">
-      <h2><%#= pluralize(@detalle_restriccion.errors.count, "error") %> prohibited this detalle_restriccion from being saved:</h2>
-
-      <ul>
-      <%# @detalle_restriccion.errors.full_messages.each do |message| %>
-        <li><%#= message %></li>
-      <%# end %>
-      </ul>
-    </div>
-  <%# end %>
-
-  <div class="field">
-    <%#= f.label :esActiva %><br>
-    <%#= f.check_box :esActiva %>
-  </div>
-  <div class="field">
-    <%#= f.label :fechaDesde %><br>
-    <%#= f.datetime_select :fechaDesde %>
-  </div>
-  <div class="field">
-    <%#= f.label :fechaHasta %><br>
-    <%#= f.datetime_select :fechaHasta %>
-  </div>
-  <div class="field">
-    <%#= f.label :montoMax %><br>
-    <%#= f.text_field :montoMax %>
-  </div>
-  <div class="field">
-    <%#= f.label :restriccion_id %><br>
-    <%#= f.text_field :restriccion_id %>
-  </div>
-  <div class="field">
-    <%#= f.label :concepto_gasto_id %><br>
-    <%#= f.text_field :concepto_gasto_id %>
-  </div>
-  <div class="actions">
-    <%#= f.submit %>
-  </div> -->
-<%# end %>

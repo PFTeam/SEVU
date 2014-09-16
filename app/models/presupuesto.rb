@@ -8,12 +8,9 @@ class Presupuesto < ActiveRecord::Base
 
   has_many :detalle_presupuestos
   has_many :concepto_gastos, :through => :detalle_presupuestos
-
-  def estado_actual #Devuelve el estado actual del proyecto
-    #no esta terminado porque faltan atributos importantes
-  end
-
-  def monto_total
-    detalle_presupuestos.sum(:monto)
-  end
+  
+  # TODO Agregar validaciones de usuario cuando este implementada la funcionalidad
+  
+  validates_presence_of :proyecto, message: "es un campo obligatorio"
+  
 end

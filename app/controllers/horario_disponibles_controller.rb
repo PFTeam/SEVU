@@ -19,7 +19,7 @@ class HorarioDisponiblesController < ApplicationController
   def new
            
     
-    @horario_disponibl = HorarioDisponibles.new
+    @horario_disponibl = @voluntario.horario_disponibles.new
   end
 
   # GET /horario_disponibles/1/edit
