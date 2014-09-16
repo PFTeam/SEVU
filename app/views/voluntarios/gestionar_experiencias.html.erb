@@ -1,0 +1,46 @@
+<h1>Gestionar Experiencia Voluntarios <small>Administracion del Presupuesto del Proyecto</small></h1>
+
+<div class="row">
+  <div class="col-lg-12">
+          <label>
+      <div class="form-group">
+        <label>
+          <% if @voluntario.experiencias.nil? then %>
+            <h4> (No se poseen experiencias) </h4>
+          <% else %>
+            <h4> <% %> </h4>
+          <% end %>
+        </label>
+           <% @habilidades.each do |habilidad| %>
+      <tr>
+        <td><%= habilidad.nombre %></td>
+        <td><%= habilidad.descripcion %></td>
+        <td><%= habilidad.tipo_habilidad %></td>
+        </tr>
+   <% end %> 
+   
+     
+                 <%#= f.collection_select(:id, @habilidades, :id, :nombre, {:selected => @habilidades.id}) %>
+            
+            
+         
+      
+         
+          
+   
+     
+      </div>
+      
+    
+
+   
+    <div align="center">  
+    	
+
+      <%= link_to "Agregar Experiencia", new_voluntario_experiencia_path(@voluntario), class: "btn btn-primary btn-lg" %> 
+    </div>
+  		</div>
+ 			 </div>
+        
+
+

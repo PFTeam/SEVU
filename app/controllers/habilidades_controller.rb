@@ -1,4 +1,5 @@
 class HabilidadesController < ApplicationController
+
   before_action :set_habilidad, only: [:show, :edit, :update, :destroy]
 
   # GET /habilidades

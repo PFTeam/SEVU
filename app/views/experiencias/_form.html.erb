@@ -1,4 +1,4 @@
-<%= form_for(@experiencia) do |f| %>
+<%= form_for([@voluntario, @experiencia]) do |f| %>
   <% if @experiencia.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@experiencia.errors.count, "error") %> prohibited this experiencia from being saved:</h2>
@@ -22,10 +22,13 @@
   <div class="field">
     <%= f.label :habilidad_id %><br>
     <%= f.text_field :habilidad_id %>
-  </div>
+     </div>
+     
   <div class="field">
-    <%= f.label :voluntario_id %><br>
-    <%= f.text_field :voluntario_id %>
+    <h1><%= @voluntario.nombreUsuario %></h1><br>
+   
+   
+    <%f.hidden_field :voluntario_id, :value =>@voluntario.id %>
   </div>
   <div class="actions">
     <%= f.submit %>

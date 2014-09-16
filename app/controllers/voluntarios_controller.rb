@@ -1,12 +1,26 @@
 class VoluntariosController < ApplicationController
-  before_action :set_voluntario, only: [:show, :edit, :update, :destroy]
+  
+  before_action :set_voluntario, only: [:show, :edit, :update, :destroy, :gestionar_experiencias, 
+    :gestion_horarios_disponibles,:gestion_horario_disponibles]
+    #ingerto juan
+  before_action :set_todasHabilidades, only: [ :gestionar_experiencias, :gestion_horarios_disponibles,:gestion_horario_disponibles]
+
+ def set_todasHabilidades
+    @habilidades = Habilidad.all
+  end
+#fin ingerto juan
 
   # GET /voluntarios
   # GET /voluntarios.json
   def index
     @voluntarios = Voluntario.all
   end
-
+#Pagina Nota Personal
+  def gestionar_nota_P
+   # @voluntario = Voluntario.find(params[:id]) 
+  #  @notap = Nota.find(params[:id])
+  
+  end
   # GET /voluntarios/1
   # GET /voluntarios/1.json
   def show
@@ -16,7 +30,13 @@ class VoluntariosController < ApplicationController
   def new
     @voluntario = Voluntario.new
   end
-
+ 
+  def gestionar_experiencias
+  
+  end
+  
+  
+  
   # GET /voluntarios/1/edit
   def edit
   end
@@ -60,15 +80,24 @@ class VoluntariosController < ApplicationController
       format.json { head :no_content }
     end
   end
+def gestion_horarios_disponibles
+  
+  @voluntario = Voluntario.find(params[:id])
+  #@horario_disponibles = HorarioDisponible.where(voluntario_id: :id)
+end
 
-  private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_voluntario
-      @voluntario = Voluntario.find(params[:id])
+       @voluntario = Voluntario.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def voluntario_params
-      params.require(:voluntario).permit(:legajo)
+      params.require(:voluntario).permit(:legajo, :id)
     end
+ private
 end
+
+
+  

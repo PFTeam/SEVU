@@ -4,6 +4,6 @@ class Voluntario < Usuario
   has_many :experiencias
   has_many :notas
   has_many :detalle_gastos
-
+validates :legajo, :presence => {:message => "es un campo obligatorio"}
 
 end

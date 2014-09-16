@@ -1,5 +1,8 @@
 class HorarioDisponiblesController < ApplicationController
   before_action :set_horario_disponibl, only: [:show, :edit, :update, :destroy]
+#  before_action :set_voluntario, only: [ :index]
+ before_action :set_voluntario, only: [:new, :create]
+
 
   # GET /horario_disponibles
   # GET /horario_disponibles.json
@@ -14,7 +17,9 @@ class HorarioDisponiblesController < ApplicationController
 
   # GET /horario_disponibles/new
   def new
-    @horario_disponibl = HorarioDisponible.new
+           
+    
+    @horario_disponibl = HorarioDisponibles.new
   end
 
   # GET /horario_disponibles/1/edit
@@ -24,7 +29,12 @@ class HorarioDisponiblesController < ApplicationController
   # POST /horario_disponibles
   # POST /horario_disponibles.json
   def create
-    @horario_disponibl = HorarioDisponible.new(horario_disponibl_params)
+          
+
+    @horario_disponibl = @voluntario.horario_disponibles.new(horario_disponibl_params)
+
+   
+    #@horario_disponibl = HorarioDisponible.new(horario_disponibl_params)
 
     respond_to do |format|
       if @horario_disponibl.save
@@ -61,12 +71,17 @@ class HorarioDisponiblesController < ApplicationController
     end
   end
 
-  private
+ 
     # Use callbacks to share common setup or constraints between actions.
     def set_horario_disponibl
       @horario_disponibl = HorarioDisponible.find(params[:id])
-    end
+     end
 
+ private
+
+    def set_voluntario
+       @voluntario = Voluntario.find(params[:voluntario_id])
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def horario_disponibl_params
       params.require(:horario_disponibl).permit(:diaSemana, :horaDesde, :horaHasta, :voluntario_id)

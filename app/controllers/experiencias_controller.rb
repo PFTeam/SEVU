@@ -1,10 +1,14 @@
 class ExperienciasController < ApplicationController
+  before_action :set_voluntario, only: [:new, :create]
   before_action :set_experiencia, only: [:show, :edit, :update, :destroy]
 
+
+  
   # GET /experiencias
   # GET /experiencias.json
   def index
     @experiencias = Experiencia.all
+    
   end
 
   # GET /experiencias/1
@@ -14,7 +18,7 @@ class ExperienciasController < ApplicationController
 
   # GET /experiencias/new
   def new
-    @experiencia = Experiencia.new
+    @experiencia = @voluntario.experiencias.new
   end
 
   # GET /experiencias/1/edit
@@ -24,7 +28,7 @@ class ExperienciasController < ApplicationController
   # POST /experiencias
   # POST /experiencias.json
   def create
-    @experiencia = Experiencia.new(experiencia_params)
+    @experiencia = @voluntario.experiencias.new(experiencia_params)
 
     respond_to do |format|
       if @experiencia.save
@@ -67,6 +71,9 @@ class ExperienciasController < ApplicationController
       @experiencia = Experiencia.find(params[:id])
     end
 
+def set_voluntario
+  @voluntario = Voluntario.find(params[:voluntario_id])
+end
     # Never trust parameters from the scary internet, only allow the white list through.
     def experiencia_params
       params.require(:experiencia).permit(:tieneExperiencia, :cantidadExperiencia, :habilidad_id, :voluntario_id)

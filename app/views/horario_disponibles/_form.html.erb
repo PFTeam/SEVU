@@ -1,4 +1,4 @@
-<%= form_for(@horario_disponibl) do |f| %>
+<%= form_for [@voluntario, @horario_disponibl] do |f| %>
   <% if @horario_disponibl.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@horario_disponibl.errors.count, "error") %> prohibited this horario_disponibl from being saved:</h2>
@@ -22,11 +22,12 @@
   <div class="field">
     <%= f.label :horaHasta %><br>
     <%= f.time_select :horaHasta %>
+    
   </div>
-  <div class="field">
-    <%= f.label :voluntario_id %><br>
-    <%= f.text_field :voluntario_id %>
+    <div class="field">
+    <%= f.label @voluntario.id %><br>
   </div>
+  
   <div class="actions">
     <%= f.submit %>
   </div>
