@@ -11,7 +11,7 @@ class ConceptoGasto < ActiveRecord::Base
       :presence => true,
       :length => {
         :maximum => 255,
-        :message => "tiene demasiados caracteres (maximo 255)"}
+        :message => "tiene demasiados caracteres (maximo 255)"},
       #length => {:maximum => 255},
       :allow_blank => false,
       :uniqueness => {
