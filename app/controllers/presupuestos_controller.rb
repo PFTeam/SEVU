@@ -94,6 +94,11 @@ class PresupuestosController < ApplicationController
     def set_presupuesto
       @presupuesto = Presupuesto.find(params[:id])
     end
+    
+    def get_proyecto
+      return self.proyecto_id
+    end
+
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def presupuesto_params
