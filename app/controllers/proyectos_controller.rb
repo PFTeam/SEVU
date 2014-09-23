@@ -71,6 +71,9 @@ class ProyectosController < ApplicationController
         colaborador.organizacion_externa_id = orgExistente.id
       end
     end
+    
+    @proyecto.historial_estado_proyectos.new(estado_proyecto_id: EstadoProyecto.find_by(nombre: 'Creado').id, proyecto_id: @proyecto.id)
+
 
     #TODO: solucionar lo de abajo para que no diga que tengo proyecto blank
     #@proyecto.historial_estado_proyectos.last.proyecto = @proyecto
@@ -113,7 +116,7 @@ class ProyectosController < ApplicationController
   end
 
   def mis_proyectos
-    params[:usuario]=Usuario.find(7) #TODO: Obtener usuario real cuando este la sesion implementada
+    params[:usuario]=Usuario.find(1) #TODO: Obtener usuario real cuando este la sesion implementada
     @proyectos = Proyecto.participando(params[:usuario])
   end
 

@@ -1,29 +1,46 @@
-<h1>Listing asignacion_roles</h1>
+<h2>Recursos del Proyecto</h2>
+       
+              <table class="table table-hover table-striped tablesorter">
+                <thead>
+                  <tr>
+                    <th class="col-lg-3">Apellido y Nombre</th>
+                    <th class="col-lg-3">Fecha Asignación </th>
+                    <th class="col-lg-3">Vigente</th>
+                    <th class="col-lg-3">Rol</th>
+                    <th class="col-lg-3"></th>
+                    <th></th>
+                  </tr>
+                </thead>
 
-<table>
-  <thead>
-    <tr>
-      <th>Fecha Asignación</th>
-      <th>Rol</th>
-      <th>Usuario</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @asignacion_roles.each do |asignacion_rol| %>
-      <tr>
-        <td><%= asignacion_rol.created_at.to_formatted_s(:rfc822)  %></td>
-        <td><%= asignacion_rol.rol %></td>
-        <td><%= asignacion_rol.usuario %></td>
-        <td><%= link_to 'Show', asignacion_rol %></td>
-        <td><%= link_to 'Edit', edit_asignacion_rol_path(asignacion_rol) %></td>
-        <td><%= link_to 'Destroy', asignacion_rol, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
+                <tbody>
+                    <% @proyecto.asignacion_roles.each do |asignacion_rol| %>
+                    <tr>
+                        <td><%= asignacion_rol.usuario %></td>
+                        <td><%= asignacion_rol.created_at.to_formatted_s(:rfc822)  %></td>
+                        <td><%= asignacion_rol.actual %></td>
+                        <td><%= asignacion_rol.rol %></td>
+                        <td>
+                            <%= link_to 'Editar', edit_asignacion_rol_path(asignacion_rol), remote: true, data: { target: 'modal', modal: true } %>
+                            <%= link_to 'Destroy', asignacion_rol, method: :delete, data: { confirm: 'Are you sure?' } %>
+                        </td>
+                        <td>
+                             <i class="fa fa-minus"></i>
+                        </td>
+                    </tr>
+                    <% end %>
+ </tbody>
 </table>
+                    <%= link_to '+', new_asignacion_rol_path( :proyecto_id => params[:proyecto_id]) , :class => "classbtn btn-primary btn-sm" %>
+<h2>Buscar Voluntarios</h2>
 
-<br>
+  <div class="form-group input-group">
+                <span class="input-group-addon">@</span>
+                <input type="text" class="form-control" placeholder="Username">
+              </div>
+                <label class="checkbox-inline">
+                  <input type="checkbox"> Filtrada
+                </label>
+                </span><button type="button" class="btn btn-primary btn-sm pull-right">Consultar Estado Académico</button></p>
+              
 
-<%= link_to 'New Asignacion rol', new_asignacion_rol_path %>
+  
