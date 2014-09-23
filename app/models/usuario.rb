@@ -34,12 +34,22 @@ class Usuario < ActiveRecord::Base
     :url  => "/assets/usuarios/:id/:style/:basename.:extension",
     :path => ":rails_root/public/assets/usuarios/:id/:style/:basename.:extension"
     
-  validates_attachment_presence :foto
-  validates_attachment_size :foto, :less_than => 4.megabytes
-  validates_attachment_content_type :foto, :content_type => ['image/jpeg', 'image/png']
+#  validates_attachment_presence :foto
+#  validates_attachment_size :foto, :less_than => 4.megabytes
+#  validates_attachment_content_type :foto, :content_type => ['image/jpeg', 'image/png']
 
   def to_s
-    apellidoNombre
+    apellido_nombre
   end  
+
+
+  def self.search query: nil, limit: false
+    result = Usuario.order 'apellido_nombre ASC'
+    if query.present?
+      result = result.where "#{table_name}.apellido_nombre ILIKE ?", "%#{query.strip}%"
+    end
+
+    limit ? result.limit(10) : result
+  end
 
 end

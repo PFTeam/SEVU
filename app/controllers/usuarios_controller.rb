@@ -4,7 +4,8 @@ class UsuariosController < ApplicationController
   # GET /usuarios
   # GET /usuarios.json
   def index
-    @usuarios = Usuario.all
+    @usuarios = Usuario.page(params[:page]).search query: params[:q]
+    #@usuarios = Usuario.all
   end
 
   # GET /usuarios/1
