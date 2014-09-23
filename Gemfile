@@ -61,6 +61,8 @@ gem 'jquery-ui-rails'
 #Para ajax
 gem 'SrBuj'
 
-
+#Poblar la base de datos
+gem 'populator'
+gem 'faker'
 
 # pry, pry-byebug  para debug
