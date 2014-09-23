@@ -1,7 +1,7 @@
 class DetallePresupuestosController < ApplicationController
- before_action :set_presupuesto, only: [:new, :create, :edit, :update, :destroy]
- before_action :set_presupuesto_detalle_presupuesto, only: [:show, :edit, :update, :destroy]
- #before_action :set_detalle_presupuesto, only: [:show]
+ before_action :set_presupuesto, only: [:new, :create, :destroy]
+ before_action :set_presupuesto_detalle_presupuesto, only: [:show, :destroy]
+ before_action :set_detalle_presupuesto, only: [:edit, :update]
 
  
   # GET /detalle_presupuestos
@@ -24,7 +24,7 @@ class DetallePresupuestosController < ApplicationController
 
   # GET /detalle_presupuestos/1/edit
   def edit
-    @detalle_presupuesto = @presupuesto.detalle_presupuestos.new #@detalle_presupuesto = DetallePresupuesto.new
+    #@detalle_presupuesto = @presupuesto.detalle_presupuestos.new #@detalle_presupuesto = DetallePresupuesto.new
     @concepto_gastos = ConceptoGasto.all 
   end
 
@@ -51,9 +51,9 @@ class DetallePresupuestosController < ApplicationController
   # PATCH/PUT /detalle_presupuestos/1.json
   def update
     respond_to do |format|
-      if @detalle_presupuesto = @presupuesto.detalle_presupuestos.new# @detalle_presupuesto.update(detalle_presupuesto_params)
-        format.html { redirect_to @detalle_presupuesto, notice: 'Detalle presupuesto was successfully updated.' }
-        format.json { render :show, status: :ok, location: @detalle_presupuesto }
+      if @detalle_presupuesto.update(detalle_presupuesto_params)
+        format.html { redirect_to  gestionar_presupuesto_path(@detalle_presupuesto.presupuesto) }
+       # format.json { render :show, status: :ok, location: @detalle_presupuesto }
       else
         format.html { render :edit }
         format.json { render json: @detalle_presupuesto.errors, status: :unprocessable_entity }
