@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :usuarios
   resources :colaboradores
 
   resources :detalle_presupuestos#, only: [:index, :show, :edit, :update, :destroy]
