@@ -1,3 +1,5 @@
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
 <h1>Sistema Estudiantil de Voluntariado Universitario</h1>
   <ol class="breadcrumb">
     <li><i class="icon-dashboard"></i><%= link_to 'Registrarme', new_usuario_path %></li>
@@ -9,7 +11,7 @@
       <label><h2><small>Nombre de Usuario</small></h2></label>
       <input class="form-control" type="text" value= <%= @contrasenia %> > </input> 
       <label><h2><small>Contraseña</small></h2></label>
-      <input class="form-control" type="text" value= <%= @contrasenia %> > </input>  
+      <input class="form-control" type="password" value= <%= @contrasenia %> > </input>  
 			<br></br>
 			<button type="button" class="btn btn-primary btn-lg">Iniciar Sesión</button>       
     </div>

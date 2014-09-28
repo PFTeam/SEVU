@@ -1,3 +1,4 @@
+
 <h1>Sistema Estudiantil de Voluntariado Universitario</h1>
   <ol class="breadcrumb">
     <li><i class="icon-dashboard"></i><%= link_to 'Registrarme', new_usuario_path %></li>
@@ -15,7 +16,8 @@
     </div>
   </form>
 </div>
-
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
 <table>
   <tbody>
     <% @usuarios.each do |usuario| %>
