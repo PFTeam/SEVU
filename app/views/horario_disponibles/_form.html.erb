@@ -26,7 +26,9 @@
   </div>
     <div class="field">
     <%= f.label @voluntario.id %><br>
-  </div>
+  <%f.hidden_field :voluntario_id, :value =>@voluntario.id %>
+ </div>
+    
   
   <div class="actions">
     <%= f.submit %>

@@ -1,0 +1,18 @@
+          <!--El panel panel-primary pone un cuadro -->
+          <div class="panel panel-primary">
+          	<!--Pone el cuadro de color azul -->
+            <div class="panel-heading">
+            	<!-- Titulo Cabecera  !-->
+  <h1 class="panel-title">
+<h1>Gestionar Estado Voluntario <small>Modulo Voluntario</small></h1>
+</div>
+
+	<!-- Cuerpo del panel  !-->
+<div class="panel-body">
+	<%= text_field_tag "legajo", "", :size => 10, :maxlenght => 5, :placeholder => "Legajo Usuario",
+    :required => "required"  %>
+    
+    <%= link_to 'Buscar_Usuario', new_voluntario_historial_estado_usuario_path(legajo) %>
+    
+</div>
+</div>>

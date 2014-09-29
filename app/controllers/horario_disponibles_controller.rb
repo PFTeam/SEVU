@@ -17,10 +17,11 @@ class HorarioDisponiblesController < ApplicationController
 
   # GET /horario_disponibles/new
   def new
-           
-    
-    @horario_disponibl = @voluntario.horario_disponibles.new
-  end
+     
+    #@voluntario = Voluntario.find(params[:voluntario_id])
+    puts @voluntario.legajo
+    @horario_disponibl =HorarioDisponible.new
+   end
 
   # GET /horario_disponibles/1/edit
   def edit
@@ -29,17 +30,19 @@ class HorarioDisponiblesController < ApplicationController
   # POST /horario_disponibles
   # POST /horario_disponibles.json
   def create
-          
+         
 
-    @horario_disponibl = @voluntario.horario_disponibles.new(horario_disponibl_params)
-
+@voluntario = Voluntario.find(params[:voluntario_id])
+ @horario_disponibl  = @voluntario.horario_disponibles.new(horario_disponible_params)
+  
+  
+ # @horario_disponibl = HorarioDisponible.new(horario_disponibl_params)
+  #@voluntario = Voluntario.find(@nota.voluntario_id)
    
-    #@horario_disponibl = HorarioDisponible.new(horario_disponibl_params)
-
     respond_to do |format|
       if @horario_disponibl.save
-        format.html { redirect_to @horario_disponibl, notice: 'Horario disponible was successfully created.' }
-        format.json { render :show, status: :created, location: @horario_disponibl }
+        format.html { redirect_to gestion_horarios_disponibles_path(@voluntario), notice: 'Horario disponible was successfully created.' }
+       # format.json { render :show, status: :created, location: @horario_disponibl }
       else
         format.html { render :new }
         format.json { render json: @horario_disponibl.errors, status: :unprocessable_entity }
@@ -84,6 +87,6 @@ class HorarioDisponiblesController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def horario_disponibl_params
-      params.require(:horario_disponibl).permit(:diaSemana, :horaDesde, :horaHasta, :voluntario_id)
+      params.require(:horario_disponibles).permit(:diaSemana, :horaDesde, :horaHasta, :voluntario_id)
     end
 end

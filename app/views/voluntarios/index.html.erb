@@ -10,17 +10,27 @@
       	 <li><i class="icon-dashboard"></i>
       	 	<%= voluntario.legajo %></li>
         <li><i class="icon-dashboard"></i>
+        	 <li><i class="icon-dashboard"></i>
+      	 	<%= voluntario.nombreUsuario %></li>
+        <li><i class="icon-dashboard"></i>
+        	<li><i class="icon-dashboard"></i>
+      	 	<%= voluntario.direccion %></li>
+        <li><i class="icon-dashboard"></i>
         	<%= link_to 'Show', voluntario %></li>
         <li><i class="icon-dashboard"></i>
         	<%= link_to 'Edit', edit_voluntario_path(voluntario) %></li>
-       
+        <li><i class="icon-dashboard"></i>
+         	<%= link_to 'Destroy', voluntario, method: :delete, data: { confirm: 'Estas Seguro?' } %></li>
         
         <li><i class="icon-dashboard"></i>
-        	<%= link_to 'Gestionar_horarios_disponibles', voluntario_horario_disponibles_path(voluntario) %><li>
+        	<%= link_to 'Gestionar_horarios_disponibles', gestion_horarios_disponibles_path(voluntario) %><li>
          <li><i class="icon-dashboard"></i>
         	<%= link_to 'Gestionar_Experiencia', gestionar_experiencias_path(voluntario) %></li>
-         <li><i class="icon-dashboard"></i>
-         	<%= link_to 'Destroy', voluntario, method: :delete, data: { confirm: 'Estas Seguro?' } %></li>
+         <li>
+         	
+         	 <li><i class="icon-dashboard"></i>
+        	<%= link_to 'Gestionar Nota Persona', gestionar_nota_P_path(voluntario) %></li>
+        
     </ol>
  
      <% end %>

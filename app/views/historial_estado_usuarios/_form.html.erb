@@ -12,12 +12,12 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :fechaCambioEstado %><br>
-    <%= f.datetime_select :fechaCambioEstado %>
+    <%= f.label 'Fecha de creacion' %><br>
+    <%= f.datetime_select :created_at %>
   </div>
   <div class="field">
-    <%= f.label :esActual %><br>
-    <%= f.check_box :esActual %>
+    <%#= f.label :esActual %><br>
+    <%#= f.check_box :esActual %>
   </div>
   <div class="field">
     <%= f.label :usuario_id %><br>

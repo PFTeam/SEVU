@@ -1,4 +1,4 @@
-<%= form_for(@nota) do |f| %>
+<%= form_for [@voluntario, @nota] do |f| %>
   <% if @nota.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@nota.errors.count, "error") %> prohibited this nota from being saved:</h2>
@@ -20,12 +20,17 @@
     <%= f.text_area :descripcion %>
   </div>
   <div class="field">
-    <%= f.label :voluntario_id %><br>
+  	<% if @voluntario.nil? then %>
+      <%#= f.label :voluntario_id %><br>
     <%= f.text_field :voluntario_id %>
+    <% else %>
+       <%= f.hidden_field :voluntario_id, :value => @voluntario.id %>
+ 	<%end%>
   </div>
   <div class="field">
     <%= f.label :usuario_id %><br>
     <%= f.text_field :usuario_id %>
+  
   </div>
   <div class="actions">
     <%= f.submit %>

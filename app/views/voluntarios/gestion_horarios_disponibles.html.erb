@@ -1,13 +1,23 @@
 <h1>No hay horarios</h1>
 <% if @voluntario.nil? then %>
+<h2>NO Voluntario</h2>
+<% else %> 
+<ol class="breadcrumb">
+      	 <li><i class="icon-dashboard"></i>
+      	 	<%= @voluntario.legajo %></li>
+      	 	</ol>
+<% if @horario_disponibles.nil? then %>
 <h2>NO HAY HORARIOS</h2>
-<% else %>
-<% @voluntario.horario_disponibles.each do |horario| %>
+<% else %> 
+<% @horario_disponibles.each do |horario| %>
 
 <%= horario.diaSemana %>
 <%= horario.horaDesde %>
-<td><%= link_to 'Editar_horario', edit_voluntario_horario_disponibl_path(horario) %><td>
+<td><%= link_to 'Editar Horario', edit_voluntario_horario_disponibl_path(horario) %><td>
+
 <% end %>
 <% end %>
-<td><%= link_to 'Agregar_horarios_disponibles', new_voluntario_horario_disponibl_path(voluntario) %><td>
+<td><%= link_to 'Agregar Horarios Disponibles', new_voluntario_horario_disponibl_path(@voluntario) %><td>
+<% end %>
+
 	
