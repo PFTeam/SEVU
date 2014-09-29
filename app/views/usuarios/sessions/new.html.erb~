@@ -1,0 +1,27 @@
+
+<h1>Sistema Estudiantil de Voluntariado Universitario</h1>
+  
+
+	
+
+<%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+	<ol class="breadcrumb">
+    	 
+  </ol>  
+
+	<div class="inputs">
+    <%= f.input :email, :required => false, :autofocus => true %>
+    <%= f.input :password, :required => false %>
+    <%= f.input :remember_me, :as => :boolean if devise_mapping.rememberable? %>
+  </div>
+  
+  <div class="actions">
+    <%= f.button :submit, "Sign in" %>
+  </div>
+<% end %>
+
+<%= render :partial => "devise/shared/links" %>
+
+
+
+
