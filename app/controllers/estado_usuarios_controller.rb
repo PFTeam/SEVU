@@ -69,6 +69,6 @@ class EstadoUsuariosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def estado_usuario_params
-      params.require(:estado_usuario).permit(:nombre)
+      params.require(:estado_usuario).permit(:nombre, :descripcion)
     end
 end

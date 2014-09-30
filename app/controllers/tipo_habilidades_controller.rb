@@ -56,10 +56,19 @@ class TipoHabilidadesController < ApplicationController
   # DELETE /tipo_habilidades/1
   # DELETE /tipo_habilidades/1.json
   def destroy
+    
+    #if !tipo_habilidad.habilidades.nil? then # Pregunto si tiene habilidades asociadas
+      #@tipo_habilidad.habilidades.each do |habilidad|
+        
+        #habilidad.destroy #elimino cada habilidad asociada
+      #end
+    #end
+
     @tipo_habilidad.destroy
     respond_to do |format|
-      format.html { redirect_to tipo_habilidades_url, notice: 'Tipo habilidad was successfully destroyed.' }
-      format.json { head :no_content }
+      format.html { redirect_to gestionar_habilidades_path } #tipo_habilidades_url, notice: 'Tipo habilidad was successfully destroyed.' }
+      format.json { render json: @tipo_habilidad.errors, status: :unprocessable_entity }
+      #format.json { head :no_content }
     end
   end
   

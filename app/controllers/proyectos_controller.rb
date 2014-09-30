@@ -5,8 +5,8 @@ class ProyectosController < ApplicationController
   # GET /proyectos
   # GET /proyectos.json
   def index
-    @proyectos = Proyecto.activos
-
+    #@proyectos = Proyecto.activos
+    @proyectos = Proyecto.all
   end
 
   # GET /proyectos/1

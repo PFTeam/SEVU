@@ -77,6 +77,9 @@ Rails.application.routes.draw do
 
   resources :proyectos do
     resources :asignacion_roles
+    resources :notificacion_predeterminadas
+
+  get 'notificaciones_predeterminadas' => 'notificacion_predeterminadas#notificaciones_predeterminadas', :as => 'notificaciones_predeterminadas'
   end
 
   resources :necesidades
@@ -117,9 +120,9 @@ Rails.application.routes.draw do
 
   get 'mis_proyectos', :as => 'proyectos/mis_proyectos', :controller => :proyectos
   get 'mis_necesidades', :as => 'necesidades/mis_necesidades', :controller => :necesidades
+  #get 'notificaciones_predeterminadas/:id', :as => 'proyectos/:id/notificaciones_predeterminadas', :controller => :notificacion_predeterminadas
 
   get 'crear_organizacion_externa', :controller => :proyectos
-
   get 'gestionar_presupuesto/:id' => 'presupuestos#gestionar_presupuesto', :as => 'gestionar_presupuesto'
 
   get 'gestionar_restricciones' => 'restricciones#gestionar_restricciones', :as => 'gestionar_restricciones'

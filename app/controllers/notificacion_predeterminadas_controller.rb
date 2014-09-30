@@ -1,10 +1,12 @@
 class NotificacionPredeterminadasController < ApplicationController
   before_action :set_notificacion_predeterminada, only: [:show, :edit, :update, :destroy]
+  before_action :set_proyecto, only: [:index, :new, :create, :notificaciones_predeterminadas]
 
   # GET /notificacion_predeterminadas
   # GET /notificacion_predeterminadas.json
   def index
-    @notificacion_predeterminadas = NotificacionPredeterminada.all
+    #@notificacion_predeterminadas = NotificacionPredeterminada.all
+    @notificacion_predeterminadas = @proyecto.notificacion_predeterminadas
   end
 
   # GET /notificacion_predeterminadas/1
@@ -14,7 +16,9 @@ class NotificacionPredeterminadasController < ApplicationController
 
   # GET /notificacion_predeterminadas/new
   def new
-    @notificacion_predeterminada = NotificacionPredeterminada.new
+    #@notificacion_predeterminada = NotificacionPredeterminada.new
+    @notificacion_predeterminada = @proyecto.notificacion_predeterminadas.new
+    
   end
 
   # GET /notificacion_predeterminadas/1/edit
@@ -24,7 +28,8 @@ class NotificacionPredeterminadasController < ApplicationController
   # POST /notificacion_predeterminadas
   # POST /notificacion_predeterminadas.json
   def create
-    @notificacion_predeterminada = NotificacionPredeterminada.new(notificacion_predeterminada_params)
+    #@notificacion_predeterminada = NotificacionPredeterminada.new(notificacion_predeterminada_params)
+    @notificacion_predeterminada = @proyecto.notificacion_predeterminadas.new(notificacion_predeterminada_params)
 
     respond_to do |format|
       if @notificacion_predeterminada.save
@@ -60,11 +65,26 @@ class NotificacionPredeterminadasController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def notificaciones_predeterminadas 
+    @tipo_notificaciones = TipoNotificacion.all
+    #if @proyecto.notificacion_predeterminadas.count > 0 then
+    #@proyecto.notificacion_predeterminadas.each do |notificacion|
+      #@tipo_notificaciones_usadas = TipoNotificacion.where nombre: notificacion.nombre
+    #end
+    #end
+    #@tipo_notificaciones_usadas = @proyecto.tipo_notificaciones
+    #@tipo_notificaciones
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_notificacion_predeterminada
       @notificacion_predeterminada = NotificacionPredeterminada.find(params[:id])
+    end
+
+    def set_proyecto
+      @proyecto = Proyecto.find params[:proyecto_id]
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

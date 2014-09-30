@@ -7,6 +7,17 @@ class Habilidad < ActiveRecord::Base
   has_many :experiencias
   has_many :voluntarios, :through => :experiencias
   
+  before_destroy :puede_eliminarse?
+
+  def puede_eliminarse?
+    if !experiencias.empty? then
+      errors.add :base, 'No puede eliminarse debido a que existen usuarios que lo utilizan'
+      return false
+    else
+      return true
+    end
+  end
+
   validates_presence_of :tipo_habilidad, :nombre, :descripcion, message: "es un campo obligatorio"
 
   validates :nombre,

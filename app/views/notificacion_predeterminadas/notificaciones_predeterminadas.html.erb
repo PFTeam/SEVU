@@ -1,0 +1,63 @@
+<h1>Metodos de Notificacion <small>Administración de los metodos de notificacion del proyecto</small></h1>
+<ol class="breadcrumb">
+  <li><i class="icon-dashboard"></i> Configuraciones</li>
+  <li class="active"><i class="icon-file-alt"></i> Notificaciones predeterminadas</li>
+</ol>
+
+<div class="row">
+  <div class="col-lg-12">
+    <%# if @proyecto.notificacion_predeterminadas.nil? then %>
+      <!--<h4> No existen actualmente restricciones </h4>-->
+    <%# else %>   
+      <% @tipo_notificaciones.each do |tipo_notificacion|%>
+        <div class="col-lg-6">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title"> 
+                <%= tipo_notificacion.nombre %>
+                <! TODO: Eliminar las restricciones, y a su vez los detalles >
+              </h3>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <% if @proyecto.tipo_notificaciones.where(nombre: tipo_notificacion.nombre) %>
+                  <% @notificacion_para_eliminar = @proyecto.notificacion_predeterminadas.where(nombre: tipo_notificacion.nombre) %>
+                  <%= link_to 'No usar', notificacion_predeterminada_path(@notificacion_para_eliminar), data: { method: :delete } %>
+                <% else %>
+                  <%= link_to 'Usar', notificacion_predeterminadas_path(proyecto_id: @proyecto.id, tipo_notificacion: tipo_notificacion.id), data: { method: :post } %>
+                <% end %>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <%# end %>
+
+  </div>
+</div>
+        
+
+    <!-- JavaScript -->
+    <script src="../../js/jquery-1.10.2.js"></script>
+    <script src="../../js/bootstrap.js"></script>
+
+    <!-- Page Specific Plugins -->
+    
+    <!--
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    -->
+     
+   <script src="../../js/raphael-min.js"></script>
+    
+    <!--
+   <script src="http://cdn.oesmith.co.uk/morris-0.4.3.min.js"></script>
+    -->
+    <script src="../../js/morris-0.4.3.min.js"></script>
+    <script src="../../js/morris/chart-data-morris.js"></script>
+    <script src="../../js/tablesorter/jquery.tablesorter.js"></script>
+    <script src="../../js/tablesorter/tables.js"></script>
+
+
+

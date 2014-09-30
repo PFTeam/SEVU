@@ -56,10 +56,19 @@ class HabilidadesController < ApplicationController
   # DELETE /habilidades/1
   # DELETE /habilidades/1.json
   def destroy
-    @habilidad.destroy
+    #@habilidad.destroy
     respond_to do |format|
-      format.html { redirect_to habilidades_url, notice: 'Habilidad was successfully destroyed.' }
-      format.json { head :no_content }
+      if @habilidad.destroy
+        format.html { redirect_to gestionar_habilidades_path }
+      #format.json { render json: @habilidad.errors, status: :unprocessable_entity }      
+      #format.html { redirect_to habilidades_url, notice: 'Habilidad was successfully destroyed.' }
+        format.json { head :no_content }
+      else
+#        format.html { redirect_to gestionar_habilidades_path, alert: 'La habilidad no puede ser eliminada porque existen usuarios que la utilizan'}
+        format.html { redirect_to :back, alert: 'La habilidad no puede ser eliminada porque existen usuarios que la utilizan'}        
+        #format.json { render json: @habilidad.errors, status: :unprocessable_entity }
+        #flash[:error] = @habilidad.errors.full_messages.join(' errorrrr')
+      end
     end
   end
 
