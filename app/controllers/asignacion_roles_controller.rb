@@ -5,7 +5,6 @@ class AsignacionRolesController < ApplicationController
   # GET /asignacion_roles.json
   def index
     @proyecto = Proyecto.find(params[:proyecto_id])
-    #@proyecto = Proyecto.find(params[:proyecto_id])
   end
 
   # GET /asignacion_roles/1
@@ -31,6 +30,7 @@ class AsignacionRolesController < ApplicationController
   # POST /asignacion_roles.json
   def create
     @asignacion_rol = AsignacionRol.new(asignacion_rol_params)
+    @asignacion_rol.esActual = true
     respond_to do |format|
       if @asignacion_rol.save
 	format.html {redirect_to :controller => 'asignacion_roles', :action => 'index',:proyecto_id => @asignacion_rol.proyecto.id } 
@@ -45,8 +45,13 @@ class AsignacionRolesController < ApplicationController
   # PATCH/PUT /asignacion_roles/1
   # PATCH/PUT /asignacion_roles/1.json
   def update
+    @asignacion_rol_viejo = AsignacionRol.find(@asignacion_rol.id)
+    @asignacion_rol_viejo.esActual=false
+    @asignacion_rol_new.esActual=true
+    @asignacion_rol_new.usuario=@asignacion_rol.usuario
+    @asignacion_rol_new.save
     respond_to do |format|
-      if @asignacion_rol.update(asignacion_rol_params)
+      if @asignacion_rol_viejo.save
 	format.js   { redirect_to :controller => 'asignacion_roles', :action => 'index', :proyecto_id => @asignacion_rol.proyecto.id } 
         format.html { redirect_to @asignacion_rol, notice: 'Asignacion rol was successfully updated.' }
         format.json { render :show, status: :ok, location: @asignacion_rol }
@@ -60,9 +65,10 @@ class AsignacionRolesController < ApplicationController
   # DELETE /asignacion_roles/1
   # DELETE /asignacion_roles/1.json
   def destroy
-    @asignacion_rol.destroy
+    @asignacion_rol.esActual = false
+    @asignacion_rol.save
     respond_to do |format|
-      format.html { redirect_to asignacion_roles_url, notice: 'Asignacion rol was successfully destroyed.' }
+      format.html { redirect_to :controller => 'asignacion_roles', :action => 'index', :proyecto_id => @asignacion_rol.proyecto.id, notice: 'El usuario fue desasignado de su rol.' }
       format.json { head :no_content }
     end
   end

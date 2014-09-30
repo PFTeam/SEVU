@@ -21,7 +21,7 @@
                         <td><%= asignacion_rol.rol %></td>
                         <td>
                             <%= link_to 'Editar', edit_asignacion_rol_path(asignacion_rol), remote: true, data: { target: 'modal', modal: true } %>
-                            <%= link_to 'Destroy', asignacion_rol, method: :delete, data: { confirm: 'Are you sure?' } %>
+                            <%= link_to 'Quitar', asignacion_rol, method: :delete, data: { confirm: 'Está seguro?' } %>
                         </td>
                         <td>
                              <i class="fa fa-minus"></i>
