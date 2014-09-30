@@ -1,8 +1,5 @@
           <ul class="nav navbar-nav side-nav">
             <li>
-              <%= link_to 'Crear Proyectos', new_proyecto_path %>
-            </li>
-            <li>
               <%= link_to 'Visualizar Proyectos', proyectos_path %>
             </li>
             <li>
@@ -16,12 +13,19 @@
             <li>
 		    <%= link_to 'Objetivos Generales', objetivo_generales_path(:proyecto_id => @proyecto.id) %>
             </li>
-
-	    <li>
-	      <%= link_to 'Postulaciones', postulaciones_path(:proyecto_id => @proyecto.id) %>
+	    <% end %>
+	    <% if defined?(@objetivo_general) %>
+            <li>
+		    <%= link_to 'Objetivos Específicos', objetivo_especificos_path(:objetivo_general_id => @objetivo_general.id) %>
 	    </li>
-    	    <% end %>
+            <% end %>
+	    <% if defined?(@objetivo_especifico) %>
+            <li>
+		    <%= link_to 'Actividades', actividades_path(:objetivo_especifico_id => @objetivo_especifico.id) %>
+            </li>
+            <% end %>
 
 
+            </li>
           </ul>    
 

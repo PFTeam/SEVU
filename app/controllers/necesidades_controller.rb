@@ -65,7 +65,7 @@ class NecesidadesController < ApplicationController
   end
 
   def mis_necesidades
-    params[:current_user] = Usuario.find(7)
+    params[:current_user] = Usuario.find(1)
     @necesidades = Necesidad.where('usuario_id' => params[:current_user])
   end
 

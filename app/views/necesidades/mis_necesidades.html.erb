@@ -13,11 +13,19 @@
                 
                 <label>Descripción de la Necesidad</label>
                 <p> 
-                  <%= necesidad.descripcion %>
+		<% if !necesidad.descripcion.blank? %>
+			<%= necesidad.descripcion%>
+		<% else %>
+			No se ha cargado una descripción
+		<% end %>
                 </p>
                 <label>Ámbito de Aplicación</label>
                 <p>
-                  <%= necesidad.ambitoAplicacion %>
+		<% if !necesidad.ambitoAplicacion.blank? %>
+			<%= necesidad.ambitoAplicacion %>
+		<% else %>
+			No se ha cargado una descripción
+		<% end %>
                 </p>
                 <label>Nombre Responsable</label>
                 <p> 
@@ -30,10 +38,11 @@
                   <%end%>
                 </p>
 
-                <button type="button" class="btn btn-primary btn-lg"><%= link_to necesidad.proyecto.to_s, necesidad.proyecto %></button>
-                </p>
-                
-                            
+		<% if necesidad.proyecto.presence %>
+			<button type="button" class="btn btn-primary btn-lg"><%= link_to necesidad.proyecto.to_s, necesidad.proyecto %></button>
+		<% else %>
+			<button type="button" class="btn btn-primary btn-lg">No hay Proyecto</button>
+		<% end %>
                 
               </div>
             </div>

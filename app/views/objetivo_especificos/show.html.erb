@@ -1,19 +1,41 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Titulo:</strong>
-  <%= @objetivo_especifico.titulo %>
-</p>
+<div id="<%= dom_id(@objetivo_especifico) %>">
 
-<p>
-  <strong>Descripcion:</strong>
-  <%= @objetivo_especifico.descripcion %>
-</p>
+            <div class="panel panel-primary">
+              <div class="panel-heading">
 
-<p>
-  <strong>Objetivo general:</strong>
-  <%= @objetivo_especifico.objetivo_general %>
-</p>
+		<% if !@objetivo_especifico.titulo.blank? %>
+		      <h3 class="panel-title">Objetivo Específico: <%= link_to @objetivo_especifico.titulo%>
+		      </h3>
+		<% else %>
+			No se ha asignado ningun nombre al Objetivo Específico
+		<% end %>
 
-<%= link_to 'Edit', edit_objetivo_especifico_path(@objetivo_especifico) %> |
-<%= link_to 'Back', objetivo_especificos_path %>
+
+
+              </div>
+              <div class="panel-body">
+                
+                <label>Descripción del Objetivo</label>
+                <p> 
+		<% if !@objetivo_especifico.descripcion.blank? %>
+			<%= @objetivo_especifico.descripcion %>
+		<% else %>
+			No se ha cargado una descripción
+		<% end %>
+                </p>
+                   <div class="btn-group btn-group-justified">
+ 
+                </div>
+                
+              </div>
+      </div>
+
+<%= link_to 'Edit', edit_objetivo_especifico_path(@objetivo_especifico, :objetivo_general_id => @objetivo_especifico.objetivo_general_id), remote: true, data: { target: 'modal', modal: true } %> |
+<%= link_to 'Back', objetivo_especificos_path(:objetivo_general_id => @objetivo_especifico.objetivo_general_id) %>
+<h2> Actividades </h2>
+</div>
+
+
+

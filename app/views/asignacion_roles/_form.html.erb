@@ -19,12 +19,12 @@
   <% if @asignacion_rol.proyecto.presence %>
    <%= f.input :proyecto_id,:as => :hidden, input_html: {value: @asignacion_rol.proyecto.id} %>
   <% end %>
-  <strong> Usuario </strong>
   <% if params[:usuario_id] %>
    <%= f.input :usuario_id,:as => :hidden, input_html: {value: params[:usuario_id]} %>
   <% end %>
 
   <% unless @asignacion_rol.usuario.presence %>
+  <strong> Usuario </strong>
    <%= f.input :usuario, as: :autocomplete, label: false, url: usuarios_path, input_html: { autofocus: true  }  %>
   <% else %>
     <%= f.input :usuario_id,:as => :hidden, input_html: {value: params[:usuario_id]} %>

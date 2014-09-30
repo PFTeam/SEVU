@@ -45,7 +45,11 @@ Rails.application.routes.draw do
     resources :detalle_restricciones #, only: [:new, :create]
   end
 
-  resources :postulaciones
+  resources :postulaciones do
+	  member do
+	    post 'aceptar'
+	  end
+  end
 
   resources :notas
 
@@ -69,14 +73,20 @@ Rails.application.routes.draw do
 
   resources :actividades
 
-  resources :objetivo_especificos
+  resources :objetivo_especificos do
+    resources :actividades
+  end
 
-  resources :objetivo_generales
+  resources :objetivo_generales do
+    resources :objetivo_especificos
+  end
 
   resources :historial_estado_proyectos
 
   resources :proyectos do
     resources :asignacion_roles
+    resources :objetivo_generales
+    resources :postulaciones
   end
 
   resources :necesidades
@@ -140,7 +150,7 @@ Rails.application.routes.draw do
 
   get 'gestionar_habilidades' => 'tipo_habilidades#gestionar_habilidades', :as => 'gestionar_habilidades'
 	
-	#root :to => "usuarios#index"
+	root :to => "usuarios#index"
 
   #get 'gestionarPresupuesto', :controller => :presupuestos
   # The priority is based upon order of creation: first created -> highest priority.

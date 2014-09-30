@@ -4,12 +4,13 @@ class ObjetivoGeneralesController < ApplicationController
   # GET /objetivo_generales
   # GET /objetivo_generales.json
   def index
-    @objetivo_generales = ObjetivoGeneral.all
+    @proyecto = Proyecto.find(params[:proyecto_id])
   end
 
   # GET /objetivo_generales/1
   # GET /objetivo_generales/1.json
   def show
+    @proyecto = Proyecto.find(@objetivo_general.proyecto.id)
   end
 
   # GET /objetivo_generales/new
@@ -19,16 +20,19 @@ class ObjetivoGeneralesController < ApplicationController
 
   # GET /objetivo_generales/1/edit
   def edit
+    respond_to do |format|
+      format.js {render partial: 'edit', content_type: 'text/html' }
+    end
   end
 
   # POST /objetivo_generales
   # POST /objetivo_generales.json
   def create
     @objetivo_general = ObjetivoGeneral.new(objetivo_general_params)
-
+    p @objetivo_general.proyecto_id
     respond_to do |format|
       if @objetivo_general.save
-        format.html { redirect_to @objetivo_general, notice: 'Objetivo general was successfully created.' }
+	format.html {redirect_to :controller => 'objetivo_generales', :action => 'index',:proyecto_id => @objetivo_general.proyecto_id, notice: 'Objetivo general creado.' } 
         format.json { render :show, status: :created, location: @objetivo_general }
       else
         format.html { render :new }
@@ -44,6 +48,7 @@ class ObjetivoGeneralesController < ApplicationController
       if @objetivo_general.update(objetivo_general_params)
         format.html { redirect_to @objetivo_general, notice: 'Objetivo general was successfully updated.' }
         format.json { render :show, status: :ok, location: @objetivo_general }
+        format.js   { render :show, content_type: 'text/html' }
       else
         format.html { render :edit }
         format.json { render json: @objetivo_general.errors, status: :unprocessable_entity }
@@ -69,6 +74,6 @@ class ObjetivoGeneralesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def objetivo_general_params
-      params.require(:objetivo_general).permit(:titulo, :description, :proyecto_id)
+      params.require(:objetivo_general).permit(:titulo, :descripcion, :proyecto_id)
     end
 end
