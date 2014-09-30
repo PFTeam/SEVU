@@ -4,7 +4,8 @@ class PostulacionesController < ApplicationController
   # GET /postulaciones
   # GET /postulaciones.json
   def index
-    @postulaciones = Postulacion.all
+	  @postulaciones = Postulacion.where('proyecto_id = ?', params[:proyecto_id]).order(:created_at)
+    @proyecto = Proyecto.find(params[:proyecto_id])
   end
 
   # GET /postulaciones/1
@@ -15,6 +16,7 @@ class PostulacionesController < ApplicationController
   # GET /postulaciones/new
   def new
     @postulacion = Postulacion.new
+    @postulacion.aceptado=false
   end
 
   # GET /postulaciones/1/edit
@@ -25,10 +27,11 @@ class PostulacionesController < ApplicationController
   # POST /postulaciones.json
   def create
     @postulacion = Postulacion.new(postulacion_params)
+    @postulacion.aceptado=false
 
     respond_to do |format|
       if @postulacion.save
-        format.html { redirect_to @postulacion, notice: 'Postulacion was successfully created.' }
+	format.html {redirect_to :controller => 'proyectos', :action => 'index', notice: 'Se ha registrado tu participación'  } 
         format.json { render :show, status: :created, location: @postulacion }
       else
         format.html { render :new }
@@ -61,6 +64,15 @@ class PostulacionesController < ApplicationController
     end
   end
 
+  def aceptar
+    @postulacion = Postulacion.find(params[:id])
+    @postulacion.aceptar
+    @postulacion.save
+    respond_to do |format|
+	    format.html {redirect_to :controller => 'postulaciones', :action => 'index', notice: 'Se ha registrado tu participación', :proyecto_id => @postulacion.proyecto.id  } 
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_postulacion
@@ -69,6 +81,6 @@ class PostulacionesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def postulacion_params
-      params.require(:postulacion).permit(:fechaPostulacion, :aceptado, :proyecto_id, :usuario_id)
+      params.require(:postulacion).permit(:aceptado, :proyecto_id, :usuario_id)
     end
 end
