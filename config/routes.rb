@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :usuarios
+
   resources :colaboradores
 
   resources :detalle_presupuestos#, only: [:index, :show, :edit, :update, :destroy]
@@ -135,6 +137,8 @@ Rails.application.routes.draw do
   get 'gestionar_restricciones' => 'restricciones#gestionar_restricciones', :as => 'gestionar_restricciones'
 
   get 'gestionar_habilidades' => 'tipo_habilidades#gestionar_habilidades', :as => 'gestionar_habilidades'
+	
+	root :to => "usuarios#index"
 
   #get 'gestionarPresupuesto', :controller => :presupuestos
   # The priority is based upon order of creation: first created -> highest priority.
