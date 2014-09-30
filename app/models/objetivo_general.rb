@@ -1,5 +1,6 @@
 class ObjetivoGeneral < ActiveRecord::Base
   belongs_to :proyecto
+  attr_accessible :titulo, :descripcion, :proyecto_id
 
   has_many :objetivo_especificos
 

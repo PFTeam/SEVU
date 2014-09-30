@@ -5,11 +5,13 @@ class ObjetivoEspecificosController < ApplicationController
   # GET /objetivo_especificos.json
   def index
     @objetivo_general = ObjetivoGeneral.find(params[:objetivo_general_id])
+    @proyecto = @objetivo_general.proyecto
   end
 
   # GET /objetivo_especificos/1
   # GET /objetivo_especificos/1.json
   def show
+	  @proyecto = Proyecto.find(@objetivo_especifico.objetivo_general.proyecto.id)
   end
 
   # GET /objetivo_especificos/new

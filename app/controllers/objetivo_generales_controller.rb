@@ -10,11 +10,12 @@ class ObjetivoGeneralesController < ApplicationController
   # GET /objetivo_generales/1
   # GET /objetivo_generales/1.json
   def show
+    @proyecto = Proyecto.find(@objetivo_general.proyecto.id)
   end
 
   # GET /objetivo_generales/new
   def new
-    @objetivo_general = ObjetivoGeneral.new(:proyecto_id => params[:proyecto_id])
+    @objetivo_general = ObjetivoGeneral.new
   end
 
   # GET /objetivo_generales/1/edit
@@ -28,6 +29,7 @@ class ObjetivoGeneralesController < ApplicationController
   # POST /objetivo_generales.json
   def create
     @objetivo_general = ObjetivoGeneral.new(objetivo_general_params)
+    p @objetivo_general.proyecto_id
     respond_to do |format|
       if @objetivo_general.save
 	format.html {redirect_to :controller => 'objetivo_generales', :action => 'index',:proyecto_id => @objetivo_general.proyecto_id, notice: 'Objetivo general creado.' } 
