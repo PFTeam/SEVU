@@ -1,5 +1,6 @@
 <p id="notice"><%= notice %></p>
 
+<div id="<%= dom_id(@objetivo_general) %>">
 <p>
   <strong>Titulo:</strong>
   <%= @objetivo_general.titulo %>
@@ -7,13 +8,9 @@
 
 <p>
   <strong>Description:</strong>
-  <%= @objetivo_general.description %>
+  <%= @objetivo_general.descripcion %>
 </p>
 
-<p>
-  <strong>Proyecto:</strong>
-  <%= @objetivo_general.proyecto %>
-</p>
-
-<%= link_to 'Edit', edit_objetivo_general_path(@objetivo_general) %> |
-<%= link_to 'Back', objetivo_generales_path %>
+</div>
+<%= link_to 'Edit', edit_objetivo_general_path(@objetivo_general, :proyecto_id => params[:proyecto_id]), remote: true, data: { target: 'modal', modal: true } %> |
+<%= link_to 'Back', objetivo_generales_path(:proyecto_id => params[:proyecto_id]) %>

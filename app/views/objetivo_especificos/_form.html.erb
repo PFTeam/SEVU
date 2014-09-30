@@ -1,4 +1,4 @@
-<%= form_for(@objetivo_especifico) do |f| %>
+<%= simple_form_for(@objetivo_especifico, html: objetivo_especifico_form_html_options ) do |f| %>
   <% if @objetivo_especifico.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@objetivo_especifico.errors.count, "error") %> prohibited this objetivo_especifico from being saved:</h2>
@@ -11,19 +11,20 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :titulo %><br>
-    <%= f.text_field :titulo %>
-  </div>
-  <div class="field">
-    <%= f.label :descripcion %><br>
-    <%= f.text_area :descripcion %>
-  </div>
-  <div class="field">
-    <%= f.label :objetivo_general_id %><br>
-    <%= f.text_field :objetivo_general_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= f.input :titulo %>
+
+
+  <%= f.input :descripcion %>
+  
+  <% if params[:objetivo_general] %>
+   <%= f.input :objetivo_general_id,:as => :hidden, input_html: {value: params[:objetivo_general_id]} %>
+  <% end %>
+
+  <% if @objetivo_especifico.objetivo_general.presence %>
+   <%= f.input :objetivo_general_id,:as => :hidden, input_html: {value: @objetivo_especifico.objetivo_general.id} %>
+  <% end %>
+
+  </br>
+  <%= f.button :submit, :class => 'btn btn-primary', :value => 'GUARDAR' %>
+
 <% end %>

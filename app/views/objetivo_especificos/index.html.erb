@@ -11,12 +11,12 @@
   </thead>
 
   <tbody>
-    <% @objetivo_especificos.each do |objetivo_especifico| %>
+    <% @objetivo_general.objetivo_especificos.each do |objetivo_especifico| %>
       <tr>
         <td><%= objetivo_especifico.titulo %></td>
         <td><%= objetivo_especifico.descripcion %></td>
         <td><%= objetivo_especifico.objetivo_general %></td>
-        <td><%= link_to 'Show', objetivo_especifico %></td>
+	<td><%= link_to 'Show', objetivo_especifico, :objetivo_general_id => @objetivo_general.id %></td>
         <td><%= link_to 'Edit', edit_objetivo_especifico_path(objetivo_especifico) %></td>
         <td><%= link_to 'Destroy', objetivo_especifico, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
@@ -26,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Objetivo especifico', new_objetivo_especifico_path %>
+<%= link_to 'New Objetivo especifico', new_objetivo_especifico_path(:objetivo_general_id => params[:objetivo_general_id]) %>
