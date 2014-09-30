@@ -5,21 +5,44 @@
 
             <div class="panel panel-primary">
               <div class="panel-heading">
-                <h3 class="panel-title"><%= link_to proyecto.nombre, proyecto %></h3>
+		<% if !proyecto.nombre.blank? %>
+		      <h3 class="panel-title">	<%= link_to proyecto.nombre, proyecto %>
+		      </h3>
+		<% else %>
+			No se ha asignado ningun nombre al proyecto
+		<% end %>
+
+
+
               </div>
               <div class="panel-body">
-
+                
                 <label>Descripción del Proyecto</label>
                 <p> 
-                  <%= proyecto.breveDescripcion %> 
+		<% if !proyecto.breveDescripcion.blank? %>
+			<%= proyecto.breveDescripcion %>
+		<% else %>
+			No se ha cargado una descripción
+		<% end %>
                 </p>
                 <label>Director del Proyecto</label>
-                <p>
-                  <i class="fa fa-user"></i><%= link_to proyecto.director.apellido_nombre.to_s, usuario_path(proyecto.director) %> 
+                <p> <!-- #TODO: Agregar validación de un solo director -->
+
+		<% if !proyecto.director.apellido_nombre.to_s.blank? %>
+                    <i class="fa fa-user"></i><%= link_to proyecto.director.apellido_nombre.to_s, usuario_path(proyecto.director) %> 
+		<% else %>
+			No se ha asignado un Director
+		<% end %>
+
                 </p>
                 <label>Fecha Inicio - Fecha Fin</label>
                 <p> 
+		<% if (!proyecto.fechaInicio.blank? & !proyecto.fechaFin.blank?) %>
                   <%= proyecto.fechaInicio.to_formatted_s(:rfc822) %> - <%= proyecto.fechaFin.to_formatted_s(:rfc822)  %> 
+		<% else %>
+			No se ha cargado la Fecha de Inicio o Fin
+		<% end %>
+
                 </p>
                 <div class="btn-group btn-group-justified">
  
