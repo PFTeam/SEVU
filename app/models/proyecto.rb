@@ -56,7 +56,7 @@ class Proyecto < ActiveRecord::Base
 
   def director
     self.asignacion_roles.each do |asignacion|
-      if (asignacion.rol.nombre.to_s == 'Director') and (asignacion.rol.tipo_rol.nombre == 'Proyecto')   #TODO: Hacerlo menos hardcodeado?
+      if (asignacion.rol.nombre.to_s == 'Director') and (asignacion.rol.tipo_rol.nombre == 'Proyecto')# and (asignacion.esActual == true)   #TODO: Hacerlo menos hardcodeado?
         return asignacion.usuario
       else
         return nil
