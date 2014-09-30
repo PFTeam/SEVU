@@ -1,8 +1,7 @@
-<%= form_for(@asignacion_rol) do |f| %>
+<%= simple_form_for(@asignacion_rol, html: asignacion_rol_form_html_options) do |f| %>
   <% if @asignacion_rol.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@asignacion_rol.errors.count, "error") %> prohibited this asignacion_rol from being saved:</h2>
-
       <ul>
       <% @asignacion_rol.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -11,27 +10,31 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :fechaCambioEstado %><br>
-    <%= f.datetime_select :fechaCambioEstado %>
-  </div>
-  <div class="field">
-    <%= f.label :esActual %><br>
-    <%= f.check_box :esActual %>
-  </div>
-  <div class="field">
-    <%= f.label :rol_id %><br>
-    <%= f.text_field :rol_id %>
-  </div>
-  <div class="field">
-    <%= f.label :proyecto_id %><br>
-    <%= f.text_field :proyecto_id %>
-  </div>
-  <div class="field">
-    <%= f.label :usuario_id %><br>
-    <%= f.text_field :usuario_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= f.input :rol_id, collection: @roles, :label => 'Rol' %>
+
+  <% if params[:proyecto_id] %>
+   <%= f.input :proyecto_id,:as => :hidden, input_html: {value: params[:proyecto_id]} %>
+  <% end %>
+
+  <% if @asignacion_rol.proyecto.presence %>
+   <%= f.input :proyecto_id,:as => :hidden, input_html: {value: @asignacion_rol.proyecto.id} %>
+  <% end %>
+  <strong> Usuario </strong>
+  <% if params[:usuario_id] %>
+   <%= f.input :usuario_id,:as => :hidden, input_html: {value: params[:usuario_id]} %>
+  <% end %>
+
+  <% unless @asignacion_rol.usuario.presence %>
+   <%= f.input :usuario, as: :autocomplete, label: false, url: usuarios_path, input_html: { autofocus: true  }  %>
+  <% else %>
+    <%= f.input :usuario_id,:as => :hidden, input_html: {value: params[:usuario_id]} %>
+  <% end %>
+
+
+ <div class="modal-footer">
+          <%= f.button :submit, :class => 'btn btn-primary', :value => 'Guardar' %>
+
 <% end %>
+
+
+

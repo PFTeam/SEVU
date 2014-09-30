@@ -4,7 +4,8 @@ class AsignacionRolesController < ApplicationController
   # GET /asignacion_roles
   # GET /asignacion_roles.json
   def index
-    @asignacion_roles = AsignacionRol.all
+    @proyecto = Proyecto.find(params[:proyecto_id])
+    #@proyecto = Proyecto.find(params[:proyecto_id])
   end
 
   # GET /asignacion_roles/1
@@ -14,21 +15,25 @@ class AsignacionRolesController < ApplicationController
 
   # GET /asignacion_roles/new
   def new
-    @asignacion_rol = AsignacionRol.new
+    @roles = Rol.all
+    @asignacion_rol = AsignacionRol.new(:usuario_id => params[:usuario_id], :proyecto_id => :proyecto_id)
   end
 
   # GET /asignacion_roles/1/edit
   def edit
+    @roles = Rol.all
+    respond_to do |format|
+      format.js {render partial: 'edit', content_type: 'text/html' }
+    end
   end
 
   # POST /asignacion_roles
   # POST /asignacion_roles.json
   def create
     @asignacion_rol = AsignacionRol.new(asignacion_rol_params)
-
     respond_to do |format|
       if @asignacion_rol.save
-        format.html { redirect_to @asignacion_rol, notice: 'Asignacion rol was successfully created.' }
+	format.html {redirect_to :controller => 'asignacion_roles', :action => 'index',:proyecto_id => @asignacion_rol.proyecto.id } 
         format.json { render :show, status: :created, location: @asignacion_rol }
       else
         format.html { render :new }
@@ -42,6 +47,7 @@ class AsignacionRolesController < ApplicationController
   def update
     respond_to do |format|
       if @asignacion_rol.update(asignacion_rol_params)
+	format.js   { redirect_to :controller => 'asignacion_roles', :action => 'index', :proyecto_id => @asignacion_rol.proyecto.id } 
         format.html { redirect_to @asignacion_rol, notice: 'Asignacion rol was successfully updated.' }
         format.json { render :show, status: :ok, location: @asignacion_rol }
       else

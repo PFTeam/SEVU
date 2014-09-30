@@ -24,8 +24,11 @@ class EstadoUsuariosController < ApplicationController
   # POST /estado_usuarios
   # POST /estado_usuarios.json
   def create
-    @estado_usuario = EstadoUsuario.new(estado_usuario_params)
-
+    
+     @estado_usuario = EstadoUsuario.new(params)
+    #@estado_usuario = EstadoUsuario.new(estado_usuario_params)
+    puts params[:nombre]
+    puts params[:descripcion]
     respond_to do |format|
       if @estado_usuario.save
         format.html { redirect_to @estado_usuario, notice: 'Estado usuario was successfully created.' }

@@ -15,6 +15,7 @@ class HistorialEstadoUsuariosController < ApplicationController
   # GET /historial_estado_usuarios/new
   def new
     @historial_estado_usuario = HistorialEstadoUsuario.new
+     @estado_usuarios = EstadoUsuario.all
   end
 
   # GET /historial_estado_usuarios/1/edit

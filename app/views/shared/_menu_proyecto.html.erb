@@ -8,8 +8,11 @@
             <li>
               <%= link_to 'Mis Proyectos', proyectos_mis_proyectos_path %>
             </li>
-            <li>
-              <%= link_to 'Asignar Recursos', asignacion_roles_path %>
+	    <li>
+	    <% if defined?(@proyecto) %>
+		    <%= link_to 'Asignar Recursos', asignacion_roles_path(:proyecto_id => @proyecto.id) %>
+	    <% end %>
+
             </li>
           </ul>    
 

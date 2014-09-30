@@ -1,10 +1,10 @@
-<%= form_for [@voluntario, @horario_disponibl] do |f| %>
-  <% if @horario_disponibl.errors.any? %>
+<%= form_for ([@voluntario, @horario_disponible]) do |f| %>
+  <% if @horario_disponible.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@horario_disponibl.errors.count, "error") %> prohibited this horario_disponibl from being saved:</h2>
+      <h2><%= pluralize(@horario_disponible.errors.count, "error") %> prohibited this horario_disponibl from being saved:</h2>
 
       <ul>
-      <% @horario_disponibl.errors.full_messages.each do |message| %>
+      <% @horario_disponible.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>

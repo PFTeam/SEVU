@@ -1,4 +1,11 @@
 class Usuario < ActiveRecord::Base
+  # Include default devise modules. Others available are:
+  # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :timeoutable, :validatable, :lockable
+
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :nombreUsuario, :email, :apellidoNombre, :contrasenia, :direccion, :fechaRegistro, :password_confirmation, :remember_me
   
   has_many :postulaciones
   has_many :asignacion_roles
@@ -34,12 +41,28 @@ class Usuario < ActiveRecord::Base
     :url  => "/assets/usuarios/:id/:style/:basename.:extension",
     :path => ":rails_root/public/assets/usuarios/:id/:style/:basename.:extension"
     
+#<<<<<<< HEAD
   #validates_attachment_presence :foto
   validates_attachment_size :foto, :less_than => 4.megabytes
   validates_attachment_content_type :foto, :content_type => ['image/jpeg', 'image/png']
+#=======
+#  validates_attachment_presence :foto
+#  validates_attachment_size :foto, :less_than => 4.megabytes
+#  validates_attachment_content_type :foto, :content_type => ['image/jpeg', 'image/png']
+#>>>>>>> a13a10c37ed3180d4f92b1b96f9244442278fdcf
 
   def to_s
-    apellidoNombre
+    apellido_nombre
   end  
+
+
+  def self.search query: nil, limit: false
+    result = Usuario.order 'apellido_nombre ASC'
+    if query.present?
+      result = result.where "#{table_name}.apellido_nombre ILIKE ?", "%#{query.strip}%"
+    end
+
+    limit ? result.limit(10) : result
+  end
 
 end

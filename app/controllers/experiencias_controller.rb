@@ -84,6 +84,9 @@ def set_voluntario
 end
     # Never trust parameters from the scary internet, only allow the white list through.
     def experiencia_params
-      params.require(:experiencia).permit(:tieneExperiencia, :cantidadExperiencia, :habilidad_id, :voluntario_id)
+     
+     params.permit! #permite todo los atriburos
+    #  params.require(:experiencia).permit(:tieneExperiencia, :cantidadExperiencia, :habilidad_id, :voluntario_id)
+    
     end
 end

@@ -1,10 +1,11 @@
 class UsuariosController < ApplicationController
   before_action :set_usuario, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_usuario!#ESTO ES NUEVO, PROBANDO....
   # GET /usuarios
   # GET /usuarios.json
   def index
-    @usuarios = Usuario.all
+    @usuarios = Usuario.page(params[:page]).search query: params[:q]
+    #@usuarios = Usuario.all
   end
 
   # GET /usuarios/1

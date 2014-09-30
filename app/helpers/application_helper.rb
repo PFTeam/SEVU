@@ -27,4 +27,14 @@ module ApplicationHelper
         }.merge(remote_if_xhr || {})
       }
   end
+  def asignacion_rol_form_html_options
+      {
+        data: {
+          #target: dom_id(@necesidad),
+          error: 'modal',
+          modal: true,
+          replace: true
+        }.merge(remote_if_xhr || {})
+      }
+  end
 end

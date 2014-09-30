@@ -5,4 +5,7 @@ class HistorialEstadoActividad < ActiveRecord::Base
 
   validates :proyecto, :presence => true
   validates :estado_proyecto, :presence => true 
+
+
+
 end

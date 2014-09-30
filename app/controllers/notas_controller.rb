@@ -17,6 +17,8 @@ class NotasController < ApplicationController
   def new
    # @nota = Nota.new
    @voluntario = Voluntario.find(params[:voluntario_id])
+   @usuario=Usuario.all
+   
    @nota= @voluntario.notas.new
   end
 

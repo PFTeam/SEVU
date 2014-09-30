@@ -16,14 +16,27 @@
     <%= f.datetime_select :created_at %>
   </div>
   <div class="field">
+  	
+    <%= f.label 'Estado Usuario' %><br>
+   <%= f.collection_select(:estado_usuario_id, @estado_usuarios, :id,:nombre,{prompt: "Estado Posible de Usuario..." }, {class:"form-control"}) %>
+    <%#= f.text_field :habilidad_id %>
+     
     <%#= f.label :esActual %><br>
     <%#= f.check_box :esActual %>
   </div>
   <div class="field">
+    <strong> Usuario </strong>
+  <%# if params[:usuario_id] %>
+   <%#= f.input :estado_actividad_id,:as => :hidden, input_html: {value: params[:usuario_id]} %>
+  <% #end %>
+ <%# unless @historial_estado_usuario.usuario.presence %>
+   
+        
     <%= f.label :usuario_id %><br>
     <%= f.text_field :usuario_id %>
   </div>
   <div class="field">
+  	
     <%= f.label :estado_usuario_id %><br>
     <%= f.text_field :estado_usuario_id %>
   </div>
