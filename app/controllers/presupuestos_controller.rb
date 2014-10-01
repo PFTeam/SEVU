@@ -78,8 +78,8 @@ class PresupuestosController < ApplicationController
         @conceptos_no_usados = @conceptos_no_usados.to_a.push concept
       end                                                 #
      end                                                  #
-    if !@conceptos.nil? then                              #
-      @conceptos = @conceptos.uniq                        #
+    if !@conceptos.nil? then                              #el metodo uniq solo deja las instancias unicas, saca las
+      @conceptos = @conceptos.uniq                        #repetidas dentro del arreglo
     end                                                   #
     if !@conceptos_no_usados.nil? then                    #
       @conceptos_no_usados = @conceptos_no_usados.uniq    #

@@ -1,19 +1,75 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Titulo:</strong>
-  <%= @objetivo_general.titulo %>
-</p>
+<div id="<%= dom_id(@objetivo_general) %>">
+            <div class="panel panel-primary">
+              <div class="panel-heading">
 
-<p>
-  <strong>Description:</strong>
-  <%= @objetivo_general.description %>
-</p>
+		<% if !@objetivo_general.titulo.blank? %>
+		      <h3 class="panel-title">Objetivo General: <%= link_to @objetivo_general.titulo%>
+		      </h3>
+		<% else %>
+			No se ha asignado ningun nombre al Objetivo Específico
+		<% end %>
 
-<p>
-  <strong>Proyecto:</strong>
-  <%= @objetivo_general.proyecto %>
-</p>
 
-<%= link_to 'Edit', edit_objetivo_general_path(@objetivo_general) %> |
-<%= link_to 'Back', objetivo_generales_path %>
+
+              </div>
+              <div class="panel-body">
+                
+                <label>Descripción del Objetivo</label>
+                <p> 
+		<% if !@objetivo_general.descripcion.blank? %>
+			<%= @objetivo_general.descripcion %>
+		<% else %>
+			No se ha cargado una descripción
+		<% end %>
+                </p>
+                   <div class="btn-group btn-group-justified">
+ 
+                </div>
+                
+              </div>
+      </div>
+
+<%= link_to 'Edit', edit_objetivo_general_path(@objetivo_general, :proyecto_id => params[:proyecto_id]), remote: true, data: { target: 'modal', modal: true } %> |
+<%= link_to 'Back', objetivo_generales_path(:proyecto_id => @objetivo_general.proyecto.id) %>
+
+
+	    <h2> Objetivos Específicos </h2>
+<% @objetivo_general.objetivo_especificos.each do |obj| %>
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+
+		<% if !obj.titulo.blank? %>
+		      <h3 class="panel-title">Objetivo Específico: <%= link_to obj.titulo, obj%>
+		      </h3>
+		<% else %>
+			No se ha asignado ningun nombre al Objetivo Específico
+		<% end %>
+
+
+
+              </div>
+              <div class="panel-body">
+                
+                <label>Descripción del Objetivo</label>
+                <p> 
+		<% if !obj.descripcion.blank? %>
+			<%= obj.descripcion %>
+		<% else %>
+			No se ha cargado una descripción
+		<% end %>
+                </p>
+                   <div class="btn-group btn-group-justified">
+ 
+                </div>
+                
+              </div>
+            </div>
+ <% end %>
+
+
+<%= link_to 'New Objetivo especifico', new_objetivo_especifico_path(:objetivo_general_id => @objetivo_general.id) %>
+
+
+</div>

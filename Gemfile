@@ -49,6 +49,8 @@ gem 'capybara'
 gem 'unicorn'
 gem 'paperclip'
 #gem 'thoughtbot-paperclip'
+gem 'devise', '1.4.7'
+#gem 'protected_attributes'	
 
 
 #Datepicker

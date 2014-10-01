@@ -1,29 +1,40 @@
-<h1>Listing objetivo_generales</h1>
+<h1>Objetivos Generales</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Titulo</th>
-      <th>Description</th>
-      <th>Proyecto</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @objetivo_generales.each do |objetivo_general| %>
-      <tr>
-        <td><%= objetivo_general.titulo %></td>
-        <td><%= objetivo_general.description %></td>
-        <td><%= objetivo_general.proyecto %></td>
-        <td><%= link_to 'Show', objetivo_general %></td>
-        <td><%= link_to 'Edit', edit_objetivo_general_path(objetivo_general) %></td>
-        <td><%= link_to 'Destroy', objetivo_general, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <% @proyecto.objetivo_generales.each do |objetivo_general| %>
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+
+		<% if !objetivo_general.titulo.blank? %>
+		      <h3 class="panel-title">Objetivo General: <%= link_to objetivo_general.titulo, objetivo_general %>
+		      </h3>
+		<% else %>
+			No se ha asignado ningun nombre al Objetivo General
+		<% end %>
+
+
+
+              </div>
+              <div class="panel-body">
+                
+                <label>Descripción del Objetivo</label>
+                <p> 
+		<% if !objetivo_general.descripcion.blank? %>
+			<%= objetivo_general.descripcion %>
+		<% else %>
+			No se ha cargado una descripción
+		<% end %>
+                </p>
+                   <div class="btn-group btn-group-justified">
+ 
+                </div>
+                
+              </div>
+            </div>
+
+
     <% end %>
-  </tbody>
-</table>
 
 <br>
 
-<%= link_to 'New Objetivo general', new_objetivo_general_path %>
+<%= link_to 'New Objetivo general', new_objetivo_general_path(:proyecto_id => params[:proyecto_id]) %>

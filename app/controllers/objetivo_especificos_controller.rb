@@ -4,21 +4,26 @@ class ObjetivoEspecificosController < ApplicationController
   # GET /objetivo_especificos
   # GET /objetivo_especificos.json
   def index
-    @objetivo_especificos = ObjetivoEspecifico.all
+    @objetivo_general = ObjetivoGeneral.find(params[:objetivo_general_id])
+    @proyecto = @objetivo_general.proyecto
   end
 
   # GET /objetivo_especificos/1
   # GET /objetivo_especificos/1.json
   def show
+	  @proyecto = Proyecto.find(@objetivo_especifico.objetivo_general.proyecto.id)
   end
 
   # GET /objetivo_especificos/new
   def new
-    @objetivo_especifico = ObjetivoEspecifico.new
+    @objetivo_especifico = ObjetivoEspecifico.new(:objetivo_general_id => params[:objetivo_general_id])
   end
 
   # GET /objetivo_especificos/1/edit
   def edit
+    respond_to do |format|
+      format.js {render partial: 'edit', content_type: 'text/html' }
+    end
   end
 
   # POST /objetivo_especificos
@@ -28,7 +33,7 @@ class ObjetivoEspecificosController < ApplicationController
 
     respond_to do |format|
       if @objetivo_especifico.save
-        format.html { redirect_to @objetivo_especifico, notice: 'Objetivo especifico was successfully created.' }
+        format.html { redirect_to :controller => 'objetivo_especificos', :action => 'index', :objetivo_general_id => @objetivo_especifico.objetivo_general_id, notice: 'Objetivo especifico was successfully created.' }
         format.json { render :show, status: :created, location: @objetivo_especifico }
       else
         format.html { render :new }
@@ -44,6 +49,7 @@ class ObjetivoEspecificosController < ApplicationController
       if @objetivo_especifico.update(objetivo_especifico_params)
         format.html { redirect_to @objetivo_especifico, notice: 'Objetivo especifico was successfully updated.' }
         format.json { render :show, status: :ok, location: @objetivo_especifico }
+        format.js   { render :show, content_type: 'text/html' }
       else
         format.html { render :edit }
         format.json { render json: @objetivo_especifico.errors, status: :unprocessable_entity }

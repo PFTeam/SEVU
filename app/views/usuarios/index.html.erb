@@ -1,19 +1,24 @@
-<h1>Listing usuarios</h1>
 
+<h1>Sistema Estudiantil de Voluntariado Universitario</h1>
+  <ol class="breadcrumb">
+    <li><i class="icon-dashboard"></i><%= link_to 'Registrarme', new_usuario_path %></li>
+  </ol>
+<div class="row">
+  <div class="col-lg-6">
+    <form role="form">
+    <div class="form-group">
+      <label><h2><small>Nombre de Usuario</small></h2></label>
+      <input class="form-control" type="text" value= <%= @contrasenia %> > </input> 
+      <label><h2><small>Contraseña</small></h2></label>
+      <input class="form-control" type="password" value= <%= @contrasenia %> > </input>  
+			<br></br>
+			<button type="button" class="btn btn-primary btn-lg">Iniciar Sesión</button>       
+    </div>
+  </form>
+</div>
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
 <table>
-  <thead>
-    <tr>
-      <th>Foto</th>
-      <th>Nombreusuario</th>
-      <th>Contrasenia</th>
-      <th>Apellidonombre</th>
-      <th>Email</th>
-      <th>Direccion</th>
-      <th>Fecharegistro</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
   <tbody>
     <% @usuarios.each do |usuario| %>
       <!-- TODO: redimensionar imagen -->
@@ -32,6 +37,3 @@
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Usuario', new_usuario_path %>

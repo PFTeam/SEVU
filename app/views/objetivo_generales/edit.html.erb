@@ -3,4 +3,4 @@
 <%= render 'form' %>
 
 <%= link_to 'Show', @objetivo_general %> |
-<%= link_to 'Back', objetivo_generales_path %>
+<%= link_to 'Back', objetivo_generales_path(:proyecto_id => params[:proyecto_id]) %>

@@ -33,10 +33,10 @@ class NotificacionPredeterminadasController < ApplicationController
 
     respond_to do |format|
       if @notificacion_predeterminada.save
-        format.html { redirect_to @notificacion_predeterminada, notice: 'Notificacion predeterminada was successfully created.' }
-        format.json { render :show, status: :created, location: @notificacion_predeterminada }
+        format.html { redirect_to :back}#@notificacion_predeterminada, notice: 'Notificacion predeterminada was successfully created.' }
+        #format.json { render :back}#, status: :created, location: @notificacion_predeterminada }
       else
-        format.html { render :new }
+        format.html { render :back }
         format.json { render json: @notificacion_predeterminada.errors, status: :unprocessable_entity }
       end
     end
@@ -61,20 +61,15 @@ class NotificacionPredeterminadasController < ApplicationController
   def destroy
     @notificacion_predeterminada.destroy
     respond_to do |format|
-      format.html { redirect_to notificacion_predeterminadas_url, notice: 'Notificacion predeterminada was successfully destroyed.' }
+      format.html { redirect_to :back}#, notice: 'Notificacion predeterminada was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
   
   def notificaciones_predeterminadas 
-    @tipo_notificaciones = TipoNotificacion.all
-    #if @proyecto.notificacion_predeterminadas.count > 0 then
-    #@proyecto.notificacion_predeterminadas.each do |notificacion|
-      #@tipo_notificaciones_usadas = TipoNotificacion.where nombre: notificacion.nombre
-    #end
-    #end
-    #@tipo_notificaciones_usadas = @proyecto.tipo_notificaciones
-    #@tipo_notificaciones
+
+    @notificaciones_no_usadas = TipoNotificacion.all - @proyecto.tipo_notificaciones   #resto las listas
+    
   end
 
   private
@@ -89,6 +84,6 @@ class NotificacionPredeterminadasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def notificacion_predeterminada_params
-      params.require(:notificacion_predeterminada).permit(:proyecto_id, :tipo_notificacion_id)
+      params.permit(:proyecto_id, :tipo_notificacion_id)
     end
 end

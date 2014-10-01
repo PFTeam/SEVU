@@ -1,4 +1,4 @@
-<%= form_for(@objetivo_general) do |f| %>
+<%= simple_form_for(@objetivo_general, html: objetivo_general_form_html_options ) do |f| %>
   <% if @objetivo_general.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@objetivo_general.errors.count, "error") %> prohibited this objetivo_general from being saved:</h2>
@@ -11,19 +11,18 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :titulo %><br>
-    <%= f.text_field :titulo %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :proyecto_id %><br>
-    <%= f.text_field :proyecto_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= f.input :titulo %>
+
+  <%= f.input :descripcion %>
+
+  <% if params[:proyecto_id] %>
+   <%= f.input :proyecto_id,:as => :hidden, input_html: {value: params[:proyecto_id]} %>
+  <% end %>
+
+  <% if @objetivo_general.proyecto.presence %>
+   <%= f.input :proyecto_id,:as => :hidden, input_html: {value: @objetivo_general.proyecto.id} %>
+  <% end %>
+  <br>
+  <%= f.button :submit, :class => 'btn btn-primary', :value => 'GUARDAR' %>
+
 <% end %>

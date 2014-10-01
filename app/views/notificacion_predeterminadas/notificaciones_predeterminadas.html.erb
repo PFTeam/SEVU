@@ -1,40 +1,53 @@
-<h1>Metodos de Notificacion <small>Administración de los metodos de notificacion del proyecto</small></h1>
+<h1>Metodos de Notificación <small>Administración de los tipos de notificación del proyecto</small></h1>
 <ol class="breadcrumb">
   <li><i class="icon-dashboard"></i> Configuraciones</li>
   <li class="active"><i class="icon-file-alt"></i> Notificaciones predeterminadas</li>
 </ol>
-
+<br></br>
 <div class="row">
   <div class="col-lg-12">
-    <%# if @proyecto.notificacion_predeterminadas.nil? then %>
-      <!--<h4> No existen actualmente restricciones </h4>-->
-    <%# else %>   
-      <% @tipo_notificaciones.each do |tipo_notificacion|%>
+    <% if !@proyecto.notificacion_predeterminadas.nil? then %>       
+      <% @proyecto.notificacion_predeterminadas.each do |np| #recorro las notificaciones del proyecto (usadas) %>
         <div class="col-lg-6">
           <div class="panel panel-primary">
             <div class="panel-heading">
               <h3 class="panel-title"> 
-                <%= tipo_notificacion.nombre %>
-                <! TODO: Eliminar las restricciones, y a su vez los detalles >
+                <%= np.tipo_notificacion.nombre %>              
               </h3>
             </div>
             <div class="panel-body">
-              <div class="row">
-                <% if @proyecto.tipo_notificaciones.where(nombre: tipo_notificacion.nombre) %>
-                  <% @notificacion_para_eliminar = @proyecto.notificacion_predeterminadas.where(nombre: tipo_notificacion.nombre) %>
-                  <%= link_to 'No usar', notificacion_predeterminada_path(@notificacion_para_eliminar), data: { method: :delete } %>
-                <% else %>
-                  <%= link_to 'Usar', notificacion_predeterminadas_path(proyecto_id: @proyecto.id, tipo_notificacion: tipo_notificacion.id), data: { method: :post } %>
-                <% end %>
-
-
+              <div class="row" align="center">
+                <%= link_to 'Desactivar', 
+                  notificacion_predeterminada_path(np), # boton verde para eliminar la notificacion predeterminada
+                  class: "btn btn-success btn-lg", 
+                  data: { method: :delete } %>
               </div>
             </div>
           </div>
         </div>
       <% end %>
-    <%# end %>
-
+    <% end %>
+    <% if !@notificaciones_no_usadas.nil? then %>
+      <% @notificaciones_no_usadas.each do |_tipo_notificacion| #recorro las notificaciones no usadas por el proyecto %>
+        <div class="col-lg-6">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title"> 
+                <%= _tipo_notificacion.nombre %>
+              </h3>
+            </div>
+            <div class="panel-body">
+              <div class="row" align="center">
+                <%= link_to 'Activar', 
+                  notificacion_predeterminadas_path(proyecto_id: @proyecto.id, tipo_notificacion_id: _tipo_notificacion.id), 
+                  class: "btn btn-default btn-lg",          # boton gris para crear la notificacion predeterminada
+                  data: { method: :post } %>                
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
   </div>
 </div>
         

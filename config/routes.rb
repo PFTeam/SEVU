@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :usuarios
+
   resources :colaboradores
 
   resources :detalle_presupuestos#, only: [:index, :show, :edit, :update, :destroy]
@@ -43,7 +45,11 @@ Rails.application.routes.draw do
     resources :detalle_restricciones #, only: [:new, :create]
   end
 
-  resources :postulaciones
+  resources :postulaciones do
+	  member do
+	    post 'aceptar'
+	  end
+  end
 
   resources :notas
 
@@ -69,9 +75,13 @@ Rails.application.routes.draw do
 
   resources :actividades
 
-  resources :objetivo_especificos
+  resources :objetivo_especificos do
+    resources :actividades
+  end
 
-  resources :objetivo_generales
+  resources :objetivo_generales do
+    resources :objetivo_especificos
+  end
 
   resources :historial_estado_proyectos
 
@@ -80,6 +90,10 @@ Rails.application.routes.draw do
     resources :notificacion_predeterminadas
 
   get 'notificaciones_predeterminadas' => 'notificacion_predeterminadas#notificaciones_predeterminadas', :as => 'notificaciones_predeterminadas'
+
+    resources :objetivo_generales
+    resources :postulaciones
+
   end
 
   resources :necesidades
@@ -128,6 +142,8 @@ Rails.application.routes.draw do
   get 'gestionar_restricciones' => 'restricciones#gestionar_restricciones', :as => 'gestionar_restricciones'
 
   get 'gestionar_habilidades' => 'tipo_habilidades#gestionar_habilidades', :as => 'gestionar_habilidades'
+	
+	root :to => "usuarios#index"
 
   #get 'gestionarPresupuesto', :controller => :presupuestos
   # The priority is based upon order of creation: first created -> highest priority.

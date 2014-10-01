@@ -30,11 +30,32 @@ module ApplicationHelper
   def asignacion_rol_form_html_options
       {
         data: {
-          #target: dom_id(@necesidad),
           error: 'modal',
           modal: true,
           replace: true
         }.merge(remote_if_xhr || {})
       }
   end
+  def objetivo_general_form_html_options
+      {
+        data: {
+          target: dom_id(@objetivo_general),
+          error: 'modal',
+          modal: true,
+          replace: true
+        }.merge(remote_if_xhr || {})
+      }
+  end
+  def objetivo_especifico_form_html_options
+      {
+        data: {
+          target: dom_id(@objetivo_especifico),
+          error: 'modal',
+          modal: true,
+          replace: true
+        }.merge(remote_if_xhr || {})
+      }
+  end
+
 end
+
