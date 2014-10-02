@@ -1,4 +1,4 @@
-<%= simple_form_for @usuario, :html => { :multipart => true } do |f| %>
+<%= form_for @usuario, :html => { :multipart => true } do |f| %>
   <% if @usuario.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@usuario.errors.count, "error") %> prohibited this usuario from being saved:</h2>
@@ -11,49 +11,35 @@
     </div>
   <% end %>
 
-  <div class="row">
-        <div class="col-lg-6">
-          <form role="form">
-              <div class="form-group">
-
-								<h2><small><%= f.input:nombreUsuario , :label => 'Nombre de Usuario', :placeholder => 'nombre del Usuario...' %></small></h2>
-
-								<h2><small><%= f.input:apellido_nombre , :label => 'Nombres y Apellidos', :placeholder => 'nombres y apellidos...' %></small></h2>
-
-								<h2><small><%= f.input:contrasenia , :label => 'Contraseña', :placeholder => 'contraseña...' %></small></h2>
-
-								<label><h2><small>Repetir Contraseña</small></h2></label>
-                <input class="form-control" type="text" value= <%= @contraseniaRepetida %> > </input>
-
-								<h2><small><%= f.input:direccion , :label => 'Dirección', :placeholder => 'dirección...' %></small></h2>
-
-								<h2><small><%= f.input:email , :label => 'Correo Electrónico', :placeholder => 'email...' %></small></h2>
-              	<div class="row">
-        					<div class="col-lg-6">
-                							<label><h2><small>Código Verificador</small></h2></label>
-														  <input class="form-control" type="text" value= <%= @codigoVerificador %> > </input>
-									</div>
-
-									<br></br><br></br>
-        					<div class="col-lg-6">
-															<button type="button" class="btn btn-primary btn-lg">Verificar Correo</button>
-        					</div>
- 								 </div>
-                <div class="field">
-									<h2><small><%= f.label :fechaRegistro %></small></h2>
-									<h2><small><%= f.datetime_select :fechaRegistro %></small></h2>
-								</div>
-								<div class="field">
-									<h2><small><%= f.label :foto %></small></h2>
-									<h2><small><%= f.file_field :foto%></small></h2>
-								</div>
-								<div class="actions">
-									<h2><small><%= f.submit %></small></h2>
-								</div>
-
-
-              </div>
-           </form>
-        </div>
+  <div class="field">
+    <%= f.label :nombreUsuario %><br>
+    <%= f.text_field :nombreUsuario %>
+  </div>
+  <div class="field">
+    <%= f.label :contrasenia %><br>
+    <%= f.text_field :contrasenia %>
+  </div>
+  <div class="field">
+    <%= f.label :apellido_nombre %><br>
+    <%= f.text_field :apellido_nombre %>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :direccion %><br>
+    <%= f.text_field :direccion %>
+  </div>
+  <div class="field">
+    <%= f.label :fechaRegistro %><br>
+    <%= f.datetime_select :fechaRegistro %>
+  </div>
+  <div class="field">
+    <%= f.label :foto %><br>
+    <%= f.file_field :foto%>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
   </div>
 <% end %>

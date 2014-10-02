@@ -49,7 +49,7 @@ gem 'capybara'
 gem 'unicorn'
 gem 'paperclip'
 #gem 'thoughtbot-paperclip'
-gem 'devise', '1.4.7'
+gem 'devise', '~> 3.0.0.rc'
 #gem 'protected_attributes'	
 
 
