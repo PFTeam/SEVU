@@ -13,6 +13,6 @@ class Rol < ActiveRecord::Base
     nombre
   end
 	
-	validates :nombre, :descripcion, :tipo_rol_id, :presence => { message: "(no puede dejarse vacío)" }
+	validates :nombre, :descripcion, :tipo_rol_id, :presence => { message: "No puede dejarse vacío" }
 
 end

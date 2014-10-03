@@ -34,7 +34,6 @@ class RolesController < ApplicationController
         format.html { render :new }
         format.json { render json: @rol.errors, status: :unprocessable_entity }
       end
-    end
   end
 
   # PATCH/PUT /roles/1
