@@ -1,0 +1,46 @@
+<!----->
+<h2>Control de Proyecto</h2>
+<div class="col-lg-12">
+  <div class="table-responsive  col-lg-4">
+    <h3>Proyectos Disponibles</h3>
+    <table class="table table-hover table-striped tablesorter">
+			<thead>
+         <tr>
+           <th class="col-lg-2">Nombre</th>
+					 <th class="col-lg-2">Fecha Inicio </th>
+         </tr>
+       </thead>
+      <tbody>
+				<% Proyecto.all.each do |proyecto| %>
+        <tr>
+          <td><%= proyecto.nombre %></td>
+					<td><%= proyecto.fechaInicio %></td>
+        </tr>
+				<% end %>
+       </tbody>
+     </table>
+   </div>
+   <div class="table-responsive  col-lg-8">
+     <h3>Transacciones</h3>
+     <table class="table table-hover table-striped tablesorter">
+       <thead>
+         <tr>
+           <th class="col-lg-3">Fecha</th>
+					 <th class="col-lg-2">Usuario</th>
+           <th class="col-lg-7">Descripción </th>
+           <th></th>
+         </tr>
+       </thead>
+       <tbody>
+				<% Transaccion.all.each do |transaccion| %>
+       	<tr>
+        	 <td><%= transaccion.fechaTransaccion %></td>
+					 <td><%=  %></td>     <!--Usuario.find(Sesion.find(transaccion.sesion_id)).nombreUsuario    ARREGLAR PROBLEMA CON LA SESION NO GUARDA EL USUARIO (MISMO PROBLEMA CON TIPO_ROL)--->
+        	 <td><%= transaccion.descripcion %></td>
+       	</tr>
+				<% end %>
+     	</tbody>
+   	</table>
+ 	</div>
+</div>
+

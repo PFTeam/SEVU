@@ -142,6 +142,12 @@ Rails.application.routes.draw do
   get 'gestionar_restricciones' => 'restricciones#gestionar_restricciones', :as => 'gestionar_restricciones'
 
   get 'gestionar_habilidades' => 'tipo_habilidades#gestionar_habilidades', :as => 'gestionar_habilidades'
+
+	get 'control_usuario' => 'transacciones#control_usuario', :as => 'control_usuario'
+
+	get 'control_proyecto' => 'transacciones#control_proyecto', :as => 'control_proyecto'
+
+	get 'control_fecha' => 'transacciones#control_fecha', :as => 'control_fecha'
 	
 	root :to => "usuarios#index"
 
