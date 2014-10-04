@@ -148,6 +148,14 @@ Rails.application.routes.draw do
 	get 'control_proyecto' => 'transacciones#control_proyecto', :as => 'control_proyecto'
 
 	get 'control_fecha' => 'transacciones#control_fecha', :as => 'control_fecha'
+
+	get 'reporte_voluntarios' => 'reportes#reporte_voluntarios', :as => 'reporte_voluntarios'
+	
+	get 'reporte_proyectos' => 'reportes#reporte_proyectos', :as => 'reporte_proyectos'
+
+	get 'reporte_regionales' => 'reportes#reporte_regionales', :as => 'reporte_regionales'
+
+	get 'reporte_generado' => 'reportes#reporte_generado', :as => 'reporte_generado'
 	
 	root :to => "usuarios#index"
 
