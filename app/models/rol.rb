@@ -12,5 +12,7 @@ class Rol < ActiveRecord::Base
   def to_s
     nombre
   end
+	
+	validates :nombre, :descripcion, :tipo_rol_id, :presence => { message: "(no puede dejarse vacío)" }
 
 end
