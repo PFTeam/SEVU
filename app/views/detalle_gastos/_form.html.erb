@@ -1,45 +1,87 @@
-<%= form_for(@detalle_gasto) do |f| %>
+<%= simple_form_for([@informe_gastos, @detalle_gasto],
+    wrapper_mappings: {
+    check_boxes: :horizontal_radio_and_checkboxes,
+    radio_buttons: :horizontal_radio_and_checkboxes,
+    file: :horizontal_file_input,
+    boolean: :horizontal_boolean
+  }) do |f| %>
   <% if @detalle_gasto.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@detalle_gasto.errors.count, "error") %> prohibited this detalle_gasto from being saved:</h2>
-
-      <ul>
-      <% @detalle_gasto.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <div class="col-lg-12">
+      <div class="col-lg-4"></div>
+        <div id="error_explanation" class="col-lg-4">
+          <div class="alert alert-danger">
+            <a class="close" data-dismiss="alert">x</a>      
+            <strong><%= pluralize(@detalle_gasto.errors.count, "Error") %> en la creacion del detalle:</strong>
+            <ul>
+              <% @detalle_gasto.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :titulo %><br>
-    <%= f.text_field :titulo %>
+  <div class="row" align="center">
+    <div class="col-lg-3" align="center"></div>
+    <div class="col-lg-6" align="center">
+       <div class="form-inputs">
+         
+         <%= f.input :titulo, :label => 'Título del gasto', :placeholder => 'Título...' %>
+      
+         <br></br>
+         <label> Concepto o Rubro </label>
+         <%= f.collection_select(:concepto_gasto_id, @concepto_gastos, :id, :titulo, {prompt: "Concepto..."}, {class: "form-control"}) %>
+         
+         <br></br>
+         
+         <%= f.input :descripcion, :as => :text, :input_html => {:rows => 6}, :label => 'Breve Descripción', :placeholder => 'Descripción del gasto...'  %>   
+         
+         <br></br>
+         
+         <%= f.input :monto, wrapper: :horizontal_input_group do %>
+           <span class="input-group-addon">$</span>
+           <%= f.input_field :monto, class: "form-control" %>
+         <% end %>      
+         <br></br>
+       </div>
+     </div>
+   </div>
+   
+   <div align="center">
+     <%= f.button :submit, :class => 'btn btn-primary btn-lg center', :value => 'Confirmar' %>
+   </div>
+
+<!--  <div class="field">
+    <%#= f.label :titulo %><br>
+    <%#= f.text_field :titulo %>
   </div>
   <div class="field">
-    <%= f.label :descripcion %><br>
-    <%= f.text_area :descripcion %>
+    <%#= f.label :descripcion %><br>
+    <%#= f.text_area :descripcion %>
   </div>
   <div class="field">
-    <%= f.label :monto %><br>
-    <%= f.text_field :monto %>
+    <%#= f.label :monto %><br>
+    <%#= f.text_field :monto %>
   </div>
   <div class="field">
-    <%= f.label :concepto_gasto_id %><br>
-    <%= f.text_field :concepto_gasto_id %>
+    <%#= f.label :concepto_gasto_id %><br>
+    <%#= f.text_field :concepto_gasto_id %>
   </div>
   <div class="field">
-    <%= f.label :informe_gastos_id %><br>
-    <%= f.text_field :informe_gastos_id %>
+    <%#= f.label :informe_gastos_id %><br>
+    <%#= f.text_field :informe_gastos_id %>
   </div>
   <div class="field">
-    <%= f.label :voluntario_id %><br>
-    <%= f.text_field :voluntario_id %>
+    <%#= f.label :voluntario_id %><br>
+    <%#= f.text_field :voluntario_id %>
   </div>
   <div class="field">
-    <%= f.label :comprobante_id %><br>
-    <%= f.text_field :comprobante_id %>
+    <%#= f.label :comprobante_id %><br>
+    <%#= f.text_field :comprobante_id %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%#= f.submit %>
   </div>
 <% end %>

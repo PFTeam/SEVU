@@ -65,25 +65,27 @@ class PresupuestosController < ApplicationController
     @presupuesto = Presupuesto.find(params[:id])
     @detalles_presupuesto = DetallePresupuesto.where(presupuesto_id: params[:id]).order(:monto).reverse_order
     @presupuesto.montoTotal = @detalles_presupuesto.sum(:monto)
-    
-    ConceptoGasto.all.each do |concept|                   #
-      flag = 0                                            #
-      @detalles_presupuesto.each do |det|                 #
-        if det.concepto_gasto == concept then             #
-          @conceptos = @conceptos.to_a.push concept       #  
-          flag = 1                                        #
-        end                                               #
-      end                                                 # Esto es para traer los conceptos que son usados solamente
-      if flag == 0 then                                   #
-        @conceptos_no_usados = @conceptos_no_usados.to_a.push concept
-      end                                                 #
-     end                                                  #
-    if !@conceptos.nil? then                              #el metodo uniq solo deja las instancias unicas, saca las
-      @conceptos = @conceptos.uniq                        #repetidas dentro del arreglo
-    end                                                   #
-    if !@conceptos_no_usados.nil? then                    #
-      @conceptos_no_usados = @conceptos_no_usados.uniq    #
-    end                                                   #
+    @conceptos = @presupuesto.concepto_gastos
+    @conceptos_no_usados = ConceptoGasto.all - @conceptos
+
+    #ConceptoGasto.all.each do |concept|                   #
+    #  flag = 0                                            #
+    #  @detalles_presupuesto.each do |det|                 #
+    #    if det.concepto_gasto == concept then             #
+    #      @conceptos = @conceptos.to_a.push concept       #  
+    #      flag = 1                                        #
+    #    end                                               #
+    #  end                                                 # Esto es para traer los conceptos que son usados solamente
+    #  if flag == 0 then                                   #
+    #    @conceptos_no_usados = @conceptos_no_usados.to_a.push concept
+    #  end                                                 #
+    # end                                                  #
+    #if !@conceptos.nil? then                              #el metodo uniq solo deja las instancias unicas, saca las
+    #  @conceptos = @conceptos.uniq                        #repetidas dentro del arreglo
+    #end                                                   #
+    #if !@conceptos_no_usados.nil? then                    #
+    #  @conceptos_no_usados = @conceptos_no_usados.uniq    #
+    #end                                                   #
 
     #@conceptos = ConceptoGasto.all                 # Esto era para buscar todos los conceptos
   end
