@@ -1,4 +1,4 @@
-<h1>Gestionar Informe de gastos <small>Administración del Informe de gastos del Proyecto</small></h1>
+<h1>Gestionar Informe de gastos <small>Administración de los gastos del proyecto</small></h1>
 <ol class="breadcrumb">
   <li><i class="icon-dashboard"></i> Gestionar Informe de gastos</li>
   <li class="active"><i class="icon-file-alt"></i> Informe de gastos</li>
@@ -43,7 +43,7 @@
     <br></br>
     <div id="my-tab-content" class="tab-content">
       <div class="tab-pane" id="paneles">
-        <% @informe_gasto.concepto_gastos.each do |concepto|%>
+        <% @informe_gasto.concepto_gastos.uniq.each do |concepto|%>
           <div class="col-lg-12">
             <div class="panel panel-primary">
               <div class="panel-heading">
@@ -52,7 +52,7 @@
               <div class="panel-body">
                 <div class="row">
                   <% sumatoria = 0 %>
-                  <% @informe_gasto.detalles_gastos.each_with_index do |detalle, index|%>
+                  <% @informe_gasto.detalle_gastos.uniq.each_with_index do |detalle, index|%>
                     <% if detalle.concepto_gasto_id == concepto.id then %>
                     <div class="col-lg-6">
                       <div class="panel panel-default">
@@ -89,7 +89,7 @@
       <div class="tab-pane active" id="lista">
         <div class="col-lg-1"></div>
         <div class="col-lg-10">
-          <% @informe_gasto.concepto_gastos.each do |concepto|%>
+          <% @informe_gasto.concepto_gastos.uniq.each do |concepto|%>
             <h3><%= concepto.titulo %></h3>
           <div class="table-responsive">
             <table class="table table-hover table-striped">
@@ -100,7 +100,7 @@
               </thead>
               <tbody>
                   <% sumatoria = 0 %>
-                  <% @informe_gasto.detalles_gastos.each_with_index do |detalle, index|%>
+                  <% @informe_gasto.detalle_gastos.uniq.each_with_index do |detalle, index|%>
                     <% if detalle.concepto_gasto_id == concepto.id then %>
                       <tr>
                         <td><%= detalle.titulo %></td>                          <!--<td> <%#=', :class => "fa fa-trash-o" do %>
@@ -110,7 +110,7 @@
                         <td>$ <%= number_with_precision(detalle.monto, :precision => 2) %></td>
                         <% sumatoria += detalle.monto %>
                         <td>
-                          <%= link_to '(Editar)',  edit_detalle_presupuesto_path(detalle) %> 
+                          <%= link_to '(Editar)',  edit_detalle_gasto_path(detalle) %> 
                           <%= link_to '(X)', [@informe_gasto, detalle], method: :delete, data: { confirm: 'Esta seguro?' }%>
                         </td>
                     <% end %>
@@ -128,8 +128,10 @@
           </div>
         </div>
       </div>
-      </div>
-      <div class="col-lg-12">
+    </div>
+    <div class="col-lg-12">
+      <div class="col-lg-3"></div>
+      <div class="col-lg-6">
         <% if !@conceptos_no_usados.nil? then %>
           <div class="panel panel-info">
             <div class="panel-heading">
@@ -142,7 +144,9 @@
         </div>
       </div>
     <% end %>
-  
+  </div>
+</div>
+<br></br>
     <div class="form-group input-group">
       <span class="input-group-addon">
           Monto total acumulado  $

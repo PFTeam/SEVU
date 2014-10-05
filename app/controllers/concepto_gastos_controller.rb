@@ -28,8 +28,8 @@ class ConceptoGastosController < ApplicationController
 
     respond_to do |format|
       if @concepto_gasto.save
-        format.html { redirect_to @concepto_gasto, notice: 'Concepto gasto was successfully created.' }
-        format.json { render :show, status: :created, location: @concepto_gasto }
+        format.html { redirect_to gestionar_concepto_gastos_path }#  @concepto_gasto, notice: 'Concepto gasto was successfully created.' }
+        #format.json { render :show, status: :created, location: @concepto_gasto }
       else
         format.html { render :new }
         format.json { render json: @concepto_gasto.errors, status: :unprocessable_entity }
@@ -42,8 +42,8 @@ class ConceptoGastosController < ApplicationController
   def update
     respond_to do |format|
       if @concepto_gasto.update(concepto_gasto_params)
-        format.html { redirect_to @concepto_gasto, notice: 'Concepto gasto was successfully updated.' }
-        format.json { render :show, status: :ok, location: @concepto_gasto }
+        format.html { redirect_to gestionar_concepto_gastos_path }# @concepto_gasto, notice: 'Concepto gasto was successfully updated.' }
+        #format.json { render :show, status: :ok, location: @concepto_gasto }
       else
         format.html { render :edit }
         format.json { render json: @concepto_gasto.errors, status: :unprocessable_entity }
@@ -56,10 +56,15 @@ class ConceptoGastosController < ApplicationController
   def destroy
     @concepto_gasto.destroy
     respond_to do |format|
-      format.html { redirect_to concepto_gastos_url, notice: 'Concepto gasto was successfully destroyed.' }
+      format.html { redirect_to gestionar_concepto_gastos_path }# concepto_gastos_url, notice: 'Concepto gasto was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
+
+    def gestionar_concepto_gastos
+      @conceptos = ConceptoGasto.all
+    end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

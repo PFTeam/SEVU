@@ -64,12 +64,12 @@ class InformeGastosController < ApplicationController
   def gestionar_informe_gastos
     #@detalles_gasto = DetalleGasto.where(informe_gasto_id: params[:id]).order(:monto).reverse_order
     #@detalles_gasto = @informe_gasto.detalle_gastos
-    #if @informe_gasto.detalle_gastos.nil? then
+    if @informe_gasto.detalle_gastos.nil? then
       @informe_gasto.montoTotal = 0
-    #else
-      #@informe_gasto.montoTotal = @informe_gasto.detalle_gastos.sum(:monto)
-    #end
-    @conceptos_no_usados = ConceptoGasto.all# - @informe_gasto.concepto_gastos
+    else
+      @informe_gasto.montoTotal = @informe_gasto.detalle_gastos.sum(:monto)
+    end
+    @conceptos_no_usados = ConceptoGasto.all - @informe_gasto.concepto_gastos
 
   end
 

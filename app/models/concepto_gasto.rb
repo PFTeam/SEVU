@@ -7,8 +7,12 @@ class ConceptoGasto < ActiveRecord::Base
   has_many :detalle_gastos
   has_many :informe_gastos, :through => :detalle_gastos
 
+
+  validates_presence_of :titulo, :descripcion, message: "- es un campo obligatorio"
+
+
   validates :titulo,
-      :presence => true,
+      #:presence => true,
       :length => {
         :maximum => 255,
         :message => "tiene demasiados caracteres (maximo 255)"},
@@ -18,8 +22,10 @@ class ConceptoGasto < ActiveRecord::Base
         :message => "No pueden existir dos Conceptos con el mismo titulo",
         :case_sensitive => false}
 
-  validates :descripcion,
-      :presence => true,
-      :allow_blank => false
+  #validates :descripcion,
+      #:presence => true,
+      #:allow_blank => false
+
+  #validates_presence_of :titulo, :descripcion, message: "- es un campo obligatorio"
 
 end

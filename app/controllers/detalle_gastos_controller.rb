@@ -38,7 +38,7 @@ class DetalleGastosController < ApplicationController
 
     respond_to do |format|
       if @detalle_gasto.save
-        format.html { redirect_to gestionar_informe_gastos_path(@informe_gastos)} #@detalle_gasto, notice: 'Detalle gasto was successfully created.' }
+        format.html { redirect_to gestionar_informe_gastos_path(@detalle_gasto.informe_gasto)} #@detalle_gasto, notice: 'Detalle gasto was successfully created.' }
         #format.json { render :show, status: :created, location: @detalle_gasto }
       else
         format.html { render :new }
@@ -52,7 +52,7 @@ class DetalleGastosController < ApplicationController
   def update
     respond_to do |format|
       if @detalle_gasto.update(detalle_gasto_params)
-        format.html { redirect_to redirect_to gestionar_informe_gastos_path(@informe_gastos)} #@detalle_gasto, notice: 'Detalle gasto was successfully updated.' }
+        format.html { redirect_to gestionar_informe_gastos_path(@detalle_gasto.informe_gasto)} #@detalle_gasto, notice: 'Detalle gasto was successfully updated.' }
         #format.json { render :show, status: :ok, location: @detalle_gasto }
       else
         format.html { render :edit }
@@ -66,7 +66,7 @@ class DetalleGastosController < ApplicationController
   def destroy
     @detalle_gasto.destroy
     respond_to do |format|
-      format.html { redirect_to redirect_to gestionar_informe_gastos_path(@informe_gastos)} #detalle_gastos_url, notice: 'Detalle gasto was successfully destroyed.' }
+      format.html { redirect_to gestionar_informe_gastos_path(@informe_gastos)} #detalle_gastos_url, notice: 'Detalle gasto was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -82,7 +82,7 @@ class DetalleGastosController < ApplicationController
     end
 
     def set_informe_gasto
-      @informe_gastos = InformeGasto.find params[:informe_gastos_id]
+      @informe_gastos = InformeGasto.find params[:informe_gasto_id]
     end
 
 

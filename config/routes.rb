@@ -151,6 +151,7 @@ Rails.application.routes.draw do
 	
 	root :to => "usuarios#index"
 
+  get 'gestionar_concepto_gastos' => 'concepto_gastos#gestionar_concepto_gastos', :as => 'gestionar_concepto_gastos'
   #get 'gestionarPresupuesto', :controller => :presupuestos
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
