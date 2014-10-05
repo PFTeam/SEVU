@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+#<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20141005002055) do
+#======= MERGE MANUAL POR CONFLICTO DE VERSIONES ENTRE COMMITS DE DIEGO E IVO
+#ActiveRecord::Schema.define(version: 20141005092425) do
+#>>>>>>> 5f6ba8937bbc7b083c74a58853ba75b534e0c4a1
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -542,9 +546,7 @@ ActiveRecord::Schema.define(version: 20141005002055) do
 
   create_table "usuarios", force: true do |t|
     t.string   "nombreUsuario"
-    t.string   "contrasenia"
     t.string   "apellido_nombre"
-    t.string   "email"
     t.string   "direccion"
     t.datetime "fechaRegistro"
     t.datetime "created_at"
@@ -557,6 +559,19 @@ ActiveRecord::Schema.define(version: 20141005002055) do
     t.string   "foto_content_type"
     t.integer  "foto_file_size"
     t.datetime "foto_updated_at"
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
   end
+
+  add_index "usuarios", ["email"], name: "index_usuarios_on_email", unique: true, using: :btree
+  add_index "usuarios", ["reset_password_token"], name: "index_usuarios_on_reset_password_token", unique: true, using: :btree
 
 end

@@ -159,6 +159,7 @@
                <% when 'postulaciones' %><%= render '/shared/menu_proyecto' %>
 				 <% when 'transacciones' %><%= render '/shared/menu_transacciones' %>
 				 <% when 'roles' %><%= render '/shared/menu_roles' %>
+				  <% when 'reportes' %><%= render '/shared/menu_reportes' %>
 				 
 
           <% end %>
@@ -177,7 +178,8 @@
       </nav>
       <div id="page-wrapper">
 
-
+				<p class="notice"><%= notice %></p> <!--PARA DEVISE--->
+       <p class="alert"><%= alert %></p> <!--PARA DEVISE--->
           <%= yield %>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          <!---------------------------------------------
           <!---------- FIN INICIO MARCO CENTRAL   -------------------
