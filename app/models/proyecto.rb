@@ -12,7 +12,7 @@ class Proyecto < ActiveRecord::Base
   has_many :historial_estado_proyectos
   has_many :estado_proyectos , :through => :historial_estado_proyectos
 
-  has_many :informe_gastos
+  has_one :informe_gasto
   has_many :transacciones
   has_many :postulaciones
   has_many :actividades

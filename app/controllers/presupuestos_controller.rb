@@ -63,12 +63,13 @@ class PresupuestosController < ApplicationController
   end
 
   def gestionar_presupuesto
+  
     @presupuesto = Presupuesto.find(params[:id])
     @detalles_presupuesto = DetallePresupuesto.where(presupuesto_id: params[:id]).order(:monto).reverse_order
     @presupuesto.montoTotal = @detalles_presupuesto.sum(:monto)
     @conceptos = @presupuesto.concepto_gastos
     @conceptos_no_usados = ConceptoGasto.all - @conceptos
-
+    @proyecto = @presupuesto.proyecto
     #ConceptoGasto.all.each do |concept|                   #
     #  flag = 0                                            #
     #  @detalles_presupuesto.each do |det|                 #

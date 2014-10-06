@@ -28,11 +28,13 @@ class InformeGastosController < ApplicationController
 
     respond_to do |format|
       if @informe_gasto.save
-        format.html { redirect_to @informe_gasto, notice: 'Informe gasto was successfully created.' }
-        format.json { render :show, status: :created, location: @informe_gasto }
+        format.html { redirect_to gestionar_informe_gastos_path(@informe_gasto) }
+        #format.html { redirect_to @informe_gasto, notice: 'Informe gasto was successfully created.' }
+        #format.json { render :show, status: :created, location: @informe_gasto }
       else
-        format.html { render :new }
-        format.json { render json: @informe_gasto.errors, status: :unprocessable_entity }
+        format.html { render :back }
+        #format.html { render :new }
+        #format.json { render json: @informe_gasto.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -42,11 +44,13 @@ class InformeGastosController < ApplicationController
   def update
     respond_to do |format|
       if @informe_gasto.update(informe_gasto_params)
-        format.html { redirect_to @informe_gasto, notice: 'Informe gasto was successfully updated.' }
-        format.json { render :show, status: :ok, location: @informe_gasto }
+        format.html { redirect_to gestionar_informe_gastos_path(@informe_gasto) }
+        #format.html { redirect_to @informe_gasto, notice: 'Informe gasto was successfully updated.' }
+        #format.json { render :show, status: :ok, location: @informe_gasto }
       else
-        format.html { render :edit }
-        format.json { render json: @informe_gasto.errors, status: :unprocessable_entity }
+         format.html { render :back }
+       #format.html { render :edit }
+        #format.json { render json: @informe_gasto.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -64,6 +68,7 @@ class InformeGastosController < ApplicationController
   def gestionar_informe_gastos
     #@detalles_gasto = DetalleGasto.where(informe_gasto_id: params[:id]).order(:monto).reverse_order
     #@detalles_gasto = @informe_gasto.detalle_gastos
+    @proyecto = @informe_gasto.proyecto
     if @informe_gasto.detalle_gastos.nil? then
       @informe_gasto.montoTotal = 0
     else
@@ -81,6 +86,6 @@ class InformeGastosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def informe_gasto_params
-      params.require(:informe_gasto).permit(:montoTotal, :proyecto_id)
+      params.permit(:montoTotal, :proyecto_id)
     end
 end
