@@ -47,6 +47,9 @@ class AsignacionRolesController < ApplicationController
   def update
     @asignacion_rol_viejo = AsignacionRol.find(@asignacion_rol.id)
     @asignacion_rol_viejo.esActual=false
+    @asignacion_rol_new = AsignacionRol.new
+    @asignacion_rol_new.proyecto = @asignacion_rol_viejo.proyecto
+    @asignacion_rol_new.rol_id = params[:asignacion_rol][:rol_id]
     @asignacion_rol_new.esActual=true
     @asignacion_rol_new.usuario=@asignacion_rol.usuario
     @asignacion_rol_new.save
