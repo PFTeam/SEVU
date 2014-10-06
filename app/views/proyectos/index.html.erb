@@ -1,5 +1,4 @@
-<h1>Listing proyectos</h1>
-<p id="notice"><%= notice %></p>
+<h1>Lista de Proyectos</h1>
 <div class="row">
           <div class="col-lg-12">
           <% @proyectos.each do |proyecto| %>
@@ -30,7 +29,7 @@
                 <label>Director del Proyecto</label>
                 <p> <!-- #TODO: Agregar validación de un solo director -->
 
-		<% if !proyecto.director.apellido_nombre.to_s.blank? %>
+		<% if !proyecto.director.blank? %>
                     <i class="fa fa-user"></i><%= link_to proyecto.director.apellido_nombre.to_s, usuario_path(proyecto.director) %> 
 		<% else %>
 			No se ha asignado un Director
@@ -49,7 +48,7 @@
                 <div class="btn-group btn-group-justified">
  
 			<p>        
-				<%= button_to "Participar",  {:controller => :postulaciones, :action => 'create', :postulacion => { :usuario_id => Usuario.find(1).id, :proyecto_id => proyecto.id }}, :method => :new %>
+				<%= button_to "Participar",  {:controller => :postulaciones, :action => 'create', :postulacion => { :usuario_id => Usuario.find_by(nombreUsuario: "SEVU").id, :proyecto_id => proyecto.id }}, :method => :new %>
 		<!-- REEMPLAZAR POR EL USUARIO ACTUAL DE LA SESION 	-->
 
 		

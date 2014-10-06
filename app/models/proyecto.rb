@@ -51,7 +51,8 @@ class Proyecto < ActiveRecord::Base
   end
 
   def self.participando usu
-    Proyecto.joins(:asignacion_roles).where('asignacion_roles.usuario_id' => usu)
+	  Proyecto.joins(:asignacion_roles).where('asignacion_roles.usuario_id' => usu).uniq
+    #CONTROLAR QUE NO SE REPITAN!
   end
 
   def director

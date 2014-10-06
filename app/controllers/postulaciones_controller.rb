@@ -31,7 +31,8 @@ class PostulacionesController < ApplicationController
 
     respond_to do |format|
       if @postulacion.save
-	format.html {redirect_to :controller => 'proyectos', :action => 'index', notice: 'Se ha registrado tu participación'  } 
+	format.html {redirect_to :controller => 'proyectos', :action => 'index'
+	      flash[:notice] = 'Se ha registrado tu participación'  } 
         format.json { render :show, status: :created, location: @postulacion }
       else
         format.html { render :new }
