@@ -157,7 +157,7 @@ Rails.application.routes.draw do
 
 	get 'reporte_generado' => 'reportes#reporte_generado', :as => 'reporte_generado'
 	
-	root :to => "usuarios#index"
+	root :to => "necesidades#index"
 
   #get 'gestionarPresupuesto', :controller => :presupuestos
   # The priority is based upon order of creation: first created -> highest priority.

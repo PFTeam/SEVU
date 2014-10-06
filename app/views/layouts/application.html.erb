@@ -131,7 +131,7 @@
                               <li><a href="#"><i class="fa fa-user"></i> Perfil</a></li>
                               <li><a href="#"><i class="fa fa-gear"></i> Configuraciones</a></li>
                               <li class="divider"></li>
-                              <li><a href="#"><i class="fa fa-power-off"></i> Desconectarse</a></li>
+                              <li><a href="#"><i class="fa fa-power-off"></i> <%= link_to 'Desconectarse', destroy_usuario_session_path, method: :delete  %></a></li>
                              </ul>
                          </li>
                       </ul>
@@ -178,8 +178,8 @@
       </nav>
       <div id="page-wrapper">
 
-				<p class="notice"><%= notice %></p> <!--PARA DEVISE--->
-       <p class="alert"><%= alert %></p> <!--PARA DEVISE--->
+			 <p class="notice"><%= notice %></p><!--PARA DEVISE--->
+       <font color="red"><p class="alert"><%= alert %></p></font> <!--PARA DEVISE--->
           <%= yield %>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          <!---------------------------------------------
           <!---------- FIN INICIO MARCO CENTRAL   -------------------

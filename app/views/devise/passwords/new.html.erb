@@ -17,5 +17,3 @@
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
   <%= link_to "Registrarme", new_registration_path(resource_name) %><br />
 <% end -%>
-
-<%= render "devise/shared/links" %>

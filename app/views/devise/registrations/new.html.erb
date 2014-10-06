@@ -11,11 +11,9 @@
 <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
   <% if @usuario.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@usuario.errors.count, "error") %> prohibited this usuario from being saved:</h2>
-
-      <ul>
+	      <ul>
       <% @usuario.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+        <font color="red"><li><%= message %></li></font>
       <% end %>
       </ul>
     </div>
@@ -44,8 +42,6 @@
 				<%= f.file_field :foto%>
 			</div>
 			<br></br>
-			<!--<%= f.datetime_select :fechaRegistro,  disabled:true%>-->
-		  <!--<%= f.input :remember_me, :as => :boolean if devise_mapping.rememberable? %>-->
 		</div>
 		<div class="col-lg-12">
 			<div class="col-lg-6">
@@ -54,16 +50,9 @@
 					<br></br>
 				</div>
 			</div>
-			<div class="col-lg-6">
-				<!--<label>Fecha de Registro: </label>
-				<%= fechaRegistro=Time.new %>-->
-				
-			</div>
-		</div>
-		
+		</div>	
 	</div>
 	
 <% end %>
-<!--<%= render "devise/shared/links" %>--->
 
 
