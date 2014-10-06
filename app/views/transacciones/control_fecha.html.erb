@@ -21,9 +21,10 @@
      </thead>
      <tbody>
 			 <% Transaccion.all.each do |transaccion| %>
+       <!--  if created_at between fecha_inicio and fecha_fin %> -->
        <tr>
        	 <td><%= transaccion.fechaTransaccion %></td>
-				 <td><%= 'user' %></td>     <!--Usuario.find(Sesion.find(transaccion.FECHAS???)).nombreUsuario    ARREGLAR PROBLEMA CON LA SESION NO GUARDA EL USUARIO (MISMO PROBLEMA CON TIPO_ROL)--->
+				 <td><!-- Usuario.find(Sesion.find(transaccion.sesion_id).usuario_id).nombreUsuario --></td>    
          <td><%= transaccion.descripcion %></td>
        </tr>
 			 <% end %>
