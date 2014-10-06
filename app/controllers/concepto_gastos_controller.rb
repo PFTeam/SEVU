@@ -28,8 +28,8 @@ class ConceptoGastosController < ApplicationController
 
     respond_to do |format|
       if @concepto_gasto.save
-        format.html { redirect_to @concepto_gasto, notice: 'Concepto gasto was successfully created.' }
-        format.json { render :show, status: :created, location: @concepto_gasto }
+        format.html { redirect_to gestionar_concepto_gastos_path }#  @concepto_gasto, notice: 'Concepto gasto was successfully created.' }
+        #format.json { render :show, status: :created, location: @concepto_gasto }
       else
         format.html { render :new }
         format.json { render json: @concepto_gasto.errors, status: :unprocessable_entity }
@@ -42,8 +42,8 @@ class ConceptoGastosController < ApplicationController
   def update
     respond_to do |format|
       if @concepto_gasto.update(concepto_gasto_params)
-        format.html { redirect_to @concepto_gasto, notice: 'Concepto gasto was successfully updated.' }
-        format.json { render :show, status: :ok, location: @concepto_gasto }
+        format.html { redirect_to gestionar_concepto_gastos_path }# @concepto_gasto, notice: 'Concepto gasto was successfully updated.' }
+        #format.json { render :show, status: :ok, location: @concepto_gasto }
       else
         format.html { render :edit }
         format.json { render json: @concepto_gasto.errors, status: :unprocessable_entity }
@@ -54,12 +54,21 @@ class ConceptoGastosController < ApplicationController
   # DELETE /concepto_gastos/1
   # DELETE /concepto_gastos/1.json
   def destroy
-    @concepto_gasto.destroy
+    #@concepto_gasto.destroy
     respond_to do |format|
-      format.html { redirect_to concepto_gastos_url, notice: 'Concepto gasto was successfully destroyed.' }
+      if @concepto_gasto.destroy
+      format.html { redirect_to gestionar_concepto_gastos_path }# concepto_gastos_url, notice: 'Concepto gasto was successfully destroyed.' }
       format.json { head :no_content }
+      else
+       format.html { redirect_to :back, alert: 'El concepto de gasto no puede ser eliminado porque es actualmente utilizado'} 
+      end
     end
   end
+
+    def gestionar_concepto_gastos
+      @conceptos = ConceptoGasto.all
+    end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -123,7 +123,7 @@ ActiveRecord::Schema.define(version: 20141005092425) do
     t.text     "descripcion"
     t.float    "monto"
     t.integer  "concepto_gasto_id"
-    t.integer  "informe_gastos_id"
+    t.integer  "informe_gasto_id"
     t.integer  "voluntario_id"
     t.integer  "comprobante_id"
     t.datetime "created_at"
@@ -132,7 +132,7 @@ ActiveRecord::Schema.define(version: 20141005092425) do
 
   add_index "detalle_gastos", ["comprobante_id"], name: "index_detalle_gastos_on_comprobante_id", using: :btree
   add_index "detalle_gastos", ["concepto_gasto_id"], name: "index_detalle_gastos_on_concepto_gasto_id", using: :btree
-  add_index "detalle_gastos", ["informe_gastos_id"], name: "index_detalle_gastos_on_informe_gastos_id", using: :btree
+  add_index "detalle_gastos", ["informe_gasto_id"], name: "index_detalle_gastos_on_informe_gasto_id", using: :btree
   add_index "detalle_gastos", ["voluntario_id"], name: "index_detalle_gastos_on_voluntario_id", using: :btree
 
   create_table "detalle_presupuestos", force: true do |t|

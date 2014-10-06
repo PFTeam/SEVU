@@ -138,7 +138,7 @@ Rails.application.routes.draw do
 
   get 'crear_organizacion_externa', :controller => :proyectos
   get 'gestionar_presupuesto/:id' => 'presupuestos#gestionar_presupuesto', :as => 'gestionar_presupuesto'
-
+  get 'gestionar_informe_gastos/:id' => 'informe_gastos#gestionar_informe_gastos', :as => 'gestionar_informe_gastos'
   get 'gestionar_restricciones' => 'restricciones#gestionar_restricciones', :as => 'gestionar_restricciones'
 
   get 'gestionar_habilidades' => 'tipo_habilidades#gestionar_habilidades', :as => 'gestionar_habilidades'
@@ -159,6 +159,13 @@ Rails.application.routes.draw do
 	
 	root :to => "necesidades#index"
 
+  get 'gestionar_concepto_gastos' => 'concepto_gastos#gestionar_concepto_gastos', :as => 'gestionar_concepto_gastos'
+
+  get 'evaluar_presupuestos_pendientes' => 'presupuestos#evaluar_presupuestos_pendientes', :as => 'evaluar_presupuestos_pendientes'
+
+  get 'gestionar_estados_presupuestos' => 'estado_presupuestos#gestionar_estados_presupuestos', :as => 'gestionar_estados_presupuestos'
+
+  get 'evaluar_presupuesto/:id' => 'presupuestos#evaluar_presupuesto', :as => 'evaluar_presupuesto'
   #get 'gestionarPresupuesto', :controller => :presupuestos
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -1,5 +1,5 @@
 class InformeGastosController < ApplicationController
-  before_action :set_informe_gasto, only: [:show, :edit, :update, :destroy]
+  before_action :set_informe_gasto, only: [:show, :edit, :update, :destroy, :gestionar_informe_gastos]
 
   # GET /informe_gastos
   # GET /informe_gastos.json
@@ -59,6 +59,18 @@ class InformeGastosController < ApplicationController
       format.html { redirect_to informe_gastos_url, notice: 'Informe gasto was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+  
+  def gestionar_informe_gastos
+    #@detalles_gasto = DetalleGasto.where(informe_gasto_id: params[:id]).order(:monto).reverse_order
+    #@detalles_gasto = @informe_gasto.detalle_gastos
+    if @informe_gasto.detalle_gastos.nil? then
+      @informe_gasto.montoTotal = 0
+    else
+      @informe_gasto.montoTotal = @informe_gasto.detalle_gastos.sum(:monto)
+    end
+    @conceptos_no_usados = ConceptoGasto.all - @informe_gasto.concepto_gastos
+
   end
 
   private

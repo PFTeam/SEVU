@@ -1,25 +1,49 @@
-<%= form_for(@concepto_gasto) do |f| %>
-  <% if @concepto_gasto.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@concepto_gasto.errors.count, "error") %> prohibited this concepto_gasto from being saved:</h2>
-
-      <ul>
-      <% @concepto_gasto.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<%= simple_form_for(@concepto_gasto,
+    wrapper_mappings: {
+    check_boxes: :horizontal_radio_and_checkboxes,
+    radio_buttons: :horizontal_radio_and_checkboxes,
+    file: :horizontal_file_input,
+    boolean: :horizontal_boolean
+  }) do |f| %>
+  <% if  @concepto_gasto.errors.any? %>
+    <div class="col-lg-12">
+      <div class="col-lg-3"></div>
+        <div id="error_explanation" class="col-lg-6">
+          <div class="alert alert-danger">
+            <a class="close" data-dismiss="alert">x</a>
+            <strong><%= pluralize(@concepto_gasto.errors.count, "Error") %> en la creacion del Concepto:</strong>
+            <ul>
+              <% @concepto_gasto.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :titulo %><br>
-    <%= f.text_field :titulo %>
+  <div class="row" align="center">
+    <div class="col-lg-3" align="center"></div>
+    <div class="col-lg-6" align="center">
+      <div class="form-inputs">
+        <%= f.input :titulo, :label => 'Título del concepto', :placeholder => 'Título...' %>
+         <br></br>
+         
+         <%= f.input :descripcion,:as => :text, :input_html => {:rows => 6}, :label => 'Breve Descripción', :placeholder => 'Descripción del concepto...'  %>   
+         
+         <br></br>
+   <div align="center">
+     <%= f.button :submit, :class => 'btn btn-primary btn-lg center', :value => 'Confirmar' %>
+   </div>
+ <!-- <div class="field">
+    <%#= f.label :titulo %><br>
+    <%#= f.text_field :titulo %>
   </div>
   <div class="field">
-    <%= f.label :descripcion %><br>
-    <%= f.text_area :descripcion %>
+    <%#= f.label :descripcion %><br>
+    <%#= f.text_area :descripcion %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%#= f.submit %>
   </div>
 <% end %>

@@ -149,17 +149,23 @@
 
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <% case controller_name 
-               when 'proyectos'%><%= render '/shared/menu_proyecto' %>
-               <% when 'asignacion_roles' %><%= render '/shared/menu_proyecto' %>
-               <% when 'necesidades' %><%= render '/shared/menu_necesidad' %>
-	       <% when 'organizacion_externas' %><%= render '/shared/menu_organizacion_externa' %>
-	       <% when 'objetivo_generales' %><%= render '/shared/menu_objetivos' %>
-	       <% when 'objetivo_especificos' %><%= render '/shared/menu_objetivos' %>
-	       <% when 'actividades' %><%= render '/shared/menu_objetivos' %>
-               <% when 'postulaciones' %><%= render '/shared/menu_proyecto' %>
-				 <% when 'transacciones' %><%= render '/shared/menu_transacciones' %>
-				 <% when 'roles' %><%= render '/shared/menu_roles' %>
-				  <% when 'reportes' %><%= render '/shared/menu_reportes' %>
+            when 'proyectos'%><%= render '/shared/menu_proyecto' %>
+            <% when 'asignacion_roles' %><%= render '/shared/menu_proyecto' %>
+            <% when 'necesidades' %><%= render '/shared/menu_necesidad' %>
+	    <% when 'organizacion_externas' %><%= render '/shared/menu_organizacion_externa' %>
+	    <% when 'objetivo_generales' %><%= render '/shared/menu_objetivos' %>
+	    <% when 'objetivo_especificos' %><%= render '/shared/menu_objetivos' %>
+	    <% when 'actividades' %><%= render '/shared/menu_objetivos' %>
+            <% when 'postulaciones' %><%= render '/shared/menu_proyecto' %>
+	    <% when 'transacciones' %><%= render '/shared/menu_transacciones' %>
+	    <% when 'roles' %><%= render '/shared/menu_roles' %>
+            <% when 'reportes' %><%= render '/shared/menu_reportes' %>
+            <% when 'concepto_gastos'%><%= render '/shared/menu_concepto_gasto' %>
+            <% when 'tipo_habilidades' %><%= render '/shared/menu_tipo_habilidad' %>
+            <% when 'habilidades' %><%= render '/shared/menu_habilidad' %>
+            <% when 'restricciones' %><%= render '/shared/menu_restriccion' %>
+            <% when 'detalle_restricciones' %><%= render '/shared/menu_detalle_restriccion' %>
+            <% when 'estado_presupuestos' %><%= render '/shared/menu_estado_presupuestos' %>
 				 
 
           <% end %>
