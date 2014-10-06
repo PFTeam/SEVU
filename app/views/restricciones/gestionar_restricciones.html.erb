@@ -6,7 +6,7 @@
 
 <div class="row">
   <div class="col-lg-12">
-    <% if @restricciones.nil? then %>
+    <% if @restricciones.empty? then %>
       <h4> No existen actualmente restricciones </h4>
     <% else %>   
       <% @restricciones.each do |restriccion|%>
