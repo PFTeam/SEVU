@@ -28,11 +28,12 @@ class PresupuestosController < ApplicationController
 
     respond_to do |format|
       if @presupuesto.save
-        format.html { redirect_to @presupuesto, notice: 'El Presupuesto fue creado exitosamente.' }
-        format.json { render :show, status: :created, location: @presupuesto }
+        format.html { redirect_to gestionar_presupuesto_path(@presupuesto) }#, notice: 'El Presupuesto fue creado exitosamente.' }
+        #format.json { render :show, status: :created, location: @presupuesto }
       else
-        format.html { render :new }
-        format.json { render json: @presupuesto.errors, status: :unprocessable_entity }
+        format.html { redirect_to proyectos_mis_proyectos_path }
+                      #render :new }
+        #format.json { render json: @presupuesto.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -90,6 +91,13 @@ class PresupuestosController < ApplicationController
     #@conceptos = ConceptoGasto.all                 # Esto era para buscar todos los conceptos
   end
 
+  def evaluar_presupuestos_pendientes
+    @presupuestos = Presupuesto.all.select { |m| m.aprobado == false }
+  end
+
+  def evaluar_presupuesto
+    @presupuesto = Presupuesto.find params[:id]
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
