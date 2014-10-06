@@ -3,88 +3,118 @@ namespace :db do
   task :populate => :environment do
     require "populator" 
     require 'faker'
+    password = "password"
     
     [Actividad, AsignacionActividad,AsignacionFuncion, AsignacionRolPredefinido, AsignacionRol,AsistenciaEvento,Colaborador,Comprobante, ConceptoGasto, DetalleGasto, DetallePresupuesto, DetalleRestriccion, EstadoActividad, EstadoPresupuesto, EstadoProyecto, EstadoUsuario, EventoPublico, Experiencia, Habilidad, HistorialEstadoActividad, HistorialEstadoPresupuesto, HistorialEstadoProyecto, HistorialEstadoUsuario, HorarioDisponible, InformeGasto, Necesidad, Nota, NotificacionEmail, NotificacionPredeterminada, Notificacion, NotificacionSistema, ObjetivoEspecifico, ObjetivoGeneral, OrganizacionExterna, Postulacion, Presupuesto, Privilegio, Proyecto, Reporte, Requisito, Restriccion, Rol, Sesion, TipoActividad, TipoHabilidad, TipoNotificacion, TipoPrivilegio, TipoProyecto, TipoRol, TipoTransaccion, Transaccion, Usuario, Voluntario].each(&:delete_all)
    
-    EstadoProyecto.populate 1 do |estado|
-      estado.nombre= "Creado"
-      estado.descripcion= "El proyecto se encuentra en estado creado" 
-    end 
-    EstadoProyecto.populate 1 do |estado|
-      estado.nombre= "En Ejecución"
-      estado.descripcion= "El proyecto se encuentra actualmente en ejecución" 
-    end 
-    EstadoProyecto.populate 1 do |estado|
-      estado.nombre= "Suspendido"
-      estado.descripcion= "El proyecto se encuentra momentaneamente suspendido" 
-    end 
-    EstadoProyecto.populate 1 do |estado|
-      estado.nombre= "Cancelado"
-      estado.descripcion= "El proyecto se encuentra definitivamente cancelado" 
-    end 
-    EstadoProyecto.populate 1 do |estado|
-      estado.nombre= "Terminado"
-      estado.descripcion= "El proyecto ha terminado" 
-    end 
-
-    EstadoActividad.populate 1 do |estado|
-      estado.nombre= "Creada"
-      estado.descripcion= "La actividad se encuentra en estado creada"
-    end
-    EstadoActividad.populate 1 do |estado|
-      estado.nombre= "Planificada"
-      estado.descripcion= "La actividad se encuentra planificada"
-    end
-    EstadoActividad.populate 1 do |estado|
-      estado.nombre= "Ejecutada"
-      estado.descripcion= "La actividad se encuentra actualmente en ejecución"
-    end
-    EstadoActividad.populate 1 do |estado|
-      estado.nombre= "Terminada"
-      estado.descripcion= "La actividad ha terminado"
-    end
-
-    Proyecto.populate 1 do |proyecto|
-      proyecto.nombre = "Creación de un sistema confiable Autos"
-      proyecto.breveDescripcion = "Se desarrollará un sistema para poder administrar un auto sin errores y poder dirigirlo de manera autónoma"
-      proyecto.fechaInicio = 1.month.ago..Time.now 
-      proyecto.fechaFin = 1.year.from_now
-      proyecto.antecedentes = "Ninguno"
-      proyecto.justificacionProyecto = "Se desea avanzar en el campo de la automatición en cuanto al tema vehicular"
-      proyecto.cantidadBeneficiariosDirectos = 100
-      proyecto.cantidadBeneficiariosIndirectos = 200
-      proyecto.justificacionImpacto = "Se está realizando en conjunto con un grupo de la UNC el cual permitirá la divulgación del proyecto y por ende su impacto"
-      proyecto.localizacionGeografica = "Mendoza"
-      TipoProyecto.populate 1 do |tipoProyecto|
-	 tipoProyecto.nombre = "Voluntariado"
-	 tipoProyecto.descripcion = "Proyecto sin remuneración económica"
-      end
-      Necesidad.populate 1 do |necesidad|
-         necesidad.descripcion = "Queremos comenzar con la investigación en el manejo de autos junto con la UNC"
-	 necesidad.ambitoAplicacion = "Automotriz y automatización"
-#	 Usuario.populate 1 do |usuario|
- #           usuario.nombreUsuario = Faker::Internet.user_name 
-#	    usuario.apellidoNombre = Faker::Name.name 
-#	    usuario.email = Faker::Internet.email 
-#	    usuario.direccion = Faker::Address.street_address
-#	    usuario fechaRegistro = 1.week.ago..Time.now
-#	    usuario.telefono = Faker::PhoneNumber.cell_phone
-#	    usuario.fax = Faker::PhoneNumber.phone_number
-#	    necesidad.usuario_id = usuario.id
-#	 end
-	 necesidad.titulo = "Sistema de manejo de auto confiable"
-      end
       
+    u = Usuario.create!(nombreUsuario: "SEVU",
+								       password: password, 
+								       password_confirmation: password,  
+								       apellido_nombre: "Sevu, Team",
+								       email: "sevu@github.com",
+								       direccion: Faker::Address.street_address,
+								       fechaRegistro: 1.week.ago..Time.now,
+								       telefono: Faker::PhoneNumber.cell_phone,
+								       fax: Faker::PhoneNumber.phone_number)
+
+
+    u1 =	Usuario.create!(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address, fechaRegistro: 1.week.ago..Time.now, telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number)
+
+u2 =	Usuario.create!(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address, fechaRegistro: 1.week.ago..Time.now, telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number)
+
+u3 =	Usuario.create!(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address, fechaRegistro: 1.week.ago..Time.now, telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number)
+
+u4 =	Usuario.create!(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address, fechaRegistro: 1.week.ago..Time.now, telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number)
+
+u5 = 	Usuario.create(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password,  apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address, fechaRegistro: 1.week.ago..Time.now, telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number)
+
+u6 =	Usuario.create(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password,  apellido_nombre: Faker::Name.name, email:Faker::Internet.email, direccion: Faker::Address.street_address, fechaRegistro: 1.week.ago..Time.now, telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number)
+
+u7 =	Usuario.create(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address, fechaRegistro: 1.week.ago..Time.now, telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number)
+
+u8 =	Usuario.create(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address, fechaRegistro: 1.week.ago..Time.now, telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number)
+
+u9 =	Usuario.create(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address, fechaRegistro: 1.week.ago..Time.now, telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number)
+
+u10 =	Usuario.create(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address, fechaRegistro: 1.week.ago..Time.now, telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number)
+
+v = Voluntario.create!(nombreUsuario: "Voluntario",
+								       password: password, 
+								       password_confirmation: password,  
+								       apellido_nombre: "Voluntario, Sevu",
+								       email: "voluntario@github.com",
+								       direccion: Faker::Address.street_address,
+								       fechaRegistro: 1.week.ago..Time.now,
+								       telefono: Faker::PhoneNumber.cell_phone,
+								       fax: Faker::PhoneNumber.phone_number,
+		      						       legajo: 34587,
+								       type: 'Voluntario'
+		      						       )
 
 
 
 
+    creado = EstadoProyecto.create(nombre: "Creado", descripcion: "El proyecto se encuentra en estado creado")
+    EstadoProyecto.create(nombre: "En Ejecución", descripcion: "El proyecto se encuentra en ejecución")
+    EstadoProyecto.create(nombre: "Suspendido", descripcion: "El proyecto se encuentra momentaneamente suspendido")
+    EstadoProyecto.create(nombre: "Cancelado", descripcion: "El proyecto se encuentra definitivamente cancelado")
+    EstadoProyecto.create(nombre: "Terminado", descripcion: "El proyecto ha terminado")
 
 
+    EstadoActividad.create(nombre: "Creada", descripcion: "La actividad se encuentra creada")
+    EstadoActividad.create(nombre: "Planificada", descripcion: "La actividad se encuentra planificada")
+    EstadoActividad.create(nombre: "Ejecutada", descripcion: "La actividad se encuentra actualmente en ejecución")
+    EstadoActividad.create(nombre: "Terminada", descripcion: "La actividad ha terminado")
+    EstadoActividad.create(nombre: "Creada", descripcion: "")
+    
+    
+    TipoRol.create(nombre: "Sistema", descripcion: "Roles aplicables a todo el sistema")
+    trp= TipoRol.create(nombre: "Proyecto", descripcion: "Roles aplicables dentro de un proyecto")
+    director = Rol.create(nombre: "Director", descripcion: "Responsable del proyecto", tipo_rol: trp)
+    voluntario = Rol.create(nombre: "Voluntario", descripcion: "Colaborador del proyecto", tipo_rol: trp)
 
+    tipo_proyecto = TipoProyecto.create(nombre: "voluntariado", descripcion: "Proyecto sin remuneración económica")
 
+    n= Necesidad.create(descripcion: "Queremos comenzar con la investigación en el manejo de autos juntos con la UNC",
+			usuario: u,
+		    titulo: "Sistema de manejo de auto confiable")
+    p = Proyecto.create(nombre: "Creación de un sistema confiable Autos", breveDescripcion: "Se desarrollará un sistema para poder administrador un auto sin errores y poder dirigirlo de manera autónoma",
+		    fechaInicio: 1.month.ago,
+		    fechaFin: 1.year.from_now,
+		    antecedentes: "Ninguno",
+		    justificacionProyecto: "Se desea avanzar ene l campo de la automaticación en cuanto al tema vehicular",
+		    cantidadBeneficiariosDirectos: 100, cantidadBeneficiariosIndirectos: 200,
+		    justificacionImpacto: "Se está realizando en conjunto con un grpo de la UNC el cual permitirá la divulgación del proyecto y por ende su impacto",
+		    localizacionGeografica: "Mendoza",
+		    tipo_proyecto: tipo_proyecto ,
+		    necesidad: n)
+		     
+
+      AsignacionRol.create(proyecto: p , usuario: u, rol: director , esActual: true).save
+      AsignacionRol.create(proyecto: p , usuario: u, rol: voluntario, esActual: true).save
+
+      HistorialEstadoProyecto.create(proyecto: p, estado_proyecto: creado)
+
+      OrganizacionExterna.create(denominacion: Faker::Company.name, sigla: Faker::Company.suffix, cuit: "30-1651654-9", fax: Faker::PhoneNumber.cell_phone, telefono: Faker::PhoneNumber.cell_phone, direccion: Faker::Address.street_address, cargoResponsable: Faker::Name.title, numeroContactoResponsable: Faker::PhoneNumber.cell_phone, nombreResponsable: Faker::Name.name)
+
+      concepto1 = ConceptoGasto.create(titulo: "Viáticos", descripcion: "Gastos realizando en viáticos")
+      concepto2 = ConceptoGasto.create(titulo: "Librería", descripcion: "Gastos realizando en librería")
+      concepto3 = ConceptoGasto.create(titulo: "Transporte", descripcion: "Gastos realizando en transporte")
+
+      restriccion = Restriccion.create(fechaDesde: 1.month.ago, fechaHasta: 1.month.from_now, esActiva: true, tipo_proyecto: tipo_proyecto )
+
+      presupuesto = Presupuesto.create(fechaPresentacion: 1.year.from_now, montoTotal: 23, aprobado: false, proyecto: p, restriccion: restriccion, usuario: u)
+
+      DetallePresupuesto.create(titulo: "Almuerzo", descripcion: "Se gastará en un almuerzo", monto: 15, presupuesto: presupuesto, concepto_gasto: concepto1)
+      DetallePresupuesto.create(titulo: "Cuadernos", descripcion: "Se gastará en un cuaderno para escribir", monto: 8, presupuesto: presupuesto, concepto_gasto: concepto2)
+
+      informe_gasto = InformeGasto.create(montoTotal: 23, proyecto: p)
+
+      DetalleGasto.create(titulo: "Almuerzo", descripcion: "Se gastó en un almuerzo", monto: 10, informe_gastos_id: informe_gasto.id, concepto_gasto: concepto1)
+      DetalleGasto.create(titulo: "Cuadernos", descripcion: "Se gastó en un cuaderno para escribir", monto: 5, informe_gastos_id: informe_gasto.id, concepto_gasto: concepto2)
 
 
   end
-end
+
 end
