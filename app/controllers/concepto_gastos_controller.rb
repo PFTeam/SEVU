@@ -54,10 +54,14 @@ class ConceptoGastosController < ApplicationController
   # DELETE /concepto_gastos/1
   # DELETE /concepto_gastos/1.json
   def destroy
-    @concepto_gasto.destroy
+    #@concepto_gasto.destroy
     respond_to do |format|
+      if @concepto_gasto.destroy
       format.html { redirect_to gestionar_concepto_gastos_path }# concepto_gastos_url, notice: 'Concepto gasto was successfully destroyed.' }
       format.json { head :no_content }
+      else
+       format.html { redirect_to :back, alert: 'El concepto de gasto no puede ser eliminado porque es actualmente utilizado'} 
+      end
     end
   end
 

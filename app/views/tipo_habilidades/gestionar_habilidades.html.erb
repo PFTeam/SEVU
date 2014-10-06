@@ -26,7 +26,7 @@
 
 
  
-    <% if @tipos_habilidades.nil? then %>
+    <% if @tipos_habilidades.empty? then %>
       <h4> No existen actualmente habilidades </h4>
     <% else %>   
       <% @tipos_habilidades.each do |tipo|%>

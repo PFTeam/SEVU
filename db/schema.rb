@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-#<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20141005002055) do
-#======= MERGE MANUAL POR CONFLICTO DE VERSIONES ENTRE COMMITS DE DIEGO E IVO
-#ActiveRecord::Schema.define(version: 20141005092425) do
-#>>>>>>> 5f6ba8937bbc7b083c74a58853ba75b534e0c4a1
+ActiveRecord::Schema.define(version: 20141005092425) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
