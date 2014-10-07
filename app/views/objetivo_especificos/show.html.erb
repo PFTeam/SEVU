@@ -33,6 +33,7 @@
       </div>
 
 <%= link_to 'Edit', edit_objetivo_especifico_path(@objetivo_especifico, :objetivo_general_id => @objetivo_especifico.objetivo_general_id), remote: true, data: { target: 'modal', modal: true } %> |
+        <%= link_to 'Destroy', @objetivo_especifico, method: :delete, data: { confirm: 'Esta seguro?' } %> |
 <%= link_to 'Back', objetivo_especificos_path(:objetivo_general_id => @objetivo_especifico.objetivo_general_id) %>
 <h2> Actividades </h2>
 </div>

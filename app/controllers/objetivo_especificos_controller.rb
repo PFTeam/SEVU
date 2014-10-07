@@ -33,7 +33,8 @@ class ObjetivoEspecificosController < ApplicationController
 
     respond_to do |format|
       if @objetivo_especifico.save
-        format.html { redirect_to :controller => 'objetivo_especificos', :action => 'index', :objetivo_general_id => @objetivo_especifico.objetivo_general_id, notice: 'Objetivo especifico was successfully created.' }
+        format.html { redirect_to :controller => 'objetivo_especificos', :action => 'index', :objetivo_general_id => @objetivo_especifico.objetivo_general_id 
+		      flash[:notice] = 'Objetivo especifico was successfully created.' }
         format.json { render :show, status: :created, location: @objetivo_especifico }
       else
         format.html { render :new }
@@ -60,9 +61,11 @@ class ObjetivoEspecificosController < ApplicationController
   # DELETE /objetivo_especificos/1
   # DELETE /objetivo_especificos/1.json
   def destroy
+    @objetivo_general = @objetivo_especifico.objetivo_general
     @objetivo_especifico.destroy
     respond_to do |format|
-      format.html { redirect_to objetivo_especificos_url, notice: 'Objetivo especifico was successfully destroyed.' }
+      format.html { redirect_to objetivo_especificos_path(:objetivo_general_id => @objetivo_general) 
+		    flash[notice] = 'Objetivo especifico was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

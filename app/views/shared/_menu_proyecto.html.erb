@@ -11,6 +11,9 @@
 
 	    <% if defined?(@proyecto) && !@proyecto.id.nil? %>
 	    <li>
+		    <%= link_to 'Ver Proyecto', proyecto_path(@proyecto) %>
+	    </li>
+	    <li>
 		    <%= link_to 'Asignar Recursos', asignacion_roles_path(:proyecto_id => @proyecto.id) %>
             </li>
             <li>
@@ -30,8 +33,8 @@
             </li>
             <li>
               <% if @proyecto.informe_gasto.nil? then #pregunta si tiene Informe de Gastos %>
-                <!NO LO HE PROBADO, PUEDE DAR ERROR CON POSTGRES, CON LA BUSQUEDA, LO QUE HABRIA QUE SOLUCIONARLO CON UN MIGRATE>
-                <!Y CAMBIANDO LOS ATRIBUTOS EN SCHEMA Y EL MODELO DE PROYECTO >
+                <!--NO LO HE PROBADO, PUEDE DAR ERROR CON POSTGRES, CON LA BUSQUEDA, LO QUE HABRIA QUE SOLUCIONARLO CON UN MIGRATE-->
+                <!--Y CAMBIANDO LOS ATRIBUTOS EN SCHEMA Y EL MODELO DE PROYECTO -->
                 <%= link_to 'Informe de Gastos', informe_gastos_path(proyecto_id: @proyecto.id), data: { method: :post } %>
               <% else %>
                 <%= link_to 'Informe de Gastos', gestionar_informe_gastos_path(@proyecto.informe_gasto.id) %>
