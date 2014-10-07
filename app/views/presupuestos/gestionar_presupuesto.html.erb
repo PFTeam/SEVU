@@ -11,13 +11,12 @@
       <div class="form-group">
         <label>
           <% if @presupuesto.proyecto.breveDescripcion.blank? then %>
-            <h4> (No existe actualmente descripción del Proyecto) </h4>
+            <p> (No existe actualmente descripción del Proyecto) </p>
           <% else %>
-            <h4> <%= @presupuesto.proyecto.breveDescripcion %> </h4>
+            <p> <%= @presupuesto.proyecto.breveDescripcion %> </p>
           <% end %>
         </label>
-        <p> <%= @presupuesto.proyecto.breveDescripcion %> </p>
-      </div>
+              </div>
     <!--</form>-->
     <! TODO Validar @detalles_presupuesto que no sea nil, si lo es hacer un camino separado y avisar > 
     <div class="form-group input-group">
