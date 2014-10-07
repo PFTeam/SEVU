@@ -19,9 +19,6 @@
 	    <li>
 	      <%= link_to 'Postulaciones', postulaciones_path(:proyecto_id => @proyecto.id) %>
             </li>
-	    <li>
-	      <%= link_to 'Postulaciones', postulaciones_path(:proyecto_id => @proyecto.id) %>
-            </li>
  
             <li>
               <% if @proyecto.presupuesto.nil? then %>
@@ -40,7 +37,7 @@
               <% end %>
           </li>   
 	    <% end %>
-	    <% if defined?(@objetivo_general) %>
+	    <% if defined?(@objetivo_general) && !@objetivo_general.id.nil? %>
             <li>
 		    <%= link_to 'Objetivos Específicos', objetivo_especificos_path(:objetivo_general_id => @objetivo_general.id) %>
 	    </li>

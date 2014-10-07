@@ -1,4 +1,4 @@
-<h1>Listing necesidades</h1>
+<h1>Lista de Necesidades</h1>
 
 
 <div class="row">
@@ -39,7 +39,7 @@
                   <%= necesidad.usuario %>
                 </p>
 		<% if necesidad.proyecto.presence %>
-			<button type="button" class="btn btn-primary btn-lg"><%= link_to necesidad.proyecto.to_s, necesidad.proyecto %></button>
+			<%= link_to necesidad.proyecto.nombre, necesidad.proyecto, :class => "btn btn-primary btn-lg"  %>
 		<% else %>
 			<button type="button" class="btn btn-primary btn-lg">No hay Proyecto</button>
 		<% end %>

@@ -17,6 +17,7 @@ class ObjetivoEspecificosController < ApplicationController
   # GET /objetivo_especificos/new
   def new
     @objetivo_especifico = ObjetivoEspecifico.new(:objetivo_general_id => params[:objetivo_general_id])
+    @proyecto = @objetivo_especifico.objetivo_general.proyecto
   end
 
   # GET /objetivo_especificos/1/edit

@@ -15,6 +15,7 @@ class ObjetivoGeneralesController < ApplicationController
 
   # GET /objetivo_generales/new
   def new
+    @proyecto = Proyecto.find(params[:proyecto_id])
     @objetivo_general = ObjetivoGeneral.new
   end
 

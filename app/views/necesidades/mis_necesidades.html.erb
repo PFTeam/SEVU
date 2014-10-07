@@ -1,4 +1,4 @@
-<h1>Listing necesidades</h1>
+<h1>Lista de Necesidades</h1>
 
 
 <div class="row">
@@ -39,7 +39,7 @@
                 </p>
 
 		<% if necesidad.proyecto.presence %>
-			<button type="button" class="btn btn-primary btn-lg"><%= link_to necesidad.proyecto.to_s, necesidad.proyecto %></button>
+			<%= link_to necesidad.proyecto.nombre, necesidad.proyecto , :class => "btn btn-primary btn-lg" %>
 		<% else %>
 			<button type="button" class="btn btn-primary btn-lg">No hay Proyecto</button>
 		<% end %>
@@ -53,39 +53,3 @@
 </div>
 
 
-
-
-
-
-
-<table>
-  <thead>
-    <tr>
-      <th>Título</th>
-      <th>Descripcion</th>
-      <th>Fechacreacion</th>
-      <th>Ambitoaplicacion</th>
-      <th>Usuario</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @necesidades.each do |necesidad| %>
-      <tr>
-        <td><%= necesidad.titulo %></td>
-        <td><%= necesidad.descripcion %></td>
-        <th><%= necesidad.created_at.to_formatted_s(:long) %></th>
-        <td><%= necesidad.ambitoAplicacion %></td>
-        <td><%= necesidad.usuario %></td>
-        <td><%= link_to 'Show', necesidad %></td>
-        <td><%= link_to 'Edit', edit_necesidad_path(necesidad) %></td>
-        <td><%= link_to 'Destroy', necesidad, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Necesidad', new_necesidad_path %>

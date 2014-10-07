@@ -30,6 +30,7 @@ module ApplicationHelper
   def asignacion_rol_form_html_options
       {
         data: {
+	  target: dom_id(@asignacion_rol),
           error: 'modal',
           modal: true,
           replace: true
