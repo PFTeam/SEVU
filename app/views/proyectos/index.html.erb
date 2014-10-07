@@ -48,7 +48,7 @@
                 <div class="btn-group btn-group-justified">
  
 			<p>        
-				<%= button_to "Participar",  {:controller => :postulaciones, :action => 'create', :postulacion => { :usuario_id => Usuario.find_by(nombreUsuario: "SEVU").id, :proyecto_id => proyecto.id }}, :method => :new %>
+				<%= button_to "Participar",  {:controller => :postulaciones, :action => 'create', :postulacion => { :usuario_id => current_usuario.id, :proyecto_id => proyecto.id }}, :method => :new %>
 		<!-- REEMPLAZAR POR EL USUARIO ACTUAL DE LA SESION 	-->
 
 		

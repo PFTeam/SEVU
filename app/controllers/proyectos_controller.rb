@@ -116,8 +116,7 @@ class ProyectosController < ApplicationController
   end
 
   def mis_proyectos
-    params[:usuario]=Usuario.find_by(nombreUsuario: "SEVU") #TODO: Obtener usuario real cuando este la sesion implementada
-    @proyectos = Proyecto.participando(params[:usuario])
+    @proyectos = Proyecto.participando(current_usuario)
   end
 
   def crear_organizacion_externa
