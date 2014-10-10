@@ -26,40 +26,34 @@ en:
     omniauth_callbacks:
       failure: "No se puede autenticar desde %{kind} por que \"%{reason}\"."
       success: "Autenticado éxitosamente desde la cuenta %{kind}."
-
-
-
-
-
-
     passwords:
-      no_token: "You can't access this page without coming from a password reset email. If you do come from a password reset email, please make sure you used the full URL provided."
-      send_instructions: "You will receive an email with instructions about how to reset your password in a few minutes."
-      send_paranoid_instructions: "If your email address exists in our database, you will receive a password recovery link at your email address in a few minutes."
-      updated: "Your password was changed successfully. You are now signed in."
-      updated_not_active: "Your password was changed successfully."
+      no_token: "No puede acceder a esta pagina sin haber recibido el mail para restaurar la contraseña. Si lo ha recibido, por favor asegurarse de hacer click al link incluido en el mail." 
+      send_instructions: "Recibirá un mail con las instrucciones de como restaurar la contraseña en unos minutos."
+      send_paranoid_instructions: " Si el mail existe en el sistema, recibirá un link para restaurar la contraseña en su cuenta de correo en unos minutos."
+      updated: "Su contraseña se ha cambiado exitosamente. Ya ingresó al sistema."
+      updated_not_active: "Su contraseña se ha cambiado exitosamente"
     registrations:
-      destroyed: "Bye! Your account was successfully cancelled. We hope to see you again soon."
+      destroyed: "Hasta Pronto! Su cuenta se ha cancelado. Lo esperamos pronto nuevamente."
       signed_up: "Bienvenido! El registro de cuenta ha sido éxitoso."
-      signed_up_but_inactive: "You have signed up successfully. However, we could not sign you in because your account is not yet activated."
-      signed_up_but_locked: "You have signed up successfully. However, we could not sign you in because your account is locked."
-      signed_up_but_unconfirmed: "A message with a confirmation link has been sent to your email address. Please open the link to activate your account."
-      update_needs_confirmation: "You updated your account successfully, but we need to verify your new email address. Please check your email and click on the confirm link to finalize confirming your new email address."
+      signed_up_but_inactive: "Ha ingresado exitosamente al sistema pero no puede utilizarlo hasta tanto la cuenta no haya sido activada."
+      signed_up_but_locked: "Ha ingresado exitosamente al sistema pero no puede utilizarlo ya que su cuenta se encuentra bloqueada."
+      signed_up_but_unconfirmed: "Un mensaje con un link de confirmación de mail ha sido enviado a su cuenta de correo. Por favor haga click al link para activar la cuenta."
+      update_needs_confirmation: "Se actualizó su cuenta exitosamente, pero se necesita verificar su nueva cuenta de correo. Por favor ingrese al mail que se le ha enviado y haga click al link de confirmación para finalizar la confirmación de la nueva cuenta de correo electrónico."
       updated: "Actualización de cuenta éxitoso."
     sessions:
       signed_in: "Ingreso éxitoso."
       signed_out: "Cierre de sesión éxitoso."
     unlocks:
-      send_instructions: "You will receive an email with instructions about how to unlock your account in a few minutes."
-      send_paranoid_instructions: "If your account exists, you will receive an email with instructions about how to unlock it in a few minutes."
-      unlocked: "Your account has been unlocked successfully. Please sign in to continue."
+      send_instructions: "Recibirá un correo con las instrucciones para desbloquear su cuenta."
+      send_paranoid_instructions: "Si su cuenta existe, recibirá un correo con las instrucciones para desbloquear su cuenta."
+      unlocked: "Su cuenta ha sido desbloqueada exitosamente. Por favor, inicie sesión para continuar."
   errors:
     messages:
-      already_confirmed: "was already confirmed, please try signing in"
-      confirmation_period_expired: "needs to be confirmed within %{period}, please request a new one"
-      expired: "has expired, please request a new one"
-      not_found: "not found"
-      not_locked: "was not locked"
+      already_confirmed: "Ya fue confirmado, por favor intente ingresar."
+      confirmation_period_expired: "Necesita ser confirmado dentro de %{period}. Por favor, intente de nuevo."
+      expired: "Ha expirado, por favor intente nuevamente."
+      not_found: "No se encuentra."
+      not_locked: "No se encuentra bloqueada."
       not_saved:
-        one: "1 error prohibited this %{resource} from being saved:"
-        other: "%{count} errors prohibited this %{resource} from being saved:"
+        one: "1 error prohibe a %{resource} guardarse:"
+        other: "%{count} errores prohiben a %{resource} guardarse:"
