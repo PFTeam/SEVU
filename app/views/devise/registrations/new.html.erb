@@ -21,6 +21,8 @@
   <%= f.error_notification %>
 	<div class="col-lg-6">
 		<div class="form-inputs">
+			<%= f.input :email, label: 'Correo Electrónico', placeholder: 'usuario@dominio.com', :required => true, :autofocus => true %>
+			<br></br>
 			<%= f.input :nombreUsuario, label: 'Nombre de Usuario', placeholder: 'user', :required => true, :autofocus => true %>
 			<br></br> 
 			<%= f.input :password, label: 'Contraseña', hint: 'Verifique el bloqueo de mayúscula (Bloq Mayús).', placeholder: 'password', :required => true %>
@@ -29,8 +31,7 @@
 			<br></br>	
 			<%= f.input :apellido_nombre, label: 'Apellido, Nombre', placeholder: 'apellido, nombres', :required => true, :autofocus => true %>
 			<br></br>
-			<%= f.input :email, label: 'Correo Electrónico', placeholder: 'usuario@dominio.com', :required => true, :autofocus => true %>
-			<br></br>
+			
 			<!--<label>Código Verificador</label>
 		  <input class="form-control">
 			<button type="f.button" class="f.botton">Verificar Correo</button>
