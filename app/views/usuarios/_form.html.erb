@@ -17,7 +17,7 @@
   </div>
   <div class="field">
     <%= f.label :contrasenia %><br>
-    <%= f.text_field :contrasenia %>
+    <%= f.text_field :encrypted_password %>
   </div>
   <div class="field">
     <%= f.label :apellido_nombre %><br>
@@ -30,10 +30,6 @@
   <div class="field">
     <%= f.label :direccion %><br>
     <%= f.text_field :direccion %>
-  </div>
-  <div class="field">
-    <%= f.label :fechaRegistro %><br>
-    <%= f.datetime_select :fechaRegistro %>
   </div>
   <div class="field">
     <%= f.label :foto %><br>

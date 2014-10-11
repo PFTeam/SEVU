@@ -4,8 +4,7 @@ class CreateUsuarios < ActiveRecord::Migration
       t.string :nombreUsuario
       t.string :apellidoNombre
       t.string :direccion
-      t.datetime :fechaRegistro
-
+			t.datetime :fechaRegistro
       t.timestamps
     end
   end
