@@ -187,9 +187,12 @@
 
       </nav>
       <div id="page-wrapper">
-
-			 <p class="notice"><%= notice %></p><!--PARA DEVISE (los mensajes se encuentran en devise.en.yml)--->
-       <font color="red"><p class="alert"><%= alert %></p></font> <!--PARA DEVISE (los mensajes se encuentran en devise.en.yml)--->
+			<% if notice =! '' %>
+						<p class="alert alert-dismissable alert-success"><%= notice %></p><!--PARA DEVISE (los mensajes se encuentran en devise.en.yml)--->
+			 <% end %>
+				<% if alert != nil %>
+					<p class="alert alert-dismissable alert-danger"><%= alert %></p> <!--PARA DEVISE (los mensajes se encuentran en devise.en.yml)--->
+					<% end %>
           <%= yield %>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          <!---------------------------------------------
           <!---------- FIN INICIO MARCO CENTRAL   -------------------

@@ -13,15 +13,17 @@
       <tbody>
 				<% Proyecto.all.each do |proyecto| %>
         <tr>
-          <td><%= proyecto.nombre %></td>
+          <td><%= link_to proyecto.nombre, control_proyecto_path(:proyecto_id => proyecto.id)  %></td>
 					<td><%= proyecto.fechaInicio %></td>
         </tr>
 				<% end %>
        </tbody>
      </table>
    </div>
+	 <% project = params[:proyecto_id].to_i %>
+	<% if project != 0 %>
    <div class="table-responsive  col-lg-8">
-     <h3>Transacciones</h3>
+     <h3>Transacciones de <%= Proyecto.find(project).nombre %></h3>
      <table class="table table-hover table-striped tablesorter">
        <thead>
          <tr>
@@ -33,14 +35,17 @@
        </thead>
        <tbody>
 				<% Transaccion.all.each do |transaccion| %>
+				<% if transaccion.proyecto_id == project %>
        	<tr>
-        	 <td><%= transaccion.fechaTransaccion %></td>
-					 <td><%=  %></td>     <!--Usuario.find(Sesion.find(transaccion.sesion_id)).nombreUsuario    ARREGLAR PROBLEMA CON LA SESION NO GUARDA EL USUARIO (MISMO PROBLEMA CON TIPO_ROL)--->
+        	 <td><%= transaccion.created_at %></td>
+					 <td><%= Usuario.find(Sesion.find(transaccion.sesion_id).usuario_id).nombreUsuario %> </td>
         	 <td><%= transaccion.descripcion %></td>
        	</tr>
 				<% end %>
+				<% end %>
      	</tbody>
    	</table>
+		<% end %>
  	</div>
 </div>
 

@@ -61,6 +61,7 @@ class TransaccionesController < ApplicationController
     end
   end
 
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_transaccion
@@ -69,6 +70,6 @@ class TransaccionesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def transaccion_params
-      params.require(:transaccion).permit(:descripcion, :fechaTransaccion, :proyecto_id, :tipo_transaccion_id, :sesion_id)
+      params.require(:transaccion).permit(:descripcion, :proyecto_id, :tipo_transaccion_id, :sesion_id)
     end
 end
