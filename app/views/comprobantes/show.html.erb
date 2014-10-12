@@ -4,6 +4,7 @@
   <strong>Numero:</strong>
   <%= @comprobant.numero %>
 </p>
+<%= image_tag @comprobant.imagen.url %>
 
 <%= link_to 'Edit', edit_comprobant_path(@comprobant) %> |
 <%= link_to 'Back', comprobantes_path %>

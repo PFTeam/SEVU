@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141011093205) do
+ActiveRecord::Schema.define(version: 20141012001217) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -109,7 +109,14 @@ ActiveRecord::Schema.define(version: 20141011093205) do
     t.integer  "numero"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "imagen_file_name"
+    t.string   "imagen_content_type"
+    t.integer  "imagen_file_size"
+    t.datetime "imagen_updated_at"
+    t.integer  "detalle_gasto_id"
   end
+
+  add_index "comprobantes", ["detalle_gasto_id"], name: "index_comprobantes_on_detalle_gasto_id", using: :btree
 
   create_table "concepto_gastos", force: true do |t|
     t.string   "titulo"
@@ -125,12 +132,10 @@ ActiveRecord::Schema.define(version: 20141011093205) do
     t.integer  "concepto_gasto_id"
     t.integer  "informe_gasto_id"
     t.integer  "voluntario_id"
-    t.integer  "comprobante_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "detalle_gastos", ["comprobante_id"], name: "index_detalle_gastos_on_comprobante_id", using: :btree
   add_index "detalle_gastos", ["concepto_gasto_id"], name: "index_detalle_gastos_on_concepto_gasto_id", using: :btree
   add_index "detalle_gastos", ["informe_gasto_id"], name: "index_detalle_gastos_on_informe_gasto_id", using: :btree
   add_index "detalle_gastos", ["voluntario_id"], name: "index_detalle_gastos_on_voluntario_id", using: :btree
