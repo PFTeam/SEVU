@@ -3,11 +3,12 @@
 <div class="col-lg-12">
 	<div class="col-lg-3">
     <h3><small>Fecha Desde</small></h3>
+		<!-- f.input :fecha_inicio, label: 'Fecha Desde', placeholder: 'dd-mm-aaaa', :required => true, :autofocus => true -->
     <input type="text/css"  placeholder="dd-mm-aaaa" id="fecha_inicio">
     <h3><small>Fecha Hasta</small></h3>
     <input type="text/css" class="span1" placeholder="dd-mm-aaaa" id="fecha_fin">
     <br></br>
-    <button type="button" class="btn btn-primary btn-lg">Buscar</button>
+		<td><%= link_to 'Buscar', control_fecha_path ,  { :class=>"btn btn-primary btn-lg" }   %></td>
   </div>
   <div class="table-responsive  col-lg-9">
   	<h3>Transacciones</h3>
@@ -23,7 +24,7 @@
 			 <% Transaccion.all.each do |transaccion| %>
        <!--  if created_at between fecha_inicio and fecha_fin %> -->
        <tr>
-       	 <td><%= transaccion.fechaTransaccion %></td>
+       	 <td><%= transaccion.created_at %></td>
 				 <td><!-- Usuario.find(Sesion.find(transaccion.sesion_id).usuario_id).nombreUsuario --></td>    
          <td><%= transaccion.descripcion %></td>
        </tr>
@@ -32,7 +33,6 @@
    </table>        
   </div>
 </div>
-
 
 
 
