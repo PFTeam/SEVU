@@ -69,6 +69,6 @@ class ComprobantesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comprobant_params
-      params.require(:comprobant).permit(:numero)
+      params.require(:comprobante).permit(:numero, :imagen, :detalle_gasto_id)
     end
 end

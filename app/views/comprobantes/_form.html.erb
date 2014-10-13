@@ -1,4 +1,4 @@
-<%= form_for(@comprobant) do |f| %>
+<%= form_for @comprobant, :html => { :multipart => true } do |f| %>
   <% if @comprobant.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@comprobant.errors.count, "error") %> prohibited this comprobant from being saved:</h2>
@@ -15,6 +15,13 @@
     <%= f.label :numero %><br>
     <%= f.number_field :numero %>
   </div>
+  <div class="field">
+    <%= f.label :detalle %>
+    <%= f.number_field :detalle_gasto_id %>
+  </div>
+
+  <%= f.file_field :imagen %>
+  
   <div class="actions">
     <%= f.submit %>
   </div>

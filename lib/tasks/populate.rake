@@ -111,8 +111,8 @@ v = Voluntario.create!(nombreUsuario: "Voluntario",
 
       informe_gasto = InformeGasto.create(montoTotal: 23, proyecto: p)
 
-      DetalleGasto.create(titulo: "Almuerzo", descripcion: "Se gastó en un almuerzo", monto: 10, informe_gastos_id: informe_gasto.id, concepto_gasto: concepto1)
-      DetalleGasto.create(titulo: "Cuadernos", descripcion: "Se gastó en un cuaderno para escribir", monto: 5, informe_gastos_id: informe_gasto.id, concepto_gasto: concepto2)
+      DetalleGasto.create(titulo: "Almuerzo", descripcion: "Se gastó en un almuerzo", monto: 10, informe_gasto_id: informe_gasto.id, concepto_gasto: concepto1)
+      DetalleGasto.create(titulo: "Cuadernos", descripcion: "Se gastó en un cuaderno para escribir", monto: 5, informe_gasto_id: informe_gasto.id, concepto_gasto: concepto2)
 
 
   end
