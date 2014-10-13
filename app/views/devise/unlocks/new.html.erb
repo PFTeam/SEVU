@@ -1,6 +1,6 @@
 <!---->
 <h2>Enviar Instrucciones de desbloqueo</h2>
-
+<br></br>
 <%= simple_form_for(resource, :as => resource_name, :url => unlock_path(resource_name), :html => { :method => :post }) do |f| %>
   <%= f.error_notification %>
 	<%= f.full_error :unlock_token %>
@@ -8,19 +8,10 @@
   <div class="form-inputs">
     <%= f.input :email, label: 'Correo Electrónico', placeholder: 'usuario@dominio.com', :required => true, :autofocus => true %>
   </div>
+	<br></br>
 	<div class="actions">
     <%= f.button :submit, "Enviar", :class => "btn btn-primary btn-lg" %>
   </div>
 <% end %>
-<%- if controller_name != 'sessions' %>
-  <%= link_to " Iniciar Sesión", new_session_path(resource_name) %><br />
-  <% end -%>
-
-<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <%= link_to "Registrarme", new_registration_path(resource_name) %><br />
-<% end -%>
-<%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
-  <%= link_to "Olvido su contraseña?", new_password_path(resource_name) %><br />
-<% end -%>
-
-<!--<%= render "devise/shared/links" %>-->
+<br></br>
+<%= render "devise/shared/links" %>

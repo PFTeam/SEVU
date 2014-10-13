@@ -4,6 +4,7 @@
 	<div class="col-lg-3">
     <h3><small>Fecha Desde</small></h3>
 		<!-- f.input :fecha_inicio, label: 'Fecha Desde', placeholder: 'dd-mm-aaaa', :required => true, :autofocus => true -->
+	<% datetime_select("article", "written_on", prompt: {hour: true})  %>
     <input type="text/css"  placeholder="dd-mm-aaaa" id="fecha_inicio">
     <h3><small>Fecha Hasta</small></h3>
     <input type="text/css" class="span1" placeholder="dd-mm-aaaa" id="fecha_fin">
