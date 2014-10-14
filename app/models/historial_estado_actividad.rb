@@ -3,6 +3,6 @@ class HistorialEstadoActividad < ActiveRecord::Base
   belongs_to :estado_actividad
 
 
-  validates :proyecto, :presence => true
-  validates :estado_proyecto, :presence => true 
+  validates :actividad, :presence => true
+  validates :estado_actividad, :presence => true 
 end

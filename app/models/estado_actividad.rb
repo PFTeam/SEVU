@@ -21,4 +21,8 @@ class EstadoActividad < ActiveRecord::Base
       estadosPosibles = [estado_actual]
     end
   end
+
+  def to_s
+	  nombre
+  end
 end

@@ -1,0 +1,4 @@
+<%= f.simple_fields_for :requisitos do |requisito| %>
+	<%= requisito.input :habilidad_id, collection: @habilidades %>
+	<%= requisito.input :actividad_id,:as => :hidden, input_html: {value: :actividad_id} %>
+<%end%>

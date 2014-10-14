@@ -31,4 +31,7 @@ class Habilidad < ActiveRecord::Base
     case_sensitive: false
   }
 
+ def to_s
+	 nombre
+ end
 end
