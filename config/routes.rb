@@ -89,8 +89,9 @@ Rails.application.routes.draw do
   resources :proyectos do
     resources :asignacion_roles
     resources :notificacion_predeterminadas
+    resources :historial_estado_proyectos
 
-  get 'notificaciones_predeterminadas' => 'notificacion_predeterminadas#notificaciones_predeterminadas', :as => 'notificaciones_predeterminadas'
+    get 'notificaciones_predeterminadas' => 'notificacion_predeterminadas#notificaciones_predeterminadas', :as => 'notificaciones_predeterminadas'
 
     resources :objetivo_generales
     resources :postulaciones
