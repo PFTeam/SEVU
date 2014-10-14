@@ -2,17 +2,33 @@
 <h2>Control por Fecha</h2>
 <div class="col-lg-12">
 	<div class="col-lg-3">
-    <h3><small>Fecha Desde</small></h3>
-		<!-- f.input :fecha_inicio, label: 'Fecha Desde', placeholder: 'dd-mm-aaaa', :required => true, :autofocus => true -->
-	<% datetime_select("article", "written_on", prompt: {hour: true})  %>
-    <input type="text/css"  placeholder="dd-mm-aaaa" id="fecha_inicio">
-    <h3><small>Fecha Hasta</small></h3>
-    <input type="text/css" class="span1" placeholder="dd-mm-aaaa" id="fecha_fin">
+		<br></br>
+		<% if params[:fi_day] != nil %>
+		<% fecha_inicio = Time.new %>
+		<% fecha_inicio = fecha_inicio.change(day: params[:fi_day].to_i ) %>
+		<% fecha_inicio.to_date  %>
+		<% end %>
+		<%= label(fecha_inicio, "Fecha Desde: ") %>
+		<%= fecha_inicio=date_select( fecha_inicio, order: [:day, :month, :year]) %>
+		<br></br>
+		<% if params[:fecha_fin] != nil %>
+		 <% fecha_fin= Time.parse(params[:fecha_fin])%>
+		<% end %>
+		<%= label(fecha_fin, "Fecha Hasta: ") %>
+		<%= fecha_fin=date_select( fecha_fin,  order: [:day, :month, :year]) %>
     <br></br>
-		<td><%= link_to 'Buscar', control_fecha_path ,  { :class=>"btn btn-primary btn-lg" }   %></td>
+		<td><%= link_to 'Buscar', control_fecha_path(:fi_day => fecha_inicio.to_date.day, :fi_month => fecha_inicio.to_date.month) ,  { :class=>"btn btn-primary btn-lg" }   %></td>
   </div>
+	<% if params[:fi_day] != nil && params[:fi_month] != nil %>
+<!----->
+			<% fecha_inicio = Time.new %>
+			<% fecha_fin = Time.new %>
+			<% fecha_inicio= fecha_inicio.beginning_of_day().change(day: 4) %>
+			<br></br>
+			<% fecha_fin= fecha_fin.end_of_day() %>
+<!----->
   <div class="table-responsive  col-lg-9">
-  	<h3>Transacciones</h3>
+  	<h3>Transacciones del <%= fecha_inicio.to_date %> al <%= fecha_fin.to_date %></h3>
     <table class="table table-hover table-striped tablesorter">
       <thead>
         <tr>
@@ -21,17 +37,19 @@
           <th class="col-lg-7">Descripción </th>
         </tr>
      </thead>
-     <tbody>
-			 <% Transaccion.all.each do |transaccion| %>
-       <!--  if created_at between fecha_inicio and fecha_fin %> -->
+     <tbody>			
+			<% Transaccion.all.each do |transaccion| %>
+  		 <% if transaccion.created_at.between?(fecha_inicio.to_date, fecha_fin.to_date) %> 
        <tr>
        	 <td><%= transaccion.created_at %></td>
-				 <td><!-- Usuario.find(Sesion.find(transaccion.sesion_id).usuario_id).nombreUsuario --></td>    
+				 <td><%= Usuario.find(Sesion.find(transaccion.sesion_id).usuario_id).nombreUsuario  %></td>    
          <td><%= transaccion.descripcion %></td>
        </tr>
 			 <% end %>
+			 <% end %>
      </tbody>
-   </table>        
+   </table> 
+		<% end %>       
   </div>
 </div>
 

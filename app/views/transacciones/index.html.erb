@@ -16,7 +16,7 @@
     <% @transacciones.each do |transaccion| %>
       <tr>
         <td><%= transaccion.descripcion %></td>
-        <td><%= transaccion.fechaTransaccion %></td>
+        <td><%= transaccion.created_at %></td>
         <td><%= transaccion.proyecto %></td>
         <td><%= transaccion.tipo_transaccion %></td>
         <td><%= transaccion.sesion %></td>

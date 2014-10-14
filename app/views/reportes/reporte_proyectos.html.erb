@@ -3,10 +3,11 @@
 	<h2>Reporte de Proyectos</h2>
 </div>
 <div class="col-lg-6">
-	<a href="reporte_generado" class="btn btn-primary btn-lg active" role="button">Generar Reporte</a>
+	<br></br>
+	<%= link_to 'Generar Reporte', reporte_generado_path ,  { :class=>"btn btn-primary btn-lg" } %>
 </div>
 <div class="col-lg-12">
-	<div class="table-responsive  col-lg-3">
+	<div class="table-responsive  col-lg-4">
 		<h3>Proyectos Disponibles</h3>
 		<table class="table table-hover table-striped tablesorter">
 			<thead>
@@ -20,31 +21,14 @@
 				<tr>
 					<td><%= proyecto.nombre %></td>
 					<td><%= proyecto.fechaInicio %></td>
+					<td><%= check_box_tag proyecto.id, '', false %></td>
 				</tr>
 			<% end %>
 			</tbody>
 		</table>
 	</div>
-	<div class="table-responsive  col-lg-3">
-		<h3>Proyectos a Reportar</h3>
-		<table class="table table-hover table-striped tablesorter">
-			<thead>
-         <tr>
-           <th class="col-lg-6">Nombre</th>
-					 <th class="col-lg-6">Fecha Inicio </th>
-         </tr>
-      </thead>
-			<tbody>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></i> <i class="fa fa-trash-o"></i></td>
-				</tr>	
-			</tbody>
-		</table>
-	</div>
-	<div class="table-responsive  col-lg-3">
-		<h3>Items</h3>
+	<div class="table-responsive  col-lg-8">
+		<h3>Items Disponibles</h3>
 		<table class="table table-hover table-striped tablesorter">
 			<thead>
          <tr>
@@ -55,76 +39,77 @@
 				<tbody>
           <tr>
             <td>Cantidad de proyectos en estado creado</td>
+						<td><%= check_box_tag 'item1', '', false %></td>
           </tr>
           <tr>
 						<td>Cantidad de proyectos en estado cancelado</td>
+						<td><%= check_box_tag 'item2', '', false %></td>
           </tr>
           <tr>
           	<td>Cantidad de proyectos en estado en ejecución</td>
+						<td><%= check_box_tag 'item3', '', false %></td>
           </tr>
           <tr>
             <td>Cantidad de proyectos en estado terminado</td>
+						<td><%= check_box_tag 'item4', '', false %></td>
           </tr>
           <tr>
             <td>Cantidad de proyectos en estado suspendido</td>
+						<td><%= check_box_tag 'item5', '', false %></td>
           </tr>
           <tr>
             <td>Cantidad de actividades por proyecto en estado creada</td>
+						<td><%= check_box_tag 'item6', '', false %></td>
           </tr>
           <tr>
             <td>Cantidad de actividades por proyecto en estado planificada</td>
+						<td><%= check_box_tag 'item7', '', false %></td>
           </tr>
           <tr>
             <td>Cantidad de actividades por proyecto en estado terminada</td>
+						<td><%= check_box_tag 'item8', '', false %></td>
           </tr>
           <tr>
             <td>Cantidad de actividades por proyecto en estado suspendida</td>
+						<td><%= check_box_tag 'item9', '', false %></td>
           </tr>
           <tr>
             <td>Cantidad de actividades por proyecto en estado cancelada</td>
+						<td><%= check_box_tag 'item10', '', false %></td>
           </tr>
           <tr>
             <td>Cantidad de actividades por proyecto en estado en ejecución</td>
+						<td><%= check_box_tag 'item11', '', false %></td>
           </tr>
           <tr>
             <td>Cantidad de voluntarios por proyecto en estado suspendido</td>
+						<td><%= check_box_tag 'item12', '', false %></td>
           </tr>
           <tr>
             <td>Cantidad de voluntarios por proyecto en estado activo</td>
+						<td><%= check_box_tag 'item13', '', false %></td>
           </tr>
           <tr>
             <td>Cantidad de voluntarios por proyecto estado suspendido</td>
+						<td><%= check_box_tag 'item14', '', false %></td>
           </tr>
           <tr>
             <td>Cantidad de presupuesto de cada proyecto</td>
+						<td><%= check_box_tag 'item15', '', false %></td>
           </tr>
           <tr>
             <td>Cantidad de horas efectivas realizadas de voluntariado por proyecto</td>
+						<td><%= check_box_tag 'item16', '', false %></td>
           </tr>
           <tr>
             <td>Cantidad de horas efectivas realizadas según tipo de actividad</td>
+						<td><%= check_box_tag 'item17', '', false %></td>
           </tr>
           <tr>
             <td>Cantidad de horas efectivas realizadas por proyecto según tipo de actividad</td>
+						<td><%= check_box_tag 'item18', '', false %></td>
           </tr>
 			</tbody>
  		</table>
-	</div>
-	<div class="table-responsive  col-lg-3">
-		<h3>Items a Reportar</h3>
-		<table class="table table-hover table-striped tablesorter">
-			<thead>
-         <tr>
-           <th class="col-lg-12">Nombre Item</th>
-         </tr>
-      </thead>
-			<tbody>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></i> <i class="fa fa-trash-o"></i></td>
-				</tr>
-			</tbody>
-		</table>
 	</div>
 </div>
