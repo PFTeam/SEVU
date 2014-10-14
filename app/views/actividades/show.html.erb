@@ -70,4 +70,5 @@
 </p>
 
 <%= link_to 'Edit', edit_actividad_path(@actividad) %> |
+<%= link_to 'Ver Historial', historial_estado_actividades_path(:actividad_id => @actividad.id)%> |
 <%= link_to 'Back', @actividad.objetivo_especifico %>
