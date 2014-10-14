@@ -137,6 +137,9 @@ Rails.application.routes.draw do
   get 'mis_necesidades', :as => 'necesidades/mis_necesidades', :controller => :necesidades
   #get 'notificaciones_predeterminadas/:id', :as => 'proyectos/:id/notificaciones_predeterminadas', :controller => :notificacion_predeterminadas
 
+  get 'agregar_habilidad', :controller => :actividades
+
+
   get 'crear_organizacion_externa', :controller => :proyectos
   get 'gestionar_presupuesto/:id' => 'presupuestos#gestionar_presupuesto', :as => 'gestionar_presupuesto'
   get 'gestionar_informe_gastos/:id' => 'informe_gastos#gestionar_informe_gastos', :as => 'gestionar_informe_gastos'
