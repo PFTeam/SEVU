@@ -112,6 +112,11 @@
                         <td>
                           <%= link_to '(Editar)',  edit_detalle_gasto_path(detalle) %> 
                           <%= link_to '(X)', [@informe_gasto, detalle], method: :delete, data: { confirm: 'Esta seguro?' }%>
+                          <% if !detalle.comprobante.nil? then %>
+                            <%= link_to '(Ver comprobante)', comprobant_path(detalle.comprobante), method: :get %>
+                          <% else %>
+                            <%= link_to '(Agregar comprobante)', new_comprobant_path(:detalle_gasto_id => detalle.id) %>  
+                          <% end %>
                         </td>
                     <% end %>
                   <% end %>

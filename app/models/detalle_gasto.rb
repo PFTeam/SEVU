@@ -19,4 +19,6 @@ class DetalleGasto < ActiveRecord::Base
       :presence => true,
       :allow_blank => false
 
+  validates_uniqueness_of :titulo, message: "- ya existe ese gasto"
+
 end
