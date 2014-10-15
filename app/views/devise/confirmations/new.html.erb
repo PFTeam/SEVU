@@ -1,9 +1,19 @@
 <!---->
+<%= simple_form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f| %>
+		 
+  <% if @usuario.errors.any? %>  
+<p class="alert alert-dismissable alert-danger">
+<% @usuario.errors.full_messages.each do |message| %>
+					<%= message %><br /> 
+      <% end %>
+</p>
+<% end %>
+
+  <%= f.full_error :confirmation_token %>
+
 <h2>Reenviar instrucciones de confirmación</h2>
 <br></br>
-<%= simple_form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f| %>
-  <%= f.error_notification %>
-  <%= f.full_error :confirmation_token %>
+
 
   <div class="form-inputs">
     <%= f.input :email, label: 'Correo Electrónico', placeholder: 'usuario@dominio.com', :required => true, :autofocus => true %>

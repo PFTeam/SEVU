@@ -1,7 +1,14 @@
 <!----->
-<h2>Restablecer Contraseña</h2>
 <%= simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
-  <%= f.error_notification %>
+<% if @usuario.errors.any? %>  
+<p class="alert alert-dismissable alert-danger">
+<% @usuario.errors.full_messages.each do |message| %>
+					<%= message %><br /> 
+      <% end %>
+</p>
+<% end %>
+<h2>Restablecer Contraseña</h2>
+
 	<br></br>
   <div class="inputs">
     <%= f.input :email, label: 'Correo Electrónico', placeholder: 'usuario@dominio.com', :required => true, :autofocus => true %>

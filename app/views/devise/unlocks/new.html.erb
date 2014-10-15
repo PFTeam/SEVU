@@ -1,9 +1,18 @@
 <!---->
+
+<%= simple_form_for(resource, :as => resource_name, :url => unlock_path(resource_name), :html => { :method => :post }) do |f| %>
+  <% if @usuario.errors.any? %>  
+<p class="alert alert-dismissable alert-danger">
+<% @usuario.errors.full_messages.each do |message| %>
+					<%= message %><br /> 
+      <% end %>
+</p>
+<% end %>
+
+	<%= f.full_error :unlock_token %>
 <h2>Enviar Instrucciones de desbloqueo</h2>
 <br></br>
-<%= simple_form_for(resource, :as => resource_name, :url => unlock_path(resource_name), :html => { :method => :post }) do |f| %>
-  <%= f.error_notification %>
-	<%= f.full_error :unlock_token %>
+
 
   <div class="form-inputs">
     <%= f.input :email, label: 'Correo Electrónico', placeholder: 'usuario@dominio.com', :required => true, :autofocus => true %>

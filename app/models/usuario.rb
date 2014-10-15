@@ -42,6 +42,7 @@ class Usuario < ActiveRecord::Base
 #  validates_attachment_presence :foto
 #  validates_attachment_size :foto, :less_than => 4.megabytes
 #  validates_attachment_content_type :foto, :content_type => ['image/jpeg', 'image/png']
+ validates_uniqueness_of :nombreUsuario
 
   def to_s
     apellido_nombre

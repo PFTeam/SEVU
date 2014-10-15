@@ -21,3 +21,9 @@
 
 en:
   hello: "Hello world"
+
+sp:
+  activerecord:
+    errors:
+      messages:
+        taken: "El %{model} ya sido utilizado"

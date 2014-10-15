@@ -3,32 +3,25 @@
 <div class="col-lg-12">
 	<div class="col-lg-3">
 		<br></br>
-		<% if params[:fi_day] != nil %>
 		<% fecha_inicio = Time.new %>
-		<% fecha_inicio = fecha_inicio.change(day: params[:fi_day].to_i ) %>
-		<% fecha_inicio.to_date  %>
+		<% if params[:fi_day] != nil %>
+		<% fecha_inicio.change(day: params[:fi_day].to_i, month: params[:fi_month].to_i, year: params[:fi_year].to_i).beginning_of_day() %>
 		<% end %>
 		<%= label(fecha_inicio, "Fecha Desde: ") %>
-		<%= fecha_inicio=date_select( fecha_inicio, order: [:day, :month, :year]) %>
+		<%= select_date( fecha_inicio,  order: [:day, :month, :year]) %><!--este ese el problema, no actualiza--->
 		<br></br>
-		<% if params[:fecha_fin] != nil %>
-		 <% fecha_fin= Time.parse(params[:fecha_fin])%>
+		<% fecha_fin= Time.new %>
+		<% if params[:ff_day] != nil %>
+		 <% fecha_fin.change(day: params[:ff_day].to_i, month: params[:ff_month].to_i, year: params[:ff_year].to_i).end_of_day() %>
 		<% end %>
 		<%= label(fecha_fin, "Fecha Hasta: ") %>
-		<%= fecha_fin=date_select( fecha_fin,  order: [:day, :month, :year]) %>
+		<%= select_date( fecha_fin,  order: [:day, :month, :year]) %><!--este ese el problema, no actualiza--->
     <br></br>
-		<td><%= link_to 'Buscar', control_fecha_path(:fi_day => fecha_inicio.to_date.day, :fi_month => fecha_inicio.to_date.month) ,  { :class=>"btn btn-primary btn-lg" }   %></td>
+		<td><%= link_to 'Buscar', control_fecha_path(:fi_day => fecha_inicio.day, :fi_month => fecha_inicio.month, :fi_year => fecha_inicio.year, :ff_day => fecha_fin.day, :ff_month => fecha_fin.month, :ff_year => fecha_fin.year) ,  { :class=>"btn btn-primary btn-lg" }   %></td>
   </div>
 	<% if params[:fi_day] != nil && params[:fi_month] != nil %>
-<!----->
-			<% fecha_inicio = Time.new %>
-			<% fecha_fin = Time.new %>
-			<% fecha_inicio= fecha_inicio.beginning_of_day().change(day: 4) %>
-			<br></br>
-			<% fecha_fin= fecha_fin.end_of_day() %>
-<!----->
   <div class="table-responsive  col-lg-9">
-  	<h3>Transacciones del <%= fecha_inicio.to_date %> al <%= fecha_fin.to_date %></h3>
+  	<h3>Transacciones del <%= fecha_inicio.day %>/<%= fecha_inicio.month %>/<%= fecha_inicio.year %> al <%= fecha_fin.day %>/<%= fecha_fin.month %>/<%= fecha_fin.year %> </h3>
     <table class="table table-hover table-striped tablesorter">
       <thead>
         <tr>

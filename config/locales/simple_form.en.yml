@@ -9,7 +9,6 @@ en:
       # When using html, text and mark won't be used.
       # html: '<abbr title="required">*</abbr>'
     error_notification:
-      default_message: "Porfavor revise los siguientes problemas:"
     # Labels and hints examples
     # labels:
     #   defaults:
@@ -22,5 +21,5 @@ en:
     # hints:
     #   defaults:
     #     username: 'User name to sign in.'
-    #     password: 'No special characters, please.'
+    #     password: 'No insertar caracteres especiales, por favor.'
 

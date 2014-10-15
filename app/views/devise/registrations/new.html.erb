@@ -1,5 +1,19 @@
 <!----->
- <h1>Sistema Estudiantil de Voluntariado Universitario</h1>
+ 
+<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  <% if @usuario.errors.any? %>
+    <div id="error_explanation">
+	      <ul>
+			<p class="alert alert-dismissable alert-danger">
+      <% @usuario.errors.full_messages.each do |message| %>
+					<%= message %><br /> <!--PARA DEVISE (los mensajes se encuentran en devise.en.yml)--->
+      <% end %>
+			</p>
+      </ul>
+    </div>
+  <% end %>
+
+<h1>Sistema Estudiantil de Voluntariado Universitario</h1>
 
  <ol class="breadcrumb">
   <li><i class="icon-dashboard"></i> Registro/</a></li>
@@ -8,17 +22,6 @@
   <% end -%>
  </ol>
 
-<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-  <% if @usuario.errors.any? %>
-    <div id="error_explanation">
-	      <ul>
-      <% @usuario.errors.full_messages.each do |message| %>
-        <font color="red"><li><%= message %></li></font>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <%= f.error_notification %>
 	<div class="col-lg-6">
 		<div class="form-inputs">
 			

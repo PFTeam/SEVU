@@ -4,11 +4,11 @@ en:
       invalid_date: "no es una fecha válida"
       invalid_time: "no es un tiempo valido"
       invalid_datetime: "no es una fecha y/o tiempo válido"
-      is_at: "must be at %{restriction}"
-      before: "must be before %{restriction}"
-      on_or_before: "must be on or before %{restriction}"
-      after: "must be after %{restriction}"
-      on_or_after: "must be on or after %{restriction}"
+      is_at: "tiene que estar en %{restriction}"
+      before: "tiene que estar antes de %{restriction}"
+      on_or_before: "tiene que estar dentro o antes de %{restriction}"
+      after: "tiene que estar despues de %{restriction}"
+      on_or_after: "tiene que estar dentro o despues de %{restriction}"
   validates_timeliness:
     error_value_formats:
       date: '%Y-%m-%d'
