@@ -9,9 +9,17 @@ class EstadoProyecto < ActiveRecord::Base
 
   def self.estados_posibles estado_actual
     if estado_actual.nombre == 'Creado'
-      estadosPosibles = [EstadoProyecto.find_by(nombre: 'En Ejecución'), EstadoProyecto.find_by(nombre: 'Cancelado'), estado_actual]
+	    if !self.fechaInicio.blank? && ( self.fechaInicio <= Time.now )
+		    estadosPosibles = [EstadoProyecto.find_by(nombre: 'En Ejecución'), EstadoProyecto.find_by(nombre: 'Cancelado'), estado_actual]
+	    else
+		    estadosPosibles = [EstadoProyecto.find_by(nombre: 'Cancelado'), estado_actual]
+	    end
     elsif estado_actual.nombre == 'En Ejecución'
-      estadosPosibles = [EstadoProyecto.find_by(nombre: 'Terminado'), EstadoProyecto.find_by(nombre: 'Suspendido'), EstadoProyecto.find_by(nombre: 'Cancelado'), estado_actual]
+	    if !self.fechaFin.blank? && ( self.fechaFin <= Time.now )
+		    estadosPosibles = [EstadoProyecto.find_by(nombre: 'Terminado'), EstadoProyecto.find_by(nombre: 'Suspendido'), EstadoProyecto.find_by(nombre: 'Cancelado'), estado_actual]
+	    else
+		    estadosPosibles = [EstadoProyecto.find_by(nombre: 'Suspendido'), EstadoProyecto.find_by(nombre: 'Cancelado'), estado_actual]
+	    end
     elsif estado_actual.nombre == 'Suspendido'
       estadosPosibles = [EstadoProyecto.find_by(nombre: 'En Ejecución'), EstadoProyecto.find_by(nombre: 'Cancelado'), estado_actual]
     elsif estado_actual.nombre == 'Cancelado'
