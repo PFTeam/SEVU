@@ -4,7 +4,9 @@ class HistorialEstadoActividadesController < ApplicationController
   # GET /historial_estado_actividades
   # GET /historial_estado_actividades.json
   def index
-    @historial_estado_actividades = HistorialEstadoActividad.all
+    @actividad = Actividad.find(params[:actividad_id])
+    @proyecto = @actividad.proyecto
+    #@historial_estado_actividades = HistorialEstadoActividad.all
   end
 
   # GET /historial_estado_actividades/1

@@ -153,9 +153,12 @@
           <% case controller_name 
             when 'proyectos'%><%= render '/shared/menu_proyecto' %>
             <% when 'asignacion_roles' %><%= render '/shared/menu_proyecto' %>
+            <% when 'historial_estado_proyectos' %><%= render '/shared/menu_proyecto' %>
+            <% when 'historial_estado_actividades' %><%= render '/shared/menu_objetivos' %>
             <% when 'necesidades' %><%= render '/shared/menu_necesidad' %>
 	    <% when 'organizacion_externas' %><%= render '/shared/menu_organizacion_externa' %>
 	    <% when 'objetivo_generales' %><%= render '/shared/menu_objetivos' %>
+	    <% when 'actividades' %><%= render '/shared/menu_objetivos' %>
 	    <% when 'objetivo_especificos' %><%= render '/shared/menu_objetivos' %>
 	    <% when 'actividades' %><%= render '/shared/menu_objetivos' %>
             <% when 'postulaciones' %><%= render '/shared/menu_proyecto' %>
@@ -169,8 +172,10 @@
             <% when 'detalle_restricciones' %><%= render '/shared/menu_detalle_restriccion' %>
             <% when 'estado_presupuestos' %><%= render '/shared/menu_estado_presupuestos' %>
             <% when 'presupuestos' %><%= render '/shared/menu_proyecto' %>
+            <% when 'detalle_presupuestos' %><%= render '/shared/menu_proyecto' %>
             <% when 'informe_gastos' %><%= render '/shared/menu_proyecto' %>
-				 
+            <% when 'detalle_gastos' %><%= render '/shared/menu_proyecto' %>
+            <% when 'comprobantes' %><%= render '/shared/menu_proyecto' %>				 
 
           <% end %>
         </div><!-- /.navbar-collapse -->

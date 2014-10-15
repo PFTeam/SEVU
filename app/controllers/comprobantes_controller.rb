@@ -1,5 +1,6 @@
 class ComprobantesController < ApplicationController
   before_action :set_comprobant, only: [:show, :edit, :update, :destroy]
+  before_action :set_detalle_gasto, only: [:new, :create]
 
   # GET /comprobantes
   # GET /comprobantes.json
@@ -15,6 +16,8 @@ class ComprobantesController < ApplicationController
   # GET /comprobantes/new
   def new
     @comprobant = Comprobante.new
+    @detalle_gasto = DetalleGasto.find params[:detalle_gasto_id]
+    #@comprobant.detalle_gasto_id = params[:detalle_gasto_id]# @detalle_gasto.id
   end
 
   # GET /comprobantes/1/edit
@@ -25,10 +28,10 @@ class ComprobantesController < ApplicationController
   # POST /comprobantes.json
   def create
     @comprobant = Comprobante.new(comprobant_params)
-
+    @comprobant.detalle_gasto = @detalle_gasto
     respond_to do |format|
       if @comprobant.save
-        format.html { redirect_to @comprobant, notice: 'Comprobante was successfully created.' }
+        format.html { redirect_to gestionar_informe_gastos_path(@comprobant.detalle_gasto.informe_gasto) }#@comprobant, notice: 'Comprobante was successfully created.' }
         format.json { render :show, status: :created, location: @comprobant }
       else
         format.html { render :new }
@@ -65,6 +68,10 @@ class ComprobantesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_comprobant
       @comprobant = Comprobante.find(params[:id])
+    end
+
+    def set_detalle_gasto
+      @detalle_gasto = DetalleGasto.find params[:detalle_gasto_id]
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -4,6 +4,7 @@ class HistorialEstadoProyectosController < ApplicationController
   # GET /historial_estado_proyectos
   # GET /historial_estado_proyectos.json
   def index
+    @proyecto = Proyecto.find(params[:proyecto_id])
     @historial_estado_proyectos = HistorialEstadoProyecto.all
   end
 

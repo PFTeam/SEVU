@@ -10,4 +10,5 @@ class Comprobante < ActiveRecord::Base
   validates_attachment_content_type :imagen, :content_type => ['image/jpeg', 'image/png']
 
 
+  validates_presence_of :detalle_gasto_id, message: "- Tiene que adjuntarse a un detalle"
 end

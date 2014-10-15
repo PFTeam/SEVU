@@ -1,5 +1,25 @@
-<h1>New comprobant</h1>
+<h1>Gestionar Informe de gastos <small>Administración de los gastos del proyecto</small></h1>
+<ol class="breadcrumb">
+  <li><i class="icon-dashboard"></i> Gestionar Informe de gastos</li>
+  <li><i class="icon-file-alt"></i> Agregar gasto </li>
+  <li class="active"><i class="icon-file-alt"></i> Agregar comprobante</li>
+</ol>
 
+<!--<h1>New detalle_gasto</h1>-->
+<br></br>
+<div align="center">
+  <%#= link_to 'Terminar sin agregar comprobante', gestionar_informe_gastos_path(@detalle_gasto.informe_gasto), :class => 'btn btn-default btn-lg center' %>
+</div>
+<!--<input id="detalle_gasto_id" type="hidden" value="<%#= params[:detalle_gasto_id] %>" />-->
 <%= render 'form' %>
 
-<%= link_to 'Back', comprobantes_path %>
+<div align="center">
+  <%#= link_to 'Terminar sin agregar gasto', gestionar_informe_gastos_path(@detalle_gasto.informe_gasto), :class => 'btn btn-default btn-lg center' %>
+</div>
+
+<%= link_to 'Back', :back %>
+<!--<h1>New comprobant</h1>-->
+
+<%#= render 'form' %>
+
+<%#= link_to 'Back', comprobantes_path %>

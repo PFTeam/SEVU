@@ -12,32 +12,31 @@ namespace :db do
 								       password: password, 
 								       password_confirmation: password,  
 								       apellido_nombre: "Sevu, Team",
-								       email: "sevu@github.com",
+								       email: "noguera.sistemas@gmail.com",
 								       direccion: Faker::Address.street_address,
-								       fechaRegistro: 1.week.ago..Time.now,
 								       telefono: Faker::PhoneNumber.cell_phone,
 								       fax: Faker::PhoneNumber.phone_number)
 
 
-    u1 =	Usuario.create!(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address, fechaRegistro: 1.week.ago..Time.now, telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number)
+    u1 =	Usuario.create!(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number)
 
-u2 =	Usuario.create!(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address, fechaRegistro: 1.week.ago..Time.now, telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number)
+u2 =	Usuario.create!(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number)
 
-u3 =	Usuario.create!(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address, fechaRegistro: 1.week.ago..Time.now, telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number)
+u3 =	Usuario.create!(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number)
 
-u4 =	Usuario.create!(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address, fechaRegistro: 1.week.ago..Time.now, telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number)
+u4 =	Usuario.create!(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number)
 
-u5 = 	Usuario.create(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password,  apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address, fechaRegistro: 1.week.ago..Time.now, telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number)
+u5 = 	Usuario.create(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password,  apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number)
 
-u6 =	Usuario.create(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password,  apellido_nombre: Faker::Name.name, email:Faker::Internet.email, direccion: Faker::Address.street_address, fechaRegistro: 1.week.ago..Time.now, telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number)
+u6 =	Usuario.create(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password,  apellido_nombre: Faker::Name.name, email:Faker::Internet.email, direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number)
 
-u7 =	Usuario.create(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address, fechaRegistro: 1.week.ago..Time.now, telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number)
+u7 =	Usuario.create(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number)
 
-u8 =	Usuario.create(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address, fechaRegistro: 1.week.ago..Time.now, telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number)
+u8 =	Usuario.create(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number)
 
-u9 =	Usuario.create(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address, fechaRegistro: 1.week.ago..Time.now, telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number)
+u9 =	Usuario.create(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number)
 
-u10 =	Usuario.create(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address, fechaRegistro: 1.week.ago..Time.now, telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number)
+u10 =	Usuario.create(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number)
 
 v = Voluntario.create!(nombreUsuario: "Voluntario",
 								       password: password, 
@@ -45,7 +44,6 @@ v = Voluntario.create!(nombreUsuario: "Voluntario",
 								       apellido_nombre: "Voluntario, Sevu",
 								       email: "voluntario@github.com",
 								       direccion: Faker::Address.street_address,
-								       fechaRegistro: 1.week.ago..Time.now,
 								       telefono: Faker::PhoneNumber.cell_phone,
 								       fax: Faker::PhoneNumber.phone_number,
 		      						       legajo: 34587,
@@ -113,7 +111,13 @@ v = Voluntario.create!(nombreUsuario: "Voluntario",
 
       DetalleGasto.create(titulo: "Almuerzo", descripcion: "Se gastó en un almuerzo", monto: 10, informe_gasto_id: informe_gasto.id, concepto_gasto: concepto1)
       DetalleGasto.create(titulo: "Cuadernos", descripcion: "Se gastó en un cuaderno para escribir", monto: 5, informe_gasto_id: informe_gasto.id, concepto_gasto: concepto2)
+      TipoHabilidad.create(nombre: "Programación", descripcion: "Conocimiento referidos a la programación")
+      TipoHabilidad.create(nombre: "Manualidades", descripcion: "Conocimiento vinculado con actividades creativas")
+      Habilidad.create(nombre: "Pintar", descripcion: "Saber pintar con cualquier elemento", tipo_habilidad: TipoHabilidad.find_by(nombre: "Manualidades"))
+      Habilidad.create(nombre: "Programación en Java", descripcion: "Programación en el lenguaje Java", tipo_habilidad: TipoHabilidad.find_by(nombre: "Programación"))
 
+      TipoActividad.create(nombre: "Reunión", descripcion: "Actividades destinadas a las reuniones de cualquier índole")
+      TipoActividad.create(nombre: "Voluntariado", descripcion: "Actividades destinadas a realizar trabajo de voluntariado")
 
   end
 

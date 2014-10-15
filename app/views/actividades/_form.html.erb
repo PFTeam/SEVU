@@ -1,4 +1,4 @@
-<%= form_for(@actividad) do |f| %>
+<%= simple_form_for(@actividad , html: actividad_form_html_options) do |f| %>
   <% if @actividad.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@actividad.errors.count, "error") %> prohibited this actividad from being saved:</h2>
@@ -11,59 +11,167 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :nombre %><br>
-    <%= f.text_field :nombre %>
-  </div>
-  <div class="field">
-    <%= f.label :descripcion %><br>
-    <%= f.text_area :descripcion %>
-  </div>
-  <div class="field">
-    <%= f.label :duracion %><br>
-    <%= f.number_field :duracion %>
-  </div>
-  <div class="field">
-    <%= f.label :duracionReal %><br>
-    <%= f.number_field :duracionReal %>
-  </div>
-  <div class="field">
-    <%= f.label :fechaEstimadaInicio %><br>
-    <%= f.date_select :fechaEstimadaInicio %>
-  </div>
-  <div class="field">
-    <%= f.label :fechaRealInicio %><br>
-    <%= f.date_select :fechaRealInicio %>
-  </div>
-  <div class="field">
-    <%= f.label :estrategiasIntervencion %><br>
-    <%= f.text_field :estrategiasIntervencion %>
-  </div>
-  <div class="field">
-    <%= f.label :metodologiasIntervencion %><br>
-    <%= f.text_area :metodologiasIntervencion %>
-  </div>
-  <div class="field">
-    <%= f.label :mecanismoEvaluacion %><br>
-    <%= f.text_area :mecanismoEvaluacion %>
-  </div>
-  <div class="field">
-    <%= f.label :resultadosEsperados %><br>
-    <%= f.text_area :resultadosEsperados %>
-  </div>
-  <div class="field">
-    <%= f.label :objetivo_especifico_id %><br>
-    <%= f.text_field :objetivo_especifico_id %>
-  </div>
-  <div class="field">
-    <%= f.label :proyecto_id %><br>
-    <%= f.text_field :proyecto_id %>
-  </div>
-  <div class="field">
-    <%= f.label :tipo_actividad_id %><br>
-    <%= f.text_field :tipo_actividad_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
+<div class="col-lg-6">
+          
+          
+                <label><h3>Titulo de la Actividad</h3></label></br>
+                <%= f.input :nombre %>
+                
+            
+          
+          	<label><h5>Repetitiva   </h5></label>  
+                    <input type="checkbox" value="" disabled>
+			
+            <div class="form-group">
+                <div class="radio-inline" disabled>
+                  <label>
+                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                    Por Semana
+                  </label>
+                </div>
+               <div class="radio-inline" disabled>
+                  <label>
+                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                    Por Mes
+                  </label>
+                </div>
+             </div>
+
+          
+                <label><h3>Descripción</h3>
+                </label>
+                <%= f.input :descripcion, :as => :text, :input_html => {:rows => 10}, label: false %>
+          
+          
+
+                <label><h3>Resultados Esperados</h3>
+                </label>
+                <%= f.input :resultadosEsperados, :as => :text, :input_html => {:rows => 10}, label: false %>
+
+
+                <label><h3>Metodologías de Intervención</h3>
+                </label>
+                <%= f.input :metodologiasIntervencion, :as => :text, :input_html => {:rows => 10}, label: false %>
+     
+
+
+                <label><h3>Entrategias de Intervención</h3>
+                </label>
+                <%= f.input :estrategiasIntervencion, :as => :text, :input_html => {:rows => 10}, label: false %>        
+
+ 
+          
+                <label><h3>Mecanismo de Evaluación</h3>
+                </label>
+                <%= f.input :mecanismoEvaluacion, :as => :text, :input_html => {:rows => 10}, label: false %>         
+          
+		<% if params[:proyecto_id] %>
+			<%= f.input :objetivo_especifico_id, :as => :hidden, input_html: {value: params[:objetivo_especifico_id]} %> 
+			<%= f.input :proyecto_id,:as => :hidden, input_html: {value: params[:proyecto_id]} %>
+		<% else %>
+			<%= f.input :objetivo_especifico_id, :as => :hidden, input_html: {value: @actividad.objetivo_especifico.id } %> 
+			<%= f.input :proyecto_id,:as => :hidden, input_html: {value: @actividad.proyecto.id } %>
+		<% end %>
+
+	 </div>
+
+
+
+<div class="col-lg-6">
+		
+         <div class="form-group">
+                <label><h3>Planificación</h3></label>  
+         </div>
+         
+         <div class="row">
+         
+	<div class="col-lg-6">
+                        <div class="form-group">
+                        
+                                <label><h5>Fecha Estimada</h5></label> 
+
+                                <%= f.input :fechaEstimadaInicio, label: false,  :as => :date %>
+
+
+                                <label><h5>Duración Estimada</h5></label>
+                                <%= f.input :duracion, label: false %>
+                        </div>
+	</div>
+            
+            
+            <div class="col-lg-6">
+          	<div class="form-group">
+            <h4>Repetitiva</h4>
+            
+            
+            
+          <label><h5>Día de la Semana</h5></label> 
+
+	<div class="form-group">
+                        <select name="select2" class="form-control" disabled>
+                                <option>Lunes</option>
+                                <option>Martes</option>
+                                <option>Miercoles</option>
+                                <option>Jueves</option>
+                                <option>Viernes</option>
+                                <option>Sábado</option>
+                                <option>Domingo</option>
+                              </select>
+	</div>
+
+            </div>
+</div>
+            
+            
+            
+            
+            </div>
+            
+
+
+    	<h3>Tipo de Actividad</h3>
+
+                    <%= f.input :tipo_actividad_id, collection: @tipoActividades, label: false %>
+            
+    
+        <h3>Habilidades Necesarias</h3>
+
+	<%= render :partial => 'requisitos', :locals => { :f => f } %>
+	<%#= link_to 'Agregar Habilidad', :controller => :actividades , :action => 'agregar_habilidad', remote: true, :locals => {:f => f}  %> 
+	<%= link_to 'Agregar Habilidad', agregar_habilidad_path(f, :format => :js ), remote: true %> 
+
+    
+     
+<h2>Asignar Recursos</h2>
+
+  <div class="form-group input-group">
+                <span class="input-group-addon">@</span>
+                <input type="text" class="form-control" placeholder="Username" disabled>
+              </div>
+                <label class="checkbox-inline">
+                  <input type="checkbox" disabled> Filtrada
+                </label>
+				</span><button type="button" class="btn btn-primary btn-sm pull-right" disabled>Agregar</button>
+
+
+    <h2>Cargar Planificación Real</h2>
+   
+    
+    	<label><h5>Fecha Real</h5></label>
+    	<%= f.input :fechaRealInicio, label: false,  :as => :date %>
+
+		  <label><h5>Duración Real</h5></label>
+	<%= f.input :duracionReal, label: false %>
+     </div>
+
+
+
+
+
+        <div class="modal-footer">
+          <%= f.button :submit, :class => 'btn btn-primary', :value => 'Confirmar' %>
+        </div>
+
+
 <% end %>

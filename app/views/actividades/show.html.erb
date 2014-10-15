@@ -64,6 +64,11 @@
   <strong>Tipo actividad:</strong>
   <%= @actividad.tipo_actividad %>
 </p>
+<p>
+  <strong>Estado Actividad:</strong>
+  <%= @actividad.historial_estado_actividades.last.estado_actividad %>
+</p>
 
 <%= link_to 'Edit', edit_actividad_path(@actividad) %> |
-<%= link_to 'Back', actividades_path %>
+<%= link_to 'Ver Historial', historial_estado_actividades_path(:actividad_id => @actividad.id)%> |
+<%= link_to 'Back', @actividad.objetivo_especifico %>
