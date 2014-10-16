@@ -141,6 +141,7 @@ Rails.application.routes.draw do
   #get 'notificaciones_predeterminadas/:id', :as => 'proyectos/:id/notificaciones_predeterminadas', :controller => :notificacion_predeterminadas
 
   get 'agregar_habilidad', :controller => :actividades
+  get 'historial_estado_proyectos/modificar', to: 'historial_estado_proyectos#modificar'
 
 
   get 'crear_organizacion_externa', :controller => :proyectos

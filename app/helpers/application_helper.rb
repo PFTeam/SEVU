@@ -67,6 +67,5 @@ module ApplicationHelper
         }.merge(remote_if_xhr || {})
       }
   end
-
 end
 

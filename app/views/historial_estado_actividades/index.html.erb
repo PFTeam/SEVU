@@ -14,12 +14,16 @@
     <% @actividad.historial_estado_actividades.each_with_index do |historial_estado_actividad, index| %>
       <tr>
         <td><%= historial_estado_actividad.estado_actividad %></td>
-        <td><%#= %></td>
         <td><%= historial_estado_actividad.updated_at %></td>
+	<td><% if index+1 == @actividad.historial_estado_actividades.size %> Sí <% else %> No <% end %></td>
+	<% if index+1 == @actividad.historial_estado_actividades.size %>
+		<%= link_to 'Modificar Ultimo Estado', edit_historial_estado_actividad_path(historial_estado_actividad) %> |
+	<% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
+<%= link_to 'Back', @actividad %>
 
