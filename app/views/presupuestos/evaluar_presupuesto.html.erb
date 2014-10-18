@@ -1,0 +1,86 @@
+<h1>Evaluar Presupuestos <small> Gestionar los presupuestos pendientes de evaluacion</small></h1>
+<ol class="breadcrumb">
+  <li><i class="icon-dashboard"></i> Evaluar Presupuestos</li>
+  <li><i class="icon-file-alt"></i> Visualizar Presupuestos pendientes</li>
+  <li class="active"><i class="icon-file-alt"></i> Evaluar presupuesto</li>
+</ol>
+<div class="row">
+      <div class="col-lg-12">
+            <h3><strong><%= @presupuesto.proyecto.nombre %> </strong></h3>
+            <small>
+                  <td><%#= link_to '(Modificar)', edit_concepto_gasto_path(concepto) %></td>
+                  <td><%#= link_to '(Eliminar)', concepto, method: :delete, data: { confirm: 'Esta seguro?' } %></td>
+            </small>
+            <h4> Descripción: </h4>
+            <% if @presupuesto.proyecto.breveDescripcion.nil? %>
+                  <p>(El proyecto no posee Descripción)</p>
+            <% else %>
+                   <p> <%= @presupuesto.proyecto.breveDescripcion %> </p>
+            <% end %>
+            <h4> Necesidad: </h4>
+            <% if @presupuesto.proyecto.necesidad.nil? %>
+                   <p>(El proyecto no posee Necesidad)</p>
+            <% else %>
+                   <p> <%= @presupuesto.proyecto.necesidad.descripcion %> </p>
+            <% end %>
+              <h4> Objetivos Generales: </h4>
+              <% if @presupuesto.proyecto.objetivo_generales.empty? %>
+                <p>(El proyecto no posee Objetivos)</p>
+              <% else %>
+                <% @presupuesto.proyecto.objetivo_generales.each do |obj| %>
+                  <p> - <%= obj.titulo %> </p>
+                <% end %>
+              <% end %>
+              <h4> Monto total: </h4>
+              <% if @presupuesto.montoTotal.nil? %>
+
+                <div class="input-group">
+                  <span class="input-group-addon">$</span>
+                  <input class="form-control" type="text" value="0 (Probablemente, no se ha detallado todavia)" disabled="disabled"></input>
+                </div>
+ 
+              <% else %>
+
+                <div class="input-group">
+                  <span class="input-group-addon">$</span>
+                  <input class="form-control" type="text" value=<%= number_with_precision(@presupuesto.montoTotal, :precision => 2)  %> disabled="disabled"></input>
+                </div>
+ 
+              <% end %>
+              <br></br>
+            <div align="center">  
+            <%= link_to 'Cancelar', :back, class: "btn btn-default btn-lg" %>
+            <%= link_to 'Aceptar', 
+                  presupuesto_path(@presupuesto, "aprobado" => true), 
+                  class: "btn  btn-primary btn-lg", 
+                  :method => :put
+                     %>
+            <%= link_to 'Rechazar', 
+                   presupuesto_path(@presupuesto, "aprobado" => false), 
+                   class: "btn btn-danger btn-lg", 
+                   :method => :put
+                    %>
+            </div>
+      </div>
+</div>
+
+
+    <!-- JavaScript -->
+    <script src="../../js/jquery-1.10.2.js"></script>
+    <script src="../../js/bootstrap.js"></script>
+
+    <!-- Page Specific Plugins -->
+    
+    <!--
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    -->
+     
+   <script src="../../js/raphael-min.js"></script>
+    
+    <!--
+   <script src="http://cdn.oesmith.co.uk/morris-0.4.3.min.js"></script>
+    -->
+    <script src="../../js/morris-0.4.3.min.js"></script>
+    <script src="../../js/morris/chart-data-morris.js"></script>
+    <script src="../../js/tablesorter/jquery.tablesorter.js"></script>
+    <script src="../../js/tablesorter/tables.js"></script>
