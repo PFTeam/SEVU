@@ -89,6 +89,9 @@ Rails.application.routes.draw do
   resources :historial_estado_proyectos
 
   resources :proyectos do
+	  member do
+		  get :agregar_necesidad
+	  end
     resources :asignacion_roles
     resources :notificacion_predeterminadas
     resources :historial_estado_proyectos
