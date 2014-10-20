@@ -25,7 +25,7 @@ class EventoPublicosController < ApplicationController
   # POST /evento_publicos.json
   def create
     @evento_publico = EventoPublico.new(evento_publico_params)
-
+    @evento_publico.usuario = current_usuario
     respond_to do |format|
       if @evento_publico.save
         format.html { redirect_to @evento_publico, notice: 'Evento publico was successfully created.' }

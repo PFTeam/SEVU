@@ -1,0 +1,20 @@
+<%= simple.form_for(@historial_estado_proyecto, html: historial_estado_proyecto_form_html_options ) do |f| %>
+  <% if @historial_estado_proyecto.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@historial_estado_proyecto.errors.count, "error") %> prohibited this historial_estado_proyecto from being saved:</h2>
+
+      <ul>
+      <% @historial_estado_proyecto.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  	<%= f.input :proyecto_id, :value => params[:proyecto_id]  %><br>
+
+	<%= f.input :proyecto_id, :collection => @estados_posibles  %><br>
+  <div class="actions">
+	   <%= f.button :submit, :class => 'btn btn-primary', :value => 'Confirmar' %>
+  </div>
+<% end %>

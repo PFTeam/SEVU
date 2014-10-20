@@ -15,11 +15,16 @@
       <tr>
 	      <td><%= historial_estado_proyecto.estado_proyecto %></td>
 	      <td><%= historial_estado_proyecto.updated_at %></td>
+	      <td><% if index+1 == @proyecto.historial_estado_proyectos.size %> Sí <% else %> No <% end %></td>
 	      <td><%=  %> </td>
       </tr>
+	<% if index+1 == @proyecto.historial_estado_proyectos.size %>
+		<%= link_to 'Modificar Ultimo Estado', edit_historial_estado_proyecto_path(historial_estado_proyecto, :proyecto_id => @proyecto.id) %> |
+	<% end %>
     <% end %>
   </tbody>
 </table>
+
 
 <br>
 

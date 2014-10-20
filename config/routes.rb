@@ -89,6 +89,9 @@ Rails.application.routes.draw do
   resources :historial_estado_proyectos
 
   resources :proyectos do
+	  member do
+		  get :agregar_necesidad
+	  end
     resources :asignacion_roles
     resources :notificacion_predeterminadas
     resources :historial_estado_proyectos
@@ -141,6 +144,7 @@ Rails.application.routes.draw do
   #get 'notificaciones_predeterminadas/:id', :as => 'proyectos/:id/notificaciones_predeterminadas', :controller => :notificacion_predeterminadas
 
   get 'agregar_habilidad', :controller => :actividades
+  get 'historial_estado_proyectos/modificar', to: 'historial_estado_proyectos#modificar'
 
 
   get 'crear_organizacion_externa', :controller => :proyectos

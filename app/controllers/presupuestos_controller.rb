@@ -49,6 +49,9 @@ class PresupuestosController < ApplicationController
         format.html { render :edit }
         format.json { render json: @presupuesto.errors, status: :unprocessable_entity }
       end
+      if @presupuesto.update_attributes presupuesto_params#:aprobado #presupuesto_params #params[:presupuesto]
+        format.html { redirect_to :back }#evaluar_presupuestos_pendientes_path }
+      end
     end
   end
 
@@ -70,42 +73,24 @@ class PresupuestosController < ApplicationController
     @conceptos = @presupuesto.concepto_gastos
     @conceptos_no_usados = ConceptoGasto.all - @conceptos
     @proyecto = @presupuesto.proyecto
-    #ConceptoGasto.all.each do |concept|                   #
-    #  flag = 0                                            #
-    #  @detalles_presupuesto.each do |det|                 #
-    #    if det.concepto_gasto == concept then             #
-    #      @conceptos = @conceptos.to_a.push concept       #  
-    #      flag = 1                                        #
-    #    end                                               #
-    #  end                                                 # Esto es para traer los conceptos que son usados solamente
-    #  if flag == 0 then                                   #
-    #    @conceptos_no_usados = @conceptos_no_usados.to_a.push concept
-    #  end                                                 #
-    # end                                                  #
-    #if !@conceptos.nil? then                              #el metodo uniq solo deja las instancias unicas, saca las
-    #  @conceptos = @conceptos.uniq                        #repetidas dentro del arreglo
-    #end                                                   #
-    #if !@conceptos_no_usados.nil? then                    #
-    #  @conceptos_no_usados = @conceptos_no_usados.uniq    #
-    #end                                                   #
 
-    #@conceptos = ConceptoGasto.all                 # Esto era para buscar todos los conceptos
   end
 
   def evaluar_presupuestos_pendientes
-    @presupuestos = Presupuesto.all.select { |m| m.aprobado == false }
+    @presupuestos = Presupuesto.all.select { |m| m.aprobado == nil }
   end
 
   def evaluar_presupuesto
     @presupuesto = Presupuesto.find params[:id]
   end
 
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_presupuesto
       @presupuesto = Presupuesto.find(params[:id])
     end
-    
+
     def get_proyecto
       return self.proyecto_id
     end

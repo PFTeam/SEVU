@@ -1,6 +1,24 @@
-<h1>Editing historial_estado_actividad</h1>
+<h1>Editando Historial Estado Actividad</h1>
 
-<%= render 'form' %>
+<%= simple_form_for(@historial_estado_actividad) do |f| %>
+  <% if @historial_estado_actividad.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@historial_estado_actividad.errors.count, "error") %> prohibited this historial_estado_actividad from being saved:</h2>
 
-<%= link_to 'Show', @historial_estado_actividad %> |
-<%= link_to 'Back', historial_estado_actividades_path %>
+      <ul>
+      <% @historial_estado_actividad.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.input :actividad_id, :as => :hidden, input_html: {value: @historial_estado_actividad.actividad.id} %><br>
+  <%= f.input :estado_actividad_id, collection: @estados_posibles, :label => 'Estado' %>
+
+        <div class="modal-footer">
+  <%= f.button :submit, :class => 'btn btn-primary', :value => 'Confirmar' %><br>
+        </div>
+<% end %>
+
+<%= link_to 'Back', historial_estado_actividades_path(:actividad_id => @historial_estado_actividad.actividad.id) %>
