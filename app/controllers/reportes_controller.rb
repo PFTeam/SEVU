@@ -42,7 +42,7 @@ class ReportesController < ApplicationController
   # POST /reportes
   # POST /reportes.json
   def create
-    @reporte = Reporte.new(report_params)
+    @reporte = Reporte.new(reporte_params)
 
     respond_to do |format|
       if @reporte.save
@@ -60,7 +60,7 @@ class ReportesController < ApplicationController
   # PATCH/PUT /reportes/1.json
   def update
     respond_to do |format|
-      if @report.update(report_params)
+      if @reporte.update(reporte_params)
         format.html { redirect_to @reporte, notice: 'Reporte was successfully updated.' }
         format.json { render :show, status: :ok, location: @reporte }
       else
