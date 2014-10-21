@@ -54,7 +54,10 @@ Rails.application.routes.draw do
 
   resources :notas
 
-  resources :asignacion_roles
+  resources :asignacion_roles do
+	resources :reportes
+  end
+
 
   resources :roles
 

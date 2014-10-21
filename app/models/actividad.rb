@@ -11,6 +11,7 @@ class Actividad < ActiveRecord::Base
 
   has_many :asignacion_actividades
   has_many :usuarios, :through => :asignacion_actividades
+  has_many :reportes, :through => :asignacion_actividades
   
   accepts_nested_attributes_for :requisitos
 
@@ -28,5 +29,7 @@ class Actividad < ActiveRecord::Base
     end
 	  # FALTA CUANDO SE CARGA EL REPORTE PASAR A TERMINADA
   end
-
+def to_s
+	nombre
+end
 end
