@@ -1,67 +1,48 @@
-<h1>Gestionar Restricciones de Gastos <small>Administración de las restricciones de gastos</small></h1>
+<h1>Gestionar Restricciones de Gastos <small>Administración de las restricciones</small></h1>
 <ol class="breadcrumb">
   <li><i class="icon-dashboard"></i> Gestionar Restricciones</li>
   <li class="active"><i class="icon-file-alt"></i> Restricciones</li>
 </ol>
-
+<!TODO: agregar mensaje de error mas bonito en el form>
 <div class="row">
   <div class="col-lg-12">
     <% if @restricciones.empty? then %>
       <h4> No existen actualmente restricciones </h4>
     <% else %>   
       <% @restricciones.each do |restriccion|%>
-        <div class="col-lg-12">
+        <div class="col-lg-6">
           <div class="panel panel-primary">
             <div class="panel-heading">
               <h3 class="panel-title"> 
-                <%= restriccion.tipo_proyecto.nombre %>
-                <! TODO: Eliminar las restricciones, y a su vez los detalles >
+                <%#= restriccion.nombre %>
+                    <label>Aplicado a </label> <%= restriccion.concepto_gasto.titulo %> <%= link_to '(Editar)', edit_restriccion_path(restriccion) %>
               </h3>
             </div>
             <div class="panel-body">
-              <div class="row">
-                <% restriccion.detalle_restricciones.each do |detalle|%>
-                  <div class="col-lg-6">
-                    <div class="panel panel-default">
-                      <div class="panel-heading">
-                        <h4 class="panel-title"> 
-                          <%= detalle.concepto_gasto.titulo %> 
-                          <small>
-                            <td><%= link_to '(Modificar)', edit_detalle_restriccion_path(detalle) %></td>
-                            <td><%= link_to '(Eliminar)', [restriccion, detalle], method: :delete, data: { confirm: 'Esta seguro?' } %></td>
-                          </small>
 
-                        </h4> 
-                      </div>
-                      <div class="panel-body">
-                        <label> Monto maximo</label>
-                        <p><%= number_with_precision(detalle.montoMax, :precision => 2) %></li></p>
-                        <label> Fecha de Inicio </label>
-                        <p><%= detalle.fechaDesde.strftime("%d/%m/%Y") %>
+                        <label> Monto maximo:</label>
+                        <p><%= number_with_precision(restriccion.montoMax, :precision => 2) %></li></p>
+                        <label> Fecha de creación:</label>
+                        <p><%= restriccion.created_at.strftime("%d/%m/%Y") %></p>
+                        <label> Fecha de la última modificación: </label>
+                        <p><%= restriccion.updated_at.strftime("%d/%m/%Y") %></p>
                         <div align="center">
                           <%= link_to(
-                            detalle.esActiva ? 'Desactivar' : 'Activar',
-                            detalle_restriccion_path(detalle, detalle_restriccion: { esActiva: !detalle.esActiva }),
-                            class: "btn #{detalle.esActiva ? 'btn-success' : 'btn-default'}",
+                            restriccion.esActiva ? 'Desactivar' : 'Activar',
+                            restriccion_path(restriccion, restriccion: { esActiva: !restriccion.esActiva }),
+                            class: "btn #{restriccion.esActiva ? 'btn-success' : 'btn-default'}",
                             data: { method: :put }
                           ) %>
+                          <%#= link_to restriccion.esActiva ? 'Desactivar' : 'Activar', activar_desactivar( restriccion.id ) %>
+
                         </div>
                       </div>
                     </div>
                   </div>
                 <% end %>
-                <div align="center"> 
-                  <br></br>
-                  <%= link_to "Agregar detalle", 
-                    new_restriccion_detalle_restriccion_path(restriccion), 
-                    class: "btn btn-primary btn-lg" 
-                  %> 
-                </div>
+
               </div>
             </div>
-          </div>
-        </div>
-      <% end %>
     <% end %>
     <div align="center">  
       <%= link_to "Agregar restricción", new_restriccion_path, class: "btn btn-primary btn-lg" %> 

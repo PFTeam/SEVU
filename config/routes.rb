@@ -42,9 +42,7 @@ Rails.application.routes.draw do
 
   resources :detalle_restricciones
 
-  resources :restricciones do
-    resources :detalle_restricciones #, only: [:new, :create]
-  end
+  resources :restricciones
 
   resources :postulaciones do
 	  member do

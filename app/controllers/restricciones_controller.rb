@@ -15,18 +15,19 @@ class RestriccionesController < ApplicationController
   # GET /restricciones/new
   def new
     @restriccion = Restriccion.new
-    @tipos_proyecto = TipoProyecto.all
+    @concepto_gastos = ConceptoGasto.all
   end
 
   # GET /restricciones/1/edit
   def edit
+     @concepto_gastos = ConceptoGasto.all
   end
 
   # POST /restricciones
   # POST /restricciones.json
   def create
     @restriccion = Restriccion.new(restriccion_params)
-
+    @concepto_gastos = ConceptoGasto.all
     respond_to do |format|
       if @restriccion.save
         format.html {redirect_to gestionar_restricciones_path}
@@ -42,10 +43,11 @@ class RestriccionesController < ApplicationController
   # PATCH/PUT /restricciones/1
   # PATCH/PUT /restricciones/1.json
   def update
+    @concepto_gastos = ConceptoGasto.all
     respond_to do |format|
       if @restriccion.update(restriccion_params)
-        format.html { redirect_to @restriccion, notice: 'Restriccion was successfully updated.' }
-        format.json { render :show, status: :ok, location: @restriccion }
+        format.html { redirect_to gestionar_restricciones_path }#@restriccion, notice: 'Restriccion was successfully updated.' }
+        #format.json { render :show, status: :ok, location: @restriccion }
       else
         format.html { render :edit }
         format.json { render json: @restriccion.errors, status: :unprocessable_entity }
@@ -64,34 +66,7 @@ class RestriccionesController < ApplicationController
   end
 
   def gestionar_restricciones
-    @restricciones = Restriccion.all #find(params[:id])
-    #@detalles_restriccion = DetalleRestriccion.where(restriccion_id: params[:id])#.order(:monto).reverse_order
-    #@presupuesto.montoTotal = @detalles_presupuesto.sum(:monto)
-    
-    #@restricciones.each do |restric|
-    #  @tipos_proyecto.to_a.push restric.tipo_proyecto
-    #end
-
-    #TipoProyecto.all.each do |tproy|                   #
-    #  flag = 0                                            #
-    #  @detalles_restriccion.each do |det|                 #
-    #    if det.restriccion.tipo_proyecto ==  then             #
-    #      @conceptos = @conceptos.to_a.push concept       #  
-    #      flag = 1                                        #
-    #    end                                               #
-    #  end                                                 # Esto es para traer los conceptos que son usados solamente
-    #  if flag == 0 then                                   #
-    #    @conceptos_no_usados = @conceptos_no_usados.to_a.push concept
-    #  end                                                 #
-    # end                                                  #
-    #if !@conceptos.nil? then                              #
-    #  @conceptos = @conceptos.uniq                        #
-    #end                                                   #
-    #if !@conceptos_no_usados.nil? then                    #
-    #  @conceptos_no_usados = @conceptos_no_usados.uniq    #
-    #end                                                   #
-
- 
+    @restricciones = Restriccion.all #find(params[:id]) 
   end
 
   private
@@ -102,6 +77,6 @@ class RestriccionesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def restriccion_params
-      params.require(:restriccion).permit(:fechaDesde, :fechaHasta, :esActiva, :tipo_proyecto_id)
+      params.require(:restriccion).permit(:concepto_gasto_id, :montoMax)
     end
 end

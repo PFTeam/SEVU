@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141012114822) do
+ActiveRecord::Schema.define(version: 20141020035328) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -152,20 +152,6 @@ ActiveRecord::Schema.define(version: 20141012114822) do
 
   add_index "detalle_presupuestos", ["concepto_gasto_id"], name: "index_detalle_presupuestos_on_concepto_gasto_id", using: :btree
   add_index "detalle_presupuestos", ["presupuesto_id"], name: "index_detalle_presupuestos_on_presupuesto_id", using: :btree
-
-  create_table "detalle_restricciones", force: true do |t|
-    t.boolean  "esActiva"
-    t.datetime "fechaDesde"
-    t.datetime "fechaHasta"
-    t.float    "montoMax"
-    t.integer  "restriccion_id"
-    t.integer  "concepto_gasto_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "detalle_restricciones", ["concepto_gasto_id"], name: "index_detalle_restricciones_on_concepto_gasto_id", using: :btree
-  add_index "detalle_restricciones", ["restriccion_id"], name: "index_detalle_restricciones_on_restriccion_id", using: :btree
 
   create_table "estado_actividades", force: true do |t|
     t.string   "nombre"
@@ -394,14 +380,12 @@ ActiveRecord::Schema.define(version: 20141012114822) do
     t.integer  "montoTotal"
     t.boolean  "aprobado"
     t.integer  "proyecto_id"
-    t.integer  "restriccion_id"
     t.integer  "usuario_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "presupuestos", ["proyecto_id"], name: "index_presupuestos_on_proyecto_id", using: :btree
-  add_index "presupuestos", ["restriccion_id"], name: "index_presupuestos_on_restriccion_id", using: :btree
   add_index "presupuestos", ["usuario_id"], name: "index_presupuestos_on_usuario_id", using: :btree
 
   create_table "privilegios", force: true do |t|
@@ -454,15 +438,16 @@ ActiveRecord::Schema.define(version: 20141012114822) do
   add_index "requisitos", ["habilidad_id"], name: "index_requisitos_on_habilidad_id", using: :btree
 
   create_table "restricciones", force: true do |t|
+    t.boolean  "esActiva"
     t.datetime "fechaDesde"
     t.datetime "fechaHasta"
-    t.boolean  "esActiva"
-    t.integer  "tipo_proyecto_id"
+    t.float    "montoMax"
+    t.integer  "concepto_gasto_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "restricciones", ["tipo_proyecto_id"], name: "index_restricciones_on_tipo_proyecto_id", using: :btree
+  add_index "restricciones", ["concepto_gasto_id"], name: "index_restricciones_on_concepto_gasto_id", using: :btree
 
   create_table "roles", force: true do |t|
     t.string   "nombre"
