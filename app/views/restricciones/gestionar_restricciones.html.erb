@@ -3,7 +3,6 @@
   <li><i class="icon-dashboard"></i> Gestionar Restricciones</li>
   <li class="active"><i class="icon-file-alt"></i> Restricciones</li>
 </ol>
-<!TODO: agregar mensaje de error mas bonito en el form>
 <div class="row">
   <div class="col-lg-12">
     <% if @restricciones.empty? then %>
@@ -14,7 +13,6 @@
           <div class="panel panel-primary">
             <div class="panel-heading">
               <h3 class="panel-title"> 
-                <%#= restriccion.nombre %>
                     <label>Aplicado a </label> <%= restriccion.concepto_gasto.titulo %> <%= link_to '(Editar)', edit_restriccion_path(restriccion) %>
               </h3>
             </div>
@@ -33,14 +31,11 @@
                             class: "btn #{restriccion.esActiva ? 'btn-success' : 'btn-default'}",
                             data: { method: :put }
                           ) %>
-                          <%#= link_to restriccion.esActiva ? 'Desactivar' : 'Activar', activar_desactivar( restriccion.id ) %>
-
                         </div>
                       </div>
                     </div>
                   </div>
                 <% end %>
-
               </div>
             </div>
     <% end %>
@@ -48,8 +43,7 @@
       <%= link_to "Agregar restricción", new_restriccion_path, class: "btn btn-primary btn-lg" %> 
     </div>
   </div>
-</div>
-        
+</div>        
 
     <!-- JavaScript -->
     <script src="../../js/jquery-1.10.2.js"></script>
