@@ -77,6 +77,6 @@ class RestriccionesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def restriccion_params
-      params.require(:restriccion).permit(:concepto_gasto_id, :montoMax)
+      params.require(:restriccion).permit(:concepto_gasto_id, :montoMax, :esActiva)
     end
 end
