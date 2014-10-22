@@ -4,6 +4,7 @@
   <title>S.E.V.U</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application', 'bootstrap' => true %>
+	<%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -159,12 +160,12 @@
 	    <% when 'organizacion_externas' %><%= render '/shared/menu_organizacion_externa' %>
 	    <% when 'objetivo_generales' %><%= render '/shared/menu_objetivos' %>
 	    <% when 'actividades' %><%= render '/shared/menu_objetivos' %>
+	    <% when 'reportes' %><%= render '/shared/menu_objetivos' %>
 	    <% when 'objetivo_especificos' %><%= render '/shared/menu_objetivos' %>
 	    <% when 'actividades' %><%= render '/shared/menu_objetivos' %>
             <% when 'postulaciones' %><%= render '/shared/menu_proyecto' %>
 	    <% when 'transacciones' %><%= render '/shared/menu_transacciones' %>
 	    <% when 'roles' %><%= render '/shared/menu_roles' %>
-            <% when 'reportes' %><%= render '/shared/menu_reportes' %>
             <% when 'concepto_gastos'%><%= render '/shared/menu_concepto_gasto' %>
             <% when 'tipo_habilidades' %><%= render '/shared/menu_tipo_habilidad' %>
             <% when 'habilidades' %><%= render '/shared/menu_habilidad' %>

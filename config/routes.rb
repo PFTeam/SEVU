@@ -52,7 +52,10 @@ Rails.application.routes.draw do
 
   resources :notas
 
-  resources :asignacion_roles
+  resources :asignacion_roles do
+	resources :reportes
+  end
+
 
   resources :roles
 
@@ -87,6 +90,9 @@ Rails.application.routes.draw do
   resources :historial_estado_proyectos
 
   resources :proyectos do
+	  member do
+		  get :agregar_necesidad
+	  end
     resources :asignacion_roles
     resources :notificacion_predeterminadas
     resources :historial_estado_proyectos
@@ -155,14 +161,6 @@ Rails.application.routes.draw do
 
 	get 'control_fecha' => 'transacciones#control_fecha', :as => 'control_fecha'
 
-	get 'reporte_voluntarios' => 'reportes#reporte_voluntarios', :as => 'reporte_voluntarios'
-	
-	get 'reporte_proyectos' => 'reportes#reporte_proyectos', :as => 'reporte_proyectos'
-
-	get 'reporte_regionales' => 'reportes#reporte_regionales', :as => 'reporte_regionales'
-
-	get 'reporte_generado' => 'reportes#reporte_generado', :as => 'reporte_generado'
-	
 	root :to => "necesidades#index"
 
   get 'gestionar_concepto_gastos' => 'concepto_gastos#gestionar_concepto_gastos', :as => 'gestionar_concepto_gastos'

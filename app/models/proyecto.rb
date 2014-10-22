@@ -47,12 +47,11 @@ class Proyecto < ActiveRecord::Base
 
   def self.activos
     #TODO: No devuelve solo los que el último estado es 'Activo'
-     Proyecto.includes(:estado_proyectos, :historial_estado_proyectos).joins(historial_estado_proyectos: :estado_proyecto).where('estado_proyectos.nombre =?', 'Creado')
+     Proyecto.include(:estado_proyectos, :historial_estado_proyectos).joins(historial_estado_proyectos: :estado_proyecto).where('estado_proyectos.nombre =?', 'Creado')
   end
 
   def self.participando usu
 	  Proyecto.joins(:asignacion_roles).where('asignacion_roles.usuario_id' => usu).uniq
-    #CONTROLAR QUE NO SE REPITAN!
   end
 
   def director

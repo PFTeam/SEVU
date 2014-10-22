@@ -51,6 +51,7 @@ gem 'paperclip'
 #gem 'thoughtbot-paperclip'
 gem 'devise', '~> 3.0.0.rc'
 #gem 'protected_attributes'	
+gem "chartkick"
 
 
 #Datepicker

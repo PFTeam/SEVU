@@ -7,6 +7,7 @@
 <%= link_to 'Editar Proyecto', edit_proyecto_path(@proyecto), remote: true, data: { target: 'modal', modal: true } %> |
 <%= link_to 'Crear Organizacion Externa', crear_organizacion_externa_path, remote: true, data: { target: 'modal', modal: true } %> |
 <%= link_to 'Agregar Organización Externa', new_colaborador_path(:proyecto_id => @proyecto.id), remote: true, data: { target: 'modal', modal: true } %> |
+<%= link_to 'Agregar Necesidad', agregar_necesidad_proyecto_path(@proyecto), remote: true, data: { target: 'modal', modal: true } %> |
 <%= link_to 'Ver Historial', historial_estado_proyectos_path(:proyecto_id => @proyecto.id)%> |
 <%#=# link_to 'Agregar Necesidad', new_necesidad_path, remote: true, data: { target: 'modal', modal: true } %> |
 
