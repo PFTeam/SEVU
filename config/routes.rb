@@ -150,6 +150,7 @@ Rails.application.routes.draw do
   
   
   get 'asignacion_actividad/dar_baja', to: 'asignacion_actividades#dar_baja'
+  get 'asignacion_rol/dar_baja', to: 'asignacion_roles#dar_baja'
 
 
   get 'crear_organizacion_externa', :controller => :proyectos

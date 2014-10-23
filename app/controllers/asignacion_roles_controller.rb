@@ -68,10 +68,22 @@ class AsignacionRolesController < ApplicationController
   # DELETE /asignacion_roles/1
   # DELETE /asignacion_roles/1.json
   def destroy
+    @proyecto_id = @asignacion_rol.proyecto.id
+    @asignacion_rol.save
+    respond_to do |format|
+      format.html { redirect_to :controller => 'asignacion_roles', :action => 'index', :proyecto_id => @proyecto_id
+		    flash[:notice] = 'El usuario fue desasignado de su rol.' }
+      format.json { head :no_content }
+    end
+  end
+
+  def dar_baja 
+    @asignacion_rol = AsignacionRol.find(params[:id])
     @asignacion_rol.esActual = false
     @asignacion_rol.save
     respond_to do |format|
-      format.html { redirect_to :controller => 'asignacion_roles', :action => 'index', :proyecto_id => @asignacion_rol.proyecto.id, notice: 'El usuario fue desasignado de su rol.' }
+      format.html { redirect_to :controller => 'asignacion_roles', :action => 'index', :proyecto_id => @asignacion_rol.proyecto.id, notice: 'El usuario fue desasignado de su rol.'
+		     flash[:notice] = 'La asignación fue dada de baja satisfactoriamente.' }
       format.json { head :no_content }
     end
   end
