@@ -77,6 +77,7 @@ Rails.application.routes.draw do
 
   resources :actividades do
   	resources :historial_estado_actividades
+  	resources :asignacion_actividades
   end
 
   resources :objetivo_especificos do
