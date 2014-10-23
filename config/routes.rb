@@ -147,6 +147,9 @@ Rails.application.routes.draw do
 
   get 'agregar_habilidad', :controller => :actividades
   get 'historial_estado_proyectos/modificar', to: 'historial_estado_proyectos#modificar'
+  
+  
+  get 'asignacion_actividad/dar_baja', to: 'asignacion_actividades#dar_baja'
 
 
   get 'crear_organizacion_externa', :controller => :proyectos

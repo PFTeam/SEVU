@@ -55,6 +55,18 @@ class AsignacionActividadesController < ApplicationController
     end
   end
 
+  def dar_baja
+    @asignacion_actividad = AsignacionActividad.find(params[:id])
+    @asignacion_actividad.vigente = false
+    respond_to do |format|
+      if @asignacion_actividad.save
+	      format.html { redirect_to :controller => 'asignacion_actividades', :action => 'index', :actividad_id => @asignacion_actividad.actividad.id
+		     flash[:notice] = 'La asignación fue dada de baja satisfactoriamente.' }
+        format.json { render :show, status: :created, location: @asignacion_actividad }
+      end
+    end
+  end
+
   # DELETE /asignacion_actividades/1
   # DELETE /asignacion_actividades/1.json
   def destroy

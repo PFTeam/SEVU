@@ -19,7 +19,8 @@
                         <td><%= asignacion.usuario %></td>
                         <td><%= asignacion.created_at.to_formatted_s(:rfc822)  %></td>
                         <td><%= asignacion.vigente %></td>
-                        <td><%= link_to 'Destroy', asignacion, method: :delete, data: { confirm: 'Are you sure?' } %> </td>
+                         <td><%= link_to 'Dar Baja', asignacion_actividad_dar_baja_path(:id => asignacion.id), data: {confirm: 'Are you sure?'} %> | 
+                        <%= link_to 'Destroy', asignacion, method: :delete, data: { confirm: 'Are you sure?' } %> </td>
                         <td>
                         </td>
                         <td>
