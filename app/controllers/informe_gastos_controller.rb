@@ -93,7 +93,6 @@ class InformeGastosController < ApplicationController
       @informe_gasto.montoTotal = @informe_gasto.detalle_gastos.sum(:monto)
     end
     @conceptos_no_usados = ConceptoGasto.all - @informe_gasto.concepto_gastos
-
   end
 
   private
