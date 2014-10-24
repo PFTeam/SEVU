@@ -28,6 +28,12 @@ class PresupuestosController < ApplicationController
 
     respond_to do |format|
       if @presupuesto.save
+         sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+        Transaccion.create!(
+          descripcion: 'Creacion del presupuesto del proyecto'+@presupuesto.proyecto.nombre,
+‪           sesion_id‬: sesion.id
+‪           proyecto_id‬: @presupuesto.proyecto.id
+        )
         format.html { redirect_to gestionar_presupuesto_path(@presupuesto) }#, notice: 'El Presupuesto fue creado exitosamente.' }
         #format.json { render :show, status: :created, location: @presupuesto }
       else
@@ -43,21 +49,33 @@ class PresupuestosController < ApplicationController
   def update
     respond_to do |format|
       if @presupuesto.update(presupuesto_params)
-        format.html { redirect_to @presupuesto, notice: 'El Presupuesto fue creado exitosamente.' }
+        sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+        Transaccion.create!(
+          descripcion: 'Modificacion del presupuesto del proyecto'+@presupuesto.proyecto.nombre,
+‪           sesion_id‬: sesion.id
+‪           proyecto_id‬: @presupuesto.proyecto.id
+        )
+        format.html { redirect_to :back }#@presupuesto, notice: 'El Presupuesto fue creado exitosamente.' }
         format.json { render :show, status: :ok, location: @presupuesto }
       else
         format.html { render :edit }
         format.json { render json: @presupuesto.errors, status: :unprocessable_entity }
       end
-      if @presupuesto.update_attributes presupuesto_params#:aprobado #presupuesto_params #params[:presupuesto]
-        format.html { redirect_to :back }#evaluar_presupuestos_pendientes_path }
-      end
+      #if @presupuesto.update_attributes presupuesto_params#:aprobado #presupuesto_params #params[:presupuesto]
+        #format.html { redirect_to :back }#evaluar_presupuestos_pendientes_path }
+      #end
     end
   end
 
   # DELETE /presupuestos/1
   # DELETE /presupuestos/1.json
   def destroy
+         sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+        Transaccion.create!(
+          descripcion: 'Destruccion del presupuesto del proyecto'+@presupuesto.proyecto.nombre,
+‪           sesion_id‬: sesion.id
+‪           proyecto_id‬: @presupuesto.proyecto.id
+        )
     @presupuesto.destroy
     respond_to do |format|
       format.html { redirect_to presupuestos_url, notice: 'Presupuesto was successfully destroyed.' }
