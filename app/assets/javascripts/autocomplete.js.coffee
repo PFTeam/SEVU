@@ -22,7 +22,7 @@ class Autocomplete
 
   _renderItem: (item) ->
     content = $ '<div></div>'
-    item.label ||= item.name
+    item.label ||= item.apellido_nombre
 
     content.append $('<span class="title"></span>').text item.apellido_nombre
     content.append $('<small></small>').text item.informal if item.informal
