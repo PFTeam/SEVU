@@ -1,13 +1,15 @@
 <h2>Recursos del Proyecto</h2>
+
+<p id="notice"><%= notice %></p>
        
               <table class="table table-hover table-striped tablesorter">
                 <thead>
                   <tr>
                     <th class="col-lg-3">Apellido y Nombre</th>
                     <th class="col-lg-3">Fecha Asignación </th>
-                    <th class="col-lg-3">Vigente</th>
-                    <th class="col-lg-3">Rol</th>
-                    <th class="col-lg-3"></th>
+                    <th class="col-lg-2">Vigente</th>
+                    <th class="col-lg-2">Rol</th>
+                    <th class="col-lg-5"></th>
                     <th></th>
                   </tr>
                 </thead>
@@ -20,8 +22,9 @@
                         <td><%= asignacion_rol.actual %></td>
                         <td><%= asignacion_rol.rol %></td>
                         <td>
-                            <%= link_to 'Editar', edit_asignacion_rol_path(asignacion_rol), remote: true, data: { target: 'modal', modal: true } %>
-                            <%= link_to 'Quitar', asignacion_rol, method: :delete, data: { confirm: 'Está seguro?' } %>
+                            <%= link_to 'Editar', edit_asignacion_rol_path(asignacion_rol), remote: true, data: { target: 'modal', modal: true } %> | 
+                            <%= link_to 'Quitar', asignacion_rol, method: :delete, data: { confirm: 'Está seguro?' } %> | 
+                            <%= link_to 'Dar Baja', asignacion_rol_dar_baja_path(:id => asignacion_rol.id), data: {confirm: 'Are you sure?'} %>
                         </td>
                         <td>
                              <i class="fa fa-minus"></i>
