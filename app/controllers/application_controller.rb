@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
 	#For Devise
 	before_filter :authenticate_usuario!
 	before_action :configure_permitted_parameters, if: :devise_controller?
+	before_action :cargar_notificaciones
 
   protected
 
@@ -15,6 +16,11 @@ class ApplicationController < ActionController::Base
    }
   end
 
-
+  def cargar_notificaciones
+	  @notificaciones = NotificacionSistema.find_by(usuarioDestino: current_usuario, notificado: false).to_a
+	  #@notificaciones = NotificacionSistema.all
+    
+  	
+  end
 
 end

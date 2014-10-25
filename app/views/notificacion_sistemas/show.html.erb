@@ -1,4 +1,41 @@
 <p id="notice"><%= notice %></p>
 
+
+
+<p>
+  <strong>Esactiva:</strong>
+  <%= @notificacion_sistema.esActiva %>
+</p>
+
+<p>
+  <strong>Mensaje:</strong>
+  <%= @notificacion_sistema.mensaje %>
+</p>
+
+<p>
+  <strong>Notificado:</strong>
+  <%= @notificacion_sistema.notificado %>
+</p>
+
+<p>
+  <strong>Usuariocreador:</strong>
+  <%= @notificacion_sistema.usuarioCreador %>
+</p>
+
+<p>
+  <strong>Usuariodestino:</strong>
+  <%= @notificacion_sistema.usuarioDestino %>
+</p>
+
+<p>
+  <strong>Evento publico:</strong>
+  <%= @notificacion_sistema.evento_publico %>
+</p>
+
+<p>
+  <strong>Proyecto:</strong>
+  <%= @notificacion_sistema.proyecto %>
+</p>
+
 <%= link_to 'Edit', edit_notificacion_sistema_path(@notificacion_sistema) %> |
 <%= link_to 'Back', notificacion_sistemas_path %>

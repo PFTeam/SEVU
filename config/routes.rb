@@ -109,7 +109,9 @@ Rails.application.routes.draw do
 
   resources :voluntarios
 
-  resources :usuarios
+  resources :usuarios do
+      resources :notificacion_sistemas
+  end
 
   resources :tipo_privilegios
 
