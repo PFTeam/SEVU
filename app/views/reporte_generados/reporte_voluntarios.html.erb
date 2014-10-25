@@ -1,0 +1,78 @@
+<!----->
+<div class="col-lg-6">
+	<h2>Reporte de Voluntarios</h2>
+</div>
+<div class="col-lg-6">
+		<br></br>
+	<%= link_to 'Generar Reporte', reporte_generado_path ,  { :class=>"btn btn-primary btn-lg" } %>
+</div>
+<div class="col-lg-12">
+	<div class="table-responsive  col-lg-4">
+		<h3>Voluntarios Disponibles</h3>
+		<table class="table table-hover table-striped tablesorter">
+			<thead>
+         <tr>
+           <th class="col-lg-6">Nombre Usuario</th>
+					 <th class="col-lg-6">Apellido y Nombre </th>
+         </tr>
+      </thead>
+			<tbody>
+			<% Usuario.all.each do |usuario| %>
+				<tr>
+					<td><%= usuario.nombreUsuario %></td>
+					<td><%= usuario.apellido_nombre %></td>
+					<td><%= check_box_tag usuario.id, '', false %></td>
+				</tr>
+			<% end %>
+			</tbody>
+		</table>
+	</div>
+	<div class="table-responsive  col-lg-8">
+		<h3>Items Disponibles</h3>
+		<table class="table table-hover table-striped tablesorter">
+			<thead>
+         <tr>
+           <th class="col-lg-12">Nombre Item</th>
+         </tr>
+      </thead>
+			<tbody>
+				<tr>
+					<td>Cantidad de voluntarios en estado suspendido</td>
+					<td><%= check_box_tag 'item1', '', false %></td>
+				</tr>
+				<tr>
+					<td>Cantidad de voluntarios en estado activo</td>
+					<td><%= check_box_tag 'item2', '', false %></td>
+				</tr>
+				<tr>
+					<td>Cantidad de voluntarios en estado suspendido</td>
+					<td><%= check_box_tag 'item3', '', false %></td>
+				</tr>
+				<tr>
+					<td>Cantidad de actividades en estado creada asociado a cada voluntario</td>
+					<td><%= check_box_tag 'item4', '', false %></td>
+				</tr>
+				<tr>
+					<td>Cantidad de actividades en estado planificada asociado a cada voluntario</td>
+					<td><%= check_box_tag 'item5', '', false %></td>
+				</tr>
+				<tr>
+					<td>Cantidad de actividades en estado suspendida asociado a cada voluntario</td>
+					<td><%= check_box_tag 'item6', '', false %></td>
+				</tr>
+				<tr>
+					<td>Cantidad de actividades en estado cancelada asociado a cada voluntario</td>
+					<td><%= check_box_tag 'item7', '', false %></td>
+				</tr>
+				<tr>
+					<td>Cantidad de actividades en estado terminada asociado a cada voluntario</td>
+					<td><%= check_box_tag 'item8', '', false %></td>
+				</tr>
+				<tr>
+					<td>Cantidad de horas efectivas realizadas por voluntario</td>
+					<td><%= check_box_tag 'item9', '', false %></td>
+				</tr>
+			</tbody>
+ 		</table>
+	</div>
+</div>

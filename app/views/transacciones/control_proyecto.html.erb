@@ -35,7 +35,7 @@
        </thead>
        <tbody>
 				<% Transaccion.all.each do |transaccion| %>
-				<% if transaccion.proyecto_id == project %>
+				<% if transaccion.proyecto_id != nil && transaccion.proyecto_id == project %>
        	<tr>
         	 <td><%= transaccion.created_at %></td>
 					 <td><%= Usuario.find(Sesion.find(transaccion.sesion_id).usuario_id).nombreUsuario %> </td>

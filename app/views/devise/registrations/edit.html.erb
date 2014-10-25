@@ -1,8 +1,8 @@
 <!---->
 <h2>Editar Usuario</h2>
  <ol class="breadcrumb">
-	<%= link_to "-Cancelar mi cuenta", registration_path(resource_name), :data => { :confirm => "Esta seguro de querer eliminar su cuenta de usuario?" }, :method => :delete %></p>
-	<!--<%= link_to "-Volver Atras", :back %>-->
+	<%= link_to "Cancelar mi cuenta", registration_path(resource_name), :data => { :confirm => "Esta seguro de querer eliminar su cuenta de usuario?" }, :method => :delete %></p>
+	<%= link_to "Volver Atras", :back %>
  </ol>
 
 <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
@@ -30,6 +30,7 @@
     <%= f.button :submit, "Actualizar Usuario", :class => "btn btn-primary btn-lg" %>
   </div>
 <% end %>
+	
 
 
 

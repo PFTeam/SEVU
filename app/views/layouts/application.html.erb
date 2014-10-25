@@ -74,9 +74,16 @@
                          <li>
                             <%= link_to 'Voluntarios', voluntarios_path %>
                          </li>
+												<% if can? :reporte_new, ReporteGenerado; %>
                          <li>
-                         <a href="../../seccion/reportes/vistaReporte.html">Reportes</a>
+                         <%= link_to 'Reportes', reporte_new_path %>
+													</li>
+												<% end %>
+												<% if can? :auditoria, Transaccion; %>
+												<li>
+												 <%= link_to 'Auditoría', auditoria_path %>
                          </li>
+												<% end %>
                          </ul>
                          <!--
   --->
@@ -133,6 +140,9 @@
                               <li><a href="#"><i class="fa fa-user"></i> Perfil</a></li>
 														  <li><a href="#"><i class="fa fa-user"></i> <%= link_to "Editar usuario", edit_usuario_registration_path %></a></li>
                               <li><a href="#"><i class="fa fa-gear"></i> Configuraciones</a></li>
+															<% if can? :read, Rol; %>
+																	<li><a href="#"><i class="fa fa-gear"></i> <%= link_to "Roles", roles_path %></a></li>
+															<% end %>
                               <li class="divider"></li>
                               <li><a href="#"><i class="fa fa-power-off"></i> <%= link_to 'Desconectarse', destroy_usuario_session_path, method: :delete  %></a></li>
                              </ul>
@@ -165,7 +175,7 @@
             <% when 'postulaciones' %><%= render '/shared/menu_proyecto' %>
 	    <% when 'transacciones' %><%= render '/shared/menu_transacciones' %>
 	    <% when 'roles' %><%= render '/shared/menu_roles' %>
-            <% when 'reportes' %><%= render '/shared/menu_reportes' %>
+            <% when 'reporte_generados' %><%= render '/shared/menu_reporte_generados' %>
             <% when 'concepto_gastos'%><%= render '/shared/menu_concepto_gasto' %>
             <% when 'tipo_habilidades' %><%= render '/shared/menu_tipo_habilidad' %>
             <% when 'habilidades' %><%= render '/shared/menu_habilidad' %>

@@ -6,7 +6,7 @@ if Usuario.find(record.id).confirmed?
 		fechaFin: nil
   )
 	Transaccion.create!(
-    descripcion: 'Inicio de sesión',
+    descripcion: 'Inicio de sesión del usuario '+record.nombreUsuario,
     sesion_id: sesion.id
   )
 end

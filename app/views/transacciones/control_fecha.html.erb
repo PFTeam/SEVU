@@ -27,7 +27,8 @@
         <tr>
           <th class="col-lg-3">Fecha</th>	
           <th class="col-lg-2">Usuario</th>
-          <th class="col-lg-7">Descripción </th>
+          <th class="col-lg-5">Descripción </th>
+					<th class="col-lg-2">Proyecto</th>
         </tr>
      </thead>
      <tbody>			
@@ -35,8 +36,11 @@
   		 <% if transaccion.created_at.between?(fecha_inicio.to_date, fecha_fin.to_date) %> 
        <tr>
        	 <td><%= transaccion.created_at %></td>
-				 <td><%= Usuario.find(Sesion.find(transaccion.sesion_id).usuario_id).nombreUsuario  %></td>    
-         <td><%= transaccion.descripcion %></td>
+				 <td><%= Usuario.find(Sesion.find(transaccion.sesion_id).usuario_id).nombreUsuario  %></td> 
+				 <td><%= transaccion.descripcion %></td>
+					 <% if transaccion.proyecto_id != nil %> 
+				 <td><%= Proyecto.find(transaccion.proyecto_id).nombre %></td>
+					<% end %>   
        </tr>
 			 <% end %>
 			 <% end %>

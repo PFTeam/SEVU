@@ -28,17 +28,21 @@
        <thead>
          <tr>
            <th class="col-lg-3">Fecha</th>
-           <th class="col-lg-10">Descripción </th>
+           <th class="col-lg-7">Descripción </th>
+					 <th class="col-lg-2">Proyecto </th>
            <th></th>
          </tr>
        </thead>
 				
        <tbody>
 				<% Transaccion.all.each do |transaccion| %>
-				<% if Sesion.find(transaccion.sesion_id).usuario_id == user %> 
+				<% if transaccion.sesion_id != nil && Sesion.find(transaccion.sesion_id).usuario_id == user %> 
        	<tr>
         	 <td><%= transaccion.created_at %></td>
         	 <td><%= transaccion.descripcion %></td>
+					  <% if transaccion.proyecto_id != nil %> 
+				 <td><%= Proyecto.find(transaccion.proyecto_id).nombre %></td>
+					<% end %>  
        	</tr>
 				<% end %>
 				<% end %>

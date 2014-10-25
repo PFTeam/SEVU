@@ -170,6 +170,21 @@ Rails.application.routes.draw do
 
   get 'evaluar_presupuesto/:id' => 'presupuestos#evaluar_presupuesto', :as => 'evaluar_presupuesto'
 
+	get 'auditoria' => 'transacciones#auditoria', :as => 'auditoria'
+
+	get 'reporte_voluntarios' => 'reporte_generados#reporte_voluntarios', :as => 'reporte_voluntarios'
+	
+	get 'reporte_proyectos' => 'reporte_generados#reporte_proyectos', :as => 'reporte_proyectos'
+
+	get 'reporte_regionales' => 'reporte_generados#reporte_regionales', :as => 'reporte_regionales'
+
+	get 'reporte_generado' => 'reporte_generados#reporte_generado', :as => 'reporte_generado'
+	
+	get 'reporte_new' => 'reporte_generados#reporte_new', :as => 'reporte_new'
+
+
+	
+
   #get 'gestionarPresupuesto', :controller => :presupuestos
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

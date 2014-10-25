@@ -4,6 +4,7 @@ class UsuariosController < ApplicationController
   # GET /usuarios
   # GET /usuarios.json
   def index
+		authorize! :index, Usuario
     @usuarios = Usuario.page(params[:page]).search query: params[:q]
     #@usuarios = Usuario.all
   end
@@ -11,20 +12,24 @@ class UsuariosController < ApplicationController
   # GET /usuarios/1
   # GET /usuarios/1.json
   def show
+		authorize! :show, Usuario
   end
 
   # GET /usuarios/new
   def new
+		authorize! :new, Usuario
     @usuario = Usuario.new
   end
 
   # GET /usuarios/1/edit
   def edit
+		authorize! :edit, Usuario
   end
 
   # POST /usuarios
   # POST /usuarios.json
   def create
+		authorize! :create, Usuario
     @usuario = Usuario.new(usuario_params)
 
     respond_to do |format|
@@ -41,6 +46,7 @@ class UsuariosController < ApplicationController
   # PATCH/PUT /usuarios/1
   # PATCH/PUT /usuarios/1.json
   def update
+		authorize! :update, Usuario
     respond_to do |format|
       if @usuario.update(usuario_params)
         format.html { redirect_to @usuario, notice: 'Usuario actualizado correctamente.' }
@@ -55,6 +61,7 @@ class UsuariosController < ApplicationController
   # DELETE /usuarios/1
   # DELETE /usuarios/1.json
   def destroy
+		authorize! :destroy, Usuario
     @usuario.destroy
     respond_to do |format|
       format.html { redirect_to usuarios_url, notice: 'Usuario eliminado correctamente.' }
