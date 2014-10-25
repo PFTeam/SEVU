@@ -21,7 +21,7 @@ class DetalleGastosController < ApplicationController
     @detalle_gasto = @informe_gastos.detalle_gastos.new
     #@detalle_gasto.informe_gastos_id = @informe_gasto.id
     @concepto_gastos = ConceptoGasto.all
-    #TODO: FALTA COMPROBAR EL VOLUNTARIO Y EL COMPROBANTE
+    @detalle_gasto.usuario_id = current_usuario.id
 
   end
 
@@ -35,7 +35,7 @@ class DetalleGastosController < ApplicationController
   # POST /detalle_gastos.json
   def create
     @detalle_gasto = @informe_gastos.detalle_gastos.new(detalle_gasto_params)
-
+    @detalle_gasto.usuario_id = current_usuario.id
     respond_to do |format|
       if @detalle_gasto.save
         #format.html { redirect_to gestionar_informe_gastos_path(@detalle_gasto.informe_gasto)} #@detalle_gasto, notice: 'Detalle gasto was successfully created.' }

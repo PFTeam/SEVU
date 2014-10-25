@@ -22,9 +22,9 @@ class Autocomplete
 
   _renderItem: (item) ->
     content = $ '<div></div>'
-    item.label ||= item.name
+    item.label ||= item.apellido_nombre
 
-    content.append $('<span class="title"></span>').text item.label
+    content.append $('<span class="title"></span>').text item.apellido_nombre
     content.append $('<small></small>').text item.informal if item.informal
 
     label: content.html(), value: item.label, item: item
@@ -45,7 +45,7 @@ class Autocomplete
     selected = ui.item
 
     @targetElement.val selected.item.id
-    @element.val selected.value
+    @element.val selected.item.apellido_nombre
     @element.trigger type: 'update.autocomplete', element: @element, item: selected.item
 
     false

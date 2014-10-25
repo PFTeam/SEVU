@@ -1,7 +1,6 @@
 class ConceptoGasto < ActiveRecord::Base
 
-  has_many :detalle_restricciones
-  has_many :restricciones, :through => :detalle_restricciones
+  has_one :restriccion
   has_many :detalle_presupuestos
   has_many :presupuestos, :through => :detalle_presupuestos
   has_many :detalle_gastos
@@ -10,7 +9,7 @@ class ConceptoGasto < ActiveRecord::Base
   before_destroy :tiene_restricciones?, :tiene_detalle_p?, :tiene_detalle_g?
 
   def tiene_restricciones?
-    if !detalle_restricciones.empty? then
+    if !restriccion.nil? then
       errors.add :base, 'No puede eliminarse debido a que existen restricciones que lo utilizan'
       return false
     else

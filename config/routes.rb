@@ -42,9 +42,7 @@ Rails.application.routes.draw do
 
   resources :detalle_restricciones
 
-  resources :restricciones do
-    resources :detalle_restricciones #, only: [:new, :create]
-  end
+  resources :restricciones
 
   resources :postulaciones do
 	  member do
@@ -54,7 +52,10 @@ Rails.application.routes.draw do
 
   resources :notas
 
-  resources :asignacion_roles
+  resources :asignacion_roles do
+	resources :reportes
+  end
+
 
   resources :roles
 
@@ -76,6 +77,7 @@ Rails.application.routes.draw do
 
   resources :actividades do
   	resources :historial_estado_actividades
+  	resources :asignacion_actividades
   end
 
   resources :objetivo_especificos do
@@ -107,7 +109,9 @@ Rails.application.routes.draw do
 
   resources :voluntarios
 
-  resources :usuarios
+  resources :usuarios do
+      resources :notificacion_sistemas
+  end
 
   resources :tipo_privilegios
 
@@ -145,6 +149,10 @@ Rails.application.routes.draw do
 
   get 'agregar_habilidad', :controller => :actividades
   get 'historial_estado_proyectos/modificar', to: 'historial_estado_proyectos#modificar'
+  
+  
+  get 'asignacion_actividad/dar_baja', to: 'asignacion_actividades#dar_baja'
+  get 'asignacion_rol/dar_baja', to: 'asignacion_roles#dar_baja'
 
 
   get 'crear_organizacion_externa', :controller => :proyectos
@@ -166,6 +174,8 @@ Rails.application.routes.draw do
 
   get 'evaluar_presupuestos_pendientes' => 'presupuestos#evaluar_presupuestos_pendientes', :as => 'evaluar_presupuestos_pendientes'
 
+  get 'presupuestos_evaluados' => 'presupuestos#presupuestos_evaluados', :as => 'presupuestos_evaluados'
+  
   get 'gestionar_estados_presupuestos' => 'estado_presupuestos#gestionar_estados_presupuestos', :as => 'gestionar_estados_presupuestos'
 
   get 'evaluar_presupuesto/:id' => 'presupuestos#evaluar_presupuesto', :as => 'evaluar_presupuesto'

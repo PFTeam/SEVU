@@ -1,15 +1,19 @@
 class NotificacionSistemasController < ApplicationController
   before_action :set_notificacion_sistema, only: [:show, :edit, :update, :destroy]
+  after_action :marcado_notificado, only: [:index]
 
   # GET /notificacion_sistemas
   # GET /notificacion_sistemas.json
   def index
-    @notificacion_sistemas = NotificacionSistema.all
+	  #@notificacion_sistemas = NotificacionSistema.all.where(usuarioDestino: current_usuario)
+	  @notificacion_sistemas = NotificacionSistema.all
   end
 
   # GET /notificacion_sistemas/1
   # GET /notificacion_sistemas/1.json
   def show
+	  @notificacion_sistema.notificado = true
+	  @notificacion_sistema.save
   end
 
   # GET /notificacion_sistemas/new
@@ -60,7 +64,15 @@ class NotificacionSistemasController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  def marcado_notificado
+	  #@notificacion_sistemas = NotificacionSistema.all.where(usuarioDestino: current_usuario)
+	  @notificacion_sistemas.each do |notificacion|
+		  if notificacion.notificado == false
+			  notificacion.notificado = true
+			  notificacion.save
+		  end
+	  end
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_notificacion_sistema

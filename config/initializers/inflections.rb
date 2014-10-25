@@ -35,4 +35,5 @@ ActiveSupport::Inflector.inflections do |inflect|
     inflect.singular(/es$/, '')
 
     inflect.irregular('el', 'los')
+    inflect.irregular('reporte', 'reportes')
 end

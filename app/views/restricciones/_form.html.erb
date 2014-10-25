@@ -5,17 +5,34 @@
     file: :horizontal_file_input,
     boolean: :horizontal_boolean
   }) do |f| %>
-  <% if @restriccion.errors.any? %>
+<!--   <%# if @restriccion.errors.any? %>
     <div class="col-lg-12" align="center">
     <div id="error_explanation">
-      <h2><%= pluralize(@restriccion.errors.count, "Error") %> en la creacion del detalle:</h2>
+      <h2><%#= pluralize(@restriccion.errors.count, "Error") %> en la creacion del detalle:</h2>
       <ul>
-      <% @restriccion.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+      <%# @restriccion.errors.full_messages.each do |message| %>
+        <li><%#= message %></li>
+      <%# end %>
       </ul>
     </div>
   </div>
+  <%# end %> -->
+    <% if @restriccion.errors.any? %>
+    <div class="col-lg-12">
+      <div class="col-lg-4"></div>
+        <div id="error_explanation" class="col-lg-4">
+          <div class="alert alert-danger">
+            <a class="close" data-dismiss="alert">x</a>
+            <strong><%= pluralize(@restriccion.errors.count, "Error") %> en la creacion del detalle:</strong>
+            <ul>
+              <% @restriccion.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
   <% end %>
   <div class="row" align="center">
     <div class="col-lg-3" align="center"></div>
@@ -25,11 +42,12 @@
          <%#= f.input :titulo, :label => 'Título', :placeholder => 'Título del gasto...' %>
       
          <br></br>-->
-         <label> Tipo de Proyecto </label>
-         <%= f.collection_select(:tipo_proyecto_id, @tipos_proyecto, :id, :nombre, {prompt: "Tipo de Proyecto..."}, {class: "form-control"}) %>
+         <!--<label> Tipo de Proyecto </label>-->
+         <%#= f.collection_select(:tipo_proyecto_id, @tipos_proyecto, :id, :nombre, {prompt: "Tipo de Proyecto..."}, {class: "form-control"}) %>
          <%#= f.collection_select(:detalle_presupuesto, :concepto_gasto_id, Concepto_gasto.all, :id, :titulo, prompt: true) %>
          <%#= f.input :concepto_gasto_id, collection: @concepto_gastos, :label => 'Concepto o rubro' %>
-         
+                  <label> Concepto o rubro </label>
+        <%= f.collection_select(:concepto_gasto_id, @concepto_gastos, :id, :titulo, {prompt: "Concepto..."}, {class: "form-control"}) %>
          <br></br>
          <!--
          <%#= f.input :descripcion,:as => :text, :input_html => {:rows => 6}, :label => 'Breve Descripción', :placeholder => 'Descripción del gasto...'  %>   
@@ -42,11 +60,18 @@
          <%# end %>      
          <br></br>
          -->
+
+         <%= f.input :montoMax, wrapper: :horizontal_input_group do %>
+           <span class="input-group-addon">Monto maximo $</span>
+           <%= f.input_field :montoMax, class: "form-control" %>
+         <% end %>
        </div>
      </div>
    </div>
-   
+            <br></br>
+
    <div align="center">
+    <%= link_to 'Cancelar', :back, :class => 'btn btn-default btn-lg' %>
      <%= f.button :submit, :class => 'btn btn-primary btn-lg center', :value => 'Confirmar' %>
    </div>
 

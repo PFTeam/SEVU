@@ -1,24 +1,28 @@
-<h1>Listing notificacion_sistemas</h1>
+<h1>Lista de Notificaciones</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @notificacion_sistemas.each do |notificacion_sistema| %>
-      <tr>
-        <td><%= link_to 'Show', notificacion_sistema %></td>
-        <td><%= link_to 'Edit', edit_notificacion_sistema_path(notificacion_sistema) %></td>
-        <td><%= link_to 'Destroy', notificacion_sistema, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-
+             	 <% @notificacion_sistemas.each do |notificacion| %>
 <br>
-
+            <div class="panel panel-primary">
+              <div class="panel-body">
+                <b><%= link_to notificacion.usuarioCreador, notificacion.usuarioCreador %></b>      <br>
+              <label><h5><b> Notificación:</b></h5></label> 
+				<%= notificacion.created_at %>
+                <br>
+                <label>Mensaje</label>
+                <p>
+                <%= notificacion.mensaje %>
+                </p>
+                <p><b>Proyecto/Evento Publico:</b><br> 
+                	<% if !notificacion.proyecto.nil? %>
+                		<%= notificacion.proyecto %>
+                	<% elsif !notificacion.evento_publico.nil? %>
+                	   	<%= notificacion.evento_publico %>
+                	<% else %>
+                	    No se encuentra ningún Proyecto/Evento Público vinculado
+                	<% end %>
+               	</p>
+              </div>
+            </div>
+   <% end %>
+<br>
 <%= link_to 'New Notificacion sistema', new_notificacion_sistema_path %>

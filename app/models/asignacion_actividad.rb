@@ -4,4 +4,7 @@ class AsignacionActividad < ActiveRecord::Base
 
   has_many :reportes
 
+  def to_a
+        [self]
+  end
 end

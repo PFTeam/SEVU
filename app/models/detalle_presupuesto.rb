@@ -4,39 +4,27 @@ class DetallePresupuesto < ActiveRecord::Base
   
   validates_presence_of :monto, :titulo, :descripcion, message: "es un campo obligatorio"
   
-#  validate :cumple_restricciones
+  validate :cumple_restricciones
 
   validates :monto,
-      #:presence => true,
       :numericality => {
         :greater_than => 0,
         :message => "no puede ser negativo"}
-
-#  validates_length_of :titulo,
-#      :presence => true,
-#      :maximum => 255,
-#      :allow_blank => false
 
   validates :titulo,
       :length => {
         :maximum => 255,
         :message => "tiene demasiados caracteres (maximo 255)"}
-      #:presence => true,
-      #:allow_blank => false #, message: "no puede estar en blanco"
 
-  #validates :descripcion,
-      #:presence => true,
-      #:allow_blank => false #, message: "no puede estar en blanco"
-
- # def cumple_restricciones
- #   @presupuesto = Presupuesto.where id: :presupuesto_id
- #   @proyecto = Proyecto.where :id => @presupuesto.proyectos
- #   @tipo_proyecto = TipoProyecto.where id: @proyecto.tipo_proyecto_id
- #   @restriccion = Restriccion.where tipo_proyecto_id: @proyecto.tipo_proyecto_id
- #   @detalle_restriccion = DetalleRestriccion.where(restriccion_id: @restriccion.id)
-##    if @detalle_restriccion.montoMax < :monto then
- #     errors.add :base, 'El detalle del Presupuesto supera las restricciones' unless (@detalle_restriccion.montoMax >= :monto)
- #    #end
- # end
+     def cumple_restricciones
+        ## Esta validacion compara la suma de los montos de un concepto de gasto particular del presupuesto (incluida la suma ingresada)
+        ## con la restriccion de el concepto especificado
+        if (presupuesto.detalle_presupuestos.where(concepto_gasto_id: concepto_gasto.id).sum(:monto) + monto) > concepto_gasto.restriccion.montoMax then
+            errors.add :base, 'El monto total para el Concepto seleccionado superaría una restriccion de gasto, cuyo valor máximo es de $'+concepto_gasto.restriccion.montoMax.to_s
+            return false
+        else
+            return true
+        end
+     end
 
 end

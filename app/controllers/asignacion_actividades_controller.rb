@@ -4,7 +4,9 @@ class AsignacionActividadesController < ApplicationController
   # GET /asignacion_actividades
   # GET /asignacion_actividades.json
   def index
-    @asignacion_actividades = AsignacionActividad.all
+	  @actividad = Actividad.find(params[:actividad_id])
+	  @asignacion_actividades = AsignacionActividad.where('actividad_id =?', @actividad.id ) 
+	  @proyecto = @actividad.proyecto
   end
 
   # GET /asignacion_actividades/1
@@ -14,6 +16,7 @@ class AsignacionActividadesController < ApplicationController
 
   # GET /asignacion_actividades/new
   def new
+	  @actividad = Actividad.find(params[:actividad_id])
     @asignacion_actividad = AsignacionActividad.new
   end
 
@@ -25,10 +28,11 @@ class AsignacionActividadesController < ApplicationController
   # POST /asignacion_actividades.json
   def create
     @asignacion_actividad = AsignacionActividad.new(asignacion_actividad_params)
-
+    @asignacion_actividad.vigente = true
     respond_to do |format|
       if @asignacion_actividad.save
-        format.html { redirect_to @asignacion_actividad, notice: 'Asignacion actividad was successfully created.' }
+	      format.html { redirect_to :controller => 'asignacion_actividades', :action => 'index', :actividad_id => @asignacion_actividad.actividad.id
+		      flash[:notice] = 'Asignacion actividad was successfully created.' }
         format.json { render :show, status: :created, location: @asignacion_actividad }
       else
         format.html { render :new }
@@ -51,11 +55,26 @@ class AsignacionActividadesController < ApplicationController
     end
   end
 
+  def dar_baja
+    @asignacion_actividad = AsignacionActividad.find(params[:id])
+    @asignacion_actividad.vigente = false
+    respond_to do |format|
+      if @asignacion_actividad.save
+	      format.html { redirect_to :controller => 'asignacion_actividades', :action => 'index', :actividad_id => @asignacion_actividad.actividad.id
+		     flash[:notice] = 'La asignación fue dada de baja satisfactoriamente.' }
+        format.json { render :show, status: :created, location: @asignacion_actividad }
+      end
+    end
+  end
+
   # DELETE /asignacion_actividades/1
   # DELETE /asignacion_actividades/1.json
   def destroy
+    @actividad_id = @asignacion_actividad.actividad_id
     @asignacion_actividad.destroy
     respond_to do |format|
+	      format.html { redirect_to :controller => 'asignacion_actividades', :action => 'index', :actividad_id => @actividad_id
+		      flash[:notice] = 'Asignacion actividad was successfully deleted.' }
       format.html { redirect_to asignacion_actividades_url, notice: 'Asignacion actividad was successfully destroyed.' }
       format.json { head :no_content }
     end

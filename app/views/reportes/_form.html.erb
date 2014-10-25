@@ -1,25 +1,21 @@
-<%= form_for(@report) do |f| %>
-  <% if @report.errors.any? %>
+<%= simple_form_for(@reporte) do |f| %>
+  <% if @reporte.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@report.errors.count, "error") %> prohibited this report from being saved:</h2>
+      <h2><%= pluralize(@reporte.errors.count, "error") %> prohibited this report from being saved:</h2>
 
       <ul>
-      <% @report.errors.full_messages.each do |message| %>
+      <% @reporte.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :descripcion %><br>
-    <%= f.text_area :descripcion %>
-  </div>
-  <div class="field">
-    <%= f.label :asignacion_actividad_id %><br>
-    <%= f.text_field :asignacion_actividad_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <%= f.input :descripcion %><br>
+    
+  <%= f.input :asignacion_actividad_id,:as => :hidden, input_html: {value: @asignacion_actividad.id} %>
+    
+  <div class="modal-footer">
+          <%= f.button :submit, :class => 'btn btn-primary', :value => 'Confirmar' %>
   </div>
 <% end %>
