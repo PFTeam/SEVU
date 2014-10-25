@@ -29,11 +29,11 @@ class PresupuestosController < ApplicationController
     respond_to do |format|
       if @presupuesto.save
          sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
-        Transaccion.create!(
-          descripcion: 'Creacion del presupuesto del proyecto'+@presupuesto.proyecto.nombre,
-‪           sesion_id‬: sesion.id
-‪           proyecto_id‬: @presupuesto.proyecto.id
-        )
+#         Transaccion.create!(
+#           descripcion: 'Creacion del presupuesto del proyecto'+@presupuesto.proyecto.nombre,
+# ‪           sesion_id‬: sesion.id,
+# ‪           proyecto_id‬: @presupuesto.proyecto.id
+#         )
         format.html { redirect_to gestionar_presupuesto_path(@presupuesto) }#, notice: 'El Presupuesto fue creado exitosamente.' }
         #format.json { render :show, status: :created, location: @presupuesto }
       else
@@ -50,13 +50,13 @@ class PresupuestosController < ApplicationController
     respond_to do |format|
       if @presupuesto.update(presupuesto_params)
         sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
-        Transaccion.create!(
-          descripcion: 'Modificacion del presupuesto del proyecto'+@presupuesto.proyecto.nombre,
-‪           sesion_id‬: sesion.id
-‪           proyecto_id‬: @presupuesto.proyecto.id
-        )
+#         Transaccion.create!(
+#           descripcion: 'Modificacion del presupuesto del proyecto'+@presupuesto.proyecto.nombre,
+# ‪           sesion_id‬: sesion.id,
+# ‪           proyecto_id‬: @presupuesto.proyecto.id
+#         )
         format.html { redirect_to :back }#@presupuesto, notice: 'El Presupuesto fue creado exitosamente.' }
-        format.json { render :show, status: :ok, location: @presupuesto }
+        #format.json { render :show, status: :ok, location: @presupuesto }
       else
         format.html { render :edit }
         format.json { render json: @presupuesto.errors, status: :unprocessable_entity }
@@ -71,11 +71,11 @@ class PresupuestosController < ApplicationController
   # DELETE /presupuestos/1.json
   def destroy
          sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
-        Transaccion.create!(
-          descripcion: 'Destruccion del presupuesto del proyecto'+@presupuesto.proyecto.nombre,
-‪           sesion_id‬: sesion.id
-‪           proyecto_id‬: @presupuesto.proyecto.id
-        )
+#         Transaccion.create!(
+#           descripcion: 'Destruccion del presupuesto del proyecto'+@presupuesto.proyecto.nombre,
+# ‪           sesion_id‬: sesion.id,
+# ‪           proyecto_id‬: @presupuesto.proyecto.id
+#         )
     @presupuesto.destroy
     respond_to do |format|
       format.html { redirect_to presupuestos_url, notice: 'Presupuesto was successfully destroyed.' }
@@ -96,6 +96,10 @@ class PresupuestosController < ApplicationController
 
   def evaluar_presupuestos_pendientes
     @presupuestos = Presupuesto.all.select { |m| m.aprobado == nil }
+  end
+
+  def presupuestos_evaluados
+    @presupuestos = Presupuesto.all.select { |m| m.aprobado != nil }
   end
 
   def evaluar_presupuesto

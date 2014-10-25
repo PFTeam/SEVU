@@ -172,6 +172,8 @@ Rails.application.routes.draw do
 
   get 'evaluar_presupuestos_pendientes' => 'presupuestos#evaluar_presupuestos_pendientes', :as => 'evaluar_presupuestos_pendientes'
 
+  get 'presupuestos_evaluados' => 'presupuestos#presupuestos_evaluados', :as => 'presupuestos_evaluados'
+  
   get 'gestionar_estados_presupuestos' => 'estado_presupuestos#gestionar_estados_presupuestos', :as => 'gestionar_estados_presupuestos'
 
   get 'evaluar_presupuesto/:id' => 'presupuestos#evaluar_presupuesto', :as => 'evaluar_presupuesto'
