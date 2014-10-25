@@ -12,7 +12,7 @@
                 <p>
                 <%= notificacion.mensaje %>
                 </p>
-                <p>Proyecto/Evento Publico: 
+                <p><b>Proyecto/Evento Publico:</b><br> 
                 	<% if !notificacion.proyecto.nil? %>
                 		<%= notificacion.proyecto %>
                 	<% elsif !notificacion.evento_publico.nil? %>
@@ -24,7 +24,5 @@
               </div>
             </div>
    <% end %>
-
 <br>
-
 <%= link_to 'New Notificacion sistema', new_notificacion_sistema_path %>
