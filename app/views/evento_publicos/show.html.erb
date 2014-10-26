@@ -29,7 +29,7 @@
                 <label>Fecha de Realización</label>
                 <p>
 		<% if !@evento_publico.fechaRealizacion.blank? %>
-			<%= @evento_publico.fechaRealizacion.to_formatted_s(:rfc822) %>
+			<%= @evento_publico.fechaRealizacion.to_formatted_s(:long_ordinal) %>
 		<% else %>
 			No se ha cargado una descripción
 		<% end %>                
