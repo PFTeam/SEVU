@@ -61,7 +61,7 @@ class UsuariosController < ApplicationController
   # DELETE /usuarios/1
   # DELETE /usuarios/1.json
 		
-	end
+
   def destroy
 		authorize! :destroy, Usuario
     @usuario.destroy

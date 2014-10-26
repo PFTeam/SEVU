@@ -19,6 +19,7 @@
 			<div class="field">
 				<label>Foto: </label>
 				<%= f.file_field :foto%>
+				<%= image_tag current_usuario.foto.url %>
 			</div>
     <%= f.input :password, label: 'Contraseña nueva',:autocomplete => "off", :hint => "Dejar el campo en blanco si no desea cambiar la contraseña", :required => false %>
     <%= f.input :password_confirmation, label: 'Repetir nueva contraseña',:required => false %>
