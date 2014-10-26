@@ -15,6 +15,8 @@ class ColaboradoresController < ApplicationController
   # GET /colaboradores/new
   def new
     @organizacionesExternas = OrganizacionExterna.all
+    @proyecto = Proyecto.find(params[:proyecto_id])
+    @colaboradores = Colaborador.all.where(proyecto: @proyecto)
     @colaborador = Colaborador.new
   end
 
@@ -30,7 +32,8 @@ class ColaboradoresController < ApplicationController
     respond_to do |format|
       if @colaborador.save
         format.js { render 'show', notice: 'El Colaborador fue agregado satisfactoriamente', content_type: 'text/html' }
-        format.html { redirect_to @colaborador, notice: 'Colaborador was successfully created.' }
+	format.html { redirect_to :action => 'new', :proyecto_id => @colaborador.proyecto_id
+		      flash[:notice] =  'Colaborador was successfully created.' }
         format.json { render :show, status: :created, location: @colaborador }
       else
         format.html { render :new }
@@ -56,9 +59,12 @@ class ColaboradoresController < ApplicationController
   # DELETE /colaboradores/1
   # DELETE /colaboradores/1.json
   def destroy
+    @proyecto_id = @colaborador.proyecto_id
     @colaborador.destroy
     respond_to do |format|
-      format.html { redirect_to colaboradores_url, notice: 'Colaborador was successfully destroyed.' }
+	format.html { redirect_to :action => 'new', :proyecto_id => @proyecto_id
+		      flash[:notice] =  'Colaborador was successfully destroyed.' }
+        format.json { render :show, status: :created, location: @colaborador }
       format.json { head :no_content }
     end
   end

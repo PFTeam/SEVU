@@ -1,21 +1,22 @@
-  <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-              <h1>Agregar Organizacion Externa</h1>
-        </div>
-        <div class="modal-body">
-          <%= simple_form_for(@colaborador, html: { remote: true, data: { error: 'modal', modal: true } }) do |f| %>
-            <%= f.input :organizacion_externa, as: :autocomplete, label: false, url: organizacion_externas_path, input_html: { autofocus: true  }  %>
-            <%= f.input :proyecto_id,:as => :hidden, input_html: {value: params[:proyecto_id]} %>
-          <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  <%= f.button :submit, :class => 'btn btn-primary', :value => 'GUARDAR' %>
-          </div>
-           <% end %>
-        </div>
-      </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
+<%= simple_form_for(@colaborador) do |f| %>
 
 
 
+    <%= f.input :organizacion_externa, as: :autocomplete, label: false, url: organizacion_externas_path, input_html: { autofocus: true  }  %>
 
+	<%= f.input :proyecto_id,:as => :hidden, input_html: {value: params[:proyecto_id]} %>
+  	
+  	<div class="modal-footer">
+      <%= f.button :submit, :class => 'btn btn-primary', :value => 'Confirmar' %>
+      <%= link_to 'Back', '/proyectos/' + params[:proyecto_id] %>
+  	</div>
+
+	<br></br>
+
+	<%= render partial: 'index' %>
+
+
+  	
+<% end %>
+
+	
