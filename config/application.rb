@@ -23,7 +23,7 @@ module SEVU
 		config.assets.initialize_on_precompile = false #Para devise (disable model loading when compiling assets)
    
    #LOCALE 
-    #config.i18n.default_locale = :es #DISABLED
+    config.i18n.default_locale = :es 
 
   end
 end
