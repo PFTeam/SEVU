@@ -192,6 +192,8 @@ Rails.application.routes.draw do
 	
 	get 'reporte_new' => 'reporte_generados#reporte_new', :as => 'reporte_new'
 
+	get 'usuario_bloqueado' => 'usuarios#usuario_bloqueado', :as => 'usuario_bloqueado'
+
 
 	
 
