@@ -12,8 +12,8 @@
 
 <p>
   <strong>Tipo rol:</strong>
-  <%= @rol.tipo_rol %>
+  <%= TipoRol.find(@rol.tipo_rol).nombre %>
 </p>
 
-<%= link_to 'Edit', edit_rol_path(@rol) %> |
-<%= link_to 'Back', roles_path %>
+<%= link_to 'Editar', edit_rol_path(@rol) %> |
+<%= link_to 'Volver', roles_path %>

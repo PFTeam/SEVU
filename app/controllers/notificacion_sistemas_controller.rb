@@ -5,6 +5,7 @@ class NotificacionSistemasController < ApplicationController
   # GET /notificacion_sistemas
   # GET /notificacion_sistemas.json
   def index
+		authorize! :index, NotificacionSistema
 	  #@notificacion_sistemas = NotificacionSistema.all.where(usuarioDestino: current_usuario)
 	  @notificacion_sistemas = NotificacionSistema.all
   end
@@ -12,22 +13,26 @@ class NotificacionSistemasController < ApplicationController
   # GET /notificacion_sistemas/1
   # GET /notificacion_sistemas/1.json
   def show
+		authorize! :show, NotificacionSistema
 	  @notificacion_sistema.notificado = true
 	  @notificacion_sistema.save
   end
 
   # GET /notificacion_sistemas/new
   def new
+		authorize! :new, NotificacionSistema
     @notificacion_sistema = NotificacionSistema.new
   end
 
   # GET /notificacion_sistemas/1/edit
   def edit
+		authorize! :edit, NotificacionSistema
   end
 
   # POST /notificacion_sistemas
   # POST /notificacion_sistemas.json
   def create
+		authorize! :create, NotificacionSistema
     @notificacion_sistema = NotificacionSistema.new(notificacion_sistema_params)
 
     respond_to do |format|
@@ -44,6 +49,7 @@ class NotificacionSistemasController < ApplicationController
   # PATCH/PUT /notificacion_sistemas/1
   # PATCH/PUT /notificacion_sistemas/1.json
   def update
+		authorize! :update, NotificacionSistema
     respond_to do |format|
       if @notificacion_sistema.update(notificacion_sistema_params)
         format.html { redirect_to @notificacion_sistema, notice: 'Notificacion sistema was successfully updated.' }
@@ -58,6 +64,7 @@ class NotificacionSistemasController < ApplicationController
   # DELETE /notificacion_sistemas/1
   # DELETE /notificacion_sistemas/1.json
   def destroy
+		authorize! :destroy, NotificacionSistema
     @notificacion_sistema.destroy
     respond_to do |format|
       format.html { redirect_to notificacion_sistemas_url, notice: 'Notificacion sistema was successfully destroyed.' }
@@ -65,6 +72,7 @@ class NotificacionSistemasController < ApplicationController
     end
   end
   def marcado_notificado
+		authorize! :marcado_notificado, NotificacionSistema
 	  #@notificacion_sistemas = NotificacionSistema.all.where(usuarioDestino: current_usuario)
 	  @notificacion_sistemas.each do |notificacion|
 		  if notificacion.notificado == false

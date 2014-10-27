@@ -4,26 +4,31 @@ class TipoTransaccionesController < ApplicationController
   # GET /tipo_transacciones
   # GET /tipo_transacciones.json
   def index
+		authorize! :index, TipoTransaccion
     @tipo_transacciones = TipoTransaccion.all
   end
 
   # GET /tipo_transacciones/1
   # GET /tipo_transacciones/1.json
   def show
+		authorize! :show, TipoTransaccion
   end
 
   # GET /tipo_transacciones/new
   def new
+		authorize! :new, TipoTransaccion
     @tipo_transaccion = TipoTransaccion.new
   end
 
   # GET /tipo_transacciones/1/edit
   def edit
+		authorize! :edit, TipoTransaccion
   end
 
   # POST /tipo_transacciones
   # POST /tipo_transacciones.json
   def create
+		authorize! :create, TipoTransaccion
     @tipo_transaccion = TipoTransaccion.new(tipo_transaccion_params)
 
     respond_to do |format|
@@ -40,6 +45,7 @@ class TipoTransaccionesController < ApplicationController
   # PATCH/PUT /tipo_transacciones/1
   # PATCH/PUT /tipo_transacciones/1.json
   def update
+		authorize! :update, TipoTransaccion
     respond_to do |format|
       if @tipo_transaccion.update(tipo_transaccion_params)
         format.html { redirect_to @tipo_transaccion, notice: 'Tipo transaccion was successfully updated.' }
@@ -54,6 +60,7 @@ class TipoTransaccionesController < ApplicationController
   # DELETE /tipo_transacciones/1
   # DELETE /tipo_transacciones/1.json
   def destroy
+		authorize! :destroy, TipoTransaccion
     @tipo_transaccion.destroy
     respond_to do |format|
       format.html { redirect_to tipo_transacciones_url, notice: 'Tipo transaccion was successfully destroyed.' }

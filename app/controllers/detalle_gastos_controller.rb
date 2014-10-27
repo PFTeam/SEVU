@@ -6,17 +6,19 @@ class DetalleGastosController < ApplicationController
   # GET /detalle_gastos
   # GET /detalle_gastos.json
   def index
+		authorize! :index, DetalleGasto
     @detalle_gastos = DetalleGasto.all
   end
 
   # GET /detalle_gastos/1
   # GET /detalle_gastos/1.json
   def show
+		authorize! :show, DetalleGasto
   end
 
   # GET /detalle_gastos/new
   def new
-    
+    authorize! :new, DetalleGasto
     #@detalle_gasto = DetalleGasto.new
     @detalle_gasto = @informe_gastos.detalle_gastos.new
     #@detalle_gasto.informe_gastos_id = @informe_gasto.id
@@ -27,6 +29,7 @@ class DetalleGastosController < ApplicationController
 
   # GET /detalle_gastos/1/edit
   def edit
+		authorize! :edit, DetalleGasto
     @concepto_gastos = ConceptoGasto.all
     
   end
@@ -34,6 +37,7 @@ class DetalleGastosController < ApplicationController
   # POST /detalle_gastos
   # POST /detalle_gastos.json
   def create
+		authorize! :create, DetalleGasto
     @detalle_gasto = @informe_gastos.detalle_gastos.new(detalle_gasto_params)
     @detalle_gasto.usuario_id = current_usuario.id
     respond_to do |format|
@@ -51,6 +55,7 @@ class DetalleGastosController < ApplicationController
   # PATCH/PUT /detalle_gastos/1
   # PATCH/PUT /detalle_gastos/1.json
   def update
+		authorize! :update, DetalleGasto
     respond_to do |format|
       if @detalle_gasto.update(detalle_gasto_params)
         format.html { redirect_to gestionar_informe_gastos_path(@detalle_gasto.informe_gasto)} #@detalle_gasto, notice: 'Detalle gasto was successfully updated.' }
@@ -65,6 +70,7 @@ class DetalleGastosController < ApplicationController
   # DELETE /detalle_gastos/1
   # DELETE /detalle_gastos/1.json
   def destroy
+		authorize! :destroy, DetalleGasto
     @detalle_gasto.destroy
     respond_to do |format|
       format.html { redirect_to gestionar_informe_gastos_path(@informe_gastos)} #detalle_gastos_url, notice: 'Detalle gasto was successfully destroyed.' }

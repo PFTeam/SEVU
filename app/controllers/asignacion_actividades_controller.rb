@@ -4,6 +4,7 @@ class AsignacionActividadesController < ApplicationController
   # GET /asignacion_actividades
   # GET /asignacion_actividades.json
   def index
+		authorize! :index, AsignacionActividad
 	  @actividad = Actividad.find(params[:actividad_id])
 	  @asignacion_actividades = AsignacionActividad.where('actividad_id =?', @actividad.id ) 
 	  @proyecto = @actividad.proyecto
@@ -12,21 +13,25 @@ class AsignacionActividadesController < ApplicationController
   # GET /asignacion_actividades/1
   # GET /asignacion_actividades/1.json
   def show
+		authorize! :show, AsignacionActividad
   end
 
   # GET /asignacion_actividades/new
   def new
+		authorize! :new, AsignacionActividad
 	  @actividad = Actividad.find(params[:actividad_id])
     @asignacion_actividad = AsignacionActividad.new
   end
 
   # GET /asignacion_actividades/1/edit
   def edit
+		authorize! :edit, AsignacionActividad
   end
 
   # POST /asignacion_actividades
   # POST /asignacion_actividades.json
   def create
+		authorize! :create, AsignacionActividad
     @asignacion_actividad = AsignacionActividad.new(asignacion_actividad_params)
     @asignacion_actividad.vigente = true
     respond_to do |format|
@@ -44,6 +49,7 @@ class AsignacionActividadesController < ApplicationController
   # PATCH/PUT /asignacion_actividades/1
   # PATCH/PUT /asignacion_actividades/1.json
   def update
+		authorize! :update, AsignacionActividad
     respond_to do |format|
       if @asignacion_actividad.update(asignacion_actividad_params)
         format.html { redirect_to @asignacion_actividad, notice: 'Asignacion actividad was successfully updated.' }
@@ -56,6 +62,7 @@ class AsignacionActividadesController < ApplicationController
   end
 
   def dar_baja
+		authorize! :dar_baja, AsignacionActividad
     @asignacion_actividad = AsignacionActividad.find(params[:id])
     @asignacion_actividad.vigente = false
     respond_to do |format|
@@ -70,6 +77,7 @@ class AsignacionActividadesController < ApplicationController
   # DELETE /asignacion_actividades/1
   # DELETE /asignacion_actividades/1.json
   def destroy
+		authorize! :destroy, AsignacionActividad
     @actividad_id = @asignacion_actividad.actividad_id
     @asignacion_actividad.destroy
     respond_to do |format|

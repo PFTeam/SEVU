@@ -5,6 +5,7 @@ class ProyectosController < ApplicationController
   # GET /proyectos
   # GET /proyectos.json
   def index
+		authorize! :index, Proyecto
     #@proyectos = Proyecto.activos
     @proyectos = Proyecto.all
   end
@@ -12,10 +13,12 @@ class ProyectosController < ApplicationController
   # GET /proyectos/1
   # GET /proyectos/1.json
   def show
+		authorize! :show, Proyecto
   end
 
   # GET /proyectos/new
   def new
+		authorize! :new, Proyecto
     @proyecto = Proyecto.new
     @tipoProyectos = TipoProyecto.all
 
@@ -39,6 +42,7 @@ class ProyectosController < ApplicationController
 
   # GET /proyectos/1/edit
   def edit
+		authorize! :edit, Proyecto
 
     @tipoProyectos = TipoProyecto.all
     @necesidades = Necesidad.all
@@ -61,6 +65,7 @@ class ProyectosController < ApplicationController
   # POST /proyectos
   # POST /proyectos.json
   def create
+		authorize! :create, Proyecto
     @proyecto = Proyecto.new(proyecto_params)
     #@proyecto.asignacion_roles.first.rol = (Rol.find_by(nombre: 'Director'))
 
@@ -91,6 +96,7 @@ class ProyectosController < ApplicationController
   # PATCH/PUT /proyectos/1
   # PATCH/PUT /proyectos/1.json
   def update
+		authorize! :update, Proyecto
     respond_to do |format|
       if @proyecto.update(proyecto_params)
         format.html { redirect_to @proyecto, notice: 'Proyecto was successfully updated.' }
@@ -108,6 +114,7 @@ class ProyectosController < ApplicationController
   # DELETE /proyectos/1
   # DELETE /proyectos/1.json
   def destroy
+		authorize! :destroy, Proyecto
     @proyecto.destroy
     respond_to do |format|
       format.html { redirect_to proyectos_url, notice: 'Proyecto was successfully destroyed.' }
@@ -116,21 +123,25 @@ class ProyectosController < ApplicationController
   end
 
   def mis_proyectos
+		authorize! :mis_proyectos, Proyecto
     @proyectos = Proyecto.participando(current_usuario)
   end
 
   def crear_organizacion_externa
+		authorize! :crear_organizacion_externa, Proyecto
    @organizacion_externa = OrganizacionExterna.new
    render partial: 'crear_organizacion_externa', content_type: 'text/html' 
   end
 
   def agregar_organizacion_externa
+		authorize! :agregar_organizacion_externa, Proyecto
     #@proyecto = Proyecto.find(params[:id])
    @colaborador = Colaborador.build(proyecto_id: @proyecto.id)
    render partial: 'agregar_organizacion_externa', content_type: 'text/html' 
   end
 
   def agregar_necesidad
+		authorize! :agregar_necesidad, Proyecto
 	  set_proyecto
    render partial: 'agregar_necesidad', content_type: 'text/html' 
   end

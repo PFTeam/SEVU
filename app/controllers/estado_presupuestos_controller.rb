@@ -4,26 +4,31 @@ class EstadoPresupuestosController < ApplicationController
   # GET /estado_presupuestos
   # GET /estado_presupuestos.json
   def index
+		authorize! :index, EstadoPresupuesto
     @estado_presupuestos = EstadoPresupuesto.all
   end
 
   # GET /estado_presupuestos/1
   # GET /estado_presupuestos/1.json
   def show
+		authorize! :show, EstadoPresupuesto
   end
 
   # GET /estado_presupuestos/new
   def new
+		authorize! :new, EstadoPresupuesto
     @estado_presupuesto = EstadoPresupuesto.new
   end
 
   # GET /estado_presupuestos/1/edit
   def edit
+		authorize! :edit, EstadoPresupuesto
   end
 
   # POST /estado_presupuestos
   # POST /estado_presupuestos.json
   def create
+		authorize! :create, EstadoPresupuesto
     @estado_presupuesto = EstadoPresupuesto.new(estado_presupuesto_params)
 
     respond_to do |format|
@@ -40,6 +45,7 @@ class EstadoPresupuestosController < ApplicationController
   # PATCH/PUT /estado_presupuestos/1
   # PATCH/PUT /estado_presupuestos/1.json
   def update
+		authorize! :update, EstadoPresupuesto
     respond_to do |format|
       if @estado_presupuesto.update(estado_presupuesto_params)
         format.html { redirect_to gestionar_estados_presupuestos_path}#@estado_presupuesto, notice: 'Estado presupuesto was successfully updated.' }
@@ -54,6 +60,7 @@ class EstadoPresupuestosController < ApplicationController
   # DELETE /estado_presupuestos/1
   # DELETE /estado_presupuestos/1.json
   def destroy
+		authorize! :destroy, EstadoPresupuesto
     #@estado_presupuesto.destroy
     #respond_to do |format|
     #  format.html { redirect_to estado_presupuestos_url, notice: 'Estado presupuesto was successfully destroyed.' }
@@ -71,6 +78,7 @@ class EstadoPresupuestosController < ApplicationController
   end
 
   def gestionar_estados_presupuestos
+		authorize! :gestionar_estados_presupuestos, EstadoPresupuesto
     @estados = EstadoPresupuesto.all
   end
 

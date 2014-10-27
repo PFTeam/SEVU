@@ -7,23 +7,27 @@ class DetallePresupuestosController < ApplicationController
   # GET /detalle_presupuestos
   # GET /detalle_presupuestos.json
   def index
+		authorize! :index, DetallePresupuesto
     @detalle_presupuestos = DetallePresupuesto.all
   end
 
   # GET /detalle_presupuestos/1
   # GET /detalle_presupuestos/1.json
   def show
+		authorize! :show, DetallePresupuesto
     @detalle_presupuestos = DetallePresupuesto.all
   end
 
   # GET /detalle_presupuestos/new
   def new
+		authorize! :new, DetallePresupuesto
     @detalle_presupuesto = @presupuesto.detalle_presupuestos.new
     @concepto_gastos = ConceptoGasto.all
   end
 
   # GET /detalle_presupuestos/1/edit
   def edit
+		authorize! :edit, DetallePresupuesto
     #@detalle_presupuesto = @presupuesto.detalle_presupuestos.new #@detalle_presupuesto = DetallePresupuesto.new
     @concepto_gastos = ConceptoGasto.all 
   end
@@ -31,6 +35,7 @@ class DetallePresupuestosController < ApplicationController
   # POST /detalle_presupuestos
   # POST /detalle_presupuestos.json
   def create
+		authorize! :create, DetallePresupuesto
    # @detalle_presupuesto = DetallePresupuesto.new(detalle_presupuesto_params)
     @concepto_gastos = ConceptoGasto.all
     @detalle_presupuesto = @presupuesto.detalle_presupuestos.new(detalle_presupuesto_params)
@@ -50,6 +55,7 @@ class DetallePresupuestosController < ApplicationController
   # PATCH/PUT /detalle_presupuestos/1
   # PATCH/PUT /detalle_presupuestos/1.json
   def update
+		authorize! :update, DetallePresupuesto
     respond_to do |format|
       if @detalle_presupuesto.update(detalle_presupuesto_params)
         format.html { redirect_to  gestionar_presupuesto_path(@detalle_presupuesto.presupuesto) }
@@ -64,6 +70,7 @@ class DetallePresupuestosController < ApplicationController
   # DELETE /detalle_presupuestos/1
   # DELETE /detalle_presupuestos/1.json
   def destroy
+		authorize! :destroy, DetallePresupuesto
     @detalle_presupuesto.destroy
     respond_to do |format|
       format.html { redirect_to gestionar_presupuesto_path(@presupuesto), notice: 'Detalle eliminado correctamente '}

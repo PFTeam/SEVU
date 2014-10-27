@@ -4,6 +4,7 @@ class PostulacionesController < ApplicationController
   # GET /postulaciones
   # GET /postulaciones.json
   def index
+		authorize! :index, Postulacion
 	  @postulaciones = Postulacion.where('proyecto_id = ?', params[:proyecto_id]).order(:created_at)
     @proyecto = Proyecto.find(params[:proyecto_id])
   end
@@ -11,21 +12,25 @@ class PostulacionesController < ApplicationController
   # GET /postulaciones/1
   # GET /postulaciones/1.json
   def show
+		authorize! :show, Postulacion
   end
 
   # GET /postulaciones/new
   def new
+		authorize! :new, Postulacion
     @postulacion = Postulacion.new
     @postulacion.aceptado=false
   end
 
   # GET /postulaciones/1/edit
   def edit
+		authorize! :edit, Postulacion
   end
 
   # POST /postulaciones
   # POST /postulaciones.json
   def create
+		authorize! :create, Postulacion
     @postulacion = Postulacion.new(postulacion_params)
     @postulacion.aceptado=false
 
@@ -44,6 +49,7 @@ class PostulacionesController < ApplicationController
   # PATCH/PUT /postulaciones/1
   # PATCH/PUT /postulaciones/1.json
   def update
+		authorize! :update, Postulacion
     respond_to do |format|
       if @postulacion.update(postulacion_params)
         format.html { redirect_to @postulacion, notice: 'Postulacion was successfully updated.' }
@@ -58,6 +64,7 @@ class PostulacionesController < ApplicationController
   # DELETE /postulaciones/1
   # DELETE /postulaciones/1.json
   def destroy
+		authorize! :destroy, Postulacion
     @postulacion.destroy
     respond_to do |format|
       format.html { redirect_to postulaciones_url, notice: 'Postulacion was successfully destroyed.' }
@@ -66,6 +73,7 @@ class PostulacionesController < ApplicationController
   end
 
   def aceptar
+		authorize! :aceptar, Postulacion
     @postulacion = Postulacion.find(params[:id])
     @postulacion.aceptar
     @postulacion.save

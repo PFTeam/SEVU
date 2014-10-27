@@ -4,26 +4,31 @@ class AsistenciaEventosController < ApplicationController
   # GET /asistencia_eventos
   # GET /asistencia_eventos.json
   def index
+		authorize! :index, AsistenciaEvento
     @asistencia_eventos = AsistenciaEvento.all
   end
 
   # GET /asistencia_eventos/1
   # GET /asistencia_eventos/1.json
   def show
+		authorize! :show, AsistenciaEvento
   end
 
   # GET /asistencia_eventos/new
   def new
+		authorize! :new, AsistenciaEvento
     @asistencia_evento = AsistenciaEvento.new
   end
 
   # GET /asistencia_eventos/1/edit
   def edit
+		authorize! :edit, AsistenciaEvento
   end
 
   # POST /asistencia_eventos
   # POST /asistencia_eventos.json
   def create
+		authorize! :create, AsistenciaEvento
     @asistencia_evento = AsistenciaEvento.new(asistencia_evento_params)
 
     respond_to do |format|
@@ -40,6 +45,7 @@ class AsistenciaEventosController < ApplicationController
   # PATCH/PUT /asistencia_eventos/1
   # PATCH/PUT /asistencia_eventos/1.json
   def update
+		authorize! :update, AsistenciaEvento
     respond_to do |format|
       if @asistencia_evento.update(asistencia_evento_params)
         format.html { redirect_to @asistencia_evento, notice: 'Asistencia evento was successfully updated.' }
@@ -54,6 +60,7 @@ class AsistenciaEventosController < ApplicationController
   # DELETE /asistencia_eventos/1
   # DELETE /asistencia_eventos/1.json
   def destroy
+		authorize! :destroy, AsistenciaEvento
     @asistencia_evento.destroy
     respond_to do |format|
       format.html { redirect_to asistencia_eventos_url, notice: 'Asistencia evento was successfully destroyed.' }

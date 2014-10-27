@@ -4,26 +4,31 @@ class HistorialEstadoUsuariosController < ApplicationController
   # GET /historial_estado_usuarios
   # GET /historial_estado_usuarios.json
   def index
+		authorize! :index, HistorialEstadoUsuario
     @historial_estado_usuarios = HistorialEstadoUsuario.all
   end
 
   # GET /historial_estado_usuarios/1
   # GET /historial_estado_usuarios/1.json
   def show
+		authorize! :show, HistorialEstadoUsuario
   end
 
   # GET /historial_estado_usuarios/new
   def new
+		authorize! :new, HistorialEstadoUsuario
     @historial_estado_usuario = HistorialEstadoUsuario.new
   end
 
   # GET /historial_estado_usuarios/1/edit
   def edit
+		authorize! :edit, HistorialEstadoUsuario
   end
 
   # POST /historial_estado_usuarios
   # POST /historial_estado_usuarios.json
   def create
+		authorize! :create, HistorialEstadoUsuario
     @historial_estado_usuario = HistorialEstadoUsuario.new(historial_estado_usuario_params)
 
     respond_to do |format|
@@ -40,6 +45,7 @@ class HistorialEstadoUsuariosController < ApplicationController
   # PATCH/PUT /historial_estado_usuarios/1
   # PATCH/PUT /historial_estado_usuarios/1.json
   def update
+		authorize! :update, HistorialEstadoUsuario
     respond_to do |format|
       if @historial_estado_usuario.update(historial_estado_usuario_params)
         format.html { redirect_to @historial_estado_usuario, notice: 'Historial estado usuario was successfully updated.' }
@@ -54,6 +60,7 @@ class HistorialEstadoUsuariosController < ApplicationController
   # DELETE /historial_estado_usuarios/1
   # DELETE /historial_estado_usuarios/1.json
   def destroy
+		authorize! :destroy, HistorialEstadoUsuario
     @historial_estado_usuario.destroy
     respond_to do |format|
       format.html { redirect_to historial_estado_usuarios_url, notice: 'Historial estado usuario was successfully destroyed.' }

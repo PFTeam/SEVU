@@ -5,16 +5,19 @@ class ComprobantesController < ApplicationController
   # GET /comprobantes
   # GET /comprobantes.json
   def index
+		authorize! :index, Comprobante
     @comprobantes = Comprobante.all
   end
 
   # GET /comprobantes/1
   # GET /comprobantes/1.json
   def show
+		authorize! :show, Comprobante
   end
 
   # GET /comprobantes/new
   def new
+		authorize! :new, Comprobante
     @comprobant = Comprobante.new
     @detalle_gasto = DetalleGasto.find params[:detalle_gasto_id]
     #@comprobant.detalle_gasto_id = params[:detalle_gasto_id]# @detalle_gasto.id
@@ -22,11 +25,13 @@ class ComprobantesController < ApplicationController
 
   # GET /comprobantes/1/edit
   def edit
+		authorize! :edit, Comprobante
   end
 
   # POST /comprobantes
   # POST /comprobantes.json
   def create
+		authorize! :create, Comprobante
     @comprobant = Comprobante.new(comprobant_params)
     @comprobant.detalle_gasto = @detalle_gasto
     respond_to do |format|
@@ -43,6 +48,7 @@ class ComprobantesController < ApplicationController
   # PATCH/PUT /comprobantes/1
   # PATCH/PUT /comprobantes/1.json
   def update
+		authorize! :update, Comprobante
     respond_to do |format|
       if @comprobant.update(comprobant_params)
         format.html { redirect_to @comprobant, notice: 'Comprobante was successfully updated.' }
@@ -57,6 +63,7 @@ class ComprobantesController < ApplicationController
   # DELETE /comprobantes/1
   # DELETE /comprobantes/1.json
   def destroy
+		authorize! :destroy, Comprobante
     @comprobant.destroy
     respond_to do |format|
       format.html { redirect_to comprobantes_url, notice: 'Comprobante was successfully destroyed.' }

@@ -1,33 +1,29 @@
-<%= form_for(@asignacion_rol_predefinido) do |f| %>
-  <% if @asignacion_rol_predefinido.errors.any? %>
+<!----->
+<%= simple_form_for(@asignacion_rol_predefinido) do |f| %>
+   <% if @asignacion_rol_predefinido.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@asignacion_rol_predefinido.errors.count, "error") %> prohibited this asignacion_rol_predefinido from being saved:</h2>
-
       <ul>
       <% @asignacion_rol_predefinido.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+         <font color="red"><li><%= message %></li></font>
       <% end %>
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :fechaAsignacion %><br>
-    <%= f.datetime_select :fechaAsignacion %>
-  </div>
-  <div class="field">
-    <%= f.label :esActual %><br>
-    <%= f.check_box :esActual %>
-  </div>
-  <div class="field">
-    <%= f.label :privilegio_id %><br>
-    <%= f.text_field :privilegio_id %>
-  </div>
-  <div class="field">
-    <%= f.label :rol_id %><br>
-    <%= f.text_field :rol_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+	<div class="col-lg-6">
+		<div class="inputs">
+			<%= f.label 'Rol: ' %>
+			<%= f.collection_select :rol_id, Rol.all, :id, :nombre,  :prompt => true, :required => true %><br></br>
+			<%= f.label 'Privilegio: ' %>
+			<%= f.collection_select :privilegio_id, Privilegio.all, :id, :nombre,  :prompt => true, :required => true %><br></br>
+			<%= f.label 'Es Actual?: ' %>
+			<%= f.check_box :esActual, :required => true, :autofocus => true %><br></br>
+		</div>
+		<div class="actions">
+		  <%= f.button :submit, "Aceptar", :class => "btn btn-primary btn-lg" %>
+		</div>
+	
+	<br></br>
+ 
+	</div>
 <% end %>
+

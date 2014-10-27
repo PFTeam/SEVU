@@ -4,6 +4,7 @@ class ObjetivoEspecificosController < ApplicationController
   # GET /objetivo_especificos
   # GET /objetivo_especificos.json
   def index
+		authorize! :index, ObjetivoEspecifico
     @objetivo_general = ObjetivoGeneral.find(params[:objetivo_general_id])
     @proyecto = @objetivo_general.proyecto
   end
@@ -11,17 +12,20 @@ class ObjetivoEspecificosController < ApplicationController
   # GET /objetivo_especificos/1
   # GET /objetivo_especificos/1.json
   def show
+		authorize! :show, ObjetivoEspecifico
 	  @proyecto = Proyecto.find(@objetivo_especifico.objetivo_general.proyecto.id)
   end
 
   # GET /objetivo_especificos/new
   def new
+		authorize! :new, ObjetivoEspecifico
     @objetivo_especifico = ObjetivoEspecifico.new(:objetivo_general_id => params[:objetivo_general_id])
     @proyecto = @objetivo_especifico.objetivo_general.proyecto
   end
 
   # GET /objetivo_especificos/1/edit
   def edit
+		authorize! :edit, ObjetivoEspecifico
     respond_to do |format|
       format.js {render partial: 'edit', content_type: 'text/html' }
     end
@@ -30,6 +34,7 @@ class ObjetivoEspecificosController < ApplicationController
   # POST /objetivo_especificos
   # POST /objetivo_especificos.json
   def create
+		authorize! :create, ObjetivoEspecifico
     @objetivo_especifico = ObjetivoEspecifico.new(objetivo_especifico_params)
 
     respond_to do |format|
@@ -47,6 +52,7 @@ class ObjetivoEspecificosController < ApplicationController
   # PATCH/PUT /objetivo_especificos/1
   # PATCH/PUT /objetivo_especificos/1.json
   def update
+		authorize! :update, ObjetivoEspecifico
     respond_to do |format|
       if @objetivo_especifico.update(objetivo_especifico_params)
         format.html { redirect_to @objetivo_especifico, notice: 'Objetivo especifico was successfully updated.' }
@@ -62,6 +68,7 @@ class ObjetivoEspecificosController < ApplicationController
   # DELETE /objetivo_especificos/1
   # DELETE /objetivo_especificos/1.json
   def destroy
+		authorize! :destroy, ObjetivoEspecifico
     @objetivo_general = @objetivo_especifico.objetivo_general
     @objetivo_especifico.destroy
     respond_to do |format|

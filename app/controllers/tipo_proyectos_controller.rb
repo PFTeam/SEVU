@@ -4,26 +4,31 @@ class TipoProyectosController < ApplicationController
   # GET /tipo_proyectos
   # GET /tipo_proyectos.json
   def index
+		authorize! :index, TipoProyecto
     @tipo_proyectos = TipoProyecto.all
   end
 
   # GET /tipo_proyectos/1
   # GET /tipo_proyectos/1.json
   def show
+		authorize! :show, TipoProyecto
   end
 
   # GET /tipo_proyectos/new
   def new
+		authorize! :new, TipoProyecto
     @tipo_proyecto = TipoProyecto.new
   end
 
   # GET /tipo_proyectos/1/edit
   def edit
+		authorize! :edit, TipoProyecto
   end
 
   # POST /tipo_proyectos
   # POST /tipo_proyectos.json
   def create
+		authorize! :create, TipoProyecto
     @tipo_proyecto = TipoProyecto.new(tipo_proyecto_params)
 
     respond_to do |format|
@@ -40,6 +45,7 @@ class TipoProyectosController < ApplicationController
   # PATCH/PUT /tipo_proyectos/1
   # PATCH/PUT /tipo_proyectos/1.json
   def update
+		authorize! :update, TipoProyecto
     respond_to do |format|
       if @tipo_proyecto.update(tipo_proyecto_params)
         format.html { redirect_to @tipo_proyecto, notice: 'Tipo proyecto was successfully updated.' }
@@ -54,6 +60,7 @@ class TipoProyectosController < ApplicationController
   # DELETE /tipo_proyectos/1
   # DELETE /tipo_proyectos/1.json
   def destroy
+		authorize! :destroy, TipoProyecto
     @tipo_proyecto.destroy
     respond_to do |format|
       format.html { redirect_to tipo_proyectos_url, notice: 'Tipo proyecto was successfully destroyed.' }

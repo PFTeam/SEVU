@@ -4,26 +4,31 @@ class TipoPrivilegiosController < ApplicationController
   # GET /tipo_privilegios
   # GET /tipo_privilegios.json
   def index
+		authorize! :index, TipoPrivilegio
     @tipo_privilegios = TipoPrivilegio.all
   end
 
   # GET /tipo_privilegios/1
   # GET /tipo_privilegios/1.json
   def show
+		authorize! :index, TipoPrivilegio
   end
 
   # GET /tipo_privilegios/new
   def new
+		authorize! :new, TipoPrivilegio
     @tipo_privilegio = TipoPrivilegio.new
   end
 
   # GET /tipo_privilegios/1/edit
   def edit
+		authorize! :edit, TipoPrivilegio
   end
 
   # POST /tipo_privilegios
   # POST /tipo_privilegios.json
   def create
+		authorize! :create, TipoPrivilegio
     @tipo_privilegio = TipoPrivilegio.new(tipo_privilegio_params)
 
     respond_to do |format|
@@ -40,6 +45,7 @@ class TipoPrivilegiosController < ApplicationController
   # PATCH/PUT /tipo_privilegios/1
   # PATCH/PUT /tipo_privilegios/1.json
   def update
+		authorize! :update, TipoPrivilegio
     respond_to do |format|
       if @tipo_privilegio.update(tipo_privilegio_params)
         format.html { redirect_to @tipo_privilegio, notice: 'Tipo privilegio was successfully updated.' }
@@ -54,6 +60,7 @@ class TipoPrivilegiosController < ApplicationController
   # DELETE /tipo_privilegios/1
   # DELETE /tipo_privilegios/1.json
   def destroy
+		authorize! :destroy, TipoPrivilegio
     @tipo_privilegio.destroy
     respond_to do |format|
       format.html { redirect_to tipo_privilegios_url, notice: 'Tipo privilegio was successfully destroyed.' }

@@ -4,26 +4,31 @@ class NotasController < ApplicationController
   # GET /notas
   # GET /notas.json
   def index
+		authorize! :index, Nota
     @notas = Nota.all
   end
 
   # GET /notas/1
   # GET /notas/1.json
   def show
+		authorize! :show, Nota
   end
 
   # GET /notas/new
   def new
+		authorize! :new, Nota
     @nota = Nota.new
   end
 
   # GET /notas/1/edit
   def edit
+		authorize! :edit, Nota
   end
 
   # POST /notas
   # POST /notas.json
   def create
+		authorize! :create, Nota
     @nota = Nota.new(nota_params)
 
     respond_to do |format|
@@ -40,6 +45,7 @@ class NotasController < ApplicationController
   # PATCH/PUT /notas/1
   # PATCH/PUT /notas/1.json
   def update
+		authorize! :update, Nota
     respond_to do |format|
       if @nota.update(nota_params)
         format.html { redirect_to @nota, notice: 'Nota was successfully updated.' }
@@ -54,6 +60,7 @@ class NotasController < ApplicationController
   # DELETE /notas/1
   # DELETE /notas/1.json
   def destroy
+		authorize! :destroy, Nota
     @nota.destroy
     respond_to do |format|
       format.html { redirect_to notas_url, notice: 'Nota was successfully destroyed.' }

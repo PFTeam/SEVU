@@ -5,6 +5,7 @@ class NotificacionPredeterminadasController < ApplicationController
   # GET /notificacion_predeterminadas
   # GET /notificacion_predeterminadas.json
   def index
+		authorize! :index, Notificacion
     #@notificacion_predeterminadas = NotificacionPredeterminada.all
     @notificacion_predeterminadas = @proyecto.notificacion_predeterminadas
   end
@@ -12,10 +13,12 @@ class NotificacionPredeterminadasController < ApplicationController
   # GET /notificacion_predeterminadas/1
   # GET /notificacion_predeterminadas/1.json
   def show
+		authorize! :show, Notificacion
   end
 
   # GET /notificacion_predeterminadas/new
   def new
+		authorize! :new, Notificacion
     #@notificacion_predeterminada = NotificacionPredeterminada.new
     @notificacion_predeterminada = @proyecto.notificacion_predeterminadas.new
     
@@ -23,11 +26,13 @@ class NotificacionPredeterminadasController < ApplicationController
 
   # GET /notificacion_predeterminadas/1/edit
   def edit
+		authorize! :edit, Notificacion
   end
 
   # POST /notificacion_predeterminadas
   # POST /notificacion_predeterminadas.json
   def create
+		authorize! :create, Notificacion
     #@notificacion_predeterminada = NotificacionPredeterminada.new(notificacion_predeterminada_params)
     @notificacion_predeterminada = @proyecto.notificacion_predeterminadas.new(notificacion_predeterminada_params)
 
@@ -45,6 +50,7 @@ class NotificacionPredeterminadasController < ApplicationController
   # PATCH/PUT /notificacion_predeterminadas/1
   # PATCH/PUT /notificacion_predeterminadas/1.json
   def update
+		authorize! :update, Notificacion
     respond_to do |format|
       if @notificacion_predeterminada.update(notificacion_predeterminada_params)
         format.html { redirect_to @notificacion_predeterminada, notice: 'Notificacion predeterminada was successfully updated.' }
@@ -59,6 +65,7 @@ class NotificacionPredeterminadasController < ApplicationController
   # DELETE /notificacion_predeterminadas/1
   # DELETE /notificacion_predeterminadas/1.json
   def destroy
+		authorize! :destroy, Notificacion
     @notificacion_predeterminada.destroy
     respond_to do |format|
       format.html { redirect_to :back}#, notice: 'Notificacion predeterminada was successfully destroyed.' }

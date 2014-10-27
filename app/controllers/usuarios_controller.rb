@@ -29,9 +29,11 @@ class UsuariosController < ApplicationController
   # POST /usuarios
   # POST /usuarios.json
   def create
+		
 		authorize! :create, Usuario
+		
     @usuario = Usuario.new(usuario_params)
-
+		
     respond_to do |format|
       if @usuario.save
         format.html { redirect_to @usuario, notice: 'Usuario creado correctamente.' }
@@ -71,6 +73,9 @@ class UsuariosController < ApplicationController
     end
   end
 
+	def usuario_bloqueado
+	end
+	
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_usuario

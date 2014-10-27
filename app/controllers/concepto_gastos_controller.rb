@@ -4,26 +4,31 @@ class ConceptoGastosController < ApplicationController
   # GET /concepto_gastos
   # GET /concepto_gastos.json
   def index
+		authorize! :index, ConceptoGasto
     @concepto_gastos = ConceptoGasto.all
   end
 
   # GET /concepto_gastos/1
   # GET /concepto_gastos/1.json
   def show
+		authorize! :show, ConceptoGasto
   end
 
   # GET /concepto_gastos/new
   def new
+		authorize! :new, ConceptoGasto
     @concepto_gasto = ConceptoGasto.new
   end
 
   # GET /concepto_gastos/1/edit
   def edit
+		authorize! :edit, ConceptoGasto
   end
 
   # POST /concepto_gastos
   # POST /concepto_gastos.json
   def create
+		authorize! :create, ConceptoGasto
     @concepto_gasto = ConceptoGasto.new(concepto_gasto_params)
 
     respond_to do |format|
@@ -40,6 +45,7 @@ class ConceptoGastosController < ApplicationController
   # PATCH/PUT /concepto_gastos/1
   # PATCH/PUT /concepto_gastos/1.json
   def update
+		authorize! :update, ConceptoGasto
     respond_to do |format|
       if @concepto_gasto.update(concepto_gasto_params)
         format.html { redirect_to gestionar_concepto_gastos_path }# @concepto_gasto, notice: 'Concepto gasto was successfully updated.' }
@@ -54,6 +60,7 @@ class ConceptoGastosController < ApplicationController
   # DELETE /concepto_gastos/1
   # DELETE /concepto_gastos/1.json
   def destroy
+		authorize! :destroy, ConceptoGasto
     #@concepto_gasto.destroy
     respond_to do |format|
       if @concepto_gasto.destroy
@@ -66,6 +73,7 @@ class ConceptoGastosController < ApplicationController
   end
 
     def gestionar_concepto_gastos
+			authorize! :gestionar_concepto_gastos, ConceptoGasto
       @conceptos = ConceptoGasto.all
     end
 

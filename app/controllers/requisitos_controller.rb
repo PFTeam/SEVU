@@ -4,26 +4,31 @@ class RequisitosController < ApplicationController
   # GET /requisitos
   # GET /requisitos.json
   def index
+		authorize! :index, Requisito
     @requisitos = Requisito.all
   end
 
   # GET /requisitos/1
   # GET /requisitos/1.json
   def show
+		authorize! :show, Requisito
   end
 
   # GET /requisitos/new
   def new
+		authorize! :new, Requisito
     @requisito = Requisito.new
   end
 
   # GET /requisitos/1/edit
   def edit
+		authorize! :edit, Requisito
   end
 
   # POST /requisitos
   # POST /requisitos.json
   def create
+		authorize! :create, Requisito
     @requisito = Requisito.new(requisito_params)
 
     respond_to do |format|
@@ -40,6 +45,7 @@ class RequisitosController < ApplicationController
   # PATCH/PUT /requisitos/1
   # PATCH/PUT /requisitos/1.json
   def update
+		authorize! :update, Requisito
     respond_to do |format|
       if @requisito.update(requisito_params)
         format.html { redirect_to @requisito, notice: 'Requisito was successfully updated.' }
@@ -54,6 +60,7 @@ class RequisitosController < ApplicationController
   # DELETE /requisitos/1
   # DELETE /requisitos/1.json
   def destroy
+		authorize! :destroy, Requisito
     @requisito.destroy
     respond_to do |format|
       format.html { redirect_to requisitos_url, notice: 'Requisito was successfully destroyed.' }

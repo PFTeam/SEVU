@@ -1,29 +1,29 @@
-<%= form_for(@privilegio) do |f| %>
-  <% if @privilegio.errors.any? %>
+<!----->
+<%= simple_form_for(@privilegio) do |f| %>
+   <% if @privilegio.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@privilegio.errors.count, "error") %> prohibited this privilegio from being saved:</h2>
-
       <ul>
       <% @privilegio.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+         <font color="red"><li><%= message %></li></font>
       <% end %>
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :nombre %><br>
-    <%= f.text_field :nombre %>
-  </div>
-  <div class="field">
-    <%= f.label :descripcion %><br>
-    <%= f.text_area :descripcion %>
-  </div>
-  <div class="field">
-    <%= f.label :tipo_privilegio_id %><br>
-    <%= f.text_field :tipo_privilegio_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+	<div class="col-lg-6">
+		<div class="inputs">
+			<%= f.input :nombre, label: 'Nombre de Privilegio', placeholder: 'privilegio...', :required => true, :autofocus => true %>
+			<br></br> 
+			<%= f.input :descripcion, label: 'Descripción del Privilegio', placeholder: 'descripción...', :required => true, :autofocus => true %>
+			<br></br>
+			<%= f.label 'Tipo de Privilegio: ' %>
+			<%= f.collection_select :tipo_privilegio_id, TipoPrivilegio.all, :id, :nombre,  :prompt => true, :required => true %><br></br>
+		</div>
+		<div class="actions">
+		  <%= f.button :submit, "Aceptar", :class => "btn btn-primary btn-lg" %>
+		</div>
+	
+	<br></br>
+ 
+	</div>
 <% end %>
+

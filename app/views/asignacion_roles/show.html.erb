@@ -1,25 +1,30 @@
 <p id="notice"><%= notice %></p>
 
+<p>
+  <strong>Fecha Asignacion:</strong>
+  <%= @asignacion_rol_predefinido.created_at %>
+</p>
 
 <p>
-  <strong>Esactual:</strong>
+  <strong>Es actual:</strong>
   <%= @asignacion_rol.esActual %>
 </p>
 
 <p>
+  <strong>Usuario:</strong>
+	
+  <%= Usuario.find(@asignacion_rol.usuario).nombre %>
+</p>
+
+<p>
   <strong>Rol:</strong>
-  <%= @asignacion_rol.rol %>
+  <%= Rol.find(@asignacion_rol.rol).nombre %>
 </p>
 
 <p>
   <strong>Proyecto:</strong>
-  <%= @asignacion_rol.proyecto %>
+  <%= Proyecto.find(@asignacion_rol.proyecto).nombre %>
 </p>
 
-<p>
-  <strong>Usuario:</strong>
-  <%= @asignacion_rol.usuario %>
-</p>
-
-<%= link_to 'Edit', edit_asignacion_rol_path(@asignacion_rol) %> |
-<%= link_to 'Back', asignacion_roles_path %>
+<%= link_to 'Editar', edit_asignacion_rol_path(@asignacion_rol) %> |
+<%= link_to 'Volver', asignacion_roles_path %>

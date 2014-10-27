@@ -4,27 +4,32 @@ class ColaboradoresController < ApplicationController
   # GET /colaboradores
   # GET /colaboradores.json
   def index
+		authorize! :index, Colaborador
     @colaboradores = Colaborador.all
   end
 
   # GET /colaboradores/1
   # GET /colaboradores/1.json
   def show
+		authorize! :show, Colaborador
   end
 
   # GET /colaboradores/new
   def new
+		authorize! :new, Colaborador
     @organizacionesExternas = OrganizacionExterna.all
     @colaborador = Colaborador.new
   end
 
   # GET /colaboradores/1/edit
   def edit
+		authorize! :edit, Colaborador
   end
 
   # POST /colaboradores
   # POST /colaboradores.json
   def create
+		authorize! :create, Colaborador
     @colaborador = Colaborador.new(colaborador_params)
 
     respond_to do |format|
@@ -42,6 +47,7 @@ class ColaboradoresController < ApplicationController
   # PATCH/PUT /colaboradores/1
   # PATCH/PUT /colaboradores/1.json
   def update
+		authorize! :update, Colaborador
     respond_to do |format|
       if @colaborador.update(colaborador_params)
         format.html { redirect_to @colaborador, notice: 'Colaborador was successfully updated.' }
@@ -56,6 +62,7 @@ class ColaboradoresController < ApplicationController
   # DELETE /colaboradores/1
   # DELETE /colaboradores/1.json
   def destroy
+		authorize! :destroy, Colaborador
     @colaborador.destroy
     respond_to do |format|
       format.html { redirect_to colaboradores_url, notice: 'Colaborador was successfully destroyed.' }

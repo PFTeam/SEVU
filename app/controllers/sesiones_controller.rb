@@ -4,26 +4,31 @@ class SesionesController < ApplicationController
   # GET /sesiones
   # GET /sesiones.json
   def index
+		authorize! :index, Sesion
     @sesiones = Sesion.all
   end
 
   # GET /sesiones/1
   # GET /sesiones/1.json
   def show
+		authorize! :show, Sesion
   end
 
   # GET /sesiones/new
   def new
+		authorize! :new, Sesion
     @sesion = Sesion.new
   end
 
   # GET /sesiones/1/edit
   def edit
+		authorize! :edit, Sesion
   end
 
   # POST /sesiones
   # POST /sesiones.json
   def create
+		authorize! :create, Sesion
     @sesion = Sesion.new(sesion_params)
 
     respond_to do |format|
@@ -40,6 +45,7 @@ class SesionesController < ApplicationController
   # PATCH/PUT /sesiones/1
   # PATCH/PUT /sesiones/1.json
   def update
+		authorize! :update, Sesion
     respond_to do |format|
       if @sesion.update(sesion_params)
         format.html { redirect_to @sesion, notice: 'Sesion was successfully updated.' }
@@ -54,6 +60,7 @@ class SesionesController < ApplicationController
   # DELETE /sesiones/1
   # DELETE /sesiones/1.json
   def destroy
+		authorize! :destroy, Sesion
     @sesion.destroy
     respond_to do |format|
       format.html { redirect_to sesiones_url, notice: 'Sesion was successfully destroyed.' }

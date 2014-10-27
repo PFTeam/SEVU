@@ -4,26 +4,31 @@ class PresupuestosController < ApplicationController
   # GET /presupuestos
   # GET /presupuestos.json
   def index
+		authorize! :index, Presupuesto
     @presupuestos = Presupuesto.all
   end
 
   # GET /presupuestos/1
   # GET /presupuestos/1.json
   def show
+		authorize! :show, Presupuesto
   end
 
   # GET /presupuestos/new
   def new
+		authorize! :new, Presupuesto
     @presupuesto = Presupuesto.new
   end
 
   # GET /presupuestos/1/edit
   def edit
+		authorize! :edit, Presupuesto
   end
 
   # POST /presupuestos
   # POST /presupuestos.json
   def create
+		authorize! :create, Presupuesto
     @presupuesto = Presupuesto.new(presupuesto_params)
 
     respond_to do |format|
@@ -47,6 +52,7 @@ class PresupuestosController < ApplicationController
   # PATCH/PUT /presupuestos/1
   # PATCH/PUT /presupuestos/1.json
   def update
+		authorize! :update, Presupuesto
     respond_to do |format|
       if @presupuesto.update(presupuesto_params)
         sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
@@ -70,6 +76,7 @@ class PresupuestosController < ApplicationController
   # DELETE /presupuestos/1
   # DELETE /presupuestos/1.json
   def destroy
+		authorize! :destroy, Presupuesto
          sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
 #         Transaccion.create!(
 #           descripcion: 'Destruccion del presupuesto del proyecto'+@presupuesto.proyecto.nombre,
@@ -84,6 +91,7 @@ class PresupuestosController < ApplicationController
   end
 
   def gestionar_presupuesto
+		authorize! :gestionar_presupuesto, Presupuesto
   
     @presupuesto = Presupuesto.find(params[:id])
     @detalles_presupuesto = DetallePresupuesto.where(presupuesto_id: params[:id]).order(:monto).reverse_order
@@ -95,14 +103,17 @@ class PresupuestosController < ApplicationController
   end
 
   def evaluar_presupuestos_pendientes
+		authorize! :evaluar_presupuestos_pendientes, Presupuesto
     @presupuestos = Presupuesto.all.select { |m| m.aprobado == nil }
   end
 
   def presupuestos_evaluados
+		authorize! :presupuestos_evaluados, Presupuesto
     @presupuestos = Presupuesto.all.select { |m| m.aprobado != nil }
   end
 
   def evaluar_presupuesto
+		authorize! :evaluar_presupuesto, Presupuesto
     @presupuesto = Presupuesto.find params[:id]
   end
 

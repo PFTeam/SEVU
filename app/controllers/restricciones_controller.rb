@@ -4,28 +4,33 @@ class RestriccionesController < ApplicationController
   # GET /restricciones
   # GET /restricciones.json
   def index
+		authorize! :index, Restriccion
     @restricciones = Restriccion.all
   end
 
   # GET /restricciones/1
   # GET /restricciones/1.json
   def show
+		authorize! :show, Restriccion
   end
 
   # GET /restricciones/new
   def new
+		authorize! :new, Restriccion
     @restriccion = Restriccion.new
     @concepto_gastos = ConceptoGasto.all
   end
 
   # GET /restricciones/1/edit
   def edit
+		authorize! :edit, Restriccion
      @concepto_gastos = ConceptoGasto.all
   end
 
   # POST /restricciones
   # POST /restricciones.json
   def create
+		authorize! :create, Restriccion
     @restriccion = Restriccion.new(restriccion_params)
     @concepto_gastos = ConceptoGasto.all
     respond_to do |format|
@@ -43,6 +48,7 @@ class RestriccionesController < ApplicationController
   # PATCH/PUT /restricciones/1
   # PATCH/PUT /restricciones/1.json
   def update
+		authorize! :update, Restriccion
     @concepto_gastos = ConceptoGasto.all
     respond_to do |format|
       if @restriccion.update(restriccion_params)
@@ -58,6 +64,7 @@ class RestriccionesController < ApplicationController
   # DELETE /restricciones/1
   # DELETE /restricciones/1.json
   def destroy
+		authorize! :destroy, Restriccion
     @restriccion.destroy
     respond_to do |format|
       format.html { redirect_to restricciones_url, notice: 'Restriccion was successfully destroyed.' }
@@ -66,6 +73,7 @@ class RestriccionesController < ApplicationController
   end
 
   def gestionar_restricciones
+		authorize! :gestionar_restricciones, Restriccion
     @restricciones = Restriccion.all #find(params[:id]) 
   end
 

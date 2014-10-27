@@ -4,26 +4,31 @@ class NotificacionesController < ApplicationController
   # GET /notificaciones
   # GET /notificaciones.json
   def index
+		authorize! :index, Notificacion
     @notificaciones = Notificacion.all
   end
 
   # GET /notificaciones/1
   # GET /notificaciones/1.json
   def show
+		authorize! :show, Notificacion
   end
 
   # GET /notificaciones/new
   def new
+		authorize! :new, Notificacion
     @notificacion = Notificacion.new
   end
 
   # GET /notificaciones/1/edit
   def edit
+		authorize! :edit, Notificacion
   end
 
   # POST /notificaciones
   # POST /notificaciones.json
   def create
+		authorize! :create, Notificacion
     @notificacion = Notificacion.new(notificacion_params)
 
     respond_to do |format|
@@ -40,6 +45,7 @@ class NotificacionesController < ApplicationController
   # PATCH/PUT /notificaciones/1
   # PATCH/PUT /notificaciones/1.json
   def update
+		authorize! :update, Notificacion
     respond_to do |format|
       if @notificacion.update(notificacion_params)
         format.html { redirect_to @notificacion, notice: 'Notificacion was successfully updated.' }
@@ -54,6 +60,7 @@ class NotificacionesController < ApplicationController
   # DELETE /notificaciones/1
   # DELETE /notificaciones/1.json
   def destroy
+		authorize! :destroy, Notificacion
     @notificacion.destroy
     respond_to do |format|
       format.html { redirect_to notificaciones_url, notice: 'Notificacion was successfully destroyed.' }

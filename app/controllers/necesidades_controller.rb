@@ -4,6 +4,7 @@ class NecesidadesController < ApplicationController
   # GET /necesidades
   # GET /necesidades.json
   def index
+		authorize! :index, Necesidad
     #@necesidades = Necesidad.all
     @necesidades = Necesidad.page(params[:page]).search query: params[:q]
   end
@@ -11,20 +12,24 @@ class NecesidadesController < ApplicationController
   # GET /necesidades/1
   # GET /necesidades/1.json
   def show
+		authorize! :show, Necesidad
   end
 
   # GET /necesidades/new
   def new
+		authorize! :new, Necesidad
     @necesidad = Necesidad.new
   end
 
   # GET /necesidades/1/edit
   def edit
+		authorize! :edit, Necesidad
   end
 
   # POST /necesidades
   # POST /necesidades.json
   def create
+		authorize! :create, Necesidad
     @necesidad = Necesidad.new(necesidad_params)
     #TODO: Agregar usuario creador
     respond_to do |format|
@@ -43,6 +48,7 @@ class NecesidadesController < ApplicationController
   # PATCH/PUT /necesidades/1
   # PATCH/PUT /necesidades/1.json
   def update
+		authorize! :update, Necesidad
     respond_to do |format|
       if @necesidad.update(necesidad_params)
         format.html { redirect_to @necesidad, notice: 'Necesidad was successfully updated.' }
@@ -57,6 +63,7 @@ class NecesidadesController < ApplicationController
   # DELETE /necesidades/1
   # DELETE /necesidades/1.json
   def destroy
+		authorize! :destroy, Necesidad
     @necesidad.destroy
     respond_to do |format|
       format.html { redirect_to necesidades_url, notice: 'Necesidad was successfully destroyed.' }
@@ -65,6 +72,7 @@ class NecesidadesController < ApplicationController
   end
 
   def mis_necesidades
+		authorize! :mis_necesidades, Necesidad
     @necesidades = Necesidad.where('usuario_id' => current_usuario.id)
   end
 

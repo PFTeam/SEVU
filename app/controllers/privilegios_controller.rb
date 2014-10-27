@@ -4,26 +4,31 @@ class PrivilegiosController < ApplicationController
   # GET /privilegios
   # GET /privilegios.json
   def index
+		authorize! :index, Privilegio
     @privilegios = Privilegio.all
   end
 
   # GET /privilegios/1
   # GET /privilegios/1.json
   def show
+		authorize! :show, Privilegio
   end
 
   # GET /privilegios/new
   def new
+		authorize! :new, Privilegio
     @privilegio = Privilegio.new
   end
 
   # GET /privilegios/1/edit
   def edit
+		authorize! :edit, Privilegio
   end
 
   # POST /privilegios
   # POST /privilegios.json
   def create
+		authorize! :create, Privilegio
     @privilegio = Privilegio.new(privilegio_params)
 
     respond_to do |format|
@@ -40,6 +45,7 @@ class PrivilegiosController < ApplicationController
   # PATCH/PUT /privilegios/1
   # PATCH/PUT /privilegios/1.json
   def update
+		authorize! :update, Privilegio
     respond_to do |format|
       if @privilegio.update(privilegio_params)
         format.html { redirect_to @privilegio, notice: 'Privilegio was successfully updated.' }
@@ -54,6 +60,7 @@ class PrivilegiosController < ApplicationController
   # DELETE /privilegios/1
   # DELETE /privilegios/1.json
   def destroy
+		authorize! :destroy, Privilegio
     @privilegio.destroy
     respond_to do |format|
       format.html { redirect_to privilegios_url, notice: 'Privilegio was successfully destroyed.' }

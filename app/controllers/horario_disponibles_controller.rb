@@ -4,26 +4,31 @@ class HorarioDisponiblesController < ApplicationController
   # GET /horario_disponibles
   # GET /horario_disponibles.json
   def index
+		authorize! :index, HorarioDisponible
     @horario_disponibles = HorarioDisponible.all
   end
 
   # GET /horario_disponibles/1
   # GET /horario_disponibles/1.json
   def show
+		authorize! :show, HorarioDisponible
   end
 
   # GET /horario_disponibles/new
   def new
+		authorize! :new, HorarioDisponible
     @horario_disponibl = HorarioDisponible.new
   end
 
   # GET /horario_disponibles/1/edit
   def edit
+		authorize! :edit, HorarioDisponible
   end
 
   # POST /horario_disponibles
   # POST /horario_disponibles.json
   def create
+		authorize! :create, HorarioDisponible
     @horario_disponibl = HorarioDisponible.new(horario_disponibl_params)
 
     respond_to do |format|
@@ -40,6 +45,7 @@ class HorarioDisponiblesController < ApplicationController
   # PATCH/PUT /horario_disponibles/1
   # PATCH/PUT /horario_disponibles/1.json
   def update
+		authorize! :update, HorarioDisponible
     respond_to do |format|
       if @horario_disponibl.update(horario_disponibl_params)
         format.html { redirect_to @horario_disponibl, notice: 'Horario disponible was successfully updated.' }
@@ -54,6 +60,7 @@ class HorarioDisponiblesController < ApplicationController
   # DELETE /horario_disponibles/1
   # DELETE /horario_disponibles/1.json
   def destroy
+		authorize! :destroy, HorarioDisponible
     @horario_disponibl.destroy
     respond_to do |format|
       format.html { redirect_to horario_disponibles_url, notice: 'Horario disponible was successfully destroyed.' }

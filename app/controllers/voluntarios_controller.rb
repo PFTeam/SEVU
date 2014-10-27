@@ -4,26 +4,31 @@ class VoluntariosController < ApplicationController
   # GET /voluntarios
   # GET /voluntarios.json
   def index
+		authorize! :index, Voluntario
     @voluntarios = Voluntario.all
   end
 
   # GET /voluntarios/1
   # GET /voluntarios/1.json
   def show
+		authorize! :show, Voluntario
   end
 
   # GET /voluntarios/new
   def new
+		authorize! :new, Voluntario
     @voluntario = Voluntario.new
   end
 
   # GET /voluntarios/1/edit
   def edit
+		authorize! :edit, Voluntario
   end
 
   # POST /voluntarios
   # POST /voluntarios.json
   def create
+		authorize! :create, Voluntario
     @voluntario = Voluntario.new(voluntario_params)
 
     respond_to do |format|
@@ -40,6 +45,7 @@ class VoluntariosController < ApplicationController
   # PATCH/PUT /voluntarios/1
   # PATCH/PUT /voluntarios/1.json
   def update
+		authorize! :update, Voluntario
     respond_to do |format|
       if @voluntario.update(voluntario_params)
         format.html { redirect_to @voluntario, notice: 'Voluntario was successfully updated.' }
@@ -54,6 +60,7 @@ class VoluntariosController < ApplicationController
   # DELETE /voluntarios/1
   # DELETE /voluntarios/1.json
   def destroy
+		authorize! :destroy, Voluntario
     @voluntario.destroy
     respond_to do |format|
       format.html { redirect_to voluntarios_url, notice: 'Voluntario was successfully destroyed.' }

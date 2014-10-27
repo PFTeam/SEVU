@@ -4,26 +4,31 @@ class TipoHabilidadesController < ApplicationController
   # GET /tipo_habilidades
   # GET /tipo_habilidades.json
   def index
+		authorize! :index, TipoHabilidad
     @tipo_habilidades = TipoHabilidad.all
   end
 
   # GET /tipo_habilidades/1
   # GET /tipo_habilidades/1.json
   def show
+		authorize! :show, TipoHabilidad
   end
 
   # GET /tipo_habilidades/new
   def new
+		authorize! :new, TipoHabilidad
     @tipo_habilidad = TipoHabilidad.new
   end
 
   # GET /tipo_habilidades/1/edit
   def edit
+		authorize! :edit, TipoHabilidad
   end
 
   # POST /tipo_habilidades
   # POST /tipo_habilidades.json
   def create
+		authorize! :create, TipoHabilidad
     @tipo_habilidad = TipoHabilidad.new(tipo_habilidad_params)
 
     respond_to do |format|
@@ -41,6 +46,7 @@ class TipoHabilidadesController < ApplicationController
   # PATCH/PUT /tipo_habilidades/1
   # PATCH/PUT /tipo_habilidades/1.json
   def update
+		authorize! :update, TipoHabilidad
     respond_to do |format|
       if @tipo_habilidad.update(tipo_habilidad_params)
         format.html { redirect_to gestionar_habilidades_path }
@@ -56,6 +62,7 @@ class TipoHabilidadesController < ApplicationController
   # DELETE /tipo_habilidades/1
   # DELETE /tipo_habilidades/1.json
   def destroy
+		authorize! :destroy, TipoHabilidad
     
     #if !tipo_habilidad.habilidades.nil? then # Pregunto si tiene habilidades asociadas
       #@tipo_habilidad.habilidades.each do |habilidad|
@@ -73,6 +80,7 @@ class TipoHabilidadesController < ApplicationController
   end
   
   def gestionar_habilidades
+		authorize! :gestionar_habilidades, TipoHabilidad
     @tipos_habilidades = TipoHabilidad.all
   end
 

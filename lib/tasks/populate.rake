@@ -119,6 +119,18 @@ v = Voluntario.create!(nombreUsuario: "Voluntario",
       TipoActividad.create(nombre: "Reunión", descripcion: "Actividades destinadas a las reuniones de cualquier índole")
       TipoActividad.create(nombre: "Voluntariado", descripcion: "Actividades destinadas a realizar trabajo de voluntariado")
 
+
+			ppdiego=TipoPrivilegio.create(nombre: "Proyecto", descripcion: "Privilegio para la utilización de un modulo o funcionalidad del sistema")
+			psdiego=TipoPrivilegio.create(nombre: "Sistema", descripcion: "Privilegio para la utilización de un modulo o funcionalidad dentro de un proyecto")
+			trpdiego=TipoRol.create(nombre: "Proyecto", descripcion: "Privilegio para la utilización de un modulo o funcionalidad del sistema")
+			trsdiego=TipoRol.create(nombre: "Sistema", descripcion: "Privilegio para la utilización de un modulo o funcionalidad dentro de un proyecto")
+			rpdiego=Rol.create(nombre: "Default", descripcion: "Privilegio para la utilización de un modulo o funcionalidad dentro de un proyecto", tipo_rol: trpdiego)
+			rsdiego=Rol.create(nombre: "Default", descripcion: "Privilegio para la utilización de un modulo o funcionalidad dentro de un proyecto", tipo_rol: trsdiego)
+			padiego=Privilegio.create(nombre: "index_necesidad", descripcion: "Permite la visualizacion de las transacciones", tipo_privilegio: psdiego)
+			pa1diego=Privilegio.create(nombre: "auditoria", descripcion: "Permite la auditoria de sistema", tipo_privilegio: psdiego)
+			pad2iego=Privilegio.create(nombre: "roles", descripcion: "Permite la visualizacion de los roles", tipo_privilegio: psdiego)
+			arddiego=AsignacionRolPredefinido.create(esActual: true, privilegio: padiego , rol: rsdiego)
+
   end
 
 end

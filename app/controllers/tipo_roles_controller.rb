@@ -4,26 +4,31 @@ class TipoRolesController < ApplicationController
   # GET /tipo_roles
   # GET /tipo_roles.json
   def index
+		authorize! :index, TipoRol
     @tipo_roles = TipoRol.all
   end
 
   # GET /tipo_roles/1
   # GET /tipo_roles/1.json
   def show
+		authorize! :show, TipoRol
   end
 
   # GET /tipo_roles/new
   def new
+		authorize! :new, TipoRol
     @tipo_rol = TipoRol.new
   end
 
   # GET /tipo_roles/1/edit
   def edit
+		authorize! :edit, TipoRol
   end
 
   # POST /tipo_roles
   # POST /tipo_roles.json
   def create
+		authorize! :create, TipoRol
     @tipo_rol = TipoRol.new(tipo_rol_params)
 
     respond_to do |format|
@@ -40,6 +45,7 @@ class TipoRolesController < ApplicationController
   # PATCH/PUT /tipo_roles/1
   # PATCH/PUT /tipo_roles/1.json
   def update
+		authorize! :update, TipoRol
     respond_to do |format|
       if @tipo_rol.update(tipo_rol_params)
         format.html { redirect_to @tipo_rol, notice: 'Tipo rol was successfully updated.' }
@@ -54,6 +60,7 @@ class TipoRolesController < ApplicationController
   # DELETE /tipo_roles/1
   # DELETE /tipo_roles/1.json
   def destroy
+		authorize! :destroy, TipoRol
     @tipo_rol.destroy
     respond_to do |format|
       format.html { redirect_to tipo_roles_url, notice: 'Tipo rol was successfully destroyed.' }

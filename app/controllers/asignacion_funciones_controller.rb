@@ -4,26 +4,31 @@ class AsignacionFuncionesController < ApplicationController
   # GET /asignacion_funciones
   # GET /asignacion_funciones.json
   def index
+		authorize! :index, AsignacionFuncion
     @asignacion_funciones = AsignacionFuncion.all
   end
 
   # GET /asignacion_funciones/1
   # GET /asignacion_funciones/1.json
   def show
+		authorize! :show, AsignacionFuncion
   end
 
   # GET /asignacion_funciones/new
   def new
+		authorize! :new, AsignacionFuncion
     @asignacion_funcion = AsignacionFuncion.new
   end
 
   # GET /asignacion_funciones/1/edit
   def edit
+		authorize! :edit, AsignacionFuncion
   end
 
   # POST /asignacion_funciones
   # POST /asignacion_funciones.json
   def create
+		authorize! :create, AsignacionFuncion
     @asignacion_funcion = AsignacionFuncion.new(asignacion_funcion_params)
 
     respond_to do |format|
@@ -40,6 +45,7 @@ class AsignacionFuncionesController < ApplicationController
   # PATCH/PUT /asignacion_funciones/1
   # PATCH/PUT /asignacion_funciones/1.json
   def update
+		authorize! :update, AsignacionFuncion
     respond_to do |format|
       if @asignacion_funcion.update(asignacion_funcion_params)
         format.html { redirect_to @asignacion_funcion, notice: 'Asignacion funcion was successfully updated.' }
@@ -54,6 +60,7 @@ class AsignacionFuncionesController < ApplicationController
   # DELETE /asignacion_funciones/1
   # DELETE /asignacion_funciones/1.json
   def destroy
+		authorize! :destroy, AsignacionFuncion
     @asignacion_funcion.destroy
     respond_to do |format|
       format.html { redirect_to asignacion_funciones_url, notice: 'Asignacion funcion was successfully destroyed.' }
@@ -69,6 +76,6 @@ class AsignacionFuncionesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def asignacion_funcion_params
-      params.require(:asignacion_funcion).permit(:fechaAsignacion, :esActual, :descripcion, :usuario_id, :rol_id)
+      params.require(:asignacion_funcion).permit(:esActual, :descripcion, :usuario_id, :rol_id)
     end
 end
