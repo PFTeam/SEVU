@@ -14,3 +14,7 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# Ignorar imagenes
+/public/assets/usuarios/*
+/public/assets/comprobantes/*
