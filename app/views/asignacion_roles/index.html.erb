@@ -18,7 +18,7 @@
                     <% @proyecto.asignacion_roles.each do |asignacion_rol| %>
                     <tr>
                         <td><%= asignacion_rol.usuario %></td>
-                        <td><%= asignacion_rol.created_at.to_formatted_s(:rfc822)  %></td>
+                        <td><%= asignacion_rol.created_at.to_formatted_s(:long_ordinal)  %></td>
                         <td><%= asignacion_rol.actual %></td>
                         <td><%= asignacion_rol.rol %></td>
                         <td>

@@ -102,6 +102,7 @@ Rails.application.routes.draw do
 
     resources :objetivo_generales
     resources :postulaciones
+    resources :colaboradores
 
   end
 

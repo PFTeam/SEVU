@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-
+<div class="row">
 <div class="col-lg-6">
           
           
@@ -54,25 +54,11 @@
                 </label>
                 <%= f.input :metodologiasIntervencion, :as => :text, :input_html => {:rows => 10}, label: false %>
      
-
-
-                <label><h3>Entrategias de Intervención</h3>
+				<label><h3>Estrategias de Intervención</h3>
                 </label>
                 <%= f.input :estrategiasIntervencion, :as => :text, :input_html => {:rows => 10}, label: false %>        
 
  
-          
-                <label><h3>Mecanismo de Evaluación</h3>
-                </label>
-                <%= f.input :mecanismoEvaluacion, :as => :text, :input_html => {:rows => 10}, label: false %>         
-          
-		<% if params[:proyecto_id] %>
-			<%= f.input :objetivo_especifico_id, :as => :hidden, input_html: {value: params[:objetivo_especifico_id]} %> 
-			<%= f.input :proyecto_id,:as => :hidden, input_html: {value: params[:proyecto_id]} %>
-		<% else %>
-			<%= f.input :objetivo_especifico_id, :as => :hidden, input_html: {value: @actividad.objetivo_especifico.id } %> 
-			<%= f.input :proyecto_id,:as => :hidden, input_html: {value: @actividad.proyecto.id } %>
-		<% end %>
 
 	 </div>
 
@@ -142,18 +128,6 @@
 	<%= link_to 'Agregar Habilidad', agregar_habilidad_path(f, :format => :js ), remote: true %> 
 
     
-     
-<h2>Asignar Recursos</h2>
-
-  <div class="form-group input-group">
-                <span class="input-group-addon">@</span>
-                <input type="text" class="form-control" placeholder="Username" disabled>
-              </div>
-                <label class="checkbox-inline">
-                  <input type="checkbox" disabled> Filtrada
-                </label>
-				</span><button type="button" class="btn btn-primary btn-sm pull-right" disabled>Agregar</button>
-
 
     <h2>Cargar Planificación Real</h2>
    
@@ -163,9 +137,24 @@
 
 		  <label><h5>Duración Real</h5></label>
 	<%= f.input :duracionReal, label: false %>
-     </div>
+	
+	
+	
+          
+                <label><h3>Mecanismo de Evaluación</h3>
+                </label>
+                <%= f.input :mecanismoEvaluacion, :as => :text, :input_html => {:rows => 10}, label: false %>         
+          
+		<% if params[:proyecto_id] %>
+			<%= f.input :objetivo_especifico_id, :as => :hidden, input_html: {value: params[:objetivo_especifico_id]} %> 
+			<%= f.input :proyecto_id,:as => :hidden, input_html: {value: params[:proyecto_id]} %>
+		<% else %>
+			<%= f.input :objetivo_especifico_id, :as => :hidden, input_html: {value: @actividad.objetivo_especifico.id } %> 
+			<%= f.input :proyecto_id,:as => :hidden, input_html: {value: @actividad.proyecto.id } %>
+		<% end %>
+ </div>
 
-
+</div>
 
 
 
