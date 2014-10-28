@@ -4,7 +4,7 @@
             <div class="panel-heading">
             	<!-- Titulo Cabecera  !-->
   <h1 class="panel-title">
-<h1>Gestionar Experiencia Voluntarios <small>Modulo Voluntario</small></h1>
+Gestionar Experiencia Voluntarios <small>Modulo Voluntario</small></h1>
 </div> 
     <% if @experiencias.nil? then %>
       <h4> No existen actualmente Experiencias  </h4>
@@ -13,13 +13,13 @@
 <div class="panel-body">
     
      <!-- Cabecera tabla experiencia !--> 
-  <table>
+  <table bgcolor="red" border="2" bordercolordark="orange" class="table" >
   <thead>
-    <tr>
+    <tr align="center" >
       <th>Tieneexperiencia</th>
       <th>Cantidadexperiencia</th>
       <th>Habilidad</th>
-      <th>Voluntario</th>
+      <th>Tiempo experiencia</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -29,16 +29,23 @@
   	 <% @experiencias.each do |experiencia|%>
   	   	 
   	  <tr>
-        <td><%= experiencia.tieneExperiencia %></td>
-        <td><%= experiencia.cantidadExperiencia %></td>
-        <td><%= experiencia.habilidad %></td>
-        <td><%= experiencia.voluntario_id %></td>
+        <td> &nbsp;<%= experiencia.tieneExperiencia %></td>
+        <td> &nbsp;<%= experiencia.cantidadExperiencia %></td>
+        <td> &nbsp;<%= experiencia.habilidad.nombre %></td>
+        <td> &nbsp;<%= experiencia.cantidadExperiencia%></td>
         
-        <td><%= link_to 'Editar', edit_experiencia_path(experiencia) %> 
-        &nbsp; &nbsp;</td>
+        <td>
+        	<span class="label label-danger"><%= link_to 'Eliminar', experiencia, method: :delete, data: { confirm: 'Are you sure?' } %>
+        	</span>
+        	
+       </td>
         
-        <td><%= link_to 'Eliminar', experiencia, method: :delete, data: { confirm: 'Are you sure?' } %>
-        	&nbsp; &nbsp;
+        <td>
+        	<span class="label label-success">
+        		<%= link_to 'Editar', edit_experiencia_path(experiencia) %>
+        	</span>
+         
+        	
         </td>
       </tr>
   	 

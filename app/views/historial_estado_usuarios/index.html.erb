@@ -1,31 +1,50 @@
-<h1>Listing historial_estado_usuarios</h1>
 
-<table>
+  <!--El panel panel-primary pone un cuadro -->
+          <div class="panel panel-primary">
+          	<!--Pone el cuadro de color azul -->
+            <div class="panel-heading">
+            	<!-- Titulo Cabecera  !-->
+<h1>Lista de estados de <%=Usuario.find(params[:usuario_id]).nombreUsuario %></h1>
+</div>
+<div class="panel-body">
+<table class="table table-striped" >
+ 
+ 
   <thead>
     <tr>
-      <th>Fechacambioestado</th>
-      <th>Esactual</th>
-      <th>Usuario</th>
-      <th>Estado usuario</th>
-      <th colspan="3"></th>
+        <th><strong>Fecha Cambio de Estado</strong></th>
+      <th><strong>Estado Usuario:</strong></th>
+      <th ></th>
     </tr>
   </thead>
 
   <tbody>
+  	<% @historial_estado_usuarios=HistorialEstadoUsuario.where(usuario_id: params[:usuario_id] ) %>
+  	<% if @historial_estado_usuarios.empty? then %>
+  	<h1>No Existe historiales de usuario</h1>
+  	<%else%>
     <% @historial_estado_usuarios.each do |historial_estado_usuario| %>
-      <tr>
-        <td><%= historial_estado_usuario.fechaCambioEstado %></td>
-        <td><%= historial_estado_usuario.esActual %></td>
-        <td><%= historial_estado_usuario.usuario %></td>
-        <td><%= historial_estado_usuario.estado_usuario %></td>
-        <td><%= link_to 'Show', historial_estado_usuario %></td>
-        <td><%= link_to 'Edit', edit_historial_estado_usuario_path(historial_estado_usuario) %></td>
-        <td><%= link_to 'Destroy', historial_estado_usuario, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
+       <tr>
+       	 <td>
+  
+  <%=historial_estado_usuario.created_at %>
+</td>
+
+ <td>
+  
+  <%= EstadoUsuario.find(historial_estado_usuario.estado_usuario_id).nombre %>
+</td>
+  <td><%#= link_to 'Show', historial_estado_usuario %></td>
+  <td><%#= link_to 'Edit', edit_historial_estado_usuario_path(historial_estado_usuario) %></td>
+  <td><%#= link_to 'Destroy', historial_estado_usuario, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</tr>
+  
+    <%end%>
+    <%end%>
   </tbody>
 </table>
+</div>
+</div>
+<button class="btn btn-primary> <%= link_to 'New Historial estado usuario', new_historial_estado_usuario_path %> </button>
 
-<br>
 
-<%= link_to 'New Historial estado usuario', new_historial_estado_usuario_path %>

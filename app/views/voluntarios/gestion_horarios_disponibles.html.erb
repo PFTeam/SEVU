@@ -1,23 +1,52 @@
-<h1>No hay horarios</h1>
+<p></p>
+<p></p><p></p>
+<p></p>
 <% if @voluntario.nil? then %>
 <h2>NO Voluntario</h2>
 <% else %> 
-<ol class="breadcrumb">
-      	 <li><i class="icon-dashboard"></i>
-      	 	<%= @voluntario.legajo %></li>
-      	 	</ol>
+<div class="well">
+<p>
+Usuario:
+<%= @voluntario.nombreUsuario%>
+Legajo:
+<%= @voluntario.legajo %>
+<%#= @voluntario.apellidoNombre%>
+</p>
+      </div>	 	
 <% if @horario_disponibles.nil? then %>
 <h2>NO HAY HORARIOS</h2>
 <% else %> 
+ 
 <% @horario_disponibles.each do |horario| %>
 
-<%= horario.diaSemana %>
-<%= horario.horaDesde %>
-<td><%= link_to 'Editar Horario', edit_voluntario_horario_disponibl_path(horario) %><td>
+     <div class="panel panel-primary">
+ <div class="panel-heading"> 
+ 	<%= horario.id %>
+ 	</div>
+ 	<div class="panel-body">
+ 		<% itemlist =[['Domingo', 0], ['Lunes', 1], ['Martes', 2], ['Miercoles', 3], ['Jueves', 4], ['Viernes', 5], ['Sabado', 6]] %>
+
+<n>"Dia de la semana: "</n> <%=itemlist[horario.diaSemana.to_i][0]%>
+<%#=horario.diaSemana %>
+<n>"Hora Desde: "</n><%=horario.horaDesde %>
+<n>"Hora hasta: "</n><%=horario.horaHasta %>
+<td><%#= link_to 'Editar Horario', edit_voluntario_horario_disponibl_path(horario) %><td>
+<%= link_to 'Editar Horario', edit_horario_disponibl_path(horario) %>
+<%= link_to 'Destroy', horario, method: :delete, data: { confirm: 'Estas seguro?' } %>
+
+
+</div>
+</div>
+<% end %>
+<% end %>
 
 <% end %>
-<% end %>
-<td><%= link_to 'Agregar Horarios Disponibles', new_voluntario_horario_disponibl_path(@voluntario) %><td>
-<% end %>
+<div>
+<button type="button" class="btn btn-lg btn-default" >
+<strong><%= link_to 'Agregar Horarios Disponibles', new_voluntario_horario_disponibl_path(@voluntario) %></strong>
+
+</button>
+</div>
+
 
 	

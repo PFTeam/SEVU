@@ -1,8 +1,8 @@
 <%= form_for ([@voluntario, @horario_disponible]) do |f| %>
   <% if @horario_disponible.errors.any? %>
+    
     <div id="error_explanation">
       <h2><%= pluralize(@horario_disponible.errors.count, "error") %> prohibited this horario_disponibl from being saved:</h2>
-
       <ul>
       <% @horario_disponible.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -10,11 +10,11 @@
       </ul>
     </div>
   <% end %>
-
+  <div class="well">
   <div class="field">
     <%= f.label :diaSemana %><br>
-    <%= f.text_field :diaSemana %>
-  </div>
+    <%= f.select :diaSemana, [['Domingo', 0], ['Lunes', 1], ['Martes', 2], ['Miercoles', 3], ['Jueves', 4], ['Viernes', 5], ['Sabado', 6]] %>
+    </div> 
   <div class="field">
     <%= f.label :horaDesde %><br>
     <%= f.time_select :horaDesde %>
@@ -24,13 +24,19 @@
     <%= f.time_select :horaHasta %>
     
   </div>
-    <div class="field">
     <%= f.label @voluntario.id %><br>
-  <%f.hidden_field :voluntario_id, :value =>@voluntario.id %>
+    <div class="field">
+   <%= f.label :voluntario_id %>
+ 
+    <%=f.text_field  :voluntario_id, :value =>@voluntario.id %>
+
+
  </div>
     
   
   <div class="actions">
     <%= f.submit %>
   </div>
+  
+   </div>
 <% end %>

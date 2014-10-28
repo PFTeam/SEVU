@@ -15,6 +15,7 @@
     </div>
   <% end %>
 
+
   <div class="field">
     <%= f.label :legajo %><br>
     <%= f.number_field :legajo %>
@@ -26,7 +27,8 @@
   
   <div class="field">
     <%= f.label :contraseña %><br>
-    <%= f.text_field :contrasenia %>
+    <%#= f.text_field :contrasenia %>
+    <%= f.password_field  :contrasenia %>
   </div>
     <div class="field">
     <%= f.label :mail %><br>

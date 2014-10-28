@@ -25,7 +25,9 @@ class NotasController < ApplicationController
 
   # GET /notas/1/edit
   def edit
-    
+           @usuario=Usuario.where(id: @nota.usuario_id)
+    @voluntario =Voluntario.find(@nota.usuario_id)
+  
   end
 
   # POST /notas

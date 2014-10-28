@@ -97,12 +97,19 @@ Rails.application.routes.draw do
     resources :notas
    
   end
+
   resources :horario_disponibles
   
   resources :experiencias
   
   resources :usuarios
-
+  
+ # get 'buscar_por_legajo' => 'voluntarios#buscar_por_legajo'
+    get 'buscar_por_legajo/:legajo' => 'voluntarios#buscar_por_legajo'
+    get 'buscar_usuario'=>'usuarios#buscar_usuario'
+  
+  
+   get 'buscar_voluntario'=>'voluntarios#buscar_usuario'
   resources :tipo_privilegios
 
   resources :concepto_gastos
@@ -132,10 +139,14 @@ Rails.application.routes.draw do
   resources :tipo_proyectos
 
   resources :estado_proyectos
+ #match 'usuarios/buscar_por_legajo/:legajo' => 'usuarios#buscar_por_legajo'
+  get 'adminitrar_estado_usuario/'  => 'voluntarios#adminitrar_estado_usuario',:as => 'adminitrar_estado_usuario'
+  get 'buscarusuario/'  => 'voluntarios#buscarusuario',:as => 'buscarusuario'
+  get 'buscarusuario/'  => 'voluntarios#buscar_usuario'
 
   get 'mis_proyectos', :as => 'proyectos/mis_proyectos', :controller => :proyectos
   get 'mis_necesidades', :as => 'necesidades/mis_necesidades', :controller => :necesidades
-
+  
   get 'crear_organizacion_externa', :controller => :proyectos
 
   get 'gestionar_presupuesto/:id' => 'presupuestos#gestionar_presupuesto', :as => 'gestionar_presupuesto'
@@ -145,11 +156,13 @@ Rails.application.routes.draw do
   get 'horarios_disponibles/:id' => 'voluntarios#gestion_horarios_disponibles', :as => 'gestion_horarios_disponibles'
   get 'gestionar_nota_P/:id'  => 'voluntarios#gestionar_nota_P',:as => 'gestionar_nota_P'
   get 'gestionar_estado_usuario'=> 'voluntarios#gestionar_estado_usuario',:as =>'gestionar_estado_usuario'
+ 
  #para el metodo get "la forma de llamado=> controlado#metodo =>,:as=>pach 
   #voluntario_controller/gestion_horario_disponibles/gestion_horario_disponible.html
 
   get 'gestionar_habilidades' => 'tipo_habilidades#gestionar_habilidades', :as => 'gestionar_habilidades'
 	
+
 	root :to => "usuarios#index"
 
   #get 'gestionarPresupuesto', :controller => :presupuestos

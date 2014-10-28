@@ -1,12 +1,76 @@
 class VoluntariosController < ApplicationController
+  #respond_to :html, :xml, :json
   
   before_action :set_voluntario, only: [:show, :edit, :update, :destroy, :gestionar_experiencias, 
     :gestion_horarios_disponibles,:gestion_horario_disponibles]
     #ingerto juan
   before_action :set_todasHabilidades, only: [ :gestionar_experiencias, :gestion_horarios_disponibles,:gestion_horario_disponibles]
   before_action :BuscarTipoHabilidad, only: [:gestionar_experiencias ]
+
+def buscarusuario 
+    @usuarios = Usuario.where(nombreUsuario: params[:usuario_bucar])
+end
+
+
+def buscar_usuario
+  @usuarios = Usuario.where(nombreUsuario: params[:usuario_bucar])
+ # @usuarios = Usuario.where( nombreUsuario: params[:usuario_bucar])
+
+end  
+
+def buscar_voluntario
  
+     @voluntario = Voluntario.where(nombreUsuario: params[:usuario_bucar]) 
+    if  @voluntario.nil? then
+      puts "no hay voluntario"
+      nil
+    else
+      puts "se encontro"
+       @voluntario
+    end
+end
+
+ # GET /voluntarios
+  # GET /voluntarios.json
+  def index2
+       @voluntarios = Voluntario.all
+   end
+
+
+
+def index
+ @voluntario = Voluntario.search(params[:searchbox])
+    
+ if  @voluntario.nil?
+   @voluntario = Voluntario.all
+ end
+
+  respond_to do |format|
+
+   format.html # index.html.erb
+end
+
+  end
+
+
+
+  def buscar_por_legajo
+   #empleado = Empleado.select("id, nombre, apellido").where(:legajo => params[:legajo]);
+  # @usuario =Usuario.select("id, nombreUsuario, apellido_nombre").where(:legajo => params[:legajo]);
+    usuario =Usuario.where(:legajo => params[:legajo])
+   #Devuelve un json como salida al navegador.
  
+   render :json => usuario[0]
+#format.json usuario[0]
+end
+  
+   def adminitrar_estado_usuario
+    
+     @estado_usuarios = EstadoUsuario.all
+  end
+
+
+
  def set_todasHabilidades 
     @habilidades = Habilidad.all
     @voluntario = Voluntario.find(params[:id])
@@ -18,10 +82,10 @@ class VoluntariosController < ApplicationController
     
   end
   
-  def otrometodo
-    
-  end
+ 
   
+
+
   def buscarusuarios
      @codigo = params[:nombre]
      @voluntario = Voluntario.where(legajo: params[:legajo] ) 
@@ -35,17 +99,14 @@ class VoluntariosController < ApplicationController
   end
   
   def gestionar_estado_usuario
- 
- #@voluntario=Voluntario.first
+    @estado=EstadoUsuario.all
+ @usuario=Usuario.all
+ @voluntario=Voluntario.first
  #@voluntario = Voluntario.where(legajo: params[:legajo] ) 
   end
 #fin ingerto juan
 
-  # GET /voluntarios
-  # GET /voluntarios.json
-  def index
-    @voluntarios = Voluntario.all
-  end
+ 
 
   def gestionar_experiencias
   @experiencias = Experiencia.where(voluntario_id: params[:id])
@@ -87,6 +148,8 @@ class VoluntariosController < ApplicationController
   # POST /voluntarios
   # POST /voluntarios.json
   def create
+ 
+ 
     @voluntario = Voluntario.new(voluntario_params)
 
     respond_to do |format|
@@ -125,8 +188,8 @@ class VoluntariosController < ApplicationController
   end
 def gestion_horarios_disponibles
   
-  @voluntario = Voluntario.find(params[:id])
- #@horario_disponibles = HorarioDisponible.where(voluntario_id: :id)
+ @voluntario = Voluntario.find(params[:id])
+ @horario_disponibles = HorarioDisponible.where(voluntario_id: @voluntario.id)
  
 #@horario_disponibles =@voluntario.horario_disponibles.all
 end

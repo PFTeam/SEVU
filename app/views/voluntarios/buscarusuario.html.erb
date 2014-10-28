@@ -1,0 +1,78 @@
+    <!--El panel panel-primary pone un cuadro -->
+          <div class="panel panel-default">
+          	<!--Pone el cuadro de color azul -->
+            <div class="panel-heading">
+<h1>Gestionar Estado Usuario </h1>
+
+</div>
+<%= form_tag({:controller => "voluntarios", :action => "buscarusuario"}, :method => :get) do %>
+
+    <%= text_field_tag "usuario_bucar", params[:buscar_usuario] %>
+
+    <%= submit_tag "Buscar", :name => nil %>
+  
+   </div> 
+ 
+        <% if @usuarios.empty? then %>
+
+    
+    <h1>Busque un usuario por Nombre</h1>
+    <%else%>
+    <% @usuarios.each do |usuario| %>
+          <!--El panel panel-primary pone un cuadro -->
+          <div class="panel panel-primary">
+          	<!--Pone el cuadro de color azul -->
+            <div class="panel-heading">
+            	<!-- Titulo Cabecera  !-->
+
+  <%aux=HistorialEstadoUsuario.where(usuario_id: usuario.id).last%>
+  
+  <%if aux.nil? then %>
+  <p>
+  <strong>No tiene Estado</strong>
+  
+</p>
+  <%else%>
+
+ <p>
+<strong>Estado Actual de </strong>
+<%=EstadoUsuario.find(aux.estado_usuario_id).nombre %>
+</p>
+<p>  
+   <strong>Ultimo Cambio de Estado</strong> <%=HistorialEstadoUsuario.where(usuario_id: usuario.id).last.created_at%>
+</p>
+<%end%>
+    <p>
+    	</div>
+  <!-- Foto -->
+  <%= image_tag usuario.foto.url(:small) %>
+</p>
+<p>
+  <strong>Nombre de usuario:</strong>
+  <%= usuario.nombreUsuario %>
+</p>
+
+
+<p>
+  <strong>Apellido y nombre:</strong>
+  <%= usuario.apellido_nombre %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= usuario.email %>
+</p>
+
+<p>
+  <strong>Direccion:</strong>
+  <%= usuario.direccion %>
+</p>
+
+</div>
+<button type="button" class="btn btn-lg btn-info">
+<%=link_to 'Cambiar Estado', new_historial_estado_usuario_path(:usuario_id => usuario.id) %>
+ </button>
+
+    <% end %>
+  <% end %>
+<% end %>
