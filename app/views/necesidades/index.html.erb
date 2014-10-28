@@ -7,7 +7,11 @@
 
             <div class="panel panel-primary">
               <div class="panel-heading">
-                <h3 class="panel-title"> <%= link_to necesidad.titulo, necesidad %></h3>
+		      <h3 class="panel-title"> <%= link_to necesidad.titulo, necesidad %> | 
+			      <% if (necesidad.created_at > Time.now - 160.hours) && (necesidad.usuario == current_usuario) %> 
+				      <%= link_to 'Edit', edit_necesidad_path(necesidad) %>
+			      <% end %>
+		      </h3>
               </div>
               <div class="panel-body">
                 
@@ -29,14 +33,11 @@
                 </p>
                 <label>Nombre Responsable</label>
                 <p> 
-
-                <!-- #TODO: mostrar nombre --> 
-                  <%= necesidad.usuario %>
+                  <%= link_to necesidad.usuario, necesidad.usuario %>
                 </p>
                 <label>Número de Contacto</label>
                 <p> 
-                <!-- #TODO: mostrar telefono --> 
-                  <%= necesidad.usuario %>
+		  <%= necesidad.usuario.telefono %>
                 </p>
 		<% if necesidad.proyecto.presence %>
 			<%= link_to necesidad.proyecto.nombre, necesidad.proyecto, :class => "btn btn-primary btn-lg"  %>
