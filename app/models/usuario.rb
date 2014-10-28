@@ -43,6 +43,17 @@ class Usuario < ActiveRecord::Base
     apellido_nombre
   end  
 
+  def self.telefono
+	  telefono
+  end
+
+  def participando_evento(evento)
+	  AsistenciaEvento.where(usuario: self, evento_publico: evento).count
+  end
+
+  def participando_proyecto(proyecto)
+	  Postulacion.where(usuario: self, proyecto: proyecto).count + AsignacionRol.where(usuario: self, proyecto: proyecto, esActual: true).count
+  end
 
   def self.search query: nil, limit: false
     result = Usuario.order 'apellido_nombre ASC'

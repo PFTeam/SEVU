@@ -1,3 +1,4 @@
+<p id="notice"><%= notice %></p>
 <h1>Lista Eventos Públicos</h1>
 <div class="row">
   <div class="col-lg-12">
@@ -32,10 +33,23 @@
 			<%= evento_publico.fechaRealizacion.to_formatted_s(:long_ordinal) %>
 		<% else %>
 			No se ha cargado una descripción
-		<% end %>          
+		<% end %>         
+		<br>
+		<br>
+		<label>Concurrencia</label>
+		<%= evento_publico.asistencia_eventos.size %>
+		<% if current_usuario.participando_evento(evento_publico) == 0 %>
+			<%= button_to "Participar",  {:controller => :asistencia_eventos, :action => 'create', :asistencia_evento => { :usuario_id => current_usuario.id, :evento_publico_id => evento_publico.id }}, :method => :new %>
+		<% else %>
+		<br>
+		<br>
+			Actualmente participando
+		<% end %>
               </div>
+
             </div>
           
+
 
     <% end %>      
   </div>
