@@ -15,7 +15,7 @@ one:
   necesidad_id: 
 
 two:
-  nombre: MyString
+  nombre: MyString2
   breveDescripcion: MyText
   fechaInicio: 2014-07-14
   fechaFin: 2014-07-14

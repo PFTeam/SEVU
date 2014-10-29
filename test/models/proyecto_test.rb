@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ProyectoTest < ActiveSupport::TestCase
       setup do
-	    @proyecto = proyecto(:one)
+	    @proyecto = proyectos(:one)
       end
 
   test 'el nombre no puede estar en blanco' do
