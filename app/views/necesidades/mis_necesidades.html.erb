@@ -38,7 +38,11 @@
                 </p>
                 <label>Número de Contacto</label>
                 <p> 
+		<% if necesidad.proyecto.presence %>
 		  <%= necesidad.usuario.telefono %>
+		<% else %>
+		  No se encuentra cargado ningún numero de teléfono.
+		<% end %>
                 </p>
 
 		<% if necesidad.proyecto.presence %>

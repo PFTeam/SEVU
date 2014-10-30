@@ -37,7 +37,11 @@
                 </p>
                 <label>Número de Contacto</label>
                 <p> 
+		<% if necesidad.proyecto.presence %>
 		  <%= necesidad.usuario.telefono %>
+		<% else %>
+		  No se encuentra cargado ningún numero de teléfono.
+		<% end %>
                 </p>
 		<% if necesidad.proyecto.presence %>
 			<%= link_to necesidad.proyecto.nombre, necesidad.proyecto, :class => "btn btn-primary btn-lg"  %>
