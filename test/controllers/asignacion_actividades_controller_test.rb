@@ -19,7 +19,7 @@ include Devise::TestHelpers
 
   test "should create asignacion_actividad" do
     assert_difference('AsignacionActividad.count') do
-      post :create, asignacion_actividad: { actividad_id: @asignacion_actividad.actividad_id, fechaAsignacion: @asignacion_actividad.fechaAsignacion, usuario_id: @asignacion_actividad.usuario_id, vigente: @asignacion_actividad.vigente }
+      post :create, asignacion_actividad: { actividad_id: @asignacion_actividad.actividad_id,  usuario_id: @asignacion_actividad.usuario_id, vigente: @asignacion_actividad.vigente }
     end
 
     assert_redirected_to asignacion_actividad_path(assigns(:asignacion_actividad))
@@ -36,7 +36,7 @@ include Devise::TestHelpers
   end
 
   test "should update asignacion_actividad" do
-    patch :update, id: @asignacion_actividad, asignacion_actividad: { actividad_id: @asignacion_actividad.actividad_id, fechaAsignacion: @asignacion_actividad.fechaAsignacion, usuario_id: @asignacion_actividad.usuario_id, vigente: @asignacion_actividad.vigente }
+    patch :update, id: @asignacion_actividad, asignacion_actividad: { actividad_id: @asignacion_actividad.actividad_id,  usuario_id: @asignacion_actividad.usuario_id, vigente: @asignacion_actividad.vigente }
     assert_redirected_to asignacion_actividad_path(assigns(:asignacion_actividad))
   end
 
