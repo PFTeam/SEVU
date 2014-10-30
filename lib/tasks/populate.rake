@@ -7,12 +7,22 @@ namespace :db do
     
     [Actividad, AsignacionActividad,AsignacionFuncion, AsignacionRolPredefinido, AsignacionRol,AsistenciaEvento,Colaborador,Comprobante, ConceptoGasto, DetalleGasto, DetallePresupuesto, EstadoActividad, EstadoPresupuesto, EstadoProyecto, EstadoUsuario, EventoPublico, Experiencia, Habilidad, HistorialEstadoActividad, HistorialEstadoPresupuesto, HistorialEstadoProyecto, HistorialEstadoUsuario, HorarioDisponible, InformeGasto, Necesidad, Nota, NotificacionEmail, NotificacionPredeterminada, Notificacion, NotificacionSistema, ObjetivoEspecifico, ObjetivoGeneral, OrganizacionExterna, Postulacion, Presupuesto, Privilegio, Proyecto, Reporte, Requisito, Restriccion, Rol, Sesion, TipoActividad, TipoHabilidad, TipoNotificacion, TipoPrivilegio, TipoProyecto, TipoRol, TipoTransaccion, Transaccion, Usuario, Voluntario].each(&:delete_all)
    
-      
-    u = Usuario.create!(nombreUsuario: "joel",
+       ppdiego=TipoPrivilegio.create(nombre: "Proyecto", descripcion: "Privilegio para la utilización de un modulo o funcionalidad del sistema")
+      psdiego=TipoPrivilegio.create(nombre: "Sistema", descripcion: "Privilegio para la utilización de un modulo o funcionalidad dentro de un proyecto")
+      trpdiego=TipoRol.create(nombre: "Proyecto", descripcion: "Privilegio para la utilización de un modulo o funcionalidad del sistema")
+      trsdiego=TipoRol.create(nombre: "Sistema", descripcion: "Privilegio para la utilización de un modulo o funcionalidad dentro de un proyecto")
+      rpdiego=Rol.create(nombre: "Default", descripcion: "Privilegio para la utilización de un modulo o funcionalidad dentro de un proyecto", tipo_rol: trpdiego)
+      rsdiego=Rol.create(nombre: "Default", descripcion: "Privilegio para la utilización de un modulo o funcionalidad dentro de un proyecto", tipo_rol: trsdiego)
+      padiego=Privilegio.create(nombre: "index_necesidad", descripcion: "Permite la visualizacion de las transacciones", tipo_privilegio: psdiego)
+      pa1diego=Privilegio.create(nombre: "auditoria", descripcion: "Permite la auditoria de sistema", tipo_privilegio: psdiego)
+      pad2iego=Privilegio.create(nombre: "roles", descripcion: "Permite la visualizacion de los roles", tipo_privilegio: psdiego)
+      arddiego=AsignacionRolPredefinido.create(esActual: true, privilegio: padiego , rol: rsdiego)
+
+    u = Usuario.create!(nombreUsuario: "adrian",
 								       password: password, 
 								       password_confirmation: password,  
-								       apellido_nombre: "Noguera, Joel",
-								       email: "noguera.sistemas@gmail.com",
+								       apellido_nombre: "Sierra, Adrian",
+								       email: "adrian@email.com",
 								       direccion: Faker::Address.street_address,
 								       telefono: Faker::PhoneNumber.cell_phone,
 								       fax: Faker::PhoneNumber.phone_number,
@@ -40,30 +50,17 @@ u9 =	Usuario.create(nombreUsuario: Faker::Internet.user_name, password: password
 
 u10 =	Usuario.create(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample))
 
-# v = Voluntario.create!(nombreUsuario: "Voluntario",
-#        password: password, 
-#        password_confirmation: password,  
-#        apellido_nombre: "Voluntario, Sevu",
-#        email: "noguera.sistemas@gmail.com",
-#        direccion: Faker::Address.street_address,
-#        telefono: Faker::PhoneNumber.cell_phone,
-#        fax: Faker::PhoneNumber.phone_number,
-# 	 legajo: 34587,
-#        type: 'Voluntario',
-#       foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample))
-
-  Usuario.create!(nombreUsuario: "ivo",
-                       password: password, 
-                       password_confirmation: password,  
-                       apellido_nombre: "Lodovico Molina, Ivo",
-                       email: "ivolodovico@gmail.com",
-                       legajo: 34559,
-                       direccion: Faker::Address.street_address,
-                       telefono: Faker::PhoneNumber.cell_phone,
-                       fax: Faker::PhoneNumber.phone_number,
-                       foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample))
-
-
+v = Voluntario.create!(nombreUsuario: "agustin",
+       password: password, 
+       password_confirmation: password,  
+       apellido_nombre: "Serrano, Agustin",
+       email: "voluntario@email.com",
+       direccion: Faker::Address.street_address,
+       telefono: Faker::PhoneNumber.cell_phone,
+       fax: Faker::PhoneNumber.phone_number,
+	 legajo: 34587,
+       type: 'Voluntario',
+      foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample))
 
 
     creado = EstadoProyecto.create(nombre: "Creado", descripcion: "El proyecto se encuentra en estado creado")
@@ -132,16 +129,7 @@ u10 =	Usuario.create(nombreUsuario: Faker::Internet.user_name, password: passwor
       TipoActividad.create(nombre: "Voluntariado", descripcion: "Actividades destinadas a realizar trabajo de voluntariado")
 
 
-			ppdiego=TipoPrivilegio.create(nombre: "Proyecto", descripcion: "Privilegio para la utilización de un modulo o funcionalidad del sistema")
-			psdiego=TipoPrivilegio.create(nombre: "Sistema", descripcion: "Privilegio para la utilización de un modulo o funcionalidad dentro de un proyecto")
-			trpdiego=TipoRol.create(nombre: "Proyecto", descripcion: "Privilegio para la utilización de un modulo o funcionalidad del sistema")
-			trsdiego=TipoRol.create(nombre: "Sistema", descripcion: "Privilegio para la utilización de un modulo o funcionalidad dentro de un proyecto")
-			rpdiego=Rol.create(nombre: "Default", descripcion: "Privilegio para la utilización de un modulo o funcionalidad dentro de un proyecto", tipo_rol: trpdiego)
-			rsdiego=Rol.create(nombre: "Default", descripcion: "Privilegio para la utilización de un modulo o funcionalidad dentro de un proyecto", tipo_rol: trsdiego)
-			padiego=Privilegio.create(nombre: "index_necesidad", descripcion: "Permite la visualizacion de las transacciones", tipo_privilegio: psdiego)
-			pa1diego=Privilegio.create(nombre: "auditoria", descripcion: "Permite la auditoria de sistema", tipo_privilegio: psdiego)
-			pad2iego=Privilegio.create(nombre: "roles", descripcion: "Permite la visualizacion de los roles", tipo_privilegio: psdiego)
-			arddiego=AsignacionRolPredefinido.create(esActual: true, privilegio: padiego , rol: rsdiego)
+
 
   end
 
