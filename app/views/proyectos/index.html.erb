@@ -48,7 +48,14 @@
                 <div class="btn-group btn-group-justified">
  
 			<p>        
+		<% if current_usuario.participando_proyecto(proyecto) == 0 %>
 				<%= button_to "Participar",  {:controller => :postulaciones, :action => 'create', :postulacion => { :usuario_id => current_usuario.id, :proyecto_id => proyecto.id }}, :method => :new %>
+		<% else %>
+		<br>
+		<br>
+			Actualmente participando
+		<% end %>
+
 		<!-- REEMPLAZAR POR EL USUARIO ACTUAL DE LA SESION 	-->
 
 		

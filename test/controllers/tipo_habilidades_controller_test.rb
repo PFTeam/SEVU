@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class TipoHabilidadesControllerTest < ActionController::TestCase
+include Devise::TestHelpers
   setup do
     @tipo_habilidad = tipo_habilidades(:one)
   end

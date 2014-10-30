@@ -2,12 +2,10 @@
 
 one:
   descripcion: MyText
-  fechaCreacion: 2014-07-14 20:53:45
   ambitoAplicacion: MyText
   usuario_id: 
 
 two:
   descripcion: MyText
-  fechaCreacion: 2014-07-14 20:53:45
   ambitoAplicacion: MyText
   usuario_id: 

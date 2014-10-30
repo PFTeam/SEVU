@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class PostulacionesControllerTest < ActionController::TestCase
+include Devise::TestHelpers
   setup do
     @postulacion = postulaciones(:one)
   end
@@ -18,7 +19,7 @@ class PostulacionesControllerTest < ActionController::TestCase
 
   test "should create postulacion" do
     assert_difference('Postulacion.count') do
-      post :create, postulacion: { aceptado: @postulacion.aceptado, fechaPostulacion: @postulacion.fechaPostulacion, proyecto_id: @postulacion.proyecto_id, usuario_id: @postulacion.usuario_id }
+      post :create, postulacion: { aceptado: @postulacion.aceptado, proyecto_id: @postulacion.proyecto_id, usuario_id: @postulacion.usuario_id }
     end
 
     assert_redirected_to postulacion_path(assigns(:postulacion))
@@ -35,7 +36,7 @@ class PostulacionesControllerTest < ActionController::TestCase
   end
 
   test "should update postulacion" do
-    patch :update, id: @postulacion, postulacion: { aceptado: @postulacion.aceptado, fechaPostulacion: @postulacion.fechaPostulacion, proyecto_id: @postulacion.proyecto_id, usuario_id: @postulacion.usuario_id }
+    patch :update, id: @postulacion, postulacion: { aceptado: @postulacion.aceptado, proyecto_id: @postulacion.proyecto_id, usuario_id: @postulacion.usuario_id }
     assert_redirected_to postulacion_path(assigns(:postulacion))
   end
 

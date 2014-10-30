@@ -7,7 +7,12 @@
 
             <div class="panel panel-primary">
               <div class="panel-heading">
-                <h3 class="panel-title"> <%= link_to necesidad.titulo, necesidad %></h3>
+		      <h3 class="panel-title"> <%= link_to necesidad.titulo, necesidad %> | 
+			      <% if necesidad.created_at > Time.now - 160.hours %> 
+				      <%= link_to 'Edit', edit_necesidad_path(necesidad) %>
+			      <% end %>
+		      </h3>
+
               </div>
               <div class="panel-body">
                 
@@ -29,13 +34,15 @@
                 </p>
                 <label>Nombre Responsable</label>
                 <p> 
-                  <%= necesidad.usuario %>
+                  <%= link_to necesidad.usuario, necesidad.usuario %>
                 </p>
                 <label>Número de Contacto</label>
                 <p> 
-                  <%= necesidad.usuario do |usu| %>
-                   <%= usu.telefono %>
-                  <%end%>
+		<% if necesidad.proyecto.presence %>
+		  <%= necesidad.usuario.telefono %>
+		<% else %>
+		  No se encuentra cargado ningún numero de teléfono.
+		<% end %>
                 </p>
 
 		<% if necesidad.proyecto.presence %>

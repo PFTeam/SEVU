@@ -33,7 +33,8 @@ class AsistenciaEventosController < ApplicationController
 
     respond_to do |format|
       if @asistencia_evento.save
-        format.html { redirect_to @asistencia_evento, notice: 'Asistencia evento was successfully created.' }
+	format.html {redirect_to :controller => 'evento_publicos', :action => 'index'
+	      flash[:notice] = 'Se ha registrado tu participación'  } 
         format.json { render :show, status: :created, location: @asistencia_evento }
       else
         format.html { render :new }

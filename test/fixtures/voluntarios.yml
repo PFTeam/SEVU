@@ -1,7 +1,2 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  legajo: 1
-
-two:
-  legajo: 1

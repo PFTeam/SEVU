@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class AsignacionRolPredefinidosControllerTest < ActionController::TestCase
+include Devise::TestHelpers
   setup do
     @asignacion_rol_predefinido = asignacion_rol_predefinidos(:one)
   end
@@ -18,7 +19,7 @@ class AsignacionRolPredefinidosControllerTest < ActionController::TestCase
 
   test "should create asignacion_rol_predefinido" do
     assert_difference('AsignacionRolPredefinido.count') do
-      post :create, asignacion_rol_predefinido: { esActual: @asignacion_rol_predefinido.esActual, fechaAsignacion: @asignacion_rol_predefinido.fechaAsignacion, privilegio_id: @asignacion_rol_predefinido.privilegio_id, rol_id: @asignacion_rol_predefinido.rol_id }
+      post :create, asignacion_rol_predefinido: { esActual: @asignacion_rol_predefinido.esActual,  privilegio_id: @asignacion_rol_predefinido.privilegio_id, rol_id: @asignacion_rol_predefinido.rol_id }
     end
 
     assert_redirected_to asignacion_rol_predefinido_path(assigns(:asignacion_rol_predefinido))
@@ -35,7 +36,7 @@ class AsignacionRolPredefinidosControllerTest < ActionController::TestCase
   end
 
   test "should update asignacion_rol_predefinido" do
-    patch :update, id: @asignacion_rol_predefinido, asignacion_rol_predefinido: { esActual: @asignacion_rol_predefinido.esActual, fechaAsignacion: @asignacion_rol_predefinido.fechaAsignacion, privilegio_id: @asignacion_rol_predefinido.privilegio_id, rol_id: @asignacion_rol_predefinido.rol_id }
+    patch :update, id: @asignacion_rol_predefinido, asignacion_rol_predefinido: { esActual: @asignacion_rol_predefinido.esActual,  privilegio_id: @asignacion_rol_predefinido.privilegio_id, rol_id: @asignacion_rol_predefinido.rol_id }
     assert_redirected_to asignacion_rol_predefinido_path(assigns(:asignacion_rol_predefinido))
   end
 

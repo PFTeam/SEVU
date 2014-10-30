@@ -16,5 +16,7 @@
   <%= @necesidad.usuario %>
 </p>
 
-<%= link_to 'Edit', edit_necesidad_path(@necesidad) %> |
+<% if @necesidad.created_at > Time.now - 160.hours %> 
+      <%= link_to 'Edit', edit_necesidad_path(@necesidad) %> | 
+<% end %>
 <%= link_to 'Back', necesidades_path %>

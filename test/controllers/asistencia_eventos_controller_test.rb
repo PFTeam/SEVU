@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class AsistenciaEventosControllerTest < ActionController::TestCase
+include Devise::TestHelpers
   setup do
     @asistencia_evento = asistencia_eventos(:one)
   end

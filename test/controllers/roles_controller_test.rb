@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class RolesControllerTest < ActionController::TestCase
+include Devise::TestHelpers
   setup do
     @rol = roles(:one)
   end

@@ -34,6 +34,12 @@ class PresupuestosController < ApplicationController
     respond_to do |format|
       if @presupuesto.save
          sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+
+        Transaccion.create!(descripcion: "Creacion del presupuesto del proyecto "+@presupuesto.proyecto.nombre,
+                  sesion_id: sesion.id, 
+                  proyecto_id: @presupuesto.proyecto.id)
+
+
 #         Transaccion.create!(
 #           descripcion: 'Creacion del presupuesto del proyecto'+@presupuesto.proyecto.nombre,
 # ‪           sesion_id‬: sesion.id,
@@ -56,6 +62,11 @@ class PresupuestosController < ApplicationController
     respond_to do |format|
       if @presupuesto.update(presupuesto_params)
         sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+
+        Transaccion.create!(descripcion: "Modificacion del presupuesto del proyecto "+@presupuesto.proyecto.nombre,
+                  sesion_id: sesion.id, 
+                  proyecto_id: @presupuesto.proyecto.id)
+
 #         Transaccion.create!(
 #           descripcion: 'Modificacion del presupuesto del proyecto'+@presupuesto.proyecto.nombre,
 # ‪           sesion_id‬: sesion.id,
@@ -78,21 +89,20 @@ class PresupuestosController < ApplicationController
   def destroy
 		authorize! :destroy, Presupuesto
          sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
-#         Transaccion.create!(
-#           descripcion: 'Destruccion del presupuesto del proyecto'+@presupuesto.proyecto.nombre,
-# ‪           sesion_id‬: sesion.id,
-# ‪           proyecto_id‬: @presupuesto.proyecto.id
-#         )
+
     @presupuesto.destroy
     respond_to do |format|
+      Transaccion.create!(
+          descripcion: "Destruccion del presupuesto del proyecto "+@presupuesto.proyecto.nombre,
+          sesion_id: sesion.id, 
+          proyecto_id: @presupuesto.proyecto.id)
       format.html { redirect_to presupuestos_url, notice: 'Presupuesto was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   def gestionar_presupuesto
-		authorize! :gestionar_presupuesto, Presupuesto
-  
+    authorize! :gestionar_presupuesto, Presupuesto
     @presupuesto = Presupuesto.find(params[:id])
     @detalles_presupuesto = DetallePresupuesto.where(presupuesto_id: params[:id]).order(:monto).reverse_order
     @presupuesto.montoTotal = @detalles_presupuesto.sum(:monto)

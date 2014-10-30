@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class OrganizacionExternasControllerTest < ActionController::TestCase
+include Devise::TestHelpers
   setup do
     @organizacion_externa = organizacion_externas(:one)
   end

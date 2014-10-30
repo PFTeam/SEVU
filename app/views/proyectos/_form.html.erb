@@ -17,6 +17,7 @@
 
 
 
+          <!-- Inputs para los atributos de Proyecto -->
           <%= f.input:nombre , :label => 'Título del Proyecto', :placeholder => 'título del proyecto...' %>
 
 
@@ -34,14 +35,13 @@
     <div class="col-lg-6">
 
      
+          <!-- Se muestra los TipoProyectos que se cargaron en el controlador --> 
           <%= f.input :tipo_proyecto_id, collection: @tipoProyectos, :label => 'Tipo de Proyecto' %>
     
-        <!-- #TODO: Hacer funcionar datepicker -->
       <%= f.input :fechaInicio, :as => :date, :label => 'Fecha Inicio' %>
       <%= f.input :fechaFin, :as => :date, :label => 'Fecha Fin' %>
 
          
-     <!-- #TODO: Sale como textarea??? -->
       <%= f.input :localizacionGeografica, :label => 'Localización Geográfica', :placeholder => 'localización...' %>
 
       <%= f.input :cantidadBeneficiariosDirectos, :label => 'Cantidad de Beneficiarios Directos', :placeholder => 'beneficiarios directos...' %>          
@@ -59,6 +59,7 @@
     
   </div><!-- /.row -->
 
+        <!-- #TODO: Sale como textarea??? -->
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           <%= f.button :submit, :class => 'btn btn-primary', :value => 'Confirmar' %>

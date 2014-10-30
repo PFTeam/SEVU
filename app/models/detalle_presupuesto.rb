@@ -19,11 +19,15 @@ class DetallePresupuesto < ActiveRecord::Base
      def cumple_restricciones
         ## Esta validacion compara la suma de los montos de un concepto de gasto particular del presupuesto (incluida la suma ingresada)
         ## con la restriccion de el concepto especificado
-        if (presupuesto.detalle_presupuestos.where(concepto_gasto_id: concepto_gasto.id).sum(:monto) + monto) > concepto_gasto.restriccion.montoMax then
-            errors.add :base, 'El monto total para el Concepto seleccionado superaría una restriccion de gasto, cuyo valor máximo es de $'+concepto_gasto.restriccion.montoMax.to_s
-            return false
-        else
-            return true
+        if concepto_gasto.restriccion.nil? then
+          return true #no hay restriccion
+        else #si hay restriccion
+          if (presupuesto.detalle_presupuestos.where(concepto_gasto_id: concepto_gasto.id).sum(:monto) + monto) > concepto_gasto.restriccion.montoMax then
+              errors.add :base, 'El monto total para el Concepto seleccionado superaría una restriccion de gasto, cuyo valor máximo es de $'+concepto_gasto.restriccion.montoMax.to_s
+              return false #es mayor a la restriccion
+          else
+              return true #no es mayor a la restriccion
+          end
         end
      end
 
