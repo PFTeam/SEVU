@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class AsignacionRolPredefinidosControllerTest < ActionController::TestCase
+include Devise::TestHelpers
   setup do
     @asignacion_rol_predefinido = asignacion_rol_predefinidos(:one)
   end

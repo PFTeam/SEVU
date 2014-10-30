@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class NecesidadesControllerTest < ActionController::TestCase
+include Devise::TestHelpers
   setup do
     @necesidad = necesidades(:one)
   end

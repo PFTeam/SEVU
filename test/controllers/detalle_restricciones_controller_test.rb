@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class DetalleRestriccionesControllerTest < ActionController::TestCase
+include Devise::TestHelpers
   setup do
     @detalle_restriccion = detalle_restricciones(:one)
   end

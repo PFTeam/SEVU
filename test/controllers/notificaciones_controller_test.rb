@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class NotificacionesControllerTest < ActionController::TestCase
+include Devise::TestHelpers
   setup do
     @notificacion = notificaciones(:one)
   end

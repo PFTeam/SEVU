@@ -1,6 +1,7 @@
 class ReportesController < ApplicationController
   before_action :set_reporte, only: [:show, :edit, :update, :destroy]
-
+# asd
+  #
   # GET /reportes
   # GET /reportes.json
   def index

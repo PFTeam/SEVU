@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class HistorialEstadoPresupuestosControllerTest < ActionController::TestCase
+include Devise::TestHelpers
   setup do
     @historial_estado_presupuesto = historial_estado_presupuestos(:one)
   end

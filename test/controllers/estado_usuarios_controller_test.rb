@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class EstadoUsuariosControllerTest < ActionController::TestCase
+include Devise::TestHelpers
   setup do
     @estado_usuario = estado_usuarios(:one)
   end

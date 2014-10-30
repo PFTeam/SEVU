@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class HistorialEstadoUsuariosControllerTest < ActionController::TestCase
+include Devise::TestHelpers
   setup do
     @historial_estado_usuario = historial_estado_usuarios(:one)
   end

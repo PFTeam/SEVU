@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class AsignacionFuncionesControllerTest < ActionController::TestCase
+	include Devise::TestHelpers
+
   setup do
     @asignacion_funcion = asignacion_funciones(:one)
   end

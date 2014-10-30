@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class AsignacionActividadesControllerTest < ActionController::TestCase
+include Devise::TestHelpers
   setup do
     @asignacion_actividad = asignacion_actividades(:one)
   end
