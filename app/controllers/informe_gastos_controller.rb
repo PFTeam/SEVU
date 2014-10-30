@@ -34,11 +34,16 @@ class InformeGastosController < ApplicationController
     respond_to do |format|
       if @informe_gasto.save
         sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
-        Transaccion.create!(
-          descripcion: 'Creacion del informe de gasto del proyecto'+@informe_gasto.proyecto.nombre,
-‪           sesion_id‬: sesion.id
-‪           proyecto_id‬: @informe_gasto.proyecto.id
-        )
+
+        Transaccion.create!(descripcion: "Creacion del informe de gasto del proyecto "+@informe_gasto.proyecto.nombre,
+                  sesion_id: sesion.id, 
+                  proyecto_id: @informe_gasto.proyecto.id)
+
+#         Transaccion.create!(
+#           descripcion: "Creacion del informe de gasto del proyecto"+@informe_gasto.proyecto.nombre,
+# ‪           sesion_id‬: sesion.id,
+# ‪           proyecto_id‬: @informe_gasto.proyecto.id
+#         )
         format.html { redirect_to gestionar_informe_gastos_path(@informe_gasto) }
         #format.html { redirect_to @informe_gasto, notice: 'Informe gasto was successfully created.' }
         #format.json { render :show, status: :created, location: @informe_gasto }
@@ -57,11 +62,16 @@ class InformeGastosController < ApplicationController
     respond_to do |format|
       if @informe_gasto.update(informe_gasto_params)
         sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
-        Transaccion.create!(
-          descripcion: 'Modificacion del informe de gasto del proyecto'+@informe_gasto.proyecto.nombre,
-‪           sesion_id‬: sesion.id
-‪           proyecto_id‬: @informe_gasto.proyecto.id
-        )
+
+        Transaccion.create!(descripcion: "Modificacion del informe de gasto del proyecto "+@informe_gasto.proyecto.nombre,
+                  sesion_id: sesion.id, 
+                  proyecto_id: @informe_gasto.proyecto.id)
+
+#         Transaccion.create!(
+#           descripcion: 'Modificacion del informe de gasto del proyecto'+@informe_gasto.proyecto.nombre,
+# ‪           sesion_id‬: sesion.id
+# ‪           proyecto_id‬: @informe_gasto.proyecto.id
+#         )
         format.html { redirect_to gestionar_informe_gastos_path(@informe_gasto) }
         #format.html { redirect_to @informe_gasto, notice: 'Informe gasto was successfully updated.' }
         #format.json { render :show, status: :ok, location: @informe_gasto }
@@ -78,11 +88,16 @@ class InformeGastosController < ApplicationController
   def destroy
 		authorize! :destroy, InformeGasto
     sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
-        Transaccion.create!(
-          descripcion: 'Destruccion del informe de gasto del proyecto'+@informe_gasto.proyecto.nombre,
-‪           sesion_id‬: sesion.id
-‪           proyecto_id‬: @informe_gasto.proyecto.id
-        )
+
+        Transaccion.create!(descripcion: "Eliminacion del informe de gasto del proyecto "+@informe_gasto.proyecto.nombre,
+                  sesion_id: sesion.id, 
+                  proyecto_id: @informe_gasto.proyecto.id)
+
+#         Transaccion.create!(
+#           descripcion: 'Destruccion del informe de gasto del proyecto'+@informe_gasto.proyecto.nombre,
+# ‪           sesion_id‬: sesion.id
+# ‪           proyecto_id‬: @informe_gasto.proyecto.id
+#         )
     @informe_gasto.destroy
     respond_to do |format|
       format.html { redirect_to informe_gastos_url, notice: 'Informe gasto was successfully destroyed.' }
@@ -91,6 +106,8 @@ class InformeGastosController < ApplicationController
   end
   
   def gestionar_informe_gastos
+
+    puts "************************ "
 		authorize! :gestionar_informe_gastos, InformeGasto
     #@detalles_gasto = DetalleGasto.where(informe_gasto_id: params[:id]).order(:monto).reverse_order
     #@detalles_gasto = @informe_gasto.detalle_gastos

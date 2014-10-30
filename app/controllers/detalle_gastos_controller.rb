@@ -23,7 +23,7 @@ class DetalleGastosController < ApplicationController
     @detalle_gasto = @informe_gastos.detalle_gastos.new
     #@detalle_gasto.informe_gastos_id = @informe_gasto.id
     @concepto_gastos = ConceptoGasto.all
-    @detalle_gasto.usuario_id = current_usuario.id
+    @detalle_gasto.voluntario_id = current_usuario.id
 
   end
 
@@ -39,7 +39,7 @@ class DetalleGastosController < ApplicationController
   def create
 		authorize! :create, DetalleGasto
     @detalle_gasto = @informe_gastos.detalle_gastos.new(detalle_gasto_params)
-    @detalle_gasto.usuario_id = current_usuario.id
+    @detalle_gasto.voluntario_id = current_usuario.id
     respond_to do |format|
       if @detalle_gasto.save
         #format.html { redirect_to gestionar_informe_gastos_path(@detalle_gasto.informe_gasto)} #@detalle_gasto, notice: 'Detalle gasto was successfully created.' }
