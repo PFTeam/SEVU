@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class SesionesControllerTest < ActionController::TestCase
+include Devise::TestHelpers
   setup do
     @sesion = sesiones(:one)
   end

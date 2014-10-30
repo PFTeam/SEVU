@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class ActividadesControllerTest < ActionController::TestCase
+include Devise::TestHelpers
   setup do
     @actividad = actividades(:one)
   end

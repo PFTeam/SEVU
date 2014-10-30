@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class TipoTransaccionesControllerTest < ActionController::TestCase
+include Devise::TestHelpers
   setup do
     @tipo_transaccion = tipo_transacciones(:one)
   end

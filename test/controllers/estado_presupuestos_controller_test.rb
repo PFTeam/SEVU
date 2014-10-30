@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class EstadoPresupuestosControllerTest < ActionController::TestCase
+include Devise::TestHelpers
   setup do
     @estado_presupuesto = estado_presupuestos(:one)
   end

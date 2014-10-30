@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class ColaboradoresControllerTest < ActionController::TestCase
+include Devise::TestHelpers
   setup do
     @colaborador = colaboradores(:one)
   end

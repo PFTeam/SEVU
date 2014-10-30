@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class NotificacionPredeterminadasControllerTest < ActionController::TestCase
+include Devise::TestHelpers
   setup do
     @notificacion_predeterminada = notificacion_predeterminadas(:one)
   end

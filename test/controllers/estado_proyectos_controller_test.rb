@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class EstadoProyectosControllerTest < ActionController::TestCase
+include Devise::TestHelpers
   setup do
     @estado_proyecto = estado_proyectos(:one)
   end

@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class VoluntariosControllerTest < ActionController::TestCase
+include Devise::TestHelpers
   setup do
     @voluntario = voluntarios(:one)
   end

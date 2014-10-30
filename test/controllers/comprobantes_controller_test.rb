@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class ComprobantesControllerTest < ActionController::TestCase
+include Devise::TestHelpers
   setup do
     @comprobant = comprobantes(:one)
   end

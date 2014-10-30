@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class ObjetivoEspecificosControllerTest < ActionController::TestCase
+include Devise::TestHelpers
   setup do
     @objetivo_especifico = objetivo_especificos(:one)
   end

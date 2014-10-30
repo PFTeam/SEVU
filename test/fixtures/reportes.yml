@@ -2,8 +2,8 @@
 
 one:
   descripcion: MyText
-  asignacion_actividad_id: 
+  asignacion_actividad_id: 1
 
 two:
-  descripcion: MyText
-  asignacion_actividad_id: 
+  descripcion: MyText2
+  asignacion_actividad_id: 1

@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class PostulacionesControllerTest < ActionController::TestCase
+include Devise::TestHelpers
   setup do
     @postulacion = postulaciones(:one)
   end
