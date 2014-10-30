@@ -1,61 +1,56 @@
 <!----->
-<h2>Control por Fecha</h2>
+<% if @fecha_inicio > @fecha_fin %>
+						<p class="alert alert-dismissable alert-danger">La 'Fecha Hasta' debe ser mayor o igual a la 'Fecha Desde'.</p>
+<% end %>
+
 <div class="col-lg-12">
 	<div class="col-lg-3">
+		<h2>Control por Fecha</h2>
 		<br></br>
-		<% fecha_inicio = Time.new %>
-		<% if params[:fi_day] != nil %>
-		<% fecha_inicio.change(day: params[:fi_day].to_i, month: params[:fi_month].to_i, year: params[:fi_year].to_i).beginning_of_day() %>
+		<%= form_tag nil, method: :get do %>
+			<%= label(@fecha_inicio, "Fecha Desde: ") %>
+  		<%= select_date @fecha_inicio, prefix: :f_inicio , order: [:day, :month, :year] %>
+			<br></br>
+			<%= label(@fecha_fin, "Fecha Hasta: ") %>
+			<%= select_date @fecha_fin, prefix: :f_fin , order: [:day, :month, :year] %>
+			<br></br>
+  		<%= submit_tag 'Buscar', { :class=>"btn btn-primary btn-lg" }  %>
 		<% end %>
-		<%= label(fecha_inicio, "Fecha Desde: ") %>
-		<%= select_date( fecha_inicio,  order: [:day, :month, :year]) %><!--este ese el problema, no actualiza--->
-		<br></br>
-		<% fecha_fin= Time.new %>
-		<% if params[:ff_day] != nil %>
-		 <% fecha_fin.change(day: params[:ff_day].to_i, month: params[:ff_month].to_i, year: params[:ff_year].to_i).end_of_day() %>
-		<% end %>
-		<%= label(fecha_fin, "Fecha Hasta: ") %>
-		<%= select_date( fecha_fin,  order: [:day, :month, :year]) %><!--este ese el problema, no actualiza--->
-    <br></br>
-		<td><%= link_to 'Buscar', control_fecha_path(:fi_day => fecha_inicio.day, :fi_month => fecha_inicio.month, :fi_year => fecha_inicio.year, :ff_day => fecha_fin.day, :ff_month => fecha_fin.month, :ff_year => fecha_fin.year) ,  { :class=>"btn btn-primary btn-lg" }   %></td>
-  </div>
-	<% if params[:fi_day] != nil && params[:fi_month] != nil %>
-  <div class="table-responsive  col-lg-9">
-  	<h3>Transacciones del <%= fecha_inicio.day %>/<%= fecha_inicio.month %>/<%= fecha_inicio.year %> al <%= fecha_fin.day %>/<%= fecha_fin.month %>/<%= fecha_fin.year %> </h3>
-    <table class="table table-hover table-striped tablesorter">
-      <thead>
-        <tr>
-          <th class="col-lg-3">Fecha</th>	
-          <th class="col-lg-2">Usuario</th>
-          <th class="col-lg-5">Descripción </th>
-					<th class="col-lg-2">Proyecto</th>
-        </tr>
-     </thead>
-     <tbody>			
-			<% Transaccion.all.each do |transaccion| %>
-  		 <% if transaccion.created_at.between?(fecha_inicio.to_date, fecha_fin.to_date) %> 
-       <tr>
-       	 <td><%= transaccion.created_at %></td>
-				 <td><%= Usuario.find(Sesion.find(transaccion.sesion_id).usuario_id).nombreUsuario  %></td> 
-				 <td><%= transaccion.descripcion %></td>
-					 <% if transaccion.proyecto_id != nil %> 
-				 <td><%= Proyecto.find(transaccion.proyecto_id).nombre %></td>
-					<% end %>   
-       </tr>
-			 <% end %>
-			 <% end %>
-     </tbody>
-   </table> 
-		<% end %>       
-  </div>
-</div>
-
-
-
-
-
-
-
+		</div>
+		<% if @fecha_fin >= @fecha_inicio %>
+		
+		<div class="table-responsive  col-lg-9">
+			<br></br>
+			<a href="#" class="btn btn-primary btn-lg active pull-right"  role="button" onclick="window.print()">Imprimir</a> 
+			<br></br>
+			<h3>Transacciones del <%= @fecha_inicio.day %>/<%= @fecha_inicio.month %>/<%= @fecha_inicio.year %> al <%= @fecha_fin.day %>/<%= @fecha_fin.month %>/<%= @fecha_fin.year %> </h3>
+		  <table class="table table-hover table-striped tablesorter">
+		    <thead>
+		      <tr>
+		        <th class="col-lg-3">Fecha</th>	
+		        <th class="col-lg-2">Usuario</th>
+		        <th class="col-lg-5">Descripción </th>
+						<th class="col-lg-2">Proyecto</th>
+		      </tr>
+		   </thead>
+		   <tbody>			
+				<% Transaccion.all.each do |transaccion| %>
+				 <% if transaccion.created_at.between?(@fecha_inicio, @fecha_fin) %> 
+		     <tr>
+		     	 <td><%= transaccion.created_at %></td>
+					 <td><%= Usuario.find(Sesion.find(transaccion.sesion_id).usuario_id).nombreUsuario  %></td> 
+					 <td><%= transaccion.descripcion %></td>
+						 <% if transaccion.proyecto_id != nil %> 
+					 <td><%= Proyecto.find(transaccion.proyecto_id).nombre %></td>
+						<% end %>   
+		     </tr>
+				 <% end %>
+				<% end %>
+		   </tbody>
+		 </table> 
+			<% end %>       
+		</div>
+	</div>
 
 
 

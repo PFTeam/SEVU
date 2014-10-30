@@ -1,12 +1,16 @@
-<!---->      
-
+<!---->    
+<% if params[':usuarios[]'].nil? %> <!--PASAR ESTA PARTE AL CONTROLADOR ASI NI SIQUIERA MUESTRA UNA PREIMAGEN  USAR REDIRECT_TO!!!!!!!!!!!!!!!-->    
+<script type="text/javascript">
+    window.location.href="/reporte_voluntarios?error=1"  
+ </script>
+<% end %>
 <div class="col-lg-12">
 	<div class="col-lg-11">
     <h2>Reporte</h2><br /><br />
 	</div>
 	<div class="col-lg-1">
 		<br />
-    <a href="reportes" class="btn btn-primary btn-lg active" role="button">Imprimir</a>
+		<a href="#" class="btn btn-primary btn-lg active" role="button" onclick="window.print()">Imprimir</a> 
   </div>	
 </div>		
 	<div class="col-lg-12">
@@ -15,13 +19,11 @@
           <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Gráfico</h3>
        </div>
        <div class="panel-body">
-						<%= line_chart [{name: "Cantidad de voluntarios en estado activo", data: [Time.new, '20'] },
-  													{name: "Study", data: [Time.new, '30'] },
-  													{name: "Conversation", data: [Time.new, '50'] }
-														] , {library: {hAxis: {title: "Tiempo"}, vAxis: {title: "Valores"}}} %>
-
-
-<!-- line_chart @goals.map{|goal|{name: goal.name, data: goal.feats.group_by_week(:created_at).count}} -->
+				<%= line_chart [
+    {name: "Cantidad de voluntarios en estado activo", data: [ [Time.now, 20], [Time.at(2001,3), 30] ] },
+    {name: "Study", data: [ [Time.at(2000,3), 30], [Time.at(2001,3), 20] ] },
+    {name: "Conversation", data: [ [Time.at(2000,3), 50], [Time.at(2001,3), 40] ] } ],
+    {library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>
          </div>
        </div>
      </div>

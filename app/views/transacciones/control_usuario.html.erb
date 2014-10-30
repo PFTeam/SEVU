@@ -24,6 +24,8 @@
 	<% user = params[:user_id].to_i %>
 	<% if user != 0 %>
    <div class="table-responsive  col-lg-9">
+			<a href="#" class="btn btn-primary btn-lg active pull-right"  role="button" onclick="window.print()">Imprimir</a> 
+			<br></br>
      <h3>Transacciones de <%= Usuario.find(user).nombreUsuario %></h3>
      <table class="table table-hover table-striped tablesorter">
        <thead>

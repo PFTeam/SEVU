@@ -2,7 +2,6 @@ class Ability
   include CanCan::Ability
 	def initialize(user)
 		user ||= Usuario.new
-		
 		if user.nombreUsuario== 'admin'# Superusuario
 			can :manage, :all
 		else
