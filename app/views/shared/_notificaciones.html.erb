@@ -1,0 +1,21 @@
+
+	
+	 <li class="dropdown messages-dropdown">
+	   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> Notificaciones <span class="badge"><%= @notificaciones.size %></span> <b class="caret"></b></a>
+	     <ul class="dropdown-menu">	
+	       <li class="dropdown-header"><%= @notificaciones.size %> Notificaciones Nuevas</li>
+	       <% @notificaciones.each do |notificacion| %>
+		       <li class="message-preview">
+		       <a href="/notificacion_sistemas/<%= notificacion.id %>">
+		       <span class="avatar"></span>
+		       <span class="name"><%= notificacion.usuarioCreador %>:</span>
+		       <span class="message"><%= notificacion.mensaje %></span>
+		       <span class="time"><i class="fa fa-clock-o"></i><%= notificacion.created_at %></span>
+		       </a>
+		       </li>
+		       <li class="divider"></li>
+	       <% end %>
+	       <li><a href="/notificacion_sistemas">Ver todo <span class="badge"><%= @notificaciones.size %></span></a></li>
+	     </ul>
+	 </li>
+

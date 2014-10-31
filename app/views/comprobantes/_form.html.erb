@@ -1,21 +1,78 @@
-<%= form_for(@comprobant) do |f| %>
-  <% if @comprobant.errors.any? %>
+<!--<%#= form_for @comprobant, :html => { :multipart => true } do |f| %>
+  <%# if @comprobant.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@comprobant.errors.count, "error") %> prohibited this comprobant from being saved:</h2>
+      <h2><%#= pluralize(@comprobant.errors.count, "error") %> prohibited this comprobant from being saved:</h2>
 
       <ul>
-      <% @comprobant.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+      <%# @comprobant.errors.full_messages.each do |message| %>
+        <li><%#= message %></li>
+      <%# end %>
       </ul>
     </div>
+  <%# end %>
+  -->
+<%= simple_form_for @comprobant,
+    wrapper_mappings: {
+    check_boxes: :horizontal_radio_and_checkboxes,
+    radio_buttons: :horizontal_radio_and_checkboxes,
+    file: :horizontal_file_input,
+    boolean: :horizontal_boolean
+}, :html => { :multipart => true } do |f| %>
+  <% if @comprobant.errors.any? %>
+    <div class="col-lg-12">
+      <div class="col-lg-4"></div>
+        <div id="error_explanation" class="col-lg-4">
+          <div class="alert alert-danger">
+            <a class="close" data-dismiss="alert">x</a>
+            <strong><%= pluralize(@comprobant.errors.count, "Error") %> en la creacion del comprobante:</strong>
+            <ul>
+              <% @comprobant.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
   <% end %>
+  <div class="row" align="center">
+    <div class="col-lg-3" align="center"></div>
+    <div class="col-lg-6" align="center">
+       <div class="form-inputs">
+         <%#= f.label 'Numero de factura/comprobante" %>
+         <br></br>
+         <%= f.input :numero, wrapper: :horizontal_input_group do %>
+           <span class="input-group-addon">Nro:</span>
+           <%= f.input_field :numero, class: "form-control" %>
+         <% end %>      
+         <br></br>
+         <%#= f.label 'Imagen del comprobante' %>
+         <p><strong>Imagen del comprobante</strong></p>
+         <%= f.file_field :imagen %>
+         </br></br>
+       </div>
+     </div>
+   </div>
+   <%# f.hidden_field :detalle_gasto_id, :value => @detalle_gasto.id %>
+ <%= hidden_field_tag 'detalle_gasto_id', params[:detalle_gasto_id] %>
+   <div align="center">
+     <%= f.button :submit, :class => 'btn btn-primary btn-lg center', :value => 'Confirmar' %>
+       <%= link_to 'Atras', :back, :class => 'btn btn-default btn-lg' %>
+   </div>
 
+<% end %> 
+<!--  <div class="field">
+    <%#= f.label :numero %><br>
+    <%#= f.number_field :numero %>
+  </div>
   <div class="field">
-    <%= f.label :numero %><br>
-    <%= f.number_field :numero %>
+    <%#= f.label :detalle %>
+    <%#= f.number_field :detalle_gasto_id %>
   </div>
+
+  <%#= f.file_field :imagen %>
+  
   <div class="actions">
-    <%= f.submit %>
+    <%#= f.submit %>
   </div>
-<% end %>
+<%# end %>

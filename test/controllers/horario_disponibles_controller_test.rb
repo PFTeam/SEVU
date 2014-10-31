@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class HorarioDisponiblesControllerTest < ActionController::TestCase
+include Devise::TestHelpers
   setup do
     @horario_disponibl = horario_disponibles(:one)
   end

@@ -4,35 +4,53 @@ class PresupuestosController < ApplicationController
   # GET /presupuestos
   # GET /presupuestos.json
   def index
+		authorize! :index, Presupuesto
     @presupuestos = Presupuesto.all
   end
 
   # GET /presupuestos/1
   # GET /presupuestos/1.json
   def show
+		authorize! :show, Presupuesto
   end
 
   # GET /presupuestos/new
   def new
+		authorize! :new, Presupuesto
     @presupuesto = Presupuesto.new
   end
 
   # GET /presupuestos/1/edit
   def edit
+		authorize! :edit, Presupuesto
   end
 
   # POST /presupuestos
   # POST /presupuestos.json
   def create
+		authorize! :create, Presupuesto
     @presupuesto = Presupuesto.new(presupuesto_params)
 
     respond_to do |format|
       if @presupuesto.save
-        format.html { redirect_to @presupuesto, notice: 'El Presupuesto fue creado exitosamente.' }
-        format.json { render :show, status: :created, location: @presupuesto }
+         sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+
+        Transaccion.create!(descripcion: "Creacion del presupuesto del proyecto "+@presupuesto.proyecto.nombre,
+                  sesion_id: sesion.id, 
+                  proyecto_id: @presupuesto.proyecto.id)
+
+
+#         Transaccion.create!(
+#           descripcion: 'Creacion del presupuesto del proyecto'+@presupuesto.proyecto.nombre,
+# ‪           sesion_id‬: sesion.id,
+# ‪           proyecto_id‬: @presupuesto.proyecto.id
+#         )
+        format.html { redirect_to gestionar_presupuesto_path(@presupuesto) }#, notice: 'El Presupuesto fue creado exitosamente.' }
+        #format.json { render :show, status: :created, location: @presupuesto }
       else
-        format.html { render :new }
-        format.json { render json: @presupuesto.errors, status: :unprocessable_entity }
+        format.html { redirect_to proyectos_mis_proyectos_path }
+                      #render :new }
+        #format.json { render json: @presupuesto.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -40,52 +58,73 @@ class PresupuestosController < ApplicationController
   # PATCH/PUT /presupuestos/1
   # PATCH/PUT /presupuestos/1.json
   def update
+		authorize! :update, Presupuesto
     respond_to do |format|
       if @presupuesto.update(presupuesto_params)
-        format.html { redirect_to @presupuesto, notice: 'El Presupuesto fue creado exitosamente.' }
-        format.json { render :show, status: :ok, location: @presupuesto }
+        sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+
+        Transaccion.create!(descripcion: "Modificacion del presupuesto del proyecto "+@presupuesto.proyecto.nombre,
+                  sesion_id: sesion.id, 
+                  proyecto_id: @presupuesto.proyecto.id)
+
+#         Transaccion.create!(
+#           descripcion: 'Modificacion del presupuesto del proyecto'+@presupuesto.proyecto.nombre,
+# ‪           sesion_id‬: sesion.id,
+# ‪           proyecto_id‬: @presupuesto.proyecto.id
+#         )
+        format.html { redirect_to :back }#@presupuesto, notice: 'El Presupuesto fue creado exitosamente.' }
+        #format.json { render :show, status: :ok, location: @presupuesto }
       else
         format.html { render :edit }
         format.json { render json: @presupuesto.errors, status: :unprocessable_entity }
       end
+      #if @presupuesto.update_attributes presupuesto_params#:aprobado #presupuesto_params #params[:presupuesto]
+        #format.html { redirect_to :back }#evaluar_presupuestos_pendientes_path }
+      #end
     end
   end
 
   # DELETE /presupuestos/1
   # DELETE /presupuestos/1.json
   def destroy
+		authorize! :destroy, Presupuesto
+         sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+
     @presupuesto.destroy
     respond_to do |format|
+      Transaccion.create!(
+          descripcion: "Destruccion del presupuesto del proyecto "+@presupuesto.proyecto.nombre,
+          sesion_id: sesion.id, 
+          proyecto_id: @presupuesto.proyecto.id)
       format.html { redirect_to presupuestos_url, notice: 'Presupuesto was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   def gestionar_presupuesto
+    authorize! :gestionar_presupuesto, Presupuesto
     @presupuesto = Presupuesto.find(params[:id])
     @detalles_presupuesto = DetallePresupuesto.where(presupuesto_id: params[:id]).order(:monto).reverse_order
     @presupuesto.montoTotal = @detalles_presupuesto.sum(:monto)
-    
-    ConceptoGasto.all.each do |concept|                   #
-      flag = 0                                            #
-      @detalles_presupuesto.each do |det|                 #
-        if det.concepto_gasto == concept then             #
-          @conceptos = @conceptos.to_a.push concept       #  
-          flag = 1                                        #
-        end                                               #
-      end                                                 # Esto es para traer los conceptos que son usados solamente
-      if flag == 0 then                                   #
-        @conceptos_no_usados = @conceptos_no_usados.to_a.push concept
-      end                                                 #
-     end                                                  #
-    if !@conceptos.nil? then                              #
-      @conceptos = @conceptos.uniq                        #
-    end                                                   #
-    if !@conceptos_no_usados.nil? then                    #
-      @conceptos_no_usados = @conceptos_no_usados.uniq    #
-    end                                                   #
+    @conceptos = @presupuesto.concepto_gastos
+    @conceptos_no_usados = ConceptoGasto.all - @conceptos
+    @proyecto = @presupuesto.proyecto
 
-    #@conceptos = ConceptoGasto.all                 # Esto era para buscar todos los conceptos
+  end
+
+  def evaluar_presupuestos_pendientes
+		authorize! :evaluar_presupuestos_pendientes, Presupuesto
+    @presupuestos = Presupuesto.all.select { |m| m.aprobado == nil }
+  end
+
+  def presupuestos_evaluados
+		authorize! :presupuestos_evaluados, Presupuesto
+    @presupuestos = Presupuesto.all.select { |m| m.aprobado != nil }
+  end
+
+  def evaluar_presupuesto
+		authorize! :evaluar_presupuesto, Presupuesto
+    @presupuesto = Presupuesto.find params[:id]
   end
 
 
@@ -94,7 +133,7 @@ class PresupuestosController < ApplicationController
     def set_presupuesto
       @presupuesto = Presupuesto.find(params[:id])
     end
-    
+
     def get_proyecto
       return self.proyecto_id
     end
@@ -102,6 +141,6 @@ class PresupuestosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def presupuesto_params
-      params.require(:presupuesto).permit(:fechaPresentacion, :montoTotal, :aprobado, :proyecto_id, :restriccion_id, :usuario_id)
+      params.permit(:fechaPresentacion, :montoTotal, :aprobado, :proyecto_id, :restriccion_id, :usuario_id)
     end
 end

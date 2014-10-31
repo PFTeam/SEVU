@@ -12,5 +12,5 @@ class Presupuesto < ActiveRecord::Base
   # TODO Agregar validaciones de usuario cuando este implementada la funcionalidad
   
   validates_presence_of :proyecto, message: "es un campo obligatorio"
-  
+
 end

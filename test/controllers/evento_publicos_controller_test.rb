@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class EventoPublicosControllerTest < ActionController::TestCase
+include Devise::TestHelpers
   setup do
     @evento_publico = evento_publicos(:one)
   end

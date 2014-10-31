@@ -1,37 +1,47 @@
 class NotificacionPredeterminadasController < ApplicationController
   before_action :set_notificacion_predeterminada, only: [:show, :edit, :update, :destroy]
+  before_action :set_proyecto, only: [:index, :new, :create, :notificaciones_predeterminadas]
 
   # GET /notificacion_predeterminadas
   # GET /notificacion_predeterminadas.json
   def index
-    @notificacion_predeterminadas = NotificacionPredeterminada.all
+		authorize! :index, Notificacion
+    #@notificacion_predeterminadas = NotificacionPredeterminada.all
+    @notificacion_predeterminadas = @proyecto.notificacion_predeterminadas
   end
 
   # GET /notificacion_predeterminadas/1
   # GET /notificacion_predeterminadas/1.json
   def show
+		authorize! :show, Notificacion
   end
 
   # GET /notificacion_predeterminadas/new
   def new
-    @notificacion_predeterminada = NotificacionPredeterminada.new
+		authorize! :new, Notificacion
+    #@notificacion_predeterminada = NotificacionPredeterminada.new
+    @notificacion_predeterminada = @proyecto.notificacion_predeterminadas.new
+    
   end
 
   # GET /notificacion_predeterminadas/1/edit
   def edit
+		authorize! :edit, Notificacion
   end
 
   # POST /notificacion_predeterminadas
   # POST /notificacion_predeterminadas.json
   def create
-    @notificacion_predeterminada = NotificacionPredeterminada.new(notificacion_predeterminada_params)
+		authorize! :create, Notificacion
+    #@notificacion_predeterminada = NotificacionPredeterminada.new(notificacion_predeterminada_params)
+    @notificacion_predeterminada = @proyecto.notificacion_predeterminadas.new(notificacion_predeterminada_params)
 
     respond_to do |format|
       if @notificacion_predeterminada.save
-        format.html { redirect_to @notificacion_predeterminada, notice: 'Notificacion predeterminada was successfully created.' }
-        format.json { render :show, status: :created, location: @notificacion_predeterminada }
+        format.html { redirect_to :back}#@notificacion_predeterminada, notice: 'Notificacion predeterminada was successfully created.' }
+        #format.json { render :back}#, status: :created, location: @notificacion_predeterminada }
       else
-        format.html { render :new }
+        format.html { render :back }
         format.json { render json: @notificacion_predeterminada.errors, status: :unprocessable_entity }
       end
     end
@@ -40,6 +50,7 @@ class NotificacionPredeterminadasController < ApplicationController
   # PATCH/PUT /notificacion_predeterminadas/1
   # PATCH/PUT /notificacion_predeterminadas/1.json
   def update
+		authorize! :update, Notificacion
     respond_to do |format|
       if @notificacion_predeterminada.update(notificacion_predeterminada_params)
         format.html { redirect_to @notificacion_predeterminada, notice: 'Notificacion predeterminada was successfully updated.' }
@@ -54,11 +65,18 @@ class NotificacionPredeterminadasController < ApplicationController
   # DELETE /notificacion_predeterminadas/1
   # DELETE /notificacion_predeterminadas/1.json
   def destroy
+		authorize! :destroy, Notificacion
     @notificacion_predeterminada.destroy
     respond_to do |format|
-      format.html { redirect_to notificacion_predeterminadas_url, notice: 'Notificacion predeterminada was successfully destroyed.' }
+      format.html { redirect_to :back}#, notice: 'Notificacion predeterminada was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+  
+  def notificaciones_predeterminadas 
+
+    @notificaciones_no_usadas = TipoNotificacion.all - @proyecto.tipo_notificaciones   #resto las listas
+    
   end
 
   private
@@ -67,8 +85,12 @@ class NotificacionPredeterminadasController < ApplicationController
       @notificacion_predeterminada = NotificacionPredeterminada.find(params[:id])
     end
 
+    def set_proyecto
+      @proyecto = Proyecto.find params[:proyecto_id]
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def notificacion_predeterminada_params
-      params.require(:notificacion_predeterminada).permit(:proyecto_id, :tipo_notificacion_id)
+      params.permit(:proyecto_id, :tipo_notificacion_id)
     end
 end

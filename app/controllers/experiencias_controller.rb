@@ -10,6 +10,7 @@ end
   # GET /experiencias
   # GET /experiencias.json
   def index
+		authorize! :index, Experiencia
     @experiencias = Experiencia.all
     
   end
@@ -17,25 +18,35 @@ end
   # GET /experiencias/1
   # GET /experiencias/1.json
   def show
+		authorize! :show, Experiencia
   end
 
   # GET /experiencias/new
   def new
-    @experiencia = @voluntario.experiencias.new
+
+  
     
+
+		authorize! :new, Experiencia
+    #@experiencia = Experiencia.new
+  @experiencia = @voluntario.experiencias.new
   end
 
   # GET /experiencias/1/edit
   def edit
-     @voluntario = Voluntario.find( @experiencia.voluntario_id)
+
+		authorize! :edit, Experiencia
+    @voluntario = Voluntario.find( @experiencia.voluntario_id)
   end
 
   # POST /experiencias
   # POST /experiencias.json
   def create
+
+		authorize! :create, Experiencia
     # @voluntario = Voluntario.find(params[:voluntario_id])
     @experiencia = @voluntario.experiencias.new(experiencia_params)
-
+    #@experiencia = Experiencia.new(experiencia_params)
     respond_to do |format|
       if @experiencia.save
         format.html { redirect_to gestionar_experiencias_path(@voluntario), notice: 'La experiencia fue creada Exitosamente.' }
@@ -50,6 +61,8 @@ end
   # PATCH/PUT /experiencias/1
   # PATCH/PUT /experiencias/1.json
   def update
+
+		authorize! :update, Experiencia
     @voluntario = Voluntario.find(params[:voluntario_id])
     respond_to do |format|
       if @experiencia.update(experiencia_params)
@@ -65,6 +78,8 @@ end
   # DELETE /experiencias/1
   # DELETE /experiencias/1.json
   def destroy
+
+		authorize! :destroy, Experiencia
      @voluntario = Voluntario.find(@experiencia.voluntario_id)
     @experiencia.destroy
     respond_to do |format|

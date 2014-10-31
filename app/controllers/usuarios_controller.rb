@@ -1,6 +1,6 @@
 class UsuariosController < ApplicationController
   before_action :set_usuario, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_usuario!#ESTO ES NUEVO, PROBANDO....
+
   # GET /usuarios
   # GET /usuarios.json
 
@@ -9,6 +9,7 @@ class UsuariosController < ApplicationController
   
   
   def index
+		authorize! :index, Usuario
     @usuarios = Usuario.page(params[:page]).search query: params[:q]
     #@usuarios = Usuario.all
   end
@@ -16,22 +17,28 @@ class UsuariosController < ApplicationController
   # GET /usuarios/1
   # GET /usuarios/1.json
   def show
+		authorize! :show, Usuario
   end
 
   # GET /usuarios/new
   def new
+		authorize! :new, Usuario
     @usuario = Usuario.new
   end
 
   # GET /usuarios/1/edit
   def edit
+		authorize! :edit, Usuario
   end
 
   # POST /usuarios
   # POST /usuarios.json
   def create
+		
+		authorize! :create, Usuario
+		
     @usuario = Usuario.new(usuario_params)
-
+		
     respond_to do |format|
       if @usuario.save
         format.html { redirect_to @usuario, notice: 'Usuario creado correctamente.' }
@@ -46,6 +53,7 @@ class UsuariosController < ApplicationController
   # PATCH/PUT /usuarios/1
   # PATCH/PUT /usuarios/1.json
   def update
+		authorize! :update, Usuario
     respond_to do |format|
       if @usuario.update(usuario_params)
         format.html { redirect_to @usuario, notice: 'Usuario actualizado correctamente.' }
@@ -59,7 +67,10 @@ class UsuariosController < ApplicationController
 
   # DELETE /usuarios/1
   # DELETE /usuarios/1.json
+		
+
   def destroy
+		authorize! :destroy, Usuario
     @usuario.destroy
     respond_to do |format|
       format.html { redirect_to usuarios_url, notice: 'Usuario eliminado correctamente.' }
@@ -67,6 +78,9 @@ class UsuariosController < ApplicationController
     end
   end
 
+	def usuario_bloqueado
+	end
+	
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_usuario
@@ -75,6 +89,6 @@ class UsuariosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def usuario_params
-      params.require(:usuario).permit(:nombreUsuario, :contrasenia, :apellidoNombre, :email, :direccion, :fechaRegistro, :foto)
+      params.require(:usuario).permit(:nombreUsuario, :encrypted_password, :apellido_nombre, :email, :direccion, :foto)
     end
 end

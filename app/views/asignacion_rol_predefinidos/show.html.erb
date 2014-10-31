@@ -1,24 +1,25 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Fechaasignacion:</strong>
-  <%= @asignacion_rol_predefinido.fechaAsignacion %>
+  <strong>Fecha Asignacion:</strong>
+  <%= @asignacion_rol_predefinido.created_at %>
 </p>
 
 <p>
-  <strong>Esactual:</strong>
+  <strong>Es actual:</strong>
   <%= @asignacion_rol_predefinido.esActual %>
 </p>
 
 <p>
   <strong>Privilegio:</strong>
-  <%= @asignacion_rol_predefinido.privilegio %>
+	
+  <%= Privilegio.find(@asignacion_rol_predefinido.privilegio).nombre %>
 </p>
 
 <p>
   <strong>Rol:</strong>
-  <%= @asignacion_rol_predefinido.rol %>
+  <%= Rol.find(@asignacion_rol_predefinido.rol).nombre %>
 </p>
 
-<%= link_to 'Edit', edit_asignacion_rol_predefinido_path(@asignacion_rol_predefinido) %> |
-<%= link_to 'Back', asignacion_rol_predefinidos_path %>
+<%= link_to 'Editar', edit_asignacion_rol_predefinido_path(@asignacion_rol_predefinido) %> |
+<%= link_to 'Volver', asignacion_rol_predefinidos_path %>

@@ -1,25 +1,26 @@
-<%= form_for(@tipo_rol) do |f| %>
+<!----->
+<%= simple_form_for(@tipo_rol) do |f| %>
   <% if @tipo_rol.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@tipo_rol.errors.count, "error") %> prohibited this tipo_rol from being saved:</h2>
-
       <ul>
       <% @tipo_rol.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+         <font color="red"><li><%= message %></li></font>
       <% end %>
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :nombre %><br>
-    <%= f.text_field :nombre %>
-  </div>
-  <div class="field">
-    <%= f.label :descripcion %><br>
-    <%= f.text_area :descripcion %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+	<div class="col-lg-6">
+		<div class="inputs">
+			<%= f.input :nombre, label: 'Nombre de Tipo de Rol', placeholder: 'tipo de rol...', :required => true, :autofocus => true %>
+			<br></br> 
+			<%= f.input :descripcion, label: 'Descripción del Tipo de Rol', placeholder: 'descripción...', :required => true, :autofocus => true %>
+			<br></br>
+		</div>
+		<div class="actions">
+		  <%= f.button :submit, "Aceptar", :class => "btn btn-primary btn-lg" %>
+		</div>
+	
+	<br></br>
+ 
+	</div>
 <% end %>

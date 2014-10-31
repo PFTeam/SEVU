@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class TipoProyectosControllerTest < ActionController::TestCase
+include Devise::TestHelpers
   setup do
     @tipo_proyecto = tipo_proyectos(:one)
   end

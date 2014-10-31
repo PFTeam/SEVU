@@ -5,7 +5,6 @@ one:
   montoTotal: 1
   aprobado: false
   proyecto_id: 
-  restriccion_id: 
   usuario_id: 
 
 two:
@@ -13,5 +12,4 @@ two:
   montoTotal: 1
   aprobado: false
   proyecto_id: 
-  restriccion_id: 
   usuario_id: 

@@ -11,6 +11,36 @@
     </div>
   <% end %>
 
+  <div class="field">
+    <%= f.label :esActiva %><br>
+    <%= f.check_box :esActiva %>
+  </div>
+  <div class="field">
+    <%= f.label :mensaje %><br>
+    <%= f.text_area :mensaje %>
+  </div>
+  <div class="field">
+    <%= f.label :notificado %><br>
+    <%= f.check_box :notificado %>
+  </div>
+  <div class="field">
+    <%= f.label :usuarioCreador_id %><br>
+    <%= f.text_field :usuarioCreador_id %>
+  </div>
+  <div class="field">
+    <%= f.label :usuarioDestino_id %><br>
+    <%= f.text_field :usuarioDestino_id %>
+  </div>
+  <div class="field">
+    <%= f.label :evento_publico_id %><br>
+    <%= f.text_field :evento_publico_id %>
+  </div>
+  <div class="field">
+    <%= f.label :proyecto_id %><br>
+    <%= f.text_field :proyecto_id %>
+  </div>
+
+
   <div class="actions">
     <%= f.submit %>
   </div>

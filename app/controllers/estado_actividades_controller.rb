@@ -4,26 +4,31 @@ class EstadoActividadesController < ApplicationController
   # GET /estado_actividades
   # GET /estado_actividades.json
   def index
+		authorize! :index, EstadoActividad
     @estado_actividades = EstadoActividad.all
   end
 
   # GET /estado_actividades/1
   # GET /estado_actividades/1.json
   def show
+		authorize! :show, EstadoActividad
   end
 
   # GET /estado_actividades/new
   def new
+		authorize! :new, EstadoActividad
     @estado_actividad = EstadoActividad.new
   end
 
   # GET /estado_actividades/1/edit
   def edit
+		authorize! :edit, EstadoActividad
   end
 
   # POST /estado_actividades
   # POST /estado_actividades.json
   def create
+		authorize! :create, EstadoActividad
     @estado_actividad = EstadoActividad.new(estado_actividad_params)
 
     respond_to do |format|
@@ -40,6 +45,7 @@ class EstadoActividadesController < ApplicationController
   # PATCH/PUT /estado_actividades/1
   # PATCH/PUT /estado_actividades/1.json
   def update
+		authorize! :update, EstadoActividad
     respond_to do |format|
       if @estado_actividad.update(estado_actividad_params)
         format.html { redirect_to @estado_actividad, notice: 'Estado actividad was successfully updated.' }
@@ -54,6 +60,7 @@ class EstadoActividadesController < ApplicationController
   # DELETE /estado_actividades/1
   # DELETE /estado_actividades/1.json
   def destroy
+		authorize! :destroy, EstadoActividad
     @estado_actividad.destroy
     respond_to do |format|
       format.html { redirect_to estado_actividades_url, notice: 'Estado actividad was successfully destroyed.' }

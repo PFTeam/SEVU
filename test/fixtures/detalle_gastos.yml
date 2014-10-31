@@ -5,15 +5,11 @@ one:
   descripcion: MyText
   monto: 1.5
   concepto_gasto_id: 
-  informe_gastos_id: 
   voluntario_id: 
-  comprobante_id: 
 
 two:
   titulo: MyString
   descripcion: MyText
   monto: 1.5
   concepto_gasto_id: 
-  informe_gastos_id: 
   voluntario_id: 
-  comprobante_id: 

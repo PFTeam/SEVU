@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class PrivilegiosControllerTest < ActionController::TestCase
+include Devise::TestHelpers
   setup do
     @privilegio = privilegios(:one)
   end

@@ -30,6 +30,7 @@ module ApplicationHelper
   def asignacion_rol_form_html_options
       {
         data: {
+	  target: dom_id(@asignacion_rol),
           error: 'modal',
           modal: true,
           replace: true
@@ -57,15 +58,15 @@ module ApplicationHelper
       }
   end
 
-def is_number?(n)
-  if n=/^\d+$/
-    true
-  else
-    false
+  def actividad_form_html_options
+      {
+        data: {
+          target: dom_id(@actividad),
+          error: 'modal',
+          modal: true,
+          replace: true
+        }.merge(remote_if_xhr || {})
+      }
   end
-  end
-
-
-
 end
 

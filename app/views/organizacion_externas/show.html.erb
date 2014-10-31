@@ -65,4 +65,8 @@
                 <%= link_to 'Edit', edit_organizacion_externa_path(@organizacion_externa) %> |
         </table>
 
-<%= link_to 'Back', organizacion_externas_path %>
+<% if params[:proyecto_id] %>
+	<%= link_to 'Back', '/proyectos/' + params[:proyecto_id] %>
+<% else %>
+	<%= link_to 'Back', organizacion_externas_path %>
+<% end %>

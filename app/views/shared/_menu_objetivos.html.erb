@@ -8,13 +8,36 @@
 
 	    <% if defined?(@proyecto) %>
 	    <li>
+		    <%= link_to 'Ver Proyecto', proyecto_path(@proyecto) %>
+	    </li>
+	    <li>
 		    <%= link_to 'Asignar Recursos', asignacion_roles_path(:proyecto_id => @proyecto.id) %>
             </li>
             <li>
 		    <%= link_to 'Objetivos Generales', objetivo_generales_path(:proyecto_id => @proyecto.id) %>
             </li>
+	    <li>
+	      <%= link_to 'Postulaciones', postulaciones_path(:proyecto_id => @proyecto.id) %>
+            </li>
+ 
+            <li>
+              <% if @proyecto.presupuesto.nil? then %>
+                <%= link_to 'Presupuesto', presupuestos_path(proyecto_id: @proyecto.id), data: { method: :post } %>
+            <% else %>
+                <%= link_to 'Presupuesto', gestionar_presupuesto_path(@proyecto.presupuesto) %>
+              <% end %>
+            </li>
+            <li>
+              <% if @proyecto.informe_gasto.nil? then #pregunta si tiene Informe de Gastos %>
+                <!--NO LO HE PROBADO, PUEDE DAR ERROR CON POSTGRES, CON LA BUSQUEDA, LO QUE HABRIA QUE SOLUCIONARLO CON UN MIGRATE-->
+                <!--Y CAMBIANDO LOS ATRIBUTOS EN SCHEMA Y EL MODELO DE PROYECTO -->
+                <%= link_to 'Informe de Gastos', informe_gastos_path(proyecto_id: @proyecto.id), data: { method: :post } %>
+              <% else %>
+                <%= link_to 'Informe de Gastos', gestionar_informe_gastos_path(@proyecto.informe_gasto.id) %>
+              <% end %>
+          </li>   
 	    <% end %>
-	    <% if defined?(@objetivo_general) %>
+	    <% if defined?(@objetivo_general) && !@objetivo_general.id.nil? %>
             <li>
 		    <%= link_to 'Objetivos Específicos', objetivo_especificos_path(:objetivo_general_id => @objetivo_general.id) %>
 	    </li>

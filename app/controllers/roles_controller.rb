@@ -4,31 +4,36 @@ class RolesController < ApplicationController
   # GET /roles
   # GET /roles.json
   def index
+		authorize! :index, Rol
     @roles = Rol.all
   end
 
   # GET /roles/1
   # GET /roles/1.json
   def show
+		authorize! :show, Rol
   end
 
   # GET /roles/new
   def new
+		authorize! :new, Rol
     @rol = Rol.new
   end
 
   # GET /roles/1/edit
   def edit
+		authorize! :edit, Rol
   end
 
   # POST /roles
   # POST /roles.json
   def create
+		authorize! :create, Rol
     @rol = Rol.new(rol_params)
 
     respond_to do |format|
       if @rol.save
-        format.html { redirect_to @rol, notice: 'Rol was successfully created.' }
+        format.html { redirect_to @rol, notice: 'El rol se ha creado exitosamente.' }
         format.json { render :show, status: :created, location: @rol }
       else
         format.html { render :new }
@@ -40,6 +45,7 @@ class RolesController < ApplicationController
   # PATCH/PUT /roles/1
   # PATCH/PUT /roles/1.json
   def update
+		authorize! :update, Rol
     respond_to do |format|
       if @rol.update(rol_params)
         format.html { redirect_to @rol, notice: 'Rol was successfully updated.' }
@@ -54,6 +60,7 @@ class RolesController < ApplicationController
   # DELETE /roles/1
   # DELETE /roles/1.json
   def destroy
+		authorize! :destroy, Rol
     @rol.destroy
     respond_to do |format|
       format.html { redirect_to roles_url, notice: 'Rol was successfully destroyed.' }

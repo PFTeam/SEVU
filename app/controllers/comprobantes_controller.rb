@@ -1,34 +1,42 @@
 class ComprobantesController < ApplicationController
   before_action :set_comprobant, only: [:show, :edit, :update, :destroy]
+  before_action :set_detalle_gasto, only: [:new, :create]
 
   # GET /comprobantes
   # GET /comprobantes.json
   def index
+		authorize! :index, Comprobante
     @comprobantes = Comprobante.all
   end
 
   # GET /comprobantes/1
   # GET /comprobantes/1.json
   def show
+		authorize! :show, Comprobante
   end
 
   # GET /comprobantes/new
   def new
+		authorize! :new, Comprobante
     @comprobant = Comprobante.new
+    @detalle_gasto = DetalleGasto.find params[:detalle_gasto_id]
+    #@comprobant.detalle_gasto_id = params[:detalle_gasto_id]# @detalle_gasto.id
   end
 
   # GET /comprobantes/1/edit
   def edit
+		authorize! :edit, Comprobante
   end
 
   # POST /comprobantes
   # POST /comprobantes.json
   def create
+		authorize! :create, Comprobante
     @comprobant = Comprobante.new(comprobant_params)
-
+    @comprobant.detalle_gasto = @detalle_gasto
     respond_to do |format|
       if @comprobant.save
-        format.html { redirect_to @comprobant, notice: 'Comprobante was successfully created.' }
+        format.html { redirect_to gestionar_informe_gastos_path(@comprobant.detalle_gasto.informe_gasto) }#@comprobant, notice: 'Comprobante was successfully created.' }
         format.json { render :show, status: :created, location: @comprobant }
       else
         format.html { render :new }
@@ -40,6 +48,7 @@ class ComprobantesController < ApplicationController
   # PATCH/PUT /comprobantes/1
   # PATCH/PUT /comprobantes/1.json
   def update
+		authorize! :update, Comprobante
     respond_to do |format|
       if @comprobant.update(comprobant_params)
         format.html { redirect_to @comprobant, notice: 'Comprobante was successfully updated.' }
@@ -54,6 +63,7 @@ class ComprobantesController < ApplicationController
   # DELETE /comprobantes/1
   # DELETE /comprobantes/1.json
   def destroy
+		authorize! :destroy, Comprobante
     @comprobant.destroy
     respond_to do |format|
       format.html { redirect_to comprobantes_url, notice: 'Comprobante was successfully destroyed.' }
@@ -67,8 +77,12 @@ class ComprobantesController < ApplicationController
       @comprobant = Comprobante.find(params[:id])
     end
 
+    def set_detalle_gasto
+      @detalle_gasto = DetalleGasto.find params[:detalle_gasto_id]
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def comprobant_params
-      params.require(:comprobant).permit(:numero)
+      params.require(:comprobante).permit(:numero, :imagen, :detalle_gasto_id)
     end
 end

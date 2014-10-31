@@ -1,8 +1,8 @@
 class DetalleGasto < ActiveRecord::Base
   belongs_to :concepto_gasto
-  belongs_to :informe_gastos
+  belongs_to :informe_gasto
   belongs_to :voluntario
-  belongs_to :comprobante
+  has_one :comprobante
 
   validates :monto,
       :presence => true,
@@ -18,5 +18,7 @@ class DetalleGasto < ActiveRecord::Base
   validates :descripcion,
       :presence => true,
       :allow_blank => false
+
+  validates_uniqueness_of :titulo, message: "- ya existe ese gasto"
 
 end

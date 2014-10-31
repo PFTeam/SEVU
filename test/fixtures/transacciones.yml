@@ -2,14 +2,12 @@
 
 one:
   descripcion: MyText
-  fechaTransaccion: 2014-07-14 20:54:21
   proyecto_id: 
   tipo_transaccion_id: 
   sesion_id: 
 
 two:
   descripcion: MyText
-  fechaTransaccion: 2014-07-14 20:54:21
   proyecto_id: 
   tipo_transaccion_id: 
   sesion_id: 

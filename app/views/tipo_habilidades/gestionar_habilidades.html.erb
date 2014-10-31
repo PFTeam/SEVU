@@ -6,7 +6,27 @@
 
 <div class="row">
   <div class="col-lg-12">
-    <% if @tipos_habilidades.nil? then %>
+    <!--<div class="col-lg-12">-->
+    <% if flash.count > 0 then%>
+      <div class="col-lg-4"></div>
+        <div id="error_explanation" class="col-lg-4">
+          <div class="alert alert-danger">
+            <a class="close" data-dismiss="alert">x</a>
+            <strong><%#= pluralize(flash.count, "Error") %>Error:</strong>
+            <ul>
+              <% flash.each do |key, value| %>
+                <%= value %>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+          <!--</div>-->
+    <% end %>
+
+
+ 
+    <% if @tipos_habilidades.empty? then %>
       <h4> No existen actualmente habilidades </h4>
     <% else %>   
       <% @tipos_habilidades.each do |tipo|%>
@@ -17,6 +37,9 @@
                 <%= tipo.nombre %>
                 <small>
                   <td><%= link_to '(Modi fi car)', edit_tipo_habilidad_path(tipo), style: 'color:#FFFFFF;' %></td>
+                  <%# if tipo.experiencias.nil? then %>
+                    <td><%#= link_to '(Eliminar)', tipo_habilidad_path... %></td>
+                  <%# end %>
                 </small>
 
                 <! TODO: Eliminar los tipos de habilidades, y a su vez las Habilidades >
@@ -51,7 +74,12 @@
 
                           <small>
                             <td><%= link_to '(Modificar)', edit_habilidad_path(habilidad) %></td>
+                            <% if habilidad.experiencias.count < 1 then %>
                             <td><%= link_to '(Eliminar)', [tipo, habilidad], method: :delete, data: { confirm: 'Esta seguro?' } %></td>
+                          <% else %>
+                            <td><%= link_to '(Eliminar)', [tipo, habilidad], method: :delete, data: { disable: true, confirm: 'Esta seguro?' } %></td>
+
+                          <% end %>
                           </small>
 
                         </h4> 

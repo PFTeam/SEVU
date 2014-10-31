@@ -1,4 +1,4 @@
-<h1>Listing necesidades</h1>
+<h1>Lista de Necesidades</h1>
 
 
 <div class="row">
@@ -7,7 +7,11 @@
 
             <div class="panel panel-primary">
               <div class="panel-heading">
-                <h3 class="panel-title"> <%= link_to necesidad.titulo, necesidad %></h3>
+		      <h3 class="panel-title"> <%= link_to necesidad.titulo, necesidad %> | 
+			      <% if (necesidad.created_at > Time.now - 160.hours) && (necesidad.usuario == current_usuario) %> 
+				      <%= link_to 'Edit', edit_necesidad_path(necesidad) %>
+			      <% end %>
+		      </h3>
               </div>
               <div class="panel-body">
                 
@@ -29,17 +33,18 @@
                 </p>
                 <label>Nombre Responsable</label>
                 <p> 
-
-                <!-- #TODO: mostrar nombre --> 
-                  <%= necesidad.usuario %>
+                  <%= link_to necesidad.usuario, necesidad.usuario %>
                 </p>
                 <label>Número de Contacto</label>
                 <p> 
-                <!-- #TODO: mostrar telefono --> 
-                  <%= necesidad.usuario %>
+		<% if necesidad.proyecto.presence %>
+		  <%= necesidad.usuario.telefono %>
+		<% else %>
+		  No se encuentra cargado ningún numero de teléfono.
+		<% end %>
                 </p>
 		<% if necesidad.proyecto.presence %>
-			<button type="button" class="btn btn-primary btn-lg"><%= link_to necesidad.proyecto.to_s, necesidad.proyecto %></button>
+			<%= link_to necesidad.proyecto.nombre, necesidad.proyecto, :class => "btn btn-primary btn-lg"  %>
 		<% else %>
 			<button type="button" class="btn btn-primary btn-lg">No hay Proyecto</button>
 		<% end %>

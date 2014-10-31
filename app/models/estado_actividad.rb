@@ -8,17 +8,21 @@ class EstadoActividad < ActiveRecord::Base
 
 
 
-  def self.estados_posibles estado_actual
-    if estado_actual.nombre == 'Creada'
-      estadosPosibles = [EstadoProyecto.find_by(nombre: 'Ejecutada'), EstadoProyecto.find_by(nombre: 'Planificada'), estado_actual]
-    elsif estado_actual.nombre == 'Ejecutada'
-      estadosPosibles = [EstadoProyecto.find_by(nombre: 'Terminado'), estado_actual]
-    elsif estado_actual.nombre == 'Planificada'
-      estadosPosibles = [EstadoProyecto.find_by(nombre: 'Ejecutada'), estado_actual]
-    elsif estado_actual.nombre == 'Terminada'
-      estadosPosibles = [estado_actual]
+  def self.estados_posibles actividad
+	  if actividad.historial_estado_actividades.last.estado_actividad.nombre == 'Creada'
+	    estadosPosibles = [EstadoActividad.find_by(nombre: 'Cancelada'), actividad.historial_estado_actividades.last.estado_actividad]
+    elsif actividad.historial_estado_actividades.last.estado_actividad.nombre == 'Ejecutada'
+      estadosPosibles = [EstadoActividad.find_by(nombre: 'Terminada'), actividad.historial_estado_actividades.last.estado_actividad]
+    elsif actividad.historial_estado_actividades.last.estado_actividad.nombre == 'Planificada'
+      estadosPosibles = [EstadoActividad.find_by(nombre: 'Cancelada'),actividad.historial_estado_actividades.last.estado_actividad]
+    elsif actividad.historial_estado_actividades.last.estado_actividad.nombre == 'Terminada'
+      estadosPosibles = [actividad.historial_estado_actividades.last.estado_actividad]
     else
-      estadosPosibles = [estado_actual]
+      estadosPosibles = [actividad.historial_estado_actividades.last.estado_actividad]
     end
+  end
+
+  def to_s
+	  nombre
   end
 end

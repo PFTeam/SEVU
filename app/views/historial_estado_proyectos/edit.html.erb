@@ -1,6 +1,23 @@
-<h1>Editing historial_estado_proyecto</h1>
+<h1>Editando Estado Proyecto</h1>
 
-<%= render 'form' %>
+<%= simple_form_for(@historial_estado_proyecto) do |f| %>
+  <% if @historial_estado_proyecto.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@historial_estado_proyecto.errors.count, "error") %> prohibited this historial_estado_proyecto from being saved:</h2>
 
-<%= link_to 'Show', @historial_estado_proyecto %> |
-<%= link_to 'Back', historial_estado_proyectos_path %>
+      <ul>
+      <% @historial_estado_proyecto.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+          <%= f.input :estado_proyecto_id, collection: @estados_posibles, :label => 'Estados' %>
+
+   	<%= f.input :proyecto_id,:as => :hidden, input_html: {value: params[:proyecto_id]} %>
+
+        <div class="modal-footer">
+          <%= f.button :submit, :class => 'btn btn-primary', :value => 'Confirmar' %>
+        </div>
+	<% end %>
+<%= link_to 'Back', historial_estado_proyectos_path(:proyecto_id => @historial_estado_proyecto.proyecto.id) %>

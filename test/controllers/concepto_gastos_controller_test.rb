@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class ConceptoGastosControllerTest < ActionController::TestCase
+include Devise::TestHelpers
   setup do
     @concepto_gasto = concepto_gastos(:one)
   end

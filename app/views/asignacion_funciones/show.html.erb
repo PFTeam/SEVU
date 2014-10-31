@@ -1,12 +1,12 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Fechaasignacion:</strong>
-  <%= @asignacion_funcion.fechaAsignacion %>
+  <strong>Fecha Asignacion:</strong>
+  <%= @asignacion_funcion.created_at %>
 </p>
 
 <p>
-  <strong>Esactual:</strong>
+  <strong>Es actual:</strong>
   <%= @asignacion_funcion.esActual %>
 </p>
 
@@ -17,13 +17,14 @@
 
 <p>
   <strong>Usuario:</strong>
-  <%= @asignacion_funcion.usuario %>
+  <%= Usuario.find(@asignacion_funcion.usuario).nombre %>
 </p>
 
 <p>
   <strong>Rol:</strong>
-  <%= @asignacion_funcion.rol %>
+  <%= Rol.find(@asignacion_funcion.rol).nombre %>
 </p>
 
-<%= link_to 'Edit', edit_asignacion_funcion_path(@asignacion_funcion) %> |
-<%= link_to 'Back', asignacion_funciones_path %>
+
+<%= link_to 'Editar', edit_asignacion_funcion_path(@asignacion_funcion) %> |
+<%= link_to 'Volver', asignacion_funciones_path %>

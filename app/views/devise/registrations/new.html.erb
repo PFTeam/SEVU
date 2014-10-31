@@ -1,0 +1,58 @@
+<!----->
+ 
+<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  <% if @usuario.errors.any? %>
+    <div id="error_explanation">
+	      <ul>
+			<p class="alert alert-dismissable alert-danger">
+      <% @usuario.errors.full_messages.each do |message| %>
+					<%= message %><br /> <!--PARA DEVISE (los mensajes se encuentran en devise.en.yml)--->
+      <% end %>
+			</p>
+      </ul>
+    </div>
+  <% end %>
+
+<h1>Sistema Estudiantil de Voluntariado Universitario</h1>
+
+ <ol class="breadcrumb">
+  <li><i class="icon-dashboard"></i> Registro/</a></li>
+	<%- if controller_name != 'sessions' %>
+  <%= link_to " Iniciar Sesión", new_session_path(resource_name) %><br />
+  <% end -%>
+ </ol>
+
+	<div class="col-lg-6">
+		<div class="form-inputs">
+			
+			<%= f.input :nombreUsuario, label: 'Nombre de Usuario', placeholder: 'user', :required => true, :autofocus => true %>
+			<br></br> 
+			<%= f.input :apellido_nombre, label: 'Apellido, Nombre', placeholder: 'apellido, nombres', :required => true, :autofocus => true %>
+			<br></br>
+			<%= f.input :email, label: 'Correo Electrónico', placeholder: 'usuario@dominio.com', :required => true, :autofocus => true %>
+			<br></br>
+			<%= f.input :password, label: 'Contraseña', :autocomplete => "off",hint: 'Verifique el bloqueo de mayúscula (Bloq Mayús).', placeholder: 'password', :required => true %>
+			<br></br>	
+    	<%= f.input :password_confirmation, label: 'Confirmar contraseña', placeholder: 'password', :required => true %>		
+			<br></br>	
+			<%= f.input :direccion, label: 'Dirección', placeholder: 'Calle, N°, Localidad, Provincia, País', :required => false, :autofocus => true %>
+			<br></br>		 
+			<div class="field">
+				<label>Foto:</label>
+				<%= f.file_field :foto %>
+			</div>
+			<br></br>
+		</div>
+		<div class="col-lg-12">
+			<div class="col-lg-6">
+				<div class="form-actions">
+		  		<%= f.button :submit, "Registrarse", :class => "btn btn-primary btn-lg" %>
+					<br></br>
+				</div>
+			</div>
+		</div>	
+	</div>
+	
+<% end %>
+
+

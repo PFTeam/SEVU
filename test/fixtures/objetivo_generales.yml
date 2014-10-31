@@ -2,10 +2,10 @@
 
 one:
   titulo: MyString
-  description: MyText
+  descripcion: MyText
   proyecto_id: 
 
 two:
   titulo: MyString
-  description: MyText
+  descripcion: MyText
   proyecto_id: 

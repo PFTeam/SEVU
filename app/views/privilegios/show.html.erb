@@ -12,8 +12,8 @@
 
 <p>
   <strong>Tipo privilegio:</strong>
-  <%= @privilegio.tipo_privilegio %>
+  <%= TipoPrivilegio.find(@privilegio.tipo_privilegio).nombre %>
 </p>
 
-<%= link_to 'Edit', edit_privilegio_path(@privilegio) %> |
-<%= link_to 'Back', privilegios_path %>
+<%= link_to 'Editar', edit_privilegio_path(@privilegio) %> |
+<%= link_to 'Volver', privilegios_path %>

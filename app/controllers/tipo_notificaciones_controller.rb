@@ -4,26 +4,31 @@ class TipoNotificacionesController < ApplicationController
   # GET /tipo_notificaciones
   # GET /tipo_notificaciones.json
   def index
+		authorize! :index, TipoNotificacion
     @tipo_notificaciones = TipoNotificacion.all
   end
 
   # GET /tipo_notificaciones/1
   # GET /tipo_notificaciones/1.json
   def show
+		authorize! :show, TipoNotificacion
   end
 
   # GET /tipo_notificaciones/new
   def new
+		authorize! :new, TipoNotificacion
     @tipo_notificacion = TipoNotificacion.new
   end
 
   # GET /tipo_notificaciones/1/edit
   def edit
+		authorize! :edit, TipoNotificacion
   end
 
   # POST /tipo_notificaciones
   # POST /tipo_notificaciones.json
   def create
+		authorize! :create, TipoNotificacion
     @tipo_notificacion = TipoNotificacion.new(tipo_notificacion_params)
 
     respond_to do |format|
@@ -40,6 +45,7 @@ class TipoNotificacionesController < ApplicationController
   # PATCH/PUT /tipo_notificaciones/1
   # PATCH/PUT /tipo_notificaciones/1.json
   def update
+		authorize! :update, TipoNotificacion
     respond_to do |format|
       if @tipo_notificacion.update(tipo_notificacion_params)
         format.html { redirect_to @tipo_notificacion, notice: 'Tipo notificacion was successfully updated.' }
@@ -54,6 +60,7 @@ class TipoNotificacionesController < ApplicationController
   # DELETE /tipo_notificaciones/1
   # DELETE /tipo_notificaciones/1.json
   def destroy
+		authorize! :destroy, TipoNotificacion
     @tipo_notificacion.destroy
     respond_to do |format|
       format.html { redirect_to tipo_notificaciones_url, notice: 'Tipo notificacion was successfully destroyed.' }

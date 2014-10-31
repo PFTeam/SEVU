@@ -13,16 +13,16 @@
       <div class="form-group">
         <label>
           <% if @presupuesto.proyecto.breveDescripcion.blank? then %>
-            <h4> (No existe actualmente descripción del Proyecto) </h4>
+            <p> (No existe actualmente descripción del Proyecto) </p>
           <% else %>
-            <h4> <%= @presupuesto.proyecto.breveDescripcion %> </h4>
+            <p> <%= @presupuesto.proyecto.breveDescripcion %> </p>
           <% end %>
         </label>
-        <p> <%= @presupuesto.proyecto.breveDescripcion %> </p>
       </div>
     <!--</form>-->
-    <! TODO Validar @detalles_presupuesto que no sea nil, si lo es hacer un camino separado y avisar > 
-    <div class="form-group input-group">
+    <% if @presupuesto.aprobado.nil? then #Verifica que el presupuesto no haya sido evaluado todavia %>
+      <! TODO Validar @detalles_presupuesto que no sea nil, si lo es hacer un camino separado y avisar > 
+      <div class="form-group input-group">
       <span class="input-group-addon">
         Monto total acumulado  $
       </span>
@@ -152,6 +152,14 @@
       <%= link_to "Agregar gasto", new_presupuesto_detalle_presupuesto_path(@presupuesto), class: "btn btn-primary btn-lg" %> 
     </div>
   </div>
+  <% else #para el caso que ya haya sido evaluado, no se permite modificarlo %>
+  <div class="alert alert-warning">
+      <strong>
+          Atencion!
+      </strong>
+       El presupuesto ya ha sido evaluado, póngase en contacto con el coordinador para que revierta esta situación si quiere modificar el presupuesto.
+  </div>
+  <% end %>
 </div>
 </div>
         

@@ -4,26 +4,31 @@ class EstadoProyectosController < ApplicationController
   # GET /estado_proyectos
   # GET /estado_proyectos.json
   def index
+		authorize! :index, EstadoProyecto
     @estado_proyectos = EstadoProyecto.all
   end
 
   # GET /estado_proyectos/1
   # GET /estado_proyectos/1.json
   def show
+		authorize! :show, EstadoProyecto
   end
 
   # GET /estado_proyectos/new
   def new
+		authorize! :new, EstadoProyecto
     @estado_proyecto = EstadoProyecto.new
   end
 
   # GET /estado_proyectos/1/edit
   def edit
+		authorize! :edit, EstadoProyecto
   end
 
   # POST /estado_proyectos
   # POST /estado_proyectos.json
   def create
+		authorize! :create, EstadoProyecto
     @estado_proyecto = EstadoProyecto.new(estado_proyecto_params)
 
     respond_to do |format|
@@ -40,6 +45,7 @@ class EstadoProyectosController < ApplicationController
   # PATCH/PUT /estado_proyectos/1
   # PATCH/PUT /estado_proyectos/1.json
   def update
+		authorize! :update, EstadoProyecto
     respond_to do |format|
       if @estado_proyecto.update(estado_proyecto_params)
         format.html { redirect_to @estado_proyecto, notice: 'Estado proyecto was successfully updated.' }
@@ -54,6 +60,7 @@ class EstadoProyectosController < ApplicationController
   # DELETE /estado_proyectos/1
   # DELETE /estado_proyectos/1.json
   def destroy
+		authorize! :destroy, EstadoProyecto
     @estado_proyecto.destroy
     respond_to do |format|
       format.html { redirect_to estado_proyectos_url, notice: 'Estado proyecto was successfully destroyed.' }

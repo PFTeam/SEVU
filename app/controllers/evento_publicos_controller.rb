@@ -4,28 +4,33 @@ class EventoPublicosController < ApplicationController
   # GET /evento_publicos
   # GET /evento_publicos.json
   def index
+		authorize! :index, EventoPublico
     @evento_publicos = EventoPublico.all
   end
 
   # GET /evento_publicos/1
   # GET /evento_publicos/1.json
   def show
+		authorize! :show, EventoPublico
   end
 
   # GET /evento_publicos/new
   def new
+		authorize! :new, EventoPublico
     @evento_publico = EventoPublico.new
   end
 
   # GET /evento_publicos/1/edit
   def edit
+		authorize! :edit, EventoPublico
   end
 
   # POST /evento_publicos
   # POST /evento_publicos.json
   def create
+		authorize! :create, EventoPublico
     @evento_publico = EventoPublico.new(evento_publico_params)
-
+    @evento_publico.usuario = current_usuario
     respond_to do |format|
       if @evento_publico.save
         format.html { redirect_to @evento_publico, notice: 'Evento publico was successfully created.' }
@@ -40,6 +45,7 @@ class EventoPublicosController < ApplicationController
   # PATCH/PUT /evento_publicos/1
   # PATCH/PUT /evento_publicos/1.json
   def update
+		authorize! :update, EventoPublico
     respond_to do |format|
       if @evento_publico.update(evento_publico_params)
         format.html { redirect_to @evento_publico, notice: 'Evento publico was successfully updated.' }
@@ -54,6 +60,7 @@ class EventoPublicosController < ApplicationController
   # DELETE /evento_publicos/1
   # DELETE /evento_publicos/1.json
   def destroy
+		authorize! :destroy, EventoPublico
     @evento_publico.destroy
     respond_to do |format|
       format.html { redirect_to evento_publicos_url, notice: 'Evento publico was successfully destroyed.' }

@@ -4,17 +4,22 @@ class NotasController < ApplicationController
   # GET /notas
   # GET /notas.json
   def index
+		authorize! :index, Nota
     @notas = Nota.all
   end
 
   # GET /notas/1
   # GET /notas/1.json
   def show
-    
+	authorize! :show, Nota
+
   end
 
   # GET /notas/new
   def new
+
+		authorize! :new, Nota
+    #@nota = Nota.new
    # @nota = Nota.new
    @voluntario = Voluntario.find(params[:voluntario_id])
    @usuario=Usuario.all
@@ -25,15 +30,20 @@ class NotasController < ApplicationController
 
   # GET /notas/1/edit
   def edit
+
+		authorize! :edit, Nota
            @usuario=Usuario.where(id: @nota.usuario_id)
     @voluntario =Voluntario.find(@nota.usuario_id)
-  
+
   end
 
   # POST /notas
   # POST /notas.json
   def create
+
+		authorize! :create, Nota
     @voluntario = Voluntario.find(params[:voluntario_id])
+
     @nota = Nota.new(nota_params)
 
     respond_to do |format|
@@ -52,7 +62,9 @@ class NotasController < ApplicationController
   # PATCH/PUT /notas/1
   # PATCH/PUT /notas/1.json
   def update
+		authorize! :update, Nota
      @voluntario = Voluntario.find(@nota.voluntario_id)
+
     respond_to do |format|
       if @nota.update(nota_params)
         format.html { redirect_to gestionar_nota_P_path(@voluntario), notice: 'La Nota fue actualizada exitosamente.' }
@@ -67,6 +79,7 @@ class NotasController < ApplicationController
   # DELETE /notas/1
   # DELETE /notas/1.json
   def destroy
+		authorize! :destroy, Nota
     @voluntario = Voluntario.find(@nota.voluntario_id)
     @nota.destroy
     respond_to do |format|

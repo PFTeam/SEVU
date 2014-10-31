@@ -2,37 +2,37 @@
 
 <p>
   <!-- Foto -->
-  <%= image_tag @usuario.foto.url(:small) %>
+  <%= image_tag @usuario.foto.url %>
 </p>
 <p>
-  <strong>Nombre de usuario:</strong>
+  <strong>Nombre de usuario: </strong>
   <%= @usuario.nombreUsuario %>
 </p>
 
 <p>
-  <strong>Contrasenia:</strong>
-  <%= @usuario.contrasenia %>
+  <strong>Contraseña: </strong>
+  <%= @usuario.encrypted_password %>
 </p>
 
 <p>
-  <strong>Apellido y nombre:</strong>
+  <strong>Apellido, Nombre: </strong>
   <%= @usuario.apellido_nombre %>
 </p>
 
 <p>
-  <strong>Email:</strong>
+  <strong>Email: </strong>
   <%= @usuario.email %>
 </p>
 
 <p>
-  <strong>Direccion:</strong>
+  <strong>Direccion: </strong>
   <%= @usuario.direccion %>
 </p>
 
 <p>
-  <strong>Fecha registro:</strong>
-  <%= @usuario.fechaRegistro %>
+  <strong>Fecha registro: </strong>
+  <%= @usuario.created_at %>
 </p>
 
-<%= link_to 'Edit', edit_usuario_path(@usuario) %> |
-<%= link_to 'Back', usuarios_path %>
+<%= link_to 'Editar', edit_usuario_path(@usuario) %> |
+<%= link_to 'Volver', control_usuario_path %>

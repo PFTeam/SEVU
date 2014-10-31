@@ -1,0 +1,40 @@
+  <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+              <h1>Agregar Organizacion Externa</h1>
+        </div>
+	<div class="modal-body">
+
+<!-- Se inicio el formluario --> 
+<%= simple_form_for(@proyecto, html: project_form_html_options ) do |f| %>
+
+<!-- Código autogenerado para la impresión de errores -->
+<% if @proyecto.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@proyecto.errors.count, "error") %> prohibited this proyecto from being saved:</h2>
+
+      <ul>
+      <% @proyecto.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %> 
+      </ul>
+    </div>
+<% end %>
+
+  <!-- Autocompletado de la necesidad -->  
+  <%= f.input :necesidad, as: :autocomplete, label: false, url: necesidades_path, input_html: { autofocus: true  }  %>
+
+
+  <div class="modal-footer">
+   
+	  <div class="modal-footer">
+	
+		  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	          <!-- Botón de submit -->	
+		  <%= f.button :submit, :class => 'btn btn-primary', :value => 'Confirmar' %>
+	  </div>
+
+<% end %>
+        </div>
+      </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->

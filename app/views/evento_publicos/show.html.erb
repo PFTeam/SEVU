@@ -1,24 +1,45 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Nombre:</strong>
-  <%= @evento_publico.nombre %>
-</p>
 
-<p>
-  <strong>Descripcion:</strong>
-  <%= @evento_publico.descripcion %>
-</p>
+<div class="row">
+  <div class="col-lg-12">
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title"> <%= @evento_publico.nombre %></h3>
+              </div>
+              <div class="panel-body">
+                
+                <label>Descripción del Evento</label>
+                <p> 
+		<% if !@evento_publico.descripcion.blank? %>
+			<%= @evento_publico.descripcion%>
+		<% else %>
+			No se ha cargado una descripción
+		<% end %>
+                </p>
+                <label>Creador del Evento</label>
+		<p>
+		<% if @evento_publico.usuario.presence %>
+			<%= @evento_publico.usuario%>
+		<% else %>
+			No se ha cargado un usuario
+		<% end %>
 
-<p>
-  <strong>Fecharealizacion:</strong>
-  <%= @evento_publico.fechaRealizacion %>
-</p>
+                </p>
+                <label>Fecha de Realización</label>
+                <p>
+		<% if !@evento_publico.fechaRealizacion.blank? %>
+			<%= @evento_publico.fechaRealizacion.to_formatted_s(:long_ordinal) %>
+		<% else %>
+			No se ha cargado una descripción
+		<% end %>                
+		                
+              </div>
+            </div>      
+  </div>
+</div>
 
-<p>
-  <strong>Usuario:</strong>
-  <%= @evento_publico.usuario %>
-</p>
 
 <%= link_to 'Edit', edit_evento_publico_path(@evento_publico) %> |
+<%= link_to 'Destroy', @evento_publico, method: :delete, data: { confirm: 'Are you sure?' } %> |
 <%= link_to 'Back', evento_publicos_path %>

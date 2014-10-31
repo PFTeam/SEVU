@@ -5,26 +5,31 @@ class HabilidadesController < ApplicationController
   # GET /habilidades
   # GET /habilidades.json
   def index
+		authorize! :index, Habilidad
     @habilidades = Habilidad.all
   end
 
   # GET /habilidades/1
   # GET /habilidades/1.json
   def show
+		authorize! :show, Habilidad
   end
 
   # GET /habilidades/new
   def new
+		authorize! :new, Habilidad
     @habilidad = Habilidad.new
   end
 
   # GET /habilidades/1/edit
   def edit
+		authorize! :edit, Habilidad
   end
 
   # POST /habilidades
   # POST /habilidades.json
   def create
+		authorize! :create, Habilidad
     #@habilidad = Habilidad.new(habilidad_params)
     @habilidad = @tipo_habilidad.habilidades.new(habilidad_params)
     respond_to do |format|
@@ -42,6 +47,7 @@ class HabilidadesController < ApplicationController
   # PATCH/PUT /habilidades/1
   # PATCH/PUT /habilidades/1.json
   def update
+		authorize! :update, Habilidad
     respond_to do |format|
       if @habilidad.update(habilidad_params)
         format.html { redirect_to gestionar_habilidades_path }
@@ -57,10 +63,20 @@ class HabilidadesController < ApplicationController
   # DELETE /habilidades/1
   # DELETE /habilidades/1.json
   def destroy
-    @habilidad.destroy
+		authorize! :destroy, Habilidad
+    #@habilidad.destroy
     respond_to do |format|
-      format.html { redirect_to habilidades_url, notice: 'Habilidad was successfully destroyed.' }
-      format.json { head :no_content }
+      if @habilidad.destroy
+        format.html { redirect_to gestionar_habilidades_path }
+      #format.json { render json: @habilidad.errors, status: :unprocessable_entity }      
+      #format.html { redirect_to habilidades_url, notice: 'Habilidad was successfully destroyed.' }
+        format.json { head :no_content }
+      else
+#        format.html { redirect_to gestionar_habilidades_path, alert: 'La habilidad no puede ser eliminada porque existen usuarios que la utilizan'}
+        format.html { redirect_to :back, alert: 'La habilidad no puede ser eliminada porque existen usuarios que la utilizan'}        
+        #format.json { render json: @habilidad.errors, status: :unprocessable_entity }
+        #flash[:error] = @habilidad.errors.full_messages.join(' errorrrr')
+      end
     end
   end
 

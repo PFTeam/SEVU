@@ -4,26 +4,34 @@ class HistorialEstadoProyectosController < ApplicationController
   # GET /historial_estado_proyectos
   # GET /historial_estado_proyectos.json
   def index
+		authorize! :index, HistorialEstadoProyecto
+    @proyecto = Proyecto.find(params[:proyecto_id])
     @historial_estado_proyectos = HistorialEstadoProyecto.all
   end
 
   # GET /historial_estado_proyectos/1
   # GET /historial_estado_proyectos/1.json
   def show
+		authorize! :show, HistorialEstadoProyecto
   end
 
   # GET /historial_estado_proyectos/new
   def new
+		authorize! :new, HistorialEstadoProyecto
     @historial_estado_proyecto = HistorialEstadoProyecto.new
   end
 
   # GET /historial_estado_proyectos/1/edit
   def edit
+		authorize! :edit, HistorialEstadoProyecto
+	  @proyecto = Proyecto.find(params[:proyecto_id])
+	  @estados_posibles = EstadoProyecto.estados_posibles(@proyecto)
   end
 
   # POST /historial_estado_proyectos
   # POST /historial_estado_proyectos.json
   def create
+		authorize! :create, HistorialEstadoProyecto
     @historial_estado_proyecto = HistorialEstadoProyecto.new(historial_estado_proyecto_params)
 
     respond_to do |format|
@@ -40,9 +48,14 @@ class HistorialEstadoProyectosController < ApplicationController
   # PATCH/PUT /historial_estado_proyectos/1
   # PATCH/PUT /historial_estado_proyectos/1.json
   def update
+		authorize! :update, HistorialEstadoProyecto
+    @historial_estado_proyecto_nuevo = HistorialEstadoProyecto.new
+    @historial_estado_proyecto_nuevo.proyecto_id = params[:historial_estado_proyecto][:proyecto_id]
+    @historial_estado_proyecto_nuevo.estado_proyecto_id = params[:historial_estado_proyecto][:estado_proyecto_id]
     respond_to do |format|
-      if @historial_estado_proyecto.update(historial_estado_proyecto_params)
-        format.html { redirect_to @historial_estado_proyecto, notice: 'Historial estado proyecto was successfully updated.' }
+      #if @historial_estado_proyecto.update(historial_estado_proyecto_params)
+	    if @historial_estado_proyecto_nuevo.save
+		    format.html { redirect_to action: 'index', proyecto_id: @historial_estado_proyecto.proyecto.id, notice: 'Historial estado proyecto was successfully updated.' }
         format.json { render :show, status: :ok, location: @historial_estado_proyecto }
       else
         format.html { render :edit }
@@ -54,11 +67,19 @@ class HistorialEstadoProyectosController < ApplicationController
   # DELETE /historial_estado_proyectos/1
   # DELETE /historial_estado_proyectos/1.json
   def destroy
+		authorize! :destroy, HistorialEstadoProyecto
     @historial_estado_proyecto.destroy
     respond_to do |format|
       format.html { redirect_to historial_estado_proyectos_url, notice: 'Historial estado proyecto was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def modificar
+		authorize! :modificar, HistorialEstadoProyecto
+	  @proyecto = Proyecto.find(params[:proyecto_id])
+	  @estados_posibles = @proyecto.historial_estado_proyectos.last.estado_proyecto.estados_posibles(@proyecto)
+    	  @historial_estado_proyecto = HistorialEstadoProyecto.new
   end
 
   private

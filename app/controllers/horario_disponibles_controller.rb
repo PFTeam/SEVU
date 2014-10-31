@@ -7,42 +7,45 @@ class HorarioDisponiblesController < ApplicationController
   # GET /horario_disponibles
   # GET /horario_disponibles.json
   def index
+		authorize! :index, HorarioDisponible
     @horario_disponibles = HorarioDisponible.all
   end
 
   # GET /horario_disponibles/1
   # GET /horario_disponibles/1.json
   def show
+		authorize! :show, HorarioDisponible
   end
 
   # GET /horario_disponibles/new
   def new
-     
+	authorize! :new, HorarioDisponible
+    #@horario_disponibl = HorarioDisponible.new
    @voluntario = Voluntario.find(params[:voluntario_id])
-#no funciona ver que pasa
 #@horario_disponible  = @voluntario.horario_disponibles.new()
     puts @voluntario.legajo
    
     @horario_disponible=HorarioDisponible.new
-   end
+  end
 
   # GET /horario_disponibles/1/edit
   def edit
-  @voluntario=Voluntario.find(@horario_disponible.voluntario_id)
+		authorize! :edit, HorarioDisponible
+@voluntario=Voluntario.find(@horario_disponible.voluntario_id)
+
   end
 
   # POST /horario_disponibles
   # POST /horario_disponibles.json
   def create
-         
+
+		authorize! :create, HorarioDisponible
+    #@horario_disponibl = HorarioDisponible.new(horario_disponibl_params)
 
 @voluntario = Voluntario.find(params[:voluntario_id])
  #@horario_disponible  = @voluntario.horario_disponibles.new(horario_disponible_params)
-  
-  
-  
- @horario_disponible = HorarioDisponible.new(horario_disponible_params)
 
+ @horario_disponible = HorarioDisponible.new(horario_disponible_params)
    
     respond_to do |format|
       if @horario_disponible.save
@@ -59,6 +62,7 @@ class HorarioDisponiblesController < ApplicationController
   # PATCH/PUT /horario_disponibles/1
   # PATCH/PUT /horario_disponibles/1.json
   def update
+		authorize! :update, HorarioDisponible
     respond_to do |format|
       if @horario_disponible.update(horario_disponible_params)
         format.html { redirect_to @horario_disponible, notice: 'Horario disponible was successfully updated.' }
@@ -73,9 +77,11 @@ class HorarioDisponiblesController < ApplicationController
   # DELETE /horario_disponibles/1
   # DELETE /horario_disponibles/1.json
   def destroy
+
+		authorize! :destroy, HorarioDisponible
+    #@horario_disponibl.destroy
     @voluntario = Voluntario.find( @horario_disponible.voluntario_id)
     @horario_disponible.destroy
-    
     respond_to do |format|
     format.html { redirect_to gestion_horarios_disponibles_path(@voluntario), notice: 'Horario disponible was successfully created.' }
      # format.html { redirect_to horario_disponibles_url, notice: 'Horario disponible was successfully destroyed.' }

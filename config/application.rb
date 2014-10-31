@@ -20,10 +20,10 @@ module SEVU
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
     config.time_zone = 'Buenos Aires'
-   
+		config.assets.initialize_on_precompile = false #Para devise (disable model loading when compiling assets)
    
    #LOCALE 
-   # config.i18n.default_locale = :es #DISABLED
+    config.i18n.default_locale = :es 
 
   end
 end

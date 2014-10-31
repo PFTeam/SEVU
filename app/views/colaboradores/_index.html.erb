@@ -1,0 +1,22 @@
+<h1>Lista de Colaboradores</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Organizacion externa</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @colaboradores.each do |colaborador| %>
+      <tr>
+        <td><%= colaborador.organizacion_externa %></td>
+        <td><%= link_to 'Show', colaborador.organizacion_externa , :proyecto_id => "colaborador.proyecto_id"  %>  |  <!-- NO PASA EL PARAM -->
+        <%= link_to 'Destroy', colaborador , method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

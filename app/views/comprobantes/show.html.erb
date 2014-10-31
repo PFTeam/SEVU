@@ -1,9 +1,10 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Numero:</strong>
+  <strong>Numero de factura/comprobante:</strong>
   <%= @comprobant.numero %>
 </p>
+<%= image_tag @comprobant.imagen.url %>
 
-<%= link_to 'Edit', edit_comprobant_path(@comprobant) %> |
-<%= link_to 'Back', comprobantes_path %>
+<%= link_to 'Editar', edit_comprobant_path(@comprobant), class: "btn btn-primary btn-lg"  %> 
+<%= link_to 'Atras', :back, class: "btn btn-default btn-lg" %>

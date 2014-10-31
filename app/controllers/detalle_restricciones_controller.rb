@@ -7,28 +7,33 @@ class DetalleRestriccionesController < ApplicationController
   # GET /detalle_restricciones
   # GET /detalle_restricciones.json
   def index
+		authorize! :index, DetalleRestriccion
     @detalle_restricciones = DetalleRestriccion.all
   end
 
   # GET /detalle_restricciones/1
   # GET /detalle_restricciones/1.json
   def show
+		authorize! :show, DetalleRestriccion
   end
 
   # GET /detalle_restricciones/new
   def new
+		authorize! :new, DetalleRestriccion
     @detalle_restriccion = DetalleRestriccion.new
     @concepto_gastos = ConceptoGasto.all
   end
 
   # GET /detalle_restricciones/1/edit
   def edit
+		authorize! :edit, DetalleRestriccion
     @concepto_gastos = ConceptoGasto.all
   end
 
   # POST /detalle_restricciones
   # POST /detalle_restricciones.json
   def create
+		authorize! :create, DetalleRestriccion
     @detalle_restriccion = @restriccion.detalle_restricciones.new(detalle_restriccion_params)
     @concepto_gastos = ConceptoGasto.all
     respond_to do |format|
@@ -46,6 +51,7 @@ class DetalleRestriccionesController < ApplicationController
   # PATCH/PUT /detalle_restricciones/1
   # PATCH/PUT /detalle_restricciones/1.json
   def update
+		authorize! :update, DetalleRestriccion
     respond_to do |format|
     @concepto_gastos = ConceptoGasto.all
       if @detalle_restriccion.update(detalle_restriccion_params)
@@ -63,6 +69,7 @@ class DetalleRestriccionesController < ApplicationController
   # DELETE /detalle_restricciones/1
   # DELETE /detalle_restricciones/1.json
   def destroy
+		authorize! :destroy, DetalleRestriccion
     @detalle_restriccion.destroy
     respond_to do |format|
       format.html { redirect_to gestionar_restricciones_path, notice: 'Actualizado correctamente'}

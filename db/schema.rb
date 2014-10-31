@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140929185341) do
+ActiveRecord::Schema.define(version: 20141025154331) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -109,7 +109,14 @@ ActiveRecord::Schema.define(version: 20140929185341) do
     t.integer  "numero"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "imagen_file_name"
+    t.string   "imagen_content_type"
+    t.integer  "imagen_file_size"
+    t.datetime "imagen_updated_at"
+    t.integer  "detalle_gasto_id"
   end
+
+  add_index "comprobantes", ["detalle_gasto_id"], name: "index_comprobantes_on_detalle_gasto_id", using: :btree
 
   create_table "concepto_gastos", force: true do |t|
     t.string   "titulo"
@@ -123,16 +130,14 @@ ActiveRecord::Schema.define(version: 20140929185341) do
     t.text     "descripcion"
     t.float    "monto"
     t.integer  "concepto_gasto_id"
-    t.integer  "informe_gastos_id"
+    t.integer  "informe_gasto_id"
     t.integer  "voluntario_id"
-    t.integer  "comprobante_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "detalle_gastos", ["comprobante_id"], name: "index_detalle_gastos_on_comprobante_id", using: :btree
   add_index "detalle_gastos", ["concepto_gasto_id"], name: "index_detalle_gastos_on_concepto_gasto_id", using: :btree
-  add_index "detalle_gastos", ["informe_gastos_id"], name: "index_detalle_gastos_on_informe_gastos_id", using: :btree
+  add_index "detalle_gastos", ["informe_gasto_id"], name: "index_detalle_gastos_on_informe_gasto_id", using: :btree
   add_index "detalle_gastos", ["voluntario_id"], name: "index_detalle_gastos_on_voluntario_id", using: :btree
 
   create_table "detalle_presupuestos", force: true do |t|
@@ -147,20 +152,6 @@ ActiveRecord::Schema.define(version: 20140929185341) do
 
   add_index "detalle_presupuestos", ["concepto_gasto_id"], name: "index_detalle_presupuestos_on_concepto_gasto_id", using: :btree
   add_index "detalle_presupuestos", ["presupuesto_id"], name: "index_detalle_presupuestos_on_presupuesto_id", using: :btree
-
-  create_table "detalle_restricciones", force: true do |t|
-    t.boolean  "esActiva"
-    t.datetime "fechaDesde"
-    t.datetime "fechaHasta"
-    t.float    "montoMax"
-    t.integer  "restriccion_id"
-    t.integer  "concepto_gasto_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "detalle_restricciones", ["concepto_gasto_id"], name: "index_detalle_restricciones_on_concepto_gasto_id", using: :btree
-  add_index "detalle_restricciones", ["restriccion_id"], name: "index_detalle_restricciones_on_restriccion_id", using: :btree
 
   create_table "estado_actividades", force: true do |t|
     t.string   "nombre"
@@ -317,8 +308,6 @@ ActiveRecord::Schema.define(version: 20140929185341) do
   add_index "notificacion_predeterminadas", ["tipo_notificacion_id"], name: "index_notificacion_predeterminadas_on_tipo_notificacion_id", using: :btree
 
   create_table "notificaciones", force: true do |t|
-    t.date     "fechaNotificacion"
-    t.time     "horaNotificacion"
     t.boolean  "esActiva"
     t.text     "mensaje"
     t.boolean  "notificado"
@@ -389,14 +378,12 @@ ActiveRecord::Schema.define(version: 20140929185341) do
     t.integer  "montoTotal"
     t.boolean  "aprobado"
     t.integer  "proyecto_id"
-    t.integer  "restriccion_id"
     t.integer  "usuario_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "presupuestos", ["proyecto_id"], name: "index_presupuestos_on_proyecto_id", using: :btree
-  add_index "presupuestos", ["restriccion_id"], name: "index_presupuestos_on_restriccion_id", using: :btree
   add_index "presupuestos", ["usuario_id"], name: "index_presupuestos_on_usuario_id", using: :btree
 
   create_table "privilegios", force: true do |t|
@@ -449,15 +436,16 @@ ActiveRecord::Schema.define(version: 20140929185341) do
   add_index "requisitos", ["habilidad_id"], name: "index_requisitos_on_habilidad_id", using: :btree
 
   create_table "restricciones", force: true do |t|
+    t.boolean  "esActiva"
     t.datetime "fechaDesde"
     t.datetime "fechaHasta"
-    t.boolean  "esActiva"
-    t.integer  "tipo_proyecto_id"
+    t.float    "montoMax"
+    t.integer  "concepto_gasto_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "restricciones", ["tipo_proyecto_id"], name: "index_restricciones_on_tipo_proyecto_id", using: :btree
+  add_index "restricciones", ["concepto_gasto_id"], name: "index_restricciones_on_concepto_gasto_id", using: :btree
 
   create_table "roles", force: true do |t|
     t.string   "nombre"
@@ -528,7 +516,6 @@ ActiveRecord::Schema.define(version: 20140929185341) do
 
   create_table "transacciones", force: true do |t|
     t.text     "descripcion"
-    t.datetime "fechaTransaccion"
     t.integer  "proyecto_id"
     t.integer  "tipo_transaccion_id"
     t.integer  "sesion_id"
@@ -542,11 +529,8 @@ ActiveRecord::Schema.define(version: 20140929185341) do
 
   create_table "usuarios", force: true do |t|
     t.string   "nombreUsuario"
-    t.string   "contrasenia"
     t.string   "apellido_nombre"
-    t.string   "email"
     t.string   "direccion"
-    t.datetime "fechaRegistro"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "legajo"
@@ -557,6 +541,28 @@ ActiveRecord::Schema.define(version: 20140929185341) do
     t.string   "foto_content_type"
     t.integer  "foto_file_size"
     t.datetime "foto_updated_at"
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
+    t.integer  "failed_attempts",        default: 0
+    t.string   "unlock_token"
+    t.datetime "locked_at"
   end
+
+  add_index "usuarios", ["confirmation_token"], name: "index_usuarios_on_confirmation_token", unique: true, using: :btree
+  add_index "usuarios", ["email"], name: "index_usuarios_on_email", unique: true, using: :btree
+  add_index "usuarios", ["reset_password_token"], name: "index_usuarios_on_reset_password_token", unique: true, using: :btree
+  add_index "usuarios", ["unlock_token"], name: "index_usuarios_on_unlock_token", unique: true, using: :btree
 
 end

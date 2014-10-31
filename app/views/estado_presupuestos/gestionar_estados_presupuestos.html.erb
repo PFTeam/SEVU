@@ -1,0 +1,79 @@
+<h1>Gestionar Estados de Presupuestos <small> Admin. de los posibles estados</small></h1>
+<ol class="breadcrumb">
+  <li><i class="icon-dashboard"></i> Gestionar Estados de Presupuesto</li>
+  <li class="active"><i class="icon-file-alt"></i> Estados </li>
+</ol>
+
+<div class="row">
+  <div class="col-lg-12">
+    <% if flash.count > 0 then%>
+      <div class="col-lg-4"></div>
+        <div id="error_explanation" class="col-lg-4">
+          <div class="alert alert-danger">
+            <a class="close" data-dismiss="alert">x</a>
+            <strong><%#= pluralize(flash.count, "Error") %>Error:</strong>
+            <ul>
+              <% flash.each do |key, value| %>
+                <%= value %>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+          <!--</div>-->
+    <% end %>
+
+    <% if @estados.empty? then %>
+      <h3> No existen actualmente Conceptos de gastos </h3>
+    <% else %>   
+      <% @estados.each do |estado|%>
+        <div class="col-lg-6">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h4 class="panel-title"> 
+                <%= estado.nombre %> 
+                <small>
+                  <td><%= link_to '(Modificar)', edit_estado_presupuesto_path(estado) %></td>
+                  <td><%= link_to '(Eliminar)', estado, method: :delete, data: { confirm: 'Esta seguro?' } %></td>
+                </small>
+              </h4> 
+            </div>
+            <div class="panel-body">
+              <h4> Descripción: </h4>
+              <p> <%= estado.descripcion %> </p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+    <br></br>
+
+    <div align="center">  
+
+      <%= link_to "Agregar estado", new_estado_presupuesto_path, class: "btn btn-primary btn-lg" %> 
+    </div>
+  </div>
+</div>
+        
+
+    <!-- JavaScript -->
+    <script src="../../js/jquery-1.10.2.js"></script>
+    <script src="../../js/bootstrap.js"></script>
+
+    <!-- Page Specific Plugins -->
+    
+    <!--
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    -->
+     
+   <script src="../../js/raphael-min.js"></script>
+    
+    <!--
+   <script src="http://cdn.oesmith.co.uk/morris-0.4.3.min.js"></script>
+    -->
+    <script src="../../js/morris-0.4.3.min.js"></script>
+    <script src="../../js/morris/chart-data-morris.js"></script>
+    <script src="../../js/tablesorter/jquery.tablesorter.js"></script>
+    <script src="../../js/tablesorter/tables.js"></script>
+
+

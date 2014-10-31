@@ -1,27 +1,93 @@
-<h1>Listing reportes</h1>
+<h1>Lista de Reportes</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Descripcion</th>
-      <th>Asignacion actividad</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<p id="notice"><%= notice %></p>
 
-  <tbody>
-    <% @reportes.each do |report| %>
-      <tr>
-        <td><%= report.descripcion %></td>
-        <td><%= report.asignacion_actividad %></td>
-        <td><%= link_to 'Show', report %></td>
-        <td><%= link_to 'Edit', edit_report_path(report) %></td>
-        <td><%= link_to 'Destroy', report, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= link_to 'New Reporte', new_reporte_path(:actividad_id => @actividad.id) %> |
+<%= link_to 'Back', @actividad %>
 
+
+<div class="col-lg-12 container">
+
+           <ul id="pills" class="nav nav-pills nav-justified" data-tabs="pills" align="center">
+
+             <li class="active">
+    
+               <a href="#todos" data-toggle="tab"><h4>Todos</h4></a>
+  
+             </li>
+
+             <li>
+
+               <a href="#mios" data-toggle="tab"><h4>Mios</h4></a>
+
+             </li>
+
+           </ul>
+
+</div>
+
+<div id="my-tab-content" class="tab-content">
+             <div class="tab-pane" id="todos">
+             	<br></br>
+             	 <% @reportes_todos.each do |reporte| %>
 <br>
+            <div class="panel panel-primary">
+              <div class="panel-body">
 
-<%= link_to 'New Reporte', new_report_path %>
+                <%= link_to reporte.asignacion_actividad.usuario, reporte.asignacion_actividad.usuario %>      <br></br>
+              <label><h5>Fecha Reporte</h5></label> <br>
+
+				<%= reporte.created_at %><br><br>
+                
+                <br>
+                <label>Descripción Reporte</label>
+                <p>
+                <%= reporte.descripcion %>
+                </p>
+     
+
+              </div>
+            </div>
+          
+
+
+   <% end %>
+             	
+             	</div>
+
+       
+             <div class="tab-pane" id="mios">
+				<br></br>
+             	<% @reportes_mios.each do |reporte| %>
+<br>
+            <div class="panel panel-primary">
+              <div class="panel-body">
+      
+                
+                <%= link_to reporte.asignacion_actividad.usuario, reporte.asignacion_actividad.usuario %>      <br></br>
+              <label><h5>Fecha Reporte</h5></label> <br>
+
+				<%= reporte.created_at %><br><br>
+                
+                <br>
+                <label>Descripción Reporte</label>
+                <p>
+                <%= reporte.descripcion %>
+                </p>
+     
+
+              </div>
+            </div>
+
+   <% end %>
+   
+             	</div>
+             	
+</div>
+
+
+
+
+
+
+
