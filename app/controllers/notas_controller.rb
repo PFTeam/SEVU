@@ -42,8 +42,9 @@ class NotasController < ApplicationController
         #format.html { redirect_to @nota, notice: 'Nota was successfully created.' }
         #format.json { render :show, status: :created, location: @nota }
       else
-        format.html { render :new }
-        format.json { render json: @nota.errors, status: :unprocessable_entity }
+        format.html { render :new }#new_voluntario_nota_path(@voluntario) }
+          format.json { render json: @3
+            ota.errors, status: :unprocessable_entity }
       end
     end
   end

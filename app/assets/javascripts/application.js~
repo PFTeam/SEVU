@@ -8,5 +8,5 @@
 //= require raphael-min
 //= require_tree ../../../vendor/assets/javascripts/tablesorter
 //= require bootstrap-datetimepicker
-
+precompile += %w( buscar_por_legajo.js )
 
