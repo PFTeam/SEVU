@@ -18,7 +18,26 @@ namespace :db do
       pad2iego=Privilegio.create(nombre: "roles", descripcion: "Permite la visualizacion de los roles", tipo_privilegio: psdiego)
       arddiego=AsignacionRolPredefinido.create(esActual: true, privilegio: padiego , rol: rsdiego)
 
-    u = Usuario.create!(nombreUsuario: "adrian",
+    u= Usuario.create!(nombreUsuario: "joel",
+								       password: password, 
+								       password_confirmation: password,  
+								       apellido_nombre: "Sierra, Adrian",
+								       email: "one.last.heaven@gmail.com",
+								       direccion: Faker::Address.street_address,
+								       telefono: Faker::PhoneNumber.cell_phone,
+								       fax: Faker::PhoneNumber.phone_number,
+                                                  foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample))
+
+#    admin = Usuario.create!(nombreUsuario: "admin",
+#								       password: password, 
+#								       password_confirmation: password,  
+#								       apellido_nombre: "Sierra, Adrian",
+#								       email: "noguera.sistemas@gmail.com",
+#								       direccion: Faker::Address.street_address,
+#								       telefono: Faker::PhoneNumber.cell_phone,
+#								       fax: Faker::PhoneNumber.phone_number,
+ #                                                 foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample))
+    u_otro = Usuario.create!(nombreUsuario: "adrian",
 								       password: password, 
 								       password_confirmation: password,  
 								       apellido_nombre: "Sierra, Adrian",
@@ -79,8 +98,9 @@ v = Voluntario.create!(nombreUsuario: "agustin",
     
     TipoRol.create(nombre: "Sistema", descripcion: "Roles aplicables a todo el sistema")
     trp= TipoRol.create(nombre: "Proyecto", descripcion: "Roles aplicables dentro de un proyecto")
-    director = Rol.create(nombre: "Director", descripcion: "Responsable del proyecto", tipo_rol: trp)
-    voluntario = Rol.create(nombre: "Voluntario", descripcion: "Colaborador del proyecto", tipo_rol: trp)
+    director = Rol.create(nombre: "Director", descripcion: "Responsable del proyecto", tipo_rol: trpdiego)
+    voluntario = Rol.create(nombre: "Voluntario", descripcion: "Colaborador del proyecto", tipo_rol: trpdiego)
+
 
     tipo_proyecto = TipoProyecto.create(nombre: "voluntariado", descripcion: "Proyecto sin remuneración económica")
 
