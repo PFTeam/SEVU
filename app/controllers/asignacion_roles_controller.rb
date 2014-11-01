@@ -26,9 +26,6 @@ class AsignacionRolesController < ApplicationController
   def edit
 		authorize! :edit, AsignacionRol
     @roles = Rol.all
-    respond_to do |format|
-      format.js {render partial: 'edit', content_type: 'text/html' }
-    end
   end
 
   # POST /asignacion_roles
@@ -37,14 +34,22 @@ class AsignacionRolesController < ApplicationController
 		authorize! :create, AsignacionRol
     @asignacion_rol = AsignacionRol.new(asignacion_rol_params)
     @asignacion_rol.esActual = true
-    respond_to do |format|
-      if @asignacion_rol.save
-	format.html {redirect_to :controller => 'asignacion_roles', :action => 'index',:proyecto_id => @asignacion_rol.proyecto.id } 
-        format.json { render :show, status: :created, location: @asignacion_rol }
-      else
-        format.html { render :new }
-        format.json { render json: @asignacion_rol.errors, status: :unprocessable_entity }
-      end
+    if unica(@asignacion_rol.usuario_id,@asignacion_rol.proyecto_id, @asignacion_rol.rol_id) == true
+	    respond_to do |format|
+	      if @asignacion_rol.save
+		format.html {redirect_to :controller => 'asignacion_roles', :action => 'index',:proyecto_id => @asignacion_rol.proyecto.id } 
+		format.json { render :show, status: :created, location: @asignacion_rol }
+	      else
+		format.html { render :new }
+		format.json { render json: @asignacion_rol.errors, status: :unprocessable_entity }
+	      end
+	    end
+    else
+	    respond_to do |format|
+
+		    format.html { redirect_to :controller => 'asignacion_roles', :action => 'index', :proyecto_id => @asignacion_rol.proyecto.id
+		             flash[:notice] = 'El usuario ya se encuentra asignado' } 
+	    end
     end
   end
 
@@ -60,15 +65,23 @@ class AsignacionRolesController < ApplicationController
     @asignacion_rol_new.esActual=true
     @asignacion_rol_new.usuario=@asignacion_rol.usuario
     @asignacion_rol_new.save
-    respond_to do |format|
-      if @asignacion_rol_viejo.save
-	format.js   { redirect_to :controller => 'asignacion_roles', :action => 'index', :proyecto_id => @asignacion_rol.proyecto.id } 
-        format.html { redirect_to @asignacion_rol, notice: 'Asignacion rol was successfully updated.' }
-        format.json { render :show, status: :ok, location: @asignacion_rol }
-      else
-        format.html { render :edit }
-        format.json { render json: @asignacion_rol.errors, status: :unprocessable_entity }
-      end
+    if unica(@asignacion_rol.usuario_id,@asignacion_rol.proyecto_id, @asignacion_rol.rol_id) == true
+	    respond_to do |format|
+	      if @asignacion_rol_viejo.save
+		format.js   { redirect_to :controller => 'asignacion_roles', :action => 'index', :proyecto_id => @asignacion_rol.proyecto.id } 
+		format.html { redirect_to @asignacion_rol, notice: 'Asignacion rol was successfully updated.' }
+		format.json { render :show, status: :ok, location: @asignacion_rol }
+	      else
+		format.html { render :edit }
+		format.json { render json: @asignacion_rol.errors, status: :unprocessable_entity }
+	      end
+	    end
+    else
+	    respond_to do |format|
+
+		    format.html { redirect_to :controller => 'asignacion_roles', :action => 'index', :proyecto_id => @asignacion_rol.proyecto.id
+		             flash[:notice] = 'El usuario ya se encuentra asignado' } 
+	    end
     end
   end
 
@@ -97,6 +110,15 @@ class AsignacionRolesController < ApplicationController
     end
   end
 
+  def unica( usuario, proyecto, rol) 
+	if AsignacionRol.all.where(usuario_id: usuario, proyecto_id: proyecto, rol_id: rol ,esActual: true ).count == 0
+		p true
+		true
+	else
+		p false
+		false
+	end
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_asignacion_rol

@@ -32,8 +32,12 @@
 
 
  <div class="modal-footer">
-          <%= f.button :submit, :class => 'btn btn-primary', :value => 'Confirmar' %>
-
+	 <%= f.button :submit, :class => 'btn btn-primary', :value => 'Confirmar' %>
+	 <% if !@asignacion_rol.proyecto.nil? %>
+		 <%= link_to 'Back', asignacion_roles_path(:proyecto_id => @asignacion_rol.proyecto.id)%>
+	 <% else %>
+		 <%= link_to 'Back', asignacion_roles_path(:proyecto_id => params[:proyecto_id])%>
+	 <% end %>
 <% end %>
 
 
