@@ -7,15 +7,24 @@ class ApplicationController < ActionController::Base
     redirect_to root_url, :alert => "No esta autorizado a acceder a la pagina solicitada."
   end
 
+#def current_ability
+#	if Rails.env.test? then
+#	  @current_ability ||= Ability.new(Usuario.find_by(nombreUsuario: "admin"))
+#        else
+#	    @current_ability ||= Ability.new(current_usuario)
+#    end
+#end
+
+
 	def current_ability
-  @current_ability ||= Ability.new(current_usuario)
+		 @current_ability ||= Ability.new(current_usuario)
 	end
 #---------------------------------------------------
 
   protect_from_forgery with: :exception	
 
 #For Devise-----------------------------------------
-	before_filter :authenticate_usuario!
+	before_filter :authenticate_usuario! unless Rails.env.test?
 	before_action :configure_permitted_parameters, if: :devise_controller?
 	before_action :cargar_notificaciones
 #---------------------------------------------------
@@ -34,5 +43,4 @@ class ApplicationController < ActionController::Base
     
   	
   end
-
 end
