@@ -1,4 +1,4 @@
-<h1>Listing postulaciones</h1>
+<h1>Lista de Postulaciones</h1>
 
 
 
@@ -6,9 +6,10 @@
                 <thead>
                   <tr>
                     <th class="col-lg-1">#</th>
-                    <th class="col-lg-4" >Apellido y Nombre </th>
+                    <th class="col-lg-3" >Apellido y Nombre </th>
                     <th class="col-lg-2" ></th>
                     <th class="col-lg-2" ></th>
+                    <th class="col-lg-1" ></th>
                      <th class="col-lg-1" ></th>
                     
                   </tr>
@@ -20,8 +21,13 @@
                     <td></td>
                     <td> <%= postulacion.usuario %></td>
                     <td><i class="fa fa-user"></i><%= link_to 'Perfil', usuario_path(postulacion.usuario) %></td>
-                    <td> <%= postulacion.aceptado %></td>
-		    <td><%= link_to "Aceptar",  aceptar_postulacion_path(postulacion.id), :method => :post %>
+                    <td> <%= postulacion.created_at.to_formatted_s(:long_ordinal) %></td>
+		    <td> <%= postulacion.fue_aceptado %></td>
+		    <% if postulacion.aceptado == false %>
+			    <td><%= link_to "Aceptar",  aceptar_postulacion_path(postulacion.id), :method => :post %>
+		    <% else %>
+			    <td>Aceptar </td>
+		    <% end %>
 		    <!-- class="btn btn-primary btn-sm" -->
                   </tr>
                   
