@@ -6,8 +6,8 @@ class NotificacionSistemasController < ApplicationController
   # GET /notificacion_sistemas.json
   def index
 		authorize! :index, NotificacionSistema
-	  #@notificacion_sistemas = NotificacionSistema.all.where(usuarioDestino: current_usuario)
-	  @notificacion_sistemas = NotificacionSistema.all
+	  @notificacion_sistemas = NotificacionSistema.all.where(usuarioDestino: current_usuario)
+	  #@notificacion_sistemas = NotificacionSistema.all
   end
 
   # GET /notificacion_sistemas/1
