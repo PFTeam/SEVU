@@ -11,7 +11,7 @@ class EstadoActividad < ActiveRecord::Base
   def self.estados_posibles actividad
 	  if actividad.historial_estado_actividades.last.estado_actividad.nombre == 'Creada'
 	    estadosPosibles = [EstadoActividad.find_by(nombre: 'Cancelada') ]
-    elsif actividad.historial_estado_actividades.last.estado_actividad.nombre == 'Ejecutada'
+	  elsif (actividad.historial_estado_actividades.last.estado_actividad.nombre == 'Ejecutada') && (actividad.reportes.count > 0)
       estadosPosibles = [EstadoActividad.find_by(nombre: 'Terminada')]
     elsif actividad.historial_estado_actividades.last.estado_actividad.nombre == 'Planificada'
       estadosPosibles = [EstadoActividad.find_by(nombre: 'Cancelada')]
