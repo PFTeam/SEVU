@@ -1,6 +1,9 @@
 <h1>Lista de Proyectos</h1>
 <div class="row">
-          <div class="col-lg-12">
+  <div class="col-lg-12">
+    <% if @proyectos.empty? then %>
+      <h3> No hay proyectos actualmente </h3>
+    <% else %>
           <% @proyectos.each do |proyecto| %>
 
             <div class="panel panel-primary">
@@ -49,11 +52,10 @@
  
 			<p>        
 		<% if current_usuario.participando_proyecto(proyecto) == 0 %>
-				<%= button_to "Participar",  {:controller => :postulaciones, :action => 'create', :postulacion => { :usuario_id => current_usuario.id, :proyecto_id => proyecto.id }}, :method => :new %>
+		  <%= link_to "Participar",  {:controller => :postulaciones, :action => 'create', :postulacion => { :usuario_id => current_usuario.id, :proyecto_id => proyecto.id }}, :method => :new, :class => "btn btn-primary btn-lg" %>
 		<% else %>
-		<br>
-		<br>
-			Actualmente participando
+		
+		  <span class="badge">Actualmente participando</span>
 		<% end %>
 
 		<!-- REEMPLAZAR POR EL USUARIO ACTUAL DE LA SESION 	-->
@@ -69,7 +71,8 @@
               </div>
             </div>
             
-          <% end %>  
+	  <% end %>  
+	<% end %>
           </div>
   </div><!-- /.row -->
 
