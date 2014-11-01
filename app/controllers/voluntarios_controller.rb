@@ -156,7 +156,7 @@ end
 
     respond_to do |format|
       if @voluntario.save
-        format.html { redirect_to @voluntario, notice: 'Voluntario was successfully created.' }
+        format.html { redirect_to @voluntario, notice: 'Voluntario 'fue creado satisfactoriamente'.' }
         format.json { render :show, status: :created, location: @voluntario }
       else
         format.html { render :new }
@@ -171,7 +171,7 @@ end
 		authorize! :update, Voluntario
     respond_to do |format|
       if @voluntario.update(voluntario_params)
-        format.html { redirect_to @voluntario, notice: 'Voluntario was successfully updated.' }
+        format.html { redirect_to @voluntario, notice: 'Voluntario 'fue actualizado satisfactoriamente'.' }
         format.json { render :show, status: :ok, location: @voluntario }
       else
         format.html { render :edit }
@@ -186,7 +186,7 @@ end
 		authorize! :destroy, Voluntario
     @voluntario.destroy
     respond_to do |format|
-      format.html { redirect_to voluntarios_url, notice: 'Voluntario was successfully destroyed.' }
+      format.html { redirect_to voluntarios_url, notice: 'Voluntario 'fue borrado satisfactoriamente'.' }
       format.json { head :no_content }
     end
   end

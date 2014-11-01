@@ -33,7 +33,7 @@ class TipoTransaccionesController < ApplicationController
 
     respond_to do |format|
       if @tipo_transaccion.save
-        format.html { redirect_to @tipo_transaccion, notice: 'Tipo transaccion was successfully created.' }
+        format.html { redirect_to @tipo_transaccion, notice: 'Tipo transaccion 'fue creado satisfactoriamente'.' }
         format.json { render :show, status: :created, location: @tipo_transaccion }
       else
         format.html { render :new }
@@ -48,7 +48,7 @@ class TipoTransaccionesController < ApplicationController
 		authorize! :update, TipoTransaccion
     respond_to do |format|
       if @tipo_transaccion.update(tipo_transaccion_params)
-        format.html { redirect_to @tipo_transaccion, notice: 'Tipo transaccion was successfully updated.' }
+        format.html { redirect_to @tipo_transaccion, notice: 'Tipo transaccion 'fue actualizado satisfactoriamente'.' }
         format.json { render :show, status: :ok, location: @tipo_transaccion }
       else
         format.html { render :edit }
@@ -63,7 +63,7 @@ class TipoTransaccionesController < ApplicationController
 		authorize! :destroy, TipoTransaccion
     @tipo_transaccion.destroy
     respond_to do |format|
-      format.html { redirect_to tipo_transacciones_url, notice: 'Tipo transaccion was successfully destroyed.' }
+      format.html { redirect_to tipo_transacciones_url, notice: 'Tipo transaccion 'fue borrado satisfactoriamente'.' }
       format.json { head :no_content }
     end
   end

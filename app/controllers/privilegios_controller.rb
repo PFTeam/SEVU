@@ -33,7 +33,7 @@ class PrivilegiosController < ApplicationController
 
     respond_to do |format|
       if @privilegio.save
-        format.html { redirect_to @privilegio, notice: 'Privilegio was successfully created.' }
+        format.html { redirect_to @privilegio, notice: 'Privilegio 'fue creado satisfactoriamente'.' }
         format.json { render :show, status: :created, location: @privilegio }
       else
         format.html { render :new }
@@ -48,7 +48,7 @@ class PrivilegiosController < ApplicationController
 		authorize! :update, Privilegio
     respond_to do |format|
       if @privilegio.update(privilegio_params)
-        format.html { redirect_to @privilegio, notice: 'Privilegio was successfully updated.' }
+        format.html { redirect_to @privilegio, notice: 'Privilegio 'fue actualizado satisfactoriamente'.' }
         format.json { render :show, status: :ok, location: @privilegio }
       else
         format.html { render :edit }
@@ -63,7 +63,7 @@ class PrivilegiosController < ApplicationController
 		authorize! :destroy, Privilegio
     @privilegio.destroy
     respond_to do |format|
-      format.html { redirect_to privilegios_url, notice: 'Privilegio was successfully destroyed.' }
+      format.html { redirect_to privilegios_url, notice: 'Privilegio 'fue borrado satisfactoriamente'.' }
       format.json { head :no_content }
     end
   end

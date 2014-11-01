@@ -33,7 +33,7 @@ class RequisitosController < ApplicationController
 
     respond_to do |format|
       if @requisito.save
-        format.html { redirect_to @requisito, notice: 'Requisito was successfully created.' }
+        format.html { redirect_to @requisito, notice: 'Requisito 'fue creado satisfactoriamente'.' }
         format.json { render :show, status: :created, location: @requisito }
       else
         format.html { render :new }
@@ -48,7 +48,7 @@ class RequisitosController < ApplicationController
 		authorize! :update, Requisito
     respond_to do |format|
       if @requisito.update(requisito_params)
-        format.html { redirect_to @requisito, notice: 'Requisito was successfully updated.' }
+        format.html { redirect_to @requisito, notice: 'Requisito 'fue actualizado satisfactoriamente'.' }
         format.json { render :show, status: :ok, location: @requisito }
       else
         format.html { render :edit }
@@ -63,7 +63,7 @@ class RequisitosController < ApplicationController
 		authorize! :destroy, Requisito
     @requisito.destroy
     respond_to do |format|
-      format.html { redirect_to requisitos_url, notice: 'Requisito was successfully destroyed.' }
+      format.html { redirect_to requisitos_url, notice: 'Requisito 'fue borrado satisfactoriamente'.' }
       format.json { head :no_content }
     end
   end

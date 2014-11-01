@@ -33,7 +33,7 @@ class NotificacionEmailesController < ApplicationController
 
     respond_to do |format|
       if @notificacion_email.save
-        format.html { redirect_to @notificacion_email, notice: 'Notificacion email was successfully created.' }
+        format.html { redirect_to @notificacion_email, notice: 'Notificacion email 'fue creado satisfactoriamente'.' }
         format.json { render :show, status: :created, location: @notificacion_email }
       else
         format.html { render :new }
@@ -48,7 +48,7 @@ class NotificacionEmailesController < ApplicationController
 		authorize! :update, NotificacionEmail
     respond_to do |format|
       if @notificacion_email.update(notificacion_email_params)
-        format.html { redirect_to @notificacion_email, notice: 'Notificacion email was successfully updated.' }
+        format.html { redirect_to @notificacion_email, notice: 'Notificacion email 'fue actualizado satisfactoriamente'.' }
         format.json { render :show, status: :ok, location: @notificacion_email }
       else
         format.html { render :edit }
@@ -63,7 +63,7 @@ class NotificacionEmailesController < ApplicationController
 		authorize! :destroy, NotificacionEmail
     @notificacion_email.destroy
     respond_to do |format|
-      format.html { redirect_to notificacion_emailes_url, notice: 'Notificacion email was successfully destroyed.' }
+      format.html { redirect_to notificacion_emailes_url, notice: 'Notificacion email 'fue borrado satisfactoriamente'.' }
       format.json { head :no_content }
     end
   end

@@ -33,7 +33,7 @@ class EstadoProyectosController < ApplicationController
 
     respond_to do |format|
       if @estado_proyecto.save
-        format.html { redirect_to @estado_proyecto, notice: 'Estado proyecto was successfully created.' }
+        format.html { redirect_to @estado_proyecto, notice: 'Estado proyecto 'fue creado satisfactoriamente'.' }
         format.json { render :show, status: :created, location: @estado_proyecto }
       else
         format.html { render :new }
@@ -48,7 +48,7 @@ class EstadoProyectosController < ApplicationController
 		authorize! :update, EstadoProyecto
     respond_to do |format|
       if @estado_proyecto.update(estado_proyecto_params)
-        format.html { redirect_to @estado_proyecto, notice: 'Estado proyecto was successfully updated.' }
+        format.html { redirect_to @estado_proyecto, notice: 'Estado proyecto 'fue actualizado satisfactoriamente'.' }
         format.json { render :show, status: :ok, location: @estado_proyecto }
       else
         format.html { render :edit }
@@ -63,7 +63,7 @@ class EstadoProyectosController < ApplicationController
 		authorize! :destroy, EstadoProyecto
     @estado_proyecto.destroy
     respond_to do |format|
-      format.html { redirect_to estado_proyectos_url, notice: 'Estado proyecto was successfully destroyed.' }
+      format.html { redirect_to estado_proyectos_url, notice: 'Estado proyecto 'fue borrado satisfactoriamente'.' }
       format.json { head :no_content }
     end
   end

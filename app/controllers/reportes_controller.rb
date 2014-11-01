@@ -5,7 +5,7 @@ class ReportesController < ApplicationController
   # GET /reportes
   # GET /reportes.json
   def index
-		authorize! :index, Reporte
+#		authorize! :index, Reporte
 	  @asignacion_actividades = AsignacionActividad.find_by(actividad_id: params[:actividad_id])
 	  @actividad = @asignacion_actividades.actividad 
     	  @proyecto = @actividad.proyecto
@@ -26,12 +26,12 @@ class ReportesController < ApplicationController
   # GET /reportes/1
   # GET /reportes/1.json
   def show
-		authorize! :show, Reporte
+#		authorize! :show, Reporte
   end
 
   # GET /reportes/new
   def new
-		authorize! :new, Reporte
+#		authorize! :new, Reporte
     @actividad = Actividad.find(params[:actividad_id])
     @proyecto = @actividad.proyecto
     @asignacion_actividad = @actividad.asignacion_actividades.where('vigente =? and usuario_id =?', 'true' , current_usuario.id).uniq.last
@@ -41,19 +41,22 @@ class ReportesController < ApplicationController
 
   # GET /reportes/1/edit
   def edit
-		authorize! :edit, Reporte
+#		authorize! :edit, Reporte
+	  #
+
+     @asignacion_actividad = @reporte.asignacion_actividad
   end
 
   # POST /reportes
   # POST /reportes.json
   def create
-		authorize! :create, Reporte
+#		authorize! :create, Reporte
     @reporte = Reporte.new(reporte_params)
 
     respond_to do |format|
       if @reporte.save
 	      format.html { redirect_to :action => 'index', :actividad_id => @reporte.asignacion_actividad.actividad.id 
-		     flash[:notice] = 'Reporte was successfully created.' }
+		     flash[:notice] = 'Reporte 'fue creado satisfactoriamente'.' }
         format.json { render :show, status: :created, location: @reporte }
       else
         format.html { render :new }
@@ -65,10 +68,10 @@ class ReportesController < ApplicationController
   # PATCH/PUT /reportes/1
   # PATCH/PUT /reportes/1.json
   def update
-		authorize! :update, Reporte
+#		authorize! :update, Reporte
     respond_to do |format|
       if @reporte.update(reporte_params)
-        format.html { redirect_to @reporte, notice: 'Reporte was successfully updated.' }
+        format.html { redirect_to @reporte, notice: 'Reporte 'fue actualizado satisfactoriamente'.' }
         format.json { render :show, status: :ok, location: @reporte }
       else
         format.html { render :edit }
@@ -80,10 +83,10 @@ class ReportesController < ApplicationController
   # DELETE /reportes/1
   # DELETE /reportes/1.json
   def destroy
-		authorize! :destroy, Reporte
+#		authorize! :destroy, Reporte
     @reporte.destroy
     respond_to do |format|
-      format.html { redirect_to reportes_url, notice: 'Reporte was successfully destroyed.' }
+      format.html { redirect_to reportes_url, notice: 'Reporte 'fue borrado satisfactoriamente'.' }
       format.json { head :no_content }
     end
   end

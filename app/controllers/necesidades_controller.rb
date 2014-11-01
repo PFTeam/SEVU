@@ -35,7 +35,7 @@ class NecesidadesController < ApplicationController
     respond_to do |format|
       if @necesidad.save
         format.js { render 'new', notice: 'La necesidad fue creada satisfactoriamente', content_type: 'text/html' }
-        format.html { redirect_to @necesidad, notice: 'Necesidad was successfully created.' }
+        format.html { redirect_to @necesidad, notice: 'Necesidad 'fue creado satisfactoriamente'.' }
         format.json { render :show, status: :created, location: @necesidad }
       else
         format.js { render 'new', status: :unprocessable_entity }
@@ -51,7 +51,7 @@ class NecesidadesController < ApplicationController
 		authorize! :update, Necesidad
     respond_to do |format|
       if @necesidad.update(necesidad_params)
-        format.html { redirect_to @necesidad, notice: 'Necesidad was successfully updated.' }
+        format.html { redirect_to @necesidad, notice: 'Necesidad 'fue actualizado satisfactoriamente'.' }
         format.json { render :show, status: :ok, location: @necesidad }
       else
         format.html { render :edit }
@@ -66,7 +66,7 @@ class NecesidadesController < ApplicationController
 		authorize! :destroy, Necesidad
     @necesidad.destroy
     respond_to do |format|
-      format.html { redirect_to necesidades_url, notice: 'Necesidad was successfully destroyed.' }
+      format.html { redirect_to necesidades_url, notice: 'Necesidad 'fue borrado satisfactoriamente'.' }
       format.json { head :no_content }
     end
   end

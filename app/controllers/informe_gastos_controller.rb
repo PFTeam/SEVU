@@ -45,7 +45,7 @@ class InformeGastosController < ApplicationController
 # ‪           proyecto_id‬: @informe_gasto.proyecto.id
 #         )
         format.html { redirect_to gestionar_informe_gastos_path(@informe_gasto) }
-        #format.html { redirect_to @informe_gasto, notice: 'Informe gasto was successfully created.' }
+        #format.html { redirect_to @informe_gasto, notice: 'Informe gasto 'fue creado satisfactoriamente'.' }
         #format.json { render :show, status: :created, location: @informe_gasto }
       else
         format.html { render :back }
@@ -73,7 +73,7 @@ class InformeGastosController < ApplicationController
 # ‪           proyecto_id‬: @informe_gasto.proyecto.id
 #         )
         format.html { redirect_to gestionar_informe_gastos_path(@informe_gasto) }
-        #format.html { redirect_to @informe_gasto, notice: 'Informe gasto was successfully updated.' }
+        #format.html { redirect_to @informe_gasto, notice: 'Informe gasto 'fue actualizado satisfactoriamente'.' }
         #format.json { render :show, status: :ok, location: @informe_gasto }
       else
          format.html { render :back }
@@ -100,7 +100,7 @@ class InformeGastosController < ApplicationController
 #         )
     @informe_gasto.destroy
     respond_to do |format|
-      format.html { redirect_to informe_gastos_url, notice: 'Informe gasto was successfully destroyed.' }
+      format.html { redirect_to informe_gastos_url, notice: 'Informe gasto 'fue borrado satisfactoriamente'.' }
       format.json { head :no_content }
     end
   end

@@ -33,7 +33,7 @@ class TipoProyectosController < ApplicationController
 
     respond_to do |format|
       if @tipo_proyecto.save
-        format.html { redirect_to @tipo_proyecto, notice: 'Tipo proyecto was successfully created.' }
+        format.html { redirect_to @tipo_proyecto, notice: 'Tipo proyecto 'fue creado satisfactoriamente'.' }
         format.json { render :show, status: :created, location: @tipo_proyecto }
       else
         format.html { render :new }
@@ -48,7 +48,7 @@ class TipoProyectosController < ApplicationController
 		authorize! :update, TipoProyecto
     respond_to do |format|
       if @tipo_proyecto.update(tipo_proyecto_params)
-        format.html { redirect_to @tipo_proyecto, notice: 'Tipo proyecto was successfully updated.' }
+        format.html { redirect_to @tipo_proyecto, notice: 'Tipo proyecto 'fue actualizado satisfactoriamente'.' }
         format.json { render :show, status: :ok, location: @tipo_proyecto }
       else
         format.html { render :edit }
@@ -63,7 +63,7 @@ class TipoProyectosController < ApplicationController
 		authorize! :destroy, TipoProyecto
     @tipo_proyecto.destroy
     respond_to do |format|
-      format.html { redirect_to tipo_proyectos_url, notice: 'Tipo proyecto was successfully destroyed.' }
+      format.html { redirect_to tipo_proyectos_url, notice: 'Tipo proyecto 'fue borrado satisfactoriamente'.' }
       format.json { head :no_content }
     end
   end

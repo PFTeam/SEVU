@@ -33,7 +33,7 @@ class EventoPublicosController < ApplicationController
     @evento_publico.usuario = current_usuario
     respond_to do |format|
       if @evento_publico.save
-        format.html { redirect_to @evento_publico, notice: 'Evento publico was successfully created.' }
+        format.html { redirect_to @evento_publico, notice: 'Evento publico 'fue creado satisfactoriamente'.' }
         format.json { render :show, status: :created, location: @evento_publico }
       else
         format.html { render :new }
@@ -48,7 +48,7 @@ class EventoPublicosController < ApplicationController
 		authorize! :update, EventoPublico
     respond_to do |format|
       if @evento_publico.update(evento_publico_params)
-        format.html { redirect_to @evento_publico, notice: 'Evento publico was successfully updated.' }
+        format.html { redirect_to @evento_publico, notice: 'Evento publico 'fue actualizado satisfactoriamente'.' }
         format.json { render :show, status: :ok, location: @evento_publico }
       else
         format.html { render :edit }
@@ -63,7 +63,7 @@ class EventoPublicosController < ApplicationController
 		authorize! :destroy, EventoPublico
     @evento_publico.destroy
     respond_to do |format|
-      format.html { redirect_to evento_publicos_url, notice: 'Evento publico was successfully destroyed.' }
+      format.html { redirect_to evento_publicos_url, notice: 'Evento publico 'fue borrado satisfactoriamente'.' }
       format.json { head :no_content }
     end
   end

@@ -33,7 +33,7 @@ class NotificacionesController < ApplicationController
 
     respond_to do |format|
       if @notificacion.save
-        format.html { redirect_to @notificacion, notice: 'Notificacion was successfully created.' }
+        format.html { redirect_to @notificacion, notice: 'Notificacion 'fue creado satisfactoriamente'.' }
         format.json { render :show, status: :created, location: @notificacion }
       else
         format.html { render :new }
@@ -48,7 +48,7 @@ class NotificacionesController < ApplicationController
 		authorize! :update, Notificacion
     respond_to do |format|
       if @notificacion.update(notificacion_params)
-        format.html { redirect_to @notificacion, notice: 'Notificacion was successfully updated.' }
+        format.html { redirect_to @notificacion, notice: 'Notificacion 'fue actualizado satisfactoriamente'.' }
         format.json { render :show, status: :ok, location: @notificacion }
       else
         format.html { render :edit }
@@ -63,7 +63,7 @@ class NotificacionesController < ApplicationController
 		authorize! :destroy, Notificacion
     @notificacion.destroy
     respond_to do |format|
-      format.html { redirect_to notificaciones_url, notice: 'Notificacion was successfully destroyed.' }
+      format.html { redirect_to notificaciones_url, notice: 'Notificacion 'fue borrado satisfactoriamente'.' }
       format.json { head :no_content }
     end
   end

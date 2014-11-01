@@ -54,7 +54,7 @@ class ObjetivoGeneralesController < ApplicationController
 		authorize! :update, ObjetivoGeneral
     respond_to do |format|
       if @objetivo_general.update(objetivo_general_params)
-        format.html { redirect_to @objetivo_general, notice: 'Objetivo general was successfully updated.' }
+        format.html { redirect_to @objetivo_general, notice: 'Objetivo general 'fue actualizado satisfactoriamente'.' }
         format.json { render :show, status: :ok, location: @objetivo_general }
         format.js   { render :show, content_type: 'text/html' }
       else
@@ -73,7 +73,7 @@ class ObjetivoGeneralesController < ApplicationController
     @objetivo_general.destroy
     respond_to do |format|
 	    format.html { redirect_to objetivo_generales_path(:proyecto_id => @proyecto.id)
-		    flash[:notice] = 'Objetivo general was successfully destroyed.' }
+		    flash[:notice] = 'Objetivo general 'fue borrado satisfactoriamente'.' }
       format.json { head :no_content }
     end
   end
