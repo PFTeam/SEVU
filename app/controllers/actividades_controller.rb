@@ -43,10 +43,11 @@ class ActividadesController < ApplicationController
 
     respond_to do |format|
       if @actividad.save
-        format.html { redirect_to @actividad, notice: 'Actividad was successfully created.' }
+	      format.html { redirect_to @actividad,:objetivo_especifico_id => @actividad.objetivo_especifico_id 
+		     flash[:notice] = 'Actividad was successfully created.'  }
         format.json { render :show, status: :created, location: @actividad }
       else
-        format.html { render :new }
+        format.html { render :new, :objetivo_especifico_id => @actividad.objetivo_especifico_id }
         format.json { render json: @actividad.errors, status: :unprocessable_entity }
       end
     end
