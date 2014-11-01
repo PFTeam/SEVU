@@ -14,11 +14,18 @@
   <% end %>
 
   <%= f.input :actividad_id, :as => :hidden, input_html: {value: @historial_estado_actividad.actividad.id} %><br>
-  <%= f.input :estado_actividad_id, collection: @estados_posibles, :label => 'Estado' %>
 
+  <% if @estados_posibles != [] %>
+	  <%= f.input :estado_actividad_id, collection: @estados_posibles, :label => 'Estado', :include_blank => false %>
         <div class="modal-footer">
   <%= f.button :submit, :class => 'btn btn-primary', :value => 'Confirmar' %><br>
         </div>
+
+  <% else %>
+	  No se puede modificar el estado.
+  <% end %>
+
+
 <% end %>
 
 <%= link_to 'Atrás', historial_estado_actividades_path(:actividad_id => @historial_estado_actividad.actividad.id) %>

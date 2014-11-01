@@ -36,7 +36,8 @@ class HistorialEstadoActividadesController < ApplicationController
 
     respond_to do |format|
       if @historial_estado_actividad.save
-        format.html { redirect_to @historial_estado_actividad, notice: 'Historial estado actividad fue creado satisfactoriamente.' }
+        format.html { redirect_to @historial_estado_actividad 
+		      flash[:notice] = 'Historial estado actividad fue creado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @historial_estado_actividad }
       else
         format.html { render :new }
@@ -54,7 +55,8 @@ class HistorialEstadoActividadesController < ApplicationController
     @historial_estado_actividad_nuevo.estado_actividad_id = params[:historial_estado_actividad][:estado_actividad_id]
     respond_to do |format|
       if @historial_estado_actividad_nuevo.save
-	      format.html { redirect_to action: 'index', actividad_id: @historial_estado_actividad.actividad.id , notice: 'Historial estado actividad fue actualizado satisfactoriamente.' }
+	      format.html { redirect_to action: 'index', actividad_id: @historial_estado_actividad.actividad.id 
+		    flash[:notice] = 'Historial estado actividad fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @historial_estado_actividad }
       else
         format.html { render :edit}

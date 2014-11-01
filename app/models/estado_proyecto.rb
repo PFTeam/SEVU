@@ -10,22 +10,22 @@ class EstadoProyecto < ActiveRecord::Base
   def self.estados_posibles proyecto
     if proyecto.historial_estado_proyectos.last.estado_proyecto.nombre == 'Creado'
 	    if !proyecto.fechaInicio.blank? && ( proyecto.fechaInicio <= Time.now )
-		    estados_posibles = [EstadoProyecto.find_by(nombre: 'En Ejecución'), EstadoProyecto.find_by(nombre: 'Cancelado'), proyecto.historial_estado_proyectos.last.estado_proyecto]
+		    estados_posibles = [EstadoProyecto.find_by(nombre: 'En Ejecución'), EstadoProyecto.find_by(nombre: 'Cancelado')]
 	    else
-		    estadosPosibles = [EstadoProyecto.find_by(nombre: 'Cancelado'), proyecto.historial_estado_proyectos.last.estado_proyecto]
+		    estadosPosibles = [EstadoProyecto.find_by(nombre: 'Cancelado')]
 	    end
     elsif proyecto.historial_estado_proyectos.last.estado_proyecto.nombre == 'En Ejecución'
-	    if !self.fechaFin.blank? && ( self.fechaFin <= Time.now )
-		    estadosPosibles = [EstadoProyecto.find_by(nombre: 'Terminado'), EstadoProyecto.find_by(nombre: 'Suspendido'), EstadoProyecto.find_by(nombre: 'Cancelado'),proyecto.historial_estado_proyectos.last.estado_proyecto]
+	    if !proyecto.fechaFin.blank? && ( proyecto.fechaFin <= Time.now )
+		    estadosPosibles = [EstadoProyecto.find_by(nombre: 'Terminado'), EstadoProyecto.find_by(nombre: 'Suspendido'), EstadoProyecto.find_by(nombre: 'Cancelado')]
 	    else
-		    estadosPosibles = [EstadoProyecto.find_by(nombre: 'Suspendido'), EstadoProyecto.find_by(nombre: 'Cancelado'),proyecto.historial_estado_proyectos.last.estado_proyecto]
+		    estadosPosibles = [EstadoProyecto.find_by(nombre: 'Suspendido'), EstadoProyecto.find_by(nombre: 'Cancelado')]
 	    end
     elsif proyecto.historial_estado_proyectos.last.estado_proyecto.nombre == 'Suspendido'
-      estadosPosibles = [EstadoProyecto.find_by(nombre: 'En Ejecución'), EstadoProyecto.find_by(nombre: 'Cancelado'),proyecto.historial_estado_proyectos.last.estado_proyecto]
+      estadosPosibles = [EstadoProyecto.find_by(nombre: 'En Ejecución'), EstadoProyecto.find_by(nombre: 'Cancelado')]
     elsif proyecto.historial_estado_proyectos.last.estado_proyecto.nombre == 'Cancelado'
-      estadosPosibles = [proyecto.historial_estado_proyectos.last.estado_proyecto]
+      estadosPosibles = []
     elsif proyecto.historial_estado_proyectos.last.estado_proyecto.nombre == 'Terminado'
-      estadosPosibles = [proyecto.historial_estado_proyectos.last.estado_proyecto]
+      estadosPosibles = []
     else
       estadosPosibles = [estado_actual]
     end

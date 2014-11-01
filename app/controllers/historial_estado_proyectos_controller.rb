@@ -36,7 +36,8 @@ class HistorialEstadoProyectosController < ApplicationController
 
     respond_to do |format|
       if @historial_estado_proyecto.save
-        format.html { redirect_to @historial_estado_proyecto, notice: 'Historial estado proyecto fue creado satisfactoriamente.' }
+        format.html { redirect_to @historial_estado_proyecto
+		     flash[:notice] = 'Historial estado proyecto fue creado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @historial_estado_proyecto }
       else
         format.html { render :new }
@@ -55,7 +56,8 @@ class HistorialEstadoProyectosController < ApplicationController
     respond_to do |format|
       #if @historial_estado_proyecto.update(historial_estado_proyecto_params)
 	    if @historial_estado_proyecto_nuevo.save
-		    format.html { redirect_to action: 'index', proyecto_id: @historial_estado_proyecto.proyecto.id, notice: 'Historial estado proyecto fue actualizado satisfactoriamente.' }
+		    format.html { redirect_to action: 'index', proyecto_id: @historial_estado_proyecto.proyecto.id
+		    flash[:notice] = 'Historial estado proyecto fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @historial_estado_proyecto }
       else
         format.html { render :edit }

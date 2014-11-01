@@ -13,7 +13,7 @@
 
   	<%= f.input :proyecto_id, :value => params[:proyecto_id]  %><br>
 
-	<%= f.input :proyecto_id, :collection => @estados_posibles  %><br>
+	<%= f.input :estado_actividad_id, :collection => @estados_posibles  %><br>
   <div class="actions">
 	   <%= f.button :submit, :class => 'btn btn-primary', :value => 'Confirmar' %>
   </div>

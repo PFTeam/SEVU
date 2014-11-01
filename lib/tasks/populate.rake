@@ -93,6 +93,7 @@ v = Voluntario.create!(nombreUsuario: "agustin",
     EstadoActividad.create(nombre: "Planificada", descripcion: "La actividad se encuentra planificada")
     EstadoActividad.create(nombre: "Ejecutada", descripcion: "La actividad se encuentra actualmente en ejecución")
     EstadoActividad.create(nombre: "Terminada", descripcion: "La actividad ha terminado")
+    EstadoActividad.create(nombre: "Cancelada", descripcion: "La actividad ha sido cancelada")
     EstadoActividad.create(nombre: "Creada", descripcion: "")
     
     

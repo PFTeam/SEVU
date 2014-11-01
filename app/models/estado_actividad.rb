@@ -10,15 +10,15 @@ class EstadoActividad < ActiveRecord::Base
 
   def self.estados_posibles actividad
 	  if actividad.historial_estado_actividades.last.estado_actividad.nombre == 'Creada'
-	    estadosPosibles = [EstadoActividad.find_by(nombre: 'Cancelada'), actividad.historial_estado_actividades.last.estado_actividad]
+	    estadosPosibles = [EstadoActividad.find_by(nombre: 'Cancelada') ]
     elsif actividad.historial_estado_actividades.last.estado_actividad.nombre == 'Ejecutada'
-      estadosPosibles = [EstadoActividad.find_by(nombre: 'Terminada'), actividad.historial_estado_actividades.last.estado_actividad]
+      estadosPosibles = [EstadoActividad.find_by(nombre: 'Terminada')]
     elsif actividad.historial_estado_actividades.last.estado_actividad.nombre == 'Planificada'
-      estadosPosibles = [EstadoActividad.find_by(nombre: 'Cancelada'),actividad.historial_estado_actividades.last.estado_actividad]
+      estadosPosibles = [EstadoActividad.find_by(nombre: 'Cancelada')]
     elsif actividad.historial_estado_actividades.last.estado_actividad.nombre == 'Terminada'
-      estadosPosibles = [actividad.historial_estado_actividades.last.estado_actividad]
+      estadosPosibles = []
     else
-      estadosPosibles = [actividad.historial_estado_actividades.last.estado_actividad]
+	    estadosPosibles = []
     end
   end
 
