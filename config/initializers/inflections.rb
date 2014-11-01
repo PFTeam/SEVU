@@ -36,4 +36,6 @@ ActiveSupport::Inflector.inflections do |inflect|
 
     inflect.irregular('el', 'los')
     inflect.irregular('reporte', 'reportes')
+    inflect.irregular('comprobante', 'comprobantes')
+    inflect.irregular('disponible', 'disponibles')
 end

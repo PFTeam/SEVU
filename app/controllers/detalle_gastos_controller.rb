@@ -43,7 +43,7 @@ class DetalleGastosController < ApplicationController
     respond_to do |format|
       if @detalle_gasto.save
         #format.html { redirect_to gestionar_informe_gastos_path(@detalle_gasto.informe_gasto)} #@detalle_gasto, notice: 'Detalle gasto was successfully created.' }
-        format.html { redirect_to new_comprobant_path(:detalle_gasto_id => @detalle_gasto.id)}
+        format.html { redirect_to new_comprobante_path(:detalle_gasto_id => @detalle_gasto.id)}
         #format.json { render :show, status: :created, location: @detalle_gasto }
       else
         format.html { render :new }
