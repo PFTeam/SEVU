@@ -1,6 +1,7 @@
 class AsignacionActividadesController < ApplicationController
   before_action :set_asignacion_actividad, only: [:show, :edit, :update, :destroy]
 
+
   # GET /asignacion_actividades
   # GET /asignacion_actividades.json
   def index
@@ -34,16 +35,25 @@ class AsignacionActividadesController < ApplicationController
 		authorize! :create, AsignacionActividad
     @asignacion_actividad = AsignacionActividad.new(asignacion_actividad_params)
     @asignacion_actividad.vigente = true
-    respond_to do |format|
-      if @asignacion_actividad.save
-	      format.html { redirect_to :controller => 'asignacion_actividades', :action => 'index', :actividad_id => @asignacion_actividad.actividad.id
-		      flash[:notice] = 'Asignacion actividad was successfully created.' }
-        format.json { render :show, status: :created, location: @asignacion_actividad }
-      else
-        format.html { render :new }
-        format.json { render json: @asignacion_actividad.errors, status: :unprocessable_entity }
-      end
-    end
+    if unica(@asignacion_actividad.usuario_id,@asignacion_actividad.actividad_id) == true
+
+	    respond_to do |format|
+		    if  @asignacion_actividad.save
+		      format.html { redirect_to :controller => 'asignacion_actividades', :action => 'index', :actividad_id => @asignacion_actividad.actividad.id
+			      flash[:notice] = 'Asignacion actividad was successfully created.' }
+		format.json { render :show, status: :created, location: @asignacion_actividad }
+	      else
+		format.html { render :new }
+		format.json { render json: @asignacion_actividad.errors, status: :unprocessable_entity }
+	      end
+	    end
+    else
+	    respond_to do |format|
+
+		    format.html { redirect_to :controller => 'asignacion_actividades', :action => 'index', :actividad_id => @asignacion_actividad.actividad.id
+		             flash[:notice] = 'El usuario ya se encuentra asignado' } 
+	    end
+  end
   end
 
   # PATCH/PUT /asignacion_actividades/1
@@ -86,6 +96,16 @@ class AsignacionActividadesController < ApplicationController
       format.html { redirect_to asignacion_actividades_url, notice: 'Asignacion actividad was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def unica( usuario, actividad) 
+	if AsignacionActividad.all.where(usuario_id: usuario, actividad_id: actividad).count == 0
+		p true
+		true
+	else
+		p false
+		false
+	end
   end
 
   private
