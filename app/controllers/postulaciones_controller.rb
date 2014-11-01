@@ -78,7 +78,7 @@ class PostulacionesController < ApplicationController
     @postulacion.aceptar
     @postulacion.save
     respond_to do |format|
-	    format.html {redirect_to :controller => 'postulaciones', :action => 'index', notice: 'Se ha registrado tu participación', :proyecto_id => @postulacion.proyecto.id  } 
+	    format.html {redirect_to :controller => 'asignacion_roles', :action => 'new', notice: 'Se ha registrado tu participación', :proyecto_id => @postulacion.proyecto.id, :usuario_id => @postulacion.usuario.id  } 
     end
   end
 

@@ -18,6 +18,7 @@ class AsignacionRolesController < ApplicationController
   def new
 		authorize! :new, AsignacionRol
     @roles = Rol.all
+    @proyecto = Proyecto.find(params[:proyecto_id])
     @asignacion_rol = AsignacionRol.new(:usuario_id => params[:usuario_id], :proyecto_id => :proyecto_id)
   end
 
