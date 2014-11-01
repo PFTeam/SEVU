@@ -9,7 +9,7 @@
 <!-- Se hace el llamado a los distintos métodos o funcionalidades asociadas a proyecto -->
 <%= link_to 'Editar Proyecto', edit_proyecto_path(@proyecto), remote: true, data: { target: 'modal', modal: true } %> |
 <%= link_to 'Agregar Organización Externa', new_colaborador_path(:proyecto_id => @proyecto.id) %> |
-<%= link_to 'Agregar Necesidad', agregar_necesidad_proyecto_path(@proyecto), remote: true, data: { target: 'modal', modal: true } %> |
+<%= link_to 'Agregar Necesidad', agregar_necesidad_proyecto_path(:proyecto => {:id => @proyecto.id}) %> |
 <%= link_to 'Ver Historial', historial_estado_proyectos_path(:proyecto_id => @proyecto.id)%> |
 
 

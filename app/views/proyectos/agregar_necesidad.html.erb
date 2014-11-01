@@ -1,9 +1,5 @@
-  <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-              <h1>Agregar Organizacion Externa</h1>
-        </div>
-	<div class="modal-body">
+<h1> Cargar Necesidad al Proyecto </h1>
+<br/>
 
 <!-- Se inicio el formluario --> 
 <%= simple_form_for(@proyecto, html: project_form_html_options ) do |f| %>
@@ -29,12 +25,9 @@
    
 	  <div class="modal-footer">
 	
-		  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		  <%= link_to 'Back', @proyecto %>
 	          <!-- Botón de submit -->	
 		  <%= f.button :submit, :class => 'btn btn-primary', :value => 'Confirmar' %>
 	  </div>
 
 <% end %>
-        </div>
-      </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
