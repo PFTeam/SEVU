@@ -99,7 +99,7 @@ class AsignacionActividadesController < ApplicationController
   end
 
   def unica( usuario, actividad) 
-	if AsignacionActividad.all.where(usuario_id: usuario, actividad_id: actividad).count == 0
+	if AsignacionActividad.all.where(usuario_id: usuario, actividad_id: actividad,vigente: true ).count == 0
 		p true
 		true
 	else
