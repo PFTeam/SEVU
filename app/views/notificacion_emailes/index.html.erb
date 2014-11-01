@@ -16,9 +16,9 @@
         <td><%= notificacion_email.destinatario %></td>
         <td><%= notificacion_email.remitente %></td>
         <td><%= notificacion_email.asunto %></td>
-        <td><%= link_to 'Show', notificacion_email %></td>
-        <td><%= link_to 'Edit', edit_notificacion_email_path(notificacion_email) %></td>
-        <td><%= link_to 'Destroy', notificacion_email, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Ver', notificacion_email %></td>
+        <td><%= link_to 'Editar', edit_notificacion_email_path(notificacion_email) %></td>
+        <td><%= link_to 'Borrar', notificacion_email, method: :delete, data: { confirm: 'Seguro?' } %></td>
       </tr>
     <% end %>
   </tbody>

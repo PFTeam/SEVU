@@ -27,7 +27,7 @@
 			    <% if asignacion_rol.actual == "No" %>
 				    Dar Baja 
 			    <% else %>
-				    <%= link_to 'Dar Baja', asignacion_rol_dar_baja_path(:id => asignacion_rol.id), disabled: true, data: {confirm: 'Are you sure?'} %>
+				    <%= link_to 'Dar Baja', asignacion_rol_dar_baja_path(:id => asignacion_rol.id), disabled: true, data: {confirm: 'Seguro?'} %>
 			    <% end %>
                         </td>
                         <td>

@@ -14,9 +14,9 @@
       <tr>
         <td><%= concepto_gasto.titulo %></td>
         <td><%= concepto_gasto.descripcion %></td>
-        <td><%= link_to 'Show', concepto_gasto %></td>
-        <td><%= link_to 'Edit', edit_concepto_gasto_path(concepto_gasto) %></td>
-        <td><%= link_to 'Destroy', concepto_gasto, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Ver', concepto_gasto %></td>
+        <td><%= link_to 'Editar', edit_concepto_gasto_path(concepto_gasto) %></td>
+        <td><%= link_to 'Borrar', concepto_gasto, method: :delete, data: { confirm: 'Seguro?' } %></td>
       </tr>
     <% end %>
   </tbody>

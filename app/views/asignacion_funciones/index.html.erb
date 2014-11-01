@@ -22,7 +22,7 @@
         <td><%= Usuario.find(asignacion_funcion.usuario).nombreUsuario %></td>
         <td><%= Rol.find(asignacion_funcion.rol).nombre %></td>
         <td><%= link_to 'Editar', edit_asignacion_funcion_path(asignacion_funcion) %></td>
-        <td><%= link_to 'Eliminar', asignacion_funcion, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Eliminar', asignacion_funcion, method: :delete, data: { confirm: 'Seguro?' } %></td>
       </tr>
     <% end %>
   </tbody>

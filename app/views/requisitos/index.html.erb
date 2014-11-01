@@ -14,9 +14,9 @@
       <tr>
         <td><%= requisito.actividad %></td>
         <td><%= requisito.habilidad %></td>
-        <td><%= link_to 'Show', requisito %></td>
-        <td><%= link_to 'Edit', edit_requisito_path(requisito) %></td>
-        <td><%= link_to 'Destroy', requisito, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Ver', requisito %></td>
+        <td><%= link_to 'Editar', edit_requisito_path(requisito) %></td>
+        <td><%= link_to 'Borrar', requisito, method: :delete, data: { confirm: 'Seguro?' } %></td>
       </tr>
     <% end %>
   </tbody>

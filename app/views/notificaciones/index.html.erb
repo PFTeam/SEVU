@@ -28,9 +28,9 @@
         <td><%= notificacion.usuarioDestino %></td>
         <td><%= notificacion.evento_publico %></td>
         <td><%= notificacion.proyecto %></td>
-        <td><%= link_to 'Show', notificacion %></td>
-        <td><%= link_to 'Edit', edit_notificacion_path(notificacion) %></td>
-        <td><%= link_to 'Destroy', notificacion, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Ver', notificacion %></td>
+        <td><%= link_to 'Editar', edit_notificacion_path(notificacion) %></td>
+        <td><%= link_to 'Borrar', notificacion, method: :delete, data: { confirm: 'Seguro?' } %></td>
       </tr>
     <% end %>
   </tbody>

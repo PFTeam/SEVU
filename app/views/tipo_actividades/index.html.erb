@@ -14,9 +14,9 @@
       <tr>
         <td><%= tipo_actividad.titulo %></td>
         <td><%= tipo_actividad.descripcion %></td>
-        <td><%= link_to 'Show', tipo_actividad %></td>
-        <td><%= link_to 'Edit', edit_tipo_actividad_path(tipo_actividad) %></td>
-        <td><%= link_to 'Destroy', tipo_actividad, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Ver', tipo_actividad %></td>
+        <td><%= link_to 'Editar', edit_tipo_actividad_path(tipo_actividad) %></td>
+        <td><%= link_to 'Borrar', tipo_actividad, method: :delete, data: { confirm: 'Seguro?' } %></td>
       </tr>
     <% end %>
   </tbody>

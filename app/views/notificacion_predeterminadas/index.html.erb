@@ -14,9 +14,9 @@
       <tr>
         <td><%= notificacion_predeterminada.proyecto %></td>
         <td><%= notificacion_predeterminada.tipo_notificacion %></td>
-        <td><%= link_to 'Show', notificacion_predeterminada %></td>
-        <td><%= link_to 'Edit', edit_notificacion_predeterminada_path(notificacion_predeterminada) %></td>
-        <td><%= link_to 'Destroy', notificacion_predeterminada, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Ver', notificacion_predeterminada %></td>
+        <td><%= link_to 'Editar', edit_notificacion_predeterminada_path(notificacion_predeterminada) %></td>
+        <td><%= link_to 'Borrar', notificacion_predeterminada, method: :delete, data: { confirm: 'Seguro?' } %></td>
       </tr>
     <% end %>
   </tbody>

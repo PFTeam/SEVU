@@ -22,9 +22,9 @@
         <td><%= presupuesto.proyecto %></td>
         <td><%= presupuesto.restriccion %></td>
         <td><%= presupuesto.usuario %></td>
-        <td><%= link_to 'Show', presupuesto %></td>
-        <td><%= link_to 'Edit', edit_presupuesto_path(presupuesto) %></td>
-        <td><%= link_to 'Destroy', presupuesto, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Ver', presupuesto %></td>
+        <td><%= link_to 'Editar', edit_presupuesto_path(presupuesto) %></td>
+        <td><%= link_to 'Borrar', presupuesto, method: :delete, data: { confirm: 'Seguro?' } %></td>
       </tr>
     <% end %>
   </tbody>

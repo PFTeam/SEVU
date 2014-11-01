@@ -12,9 +12,9 @@
     <% @comprobantes.each do |comprobant| %>
       <tr>
         <td><%= comprobant.numero %></td>
-        <td><%= link_to 'Show', comprobant %></td>
-        <td><%= link_to 'Edit', edit_comprobante_path(comprobant) %></td>
-        <td><%= link_to 'Destroy', comprobant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Ver', comprobant %></td>
+        <td><%= link_to 'Editar', edit_comprobante_path(comprobant) %></td>
+        <td><%= link_to 'Borrar', comprobant, method: :delete, data: { confirm: 'Seguro?' } %></td>
       </tr>
     <% end %>
   </tbody>
