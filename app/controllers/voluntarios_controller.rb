@@ -52,7 +52,7 @@ end
   end
 
 
-
+   end
   def buscar_por_legajo
    #empleado = Empleado.select("id, nombre, apellido").where(:legajo => params[:legajo]);
   # @usuario =Usuario.select("id, nombreUsuario, apellido_nombre").where(:legajo => params[:legajo]);
@@ -211,6 +211,5 @@ end
     end
 
 end
-
 
   
