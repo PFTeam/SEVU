@@ -50,7 +50,7 @@ class HorarioDisponiblesController < ApplicationController
     respond_to do |format|
       if @horario_disponible.save
         
-        format.html { redirect_to gestion_horarios_disponibles_path(@voluntario), notice: 'Horario disponible 'fue creado satisfactoriamente'.' }
+        format.html { redirect_to gestion_horarios_disponibles_path(@voluntario), notice: 'Horario disponible fue creado satisfactoriamente.' }
        # format.json { render :show, status: :created, location: @horario_disponibl }
       else
         format.html { render :new }
@@ -65,7 +65,7 @@ class HorarioDisponiblesController < ApplicationController
 		authorize! :update, HorarioDisponible
     respond_to do |format|
       if @horario_disponible.update(horario_disponible_params)
-        format.html { redirect_to @horario_disponible, notice: 'Horario disponible 'fue actualizado satisfactoriamente'.' }
+        format.html { redirect_to @horario_disponible, notice: 'Horario disponible fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @horario_disponible }
       else
         format.html { render :edit }
@@ -83,8 +83,8 @@ class HorarioDisponiblesController < ApplicationController
     @voluntario = Voluntario.find( @horario_disponible.voluntario_id)
     @horario_disponible.destroy
     respond_to do |format|
-    format.html { redirect_to gestion_horarios_disponibles_path(@voluntario), notice: 'Horario disponible 'fue creado satisfactoriamente'.' }
-     # format.html { redirect_to horario_disponibles_url, notice: 'Horario disponible 'fue borrado satisfactoriamente'.' }
+    format.html { redirect_to gestion_horarios_disponibles_path(@voluntario), notice: 'Horario disponible fue creado satisfactoriamente.' }
+     # format.html { redirect_to horario_disponibles_url, notice: 'Horario disponible fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end
   end

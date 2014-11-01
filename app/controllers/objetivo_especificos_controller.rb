@@ -40,7 +40,7 @@ class ObjetivoEspecificosController < ApplicationController
     respond_to do |format|
       if @objetivo_especifico.save
         format.html { redirect_to :controller => 'objetivo_especificos', :action => 'index', :objetivo_general_id => @objetivo_especifico.objetivo_general_id 
-		      flash[:notice] = 'Objetivo especifico 'fue creado satisfactoriamente'.' }
+		      flash[:notice] = 'Objetivo especifico fue creado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @objetivo_especifico }
       else
         format.html { render :new }
@@ -55,7 +55,7 @@ class ObjetivoEspecificosController < ApplicationController
 		authorize! :update, ObjetivoEspecifico
     respond_to do |format|
       if @objetivo_especifico.update(objetivo_especifico_params)
-        format.html { redirect_to @objetivo_especifico, notice: 'Objetivo especifico 'fue actualizado satisfactoriamente'.' }
+        format.html { redirect_to @objetivo_especifico, notice: 'Objetivo especifico fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @objetivo_especifico }
         format.js   { render :show, content_type: 'text/html' }
       else
@@ -73,7 +73,7 @@ class ObjetivoEspecificosController < ApplicationController
     @objetivo_especifico.destroy
     respond_to do |format|
       format.html { redirect_to objetivo_especificos_path(:objetivo_general_id => @objetivo_general) 
-		    flash[notice] = 'Objetivo especifico 'fue borrado satisfactoriamente'.' }
+		    flash[notice] = 'Objetivo especifico fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end
   end

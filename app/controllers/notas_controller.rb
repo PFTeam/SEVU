@@ -49,7 +49,7 @@ class NotasController < ApplicationController
     respond_to do |format|
       if @nota.save
         format.html { redirect_to gestionar_nota_P_path(@voluntario), notice: 'La Nota fue creada exitosamente.' }
-        #format.html { redirect_to @nota, notice: 'Nota 'fue creado satisfactoriamente'.' }
+        #format.html { redirect_to @nota, notice: 'Nota fue creado satisfactoriamente.' }
         #format.json { render :show, status: :created, location: @nota }
       else
         format.html { render :new }#new_voluntario_nota_path(@voluntario) }

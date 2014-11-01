@@ -69,7 +69,7 @@ class AsignacionRolesController < ApplicationController
 	    respond_to do |format|
 	      if @asignacion_rol_viejo.save
 		format.js   { redirect_to :controller => 'asignacion_roles', :action => 'index', :proyecto_id => @asignacion_rol.proyecto.id } 
-		format.html { redirect_to @asignacion_rol, notice: 'Asignacion rol 'fue actualizado satisfactoriamente'.' }
+		format.html { redirect_to @asignacion_rol, notice: 'Asignacion rol fue actualizado satisfactoriamente.' }
 		format.json { render :show, status: :ok, location: @asignacion_rol }
 	      else
 		format.html { render :edit }

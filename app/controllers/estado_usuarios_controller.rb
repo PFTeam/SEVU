@@ -36,7 +36,7 @@ class EstadoUsuariosController < ApplicationController
     puts params[:descripcion]
     respond_to do |format|
       if @estado_usuario.save
-        format.html { redirect_to @estado_usuario, notice: 'Estado usuario 'fue creado satisfactoriamente'.' }
+        format.html { redirect_to @estado_usuario, notice: 'Estado usuario fue creado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @estado_usuario }
       else
         format.html { render :new }
@@ -51,7 +51,7 @@ class EstadoUsuariosController < ApplicationController
 		authorize! :update, EstadoUsuario
     respond_to do |format|
       if @estado_usuario.update(estado_usuario_params)
-        format.html { redirect_to @estado_usuario, notice: 'Estado usuario 'fue actualizado satisfactoriamente'.' }
+        format.html { redirect_to @estado_usuario, notice: 'Estado usuario fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @estado_usuario }
       else
         format.html { render :edit }
@@ -66,7 +66,7 @@ class EstadoUsuariosController < ApplicationController
 		authorize! :destroy, EstadoUsuario
     @estado_usuario.destroy
     respond_to do |format|
-      format.html { redirect_to estado_usuarios_url, notice: 'Estado usuario 'fue borrado satisfactoriamente'.' }
+      format.html { redirect_to estado_usuarios_url, notice: 'Estado usuario fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end
   end

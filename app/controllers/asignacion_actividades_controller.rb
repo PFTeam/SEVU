@@ -40,7 +40,7 @@ class AsignacionActividadesController < ApplicationController
 	    respond_to do |format|
 		    if  @asignacion_actividad.save
 		      format.html { redirect_to :controller => 'asignacion_actividades', :action => 'index', :actividad_id => @asignacion_actividad.actividad.id
-			      flash[:notice] = 'Asignacion actividad 'fue creado satisfactoriamente'.' }
+			      flash[:notice] = 'Asignacion actividad fue creado satisfactoriamente.' }
 		format.json { render :show, status: :created, location: @asignacion_actividad }
 	      else
 		format.html { render :new }
@@ -62,7 +62,7 @@ class AsignacionActividadesController < ApplicationController
 		authorize! :update, AsignacionActividad
     respond_to do |format|
       if @asignacion_actividad.update(asignacion_actividad_params)
-        format.html { redirect_to @asignacion_actividad, notice: 'Asignacion actividad 'fue actualizado satisfactoriamente'.' }
+        format.html { redirect_to @asignacion_actividad, notice: 'Asignacion actividad fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @asignacion_actividad }
       else
         format.html { render :edit }
@@ -92,8 +92,8 @@ class AsignacionActividadesController < ApplicationController
     @asignacion_actividad.destroy
     respond_to do |format|
 	      format.html { redirect_to :controller => 'asignacion_actividades', :action => 'index', :actividad_id => @actividad_id
-		      flash[:notice] = 'Asignacion actividad 'fue borrado satisfactoriamente'.' }
-      format.html { redirect_to asignacion_actividades_url, notice: 'Asignacion actividad 'fue borrado satisfactoriamente'.' }
+		      flash[:notice] = 'Asignacion actividad fue borrado satisfactoriamente.' }
+      format.html { redirect_to asignacion_actividades_url, notice: 'Asignacion actividad fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end
   end

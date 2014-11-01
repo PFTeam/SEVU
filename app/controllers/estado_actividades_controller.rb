@@ -33,7 +33,7 @@ class EstadoActividadesController < ApplicationController
 
     respond_to do |format|
       if @estado_actividad.save
-        format.html { redirect_to @estado_actividad, notice: 'Estado actividad 'fue creado satisfactoriamente'.' }
+        format.html { redirect_to @estado_actividad, notice: 'Estado actividad fue creado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @estado_actividad }
       else
         format.html { render :new }
@@ -48,7 +48,7 @@ class EstadoActividadesController < ApplicationController
 		authorize! :update, EstadoActividad
     respond_to do |format|
       if @estado_actividad.update(estado_actividad_params)
-        format.html { redirect_to @estado_actividad, notice: 'Estado actividad 'fue actualizado satisfactoriamente'.' }
+        format.html { redirect_to @estado_actividad, notice: 'Estado actividad fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @estado_actividad }
       else
         format.html { render :edit }
@@ -63,7 +63,7 @@ class EstadoActividadesController < ApplicationController
 		authorize! :destroy, EstadoActividad
     @estado_actividad.destroy
     respond_to do |format|
-      format.html { redirect_to estado_actividades_url, notice: 'Estado actividad 'fue borrado satisfactoriamente'.' }
+      format.html { redirect_to estado_actividades_url, notice: 'Estado actividad fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end
   end

@@ -34,7 +34,7 @@ class TipoHabilidadesController < ApplicationController
     respond_to do |format|
       if @tipo_habilidad.save
         format.html { redirect_to gestionar_habilidades_path }
-        #format.html { redirect_to @tipo_habilidad, notice: 'Tipo habilidad 'fue creado satisfactoriamente'.' }
+        #format.html { redirect_to @tipo_habilidad, notice: 'Tipo habilidad fue creado satisfactoriamente.' }
         #format.json { render :show, status: :created, location: @tipo_habilidad }
       else
         format.html { render :new }
@@ -50,7 +50,7 @@ class TipoHabilidadesController < ApplicationController
     respond_to do |format|
       if @tipo_habilidad.update(tipo_habilidad_params)
         format.html { redirect_to gestionar_habilidades_path }
-        #format.html { redirect_to @tipo_habilidad, notice: 'Tipo habilidad 'fue actualizado satisfactoriamente'.' }
+        #format.html { redirect_to @tipo_habilidad, notice: 'Tipo habilidad fue actualizado satisfactoriamente.' }
         #format.json { render :show, status: :ok, location: @tipo_habilidad }
       else
         format.html { render :edit }
@@ -73,7 +73,7 @@ class TipoHabilidadesController < ApplicationController
 
     @tipo_habilidad.destroy
     respond_to do |format|
-      format.html { redirect_to gestionar_habilidades_path } #tipo_habilidades_url, notice: 'Tipo habilidad 'fue borrado satisfactoriamente'.' }
+      format.html { redirect_to gestionar_habilidades_path } #tipo_habilidades_url, notice: 'Tipo habilidad fue borrado satisfactoriamente.' }
       format.json { render json: @tipo_habilidad.errors, status: :unprocessable_entity }
       #format.json { head :no_content }
     end

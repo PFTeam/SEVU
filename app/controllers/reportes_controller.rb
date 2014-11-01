@@ -56,7 +56,7 @@ class ReportesController < ApplicationController
     respond_to do |format|
       if @reporte.save
 	      format.html { redirect_to :action => 'index', :actividad_id => @reporte.asignacion_actividad.actividad.id 
-		     flash[:notice] = 'Reporte 'fue creado satisfactoriamente'.' }
+		     flash[:notice] = 'Reporte fue creado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @reporte }
       else
         format.html { render :new }
@@ -71,7 +71,7 @@ class ReportesController < ApplicationController
 #		authorize! :update, Reporte
     respond_to do |format|
       if @reporte.update(reporte_params)
-        format.html { redirect_to @reporte, notice: 'Reporte 'fue actualizado satisfactoriamente'.' }
+        format.html { redirect_to @reporte, notice: 'Reporte fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @reporte }
       else
         format.html { render :edit }
@@ -86,7 +86,7 @@ class ReportesController < ApplicationController
 #		authorize! :destroy, Reporte
     @reporte.destroy
     respond_to do |format|
-      format.html { redirect_to reportes_url, notice: 'Reporte 'fue borrado satisfactoriamente'.' }
+      format.html { redirect_to reportes_url, notice: 'Reporte fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end
   end

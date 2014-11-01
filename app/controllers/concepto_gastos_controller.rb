@@ -33,7 +33,7 @@ class ConceptoGastosController < ApplicationController
 
     respond_to do |format|
       if @concepto_gasto.save
-        format.html { redirect_to gestionar_concepto_gastos_path }#  @concepto_gasto, notice: 'Concepto gasto 'fue creado satisfactoriamente'.' }
+        format.html { redirect_to gestionar_concepto_gastos_path }#  @concepto_gasto, notice: 'Concepto gasto fue creado satisfactoriamente.' }
         #format.json { render :show, status: :created, location: @concepto_gasto }
       else
         format.html { render :new }
@@ -48,7 +48,7 @@ class ConceptoGastosController < ApplicationController
 		authorize! :update, ConceptoGasto
     respond_to do |format|
       if @concepto_gasto.update(concepto_gasto_params)
-        format.html { redirect_to gestionar_concepto_gastos_path }# @concepto_gasto, notice: 'Concepto gasto 'fue actualizado satisfactoriamente'.' }
+        format.html { redirect_to gestionar_concepto_gastos_path }# @concepto_gasto, notice: 'Concepto gasto fue actualizado satisfactoriamente.' }
         #format.json { render :show, status: :ok, location: @concepto_gasto }
       else
         format.html { render :edit }
@@ -64,7 +64,7 @@ class ConceptoGastosController < ApplicationController
     #@concepto_gasto.destroy
     respond_to do |format|
       if @concepto_gasto.destroy
-      format.html { redirect_to gestionar_concepto_gastos_path }# concepto_gastos_url, notice: 'Concepto gasto 'fue borrado satisfactoriamente'.' }
+      format.html { redirect_to gestionar_concepto_gastos_path }# concepto_gastos_url, notice: 'Concepto gasto fue borrado satisfactoriamente.' }
       format.json { head :no_content }
       else
        format.html { redirect_to :back, alert: 'El concepto de gasto no puede ser eliminado porque es actualmente utilizado'} 

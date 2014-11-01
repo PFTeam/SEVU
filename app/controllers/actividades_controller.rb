@@ -44,7 +44,7 @@ class ActividadesController < ApplicationController
     respond_to do |format|
       if @actividad.save
 	      format.html { redirect_to @actividad,:objetivo_especifico_id => @actividad.objetivo_especifico_id 
-		     flash[:notice] = 'Actividad 'fue creado satisfactoriamente'.'  }
+		     flash[:notice] = 'Actividad fue creado satisfactoriamente.'  }
         format.json { render :show, status: :created, location: @actividad }
       else
         format.html { render :new, :objetivo_especifico_id => @actividad.objetivo_especifico_id }
@@ -59,7 +59,7 @@ class ActividadesController < ApplicationController
 		authorize! :update, Actividad
     respond_to do |format|
       if @actividad.update(actividad_params)
-        format.html { redirect_to @actividad, notice: 'Actividad 'fue actualizado satisfactoriamente'.' }
+        format.html { redirect_to @actividad, notice: 'Actividad fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @actividad }
       else
         format.html { render :edit }
@@ -74,7 +74,7 @@ class ActividadesController < ApplicationController
 		authorize! :destroy, Actividad
     @actividad.destroy
     respond_to do |format|
-      format.html { redirect_to actividades_url, notice: 'Actividad 'fue borrado satisfactoriamente'.' }
+      format.html { redirect_to actividades_url, notice: 'Actividad fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end
   end
