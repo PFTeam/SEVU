@@ -17,8 +17,8 @@
                     <% @asignacion_actividades.each do |asignacion| %>
                     <tr>
                         <td><%= asignacion.usuario %></td>
-                        <td><%= asignacion.created_at.to_formatted_s(:rfc822)  %></td>
-                        <td><%= asignacion.vigente %></td>
+                        <td><%= asignacion.created_at.to_formatted_s(:long_ordinal)%></td>
+                        <td><%= asignacion.es_vigente %></td>
                          <td><%= link_to 'Dar Baja', asignacion_actividad_dar_baja_path(:id => asignacion.id), data: {confirm: 'Seguro?'} %> | 
                         <%= link_to 'Borrar', asignacion, method: :delete, data: { confirm: 'Seguro?' } %> </td>
                         <td>

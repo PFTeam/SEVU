@@ -6,21 +6,23 @@ class ReportesController < ApplicationController
   # GET /reportes.json
   def index
 #		authorize! :index, Reporte
-	  @asignacion_actividades = AsignacionActividad.find_by(actividad_id: params[:actividad_id])
-	  @actividad = @asignacion_actividades.actividad 
-    	  @proyecto = @actividad.proyecto
-	  @reportes_mios = []
-	  @asignacion_actividades.to_a.each do |asignacion|
-		if asignacion.usuario == current_usuario && !asignacion.reportes.nil?
-			    @reportes_mios = @reportes_mios + asignacion.reportes
-	     	end
-	  end
-	  @reportes_todos = @actividad.reportes
+	  @asignacion_actividades = AsignacionActividad.find_by(actividad_id: params[:actividad_id]).to_a
+	  @actividad = Actividad.find(params[:actividad_id])
+	  if @asignacion_actividades.size > 0
+		  @proyecto = @actividad.proyecto
+		  @reportes_mios = []
+		  @asignacion_actividades.to_a.each do |asignacion|
+			if asignacion.usuario == current_usuario && !asignacion.reportes.nil?
+				    @reportes_mios = @reportes_mios + asignacion.reportes
+			end
+		  end
+		  @reportes_todos = @actividad.reportes
 
-	  @reportes_todos = [] if @reportes_todos.nil?
-	  @reportes_mios = [] if @reportes_mios.nil?
-	  @reportes_todos = @reportes_todos.uniq
-	  @reportes_mios = @reportes_mios.uniq
+		  @reportes_todos = [] if @reportes_todos.nil?
+		  @reportes_mios = [] if @reportes_mios.nil?
+		  @reportes_todos = @reportes_todos.uniq
+		  @reportes_mios = @reportes_mios.uniq
+	  end
   end
 
   # GET /reportes/1
