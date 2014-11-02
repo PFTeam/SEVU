@@ -86,7 +86,8 @@
               </div> 
               <% end %>
               <div align="center">  
-                <%= link_to "Re-Evaluar", evaluar_presupuesto_path(presupuesto), class: "btn btn-primary btn-lg" %> 
+                <%= link_to("Re-Evaluar", presupuesto_path(presupuesto, {evaluado: false }), class: "btn btn-primary btn-lg", title: "Re-evaluar el presupuesto permitirá al Director modificarlo", data: { method: :put })%>
+                <%#= link_to "Re-Evaluar", evaluar_presupuesto_path(presupuesto), class: "btn btn-primary btn-lg" %> 
               </div>
             </div>
           </div>

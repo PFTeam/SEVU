@@ -42,7 +42,15 @@
           </li>   
   
     <% end %>
-
-
+              <% if can? :evaluar_presupuestos_pendientes, Presupuesto then %>
+                  <li>
+                      <%= link_to 'Evaluar Presupuestos', evaluar_presupuestos_pendientes_path %>
+                  </li>
+              <% end %>
+              <% if can? :presupuestos_evaluados, Presupuesto then %>
+                  <li>
+                      <%= link_to 'Presupuestos evaluados', presupuestos_evaluados_path %>
+                  </li>
+              <% end %>
           </ul>    
 
