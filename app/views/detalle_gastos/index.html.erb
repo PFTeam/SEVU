@@ -24,9 +24,9 @@
         <td><%= detalle_gasto.informe_gastos %></td>
         <td><%= detalle_gasto.voluntario %></td>
         <td><%= detalle_gasto.comprobante %></td>
-        <td><%= link_to 'Show', detalle_gasto %></td>
-        <td><%= link_to 'Edit', edit_detalle_gasto_path(detalle_gasto) %></td>
-        <td><%= link_to 'Destroy', detalle_gasto, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Ver', detalle_gasto %></td>
+        <td><%= link_to 'Editar', edit_detalle_gasto_path(detalle_gasto) %></td>
+        <td><%= link_to 'Borrar', detalle_gasto, method: :delete, data: { confirm: 'Seguro?' } %></td>
       </tr>
     <% end %>
   </tbody>

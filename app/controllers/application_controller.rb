@@ -28,7 +28,6 @@ class ApplicationController < ActionController::Base
 	before_action :configure_permitted_parameters, if: :devise_controller?
 	before_action :cargar_notificaciones
 #---------------------------------------------------
-
   protected
   def puede_configurar? #pregunta si puede hacer algun tipo de configuraciones del sistema o del proyecto
     if can? :manage, Rol then

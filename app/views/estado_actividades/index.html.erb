@@ -12,9 +12,9 @@
     <% @estado_actividades.each do |estado_actividad| %>
       <tr>
         <td><%= estado_actividad.nombre %></td>
-        <td><%= link_to 'Show', estado_actividad %></td>
-        <td><%= link_to 'Edit', edit_estado_actividad_path(estado_actividad) %></td>
-        <td><%= link_to 'Destroy', estado_actividad, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Ver', estado_actividad %></td>
+        <td><%= link_to 'Editar', edit_estado_actividad_path(estado_actividad) %></td>
+        <td><%= link_to 'Borrar', estado_actividad, method: :delete, data: { confirm: 'Seguro?' } %></td>
       </tr>
     <% end %>
   </tbody>

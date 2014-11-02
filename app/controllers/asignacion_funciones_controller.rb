@@ -33,7 +33,7 @@ class AsignacionFuncionesController < ApplicationController
 
     respond_to do |format|
       if @asignacion_funcion.save
-        format.html { redirect_to @asignacion_funcion, notice: 'Asignacion funcion was successfully created.' }
+        format.html { redirect_to @asignacion_funcion, notice: 'Asignacion funcion fue creado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @asignacion_funcion }
       else
         format.html { render :new }
@@ -48,7 +48,7 @@ class AsignacionFuncionesController < ApplicationController
 		authorize! :update, AsignacionFuncion
     respond_to do |format|
       if @asignacion_funcion.update(asignacion_funcion_params)
-        format.html { redirect_to @asignacion_funcion, notice: 'Asignacion funcion was successfully updated.' }
+        format.html { redirect_to @asignacion_funcion, notice: 'Asignacion funcion fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @asignacion_funcion }
       else
         format.html { render :edit }
@@ -63,7 +63,7 @@ class AsignacionFuncionesController < ApplicationController
 		authorize! :destroy, AsignacionFuncion
     @asignacion_funcion.destroy
     respond_to do |format|
-      format.html { redirect_to asignacion_funciones_url, notice: 'Asignacion funcion was successfully destroyed.' }
+      format.html { redirect_to asignacion_funciones_url, notice: 'Asignacion funcion fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end
   end

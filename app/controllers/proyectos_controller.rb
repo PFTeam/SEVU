@@ -47,9 +47,15 @@ class ProyectosController < ApplicationController
   # POST /proyectos.json
   def create
     authorize! :create, Proyecto
-    
+   
+
+
+
     #Se hacen un new con los parámetros recibidos
     @proyecto = Proyecto.new(proyecto_params)
+    
+
+
 
     #Se crea un HistorialEstadoProyecto con el Estado 'Creado'.
     @proyecto.historial_estado_proyectos.new(estado_proyecto_id: EstadoProyecto.find_by(nombre: 'Creado').id, proyecto_id: @proyecto.id)
@@ -57,7 +63,12 @@ class ProyectosController < ApplicationController
     #Se renderiza según el formato 'html' o 'js' las respectivas vistas según los casos de éxito y fracaso.
     respond_to do |format|
       if @proyecto.save
-        format.html { redirect_to @proyecto, notice: 'Proyecto was successfully created.' }
+            sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+            Transaccion.create!(
+		    descripcion: 'Creación del Proyecto:' + @proyecto.nombre ,
+		    sesion_id: sesion.id ,
+		    proyecto_id: @proyecto.id)
+        format.html { redirect_to @proyecto, notice: 'Proyecto fue creado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @proyecto }
       else
         format.html { render :new }
@@ -74,7 +85,7 @@ class ProyectosController < ApplicationController
     #Se renderiza según el formato 'html' o 'js' las respectivas vistas según los casos de éxito y fracaso.
     respond_to do |format|
       if @proyecto.update(proyecto_params)
-        format.html { redirect_to @proyecto, notice: 'Proyecto was successfully updated.' }
+        format.html { redirect_to @proyecto, notice: 'Proyecto fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @proyecto }
         format.js   { render partial: 'proyecto_show', content_type: 'text/html' }
       else
@@ -94,7 +105,7 @@ class ProyectosController < ApplicationController
 
     #Se renderiza según el formato 'html' o 'js' las respectivas vistas según los casos de éxito y fracaso.
     respond_to do |format|
-      format.html { redirect_to proyectos_url, notice: 'Proyecto was successfully destroyed.' }
+      format.html { redirect_to proyectos_url, notice: 'Proyecto fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end
   end
@@ -110,10 +121,7 @@ class ProyectosController < ApplicationController
 	  authorize! :agregar_necesidad, Proyecto
 
 	  #Se setea el proyecto actual con el parametro :id que recibe
-	  set_proyecto
-
-	  #Se renderiza el modal para cargar o modificar la necesidad asociada
-	  render partial: 'agregar_necesidad', content_type: 'text/html' 
+	  set_proyecto 
   end
 
   private
@@ -124,6 +132,6 @@ class ProyectosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def proyecto_params
-      params.require(:proyecto).permit(:nombre, :breveDescripcion, :fechaInicio, :fechaFin, :antecedentes, :justificacionProyecto, :cantidadBeneficiariosDirectos, :cantidadBeneficiariosIndirectos, :justificacionImpacto, :localizacionGeografica, :tipo_proyecto_id, :necesidad_id, historial_estado_proyectos_attributes:[:id, :estado_proyecto_id], asignacion_roles_attributes:[:id, :usuario_id, :rol_id], organizacion_externa_attributes:[:id, :denominacion, :sigla, :cuit, :fax, :telefono, :direccion, :cargoResponsable, :numeroContactoResponsable, :nombreResponsable])
+      params.require(:proyecto).permit(:id, :nombre, :breveDescripcion, :fechaInicio, :fechaFin, :antecedentes, :justificacionProyecto, :cantidadBeneficiariosDirectos, :cantidadBeneficiariosIndirectos, :justificacionImpacto, :localizacionGeografica, :tipo_proyecto_id, :necesidad_id, historial_estado_proyectos_attributes:[:id, :estado_proyecto_id], asignacion_roles_attributes:[:id, :usuario_id, :rol_id], organizacion_externa_attributes:[:id, :denominacion, :sigla, :cuit, :fax, :telefono, :direccion, :cargoResponsable, :numeroContactoResponsable, :nombreResponsable])
     end
 end

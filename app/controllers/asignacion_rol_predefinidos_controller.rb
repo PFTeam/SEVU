@@ -33,7 +33,7 @@ class AsignacionRolPredefinidosController < ApplicationController
 
     respond_to do |format|
       if @asignacion_rol_predefinido.save
-        format.html { redirect_to @asignacion_rol_predefinido, notice: 'Asignacion rol predefinido was successfully created.' }
+        format.html { redirect_to @asignacion_rol_predefinido, notice: 'Asignacion rol predefinido fue creado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @asignacion_rol_predefinido }
       else
         format.html { render :new }
@@ -48,7 +48,7 @@ class AsignacionRolPredefinidosController < ApplicationController
 		authorize! :update, AsignacionRolPredefinido
     respond_to do |format|
       if @asignacion_rol_predefinido.update(asignacion_rol_predefinido_params)
-        format.html { redirect_to @asignacion_rol_predefinido, notice: 'Asignacion rol predefinido was successfully updated.' }
+        format.html { redirect_to @asignacion_rol_predefinido, notice: 'Asignacion rol predefinido fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @asignacion_rol_predefinido }
       else
         format.html { render :edit }
@@ -63,7 +63,7 @@ class AsignacionRolPredefinidosController < ApplicationController
 		authorize! :destroy, AsignacionRolPredefinido
     @asignacion_rol_predefinido.destroy
     respond_to do |format|
-      format.html { redirect_to asignacion_rol_predefinidos_url, notice: 'Asignacion rol predefinido was successfully destroyed.' }
+      format.html { redirect_to asignacion_rol_predefinidos_url, notice: 'Asignacion rol predefinido fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end
   end

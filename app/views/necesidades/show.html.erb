@@ -1,5 +1,12 @@
 <p id="notice"><%= notice %></p>
 
+
+<p>
+  <strong>Título:</strong>
+  <%= @necesidad.titulo %>
+</p>
+
+
 <p>
   <strong>Descripcion:</strong>
   <%= @necesidad.descripcion %>
@@ -17,6 +24,6 @@
 </p>
 
 <% if @necesidad.created_at > Time.now - 160.hours %> 
-      <%= link_to 'Edit', edit_necesidad_path(@necesidad) %> | 
+      <%= link_to 'Editar', edit_necesidad_path(@necesidad) %> | 
 <% end %>
-<%= link_to 'Back', necesidades_path %>
+<%= link_to 'Atrás', necesidades_path %>

@@ -33,7 +33,7 @@ class TransaccionesController < ApplicationController
 
     respond_to do |format|
       if @transaccion.save
-        format.html { redirect_to @transaccion, notice: 'Transaccion was successfully created.' }
+        format.html { redirect_to @transaccion, notice: 'Transaccion fue creado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @transaccion }
       else
         format.html { render :new }
@@ -48,7 +48,7 @@ class TransaccionesController < ApplicationController
 		authorize! :update, Transaccion
     respond_to do |format|
       if @transaccion.update(transaccion_params)
-        format.html { redirect_to @transaccion, notice: 'Transaccion was successfully updated.' }
+        format.html { redirect_to @transaccion, notice: 'Transaccion fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @transaccion }
       else
         format.html { render :edit }
@@ -63,7 +63,7 @@ class TransaccionesController < ApplicationController
 		authorize! :destroy, Transaccion
     @transaccion.destroy
     respond_to do |format|
-      format.html { redirect_to transacciones_url, notice: 'Transaccion was successfully destroyed.' }
+      format.html { redirect_to transacciones_url, notice: 'Transaccion fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end
   end

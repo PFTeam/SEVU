@@ -14,9 +14,9 @@
       <tr>
         <td><%= tipo_proyecto.nombre %></td>
         <td><%= tipo_proyecto.descripcion %></td>
-        <td><%= link_to 'Show', tipo_proyecto %></td>
-        <td><%= link_to 'Edit', edit_tipo_proyecto_path(tipo_proyecto) %></td>
-        <td><%= link_to 'Destroy', tipo_proyecto, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Ver', tipo_proyecto %></td>
+        <td><%= link_to 'Editar', edit_tipo_proyecto_path(tipo_proyecto) %></td>
+        <td><%= link_to 'Borrar', tipo_proyecto, method: :delete, data: { confirm: 'Seguro?' } %></td>
       </tr>
     <% end %>
   </tbody>

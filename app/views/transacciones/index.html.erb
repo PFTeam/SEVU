@@ -20,9 +20,9 @@
         <td><%= transaccion.proyecto %></td>
         <td><%= transaccion.tipo_transaccion %></td>
         <td><%= transaccion.sesion %></td>
-        <td><%= link_to 'Show', transaccion %></td>
-        <td><%= link_to 'Edit', edit_transaccion_path(transaccion) %></td>
-        <td><%= link_to 'Destroy', transaccion, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Ver', transaccion %></td>
+        <td><%= link_to 'Editar', edit_transaccion_path(transaccion) %></td>
+        <td><%= link_to 'Borrar', transaccion, method: :delete, data: { confirm: 'Seguro?' } %></td>
       </tr>
     <% end %>
   </tbody>

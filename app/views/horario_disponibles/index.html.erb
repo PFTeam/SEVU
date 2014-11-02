@@ -19,9 +19,9 @@
         <td><%= horario_disponibl.horaDesde %></td>
         <td><%= horario_disponibl.horaHasta %></td>
         <td><%= horario_disponibl.voluntario %></td>
-        <td><%= link_to 'Show', horario_disponibl %></td>
-        <td><%= link_to 'Edit', edit_horario_disponibl_path(horario_disponibl) %></td>
-        <td><%= link_to 'Destroy', horario_disponibl, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Ver', horario_disponibl %></td>
+        <td><%= link_to 'Editar', edit_horario_disponibl_path(horario_disponibl) %></td>
+        <td><%= link_to 'Borrar', horario_disponibl, method: :delete, data: { confirm: 'Seguro?' } %></td>
       </tr>
     <% end %>
   </tbody>

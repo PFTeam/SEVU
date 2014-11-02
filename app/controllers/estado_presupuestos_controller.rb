@@ -33,7 +33,7 @@ class EstadoPresupuestosController < ApplicationController
 
     respond_to do |format|
       if @estado_presupuesto.save
-        format.html { redirect_to gestionar_estados_presupuestos_path}#@estado_presupuesto, notice: 'Estado presupuesto was successfully created.' }
+        format.html { redirect_to gestionar_estados_presupuestos_path}#@estado_presupuesto, notice: 'Estado presupuesto fue creado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @estado_presupuesto }
       else
         format.html { render :new }
@@ -48,7 +48,7 @@ class EstadoPresupuestosController < ApplicationController
 		authorize! :update, EstadoPresupuesto
     respond_to do |format|
       if @estado_presupuesto.update(estado_presupuesto_params)
-        format.html { redirect_to gestionar_estados_presupuestos_path}#@estado_presupuesto, notice: 'Estado presupuesto was successfully updated.' }
+        format.html { redirect_to gestionar_estados_presupuestos_path}#@estado_presupuesto, notice: 'Estado presupuesto fue actualizado satisfactoriamente.' }
         #format.json { render :show, status: :ok, location: @estado_presupuesto }
       else
         format.html { render :edit }
@@ -63,12 +63,12 @@ class EstadoPresupuestosController < ApplicationController
 		authorize! :destroy, EstadoPresupuesto
     #@estado_presupuesto.destroy
     #respond_to do |format|
-    #  format.html { redirect_to estado_presupuestos_url, notice: 'Estado presupuesto was successfully destroyed.' }
+    #  format.html { redirect_to estado_presupuestos_url, notice: 'Estado presupuesto fue borrado satisfactoriamente.' }
     #  format.json { head :no_content }
     #end
     respond_to do |format|
       if @estado_presupuesto.destroy
-      format.html { redirect_to gestionar_estados_presupuestos_path }# concepto_gastos_url, notice: 'Concepto gasto was successfully destroyed.' }
+      format.html { redirect_to gestionar_estados_presupuestos_path }# concepto_gastos_url, notice: 'Concepto gasto fue borrado satisfactoriamente.' }
       format.json { head :no_content }
       else
        format.html { redirect_to :back, alert: 'El estado no puede ser eliminado porque es actualmente utilizado'} 

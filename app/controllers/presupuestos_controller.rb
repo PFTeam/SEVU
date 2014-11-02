@@ -96,7 +96,7 @@ class PresupuestosController < ApplicationController
           descripcion: "Destruccion del presupuesto del proyecto "+@presupuesto.proyecto.nombre,
           sesion_id: sesion.id, 
           proyecto_id: @presupuesto.proyecto.id)
-      format.html { redirect_to presupuestos_url, notice: 'Presupuesto was successfully destroyed.' }
+      format.html { redirect_to presupuestos_url, notice: 'Presupuesto fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end
   end

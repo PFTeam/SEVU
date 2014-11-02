@@ -1,3 +1,7 @@
+
+<p id="notice"><%= notice %></p>
+
+
 <h1>Listing historial_estado_actividades</h1>
 
 <table class="table table-hover table-striped tablesorter">
@@ -14,7 +18,7 @@
     <% @actividad.historial_estado_actividades.each_with_index do |historial_estado_actividad, index| %>
       <tr>
         <td><%= historial_estado_actividad.estado_actividad %></td>
-        <td><%= historial_estado_actividad.updated_at %></td>
+        <td><%= historial_estado_actividad.created_at.to_formatted_s(:long_ordinal) %></td>
 	<td><% if index+1 == @actividad.historial_estado_actividades.size %> Sí <% else %> No <% end %></td>
 	<% if index+1 == @actividad.historial_estado_actividades.size %>
 		<%= link_to 'Modificar Ultimo Estado', edit_historial_estado_actividad_path(historial_estado_actividad) %> |
@@ -25,5 +29,5 @@
 </table>
 
 <br>
-<%= link_to 'Back', @actividad %>
+<%= link_to 'Atrás', @actividad %>
 

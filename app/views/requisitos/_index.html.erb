@@ -1,0 +1,23 @@
+<h1>Lista de Requisitos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Habilidad</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @requisitos.each do |requisito| %>
+      <tr>
+        <td><%= requisito.habilidad %></td>
+	<td><%= link_to 'Ver', requisito, :actividad_id => requisito.actividad_id %> | 
+        <%= link_to 'Borrar', requisito, method: :delete, data: { confirm: 'Seguro?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+

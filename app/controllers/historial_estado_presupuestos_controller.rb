@@ -33,7 +33,7 @@ class HistorialEstadoPresupuestosController < ApplicationController
 
     respond_to do |format|
       if @historial_estado_presupuesto.save
-        format.html { redirect_to @historial_estado_presupuesto, notice: 'Historial estado presupuesto was successfully created.' }
+        format.html { redirect_to @historial_estado_presupuesto, notice: 'Historial estado presupuesto fue creado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @historial_estado_presupuesto }
       else
         format.html { render :new }
@@ -48,7 +48,7 @@ class HistorialEstadoPresupuestosController < ApplicationController
 		authorize! :update, HistorialEstadoPresupuesto
     respond_to do |format|
       if @historial_estado_presupuesto.update(historial_estado_presupuesto_params)
-        format.html { redirect_to @historial_estado_presupuesto, notice: 'Historial estado presupuesto was successfully updated.' }
+        format.html { redirect_to @historial_estado_presupuesto, notice: 'Historial estado presupuesto fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @historial_estado_presupuesto }
       else
         format.html { render :edit }
@@ -63,7 +63,7 @@ class HistorialEstadoPresupuestosController < ApplicationController
 		authorize! :destroy, HistorialEstadoPresupuesto
     @historial_estado_presupuesto.destroy
     respond_to do |format|
-      format.html { redirect_to historial_estado_presupuestos_url, notice: 'Historial estado presupuesto was successfully destroyed.' }
+      format.html { redirect_to historial_estado_presupuestos_url, notice: 'Historial estado presupuesto fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end
   end

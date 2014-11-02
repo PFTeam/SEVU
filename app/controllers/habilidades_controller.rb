@@ -6,7 +6,8 @@ class HabilidadesController < ApplicationController
   # GET /habilidades.json
   def index
 		authorize! :index, Habilidad
-    @habilidades = Habilidad.all
+    #@habilidades = Habilidad.all
+    @habilidades = Habilidad.page(params[:page]).search query: params[:q]
   end
 
   # GET /habilidades/1
@@ -35,7 +36,7 @@ class HabilidadesController < ApplicationController
     respond_to do |format|
       if @habilidad.save
         format.html { redirect_to gestionar_habilidades_path }
-        #format.html { redirect_to @habilidad, notice: 'Habilidad was successfully created.' }
+        #format.html { redirect_to @habilidad, notice: 'Habilidad fue creado satisfactoriamente.' }
         #format.json { render :show, status: :created, location: @habilidad }
       else
         format.html { render :new }
@@ -51,7 +52,7 @@ class HabilidadesController < ApplicationController
     respond_to do |format|
       if @habilidad.update(habilidad_params)
         format.html { redirect_to gestionar_habilidades_path }
-        #format.html { redirect_to @habilidad, notice: 'Habilidad was successfully updated.' }
+        #format.html { redirect_to @habilidad, notice: 'Habilidad fue actualizado satisfactoriamente.' }
         #format.json { render :show, status: :ok, location: @habilidad }
       else
         format.html { render :edit }
@@ -69,7 +70,7 @@ class HabilidadesController < ApplicationController
       if @habilidad.destroy
         format.html { redirect_to gestionar_habilidades_path }
       #format.json { render json: @habilidad.errors, status: :unprocessable_entity }      
-      #format.html { redirect_to habilidades_url, notice: 'Habilidad was successfully destroyed.' }
+      #format.html { redirect_to habilidades_url, notice: 'Habilidad fue borrado satisfactoriamente.' }
         format.json { head :no_content }
       else
 #        format.html { redirect_to gestionar_habilidades_path, alert: 'La habilidad no puede ser eliminada porque existen usuarios que la utilizan'}

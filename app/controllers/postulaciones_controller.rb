@@ -52,7 +52,7 @@ class PostulacionesController < ApplicationController
 		authorize! :update, Postulacion
     respond_to do |format|
       if @postulacion.update(postulacion_params)
-        format.html { redirect_to @postulacion, notice: 'Postulacion was successfully updated.' }
+        format.html { redirect_to @postulacion, notice: 'Postulacion fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @postulacion }
       else
         format.html { render :edit }
@@ -67,7 +67,7 @@ class PostulacionesController < ApplicationController
 		authorize! :destroy, Postulacion
     @postulacion.destroy
     respond_to do |format|
-      format.html { redirect_to postulaciones_url, notice: 'Postulacion was successfully destroyed.' }
+      format.html { redirect_to postulaciones_url, notice: 'Postulacion fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end
   end

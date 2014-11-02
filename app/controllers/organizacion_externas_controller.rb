@@ -34,7 +34,7 @@ class OrganizacionExternasController < ApplicationController
     respond_to do |format|
       if @organizacion_externa.save
         format.js {render partial: 'proyectos/crear_organizacion_externa', content_type: 'text/html'}
-        format.html { redirect_to @organizacion_externa, notice: 'Organizacion externa was successfully created.' }
+        format.html { redirect_to @organizacion_externa, notice: 'Organizacion externa fue creado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @organizacion_externa }
 
       else
@@ -50,7 +50,7 @@ class OrganizacionExternasController < ApplicationController
 		authorize! :update, OrganizacionExterna
     respond_to do |format|
       if @organizacion_externa.update(organizacion_externa_params)
-        format.html { redirect_to @organizacion_externa, notice: 'Organizacion externa was successfully updated.' }
+        format.html { redirect_to @organizacion_externa, notice: 'Organizacion externa fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @organizacion_externa }
       else
         format.html { render :edit }
@@ -65,7 +65,7 @@ class OrganizacionExternasController < ApplicationController
 		authorize! :destroy, OrganizacionExterna
     @organizacion_externa.destroy
     respond_to do |format|
-      format.html { redirect_to organizacion_externas_url, notice: 'Organizacion externa was successfully destroyed.' }
+      format.html { redirect_to organizacion_externas_url, notice: 'Organizacion externa fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end
   end
