@@ -36,6 +36,11 @@ class HistorialEstadoProyectosController < ApplicationController
 
     respond_to do |format|
       if @historial_estado_proyecto.save
+            sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+            Transaccion.create!(
+		    descripcion: 'Creación del Historial Estado Proyecto id :' + @historial_estado_proyecto.id.to_s ,
+		    sesion_id: sesion.id ,
+		    proyecto_id: @historial_estado_proyecto.proyecto.id)
         format.html { redirect_to @historial_estado_proyecto
 		     flash[:notice] = 'Historial estado proyecto fue creado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @historial_estado_proyecto }
@@ -56,6 +61,11 @@ class HistorialEstadoProyectosController < ApplicationController
     respond_to do |format|
       #if @historial_estado_proyecto.update(historial_estado_proyecto_params)
 	    if @historial_estado_proyecto_nuevo.save
+            sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+            Transaccion.create!(
+		    descripcion: 'Creación del Historial Estado Proyecto id :' + @historial_estado_proyecto_nuevo.id.to_s ,
+		    sesion_id: sesion.id ,
+		    proyecto_id: @historial_estado_proyecto_nuevo.proyecto.id)
 		    format.html { redirect_to action: 'index', proyecto_id: @historial_estado_proyecto.proyecto.id
 		    flash[:notice] = 'Historial estado proyecto fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @historial_estado_proyecto }

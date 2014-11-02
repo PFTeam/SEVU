@@ -84,6 +84,11 @@ class ProyectosController < ApplicationController
 
     #Se renderiza según el formato 'html' o 'js' las respectivas vistas según los casos de éxito y fracaso.
     respond_to do |format|
+            sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+            Transaccion.create!(
+		    descripcion: 'Edición del Proyecto:' + @proyecto.nombre ,
+		    sesion_id: sesion.id ,
+		    proyecto_id: @proyecto.id)
       if @proyecto.update(proyecto_params)
         format.html { redirect_to @proyecto, notice: 'Proyecto fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @proyecto }
@@ -101,6 +106,11 @@ class ProyectosController < ApplicationController
   # DELETE /proyectos/1.json
   def destroy
     authorize! :destroy, Proyecto
+            sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+            Transaccion.create!(
+		    descripcion: 'Borrado del Proyecto:' + @proyecto.nombre ,
+		    sesion_id: sesion.id ,
+		    proyecto_id: @proyecto.id)
     @proyecto.destroy
 
     #Se renderiza según el formato 'html' o 'js' las respectivas vistas según los casos de éxito y fracaso.
