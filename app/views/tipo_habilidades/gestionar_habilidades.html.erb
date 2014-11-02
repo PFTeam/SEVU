@@ -36,13 +36,17 @@
               <h3 class="panel-title"> 
                 <%= tipo.nombre %>
                 <small>
-                  <td><%= link_to '(Modi fi car)', edit_tipo_habilidad_path(tipo), style: 'color:#FFFFFF;' %></td>
-                  <%# if tipo.experiencias.nil? then %>
-                    <td><%#= link_to '(Eliminar)', tipo_habilidad_path... %></td>
-                  <%# end %>
-                </small>
+                  
+                  <% if tipo.habilidades.empty? then %>
+                    <td title="Eliminar"><%= link_to content_tag(:i, fa_icon("trash 2x pull-right", text: "")), tipo, method: :delete, data: { confirm: 'Esta seguro?' }, style: 'padding-left: 5px;color:#FFFFFF;float:right', title: 'Eliminar'  %></td>
+                    <% else %>
 
-                <! TODO: Eliminar los tipos de habilidades, y a su vez las Habilidades >
+                      <i class="fa fa-2x fa-lock fa-inverse pull-right" title="Debe eliminar las habilidades primero"></i>
+
+                    <!--<i class="fa fa-trash fa-2x fa-inverse pull-right"></i>-->
+                  <% end %>
+                  <td><%= link_to content_tag(:i, fa_icon("pencil-square-o 2x", text: "")), edit_tipo_habilidad_path(tipo), style: 'padding-left: 5px;color:#FFFFFF;float:right', title: 'Editar' %></td>
+                </small>
               </h3>
             </div>
             <div class="panel-body">
@@ -56,30 +60,31 @@
                   <div class="col-lg-6">
                     <div class="panel panel-default">
                       <div class="panel-heading">
-                        <h4 class="panel-title"> 
-                           <tr>
-       					 <td><%= experiencia.tieneExperiencia %></td>
-        				<td><%= experiencia.cantidadExperiencia %></td>
-        				<td><%= experiencia.habilidad %></td>
-        				<td><%= experiencia.voluntario_id %></td>
-        				<td><%= link_to 'Show', experiencia %></td>
-        				<td><%= link_to 'Edit', edit_experiencia_path(experiencia) %></td>
-        				<td><%= link_to 'Destroy', experiencia, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                        <h4 class="panel-title"> <%= habilidad.nombre %>
+<!--                            <tr>
+       					 <td><%#= experiencia.tieneExperiencia %></td>
+        				<td><%#= experiencia.cantidadExperiencia %></td>
+        				<td><%#= experiencia.habilidad %></td>
+        				<td><%#= experiencia.voluntario_id %></td>
+        				<td><%#= link_to 'Show', experiencia %></td>
+        				<td><%#= link_to 'Edit', edit_experiencia_path(experiencia) %></td>
+        				<td><%#= link_to 'Destroy', experiencia, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       						</tr>
 
 
-
+ -->
 
 
 
                           <small>
-                            <td><%= link_to '(Modificar)', edit_habilidad_path(habilidad) %></td>
+
                             <% if habilidad.experiencias.count < 1 then %>
-                            <td><%= link_to '(Eliminar)', [tipo, habilidad], method: :delete, data: { confirm: 'Esta seguro?' } %></td>
+                            <td><%= link_to content_tag(:i, fa_icon("trash", text: "")), [tipo, habilidad], method: :delete, data: { confirm: 'Esta seguro?' }, style: 'padding-left: 5px;float:right', title: 'Eliminar'  %></td>
                           <% else %>
-                            <td><%= link_to '(Eliminar)', [tipo, habilidad], method: :delete, data: { disable: true, confirm: 'Esta seguro?' } %></td>
+                            <td><%= link_to content_tag(:i, fa_icon("trash", text: "")), [tipo, habilidad], method: :delete, data: { disable: true, confirm: 'Esta seguro?' }, style: 'padding-left: 5px;float:right', title: 'Eliminar'  %></td>
 
                           <% end %>
+                          <td><%= link_to content_tag(:i, fa_icon("pencil-square-o", text: "")), edit_habilidad_path(habilidad), style: 'padding-left: 5px;float:right', title: 'Editar'  %></td>
                           </small>
 
                         </h4> 

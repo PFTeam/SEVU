@@ -1,33 +1,102 @@
-        <ul class="nav navbar-nav side-nav">
-            <li>
-              <%= link_to 'Lista de Roles', roles_path %>
-            </li>
-						<li>
+<ul class="nav navbar-nav side-nav">
+
+    <li>
+          <a class="collapsed" data-target="#config" data-toggle="collapse" href="javascript:;" aria-expanded="false">
+            Configuraciones <i class="fa fa-fw fa-caret-down"></i>
+          </a>
+
+            <ul id="config" class="collapse">
+                 <% if can? :manage, ConceptoGasto then %>
+                      <li>
+                           <%= link_to 'Gestionar Conceptos de Gastos', gestionar_concepto_gastos_path %>
+                      </li>
+                <% end %>
+                <% if can? :manage, Habilidad then %>
+                      <li>
+                           <%= link_to 'Gestionar Habilidades', gestionar_habilidades_path %>
+                      </li>
+                <% end %>
+                <% if can? :manage, Restriccion then %>
+                      <li>
+                           <%= link_to 'Gestionar Restricciones', gestionar_restricciones_path %>
+                      </li>
+                <% end %>
+                <% if can? :manage, NotificacionPredeterminada%>
+                     <li>
+                          <%= link_to 'Gestionar notificaciones predeterminadas', gestionar_notificaciones_path %>
+                     </li>
+                <% end %>
+          </ul>
+      </li>
+      <% if (can? :index, Rol) & (can? :index, TipoRol) then %>
+      <li>
+
+          <a class="collapsed" data-target="#roles" data-toggle="collapse" href="javascript:;" aria-expanded="false">
+            Roles <i class="fa fa-fw fa-caret-down"></i>
+          </a>
+
+          <ul id="roles" class="collapse">
+                <% if can? :index, Rol then %>
+                      <li>
+                          <%= link_to 'Lista de Roles', roles_path %>
+                      </li>
+                <% end %>
+                <% if can? :index, TipoRol then %>
+                    <li>
+                        <%= link_to 'Lista de Tipos de Rol', tipo_roles_path %>
+                    </li>
+                <% end %>
+                <% if can? :create, Rol then %>
+                    <li>
+                      <%= link_to 'Crear Rol', new_rol_path %>
+                    </li>
+                <% end %>
+                <% if can? :create, TipoRol then %>
+                    <li>
+                      <%= link_to 'Crear Tipo de Rol', new_tipo_rol_path %>
+                    </li>
+                <% end %>
+          </ul>
+      </li>
+      <% end %>
+      <% if (can? :index, Privilegio) & (can? :index, TipoPrivilegio) then %>
+      <li>
+          <a class="collapsed" data-target="#privilegios" data-toggle="collapse" href="javascript:;" aria-expanded="false">
+            Privilegios <i class="fa fa-fw fa-caret-down"></i>
+          </a>
+          <ul id="privilegios" class="collapse">
+            <% if can? :index, Privilegio then %>
+                  <li>
+                    <%= link_to 'Lista de Privilegios', privilegios_path %>
+                  </li>
+              <% end %>
+              <% if can? :index, TipoPrivilegio then %>
+                  <li>
+                    <%= link_to 'Lista de Tipos de Privilegios', tipo_privilegios_path %>
+                  </li>
+              <% end %>
+              <% if can? :create, Privilegio then %>
+                  <li>
+                    <%= link_to 'Crear Privilegio', new_privilegio_path %>
+                  </li>
+              <% end %>
+              <% if can? :create, TipoPrivilegio then %>
+                  <li>
+                    <%= link_to 'Crear Tipo de Privilegio', new_tipo_privilegio_path %>
+                  </li>
+              <% end %>
+          </ul>
+      </li>
+      <% end %>
+      <% if can? :manage, AsignacionRolPredefinido %>
+          <li>
               <%= link_to 'Agregar Privilegio a Rol', new_asignacion_rol_predefinido_path %>
-            </li>
-						<li>
+          </li>
+      <% end %>
+      <% if can? :manage, AsignacionFuncion %>
+          <li>
               <%= link_to 'Agregar Funcion a Usuario', new_asignacion_funcion_path %>
-            </li>
-						<li>
-              <%= link_to 'Lista de Tipos de Rol', tipo_roles_path %>
-            </li>
-						<li>
-              <%= link_to 'Lista de Privilegios', privilegios_path %>
-            </li>
-						<li>
-              <%= link_to 'Lista de Tipos de Privilegios', tipo_privilegios_path %>
-            </li>
-            <li>
-              <%= link_to 'Crear Rol', new_rol_path %>
-            </li>
-						<li>
-              <%= link_to 'Crear Tipo de Rol', new_tipo_rol_path %>
-            </li>
-						<li>
-              <%= link_to 'Crear Privilegio', new_privilegio_path %>
-            </li>
-						<li>
-              <%= link_to 'Crear Tipo de Privilegio', new_tipo_privilegio_path %>
-            </li>
-				</ul>	
+          </li>
+      <% end %>
+</ul>	
 

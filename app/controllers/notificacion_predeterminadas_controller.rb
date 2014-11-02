@@ -73,6 +73,10 @@ class NotificacionPredeterminadasController < ApplicationController
     end
   end
   
+  def gestionar_notificaciones
+    @proyectos = Proyecto.where(id: AsignacionRol.find_by(usuario_id: current_usuario.id, esActual: true, rol_id: Rol.find_by(nombre: 'Director').id).proyecto_id)
+  end
+
   def notificaciones_predeterminadas 
 
     @notificaciones_no_usadas = TipoNotificacion.all - @proyecto.tipo_notificaciones   #resto las listas

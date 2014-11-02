@@ -13,7 +13,7 @@
           <div class="panel panel-primary">
             <div class="panel-heading">
               <h3 class="panel-title"> 
-                    <label>Aplicado a </label> <%= restriccion.concepto_gasto.titulo %> <%= link_to '(Editar)', edit_restriccion_path(restriccion) %>
+                    <label>Aplicado a </label> <%= restriccion.concepto_gasto.titulo %> <%= link_to content_tag(:i, fa_icon("pencil-square-o 2x", text: "")), edit_restriccion_path(restriccion), style: 'padding-left: 5px;color:#FFFFFF;float:right', title: 'Editar'  %>
               </h3>
             </div>
             <div class="panel-body">
