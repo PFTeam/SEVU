@@ -53,18 +53,16 @@
 			<p>        
 		<% if current_usuario.participando_proyecto(proyecto) == 0 %>
 		  <%= link_to "Participar",  {:controller => :postulaciones, :action => 'create', :postulacion => { :usuario_id => current_usuario.id, :proyecto_id => proyecto.id }}, :method => :new, :class => "btn btn-primary btn-lg" %>
-		<% else %>
+	  <% elsif current_usuario.esperando_aceptacion_proyecto(proyecto) > 0 %>
 		
+		  <span class="badge">Actualmente esperando aceptación</span>
+
+	  <% else %>
+
 		  <span class="badge">Actualmente participando</span>
 		<% end %>
 
-		<!-- REEMPLAZAR POR EL USUARIO ACTUAL DE LA SESION 	-->
-
-		
                 </p>
-		<!-- <button type="button" class="btn btn-primary btn-lg">Participar</button> -->
-		<!-- 	#TODO: Agregar lógica de postulación -->
-
                 
                 </div>
                 
