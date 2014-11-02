@@ -6,7 +6,8 @@ class HabilidadesController < ApplicationController
   # GET /habilidades.json
   def index
 		authorize! :index, Habilidad
-    @habilidades = Habilidad.all
+    #@habilidades = Habilidad.all
+    @habilidades = Habilidad.page(params[:page]).search query: params[:q]
   end
 
   # GET /habilidades/1

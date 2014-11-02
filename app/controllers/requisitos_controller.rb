@@ -17,6 +17,9 @@ class RequisitosController < ApplicationController
   # GET /requisitos/new
   def new
 		authorize! :new, Requisito
+    @actividad = Actividad.find(params[:actividad_id])
+    @proyecto = @actividad.proyecto
+    @requisitos = Requisito.all.where(actividad: @actividad)
     @requisito = Requisito.new
   end
 
@@ -33,10 +36,12 @@ class RequisitosController < ApplicationController
 
     respond_to do |format|
       if @requisito.save
-        format.html { redirect_to @requisito, notice: 'Requisito fue creado satisfactoriamente.' }
+	      format.html { redirect_to :action => 'new', :actividad_id => @requisito.actividad
+		    flash[:notice] = 'Requisito fue creado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @requisito }
       else
-        format.html { render :new }
+	      flash[:notice] = 'Por favor ingrese alguna habilidad'
+        format.html { redirect_to :action => 'new', :actividad_id => params[:requisito][:actividad_id] }
         format.json { render json: @requisito.errors, status: :unprocessable_entity }
       end
     end
@@ -48,7 +53,8 @@ class RequisitosController < ApplicationController
 		authorize! :update, Requisito
     respond_to do |format|
       if @requisito.update(requisito_params)
-        format.html { redirect_to @requisito, notice: 'Requisito fue actualizado satisfactoriamente.' }
+	      format.html { redirect_to :action => 'new', :actividad_id => @requisito.actividad
+		    flash[:notice] = 'Requisito fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @requisito }
       else
         format.html { render :edit }
@@ -61,9 +67,11 @@ class RequisitosController < ApplicationController
   # DELETE /requisitos/1.json
   def destroy
 		authorize! :destroy, Requisito
+	@actividad_id = @requisito.actividad_id
     @requisito.destroy
     respond_to do |format|
-      format.html { redirect_to requisitos_url, notice: 'Requisito fue borrado satisfactoriamente.' }
+	      format.html { redirect_to :action => 'new', :actividad_id => @actividad_id
+		    flash[:notice] = 'Requisito fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end
   end

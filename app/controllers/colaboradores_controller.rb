@@ -41,7 +41,8 @@ class ColaboradoresController < ApplicationController
 		      flash[:notice] =  'Colaborador fue creado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @colaborador }
       else
-        format.html { render :new }
+	      flash[:notice] = 'Por favor ingresa alguna organización externa'
+	      format.html { redirect_to :action => 'new', :proyecto_id => @colaborador.proyecto_id }
         format.json { render json: @colaborador.errors, status: :unprocessable_entity }
       end
     end
@@ -53,7 +54,8 @@ class ColaboradoresController < ApplicationController
 		authorize! :update, Colaborador
     respond_to do |format|
       if @colaborador.update(colaborador_params)
-        format.html { redirect_to @colaborador, notice: 'Colaborador fue actualizado satisfactoriamente.' }
+	format.html { redirect_to :action => 'new', :proyecto_id => @colaborador.proyecto_id
+                                   flash[:notice] = 'Colaborador fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @colaborador }
       else
         format.html { render :edit }

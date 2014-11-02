@@ -76,6 +76,7 @@
 
 
 <%= link_to 'Editar', edit_actividad_path(@actividad) %> |
+<%= link_to 'Agregar Requisitos', new_requisito_path(:actividad_id => @actividad.id) %> |
 <%= link_to 'Ver Historial', historial_estado_actividades_path(:actividad_id => @actividad.id)%> |
 <%= link_to 'Ver Reportes', reportes_path(:actividad_id => @actividad.id)%> |
 <%= link_to 'Asignación de Recursos', asignacion_actividades_path(:actividad_id => @actividad.id)%> |

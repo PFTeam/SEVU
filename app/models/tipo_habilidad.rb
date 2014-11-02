@@ -21,4 +21,7 @@ class TipoHabilidad < ActiveRecord::Base
   
   validates_presence_of :nombre, :descripcion, message: "es un campo obligatorio"
 
+  def to_s
+	  nombre
+  end
 end
