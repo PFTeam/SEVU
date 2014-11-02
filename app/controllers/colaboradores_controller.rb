@@ -35,13 +35,13 @@ class ColaboradoresController < ApplicationController
     @colaborador = Colaborador.new(colaborador_params)
 
     respond_to do |format|
-      if @colaborador.save
+	    if @colaborador.unico && @colaborador.save
         format.js { render 'show', notice: 'El Colaborador fue agregado satisfactoriamente', content_type: 'text/html' }
 	format.html { redirect_to :action => 'new', :proyecto_id => @colaborador.proyecto_id
 		      flash[:notice] =  'Colaborador fue creado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @colaborador }
       else
-	      flash[:notice] = 'Por favor ingresa alguna organización externa'
+	      flash[:notice] = 'Por favor ingresa alguna organización externa correcto'
 	      format.html { redirect_to :action => 'new', :proyecto_id => @colaborador.proyecto_id }
         format.json { render json: @colaborador.errors, status: :unprocessable_entity }
       end

@@ -35,12 +35,12 @@ class RequisitosController < ApplicationController
     @requisito = Requisito.new(requisito_params)
 
     respond_to do |format|
-      if @requisito.save
+	    if @requisito.unico && @requisito.save
 	      format.html { redirect_to :action => 'new', :actividad_id => @requisito.actividad
 		    flash[:notice] = 'Requisito fue creado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @requisito }
       else
-	      flash[:notice] = 'Por favor ingrese alguna habilidad'
+	      flash[:notice] = 'Por favor ingrese alguna habilidad correcta'
         format.html { redirect_to :action => 'new', :actividad_id => params[:requisito][:actividad_id] }
         format.json { render json: @requisito.errors, status: :unprocessable_entity }
       end
