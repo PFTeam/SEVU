@@ -26,7 +26,7 @@ class Ability
 								can :manage, EventoPublico
 						end
 						if asignacionrolpredefinido.rol==asignacionfuncion.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'notificaciones').id 				
-								can :manage, Notificaciones
+								can :manage, Notificacion
 						end
 						
 						#TRANSACCIONES/USUARIOS/SESIONES/TIPOTRANSACCIONES---------------------------------------
