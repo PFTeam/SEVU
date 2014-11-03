@@ -36,6 +36,11 @@ class ComprobantesController < ApplicationController
     @comprobant.detalle_gasto = @detalle_gasto
     respond_to do |format|
       if @comprobant.save
+                 sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+
+        Transaccion.create!(descripcion: "Adjunto del comprobante para el gasto "+@comprobant.detalle_gasto.titulo,
+                  sesion_id: sesion.id, 
+                  proyecto_id: @comprobant.detalle_gasto.informe_gasto.proyecto.id)
         format.html { redirect_to gestionar_informe_gastos_path(@comprobant.detalle_gasto.informe_gasto) }#@comprobant, notice: 'Comprobante fue creado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @comprobant }
       else
@@ -51,6 +56,10 @@ class ComprobantesController < ApplicationController
 		authorize! :update, Comprobante
     respond_to do |format|
       if @comprobant.update(comprobant_params)
+        sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+        Transaccion.create!(descripcion: "Modificación del comprobante para el gasto "+@comprobant.detalle_gasto.titulo,
+                  sesion_id: sesion.id, 
+                  proyecto_id: @comprobant.detalle_gasto.informe_gasto.proyecto.id)
         format.html { redirect_to @comprobant, notice: 'Comprobante fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @comprobant }
       else
@@ -65,6 +74,10 @@ class ComprobantesController < ApplicationController
   def destroy
 		authorize! :destroy, Comprobante
     @comprobant.destroy
+    sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+        Transaccion.create!(descripcion: "Eliminación del comprobante para el gasto "+@comprobant.detalle_gasto.titulo,
+                  sesion_id: sesion.id, 
+                  proyecto_id: @comprobant.detalle_gasto.informe_gasto.proyecto.id)
     respond_to do |format|
       format.html { redirect_to comprobantes_url, notice: 'Comprobante fue borrado satisfactoriamente.' }
       format.json { head :no_content }
