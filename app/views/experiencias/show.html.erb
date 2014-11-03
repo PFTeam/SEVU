@@ -1,9 +1,10 @@
+<div class="page-header">
 <p id="notice"><%= notice %></p>
-
+</div>
 <p>
   <strong>Tieneexperiencia:</strong>
   <%= @experiencia.tieneExperiencia %>
-</p>
+</p> 
 
 <p>
   <strong>Cantidadexperiencia:</strong>
@@ -20,5 +21,5 @@
   <%= @experiencia.voluntario %>
 </p>
 
-<%= link_to 'Edit', edit_experiencia_path(@experiencia) %> |
-<%= link_to 'Back', experiencias_path %>
+<%= link_to 'Editar', edit_experiencia_path(@experiencia) %> |
+<%= link_to 'Atrás', experiencias_path %>

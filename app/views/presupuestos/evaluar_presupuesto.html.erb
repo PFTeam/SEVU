@@ -40,23 +40,117 @@
                 </div>
  
               <% else %>
-
-                <div class="input-group">
-                  <span class="input-group-addon">$</span>
-                  <input class="form-control" type="text" value=<%= number_with_precision(@presupuesto.montoTotal, :precision => 2)  %> disabled="disabled"></input>
+    <div class="form-group input-group">
+      <span class="input-group-addon">
+          Monto total acumulado  $
+      </span>
+      <input class="form-control" type="text" value=<%= number_with_precision(@presupuesto.montoTotal, :precision => 2)  %> disabled="disabled"></input>
+    </div>
+<div class="col-lg-12 container">
+    <ul id="pills" class="nav nav-pills nav-justified" data-tabs="pills" align="center">
+      <li class="active">
+        <a href="#lista" data-toggle="tab"><h4>Lista</h4></a>
+      </li>
+      <li>
+        <a href="#paneles" data-toggle="tab"><h4>Paneles</h4></a>
+      </li>
+    </ul>
+    <br></br>
+    <div id="my-tab-content" class="tab-content">
+      <div class="tab-pane" id="paneles">
+        <% @presupuesto.concepto_gastos.each do |concepto|%>
+          <div class="col-lg-12">
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title"> <%= concepto.titulo %></h3>
+              </div>
+              <div class="panel-body">
+                <div class="row">
+                  <% sumatoria = 0 %>
+                  <% @presupuesto.detalle_presupuestos.each_with_index do |detalle, index|%>
+                    <% if detalle.concepto_gasto_id == concepto.id then %>
+                    <div class="col-lg-6">
+                      <div class="panel panel-default">
+                        <div class="panel-heading">
+                          <h4 class="panel-title"> <%= detalle.titulo %>
+                          </h4> 
+                        </div>
+                        <div class="panel-body">
+                          <label>Descripción del Gasto</label>
+                          <p><%= detalle.descripcion %></li></p>
+                          <label>Concepto (Rubro) del Gasto</label>
+                          <p><%= detalle.concepto_gasto.titulo  %></li></p>
+                          <label>Monto:</label>
+                          <p>$ <%= number_with_precision(detalle.monto, :precision => 2) %></li></p>
+                          <% sumatoria += detalle.monto %>
+                        </div>
+                      </div>
+                    </div>
+                    <% end %>
+                  <% end %>
                 </div>
+              </div>
+              <div class="panel-footer">
+                Subtotal de <%= concepto.titulo %> = $ <%= number_with_precision(sumatoria, :precision => 2)  %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="tab-pane active" id="lista">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-10">
+          <% @presupuesto.concepto_gastos.each do |concepto|%>
+            <h3><%= concepto.titulo %></h3>
+          <div class="table-responsive">
+            <table class="table table-hover table-striped">
+              <thead>
+                <th>Descripción</th>
+                <th>Monto</th>
+
+              </thead>
+              <tbody>
+                  <% sumatoria = 0 %>
+                  <% @presupuesto.detalle_presupuestos.each_with_index do |detalle, index|%>
+                    <% if detalle.concepto_gasto_id == concepto.id then %>
+                      <tr>
+                        <td><%= detalle.titulo %></td>
+                        <td>$ <%= number_with_precision(detalle.monto, :precision => 2) %></td>
+                        <% sumatoria += detalle.monto %>
+                    <% end %>
+                  <% end %>
+                      <tr class="active">
+                        <th>Subtotal de <%= concepto.titulo %></th>
+                        <th> = $ <%= number_with_precision(sumatoria, :precision => 2)  %></th>
+
+                      </tr>
+                    </tbody>
+                  </table>
+                  <br></br>
+                </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+          <div class="form-group input-group">
+      <span class="input-group-addon">
+          Monto total acumulado  $
+      </span>
+      <input class="form-control" type="text" value=<%= number_with_precision(@presupuesto.montoTotal, :precision => 2)  %> disabled="disabled"></input>
+    </div>
+      </div>
  
               <% end %>
               <br></br>
             <div align="center">  
             <%= link_to 'Cancelar', :back, class: "btn btn-default btn-lg" %>
             <%= link_to 'Aceptar', 
-                  presupuesto_path(@presupuesto, "aprobado" => true), 
+                  presupuesto_path(@presupuesto,{ aprobado: true, evaluado: true }), 
                   class: "btn  btn-primary btn-lg", 
                   :method => :put
                      %>
             <%= link_to 'Rechazar', 
-                   presupuesto_path(@presupuesto, "aprobado" => false), 
+                   presupuesto_path(@presupuesto, { aprobado: false, evaluado: true }), 
                    class: "btn btn-danger btn-lg", 
                    :method => :put
                     %>

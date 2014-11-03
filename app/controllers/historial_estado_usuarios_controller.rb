@@ -11,13 +11,21 @@ class HistorialEstadoUsuariosController < ApplicationController
   # GET /historial_estado_usuarios/1
   # GET /historial_estado_usuarios/1.json
   def show
+
 		authorize! :show, HistorialEstadoUsuario
+    @historial_estado_usuario=HistorialEstadoUsuario.find(params[:id])
+
   end
 
   # GET /historial_estado_usuarios/new
   def new
+
 		authorize! :new, HistorialEstadoUsuario
+    @usuario=Usuario.all
+    @proyecto= Proyecto.all
+     @estado_usuarios = EstadoUsuario.all
     @historial_estado_usuario = HistorialEstadoUsuario.new
+     
   end
 
   # GET /historial_estado_usuarios/1/edit
@@ -33,8 +41,8 @@ class HistorialEstadoUsuariosController < ApplicationController
 
     respond_to do |format|
       if @historial_estado_usuario.save
-        format.html { redirect_to @historial_estado_usuario, notice: 'Historial estado usuario was successfully created.' }
-        format.json { render :show, status: :created, location: @historial_estado_usuario }
+        format.html { redirect_to @historial_estado_usuario, notice: 'Historial estado fue creado satisfactoria mente' }
+        #format.json { render :show, status: :created, location: @historial_estado_usuario }
       else
         format.html { render :new }
         format.json { render json: @historial_estado_usuario.errors, status: :unprocessable_entity }
@@ -48,7 +56,7 @@ class HistorialEstadoUsuariosController < ApplicationController
 		authorize! :update, HistorialEstadoUsuario
     respond_to do |format|
       if @historial_estado_usuario.update(historial_estado_usuario_params)
-        format.html { redirect_to @historial_estado_usuario, notice: 'Historial estado usuario was successfully updated.' }
+        format.html { redirect_to @historial_estado_usuario, notice: 'Historial estado usuario fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @historial_estado_usuario }
       else
         format.html { render :edit }
@@ -63,7 +71,7 @@ class HistorialEstadoUsuariosController < ApplicationController
 		authorize! :destroy, HistorialEstadoUsuario
     @historial_estado_usuario.destroy
     respond_to do |format|
-      format.html { redirect_to historial_estado_usuarios_url, notice: 'Historial estado usuario was successfully destroyed.' }
+      format.html { redirect_to historial_estado_usuarios_url, notice: 'Historial estado usuario fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end
   end
@@ -71,11 +79,12 @@ class HistorialEstadoUsuariosController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_historial_estado_usuario
-      @historial_estado_usuario = HistorialEstadoUsuario.find(params[:id])
+       @historial_estado_usuario = HistorialEstadoUsuario.where(usuario_id:  params[:id])
+     # @historial_estado_usuario = HistorialEstadoUsuario.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def historial_estado_usuario_params
-      params.require(:historial_estado_usuario).permit(:fechaCambioEstado, :esActual, :usuario_id, :estado_usuario_id)
+      params.require(:historial_estado_usuario).permit( :usuario_id, :estado_usuario_id)
     end
 end

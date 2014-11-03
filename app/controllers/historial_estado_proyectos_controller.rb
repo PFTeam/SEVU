@@ -36,7 +36,13 @@ class HistorialEstadoProyectosController < ApplicationController
 
     respond_to do |format|
       if @historial_estado_proyecto.save
-        format.html { redirect_to @historial_estado_proyecto, notice: 'Historial estado proyecto was successfully created.' }
+            sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+            Transaccion.create!(
+		    descripcion: 'Creación del Historial Estado Proyecto id :' + @historial_estado_proyecto.id.to_s ,
+		    sesion_id: sesion.id ,
+		    proyecto_id: @historial_estado_proyecto.proyecto.id)
+        format.html { redirect_to @historial_estado_proyecto
+		     flash[:notice] = 'Historial estado proyecto fue creado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @historial_estado_proyecto }
       else
         format.html { render :new }
@@ -55,7 +61,13 @@ class HistorialEstadoProyectosController < ApplicationController
     respond_to do |format|
       #if @historial_estado_proyecto.update(historial_estado_proyecto_params)
 	    if @historial_estado_proyecto_nuevo.save
-		    format.html { redirect_to action: 'index', proyecto_id: @historial_estado_proyecto.proyecto.id, notice: 'Historial estado proyecto was successfully updated.' }
+            sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+            Transaccion.create!(
+		    descripcion: 'Creación del Historial Estado Proyecto id :' + @historial_estado_proyecto_nuevo.id.to_s ,
+		    sesion_id: sesion.id ,
+		    proyecto_id: @historial_estado_proyecto_nuevo.proyecto.id)
+		    format.html { redirect_to action: 'index', proyecto_id: @historial_estado_proyecto.proyecto.id
+		    flash[:notice] = 'Historial estado proyecto fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @historial_estado_proyecto }
       else
         format.html { render :edit }
@@ -70,7 +82,7 @@ class HistorialEstadoProyectosController < ApplicationController
 		authorize! :destroy, HistorialEstadoProyecto
     @historial_estado_proyecto.destroy
     respond_to do |format|
-      format.html { redirect_to historial_estado_proyectos_url, notice: 'Historial estado proyecto was successfully destroyed.' }
+      format.html { redirect_to historial_estado_proyectos_url, notice: 'Historial estado proyecto fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end
   end

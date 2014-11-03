@@ -1,4 +1,3 @@
-<!----->
 <%= simple_form_for @usuario, :html => { :multipart => true } do |f| %>
   <% if @usuario.errors.any? %>
     <div id="error_explanation">
@@ -12,15 +11,15 @@
 
 	<div class="col-lg-6">
 		<div class="inputs">
-			<%= f.input :nombreUsuario, label: 'Nombre de Usuario', placeholder: 'nombre de usuario...', :required => true, :autofocus => true %>
+			<%= f.input :nombreUsuario, label: 'Nombre de Usuario', placeholder: 'Usuario...', :required => true, :autofocus => true %>
 			<br></br> 
-			<%= f.input :encrypted_password , label: 'Contraseña', disabled: true, placeholder: 'contraseña...', :required => true, :autofocus => true %>
+			<%= f.input :encrypted_password , label: 'Contraseña', disabled: true, placeholder: 'Contraseña...', :required => true, :autofocus => true %>
 			<br></br>
-			<%= f.input :apellido_nombre, label: 'Apellido, Nombre', placeholder: 'apellido, nombre...', :required => true, :autofocus => true %>
+			<%= f.input :apellido_nombre, label: 'Apellido, Nombre', placeholder: 'Nombre...', :required => true, :autofocus => true %>
 			<br></br> 
-			<%= f.input :email , label: 'Correo Electronico', placeholder: 'email...', :required => true, :autofocus => true %>
+			<%= f.input :email , label: 'Correo Electronico', placeholder: 'E-mail...', :required => true, :autofocus => true %>
 			<br></br>
-			<%= f.input :direccion, label: 'Dirección', placeholder: 'Calle, N°, Localidad, Provincia, País', :required => true, :autofocus => true %>
+			<%= f.input :direccion, label: 'Dirección', placeholder: 'Calle, N°, Localidad, Provincia', :required => true, :autofocus => true %>
 			<br></br> 
 			<%= f.file_field :foto , label: 'Foto: ', :required => true, :autofocus => true %>
 			<br></br>

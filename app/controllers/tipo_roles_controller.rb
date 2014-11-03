@@ -33,7 +33,7 @@ class TipoRolesController < ApplicationController
 
     respond_to do |format|
       if @tipo_rol.save
-        format.html { redirect_to @tipo_rol, notice: 'Tipo rol was successfully created.' }
+        format.html { redirect_to @tipo_rol, notice: 'Tipo rol fue creado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @tipo_rol }
       else
         format.html { render :new }
@@ -48,7 +48,7 @@ class TipoRolesController < ApplicationController
 		authorize! :update, TipoRol
     respond_to do |format|
       if @tipo_rol.update(tipo_rol_params)
-        format.html { redirect_to @tipo_rol, notice: 'Tipo rol was successfully updated.' }
+        format.html { redirect_to @tipo_rol, notice: 'Tipo rol fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @tipo_rol }
       else
         format.html { render :edit }
@@ -63,7 +63,7 @@ class TipoRolesController < ApplicationController
 		authorize! :destroy, TipoRol
     @tipo_rol.destroy
     respond_to do |format|
-      format.html { redirect_to tipo_roles_url, notice: 'Tipo rol was successfully destroyed.' }
+      format.html { redirect_to tipo_roles_url, notice: 'Tipo rol fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end
   end

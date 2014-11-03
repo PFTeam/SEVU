@@ -36,7 +36,13 @@ class HistorialEstadoActividadesController < ApplicationController
 
     respond_to do |format|
       if @historial_estado_actividad.save
-        format.html { redirect_to @historial_estado_actividad, notice: 'Historial estado actividad was successfully created.' }
+            sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+            Transaccion.create!(
+		    descripcion: 'Creación del Historial Estado Actividad id :' + @historial_estado_actividad.id.to_s ,
+		    sesion_id: sesion.id ,
+		    proyecto_id: @historial_estado_actividad.actividad.proyecto.id)
+        format.html { redirect_to @historial_estado_actividad 
+		      flash[:notice] = 'Historial estado actividad fue creado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @historial_estado_actividad }
       else
         format.html { render :new }
@@ -54,7 +60,13 @@ class HistorialEstadoActividadesController < ApplicationController
     @historial_estado_actividad_nuevo.estado_actividad_id = params[:historial_estado_actividad][:estado_actividad_id]
     respond_to do |format|
       if @historial_estado_actividad_nuevo.save
-	      format.html { redirect_to action: 'index', actividad_id: @historial_estado_actividad.actividad.id , notice: 'Historial estado actividad was successfully updated.' }
+            sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+            Transaccion.create!(
+		    descripcion: 'Creación del Historial Estado Actividad id :' + @historial_estado_actividad_nuevo.id.to_s ,
+		    sesion_id: sesion.id ,
+		    proyecto_id: @historial_estado_actividad_nuevo.actividad.proyecto.id)
+	      format.html { redirect_to action: 'index', actividad_id: @historial_estado_actividad.actividad.id 
+		    flash[:notice] = 'Historial estado actividad fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @historial_estado_actividad }
       else
         format.html { render :edit}
@@ -69,7 +81,7 @@ class HistorialEstadoActividadesController < ApplicationController
 		authorize! :destroy, Habilidad
     @historial_estado_actividad.destroy
     respond_to do |format|
-      format.html { redirect_to historial_estado_actividades_url, notice: 'Historial estado actividad was successfully destroyed.' }
+      format.html { redirect_to historial_estado_actividades_url, notice: 'Historial estado actividad fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end
   end

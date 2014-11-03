@@ -12,12 +12,17 @@
       </ul>
     </div>
   <% end %>
-          <%= f.input :estado_proyecto_id, collection: @estados_posibles, :label => 'Estados' %>
+  <% if @estados_posibles != [] %>
+  <%= f.input :estado_proyecto_id, collection: @estados_posibles, :label => 'Estados', :include_blank => false %>
+        <div class="modal-footer">
+  <%= f.button :submit, :class => 'btn btn-primary', :value => 'Confirmar' %><br>
+        </div>
+
+  <% else %>
+	  No se puede modificar el estado.
+  <% end %>
 
    	<%= f.input :proyecto_id,:as => :hidden, input_html: {value: params[:proyecto_id]} %>
 
-        <div class="modal-footer">
-          <%= f.button :submit, :class => 'btn btn-primary', :value => 'Confirmar' %>
-        </div>
 	<% end %>
-<%= link_to 'Back', historial_estado_proyectos_path(:proyecto_id => @historial_estado_proyecto.proyecto.id) %>
+<%= link_to 'Atrás', historial_estado_proyectos_path(:proyecto_id => @historial_estado_proyecto.proyecto.id) %>

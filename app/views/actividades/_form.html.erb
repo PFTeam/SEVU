@@ -119,15 +119,6 @@
     	<h3>Tipo de Actividad</h3>
 
                     <%= f.input :tipo_actividad_id, collection: @tipoActividades, label: false %>
-            
-    
-        <h3>Habilidades Necesarias</h3>
-
-	<%= render :partial => 'requisitos', :locals => { :f => f } %>
-	<%#= link_to 'Agregar Habilidad', :controller => :actividades , :action => 'agregar_habilidad', remote: true, :locals => {:f => f}  %> 
-	<%= link_to 'Agregar Habilidad', agregar_habilidad_path(f, :format => :js ), remote: true %> 
-
-    
 
     <h2>Cargar Planificación Real</h2>
    

@@ -3,6 +3,11 @@ class UsuariosController < ApplicationController
 
   # GET /usuarios
   # GET /usuarios.json
+
+
+
+  
+  
   def index
 		authorize! :index, Usuario
     @usuarios = Usuario.page(params[:page]).search query: params[:q]

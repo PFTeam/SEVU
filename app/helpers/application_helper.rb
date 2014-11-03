@@ -57,6 +57,7 @@ module ApplicationHelper
         }.merge(remote_if_xhr || {})
       }
   end
+
   def actividad_form_html_options
       {
         data: {

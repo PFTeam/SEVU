@@ -1,6 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>Nombre voluntario:</strong>
+  <%= @voluntario.legajo %>
+</p>
+
+<p>
   <strong>Diasemana:</strong>
   <%= @horario_disponibl.diaSemana %>
 </p>
@@ -20,5 +25,5 @@
   <%= @horario_disponibl.voluntario %>
 </p>
 
-<%= link_to 'Edit', edit_horario_disponibl_path(@horario_disponibl) %> |
-<%= link_to 'Back', horario_disponibles_path %>
+<%= link_to 'Editar', edit_horario_disponibl_path(@horario_disponibl) %> |
+<%= link_to 'Atrás', horario_disponibles_path %>

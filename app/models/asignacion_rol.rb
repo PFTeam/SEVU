@@ -11,4 +11,6 @@ class AsignacionRol < ActiveRecord::Base
      end
   end
 
+
+
 end

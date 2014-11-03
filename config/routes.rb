@@ -61,13 +61,11 @@ Rails.application.routes.draw do
 
   resources :roles
 
-  resources :horario_disponibles
+  
 
   resources :reportes
 
   resources :asignacion_actividades
-
-  resources :experiencias
 
   resources :requisitos
 
@@ -110,7 +108,26 @@ Rails.application.routes.draw do
 
   resources :necesidades
 
-  resources :voluntarios
+  resources :voluntarios do
+    resources :experiencias 
+    resources :horario_disponibles
+    resources :notas
+   
+  end
+
+
+  resources :horario_disponibles
+  
+  resources :experiencias
+  
+
+  
+ # get 'buscar_por_legajo' => 'voluntarios#buscar_por_legajo'
+    get 'buscar_por_legajo/:legajo' => 'voluntarios#buscar_por_legajo'
+    get 'buscar_usuario'=>'usuarios#buscar_usuario'
+  
+  
+   get 'buscar_voluntario'=>'voluntarios#buscar_usuario'
 
   resources :usuarios do
       resources :notificacion_sistemas
@@ -140,14 +157,21 @@ Rails.application.routes.draw do
 
   resources :tipo_notificaciones
 
-  resources :estado_actividades
+  resources :estvlado_actividades
 
   resources :tipo_proyectos
 
   resources :estado_proyectos
+ #match 'usuarios/buscar_por_legajo/:legajo' => 'usuarios#buscar_por_legajo'
+  get 'adminitrar_estado_usuario/'  => 'voluntarios#adminitrar_estado_usuario',:as => 'adminitrar_estado_usuario'
+  get 'buscarusuario/'  => 'voluntarios#buscarusuario',:as => 'buscarusuario'
+  get 'buscarusuario/'  => 'voluntarios#buscar_usuario'
 
   get 'mis_proyectos', :as => 'proyectos/mis_proyectos', :controller => :proyectos
   get 'mis_necesidades', :as => 'necesidades/mis_necesidades', :controller => :necesidades
+
+  get 'gestionar_experiencias/:id' => 'voluntarios#gestionar_experiencias', :as => 'gestionar_experiencias'
+
   #get 'notificaciones_predeterminadas/:id', :as => 'proyectos/:id/notificaciones_predeterminadas', :controller => :notificacion_predeterminadas
 
   get 'agregar_habilidad', :controller => :actividades
@@ -161,7 +185,15 @@ Rails.application.routes.draw do
   get 'crear_organizacion_externa', :controller => :proyectos
   get 'gestionar_presupuesto/:id' => 'presupuestos#gestionar_presupuesto', :as => 'gestionar_presupuesto'
   get 'gestionar_informe_gastos/:id' => 'informe_gastos#gestionar_informe_gastos', :as => 'gestionar_informe_gastos'
+
   get 'gestionar_restricciones' => 'restricciones#gestionar_restricciones', :as => 'gestionar_restricciones'
+
+  get 'horarios_disponibles/:id' => 'voluntarios#gestion_horarios_disponibles', :as => 'gestion_horarios_disponibles'
+  get 'gestionar_nota_P/:id'  => 'voluntarios#gestionar_nota_P',:as => 'gestionar_nota_P'
+  get 'gestionar_estado_usuario'=> 'voluntarios#gestionar_estado_usuario',:as =>'gestionar_estado_usuario'
+ 
+ #para el metodo get "la forma de llamado=> controlado#metodo =>,:as=>pach 
+  #voluntario_controller/gestion_horario_disponibles/gestion_horario_disponible.html
 
   get 'gestionar_habilidades' => 'tipo_habilidades#gestionar_habilidades', :as => 'gestionar_habilidades'
 
@@ -197,8 +229,8 @@ Rails.application.routes.draw do
 
 	get 'usuario_bloqueado' => 'usuarios#usuario_bloqueado', :as => 'usuario_bloqueado'
 
+      get 'gestionar_notificaciones' => 'notificacion_predeterminadas#gestionar_notificaciones', :as => 'gestionar_notificaciones'
 
-	
 
   #get 'gestionarPresupuesto', :controller => :presupuestos
   # The priority is based upon order of creation: first created -> highest priority.

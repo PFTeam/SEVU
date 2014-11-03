@@ -14,9 +14,9 @@
       <tr>
         <td><%= colaborador.organizacion_externa %></td>
         <td><%= colaborador.proyecto %></td>
-        <td><%= link_to 'Show', colaborador %></td>
-        <td><%= link_to 'Edit', edit_colaborador_path(colaborador) %></td>
-        <td><%= link_to 'Destroy', colaborador, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Ver', colaborador %></td>
+        <td><%= link_to 'Editar', edit_colaborador_path(colaborador) %></td>
+        <td><%= link_to 'Borrar', colaborador, method: :delete, data: { confirm: 'Seguro?' } %></td>
       </tr>
     <% end %>
   </tbody>

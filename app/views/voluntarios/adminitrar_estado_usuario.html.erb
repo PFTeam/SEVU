@@ -1,0 +1,46 @@
+
+       <!--El panel panel-primary pone un cuadro -->
+          <div class="panel panel-default">
+          	<!--Pone el cuadro de color azul -->
+            <div class="panel-heading">
+<h1> Administrar estado usuario       </h1>
+</div>
+ <div class="panel-body">
+ 	 
+<%= form_tag do %>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<br></br>
+
+   <%= label_tag "legajo", "Buscar por legajo" %>
+    <div class="field">
+   <%= text_field_tag "legajo", "" %>
+   </div>
+   <%= submit_tag "Buscar", {:type => "button", :id => "boton_buscar"} %>
+    <div id="respuesta"></div>
+    
+   
+     <div class="field">
+     	 <%= label_tag "estado_usuario", "Cambio de estado Usuario" %>
+    <%= collection_select(:estado_usuario, :id, EstadoUsuario.all, :id,:nombre,{prompt: "Estado Posible de Usuario..." }, {class:"form-control"}) %>
+      </div>
+      <div>
+      		<button type="button" class="btn btn-lg btn-success">
+<%=link_to "Confirmar", historial_estado_usuarios_path(:estado_usuario_id => 4   , :usuario_id => 4 ) %>
+</button>
+
+
+<% end %>
+
+
+
+
+</div>
+</div>
+<%#= javascript_include_tag "buscar_por_legajo" %>
+<script src="./assets/buscar_por_legajo.js" type="text/javascript"></script>
+
+

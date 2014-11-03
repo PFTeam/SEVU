@@ -1,0 +1,16 @@
+class HistorialEstadoActividad < ActiveRecord::Base
+  belongs_to :actividad
+  belongs_to :estado_actividad
+
+
+<<<<<<< HEAD
+  validates :proyecto, :presence => true
+  validates :estado_proyecto, :presence => true 
+
+
+
+=======
+  validates :actividad, :presence => false
+  validates :estado_actividad, :presence => false 
+>>>>>>> ad61ebf358fb7f3aaeb0add6a8f14691cc4853e4
+end

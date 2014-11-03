@@ -16,9 +16,9 @@
         <td><%= sesion.fechaInicio %></td>
         <td><%= sesion.fechaFin %></td>
         <td><%= sesion.usuario %></td>
-        <td><%= link_to 'Show', sesion %></td>
-        <td><%= link_to 'Edit', edit_sesion_path(sesion) %></td>
-        <td><%= link_to 'Destroy', sesion, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Ver', sesion %></td>
+        <td><%= link_to 'Editar', edit_sesion_path(sesion) %></td>
+        <td><%= link_to 'Borrar', sesion, method: :delete, data: { confirm: 'Seguro?' } %></td>
       </tr>
     <% end %>
   </tbody>

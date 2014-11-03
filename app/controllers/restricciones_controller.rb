@@ -36,7 +36,7 @@ class RestriccionesController < ApplicationController
     respond_to do |format|
       if @restriccion.save
         format.html {redirect_to gestionar_restricciones_path}
-        #format.html { redirect_to @restriccion, notice: 'Restriccion was successfully created.' }
+        #format.html { redirect_to @restriccion, notice: 'Restriccion fue creado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @restriccion }
       else
         format.html { render :new }
@@ -52,7 +52,7 @@ class RestriccionesController < ApplicationController
     @concepto_gastos = ConceptoGasto.all
     respond_to do |format|
       if @restriccion.update(restriccion_params)
-        format.html { redirect_to gestionar_restricciones_path }#@restriccion, notice: 'Restriccion was successfully updated.' }
+        format.html { redirect_to gestionar_restricciones_path }#@restriccion, notice: 'Restriccion fue actualizado satisfactoriamente.' }
         #format.json { render :show, status: :ok, location: @restriccion }
       else
         format.html { render :edit }
@@ -67,7 +67,7 @@ class RestriccionesController < ApplicationController
 		authorize! :destroy, Restriccion
     @restriccion.destroy
     respond_to do |format|
-      format.html { redirect_to restricciones_url, notice: 'Restriccion was successfully destroyed.' }
+      format.html { redirect_to restricciones_url, notice: 'Restriccion fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end
   end

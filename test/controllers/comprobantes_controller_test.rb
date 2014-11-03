@@ -22,7 +22,7 @@ include Devise::TestHelpers
       post :create, comprobant: { numero: @comprobant.numero }
     end
 
-    assert_redirected_to comprobant_path(assigns(:comprobant))
+    assert_redirected_to comprobante_path(assigns(:comprobant))
   end
 
   test "should show comprobant" do
@@ -37,7 +37,7 @@ include Devise::TestHelpers
 
   test "should update comprobant" do
     patch :update, id: @comprobant, comprobant: { numero: @comprobant.numero }
-    assert_redirected_to comprobant_path(assigns(:comprobant))
+    assert_redirected_to comprobante_path(assigns(:comprobant))
   end
 
   test "should destroy comprobant" do

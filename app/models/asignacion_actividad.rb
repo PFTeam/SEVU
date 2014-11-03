@@ -7,4 +7,12 @@ class AsignacionActividad < ActiveRecord::Base
   def to_a
         [self]
   end
+
+  def es_vigente
+	  if self.vigente == true
+	     "Si"
+     else
+	     "No"
+     end
+  end
 end

@@ -43,10 +43,16 @@ class ActividadesController < ApplicationController
 
     respond_to do |format|
       if @actividad.save
-        format.html { redirect_to @actividad, notice: 'Actividad was successfully created.' }
+            sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+            Transaccion.create!(
+		    descripcion: 'Creación de la Actividad id :' + @actividad.id.to_s ,
+		    sesion_id: sesion.id ,
+		    proyecto_id: @actividad.proyecto.id)
+	      format.html { redirect_to @actividad,:objetivo_especifico_id => @actividad.objetivo_especifico_id 
+		     flash[:notice] = 'Actividad fue creado satisfactoriamente.'  }
         format.json { render :show, status: :created, location: @actividad }
       else
-        format.html { render :new }
+        format.html { render :new, :objetivo_especifico_id => @actividad.objetivo_especifico_id }
         format.json { render json: @actividad.errors, status: :unprocessable_entity }
       end
     end
@@ -58,7 +64,12 @@ class ActividadesController < ApplicationController
 		authorize! :update, Actividad
     respond_to do |format|
       if @actividad.update(actividad_params)
-        format.html { redirect_to @actividad, notice: 'Actividad was successfully updated.' }
+            sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+            Transaccion.create!(
+		    descripcion: 'Actualización de la Actividad id :' + @actividad.id.to_s ,
+		    sesion_id: sesion.id ,
+		    proyecto_id: @actividad.proyecto.id)
+        format.html { redirect_to @actividad, notice: 'Actividad fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @actividad }
       else
         format.html { render :edit }
@@ -73,7 +84,13 @@ class ActividadesController < ApplicationController
 		authorize! :destroy, Actividad
     @actividad.destroy
     respond_to do |format|
-      format.html { redirect_to actividades_url, notice: 'Actividad was successfully destroyed.' }
+            sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+            Transaccion.create!(
+		    descripcion: 'Borrado de la Actividad id :' + @actividad.id.to_s ,
+		    sesion_id: sesion.id ,
+		    proyecto_id: @actividad.proyecto.id)
+      format.html { redirect_to actividades_url
+		    flash[:notice] = 'Actividad fue borrada satisfactoriamente.' }
       format.json { head :no_content }
     end
   end

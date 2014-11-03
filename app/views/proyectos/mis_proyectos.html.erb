@@ -28,7 +28,7 @@
                 <label>Director del Proyecto</label>
                 <p> <!-- #TODO: Agregar validación de un solo director -->
 
-		<% if !proyecto.director.apellido_nombre.to_s.blank? %>
+		<% if !proyecto.director.nil? && !proyecto.director.apellido_nombre.to_s.blank?%>
                     <i class="fa fa-user"></i><%= link_to proyecto.director.apellido_nombre.to_s, usuario_path(proyecto.director) %> 
 		<% else %>
 			No se ha asignado un Director

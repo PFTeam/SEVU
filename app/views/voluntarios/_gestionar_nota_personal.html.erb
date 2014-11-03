@@ -1,0 +1,40 @@
+          <!--El panel panel-primary pone un cuadro -->
+          <div class="panel panel-primary">
+          	<!--Pone el cuadro de color azul -->
+            <div class="panel-heading">
+            	<!-- Titulo Cabecera  !-->
+  <h1 class="panel-title">
+<h1>Gestionar Nota Voluntario <small>Modulo Voluntario</small></h1>
+</div>
+
+	<!-- Cuerpo del panel  !-->
+<div class="panel-body">
+
+    <% if @notap.nil? then %>
+      <h4> No existen Notas Personales  </h4>
+    <% else %>  
+ 
+ 
+ <% @notap.each do |nota|%>
+ <div class="panel panel-primary">
+     
+ <div class="panel-heading">                     
+<p><%= "Titulo: "+ nota.titulo %></p>
+</div>
+<div class="panel-body">
+
+<p><%= "Descripcion: "+nota.descripcion %></p>
+<%= link_to 'Editar', edit_nota_path(nota) %>
+<%= link_to 'Borrar', nota, method: :delete, data: { confirm: 'Seguro?' } %>
+</div>
+</div>
+<% end %>
+<% end %>
+ <div class="col-lg-12">
+<div class="row">
+    <div class="field">
+
+  	  <%= link_to "Generar Nota", new_voluntario_nota_path(@voluntario), class: "btn btn-primary btn-lg" %> 
+  </div> 
+    </div> 
+    </div>    

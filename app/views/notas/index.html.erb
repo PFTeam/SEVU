@@ -18,9 +18,9 @@
         <td><%= nota.descripcion %></td>
         <td><%= nota.voluntario %></td>
         <td><%= nota.usuario %></td>
-        <td><%= link_to 'Show', nota %></td>
-        <td><%= link_to 'Edit', edit_nota_path(nota) %></td>
-        <td><%= link_to 'Destroy', nota, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Ver', nota %></td>
+        <td><%= link_to 'Editar', edit_nota_path(nota) %></td>
+        <td><%= link_to 'Borrar', nota, method: :delete, data: { confirm: 'Seguro?' } %></td>
       </tr>
     <% end %>
   </tbody>

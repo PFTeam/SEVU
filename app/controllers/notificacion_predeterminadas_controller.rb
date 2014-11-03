@@ -38,7 +38,7 @@ class NotificacionPredeterminadasController < ApplicationController
 
     respond_to do |format|
       if @notificacion_predeterminada.save
-        format.html { redirect_to :back}#@notificacion_predeterminada, notice: 'Notificacion predeterminada was successfully created.' }
+        format.html { redirect_to :back}#@notificacion_predeterminada, notice: 'Notificacion predeterminada fue creado satisfactoriamente.' }
         #format.json { render :back}#, status: :created, location: @notificacion_predeterminada }
       else
         format.html { render :back }
@@ -53,7 +53,7 @@ class NotificacionPredeterminadasController < ApplicationController
 		authorize! :update, Notificacion
     respond_to do |format|
       if @notificacion_predeterminada.update(notificacion_predeterminada_params)
-        format.html { redirect_to @notificacion_predeterminada, notice: 'Notificacion predeterminada was successfully updated.' }
+        format.html { redirect_to @notificacion_predeterminada, notice: 'Notificacion predeterminada fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @notificacion_predeterminada }
       else
         format.html { render :edit }
@@ -68,11 +68,15 @@ class NotificacionPredeterminadasController < ApplicationController
 		authorize! :destroy, Notificacion
     @notificacion_predeterminada.destroy
     respond_to do |format|
-      format.html { redirect_to :back}#, notice: 'Notificacion predeterminada was successfully destroyed.' }
+      format.html { redirect_to :back}#, notice: 'Notificacion predeterminada fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end
   end
   
+  def gestionar_notificaciones
+    @proyectos = Proyecto.where(id: AsignacionRol.find_by(usuario_id: current_usuario.id, esActual: true, rol_id: Rol.find_by(nombre: 'Director').id).proyecto_id)
+  end
+
   def notificaciones_predeterminadas 
 
     @notificaciones_no_usadas = TipoNotificacion.all - @proyecto.tipo_notificaciones   #resto las listas

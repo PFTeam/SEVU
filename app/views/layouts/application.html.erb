@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>S.E.V.U</title>
+  <title>S.E.V.U.</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application', 'bootstrap' => true %>
-	<%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
+  <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
   <%= csrf_meta_tags %>
+  <%= favicon_link_tag 'favicon.ico' %>
 </head>
 <body>
-
-
   <div id="wrapper">
-
           <!-- Sidebar -->
      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -24,177 +22,141 @@
               </button>
        <!--    <div class="container">   -->
           <div class="container">
+          <div class="navbar-header">
+            <a href="#" class="navbar-brand"> S.E.V.U. </a>
+            <div class="navbar-header">
+            <a class="navbar-brand"> </a>
+            </div>
+            <div class="navbar-header">
+            <a class="navbar-brand"> </a>
+            </div>
+            <div class="navbar-header">
+            <a class="navbar-brand"> </a>
+            </div>
+                        <div class="navbar-header">
+            <a class="navbar-brand"> </a>
+            </div>
+
+          </div>
+		<% if controller_name != 'sessions' && controller_name != 'usuarios' && controller_name != 'confirmations' && controller_name != 'passwords' && controller_name != 'registrations' && controller_name != 'unlocks' %>
+
+  <!-------- MENU SUPERIOR---------->
 
 
-                    <div class="navbar-header">
-                      <a href="#" class="navbar-brand">  S.E.V.U </a>
-                      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                      </button>
-                       <!-- PUROS BOTONES VACIOS ASQUEROSOS -->
-                    </div>
-										 <% if controller_name != 'sessions' && controller_name != 'usuarios' && controller_name != 'confirmations' && controller_name != 'passwords' && controller_name != 'registrations' && controller_name != 'unlocks' %>
-                    <div class="navbar-header">
-                      <a  class="navbar-brand">   </a>
-                    </div>
-                    <div class="navbar-header">
-                      <a  class="navbar-brand">   </a>
-                    </div>
-                    <div class="navbar-header">
-                      <a  class="navbar-brand">   </a>
-                    </div>
-                    <div class="navbar-header">
-                      <a  class="navbar-brand">   </a>
-                    </div>
-
-  <!-- FIN DE LOS PUROS BOTONES VACIOS ASQUEROSOS -->
-
-
-  <!---------------------------------------------
-  <!---------- MENU SUPERIOR (quedaría así por ahora) NO CAMBIAR  -------------------
-  <!---------------------------------------------
-  <!---------------------------------------------
-  <!---------------------------------------------
-  <!------------------------>
-
-
-                    <div class="navbar-collapse collapse" id="navbar-main">
-                       <ul class="nav navbar-nav">
-                         <li>
-                            <%= link_to 'Proyectos', proyectos_path %>
-                         </li>
-                         <li>
-                            <%= link_to 'Eventos Públicos', evento_publicos_path %>
-                         </li>
-                         <li>
-                            <%= link_to 'Necesidades', necesidades_path %>
-                         </li>
-                         <li>
-                            <%= link_to 'Voluntarios', voluntarios_path %>
-                         </li>
-												<% if can? :reporte_new, ReporteGenerado; %>
-                         <li>
-                         <%= link_to 'Reportes', reporte_new_path %>
-													</li>
-												<% end %>
-												<% if can? :auditoria, Transaccion; %>
-												<li>
-												 <%= link_to 'Auditoría', auditoria_path %>
-                         </li>
-												<% end %>
-                         </ul>
-                         <!--
-  --->
-  <!---------------------------------------------
-  <!---------- NOTIFICACIONES -------------------
-  <!---------------------------------------------
-  <!---------------------------------------------
-  <!---------------------------------------------
-  <!------------------------>
+  <div class="navbar-collapse collapse" id="navbar-main" style="
+	height: 50px;
+	width: 1140px;">
+     <ul class="nav navbar-nav">
+    <li>
+        <%= link_to 'Proyectos', proyectos_path %>
+     </li>
+     <li>
+        <%= link_to 'Eventos Públicos', evento_publicos_path %>
+     </li>
+     <li>
+        <%= link_to 'Necesidades', necesidades_path %>
+     </li>
+     <li>
+        <%= link_to 'Voluntarios', voluntarios_path %>
+     </li>
+	<% if can? :reporte_new, ReporteGenerado; %>
+       <li>
+       <%= link_to 'Reportes', reporte_new_path %>
+  	  </li>
+     <% end %>
+      <% if can? :auditoria, Transaccion; %>
+          <li>
+              <%= link_to 'Auditoría', auditoria_path %>
+           </li>
+      <% end %>
+           <li>
+               <a href="http://bootswatch.com/help/">Ayuda</a>
+           </li>
+   </ul>
 
   
   <ul class="nav navbar-nav navbar-right">
   <%= render '/shared/notificaciones' %>
-  	 <li>
-	     <a href="http://bootswatch.com/help/">Ayuda</a>
-	 </li>
-  
-  			
-	
-	 <li class="dropdown user-dropdown">
-	     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%= current_usuario.nombreUsuario  %><b class="caret"></b></a>
+
+	 <li class="dropdown user-dropdown pull-right">
+	     <a href="#" class="dropdown-toggle pull-right" data-toggle="dropdown"><i class="fa fa-user"></i> <%= current_usuario.nombreUsuario  %></a>
 	     <ul class="dropdown-menu">
-	      <li><a href="#"><i class="fa fa-user"></i> Perfil</a></li>
-									  <li><a href="#"><i class="fa fa-user"></i> <%= link_to "Editar usuario", edit_usuario_registration_path %></a></li>
-	      <li><a href="#"><i class="fa fa-gear"></i> Configuraciones</a></li>
-				<% if can? :manage, Rol; %>
-						<li><a href="#"><i class="fa fa-gear"></i> <%= link_to "Roles", roles_path %></a></li>
-				<% end %>
-	      <li class="divider"></li>
-	      <li><a href="#"><i class="fa fa-power-off"></i> <%= link_to 'Desconectarse', destroy_usuario_session_path, method: :delete  %></a></li>
+	      <!--<li><a href="#"><i class="fa fa-user"></i> Perfil</a></li>-->
+			<li><%= link_to content_tag(:i, fa_icon("user", text: "Mi Perfil")), edit_usuario_registration_path %></li>
+	      <!--<li><a href="#"><i class="fa fa-gear"></i> Configuraciones</a></li>-->
+			<% if puede_configurar? then %>
+				<li><%= link_to content_tag(:i, fa_icon("gear", text: "Configuraciones grales.")), roles_path %></li>
+			<% end %>
+	      <!--<li class="divider"></li>-->
+	      <li><%= link_to content_tag(:i, fa_icon("power-off", text: "Desconectarse")), destroy_usuario_session_path, method: :delete, style: "padding-right: 5px;"  %></li>
 	     </ul>
 	 </li>
 	
 	
 	<% if !can? :auditoria, Transaccion; %>
-	<li><%= image_tag current_usuario.foto.url %></li>
+	<li class="pull-right"><%= image_tag current_usuario.foto.url %></li>
 	<% end %>
   
-  
-  
-  
-  
   </ul>
-  
-  
-  
-  
+           </div>
 
-                    </div>
-                           <!--    ACA     </div>    --->
-          </div>           
-        </div>
 				<% end %>
-<!---------------------------------------------
-<!---------- MENU VERTICAL (Poner las opciones dentro de cada menu superior -------------------
-<!---------------------------------------------
-<!---------------------------------------------
-<!---------------------------------------------
-<!------------------------>
-				
+
+<!---------- MENU VERTICAL (Poner las opciones dentro de cada menu superior -------------------->
+
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <% case controller_name 
-            when 'proyectos'%><%= render '/shared/menu_proyecto' %>
-            <% when 'asignacion_roles' %><%= render '/shared/menu_proyecto' %>
-            <% when 'colaboradores' %><%= render '/shared/menu_proyecto' %>
-            <% when 'historial_estado_proyectos' %><%= render '/shared/menu_proyecto' %>
-            <% when 'notificacion_sistemas' %><%= render '/shared/menu_proyecto' %>
-            <% when 'historial_estado_actividades' %><%= render '/shared/menu_objetivos' %>
-            <% when 'necesidades' %><%= render '/shared/menu_necesidad' %>
-	    <% when 'organizacion_externas' %><%= render '/shared/menu_organizacion_externa' %>
-	    <% when 'objetivo_generales' %><%= render '/shared/menu_objetivos' %>
-	    <% when 'actividades' %><%= render '/shared/menu_objetivos' %>
-	    <% when 'asignacion_actividades' %><%= render '/shared/menu_objetivos' %>
-	    <% when 'reportes' %><%= render '/shared/menu_objetivos' %>
-	    <% when 'objetivo_especificos' %><%= render '/shared/menu_objetivos' %>
-	    <% when 'actividades' %><%= render '/shared/menu_objetivos' %>
-            <% when 'postulaciones' %><%= render '/shared/menu_proyecto' %>
-	    <% when 'transacciones' %><%= render '/shared/menu_transacciones' %>
-	    <% when 'roles' %><%= render '/shared/menu_roles' %>
-			<% when 'tipo_roles' %><%= render '/shared/menu_roles' %>
-			<% when 'privilegios' %><%= render '/shared/menu_roles' %>
-			<% when 'tipo_privilegios' %><%= render '/shared/menu_roles' %>
-			<% when 'asignacion_rol_predefinidos' %><%= render '/shared/menu_roles' %>
-			<% when 'asignacion_funciones' %><%= render '/shared/menu_roles' %>
-            <% when 'reporte_generados' %><%= render '/shared/menu_reporte_generados' %>
-            <% when 'concepto_gastos'%><%= render '/shared/menu_concepto_gasto' %>
-            <% when 'tipo_habilidades' %><%= render '/shared/menu_tipo_habilidad' %>
-            <% when 'habilidades' %><%= render '/shared/menu_habilidad' %>
-            <% when 'restricciones' %><%= render '/shared/menu_restriccion' %>
-            <% when 'detalle_restricciones' %><%= render '/shared/menu_detalle_restriccion' %>
-            <% when 'estado_presupuestos' %><%= render '/shared/menu_estado_presupuestos' %>
-            <% when 'presupuestos' %><%= render '/shared/menu_proyecto' %>
-            <% when 'detalle_presupuestos' %><%= render '/shared/menu_proyecto' %>
-            <% when 'informe_gastos' %><%= render '/shared/menu_proyecto' %>
-            <% when 'detalle_gastos' %><%= render '/shared/menu_proyecto' %>
-            <% when 'comprobantes' %><%= render '/shared/menu_proyecto' %>				 
-            <% when 'evento_publicos' %><%= render '/shared/menu_eventos_publicos' %>				 
-
+                when 'proyectos'%><%= render '/shared/menu_proyecto' %>
+                <% when 'asignacion_roles' %><%= render '/shared/menu_proyecto' %>
+                <% when 'colaboradores' %><%= render '/shared/menu_proyecto' %>
+                <% when 'historial_estado_proyectos' %><%= render '/shared/menu_proyecto' %>
+                <% when 'notificacion_sistemas' %><%= render '/shared/menu_proyecto' %>
+                <% when 'necesidades' %><%= render '/shared/menu_necesidad' %>
+        	     <% when 'organizacion_externas' %><%= render '/shared/menu_organizacion_externa' %>
+                <%# when 'historial_estado_actividades' %><%#= render '/shared/menu_objetivos' %>
+        	     <%# when 'objetivo_generales' %><%#= render '/shared/menu_objetivos' %>
+        	     <%# when 'actividades' %><%#= render '/shared/menu_objetivos' %>
+        	     <%# when 'requisitos' %><%#= render '/shared/menu_objetivos' %>
+        	     <%# when 'asignacion_actividades' %><%#= render '/shared/menu_objetivos' %>
+        	     <%# when 'reportes' %><%#= render '/shared/menu_objetivos' %>
+        	     <%# when 'objetivo_especificos' %><%#= render '/shared/menu_objetivos' %>
+        	     <%# when 'actividades' %><%#= render '/shared/menu_objetivos' %>
+                <% when 'historial_estado_actividades' %><%= render '/shared/menu_proyecto' %>
+                <% when 'objetivo_generales' %><%= render '/shared/menu_proyecto' %>
+                <% when 'actividades' %><%= render '/shared/menu_proyecto' %>
+                <% when 'requisitos' %><%= render '/shared/menu_proyecto' %>
+                <% when 'asignacion_actividades' %><%= render '/shared/menu_proyecto' %>
+                <% when 'reportes' %><%= render '/shared/menu_proyecto' %>
+                <% when 'objetivo_especificos' %><%= render '/shared/menu_proyecto' %>
+                <% when 'actividades' %><%= render '/shared/menu_proyecto' %>
+                <% when 'postulaciones' %><%= render '/shared/menu_proyecto' %>
+        	     <% when 'transacciones' %><%= render '/shared/menu_transacciones' %>
+        	     <% when 'roles' %><%= render '/shared/menu_roles' %>
+    			<% when 'tipo_roles' %><%= render '/shared/menu_roles' %>
+    			<% when 'privilegios' %><%= render '/shared/menu_roles' %>
+    			<% when 'tipo_privilegios' %><%= render '/shared/menu_roles' %>
+    			<% when 'asignacion_rol_predefinidos' %><%= render '/shared/menu_roles' %>
+    			<% when 'asignacion_funciones' %><%= render '/shared/menu_roles' %>
+                <% when 'notificacion_predeterminadas' %><%= render '/shared/menu_roles' %>
+                <% when 'tipo_notificaciones' %><%= render '/shared/menu_roles' %>
+                <% when 'reporte_generados' %><%= render '/shared/menu_reporte_generados' %>
+                <% when 'concepto_gastos'%><%= render '/shared/menu_roles' %>
+                <% when 'tipo_habilidades' %><%= render '/shared/menu_roles' %>
+                <% when 'habilidades' %><%= render '/shared/menu_roles' %>
+                <% when 'restricciones' %><%= render '/shared/menu_roles' %>
+                <% when 'detalle_restricciones' %><%= render '/shared/menu_roles' %>
+                <% when 'estado_presupuestos' %><%= render '/shared/menu_estado_presupuestos' %>
+                <% when 'presupuestos' %><%= render '/shared/menu_proyecto' %>
+                <% when 'detalle_presupuestos' %><%= render '/shared/menu_proyecto' %>
+                <% when 'informe_gastos' %><%= render '/shared/menu_proyecto' %>
+                <% when 'detalle_gastos' %><%= render '/shared/menu_proyecto' %>
+                <% when 'comprobantes' %><%= render '/shared/menu_proyecto' %>				 
+                <% when 'evento_publicos' %><%= render '/shared/menu_eventos_publicos' %>				 
 
           <% end %>
         </div><!-- /.navbar-collapse -->
 
-
-
-
-        <!---------------------------------------------
-        <!---------- FIN MENU VERTICAL -------------------
-        <!---------------------------------------------
-        <!---------------------------------------------
-        <!---------------------------------------------
-        <!------------------------>
+        <!---------- FIN MENU VERTICAL -------------->
 
       </nav>
       <div id="page-wrapper">
@@ -204,20 +166,10 @@
 				<% if alert != nil %>
 					<p class="alert alert-dismissable alert-danger"><%= alert %></p> <!--PARA DEVISE (los mensajes se encuentran en devise.en.yml)--->
 					<% end %>
-          <%= yield %>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         <!---------------------------------------------
-          <!---------- FIN INICIO MARCO CENTRAL   -------------------
-          !---------------------------------------------
-          !---------------------------------------------
-          !---------------------------------------------
-          !------------------------>    
 
-          <!---------------------------------------------
-          !---------- MODIFICAR ABAJO los ../../   -------------------
-          !---------------------------------------------
-          !---------------------------------------------
-          !---------------------------------------------
-          !------------------------>  
+          <%= yield %>
+          <!---------- FIN INICIO MARCO CENTRAL   --------------->    
+
        </div><!-- /#page-wrapper -->
   </div><!-- /#wrapper -->
   <!-- Modal -->

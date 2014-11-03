@@ -1,5 +1,6 @@
 <%= form_for(@historial_estado_usuario) do |f| %>
   <% if @historial_estado_usuario.errors.any? %>
+  
     <div id="error_explanation">
       <h2><%= pluralize(@historial_estado_usuario.errors.count, "error") %> prohibited this historial_estado_usuario from being saved:</h2>
 
@@ -11,23 +12,35 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :fechaCambioEstado %><br>
-    <%= f.datetime_select :fechaCambioEstado %>
+<div class="well">
+   
+ <div class="field">
+   <%= f.label :usuario_id   %>
+
+   <%=f.hidden_field :usuario_id, :value =>params[:usuario_id] %>
+   <% @user=Usuario.find(params[:usuario_id]) %>
+   <label><%=@user.nombreUsuario%> </label> 
+   <%#= f.collection_select(:usuario_id , @usuario, :id,:nombreUsuario,{prompt: "Usuario..." }, {class:"form-control"}) %>
+        </div>
+         
+         
+ 
+ 
+  <div class="field"> 	
+    <%= f.label 'Estado Usuario' %><br>
+   <%= f.collection_select(:estado_usuario_id, @estado_usuarios, :id,:nombre,{prompt: "Estado Posible de Usuario..." }, {class:"form-control"}) %>
+
   </div>
-  <div class="field">
-    <%= f.label :esActual %><br>
-    <%= f.check_box :esActual %>
-  </div>
-  <div class="field">
-    <%= f.label :usuario_id %><br>
-    <%= f.text_field :usuario_id %>
-  </div>
-  <div class="field">
-    <%= f.label :estado_usuario_id %><br>
-    <%= f.text_field :estado_usuario_id %>
-  </div>
-  <div class="actions">
+ 
+ <div class="field">
+          <%#= f.label 'Proyecto' %>
+    <%#= f.collection_select(:proyecto_id, @proyecto, :id,:nombre,{prompt: "Estado Posible de Usuario..." }, {class:"form-control"}) %>
+     
+           </div>
+  
+    <div class="actions">
     <%= f.submit %>
+    
   </div>
+    </div>
 <% end %>

@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require_self
+ *= require font-awesome
 *= require jquery-ui
 *= require bootstrap
 *= require morris-0.4.3.min
@@ -20,3 +21,7 @@
 *= require SrBuj
   *= require datepicker
  */
+.pull-right {
+  float: right;
+  padding-left: 4px;
+}

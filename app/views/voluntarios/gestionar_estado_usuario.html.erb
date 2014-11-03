@@ -1,0 +1,26 @@
+          <!--El panel panel-primary pone un cuadro -->
+          <div class="panel panel-primary">
+          	<!--Pone el cuadro de color azul -->
+            <div class="panel-heading">
+            	<!-- Titulo Cabecera  !-->
+  <h1 class="panel-title">
+<h1>Gestionar Estado Voluntario <small>Modulo Voluntario</small></h1>
+</div>
+
+<%= form_for(@voluntario) do |f|    %>
+ <%#= f.input :usuario, as: :autocomplete, label: false, url: usuarios_path, input_html: { autofocus: true } %>
+	<!-- Cuerpo del panel  !-->
+<div class="panel-body">
+	<%#= text_field_tag "legajo", "", :size => 10, :maxlenght => 5, :placeholder => "Legajo Usuario",:required => "required"  %>
+ <div>
+   <%= f.label :usuario_id %><br>
+   <%= f.collection_select(:usuario_id , @usuario, :id,:nombreUsuario,{prompt: "Usuario..." }, {class:"form-control"}) %>
+        </div>
+          <%= f.collection_select(:id , @estado, :id,:nombre,{prompt: "Estados..." }, {class:"form-control"}) %>
+        </div>
+        <div>
+    <%= f.submit "Boton "   %> 
+   		 </div>
+        <%end%>
+</div>
+</div>

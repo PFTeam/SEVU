@@ -62,11 +62,11 @@
                   </tr>                  
 
                 </tbody>
-                <%= link_to 'Edit', edit_organizacion_externa_path(@organizacion_externa) %> |
+                <%= link_to 'Editar', edit_organizacion_externa_path(@organizacion_externa) %> |
         </table>
 
 <% if params[:proyecto_id] %>
-	<%= link_to 'Back', '/proyectos/' + params[:proyecto_id] %>
+	<%= link_to 'Atrás', '/proyectos/' + params[:proyecto_id] %>
 <% else %>
-	<%= link_to 'Back', organizacion_externas_path %>
+	<%= link_to 'Atrás', organizacion_externas_path %>
 <% end %>

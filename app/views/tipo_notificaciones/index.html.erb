@@ -12,9 +12,9 @@
     <% @tipo_notificaciones.each do |tipo_notificacion| %>
       <tr>
         <td><%= tipo_notificacion.nombre %></td>
-        <td><%= link_to 'Show', tipo_notificacion %></td>
-        <td><%= link_to 'Edit', edit_tipo_notificacion_path(tipo_notificacion) %></td>
-        <td><%= link_to 'Destroy', tipo_notificacion, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Ver', tipo_notificacion %></td>
+        <td><%= link_to 'Editar', edit_tipo_notificacion_path(tipo_notificacion) %></td>
+        <td><%= link_to 'Borrar', tipo_notificacion, method: :delete, data: { confirm: 'Seguro?' } %></td>
       </tr>
     <% end %>
   </tbody>

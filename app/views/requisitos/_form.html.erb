@@ -1,4 +1,4 @@
-<%= form_for(@requisito) do |f| %>
+<%= simple_form_for(@requisito) do |f| %>
   <% if @requisito.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@requisito.errors.count, "error") %> prohibited this requisito from being saved:</h2>
@@ -11,15 +11,18 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :actividad_id %><br>
-    <%= f.text_field :actividad_id %>
-  </div>
-  <div class="field">
-    <%= f.label :habilidad_id %><br>
-    <%= f.text_field :habilidad_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
+    <%= f.input :habilidad, as: :autocomplete, label: false, url: habilidades_path , input_html: { autofocus: true  }  %>
+
+    <%= f.input :actividad_id ,:as => :hidden, input_html: {value: params[:actividad_id]} %>
+    
+    
+  	<div class="modal-footer">
+      <%= f.button :submit, :class => 'btn btn-primary', :value => 'Confirmar' %>
+      <%= link_to 'Atrás', '/actividades/' + params[:actividad_id] %>
+  	</div>
+
+	<br></br>
+
+	<%= render partial: 'index' %>
 <% end %>

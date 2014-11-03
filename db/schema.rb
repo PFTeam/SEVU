@@ -381,6 +381,7 @@ ActiveRecord::Schema.define(version: 20141103084505) do
     t.integer  "usuario_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "evaluado",          default: false
   end
 
   add_index "presupuestos", ["proyecto_id"], name: "index_presupuestos_on_proyecto_id", using: :btree

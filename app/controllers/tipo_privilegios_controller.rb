@@ -33,7 +33,7 @@ class TipoPrivilegiosController < ApplicationController
 
     respond_to do |format|
       if @tipo_privilegio.save
-        format.html { redirect_to @tipo_privilegio, notice: 'Tipo privilegio was successfully created.' }
+        format.html { redirect_to @tipo_privilegio, notice: 'Tipo privilegio fue creado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @tipo_privilegio }
       else
         format.html { render :new }
@@ -48,7 +48,7 @@ class TipoPrivilegiosController < ApplicationController
 		authorize! :update, TipoPrivilegio
     respond_to do |format|
       if @tipo_privilegio.update(tipo_privilegio_params)
-        format.html { redirect_to @tipo_privilegio, notice: 'Tipo privilegio was successfully updated.' }
+        format.html { redirect_to @tipo_privilegio, notice: 'Tipo privilegio fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @tipo_privilegio }
       else
         format.html { render :edit }
@@ -63,7 +63,7 @@ class TipoPrivilegiosController < ApplicationController
 		authorize! :destroy, TipoPrivilegio
     @tipo_privilegio.destroy
     respond_to do |format|
-      format.html { redirect_to tipo_privilegios_url, notice: 'Tipo privilegio was successfully destroyed.' }
+      format.html { redirect_to tipo_privilegios_url, notice: 'Tipo privilegio fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end
   end

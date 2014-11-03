@@ -5,4 +5,14 @@ class Postulacion < ActiveRecord::Base
   def aceptar
 	  self.save if self.aceptado = true
   end
+
+  def fue_aceptado
+
+     if self.aceptado == true
+	     "Si"
+     else
+	     "No"
+     end
+  	
+  end
 end

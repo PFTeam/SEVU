@@ -1,24 +1,31 @@
-<p id="notice"><%= notice %></p>
+<h1>Nuevo estado Creado </h1>
+
+
+    <!--El panel panel-primary pone un cuadro -->
+          <div class="panel panel-primary">
+          	<!--Pone el cuadro de color azul -->
+            <div class="panel-heading">
+            	<!-- Titulo Cabecera  !-->
+ <p id="notice"><%= notice %></p>
+  </div>
+
+
 
 <p>
   <strong>Fechacambioestado:</strong>
-  <%= @historial_estado_usuario.fechaCambioEstado %>
+  <%=@historial_estado_usuario.created_at %>
 </p>
 
 <p>
-  <strong>Esactual:</strong>
-  <%= @historial_estado_usuario.esActual %>
+  <strong>Nombre Usuario </strong>
+  <%= Usuario.find(@historial_estado_usuario.usuario_id).nombreUsuario %>
 </p>
-
 <p>
-  <strong>Usuario:</strong>
-  <%= @historial_estado_usuario.usuario %>
+  <strong>Nuevo Estado usuario:</strong>
+  <%= EstadoUsuario.find(@historial_estado_usuario.estado_usuario_id).nombre %>
 </p>
+</div>
 
-<p>
-  <strong>Estado usuario:</strong>
-  <%= @historial_estado_usuario.estado_usuario %>
-</p>
 
-<%= link_to 'Edit', edit_historial_estado_usuario_path(@historial_estado_usuario) %> |
-<%= link_to 'Back', historial_estado_usuarios_path %>
+<%= link_to 'Editar', edit_historial_estado_usuario_path(@historial_estado_usuario) %> |
+<%= link_to 'Listar Estados Anteriores', historial_estado_usuarios_path(:usuario_id => @historial_estado_usuario.usuario_id ) %>

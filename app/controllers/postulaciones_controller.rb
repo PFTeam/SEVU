@@ -36,6 +36,11 @@ class PostulacionesController < ApplicationController
 
     respond_to do |format|
       if @postulacion.save
+            sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+            Transaccion.create!(
+		    descripcion: 'Creación de la Postulación id :' + @postulacion.id.to_s ,
+		    sesion_id: sesion.id ,
+		    proyecto_id: @postulacion.proyecto.id)
 	format.html {redirect_to :controller => 'proyectos', :action => 'index'
 	      flash[:notice] = 'Se ha registrado tu participación'  } 
         format.json { render :show, status: :created, location: @postulacion }
@@ -52,7 +57,12 @@ class PostulacionesController < ApplicationController
 		authorize! :update, Postulacion
     respond_to do |format|
       if @postulacion.update(postulacion_params)
-        format.html { redirect_to @postulacion, notice: 'Postulacion was successfully updated.' }
+            sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+            Transaccion.create!(
+		    descripcion: 'Actualización de la Postulación id :' + @postulacion.id.to_s ,
+		    sesion_id: sesion.id ,
+		    proyecto_id: @postulacion.proyecto.id)
+        format.html { redirect_to @postulacion, notice: 'Postulacion fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @postulacion }
       else
         format.html { render :edit }
@@ -67,7 +77,7 @@ class PostulacionesController < ApplicationController
 		authorize! :destroy, Postulacion
     @postulacion.destroy
     respond_to do |format|
-      format.html { redirect_to postulaciones_url, notice: 'Postulacion was successfully destroyed.' }
+      format.html { redirect_to postulaciones_url, notice: 'Postulacion fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end
   end
@@ -77,8 +87,13 @@ class PostulacionesController < ApplicationController
     @postulacion = Postulacion.find(params[:id])
     @postulacion.aceptar
     @postulacion.save
+            sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+            Transaccion.create!(
+		    descripcion: 'Aceptación de la Postulación id :' + @postulacion.id.to_s ,
+		    sesion_id: sesion.id ,
+		    proyecto_id: @postulacion.proyecto.id)
     respond_to do |format|
-	    format.html {redirect_to :controller => 'postulaciones', :action => 'index', notice: 'Se ha registrado tu participación', :proyecto_id => @postulacion.proyecto.id  } 
+	    format.html {redirect_to :controller => 'asignacion_roles', :action => 'new', notice: 'Se ha registrado tu participación', :proyecto_id => @postulacion.proyecto.id, :usuario_id => @postulacion.usuario.id  } 
     end
   end
 
