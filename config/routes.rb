@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :regionales
+
 	devise_for :usuarios, :controllers => {:registrations => "registrations"}
 
   resources :colaboradores

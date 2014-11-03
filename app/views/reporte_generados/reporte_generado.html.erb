@@ -1,9 +1,5 @@
 <!---->    
-<% if params[':usuarios[]'].nil? %> <!--PASAR ESTA PARTE AL CONTROLADOR ASI NI SIQUIERA MUESTRA UNA PREIMAGEN  USAR REDIRECT_TO!!!!!!!!!!!!!!!-->    
-<script type="text/javascript">
-    window.location.href="/reporte_voluntarios?error=1"  
- </script>
-<% end %>
+
 <div class="col-lg-12">
 	<div class="col-lg-11">
     <h2>Reporte</h2><br /><br />
@@ -13,22 +9,85 @@
 		<a href="#" class="btn btn-primary btn-lg active" role="button" onclick="window.print()">Imprimir</a> 
   </div>	
 </div>		
-	<div class="col-lg-12">
-    <div class="panel panel-primary">
-       <div class="panel-heading">
-          <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Gráfico</h3>
-       </div>
-       <div class="panel-body">
+<%	params[:i_ids].each { |item| %>
+	<br />
+<div class="col-lg-12">
+	<div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Gráfico</h3>
+    </div>
+    <div class="panel-body">
+				<% case item
+
+						when '1' %>
+
+							<%= line_chart [
+    {name: "Cantidad de voluntarios en estado suspendido", data: [ [Time.now, 20], [Time.at(2001,3), 30] ] },
+    {name: "Study", data: [ [Time.at(2000,3), 30], [Time.at(2001,3), 20] ] },
+    {name: "Conversation", data: [ [Time.at(2000,3), 50], [Time.at(2001,3), 40] ] } ],
+    {library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>
+
+				<% when '2' %>
+					
 				<%= line_chart [
     {name: "Cantidad de voluntarios en estado activo", data: [ [Time.now, 20], [Time.at(2001,3), 30] ] },
     {name: "Study", data: [ [Time.at(2000,3), 30], [Time.at(2001,3), 20] ] },
     {name: "Conversation", data: [ [Time.at(2000,3), 50], [Time.at(2001,3), 40] ] } ],
     {library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>
-         </div>
-       </div>
-     </div>
-	</div>
+
+				<% when '3' %>
+
+				<%= line_chart [
+    {name: "Cantidad de actividades en estado creada asociado a cada voluntario", data: [ [Time.now, 20], [Time.at(2001,3), 30] ] },
+    {name: "Study", data: [ [Time.at(2000,3), 30], [Time.at(2001,3), 20] ] },
+    {name: "Conversation", data: [ [Time.at(2000,3), 50], [Time.at(2001,3), 40] ] } ],
+    {library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>
+
+				<% when '4' %>
+
+				<%= line_chart [
+    {name: "Cantidad de actividades en estado planificada asociado a cada voluntario", data: [ [Time.now, 20], [Time.at(2001,3), 30] ] },
+    {name: "Study", data: [ [Time.at(2000,3), 30], [Time.at(2001,3), 20] ] },
+    {name: "Conversation", data: [ [Time.at(2000,3), 50], [Time.at(2001,3), 40] ] } ],
+    {library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>
+
+				<% when '5' %>
+		
+				<%= line_chart [
+    {name: "Cantidad de actividades en estado suspendida asociado a cada voluntario", data: [ [Time.now, 20], [Time.at(2001,3), 30] ] },
+    {name: "Study", data: [ [Time.at(2000,3), 30], [Time.at(2001,3), 20] ] },
+    {name: "Conversation", data: [ [Time.at(2000,3), 50], [Time.at(2001,3), 40] ] } ],
+    {library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>
+
+				<% when '6' %>
 	
+				<%= line_chart [
+    {name: "Cantidad de actividades en estado cancelada asociado a cada voluntario", data: [ [Time.now, 20], [Time.at(2001,3), 30] ] },
+    {name: "Study", data: [ [Time.at(2000,3), 30], [Time.at(2001,3), 20] ] },
+    {name: "Conversation", data: [ [Time.at(2000,3), 50], [Time.at(2001,3), 40] ] } ],
+    {library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>
+
+				<% when '7' %>
+	
+				<%= line_chart [
+    {name: "Cantidad de actividades en estado terminada asociado a cada voluntario", data: [ [Time.now, 20], [Time.at(2001,3), 30] ] },
+    {name: "Study", data: [ [Time.at(2000,3), 30], [Time.at(2001,3), 20] ] },
+    {name: "Conversation", data: [ [Time.at(2000,3), 50], [Time.at(2001,3), 40] ] } ],
+    {library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>
+
+				 <% when '8' %>
+
+								<%= line_chart [
+    {name: "Cantidad de horas efectivas realizadas por voluntario", data: [ [Time.now, 20], [Time.at(2001,3), 30] ] },
+    {name: "Study", data: [ [Time.at(2000,3), 30], [Time.at(2001,3), 20] ] },
+    {name: "Conversation", data: [ [Time.at(2000,3), 50], [Time.at(2001,3), 40] ] } ],
+    {library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>
+
+	<%	end %>
+		</div>
+  </div>
+</div>
+
 	<div class="col-lg-12">
     <div class="panel panel-primary">
        <div class="panel-heading">
@@ -38,7 +97,7 @@
          <table class="table table-hover table-striped tablesorter">
                 <thead>
                   <tr>
-                    <th class="col-lg-3">Proyecto</th>
+                    <th class="col-lg-3">Fecha</th>
                     <th class="col-lg-1">Cantidad</th>
                     <th></th>
                   </tr>
@@ -50,21 +109,37 @@
                    
                     </td>
                   </tr>
-                   <tr>
-                     <td>  </td>
-                     <td>  </td>
-
-                    
-                    </td>
-                  </tr>
+                   
+										<% case item
+						when 1 %>
+							<tr>
+							<td> <%= Time.now %> </td>
+                     <td><%= 20 %></td>
+							</tr>
+							<tr>
+								<td> <%= Time.at(2001,3) %> </td>
+                     <td><%= 30 %></td>
+								</tr>
+						<% else %>
+								<tr>
+							<td> <%= Time.now %> </td>
+                     <td><%= 20 %></td>
+							</tr>
+							<tr>
+								<td> <%= Time.at(2001,3) %> </td>
+                     <td><%= 30 %></td>
+								</tr>
+						<%	end %>
+                  
                   
                 </tbody>
               </table>
       </div>
     </div>
 	</div>
+		
 
-              
+<%  } %>      
               
 
       

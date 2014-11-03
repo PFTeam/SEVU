@@ -3,6 +3,7 @@ class Proyecto < ActiveRecord::Base
   #Se establece que existe una foreign key
   belongs_to :tipo_proyecto
   belongs_to :necesidad
+  belongs_to :regional
 
   #Se establece la relación a muchos
   has_many :objetivo_generales
