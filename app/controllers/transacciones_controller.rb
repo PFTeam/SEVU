@@ -74,23 +74,23 @@ class TransaccionesController < ApplicationController
 	def control_fecha
 		authorize! :control_fecha, Transaccion
 				if params[:f_inicio]
-    @fecha_inicio = Date.new(
-      params[:f_inicio][:year].to_i,
-      params[:f_inicio][:month].to_i,
-      params[:f_inicio][:day].to_i
-    ).beginning_of_day
-  else
-    @fecha_inicio = Date.today.beginning_of_day
-  end
-		if params[:f_fin]
-    @fecha_fin = Date.new(
-      params[:f_fin][:year].to_i,
-      params[:f_fin][:month].to_i,
-      params[:f_fin][:day].to_i
-    ).end_of_day
-  else
-    @fecha_fin = Date.today.end_of_day
-  end
+    				@fecha_inicio = Date.new(
+      				params[:f_inicio][:year].to_i,
+      				params[:f_inicio][:month].to_i,
+      				params[:f_inicio][:day].to_i
+    				).beginning_of_day
+ 			 	else
+    				@fecha_inicio = Date.today.beginning_of_day
+  			end
+				if params[:f_fin]
+						@fecha_fin = Date.new(
+							params[:f_fin][:year].to_i,
+							params[:f_fin][:month].to_i,
+							params[:f_fin][:day].to_i
+						).end_of_day
+  			else
+    				@fecha_fin = Date.today.end_of_day
+  			end
 	end
 	def control_proyecto
 		authorize! :control_proyecto, Transaccion

@@ -85,7 +85,7 @@
 			<li><%= link_to content_tag(:i, fa_icon("user", text: "Mi Perfil")), edit_usuario_registration_path %></li>
 	      <!--<li><a href="#"><i class="fa fa-gear"></i> Configuraciones</a></li>-->
 			<% if puede_configurar? then %>
-				<li><%= link_to content_tag(:i, fa_icon("gear", text: "Configuraciones grales.")), roles_path %></li>
+				<li><%= link_to content_tag(:i, fa_icon("gear", text: "Configuraciones grales.")), configuraciones_generales_path %></li>
 			<% end %>
 	      <!--<li class="divider"></li>-->
 	      <li><%= link_to content_tag(:i, fa_icon("power-off", text: "Desconectarse")), destroy_usuario_session_path, method: :delete, style: "padding-right: 5px;"  %></li>
@@ -131,20 +131,22 @@
                 <% when 'actividades' %><%= render '/shared/menu_proyecto' %>
                 <% when 'postulaciones' %><%= render '/shared/menu_proyecto' %>
         	     <% when 'transacciones' %><%= render '/shared/menu_transacciones' %>
-        	     <% when 'roles' %><%= render '/shared/menu_roles' %>
-    			<% when 'tipo_roles' %><%= render '/shared/menu_roles' %>
-    			<% when 'privilegios' %><%= render '/shared/menu_roles' %>
-    			<% when 'tipo_privilegios' %><%= render '/shared/menu_roles' %>
-    			<% when 'asignacion_rol_predefinidos' %><%= render '/shared/menu_roles' %>
-    			<% when 'asignacion_funciones' %><%= render '/shared/menu_roles' %>
-                <% when 'notificacion_predeterminadas' %><%= render '/shared/menu_roles' %>
-                <% when 'tipo_notificaciones' %><%= render '/shared/menu_roles' %>
+        	     <% when 'roles' %><%= render '/shared/menu_configuraciones_generales' %>
+							<% when 'regionales' %><%= render '/shared/menu_configuraciones_generales' %>
+    			<% when 'tipo_roles' %><%= render '/shared/menu_configuraciones_generales' %>
+    			<% when 'privilegios' %><%= render '/shared/menu_configuraciones_generales' %>
+					<% when 'configuraciones_generales' %><%= render '/shared/menu_configuraciones_generales' %>
+    			<% when 'tipo_privilegios' %><%= render '/shared/menu_configuraciones_generales' %>
+    			<% when 'asignacion_rol_predefinidos' %><%= render '/shared/menu_configuraciones_generales' %>
+    			<% when 'asignacion_funciones' %><%= render '/shared/menu_configuraciones_generales' %>
+                <% when 'notificacion_predeterminadas' %><%= render '/shared/menu_configuraciones_generales' %>
+                <% when 'tipo_notificaciones' %><%= render '/shared/menu_configuraciones_generales' %>
                 <% when 'reporte_generados' %><%= render '/shared/menu_reporte_generados' %>
-                <% when 'concepto_gastos'%><%= render '/shared/menu_roles' %>
-                <% when 'tipo_habilidades' %><%= render '/shared/menu_roles' %>
-                <% when 'habilidades' %><%= render '/shared/menu_roles' %>
-                <% when 'restricciones' %><%= render '/shared/menu_roles' %>
-                <% when 'detalle_restricciones' %><%= render '/shared/menu_roles' %>
+                <% when 'concepto_gastos'%><%= render '/shared/menu_configuraciones_generales' %>
+                <% when 'tipo_habilidades' %><%= render '/shared/menu_configuraciones_generales' %>
+                <% when 'habilidades' %><%= render '/shared/menu_configuraciones_generales' %>
+                <% when 'restricciones' %><%= render '/shared/menu_configuraciones_generales' %>
+                <% when 'detalle_restricciones' %><%= render '/shared/menu_configuraciones_generales' %>
                 <% when 'estado_presupuestos' %><%= render '/shared/menu_estado_presupuestos' %>
                 <% when 'presupuestos' %><%= render '/shared/menu_proyecto' %>
                 <% when 'detalle_presupuestos' %><%= render '/shared/menu_proyecto' %>

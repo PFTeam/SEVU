@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @regional.nombre %>
+</p>
+
+<p>
+  <strong>Domicilio:</strong>
+  <%= @regional.domicilio %>
+</p>
+
+<p>
+  <strong>Telefono contacto:</strong>
+  <%= @regional.telefono_contacto %>
+</p>
+
+<p>
+  <strong>Nombre contacto:</strong>
+  <%= @regional.nombre_contacto %>
+</p>
+
+<%= link_to 'Editar', edit_regional_path(@regional) %> 

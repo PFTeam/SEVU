@@ -88,15 +88,70 @@
           </ul>
       </li>
       <% end %>
-      <% if can? :manage, AsignacionRolPredefinido %>
-          <li>
-              <%= link_to 'Agregar Privilegio a Rol', new_asignacion_rol_predefinido_path %>
-          </li>
+
+			<% if (can? :manage, AsignacionRolPredefinido) then %>
+      <li>
+
+          <a class="collapsed" data-target="#asignacionrolpredefinidos" data-toggle="collapse" href="javascript:;" aria-expanded="false">
+            Privilegios a Roles <i class="fa fa-fw fa-caret-down"></i>
+          </a>
+
+          <ul id="asignacionrolpredefinidos" class="collapse">
+                <% if can? :index, AsignacionRolPredefinido then %>
+                      <li>
+                          <%= link_to 'Lista de Privilegio a Rol', asignacion_rol_predefinidos_path %>
+                      </li>
+                <% end %>
+                <% if can? :create, AsignacionRolPredefinido then %>
+                    <li>
+                        <%= link_to 'Agregar Privilegio a Rol', new_asignacion_rol_predefinido_path %>
+                    </li>
+                <% end %>
+          </ul>
+      </li>
       <% end %>
-      <% if can? :manage, AsignacionFuncion %>
-          <li>
-              <%= link_to 'Agregar Funcion a Usuario', new_asignacion_funcion_path %>
-          </li>
+			<% if (can? :manage, AsignacionFuncion) then %>
+      <li>
+
+          <a class="collapsed" data-target="#asignacionfunciones" data-toggle="collapse" href="javascript:;" aria-expanded="false">
+            Funciones a Usuarios <i class="fa fa-fw fa-caret-down"></i>
+          </a>
+
+          <ul id="asignacionfunciones" class="collapse">
+                <% if can? :index, AsignacionFuncion then %>
+                      <li>
+                          <%= link_to 'Lista de Funcion a Usuario', asignacion_funciones_path %>
+                      </li>
+                <% end %>
+                <% if can? :create, AsignacionFuncion then %>
+                    <li>
+                        <%= link_to 'Agregar Funcion a Usuario', new_asignacion_funcion_path %>
+                    </li>
+                <% end %>
+          </ul>
+      </li>
+      <% end %>
+
+			<% if (can? :manage, Regional) then %>
+      <li>
+
+          <a class="collapsed" data-target="#regionales" data-toggle="collapse" href="javascript:;" aria-expanded="false">
+            Regionales <i class="fa fa-fw fa-caret-down"></i>
+          </a>
+
+          <ul id="regionales" class="collapse">
+                <% if can? :index, Regional then %>
+                      <li>
+                          <%= link_to 'Lista de Regionales', regionales_path %>
+                      </li>
+                <% end %>
+                <% if can? :create, Regional then %>
+                    <li>
+                        <%= link_to 'Agregar una Regional', new_regional_path %>
+                    </li>
+                <% end %>
+          </ul>
+      </li>
       <% end %>
 </ul>	
 

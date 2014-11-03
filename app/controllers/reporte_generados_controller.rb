@@ -18,6 +18,10 @@ class ReporteGeneradosController < ApplicationController
 
 	def reporte_voluntarios
 		authorize! :reporte_voluntarios, ReporteGenerado
+		if params[:usuario_ids].blank? || params[:item_ids].blank?  
+    		@error = '1';
+		else
+				 redirect_to reporte_generado_path( :u_ids => params[:usuario_ids], :i_ids => params[:item_ids]) #no me estan pasando los parametros
+ 		end 
   end
-
 end
