@@ -98,5 +98,26 @@
               <%= link_to 'Agregar Funcion a Usuario', new_asignacion_funcion_path %>
           </li>
       <% end %>
+			<% if (can? :manage, Regional) then %>
+      <li>
+
+          <a class="collapsed" data-target="#regionales" data-toggle="collapse" href="javascript:;" aria-expanded="false">
+            Regionales <i class="fa fa-fw fa-caret-down"></i>
+          </a>
+
+          <ul id="regionales" class="collapse">
+                <% if can? :index, Regional then %>
+                      <li>
+                          <%= link_to 'Lista de Regionales', regionales_path %>
+                      </li>
+                <% end %>
+                <% if can? :create, Regional then %>
+                    <li>
+                        <%= link_to 'Agregar una Regional', new_regional_path %>
+                    </li>
+                <% end %>
+          </ul>
+      </li>
+      <% end %>
 </ul>	
 

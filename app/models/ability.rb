@@ -27,6 +27,7 @@ class Ability
 						if asignacionrolpredefinido.rol==asignacionfuncion.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'notificaciones').id								
 								can :manage, Notificaciones
 						end
+						
 						#TRANSACCIONES/USUARIOS/SESIONES/TIPOTRANSACCIONES---------------------------------------
 						if asignacionrolpredefinido.rol==asignacionfuncion.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'auditoria').id								
 								can :auditoria, Transaccion
@@ -39,8 +40,10 @@ class Ability
 								can :manage, Sesiones
 						end
 							#ROLES/TIPOROL/PRIVILEGIO/TIPOPRIVILEGIO/ASIGNACIONROLPREDEFINIDO/ASIGNACIONFUNCION---------------------------------------
-						if asignacionrolpredefinido.rol==asignacionfuncion.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'roles').id
+						if asignacionrolpredefinido.rol==asignacionfuncion.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'configuraciones_generales').id
 								can :manage, Rol
+								can :configuraciones_generales, Rol
+								can :manage, Regional
 								can :manage, TipoRol
 								can :manage, Privilegio
 								can :manage, TipoPrivilegio

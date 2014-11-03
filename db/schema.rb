@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141103084505) do
+ActiveRecord::Schema.define(version: 20141103102120) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -422,10 +422,10 @@ ActiveRecord::Schema.define(version: 20141103084505) do
   create_table "regionales", force: true do |t|
     t.string   "nombre"
     t.string   "domicilio"
-    t.integer  "telefono_contacto"
     t.string   "nombre_contacto"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "telefono_contacto"
   end
 
   create_table "reportes", force: true do |t|

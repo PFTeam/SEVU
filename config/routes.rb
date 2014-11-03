@@ -230,6 +230,7 @@ Rails.application.routes.draw do
 	get 'usuario_bloqueado' => 'usuarios#usuario_bloqueado', :as => 'usuario_bloqueado'
 
       get 'gestionar_notificaciones' => 'notificacion_predeterminadas#gestionar_notificaciones', :as => 'gestionar_notificaciones'
+	 get 'configuraciones_generales' => 'roles#configuraciones_generales', :as => 'configuraciones_generales'
 
 
   #get 'gestionarPresupuesto', :controller => :presupuestos

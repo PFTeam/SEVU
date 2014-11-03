@@ -4,26 +4,31 @@ class RegionalesController < ApplicationController
   # GET /regionales
   # GET /regionales.json
   def index
+		authorize! :index, Regional
     @regionales = Regional.all
   end
 
   # GET /regionales/1
   # GET /regionales/1.json
   def show
+		authorize! :show, Regional
   end
 
   # GET /regionales/new
   def new
+		authorize! :new, Regional
     @regional = Regional.new
   end
 
   # GET /regionales/1/edit
   def edit
+		authorize! :edit, Regional
   end
 
   # POST /regionales
   # POST /regionales.json
   def create
+		authorize! :create, Regional
     @regional = Regional.new(regional_params)
 
     respond_to do |format|
@@ -40,6 +45,7 @@ class RegionalesController < ApplicationController
   # PATCH/PUT /regionales/1
   # PATCH/PUT /regionales/1.json
   def update
+		authorize! :update, Regional
     respond_to do |format|
       if @regional.update(regional_params)
         format.html { redirect_to @regional, notice: 'Regional was successfully updated.' }
@@ -54,6 +60,7 @@ class RegionalesController < ApplicationController
   # DELETE /regionales/1
   # DELETE /regionales/1.json
   def destroy
+		authorize! :destroy, Regional
     @regional.destroy
     respond_to do |format|
       format.html { redirect_to regionales_url, notice: 'Regional was successfully destroyed.' }

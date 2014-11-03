@@ -1,14 +1,24 @@
 <%= simple_form_for(@regional) do |f| %>
-  <%= f.error_notification %>
-
+  <% if @regional.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+      <% @regional.errors.full_messages.each do |message| %>
+         <font color="red"><li><%= message %></li></font>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div class="col-lg-6">
   <div class="form-inputs">
-    <%= f.input :nombre %>
-    <%= f.input :domicilio %>
-    <%= f.input :telefono_contacto %>
-    <%= f.input :nombre_contacto %>
+    <%= f.input :nombre, label: 'Nombre de Regional', placeholder: 'tipo de regional...', :required => true, :autofocus => true %><br />
+    <%= f.input :domicilio, label: 'Domicilio de Regional', placeholder: 'tipo de rol...', :required => true, :autofocus => true %><br />
+    <%= f.input :telefono_contacto, label: 'Telefono de Contacto', placeholder: 'telefono contacto...', :required => true, :autofocus => true %><br />
+    <%= f.input :nombre_contacto, label: 'Nombre de Contacto', placeholder: 'nombre contacto...', :required => true, :autofocus => true %><br />
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, "Aceptar", :class => "btn btn-primary btn-lg"  %>
   </div>
+</div>
 <% end %>
+
