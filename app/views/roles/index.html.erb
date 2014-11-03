@@ -44,6 +44,7 @@
         	 <td><%= Privilegio.find(asignacionrolpredefinido.privilegio).nombre %></td>
         	 <td><%= Privilegio.find(asignacionrolpredefinido.privilegio).descripcion %></td>
 					<td><%= asignacionrolpredefinido.esActual %></td>
+					<td><%= link_to 'Editar', edit_asignacion_rol_predefinido_path(asignacionrolpredefinido) %> </td>
        	</tr>
 				<% end %>
 				<% end %>

@@ -1,7 +1,7 @@
 <% proyect = params[:proyecto_id].to_i %>
 <h2>Control de Proyecto</h2>
 <% if proyect != 0%>
-<div class="table-fluid col-lg-12" >	
+<div class="table-fluid col-lg-12" align="center" >	
 	<%= link_to "Atrás", :back, :class => "btn btn-default btn-lg" %>
 	<a href="#" class="btn btn-primary btn-lg active"  role="button" onclick="window.print()">Imprimir</a>
 </div>
@@ -28,9 +28,8 @@
    </div>
  <% else %>
    <div class="table-responsive  col-lg-12">
-			<a href="#" class="btn btn-primary btn-lg active pull-right"  role="button" onclick="window.print()">Imprimir</a> 
-			<br></br>
-     <h3>Transacciones de <%= Proyecto.find(project).nombre %></h3>
+
+     <h3>Transacciones de <%= Proyecto.find(proyect).nombre %></h3>
      <table class="table table-hover table-striped tablesorter" align="right">
        <thead>
          <tr>
