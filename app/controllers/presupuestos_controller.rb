@@ -62,16 +62,20 @@ class PresupuestosController < ApplicationController
     respond_to do |format|
       if @presupuesto.update(presupuesto_params)
         sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
-
-        Transaccion.create!(descripcion: "Modificacion del presupuesto del proyecto "+@presupuesto.proyecto.nombre,
+        if @presupuesto.evaluado then #el presupuesto fue evaluado
+          if @presupuesto.aprobado then #el presupuesto fue aprobado
+            description = "El presupuesto del proyecto "+@presupuesto.proyecto.nombre+" fue Aprobado."
+          else
+            description = "El presupuesto del proyecto "+@presupuesto.proyecto.nombre+" fue Rechazado."
+          end
+        else
+          description = "El presupuesto del proyecto "+@presupuesto.proyecto.nombre+" fue puesto para evaluar nuevamente."
+        end
+        # Creacion de la transaccion con mensaje personalizado
+        Transaccion.create!(descripcion: description,
                   sesion_id: sesion.id, 
                   proyecto_id: @presupuesto.proyecto.id)
 
-#         Transaccion.create!(
-#           descripcion: 'Modificacion del presupuesto del proyecto'+@presupuesto.proyecto.nombre,
-# ‪           sesion_id‬: sesion.id,
-# ‪           proyecto_id‬: @presupuesto.proyecto.id
-#         )
         format.html { redirect_to evaluar_presupuestos_pendientes_path }#@presupuesto, notice: 'El Presupuesto fue creado exitosamente.' }
         #format.json { render :show, status: :ok, location: @presupuesto }
       else
