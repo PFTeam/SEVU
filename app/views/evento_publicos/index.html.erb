@@ -37,9 +37,9 @@
 		<br>
 		<br>
 		<label>Concurrencia</label>
-		<%= evento_publico.asistencia_eventos.size %>
+		<%= evento_publico.asistencia_eventos.size %></br>
 		<% if current_usuario.participando_evento(evento_publico) == 0 %>
-			<%= button_to "Participar",  {:controller => :asistencia_eventos, :action => 'create', :asistencia_evento => { :usuario_id => current_usuario.id, :evento_publico_id => evento_publico.id }}, :method => :new %>
+			<%= link_to "Participar",  {:controller => :asistencia_eventos, :action => 'create', :asistencia_evento => { :usuario_id => current_usuario.id, :evento_publico_id => evento_publico.id }}, :class => "btn btn-primary btn-lg", :method => :new %>
 		<% else %>
 		<br>
 		<br>
