@@ -17,17 +17,18 @@
           <% end %>
         </label>
       </div>
-      <% if !@presupuesto.aprobado.nil? & @presupuesto.aprobado then %>
+      <% if @presupuesto.evaluado && @presupuesto.aprobado then %>
       <div class="alert alert-success">
         <strong> Felicitaciones! </strong>
-        El presupuesto ha sido <u>APROBADO</u>! Si necesita modificar póngase en contacto con el coordinador
+        El presupuesto ha sido <u>APROBADO</u>! Si necesita modificar póngase en contacto con el coordinador.
       </div>
-    <% else %>
+    <% end %>
+    <% if @presupuesto.evaluado && !@presupuesto.aprobado then %>
   <div class="alert alert-danger">
       <strong>
           Lo sentimos!
       </strong>
-       El presupuesto ha sido <u>RECHAZADO</u>, si necesita modificar póngase en contacto con el coordinador
+       El presupuesto ha sido <u>RECHAZADO</u>, si necesita modificar póngase en contacto con el coordinador.
      </div>
    <% end %>
     <!--</form>-->
@@ -158,10 +159,10 @@
       </span>
       <input class="form-control" type="text" value=<%= number_with_precision(@presupuesto.montoTotal, :precision => 2)  %> disabled="disabled"></input>
     </div>
-    <% if @presupuesto.aprobado.nil? then #Verifica que el presupuesto no haya sido evaluado todavia %>
+    <% if !@presupuesto.evaluado then #Verifica que el presupuesto no haya sido evaluado todavia %>
     
     <div align="center">  
-      <%= link_to "Atras", :back %>
+      <%= link_to "Atras", :back, class: "btn btn-default btn-lg" %>
       <%= link_to "Agregar gasto", new_presupuesto_detalle_presupuesto_path(@presupuesto), class: "btn btn-primary btn-lg" %> 
     </div>
   </div>
