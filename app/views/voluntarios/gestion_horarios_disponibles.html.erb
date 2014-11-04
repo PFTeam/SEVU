@@ -2,7 +2,7 @@
 <p></p><p></p>
 <p></p>
 <% if @voluntario.nil? then %>
-<h2>NO Voluntario</h2>
+<h2>No existe el Voluntario</h2>
 <% else %> 
 <div class="well">
 <p>
@@ -31,7 +31,7 @@ Legajo:
 <n>"Hora Desde: "</n><%=horario.horaDesde %>
 <n>"Hora hasta: "</n><%=horario.horaHasta %>
 <td><%#= link_to 'Editar Horario', edit_voluntario_horario_disponibl_path(horario) %><td>
-<%= link_to 'Editar Horario', edit_horario_disponibl_path(horario) %>
+<%= link_to 'Editar Horario', edit_horario_disponible_path(horario) %>
 <%= link_to 'Borrar', horario, method: :delete, data: { confirm: 'Estas seguro?' } %>
 
 
@@ -44,9 +44,9 @@ Legajo:
 
 
 <% end %>
-<span class="label label-primary">
 
-<%= link_to 'Agregar Horarios Disponibles', new_voluntario_horario_disponibl_path(@voluntario) %>
+<div align="center">
+<%= link_to 'Agregar Horarios Disponibles', new_voluntario_horario_disponible_path(@voluntario), :class => "btn btn-primary btn-lg", :style => 'color:#FFFFFF;' %>
+</div>
 
-</span>
 	

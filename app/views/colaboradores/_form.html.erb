@@ -2,7 +2,7 @@
 
 
 
-    <%= f.input :organizacion_externa, as: :autocomplete, label: false, url: organizacion_externas_path, input_html: { autofocus: true  }  %>
+    <%= f.input :organizacion_externa, as: :autocomplete, label: true, url: organizacion_externas_path, input_html: { autofocus: true  }  %>
 
 	<%= f.input :proyecto_id,:as => :hidden, input_html: {value: params[:proyecto_id]} %>
   	
