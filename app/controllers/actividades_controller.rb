@@ -1,5 +1,6 @@
 class ActividadesController < ApplicationController
   before_action :set_actividad, only: [:show, :edit, :update, :destroy]
+ # before_destroy :borrar_asociaciones
 
   # GET /actividades
   # GET /actividades.json
@@ -82,6 +83,7 @@ class ActividadesController < ApplicationController
   # DELETE /actividades/1.json
   def destroy
 		authorize! :destroy, Actividad
+    @objetivo_especifico = @actividad.objetivo_especifico
     @actividad.destroy
     respond_to do |format|
             sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
@@ -89,7 +91,7 @@ class ActividadesController < ApplicationController
 		    descripcion: 'Borrado de la Actividad id :' + @actividad.id.to_s ,
 		    sesion_id: sesion.id ,
 		    proyecto_id: @actividad.proyecto.id)
-      format.html { redirect_to actividades_url
+      format.html { redirect_to @objetivo_especifico
 		    flash[:notice] = 'Actividad fue borrada satisfactoriamente.' }
       format.json { head :no_content }
     end
