@@ -42,7 +42,8 @@
               <div class="panel-heading">
 
 		<% if !actividad.nombre.blank? %>
-		      <h3 class="panel-title">Actividades: <%= link_to actividad.nombre, actividad%>
+			<h3 class="panel-title">Actividades: <%= link_to actividad.nombre, actividad%>
+			<%= link_to 'Borrar', actividad, method: :delete, data: { confirm: 'Seguro?' } %>
 		      </h3>
 		<% else %>
 			No se ha asignado ningun nombre a la Actividad

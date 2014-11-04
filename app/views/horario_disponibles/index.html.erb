@@ -1,4 +1,4 @@
-<h1>Listing horario_disponibles</h1>
+<h1>Lista de Horarios Disponibles</h1>
 
 <table>
   <thead>
@@ -20,7 +20,7 @@
         <td><%= horario_disponibl.horaHasta %></td>
         <td><%= horario_disponibl.voluntario %></td>
         <td><%= link_to 'Ver', horario_disponibl %></td>
-        <td><%= link_to 'Editar', edit_horario_disponibl_path(horario_disponibl) %></td>
+        <td><%= link_to 'Editar', edit_horario_disponible_path(horario_disponibl) %></td>
         <td><%= link_to 'Borrar', horario_disponibl, method: :delete, data: { confirm: 'Seguro?' } %></td>
       </tr>
     <% end %>
@@ -29,4 +29,4 @@
 
 <br>
 
-<%= link_to 'New Horario disponible', new_voluntario_horario_disponibl_path(@voluntario) %>
+<%#= link_to 'Agregar Horario disponible', new_voluntario_horario_disponible_path(:voluntario_id => @voluntario.id) %>

@@ -36,10 +36,10 @@ class ObjetivoEspecificosController < ApplicationController
   def create
 		authorize! :create, ObjetivoEspecifico
     @objetivo_especifico = ObjetivoEspecifico.new(objetivo_especifico_params)
-
+    @objetivo_general = @objetivo_especifico.objetivo_general
     respond_to do |format|
       if @objetivo_especifico.save
-        format.html { redirect_to :controller => 'objetivo_especificos', :action => 'index', :objetivo_general_id => @objetivo_especifico.objetivo_general_id 
+        format.html { redirect_to @objetivo_general
 		      flash[:notice] = 'Objetivo especifico fue creado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @objetivo_especifico }
       else
@@ -72,7 +72,7 @@ class ObjetivoEspecificosController < ApplicationController
     @objetivo_general = @objetivo_especifico.objetivo_general
     @objetivo_especifico.destroy
     respond_to do |format|
-      format.html { redirect_to objetivo_especificos_path(:objetivo_general_id => @objetivo_general) 
+      format.html { redirect_to @objetivo_general
 		    flash[notice] = 'Objetivo especifico fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end
