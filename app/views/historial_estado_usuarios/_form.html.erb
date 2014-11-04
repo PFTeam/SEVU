@@ -18,9 +18,13 @@
    <%= f.label :usuario_id   %>
 
    <%=f.hidden_field :usuario_id, :value =>params[:usuario_id] %>
-   <% @user=Usuario.find(params[:usuario_id]) %>
-   <label><%=@user.nombreUsuario%> </label> 
-   <%#= f.collection_select(:usuario_id , @usuario, :id,:nombreUsuario,{prompt: "Usuario..." }, {class:"form-control"}) %>
+   
+   <%=@user=Usuario.find(params[:usuario_id]) %>
+   <p>
+   	<label>El ultimo Estado: </label>
+   	<label><%=EstadoUsuario.find(HistorialEstadoUsuario.where(usuario_id: params[:usuario_id]).last.estado_usuario_id).nombre%> </label> </p>
+   
+  
         </div>
          
          
@@ -32,11 +36,7 @@
 
   </div>
  
- <div class="field">
-          <%#= f.label 'Proyecto' %>
-    <%#= f.collection_select(:proyecto_id, @proyecto, :id,:nombre,{prompt: "Estado Posible de Usuario..." }, {class:"form-control"}) %>
-     
-           </div>
+
   
     <div class="actions">
     <%= f.submit %>

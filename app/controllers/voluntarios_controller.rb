@@ -51,7 +51,7 @@ end
 
   end
 
-
+ end
 
   def buscar_por_legajo
    #empleado = Empleado.select("id, nombre, apellido").where(:legajo => params[:legajo]);
@@ -75,8 +75,6 @@ end
     @voluntario = Voluntario.find(params[:id])
  @horario_disponibles = HorarioDisponible.where(voluntario_id: params[:id])
  
- 
-
 #horario_disponibles =@voluntario.horario_disponibles.all
     
   end
@@ -126,6 +124,7 @@ end
    @notap = @voluntario.notas
 
   end
+  
   # GET /voluntarios/1
   # GET /voluntarios/1.json
   def show
@@ -167,6 +166,7 @@ end
 
   # PATCH/PUT /voluntarios/1
   # PATCH/PUT /voluntarios/1.json
+  
   def update
 		authorize! :update, Voluntario
     respond_to do |format|
@@ -190,6 +190,7 @@ end
       format.json { head :no_content }
     end
   end
+  
 def gestion_horarios_disponibles
   
  @voluntario = Voluntario.find(params[:id])

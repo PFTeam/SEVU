@@ -43,8 +43,17 @@
     <%end%>
   </tbody>
 </table>
+
+<p>
+	<%= link_to 'New Historial estado usuario', new_historial_estado_usuario_path(:usuario_id => params[:usuario_id]) %>
+
+</p>
+
+<p>
+  <%= link_to 'Back', voluntarios_path%>
+  </p>
+
 </div>
 </div>
-<button class="btn btn-primary> <%= link_to 'New Historial estado usuario', new_historial_estado_usuario_path %> </button>
 
 

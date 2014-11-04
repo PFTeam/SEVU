@@ -31,6 +31,7 @@ class HistorialEstadoUsuariosController < ApplicationController
   # GET /historial_estado_usuarios/1/edit
   def edit
 		authorize! :edit, HistorialEstadoUsuario
+		 @estado_usuarios = EstadoUsuario.all
   end
 
   # POST /historial_estado_usuarios
@@ -56,8 +57,8 @@ class HistorialEstadoUsuariosController < ApplicationController
 		authorize! :update, HistorialEstadoUsuario
     respond_to do |format|
       if @historial_estado_usuario.update(historial_estado_usuario_params)
-        format.html { redirect_to @historial_estado_usuario, notice: 'Historial estado usuario was successfully updated.' }
-        format.json { render :show, status: :ok, location: @historial_estado_usuario }
+        format.html { redirect_to @historial_estado_usuario, notice: 'Historial estado fue actualizado satisfactoriamente' }
+        #format.json { render :show, status: :ok, location: @historial_estado_usuario }
       else
         format.html { render :edit }
         format.json { render json: @historial_estado_usuario.errors, status: :unprocessable_entity }
@@ -79,8 +80,8 @@ class HistorialEstadoUsuariosController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_historial_estado_usuario
-       @historial_estado_usuario = HistorialEstadoUsuario.where(usuario_id:  params[:id])
-     # @historial_estado_usuario = HistorialEstadoUsuario.find(params[:id])
+      # @historial_estado_usuario = HistorialEstadoUsuario.where(usuario_id:  params[:id])
+     @historial_estado_usuario = HistorialEstadoUsuario.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

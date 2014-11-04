@@ -25,10 +25,11 @@
 	
 
 	
+	<%#usuarioss=Usuario.find(voluntario.id) %>
 	
 	
-	
-	<h3>Voluntario: <%= voluntario.nombreUsuario %> Legajo:	<%= voluntario.legajo %> Direccion: <%= voluntario.direccion %> </h3>
+	<h3> <%= image_tag voluntario.foto.url(:small) %>  Voluntario: <%= voluntario.nombreUsuario %> Legajo:	<%= voluntario.legajo %> Direccion: <%= voluntario.direccion %> </h3>
+      	
       	<h4>
       	 </div>
       	 	<div class="panel-body">

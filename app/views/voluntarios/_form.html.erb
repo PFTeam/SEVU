@@ -29,6 +29,7 @@
     <%= f.label :contraseña %><br>
     <%#= f.text_field :contrasenia %>
     <%= f.password_field  :contrasenia %>
+
   </div>
     <div class="field">
     <%= f.label :mail %><br>
@@ -44,7 +45,7 @@
   
   <div class="field">
     <%= f.label :fechaRegistro %><br>
-    <%= f.datetime_select :fechaRegistro %>
+    <%= f.datetime_select :created_at %>
   </div>
   <div class="field">
     <%= f.label :foto %><br>
