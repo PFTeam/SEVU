@@ -43,7 +43,15 @@ namespace :db do
 			pap19diego=Privilegio.create(nombre: "edit_actividad", descripcion: "Permite editar la actividad y manejar detalles de gastos, comprobantes y reportes", tipo_privilegio: ppdiego)
 
 
-      arddiego=AsignacionRolPredefinido.create(esActual: true, privilegio: padiego , rol: rsdiego)
+      ard1diego=AsignacionRolPredefinido.create(esActual: true, privilegio: padiego , rol: rsdiego)
+			ard2diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pa1diego , rol: rsdiego)
+			ard3diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pa2diego , rol: rsdiego)
+			ard4diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pa3diego , rol: rsdiego)
+			ard5diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pa4diego , rol: rsdiego)
+
+			EstadoUsuario.create(nombre: "Activo", descripcion: "El usuario se encuentra activo dentro del sistema")
+			EstadoUsuario.create(nombre: "Suspendido", descripcion: "El usuario se encuentra suspendido dentro del sistema")
+
 
     u= Usuario.create!(nombreUsuario: "joel",
 								       password: password, 

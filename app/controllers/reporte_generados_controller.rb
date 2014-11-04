@@ -21,7 +21,7 @@ class ReporteGeneradosController < ApplicationController
 		if params[:usuario_ids].blank? || params[:item_ids].blank?  
     		@error = '1';
 		else
-				 redirect_to reporte_generado_path( :u_ids => params[:usuario_ids], :i_ids => params[:item_ids]) #no me estan pasando los parametros
+				 redirect_to reporte_generado_path( :tipo_rep => 1, :anio => params[:anio_rep], :u_ids => params[:usuario_ids], :i_ids => params[:item_ids] )
  		end 
   end
 end
