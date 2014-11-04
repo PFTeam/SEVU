@@ -169,6 +169,8 @@ Rails.application.routes.draw do
 
   get 'mis_proyectos', :as => 'proyectos/mis_proyectos', :controller => :proyectos
   get 'mis_necesidades', :as => 'necesidades/mis_necesidades', :controller => :necesidades
+  
+  get 'asignacion_actividad/busqueda_filtrada', :to => 'asignacion_actividades#busqueda_filtrada'
 
   get 'gestionar_experiencias/:id' => 'voluntarios#gestionar_experiencias', :as => 'gestionar_experiencias'
 

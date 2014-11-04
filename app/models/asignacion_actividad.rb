@@ -4,6 +4,8 @@ class AsignacionActividad < ActiveRecord::Base
 
   has_many :reportes
 
+  #validates :usuario, :presence => true
+
   def to_a
         [self]
   end

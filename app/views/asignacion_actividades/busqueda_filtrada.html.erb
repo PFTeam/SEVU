@@ -1,0 +1,76 @@
+<%= simple_form_for(@asignacion_actividad) do |f| %>
+  <% if @asignacion_actividad.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@asignacion_actividad.errors.count, "error") %> prohibited this asignacion_actividad from being saved:</h2>
+
+      <ul>
+      <% @asignacion_actividad.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.input :actividad_id ,:as => :hidden, input_html: {value: @actividad.id}  %>
+
+<div class="form-group input-group">
+                <span class="input-group-addon">@</span>              
+   <%= f.input :usuario_id, label: false, :collection => @usuarios%>
+   </div>
+   
+ <div class="modal-footer">
+	 <%= f.button :submit, :class => 'btn btn-primary', :value => 'Confirmar' %>
+ </div>
+
+<% end %>
+
+
+
+<h1>Lista de Usuarios</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Foto</th>
+      <th>Nombre de Usuario   </th>
+      <th>Apellido y Nombre   </th>
+      <th>Email   </th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @usuarios.each do |usuario| %>
+      <tr>
+      <td><%= image_tag usuario.foto.url(:thumb) %></td>
+        <td><%= usuario.nombreUsuario %></td>
+
+        <td><%= usuario.apellido_nombre %></td>
+        <td><%= usuario.email %></td>
+      </tr> 
+      <tr>
+	  <% if usuario.type == "Voluntario"%>
+         <td>HABILIDADES: </td>
+          
+         <% @experiencias = Experiencia.find_by(voluntario: usuario.id).to_a %>
+         <% @experiencias.each do |experiencia| %>
+         <td><%= experiencia.habilidad %>1</td>
+         
+         
+         <% end %>	  
+	  <% else %>
+	  
+	  <% end %>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Usuario', new_usuario_path %>
+
+
+
+
