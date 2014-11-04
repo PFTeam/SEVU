@@ -32,6 +32,11 @@ class AsignacionRolPredefinidosController < ApplicationController
     @asignacion_rol_predefinido = AsignacionRolPredefinido.new(asignacion_rol_predefinido_params)
 
     respond_to do |format|
+									sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+				Transaccion.create!(
+    				descripcion: 'Asignar el privilegio '+Privilegio.find(@asignacion_rol_predefinido.privilegio_id).nombre + ' al rol ' + Rol.find(@asignacion_rol_predefinido.rol_id).nombre,
+    				sesion_id: sesion.id
+				)
       if @asignacion_rol_predefinido.save
         format.html { redirect_to @asignacion_rol_predefinido, notice: 'Asignacion rol predefinido fue creado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @asignacion_rol_predefinido }
@@ -48,6 +53,11 @@ class AsignacionRolPredefinidosController < ApplicationController
 		authorize! :update, AsignacionRolPredefinido
     respond_to do |format|
       if @asignacion_rol_predefinido.update(asignacion_rol_predefinido_params)
+				sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+				Transaccion.create!(
+    				descripcion: 'Actualizar el privilegio '+Privilegio.find(@asignacion_rol_predefinido.privilegio_id).nombre + ' con el rol ' + Rol.find(@asignacion_rol_predefinido.rol_id).nombre,
+    				sesion_id: sesion.id
+				)
         format.html { redirect_to @asignacion_rol_predefinido, notice: 'Asignacion rol predefinido fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @asignacion_rol_predefinido }
       else
@@ -61,6 +71,11 @@ class AsignacionRolPredefinidosController < ApplicationController
   # DELETE /asignacion_rol_predefinidos/1.json
   def destroy
 		authorize! :destroy, AsignacionRolPredefinido
+		sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+				Transaccion.create!(
+    				descripcion: 'Eliminar asignación del privilegio '+Privilegio.find(@asignacion_rol_predefinido.privilegio_id).nombre + ' al rol ' + Rol.find(@asignacion_rol_predefinido.rol_id).nombre,
+    				sesion_id: sesion.id
+				)
     @asignacion_rol_predefinido.destroy
     respond_to do |format|
       format.html { redirect_to asignacion_rol_predefinidos_url, notice: 'Asignacion rol predefinido fue borrado satisfactoriamente.' }

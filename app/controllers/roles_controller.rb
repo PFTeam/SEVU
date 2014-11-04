@@ -23,6 +23,7 @@ class RolesController < ApplicationController
   # GET /roles/1/edit
   def edit
 		authorize! :edit, Rol
+
   end
 
   # POST /roles
@@ -33,6 +34,11 @@ class RolesController < ApplicationController
 
     respond_to do |format|
       if @rol.save
+				sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+				Transaccion.create!(
+    				descripcion: 'Creación del rol  '+@rol.nombre,
+    				sesion_id: sesion.id
+				)
         format.html { redirect_to @rol, notice: 'El rol se ha creado exitosamente.' }
         format.json { render :show, status: :created, location: @rol }
       else
@@ -48,6 +54,11 @@ class RolesController < ApplicationController
 		authorize! :update, Rol
     respond_to do |format|
       if @rol.update(rol_params)
+				sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+				Transaccion.create!(
+    				descripcion: 'Actualización del rol  '+@rol.nombre,
+    				sesion_id: sesion.id
+				)
         format.html { redirect_to @rol, notice: 'Rol fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @rol }
       else
@@ -61,6 +72,11 @@ class RolesController < ApplicationController
   # DELETE /roles/1.json
   def destroy
 		authorize! :destroy, Rol
+		sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+				Transaccion.create!(
+    				descripcion: 'Eliminar el rol  '+@rol.nombre,
+    				sesion_id: sesion.id
+				)
     @rol.destroy
     respond_to do |format|
       format.html { redirect_to roles_url, notice: 'Rol fue borrado satisfactoriamente.' }

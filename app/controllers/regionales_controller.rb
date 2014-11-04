@@ -30,9 +30,13 @@ class RegionalesController < ApplicationController
   def create
 		authorize! :create, Regional
     @regional = Regional.new(regional_params)
-
     respond_to do |format|
       if @regional.save
+				sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+				Transaccion.create!(
+    				descripcion: 'Creacion de Regional '+@regional.nombre,
+    				sesion_id: sesion.id
+				)
         format.html { redirect_to @regional, notice: 'Regional was successfully created.' }
         format.json { render :show, status: :created, location: @regional }
       else
@@ -47,6 +51,11 @@ class RegionalesController < ApplicationController
   def update
 		authorize! :update, Regional
     respond_to do |format|
+			sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+				Transaccion.create!(
+    				descripcion: 'Actualización de Regional '+@regional.nombre,
+    				sesion_id: sesion.id
+				)
       if @regional.update(regional_params)
         format.html { redirect_to @regional, notice: 'Regional was successfully updated.' }
         format.json { render :show, status: :ok, location: @regional }
@@ -61,6 +70,11 @@ class RegionalesController < ApplicationController
   # DELETE /regionales/1.json
   def destroy
 		authorize! :destroy, Regional
+		sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+				Transaccion.create!(
+    				descripcion: 'Eliminar la Regional '+@regional.nombre,
+    				sesion_id: sesion.id
+				)
     @regional.destroy
     respond_to do |format|
       format.html { redirect_to regionales_url, notice: 'Regional was successfully destroyed.' }

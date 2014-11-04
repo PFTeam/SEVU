@@ -33,6 +33,11 @@ class PrivilegiosController < ApplicationController
 
     respond_to do |format|
       if @privilegio.save
+						sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+				Transaccion.create!(
+    				descripcion: 'Crear el privilegio  '+@privilegio.nombre,
+    				sesion_id: sesion.id
+				)
         format.html { redirect_to @privilegio, notice: 'Privilegio fue creado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @privilegio }
       else
@@ -48,6 +53,11 @@ class PrivilegiosController < ApplicationController
 		authorize! :update, Privilegio
     respond_to do |format|
       if @privilegio.update(privilegio_params)
+						sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+				Transaccion.create!(
+    				descripcion: 'Actualizar el privilegio  '+@privilegio.nombre,
+    				sesion_id: sesion.id
+				)
         format.html { redirect_to @privilegio, notice: 'Privilegio fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @privilegio }
       else
@@ -61,6 +71,11 @@ class PrivilegiosController < ApplicationController
   # DELETE /privilegios/1.json
   def destroy
 		authorize! :destroy, Privilegio
+		sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+				Transaccion.create!(
+    				descripcion: 'Eliminar el privilegio  '+@privilegio.nombre,
+    				sesion_id: sesion.id
+				)
     @privilegio.destroy
     respond_to do |format|
       format.html { redirect_to privilegios_url, notice: 'Privilegio fue borrado satisfactoriamente.' }
