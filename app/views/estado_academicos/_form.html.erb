@@ -1,0 +1,14 @@
+<%= simple_form_for(@estado_academico) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :cantidad_materias_regulares %>
+    <%= f.input :cantidad_materias_aprobadas %>
+    <%= f.input :cantidad_materias_cursando %>
+    <%= f.association :usuario %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

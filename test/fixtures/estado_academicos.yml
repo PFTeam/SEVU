@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cantidad_materias_regulares: 1
+  cantidad_materias_aprobadas: 1
+  cantidad_materias_cursando: 1
+  usuario_id: 
+
+two:
+  cantidad_materias_regulares: 1
+  cantidad_materias_aprobadas: 1
+  cantidad_materias_cursando: 1
+  usuario_id: 

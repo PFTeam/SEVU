@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141107190852) do
+ActiveRecord::Schema.define(version: 20141108160551) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -155,6 +155,17 @@ ActiveRecord::Schema.define(version: 20141107190852) do
 
   add_index "detalle_presupuestos", ["concepto_gasto_id"], name: "index_detalle_presupuestos_on_concepto_gasto_id", using: :btree
   add_index "detalle_presupuestos", ["presupuesto_id"], name: "index_detalle_presupuestos_on_presupuesto_id", using: :btree
+
+  create_table "estado_academicos", force: true do |t|
+    t.integer  "cantidad_materias_regulares"
+    t.integer  "cantidad_materias_aprobadas"
+    t.integer  "cantidad_materias_cursando"
+    t.integer  "usuario_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "estado_academicos", ["usuario_id"], name: "index_estado_academicos_on_usuario_id", using: :btree
 
   create_table "estado_actividades", force: true do |t|
     t.string   "nombre"

@@ -1,0 +1,2 @@
+module EstadoAcademicosHelper
+end
