@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141103102120) do
+ActiveRecord::Schema.define(version: 20141107190852) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,9 @@ ActiveRecord::Schema.define(version: 20141103102120) do
     t.integer  "tipo_actividad_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "repetitiva"
+    t.string   "frecuencia"
+    t.string   "dia_semana"
   end
 
   add_index "actividades", ["objetivo_especifico_id"], name: "index_actividades_on_objetivo_especifico_id", using: :btree
@@ -311,8 +314,6 @@ ActiveRecord::Schema.define(version: 20141103102120) do
     t.boolean  "esActiva"
     t.text     "mensaje"
     t.boolean  "notificado"
-    t.integer  "usuarioCreador_id"
-    t.integer  "usuarioDestino_id"
     t.integer  "evento_publico_id"
     t.integer  "proyecto_id"
     t.datetime "created_at"
@@ -321,12 +322,14 @@ ActiveRecord::Schema.define(version: 20141103102120) do
     t.string   "destinatario"
     t.string   "asunto"
     t.string   "remitente"
+    t.integer  "usuario_creador_id"
+    t.integer  "usuario_destino_id"
   end
 
   add_index "notificaciones", ["evento_publico_id"], name: "index_notificaciones_on_evento_publico_id", using: :btree
   add_index "notificaciones", ["proyecto_id"], name: "index_notificaciones_on_proyecto_id", using: :btree
-  add_index "notificaciones", ["usuarioCreador_id"], name: "index_notificaciones_on_usuarioCreador_id", using: :btree
-  add_index "notificaciones", ["usuarioDestino_id"], name: "index_notificaciones_on_usuarioDestino_id", using: :btree
+  add_index "notificaciones", ["usuario_creador_id"], name: "index_notificaciones_on_usuario_creador_id", using: :btree
+  add_index "notificaciones", ["usuario_destino_id"], name: "index_notificaciones_on_usuario_destino_id", using: :btree
 
   create_table "objetivo_especificos", force: true do |t|
     t.string   "titulo"
