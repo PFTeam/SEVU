@@ -1,5 +1,5 @@
 <!----->
-<% if params[:error].to_i != 0 %>
+<% if  @error != 0 %>
 						<p class="alert alert-dismissable alert-danger">Debe seleccionar voluntarios e items.</p>
 <% end %>
 <div class="col-lg-6">
@@ -7,8 +7,9 @@
 </div>
 <div class="col-lg-6">
 		<br></br>
-	
-	<%= link_to 'Generar Reporte', reporte_generado_path,  { :class=>"btn btn-primary btn-lg" } %>
+	<%= form_tag nil, method: :get do %>
+	<%= select_year(DateTime.now.year, :start_year => 2000, :end_year =>DateTime.now.year, prefix: :anio_rep) %>
+	<%= submit_tag 'Generar Reporte', { :class=>"btn btn-primary btn-lg" }  %>
 </div>
 <div class="col-lg-12">
 	<div class="table-responsive  col-lg-4">
@@ -24,15 +25,14 @@
 			<% Usuario.all.each do |usuario| %>
 				<tr>
 					<td><%= usuario.nombreUsuario %></td>
-					<td><%= usuario.apellido_nombre %></td>
-					
-					<td><%= check_box_tag ':usuarios[]', usuario.id %></td><!--ME TIENE QUE TOMAR LOS VALORES DE LOS ITEMS       =submit_tag "Email Selected Users", :name => "selected"!!!!!!!!!!!!!!!!!--->
-
+					<td><%= usuario.apellido_nombre %></td>					
+					<td><%= check_box_tag 'usuario_ids[]', usuario.id %></td>
 				</tr>
 			<% end %>
 			</tbody>
 		</table>
 	</div>
+	
 	<div class="table-responsive  col-lg-8">
 		<h3>Items Disponibles</h3>
 		<table class="table table-hover table-striped tablesorter">
@@ -43,42 +43,39 @@
       </thead>
 			<tbody>
 				<tr>
-					<td>Cantidad de voluntarios en estado suspendido</td>
-					<td><%= check_box_tag 'item1', '' %></td>
+					<td>Voluntarios en estado suspendido</td>
+					<td><%= check_box_tag 'item_ids[]', 1 %></td>
 				</tr>
 				<tr>
-					<td>Cantidad de voluntarios en estado activo</td>
-					<td><%= check_box_tag 'item2', '' %></td>
-				</tr>
-				<tr>
-					<td>Cantidad de voluntarios en estado suspendido</td>
-					<td><%= check_box_tag 'item3', '' %></td>
+					<td>Voluntarios en estado activo</td>
+					<td><%= check_box_tag 'item_ids[]', 2 %></td>
 				</tr>
 				<tr>
 					<td>Cantidad de actividades en estado creada asociado a cada voluntario</td>
-					<td><%= check_box_tag 'item4', '' %></td>
+					<td><%= check_box_tag 'item_ids[]', 3 %></td>
 				</tr>
 				<tr>
 					<td>Cantidad de actividades en estado planificada asociado a cada voluntario</td>
-					<td><%= check_box_tag 'item5', '' %></td>
+					<td><%= check_box_tag 'item_ids[]', 4 %></td>
 				</tr>
 				<tr>
-					<td>Cantidad de actividades en estado suspendida asociado a cada voluntario</td>
-					<td><%= check_box_tag 'item6', '' %></td>
-				</tr>
-				<tr>
-					<td>Cantidad de actividades en estado cancelada asociado a cada voluntario</td>
-					<td><%= check_box_tag 'item7', '' %></td>
+					<td>Cantidad de actividades en estado ejecutada asociado a cada voluntario</td>
+					<td><%= check_box_tag 'item_ids[]', 5 %></td>
 				</tr>
 				<tr>
 					<td>Cantidad de actividades en estado terminada asociado a cada voluntario</td>
-					<td><%= check_box_tag 'item8', '' %></td>
+					<td><%= check_box_tag 'item_ids[]', 6 %></td>
+				</tr>
+				<tr>
+					<td>Cantidad de actividades en estado cancelada asociado a cada voluntario</td>
+					<td><%= check_box_tag 'item_ids[]', 7 %></td>
 				</tr>
 				<tr>
 					<td>Cantidad de horas efectivas realizadas por voluntario</td>
-					<td><%= check_box_tag 'item9', '' %></td>
+					<td><%= check_box_tag 'item_ids[]', 8 %></td>
 				</tr>
 			</tbody>
  		</table>
 	</div>
 </div>
+<% end %>

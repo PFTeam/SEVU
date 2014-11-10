@@ -49,7 +49,7 @@ class AsistenciaEventosController < ApplicationController
 		authorize! :update, AsistenciaEvento
     respond_to do |format|
       if @asistencia_evento.update(asistencia_evento_params)
-        format.html { redirect_to @asistencia_evento, notice: 'Asistencia evento was successfully updated.' }
+        format.html { redirect_to @asistencia_evento, notice: 'Asistencia evento fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @asistencia_evento }
       else
         format.html { render :edit }
@@ -64,7 +64,7 @@ class AsistenciaEventosController < ApplicationController
 		authorize! :destroy, AsistenciaEvento
     @asistencia_evento.destroy
     respond_to do |format|
-      format.html { redirect_to asistencia_eventos_url, notice: 'Asistencia evento was successfully destroyed.' }
+      format.html { redirect_to asistencia_eventos_url, notice: 'Asistencia evento fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end
   end

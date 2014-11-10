@@ -53,7 +53,7 @@ gem 'devise', '~> 3.0.0.rc'
 #gem 'protected_attributes'	
 gem "chartkick"
 gem "cancan"
-
+gem "font-awesome-rails"
 
 #Datepicker
 gem 'datetimepicker-rails', '>= 3.0.0', :git => 'git://github.com/zpaulovics/datetimepicker-rails.git',  \

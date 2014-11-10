@@ -1,6 +1,9 @@
 <h1>Lista de Proyectos</h1>
 <div class="row">
-          <div class="col-lg-12">
+  <div class="col-lg-12">
+    <% if @proyectos.empty? then %>
+      <h3> No hay proyectos actualmente </h3>
+    <% else %>
           <% @proyectos.each do |proyecto| %>
 
             <div class="panel panel-primary">
@@ -49,27 +52,25 @@
  
 			<p>        
 		<% if current_usuario.participando_proyecto(proyecto) == 0 %>
-				<%= button_to "Participar",  {:controller => :postulaciones, :action => 'create', :postulacion => { :usuario_id => current_usuario.id, :proyecto_id => proyecto.id }}, :method => :new %>
-		<% else %>
-		<br>
-		<br>
-			Actualmente participando
+		  <%= link_to "Participar",  {:controller => :postulaciones, :action => 'create', :postulacion => { :usuario_id => current_usuario.id, :proyecto_id => proyecto.id }}, :method => :new, :class => "btn btn-primary btn-lg" %>
+	  <% elsif current_usuario.esperando_aceptacion_proyecto(proyecto) > 0 %>
+		
+		  <span class="badge">Actualmente esperando aceptación</span>
+
+	  <% else %>
+
+		  <span class="badge">Actualmente participando</span>
 		<% end %>
 
-		<!-- REEMPLAZAR POR EL USUARIO ACTUAL DE LA SESION 	-->
-
-		
                 </p>
-		<!-- <button type="button" class="btn btn-primary btn-lg">Participar</button> -->
-		<!-- 	#TODO: Agregar lógica de postulación -->
-
                 
                 </div>
                 
               </div>
             </div>
             
-          <% end %>  
+	  <% end %>  
+	<% end %>
           </div>
   </div><!-- /.row -->
 

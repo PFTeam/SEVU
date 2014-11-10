@@ -62,17 +62,21 @@ class PresupuestosController < ApplicationController
     respond_to do |format|
       if @presupuesto.update(presupuesto_params)
         sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
-
-        Transaccion.create!(descripcion: "Modificacion del presupuesto del proyecto "+@presupuesto.proyecto.nombre,
+        if @presupuesto.evaluado then #el presupuesto fue evaluado
+          if @presupuesto.aprobado then #el presupuesto fue aprobado
+            description = "El presupuesto del proyecto "+@presupuesto.proyecto.nombre+" fue Aprobado."
+          else
+            description = "El presupuesto del proyecto "+@presupuesto.proyecto.nombre+" fue Rechazado."
+          end
+        else
+          description = "El presupuesto del proyecto "+@presupuesto.proyecto.nombre+" fue puesto para evaluar nuevamente."
+        end
+        # Creacion de la transaccion con mensaje personalizado
+        Transaccion.create!(descripcion: description,
                   sesion_id: sesion.id, 
                   proyecto_id: @presupuesto.proyecto.id)
 
-#         Transaccion.create!(
-#           descripcion: 'Modificacion del presupuesto del proyecto'+@presupuesto.proyecto.nombre,
-# ‪           sesion_id‬: sesion.id,
-# ‪           proyecto_id‬: @presupuesto.proyecto.id
-#         )
-        format.html { redirect_to :back }#@presupuesto, notice: 'El Presupuesto fue creado exitosamente.' }
+        format.html { redirect_to evaluar_presupuestos_pendientes_path }#@presupuesto, notice: 'El Presupuesto fue creado exitosamente.' }
         #format.json { render :show, status: :ok, location: @presupuesto }
       else
         format.html { render :edit }
@@ -96,7 +100,7 @@ class PresupuestosController < ApplicationController
           descripcion: "Destruccion del presupuesto del proyecto "+@presupuesto.proyecto.nombre,
           sesion_id: sesion.id, 
           proyecto_id: @presupuesto.proyecto.id)
-      format.html { redirect_to presupuestos_url, notice: 'Presupuesto was successfully destroyed.' }
+      format.html { redirect_to presupuestos_url, notice: 'Presupuesto fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end
   end
@@ -114,12 +118,12 @@ class PresupuestosController < ApplicationController
 
   def evaluar_presupuestos_pendientes
 		authorize! :evaluar_presupuestos_pendientes, Presupuesto
-    @presupuestos = Presupuesto.all.select { |m| m.aprobado == nil }
+    @presupuestos = Presupuesto.all.select { |m| m.evaluado == false }
   end
 
   def presupuestos_evaluados
 		authorize! :presupuestos_evaluados, Presupuesto
-    @presupuestos = Presupuesto.all.select { |m| m.aprobado != nil }
+    @presupuestos = Presupuesto.all.select { |m| m.evaluado == true }
   end
 
   def evaluar_presupuesto
@@ -138,9 +142,8 @@ class PresupuestosController < ApplicationController
       return self.proyecto_id
     end
 
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def presupuesto_params
-      params.permit(:fechaPresentacion, :montoTotal, :aprobado, :proyecto_id, :restriccion_id, :usuario_id)
+      params.permit(:fechaPresentacion, :montoTotal, :aprobado, :proyecto_id, :restriccion_id, :usuario_id, :evaluado)
     end
 end

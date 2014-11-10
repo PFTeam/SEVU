@@ -43,7 +43,7 @@ class DetallePresupuestosController < ApplicationController
       if @detalle_presupuesto.save
         format.html {redirect_to gestionar_presupuesto_path(@presupuesto)}
         #format.html { redirect_to [@presupuesto, @detalle_presupuesto], notice: 'Detalle creado correctamente.' }
-        #format.html { redirect_to @detalle_presupuesto, notice: 'Detalle presupuesto was successfully created.' }
+        #format.html { redirect_to @detalle_presupuesto, notice: 'Detalle presupuesto fue creado satisfactoriamente.' }
         #format.json { render :show, status: :created, location: @detalle_presupuesto }
       else
         format.html { render :new }

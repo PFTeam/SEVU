@@ -14,9 +14,9 @@
       <tr>
         <td><%= asistencia_evento.evento_publico %></td>
         <td><%= asistencia_evento.usuario %></td>
-        <td><%= link_to 'Show', asistencia_evento %></td>
-        <td><%= link_to 'Edit', edit_asistencia_evento_path(asistencia_evento) %></td>
-        <td><%= link_to 'Destroy', asistencia_evento, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Ver', asistencia_evento %></td>
+        <td><%= link_to 'Editar', edit_asistencia_evento_path(asistencia_evento) %></td>
+        <td><%= link_to 'Borrar', asistencia_evento, method: :delete, data: { confirm: 'Seguro?' } %></td>
       </tr>
     <% end %>
   </tbody>

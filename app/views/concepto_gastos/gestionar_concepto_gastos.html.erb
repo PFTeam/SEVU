@@ -33,8 +33,8 @@
               <h4 class="panel-title"> 
                 <%= concepto.titulo %> 
                 <small>
-                  <td><%= link_to '(Modificar)', edit_concepto_gasto_path(concepto) %></td>
-                  <td><%= link_to '(Eliminar)', concepto, method: :delete, data: { confirm: 'Esta seguro?' } %></td>
+                  <td><%= link_to content_tag(:i, fa_icon("trash 2x", text: "")), concepto, method: :delete, data: { confirm: 'Esta seguro?' }, :style=>'padding-left: 6px;color:#FFFFFF;float:right', title: "Eliminar" %></td>
+                  <td><%= link_to content_tag(:i, fa_icon("pencil-square-o 2x", text: "")), edit_concepto_gasto_path(concepto), :style=>'padding-left: 6px;color:#FFFFFF;float:right', title: "Editar" %></td>
                 </small>
               </h4> 
             </div>

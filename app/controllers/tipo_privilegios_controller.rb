@@ -33,7 +33,12 @@ class TipoPrivilegiosController < ApplicationController
 
     respond_to do |format|
       if @tipo_privilegio.save
-        format.html { redirect_to @tipo_privilegio, notice: 'Tipo privilegio was successfully created.' }
+						sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+				Transaccion.create!(
+    				descripcion: 'Crear el tipo de privilegio  '+@tipo_privilegio.nombre,
+    				sesion_id: sesion.id
+				)
+        format.html { redirect_to @tipo_privilegio, notice: 'Tipo privilegio fue creado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @tipo_privilegio }
       else
         format.html { render :new }
@@ -48,7 +53,12 @@ class TipoPrivilegiosController < ApplicationController
 		authorize! :update, TipoPrivilegio
     respond_to do |format|
       if @tipo_privilegio.update(tipo_privilegio_params)
-        format.html { redirect_to @tipo_privilegio, notice: 'Tipo privilegio was successfully updated.' }
+										sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+				Transaccion.create!(
+    				descripcion: 'Actualizar el tipo de privilegio  '+@tipo_privilegio.nombre,
+    				sesion_id: sesion.id
+				)
+        format.html { redirect_to @tipo_privilegio, notice: 'Tipo privilegio fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @tipo_privilegio }
       else
         format.html { render :edit }
@@ -61,9 +71,14 @@ class TipoPrivilegiosController < ApplicationController
   # DELETE /tipo_privilegios/1.json
   def destroy
 		authorize! :destroy, TipoPrivilegio
+								sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+				Transaccion.create!(
+    				descripcion: 'Eliminar el tipo de privilegio  '+@tipo_privilegio.nombre,
+    				sesion_id: sesion.id
+				)
     @tipo_privilegio.destroy
     respond_to do |format|
-      format.html { redirect_to tipo_privilegios_url, notice: 'Tipo privilegio was successfully destroyed.' }
+      format.html { redirect_to tipo_privilegios_url, notice: 'Tipo privilegio fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end
   end

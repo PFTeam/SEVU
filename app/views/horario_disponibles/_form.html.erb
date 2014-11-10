@@ -24,11 +24,11 @@
     <%= f.time_select :horaHasta %>
     
   </div>
-    <%= f.label @voluntario.id %><br>
+    <%#= f.label @voluntario.id %><br>
     <div class="field">
-   <%= f.label :voluntario_id %>
+   <%#= f.label :voluntario_id %>
  
-    <%=f.text_field  :voluntario_id, :value =>@voluntario.id %>
+    <%=f.hidden_field :voluntario_id, :value =>@voluntario.id %>
 
 
  </div>
@@ -38,5 +38,6 @@
     <%= f.submit %>
   </div>
   
+  <label>Horarios Ya creados </label>
    </div>
 <% end %>

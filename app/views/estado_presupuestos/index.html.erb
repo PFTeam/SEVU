@@ -12,9 +12,9 @@
     <% @estado_presupuestos.each do |estado_presupuesto| %>
       <tr>
         <td><%= estado_presupuesto.nombre %></td>
-        <td><%= link_to 'Show', estado_presupuesto %></td>
-        <td><%= link_to 'Edit', edit_estado_presupuesto_path(estado_presupuesto) %></td>
-        <td><%= link_to 'Destroy', estado_presupuesto, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Ver', estado_presupuesto %></td>
+        <td><%= link_to 'Editar', edit_estado_presupuesto_path(estado_presupuesto) %></td>
+        <td><%= link_to 'Borrar', estado_presupuesto, method: :delete, data: { confirm: 'Seguro?' } %></td>
       </tr>
     <% end %>
   </tbody>

@@ -57,8 +57,10 @@ class HistorialEstadoUsuariosController < ApplicationController
 		authorize! :update, HistorialEstadoUsuario
     respond_to do |format|
       if @historial_estado_usuario.update(historial_estado_usuario_params)
+
         format.html { redirect_to @historial_estado_usuario, notice: 'Historial estado fue actualizado satisfactoriamente' }
         #format.json { render :show, status: :ok, location: @historial_estado_usuario }
+
       else
         format.html { render :edit }
         format.json { render json: @historial_estado_usuario.errors, status: :unprocessable_entity }
@@ -72,7 +74,7 @@ class HistorialEstadoUsuariosController < ApplicationController
 		authorize! :destroy, HistorialEstadoUsuario
     @historial_estado_usuario.destroy
     respond_to do |format|
-      format.html { redirect_to historial_estado_usuarios_url, notice: 'Historial estado usuario was successfully destroyed.' }
+      format.html { redirect_to historial_estado_usuarios_url, notice: 'Historial estado usuario fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end
   end

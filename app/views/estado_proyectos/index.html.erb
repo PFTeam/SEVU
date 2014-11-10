@@ -12,9 +12,9 @@
     <% @estado_proyectos.each do |estado_proyecto| %>
       <tr>
         <td><%= estado_proyecto.nombre %></td>
-        <td><%= link_to 'Show', estado_proyecto %></td>
-        <td><%= link_to 'Edit', edit_estado_proyecto_path(estado_proyecto) %></td>
-        <td><%= link_to 'Destroy', estado_proyecto, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Ver', estado_proyecto %></td>
+        <td><%= link_to 'Editar', edit_estado_proyecto_path(estado_proyecto) %></td>
+        <td><%= link_to 'Borrar', estado_proyecto, method: :delete, data: { confirm: 'Seguro?' } %></td>
       </tr>
     <% end %>
   </tbody>

@@ -33,7 +33,7 @@ class TipoActividadesController < ApplicationController
 
     respond_to do |format|
       if @tipo_actividad.save
-        format.html { redirect_to @tipo_actividad, notice: 'Tipo actividad was successfully created.' }
+        format.html { redirect_to @tipo_actividad, notice: 'Tipo actividad fue creado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @tipo_actividad }
       else
         format.html { render :new }
@@ -48,7 +48,7 @@ class TipoActividadesController < ApplicationController
 		authorize! :update, TipoActividad
     respond_to do |format|
       if @tipo_actividad.update(tipo_actividad_params)
-        format.html { redirect_to @tipo_actividad, notice: 'Tipo actividad was successfully updated.' }
+        format.html { redirect_to @tipo_actividad, notice: 'Tipo actividad fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @tipo_actividad }
       else
         format.html { render :edit }
@@ -63,7 +63,7 @@ class TipoActividadesController < ApplicationController
 		authorize! :destroy, TipoActividad
     @tipo_actividad.destroy
     respond_to do |format|
-      format.html { redirect_to tipo_actividades_url, notice: 'Tipo actividad was successfully destroyed.' }
+      format.html { redirect_to tipo_actividades_url, notice: 'Tipo actividad fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end
   end

@@ -42,8 +42,12 @@ class DetalleGastosController < ApplicationController
     @detalle_gasto.voluntario_id = current_usuario.id
     respond_to do |format|
       if @detalle_gasto.save
-        #format.html { redirect_to gestionar_informe_gastos_path(@detalle_gasto.informe_gasto)} #@detalle_gasto, notice: 'Detalle gasto was successfully created.' }
-        format.html { redirect_to new_comprobant_path(:detalle_gasto_id => @detalle_gasto.id)}
+        sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+        Transaccion.create!(descripcion: "Creación del detalle gasto "+@detalle_gasto.titulo,
+                  sesion_id: sesion.id, 
+                  proyecto_id: @detalle_gasto.informe_gasto.proyecto.id)
+        #format.html { redirect_to gestionar_informe_gastos_path(@detalle_gasto.informe_gasto)} #@detalle_gasto, notice: 'Detalle gasto fue creado satisfactoriamente.' }
+        format.html { redirect_to new_comprobante_path(:detalle_gasto_id => @detalle_gasto.id)}
         #format.json { render :show, status: :created, location: @detalle_gasto }
       else
         format.html { render :new }
@@ -58,7 +62,11 @@ class DetalleGastosController < ApplicationController
 		authorize! :update, DetalleGasto
     respond_to do |format|
       if @detalle_gasto.update(detalle_gasto_params)
-        format.html { redirect_to gestionar_informe_gastos_path(@detalle_gasto.informe_gasto)} #@detalle_gasto, notice: 'Detalle gasto was successfully updated.' }
+        sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+        Transaccion.create!(descripcion: "Modificación del detalle gasto "+@detalle_gasto.titulo,
+                  sesion_id: sesion.id, 
+                  proyecto_id: @detalle_gasto.informe_gasto.proyecto.id)
+        format.html { redirect_to gestionar_informe_gastos_path(@detalle_gasto.informe_gasto)} #@detalle_gasto, notice: 'Detalle gasto fue actualizado satisfactoriamente.' }
         #format.json { render :show, status: :ok, location: @detalle_gasto }
       else
         format.html { render :edit }
@@ -72,8 +80,12 @@ class DetalleGastosController < ApplicationController
   def destroy
 		authorize! :destroy, DetalleGasto
     @detalle_gasto.destroy
+    sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+        Transaccion.create!(descripcion: "Eliminación del detalle gasto "+@detalle_gasto.titulo,
+                  sesion_id: sesion.id, 
+                  proyecto_id: @detalle_gasto.informe_gasto.proyecto.id)
     respond_to do |format|
-      format.html { redirect_to gestionar_informe_gastos_path(@informe_gastos)} #detalle_gastos_url, notice: 'Detalle gasto was successfully destroyed.' }
+      format.html { redirect_to gestionar_informe_gastos_path(@informe_gastos)} #detalle_gastos_url, notice: 'Detalle gasto fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end
   end

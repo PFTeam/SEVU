@@ -36,9 +36,9 @@
         <td><%= actividad.objetivo_especifico %></td>
         <td><%= actividad.proyecto %></td>
         <td><%= actividad.tipo_actividad %></td>
-        <td><%= link_to 'Show', actividad %></td>
-        <td><%= link_to 'Edit', edit_actividad_path(actividad) %></td>
-        <td><%= link_to 'Destroy', actividad, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Ver', actividad %></td>
+        <td><%= link_to 'Editar', edit_actividad_path(actividad) %></td>
+        <td><%= link_to 'Borrar', actividad, method: :delete, data: { confirm: 'Seguro?' } %></td>
       </tr>
     <% end %>
   </tbody>

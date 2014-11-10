@@ -3,13 +3,13 @@ class Actividad < ActiveRecord::Base
   belongs_to :proyecto
   belongs_to :tipo_actividad
 
-  has_many :requisitos
+  has_many :requisitos,  :dependent => :destroy
   has_many :habilidades, :through => :requisitos
 
-  has_many :historial_estado_actividades
+  has_many :historial_estado_actividades,  :dependent => :destroy
   has_many :estado_actividades, :through => :historial_estado_actividades
 
-  has_many :asignacion_actividades
+  has_many :asignacion_actividades,  :dependent => :destroy
   has_many :usuarios, :through => :asignacion_actividades
   has_many :reportes, :through => :asignacion_actividades
   

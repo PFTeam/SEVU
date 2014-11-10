@@ -2,13 +2,13 @@
 
 
 
-    <%= f.input :organizacion_externa, as: :autocomplete, label: false, url: organizacion_externas_path, input_html: { autofocus: true  }  %>
+    <%= f.input :organizacion_externa, as: :autocomplete, label: true, url: organizacion_externas_path, input_html: { autofocus: true  }  %>
 
 	<%= f.input :proyecto_id,:as => :hidden, input_html: {value: params[:proyecto_id]} %>
   	
   	<div class="modal-footer">
       <%= f.button :submit, :class => 'btn btn-primary', :value => 'Confirmar' %>
-      <%= link_to 'Back', '/proyectos/' + params[:proyecto_id] %>
+      <%= link_to 'Atrás', '/proyectos/' + params[:proyecto_id] %>
   	</div>
 
 	<br></br>

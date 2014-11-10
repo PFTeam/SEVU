@@ -34,4 +34,13 @@ class Habilidad < ActiveRecord::Base
  def to_s
 	 nombre
  end
+
+  def self.search query: nil, limit: false
+    result = Habilidad.order 'nombre ASC'
+    if query.present?
+      result = result.where "#{table_name}.nombre ILIKE ?", "%#{query.strip}%"
+    end
+    
+    limit ? result.limit(10) : result
+  end
 end

@@ -33,7 +33,7 @@ class TransaccionesController < ApplicationController
 
     respond_to do |format|
       if @transaccion.save
-        format.html { redirect_to @transaccion, notice: 'Transaccion was successfully created.' }
+        format.html { redirect_to @transaccion, notice: 'Transaccion fue creado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @transaccion }
       else
         format.html { render :new }
@@ -48,7 +48,7 @@ class TransaccionesController < ApplicationController
 		authorize! :update, Transaccion
     respond_to do |format|
       if @transaccion.update(transaccion_params)
-        format.html { redirect_to @transaccion, notice: 'Transaccion was successfully updated.' }
+        format.html { redirect_to @transaccion, notice: 'Transaccion fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @transaccion }
       else
         format.html { render :edit }
@@ -63,7 +63,7 @@ class TransaccionesController < ApplicationController
 		authorize! :destroy, Transaccion
     @transaccion.destroy
     respond_to do |format|
-      format.html { redirect_to transacciones_url, notice: 'Transaccion was successfully destroyed.' }
+      format.html { redirect_to transacciones_url, notice: 'Transaccion fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end
   end
@@ -74,23 +74,23 @@ class TransaccionesController < ApplicationController
 	def control_fecha
 		authorize! :control_fecha, Transaccion
 				if params[:f_inicio]
-    @fecha_inicio = Date.new(
-      params[:f_inicio][:year].to_i,
-      params[:f_inicio][:month].to_i,
-      params[:f_inicio][:day].to_i
-    ).beginning_of_day
-  else
-    @fecha_inicio = Date.today.beginning_of_day
-  end
-		if params[:f_fin]
-    @fecha_fin = Date.new(
-      params[:f_fin][:year].to_i,
-      params[:f_fin][:month].to_i,
-      params[:f_fin][:day].to_i
-    ).end_of_day
-  else
-    @fecha_fin = Date.today.end_of_day
-  end
+    				@fecha_inicio = Date.new(
+      				params[:f_inicio][:year].to_i,
+      				params[:f_inicio][:month].to_i,
+      				params[:f_inicio][:day].to_i
+    				).beginning_of_day
+ 			 	else
+    				@fecha_inicio = Date.today.beginning_of_day
+  			end
+				if params[:f_fin]
+						@fecha_fin = Date.new(
+							params[:f_fin][:year].to_i,
+							params[:f_fin][:month].to_i,
+							params[:f_fin][:day].to_i
+						).end_of_day
+  			else
+    				@fecha_fin = Date.today.end_of_day
+  			end
 	end
 	def control_proyecto
 		authorize! :control_proyecto, Transaccion

@@ -24,9 +24,9 @@
         <td><%= usuario.email %></td>
         <td><%= usuario.direccion %></td>
         <td><%= usuario.created_at %></td>
-        <td><%= link_to 'Show', usuario %></td>
-        <td><%= link_to 'Edit', edit_usuario_path(usuario) %></td>
-        <td><%= link_to 'Destroy', usuario, method: :delete, data: { confirm: 'Esta seguro?' } %></td>
+        <td><%= link_to 'Ver', usuario %></td>
+        <td><%= link_to 'Editar', edit_usuario_path(usuario) %></td>
+        <td><%= link_to 'Borrar', usuario, method: :delete, data: { confirm: 'Esta seguro?' } %></td>
       </tr>
     <% end %>
   </tbody>

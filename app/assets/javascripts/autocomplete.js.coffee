@@ -22,9 +22,22 @@ class Autocomplete
 
   _renderItem: (item) ->
     content = $ '<div></div>'
-    item.label ||= item.apellido_nombre
+    # Pregunta si el item tiene denominacion
+    if item.denominacion
+        # Si tiene denominacion quiere decir que es una organizacion externa, y entra a este bloque
+        item.label ||= item.denominacion
+    if item.apellido_nombre
+        # Si tiene nombre y apellido quiere decir que es un usuario, y entra a este bloque
+        item.label ||= item.apellido_nombre
+    if item.descripcion
+        # Esto significa que es una necesidad
+        item.label ||= item.descripcion
+    if item.nombre
+        # Esto significa que tiene nombre, y entra aca, es IMPORTANTE QUE ESTE AL SER MAS GENERICO VAYA ABAJO
+        item.label ||= item.nombre
 
-    content.append $('<span class="title"></span>').text item.apellido_nombre
+
+    content.append $('<span class="title"></span>').text item.label
     content.append $('<small></small>').text item.informal if item.informal
 
     label: content.html(), value: item.label, item: item
@@ -45,7 +58,7 @@ class Autocomplete
     selected = ui.item
 
     @targetElement.val selected.item.id
-    @element.val selected.item.apellido_nombre
+    @element.val selected.item.label
     @element.trigger type: 'update.autocomplete', element: @element, item: selected.item
 
     false

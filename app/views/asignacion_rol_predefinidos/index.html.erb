@@ -19,7 +19,7 @@
 				<td><%= Rol.find(asignacion_rol_predefinido.rol).nombre %></td>
         <td><%= Privilegio.find(asignacion_rol_predefinido.privilegio).nombre %></td>
         <td><%= link_to 'Editar', edit_asignacion_rol_predefinido_path(asignacion_rol_predefinido) %></td>
-        <td><%= link_to 'Eliminar', asignacion_rol_predefinido, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Eliminar', asignacion_rol_predefinido, method: :delete, data: { confirm: 'Seguro?' } %></td>
       </tr>
     <% end %>
   </tbody>

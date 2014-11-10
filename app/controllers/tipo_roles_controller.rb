@@ -23,6 +23,7 @@ class TipoRolesController < ApplicationController
   # GET /tipo_roles/1/edit
   def edit
 		authorize! :edit, TipoRol
+
   end
 
   # POST /tipo_roles
@@ -30,10 +31,15 @@ class TipoRolesController < ApplicationController
   def create
 		authorize! :create, TipoRol
     @tipo_rol = TipoRol.new(tipo_rol_params)
-
+		
     respond_to do |format|
       if @tipo_rol.save
-        format.html { redirect_to @tipo_rol, notice: 'Tipo rol was successfully created.' }
+				sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+				Transaccion.create!(
+    				descripcion: 'Creacion del tipo de rol  '+@tipo_rol.nombre,
+    				sesion_id: sesion.id
+				)
+        format.html { redirect_to @tipo_rol, notice: 'Tipo rol fue creado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @tipo_rol }
       else
         format.html { render :new }
@@ -47,8 +53,13 @@ class TipoRolesController < ApplicationController
   def update
 		authorize! :update, TipoRol
     respond_to do |format|
+			sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+				Transaccion.create!(
+    				descripcion: 'Actualización del tipo de rol  '+@tipo_rol.nombre,
+    				sesion_id: sesion.id
+				)
       if @tipo_rol.update(tipo_rol_params)
-        format.html { redirect_to @tipo_rol, notice: 'Tipo rol was successfully updated.' }
+        format.html { redirect_to @tipo_rol, notice: 'Tipo rol fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @tipo_rol }
       else
         format.html { render :edit }
@@ -61,9 +72,14 @@ class TipoRolesController < ApplicationController
   # DELETE /tipo_roles/1.json
   def destroy
 		authorize! :destroy, TipoRol
+		sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+				Transaccion.create!(
+    				descripcion: 'Eliminar el tipo de rol  '+@tipo_rol.nombre,
+    				sesion_id: sesion.id
+				)
     @tipo_rol.destroy
     respond_to do |format|
-      format.html { redirect_to tipo_roles_url, notice: 'Tipo rol was successfully destroyed.' }
+      format.html { redirect_to tipo_roles_url, notice: 'Tipo rol fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end
   end

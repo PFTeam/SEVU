@@ -18,7 +18,7 @@
        	 		<td><%= link_to rol.nombre, roles_path(:rol_id => rol.id) %></td>
 						<td><%= TipoRol.find(rol.tipo_rol_id).nombre  %></td>
        	 		<td><%= rol.descripcion %></td>
-        		<td><%= link_to 'Edit', edit_rol_path(rol) %>  <%= link_to 'Destroy', rol, method: :delete, data: { confirm: 'Esta seguro de eliminar el rol?' } %></td>
+        		<td><%= link_to 'Editar', edit_rol_path(rol) %>  <%= link_to 'Eliminar', rol, method: :delete, data: { confirm: 'Esta seguro de eliminar el rol?' } %></td>
       		</tr>
     		<% end %>
     	</tbody>
@@ -44,6 +44,7 @@
         	 <td><%= Privilegio.find(asignacionrolpredefinido.privilegio).nombre %></td>
         	 <td><%= Privilegio.find(asignacionrolpredefinido.privilegio).descripcion %></td>
 					<td><%= asignacionrolpredefinido.esActual %></td>
+					<td><%= link_to 'Editar', edit_asignacion_rol_predefinido_path(asignacionrolpredefinido) %> </td>
        	</tr>
 				<% end %>
 				<% end %>

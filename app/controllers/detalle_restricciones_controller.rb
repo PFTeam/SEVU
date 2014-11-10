@@ -39,7 +39,7 @@ class DetalleRestriccionesController < ApplicationController
     respond_to do |format|
       if @detalle_restriccion.save
         format.html { redirect_to gestionar_restricciones_path}
-        #format.html { redirect_to @detalle_restriccion, notice: 'Detalle restriccion was successfully created.' }
+        #format.html { redirect_to @detalle_restriccion, notice: 'Detalle restriccion fue creado satisfactoriamente.' }
         #format.json { render :show, status: :created, location: @detalle_restriccion }
       else
         format.html { render :new }
@@ -56,7 +56,7 @@ class DetalleRestriccionesController < ApplicationController
     @concepto_gastos = ConceptoGasto.all
       if @detalle_restriccion.update(detalle_restriccion_params)
         format.html { redirect_to gestionar_restricciones_path, notice: 'Actualizado correctamente'}
-        #format.html { redirect_to @detalle_restriccion, notice: 'Detalle restriccion was successfully updated.' }
+        #format.html { redirect_to @detalle_restriccion, notice: 'Detalle restriccion fue actualizado satisfactoriamente.' }
         #format.json { render :show, status: :ok, location: @detalle_restriccion }
       else
         format.html { redirect_to gestionar_restricciones_path, alert: 'No pueden guardarse'}
@@ -73,7 +73,7 @@ class DetalleRestriccionesController < ApplicationController
     @detalle_restriccion.destroy
     respond_to do |format|
       format.html { redirect_to gestionar_restricciones_path, notice: 'Actualizado correctamente'}
-      #format.html { redirect_to detalle_restricciones_url, notice: 'Detalle restriccion was successfully destroyed.' }
+      #format.html { redirect_to detalle_restricciones_url, notice: 'Detalle restriccion fue borrado satisfactoriamente.' }
       #format.json { head :no_content }
     end
   end

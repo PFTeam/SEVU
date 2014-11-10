@@ -32,14 +32,13 @@ end
 
  # GET /voluntarios
   # GET /voluntarios.json
-<<<<<<< HEAD
   def index2
        @voluntarios = Voluntario.all
    end
 
 
-
-def index
+   def index
+	authorize! :index, Voluntario
  @voluntario = Voluntario.search(params[:searchbox])
     
  if  @voluntario.nil?
@@ -49,17 +48,16 @@ def index
   respond_to do |format|
 
    format.html # index.html.erb
-end
 
-=======
-  def index
-		authorize! :index, Voluntario
-    @voluntarios = Voluntario.all
->>>>>>> ad61ebf358fb7f3aaeb0add6a8f14691cc4853e4
   end
 
+<<<<<<< HEAD
+ end
 
+=======
 
+   end
+>>>>>>> e83138c81a1317b71bd34c64da6e294f5fd9f84f
   def buscar_por_legajo
    #empleado = Empleado.select("id, nombre, apellido").where(:legajo => params[:legajo]);
   # @usuario =Usuario.select("id, nombreUsuario, apellido_nombre").where(:legajo => params[:legajo]);
@@ -82,8 +80,6 @@ end
     @voluntario = Voluntario.find(params[:id])
  @horario_disponibles = HorarioDisponible.where(voluntario_id: params[:id])
  
- 
-
 #horario_disponibles =@voluntario.horario_disponibles.all
     
   end
@@ -133,6 +129,7 @@ end
    @notap = @voluntario.notas
 
   end
+  
   # GET /voluntarios/1
   # GET /voluntarios/1.json
   def show
@@ -150,27 +147,20 @@ end
   
   # GET /voluntarios/1/edit
   def edit
-<<<<<<< HEAD
- 
-=======
+
 		authorize! :edit, Voluntario
->>>>>>> ad61ebf358fb7f3aaeb0add6a8f14691cc4853e4
   end
 
   # POST /voluntarios
   # POST /voluntarios.json
   def create
-<<<<<<< HEAD
- 
- 
-=======
+
 		authorize! :create, Voluntario
->>>>>>> ad61ebf358fb7f3aaeb0add6a8f14691cc4853e4
     @voluntario = Voluntario.new(voluntario_params)
 
     respond_to do |format|
       if @voluntario.save
-        format.html { redirect_to @voluntario, notice: 'Voluntario was successfully created.' }
+        format.html { redirect_to @voluntario, notice: 'Voluntario fue creado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @voluntario }
       else
         format.html { render :new }
@@ -181,11 +171,12 @@ end
 
   # PATCH/PUT /voluntarios/1
   # PATCH/PUT /voluntarios/1.json
+  
   def update
 		authorize! :update, Voluntario
     respond_to do |format|
       if @voluntario.update(voluntario_params)
-        format.html { redirect_to @voluntario, notice: 'Voluntario was successfully updated.' }
+        format.html { redirect_to @voluntario, notice: 'Voluntario fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @voluntario }
       else
         format.html { render :edit }
@@ -200,10 +191,11 @@ end
 		authorize! :destroy, Voluntario
     @voluntario.destroy
     respond_to do |format|
-      format.html { redirect_to voluntarios_url, notice: 'Voluntario was successfully destroyed.' }
+      format.html { redirect_to voluntarios_url, notice: 'Voluntario fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end
   end
+  
 def gestion_horarios_disponibles
   
  @voluntario = Voluntario.find(params[:id])
@@ -225,6 +217,5 @@ end
     end
 
 end
-
 
   

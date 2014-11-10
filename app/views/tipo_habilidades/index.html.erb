@@ -14,9 +14,9 @@
       <tr>
         <td><%= tipo_habilidad.nombre %></td>
         <td><%= tipo_habilidad.descripcion %></td>
-        <td><%= link_to 'Show', tipo_habilidad %></td>
-        <td><%= link_to 'Edit', edit_tipo_habilidad_path(tipo_habilidad) %></td>
-        <td><%= link_to 'Destroy', tipo_habilidad, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Ver', tipo_habilidad %></td>
+        <td><%= link_to 'Editar', edit_tipo_habilidad_path(tipo_habilidad) %></td>
+        <td><%= link_to 'Borrar', tipo_habilidad, method: :delete, data: { confirm: 'Seguro?' } %></td>
       </tr>
     <% end %>
   </tbody>

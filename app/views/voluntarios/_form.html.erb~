@@ -1,0 +1,75 @@
+
+          	
+            
+
+<%= form_for(@voluntario) do |f| %>
+  <% if @voluntario.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@voluntario.errors.count, "error") %> prohibited this voluntario from being saved:</h2>
+
+      <ul>
+      <% @voluntario.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="field">
+    <%= f.label :legajo %><br>
+    <%= f.number_field :legajo %>
+  </div>
+  <!--<div class="field">
+    <%#= f.label :nombreVoluntario %><br>
+    <%#= f.text_field :nombreUsuario %>
+  </div>
+  
+  <div class="field">
+    <%#= f.label :contraseña %><br>
+    <%#= f.text_field :contrasenia %>
+
+    <%= f.password_field  :contrasenia %>
+
+
+  </div>
+    <div class="field">
+    <%#= f.label :mail %><br>
+    <%#= f.text_field :email %>
+  </div>
+  
+  
+  
+    <div class="field">
+    <%#= f.label :Direccion	 %><br>
+    <%#= f.text_field :direccion %>
+  </div>
+  
+  <div class="field">
+
+    <%= f.label :fechaRegistro %><br>
+    <%= f.datetime_select :created_at %>
+  </div>
+  <div class="field">
+    <%= f.label :foto %><br>
+    <%= f.file_field :foto%>
+  </div>
+
+  
+</div>
+<!--, , direccion, 
+       "fechaRegistro", created_at, updated_at, legajo, type, telefono, 
+       fax
+ -->
+  
+  
+  
+  
+  
+  
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+

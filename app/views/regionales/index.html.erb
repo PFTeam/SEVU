@@ -1,0 +1,29 @@
+<!----->
+<div class="col-lg-12">
+  <h2>Lista de Regionales</h2>
+		<br></br>
+    <table class="table table-hover table-striped tablesorter">
+			<thead>
+    		<tr>
+      <th>Nombre</th>
+      <th>Domicilio</th>
+      <th>Telefono Contacto</th>
+      <th>Nombre Contacto</th>
+      <th colspan="3"></th>
+    </tr>
+  		</thead>
+    	<tbody>
+       	<% @regionales.each do |regional| %>
+      		<tr>
+       	 		<td><%= regional.nombre %></td>
+        		<td><%= regional.domicilio %></td>
+        		<td><%= regional.telefono_contacto %></td>
+        		<td><%= regional.nombre_contacto %></td>
+        		<td><%= link_to 'Editar', edit_regional_path(regional) %></td>
+      	 		<td><%= link_to 'Eliminar', regional, method: :delete, data: { confirm: 'Esta seguro de eliminar el tipo de rol?' } %></td>
+      		</tr>
+    		<% end %>
+    	</tbody>
+    </table>
+  </div>
+</div>
