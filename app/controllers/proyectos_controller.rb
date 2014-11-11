@@ -142,6 +142,6 @@ class ProyectosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def proyecto_params
-      params.require(:proyecto).permit(:id, :nombre, :breveDescripcion, :fechaInicio, :fechaFin, :antecedentes, :justificacionProyecto, :cantidadBeneficiariosDirectos, :cantidadBeneficiariosIndirectos, :justificacionImpacto, :localizacionGeografica, :tipo_proyecto_id, :necesidad_id, historial_estado_proyectos_attributes:[:id, :estado_proyecto_id], asignacion_roles_attributes:[:id, :usuario_id, :rol_id], organizacion_externa_attributes:[:id, :denominacion, :sigla, :cuit, :fax, :telefono, :direccion, :cargoResponsable, :numeroContactoResponsable, :nombreResponsable])
+      params.require(:proyecto).permit(:id, :nombre, :breveDescripcion, :fechaInicio, :fechaFin, :antecedentes, :justificacionProyecto, :cantidadBeneficiariosDirectos, :cantidadBeneficiariosIndirectos, :justificacionImpacto, :localizacionGeografica, :tipo_proyecto_id, :necesidad_id, historial_estado_proyectos_attributes:[:id, :estado_proyecto_id], asignacion_roles_attributes:[:id, :usuario_id, :rol_id], organizacion_externa_attributes:[:id, :denominacion, :sigla, :cuit, :fax, :telefono, :direccion, :cargoResponsable, :numeroContactoResponsable, :nombreResponsable], :regional_id)
     end
 end
