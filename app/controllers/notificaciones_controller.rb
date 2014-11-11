@@ -17,6 +17,7 @@ class NotificacionesController < ApplicationController
   # GET /notificaciones/new
   def new
 		authorize! :new, Notificacion
+		@usuarios = Usuario.all
     @notificacion = Notificacion.new
   end
 
@@ -28,18 +29,64 @@ class NotificacionesController < ApplicationController
   # POST /notificaciones
   # POST /notificaciones.json
   def create
-		authorize! :create, Notificacion
+    authorize! :create, Notificacion
     @notificacion = Notificacion.new(notificacion_params)
+    p "Notificacion.destino: " + params[:notificacion][:usuaroi_creador_id].to_s
+    @notificacion.usuario_creador = current_usuario
+    case @notificacion.type
+    when "NotificacionEmail"
+	    # ENVIAR EMAIL Y CAMBIAR A NOTIFICADO 
+	    respond_to do |format|
+	      if @notificacion.save
+		NotificacionMailer.enviar_notificacion(@notificacion).deliver
+		format.html { redirect_to :controller => 'notificacion_sistemas', :action => 'index' 
+		                      flash[:notice] =  'Notificacion fue creado satisfactoriamente.' }
+		format.json { render :show, status: :created, location: @notificacion }
+	      else
+		format.html { render :new }
+		format.json { render json: @notificacion.errors, status: :unprocessable_entity }
+	      end
+	    end
+         
+    when "NotificacionSistema"
+	    @notificacion.notificado = false
+	    @notificacion.esActiva = true
+	    respond_to do |format|
+	      if @notificacion.save
+		format.html { redirect_to :controller => 'notificacion_sistemas', :action => 'index' 
+		                      flash[:notice] =  'Notificacion fue creado satisfactoriamente.' }
+		format.json { render :show, status: :created, location: @notificacion }
+	      else
+		format.html { render :new }
+		format.json { render json: @notificacion.errors, status: :unprocessable_entity }
+	      end
+	    end
 
-    respond_to do |format|
-      if @notificacion.save
-        format.html { redirect_to @notificacion, notice: 'Notificacion fue creado satisfactoriamente.' }
-        format.json { render :show, status: :created, location: @notificacion }
-      else
-        format.html { render :new }
-        format.json { render json: @notificacion.errors, status: :unprocessable_entity }
-      end
+    when "Ambos"
+		@notificacion_sistema = Notificacion.new(notificacion_params)
+		@notificacion_sistema.type = "NotificacionSistema"
+		@notificacion_email = Notificacion.new(notificacino_params)
+		@notificacion_email.type = "NotificacionEmail"
+		@notificacion_email.usuario_creador = current_usuario
+		@notificacion_sistema.usuario_creador = current_usuario
+		@notificacion_sistema.notificado = false
+		@notificacion_sistema.esActiva = true
+		respond_to do |format|
+			if @notificacion_sistema.save && @notificacion_email.save
+				NotificacionMailer.enviar_notificacion(@notificacion_email).deliver
+				format.html { redirect_to :controller => 'notificacion_sistemas', :action => 'index' 
+		                      flash[:notice] =  'Notificacion fue creado satisfactoriamente.' }
+				format.json { render :show, status: :created, location: @notificacion }
+			else
+				format.html { render :new }
+				format.json { render json: @notificacion.errors, status: :unprocessable_entity }
+			end
+		end
+    else 
+
     end
+
+
   end
 
   # PATCH/PUT /notificaciones/1
@@ -76,6 +123,6 @@ class NotificacionesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def notificacion_params
-      params.require(:notificacion).permit(:fechaNotificacion, :horaNotificacion, :esActiva, :mensaje, :notificado, :usuarioCreador_id, :usuarioDestino_id, :evento_publico_id, :proyecto_id)
+      params.require(:notificacion).permit(:esActiva, :mensaje, :notificado, :usuario_creador_id, :usuario_destino_id, :evento_publico_id, :proyecto_id, :type)
     end
 end

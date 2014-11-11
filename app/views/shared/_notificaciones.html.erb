@@ -8,9 +8,9 @@
 		       <li class="message-preview">
 		       <a href="/notificacion_sistemas/<%= notificacion.id %>">
 		       <span class="avatar"></span>
-		       <span class="name"><%= notificacion.usuarioCreador %>:</span>
+		       <span class="name"><%= notificacion.usuario_creador%>:</span>
 		       <span class="message"><%= notificacion.mensaje %></span>
-		       <span class="time"><i class="fa fa-clock-o"></i><%= notificacion.created_at %></span>
+		       <span class="time"><i class="fa fa-clock-o"></i><%= notificacion.created_at.to_formatted_s(:long_ordinal) %></span>
 		       </a>
 		       </li>
 		       <li class="divider"></li>

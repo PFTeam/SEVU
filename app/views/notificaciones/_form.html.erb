@@ -1,53 +1,73 @@
-<%= form_for(@notificacion) do |f| %>
+<%= simple_form_for(@notificacion) do |f| %>
   <% if @notificacion.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@notificacion.errors.count, "error") %> prohibited this notificacion from being saved:</h2>
-
-      <ul>
-      <% @notificacion.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <div class="col-lg-12">
+      <div class="col-lg-4"></div>
+        <div id="error_explanation" class="col-lg-4">
+          <div class="alert alert-danger">
+            <a class="close" data-dismiss="alert">x</a>      
+            <strong><%= pluralize(@notificacion.errors.count, "Error") %> en la creacion de la notificación:</strong>
+            <ul>
+              <% @notificacion.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :fechaNotificacion %><br>
-    <%= f.date_select :fechaNotificacion %>
+
+
+   
+      
+
+ <div class="row">
+          <div class="col-lg-12">
+            <h1>Generar Notificación <small>Creación de una notificación.</small></h1>
+            <ol class="breadcrumb">
+              <li><a href="index.html"><i class="icon-dashboard"></i> Notificaciones</a></li>
+              <li class="active"><i class="icon-file-alt"></i> Generar Notificación</li>
+            </ol>
+          </div>
+        </div><!-- /.row -->
+
+<p><br></br></p>
+<div class="row">
+          <div class="col-lg-12">
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title"> Crear Notificación</h3>
+              </div>
+              <div class="panel-body">
+              	
+
+                <label>Método de Notificación</label>
+                <label class="radio inline">
+                	<%= f.input :type , :as => :radio_buttons, :collection => [['Email', 'NotificacionEmail'], ['Sistema', 'NotificacionSistema'], ['Ambos', 'Ambos']], label:"Tipo de envío:" %>
+                </label>
+
+              
+                <label>Destinatario</label>
+                <div class="form-group input-group">
+			<span class="input-group-addon">@</span>
+
+			<%#= f.input :usuario_destino, as: :autocomplete, label: false, url: usuarios_path, input_html: { autofocus: true  }  %>
+
+			<%= f.association :usuario_destino, :collection => Usuario.all, input_html: { class: 'multiselectuser'}, :label => false  %>
+		<%#= collection_select(:usuario_destino, Usuario.all, :usuario_destino_id, {}, { :multiple => true } )%>
+              	</div>
+                
+                
+                <label>Descripción de la Notificación</label>
+                <%= f.input :mensaje,:as => :text, :input_html => {:rows => 10}, :placeholder => 'descripción de la notificación...'  %>
+
+              </div>
+            </div>
+          </div>
   </div>
-  <div class="field">
-    <%= f.label :horaNotificacion %><br>
-    <%= f.time_select :horaNotificacion %>
-  </div>
-  <div class="field">
-    <%= f.label :esActiva %><br>
-    <%= f.check_box :esActiva %>
-  </div>
-  <div class="field">
-    <%= f.label :mensaje %><br>
-    <%= f.text_area :mensaje %>
-  </div>
-  <div class="field">
-    <%= f.label :notificado %><br>
-    <%= f.check_box :notificado %>
-  </div>
-  <div class="field">
-    <%= f.label :usuarioCreador_id %><br>
-    <%= f.text_field :usuarioCreador_id %>
-  </div>
-  <div class="field">
-    <%= f.label :usuarioDestino_id %><br>
-    <%= f.text_field :usuarioDestino_id %>
-  </div>
-  <div class="field">
-    <%= f.label :evento_publico_id %><br>
-    <%= f.text_field :evento_publico_id %>
-  </div>
-  <div class="field">
-    <%= f.label :proyecto_id %><br>
-    <%= f.text_field :proyecto_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
+          <%= f.button :submit, :class => 'btn btn-primary', :value => 'Confirmar' %>
+
+  
 <% end %>

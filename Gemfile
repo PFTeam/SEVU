@@ -70,3 +70,4 @@ gem 'populator'
 gem 'faker'
 
 # pry, pry-byebug  para debug
+gem 'mail'
