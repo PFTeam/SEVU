@@ -1,6 +1,7 @@
 class NotificacionEmailesController < ApplicationController
   before_action :set_notificacion_email, only: [:show, :edit, :update, :destroy]
 
+
   # GET /notificacion_emailes
   # GET /notificacion_emailes.json
   def index

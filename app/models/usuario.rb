@@ -28,6 +28,8 @@ class Usuario < ActiveRecord::Base
   has_many :notificacion_recibidas, :class_name => "Notificacion"
   has_many :notificacion_enviadas, :class_name => "Notificacion"
   has_many :necesidades
+  
+  has_many :estado_academicos
 
   has_attached_file :foto,
 	 :styles => { :small => "50x50!" },

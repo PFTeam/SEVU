@@ -1,0 +1,27 @@
+<h1>Estados Academico</h1>
+
+<table class="table table-hover table-striped tablesorter">
+  <thead>
+    <tr>
+      <th class="col-lg-3">Cantidad materias regulares</th>
+       <th class="col-lg-3">Cantidad materias aprobadas</th>
+       <th class="col-lg-3">Cantidad materias cursando</th>
+       <th class="col-lg-3">Fecha Consulta</th>
+       <th class="col-lg-3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @estado_academicos.each do |estado_academico| %>
+      <tr>
+        <td><%= estado_academico.cantidad_materias_regulares %></td>
+        <td><%= estado_academico.cantidad_materias_aprobadas %></td>
+        <td><%= estado_academico.cantidad_materias_cursando %></td>
+        <td><%= estado_academico.created_at.to_formatted_s(:long_ordinal) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
