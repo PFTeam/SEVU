@@ -6,7 +6,7 @@
 <br>
             <div class="panel panel-primary">
               <div class="panel-body">
-                <b><%= link_to notificacion.usuarioCreador, notificacion.usuarioCreador %></b>      <br>
+                <b><%= link_to notificacion.usuario_creador, notificacion.usuario_creador %></b>      <br>
               <label><h5><b> Notificación:</b></h5></label> 
 				<%= notificacion.created_at %>
                 <br>
@@ -24,7 +24,13 @@
                 	<% end %>
                	</p>
               </div>
-            </div>
+      </div>
+
+
+
    <% end %>
+       <% if @notificacion_sistemas.count == 0 %>
+	       Aún no existen notificaciones
+       <% end %>
 <br>
 <%#= link_to 'New Notificacion sistema', new_notificacion_sistema_path %>

@@ -20,6 +20,7 @@ class ActividadesController < ApplicationController
   # GET /actividades/new
   def new
 		authorize! :new, Actividad
+    @objetivo_especifico = ObjetivoEspecifico.find(params[:objetivo_especifico_id])
     @actividad = Actividad.new(:objetivo_especifico_id => params[:objetivo_especifico_id])
     @proyecto = @actividad.objetivo_especifico.objetivo_general.proyecto
     @habilidades = Habilidad.all
