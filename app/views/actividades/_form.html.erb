@@ -23,7 +23,7 @@
 		<%= f.input :repetitiva, :as => :boolean , :html => {:style => "width: 100px" } %>
 
 
-		<%= f.input :frecuencia, :as => :radio_buttons, :collection => [['Por Semana', 'Por Semana'], ['Por Mes','Por Mes']] %>
+		<%= f.input :frecuencia, :as => :radio_buttons, :collection => [['Por Semana', 'Por Semana'], ['Por Mes','Por Mes']], :disabled => true %>
 
           
                 <label><h3>Descripción</h3>
@@ -82,7 +82,7 @@
           <label><h5>Día de la Semana</h5></label> 
 
 
-	  <%= f.input :dia_semana, :collection => [['Lunes',1],['Martes',2],['Miércoles',3],['Jueves',4],['Viernes',5],['Sábado',6],['Domingo',7]] %>
+	  <%= f.input :dia_semana, :collection => [['Lunes',1],['Martes',2],['Miércoles',3],['Jueves',4],['Viernes',5],['Sábado',6],['Domingo',7]]  %>
 
             </div>
 </div>
@@ -133,3 +133,19 @@
 
 
 <% end %>
+
+
+<script>
+$('#actividad_repetitiva').click(function(){
+		alert(this.checked);
+		if($(this).checked == true){
+			$('#actividad_frecuencia_por_semana').removeAttribute("disabled");
+		} else {
+                        if ($('#actividad_frecuencia_por_semana').disabled == true) {
+				$('#actividad_frecuencia_por_semana').setAttribute("disabled","true");
+			}
+		}
+		       //      $('#actividad_frecuencia_por_semana').attr("disabled","disabled");   
+	     });
+
+</script>

@@ -30,9 +30,9 @@ class Autocomplete
         # Si tiene nombre y apellido quiere decir que es un usuario, y entra a este bloque
         item.label ||= item.apellido_nombre
         #item.foto ||= item.foto.url
-    if item.descripcion
+    if item.titulo
         # Esto significa que es una necesidad
-        item.label ||= item.descripcion
+        item.label ||= item.titulo
     if item.nombre
         # Esto significa que tiene nombre, y entra aca, es IMPORTANTE QUE ESTE AL SER MAS GENERICO VAYA ABAJO
         item.label ||= item.nombre

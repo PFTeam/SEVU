@@ -33,17 +33,11 @@ class AsignacionActividadesController < ApplicationController
   # POST /asignacion_actividades.json
   def create
 		authorize! :create, AsignacionActividad
-		p "BLANK Y TO_S :" + params[:usuario_id].to_s.blank?.to_s
-		p "SOLO BLANK? :" + params[:usuario_id].blank?.to_s
-		p "presence? :" + params[:usuario_id].presence.to_s
-		p "defined? :" + defined? params[:usuario_id]
-		p "has_key? :" + params.has_key?(:usuario_id).to_s
-		p params[:usuario_id]
 		if params[:asignacion_actividad][:usuario_id].to_s.blank? #(!defined? (params[:usuario_id])) && (defined? params[:usuario])
                 p "VACIOOO"
 		@actividad = Actividad.find(params[:asignacion_actividad][:actividad_id])
 		@asignacion_actividad= AsignacionActividad.new
-	        @usuarios = Usuario.page(params[:page]).search query: params[:usuario]
+	        @usuarios = Usuario.page(params[:page]).search query: params[:asignacion_actividad][:usuario]
 		respond_to do |format|
 			format.html { render '/asignacion_actividades/busqueda_filtrada', :actividad_id => @actividad.id, :usuario => params[:usuario] }
 	        end
