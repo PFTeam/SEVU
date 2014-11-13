@@ -6,14 +6,17 @@ class ReportesController < ApplicationController
   # GET /reportes.json
   def index
 #		authorize! :index, Reporte
-	  @asignacion_actividades = AsignacionActividad.find_by(actividad_id: params[:actividad_id]).to_a
+	  @asignacion_actividades = AsignacionActividad.where(actividad_id: params[:actividad_id]).to_a
+	  p @asignacion_actividades
 	  @actividad = Actividad.find(params[:actividad_id])
 	  if @asignacion_actividades.size > 0
 		  @proyecto = @actividad.proyecto
 		  @reportes_mios = []
+		  p @reportes_mios
 		  @asignacion_actividades.to_a.each do |asignacion|
 			if asignacion.usuario == current_usuario && !asignacion.reportes.nil?
 				    @reportes_mios = @reportes_mios + asignacion.reportes
+					  p @reportes_mios
 			end
 		  end
 		  @reportes_todos = @actividad.reportes

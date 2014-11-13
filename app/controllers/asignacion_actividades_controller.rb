@@ -7,7 +7,8 @@ class AsignacionActividadesController < ApplicationController
   def index
 		authorize! :index, AsignacionActividad
 	  @actividad = Actividad.find(params[:actividad_id])
-	  @asignacion_actividades = AsignacionActividad.where('actividad_id =?', @actividad.id ) 
+	  @asignacion_actividades = @actividad.asignacion_actividades
+	  #@asignacion_actividades = AsignacionActividad.where('actividad_id =?', @actividad.id ) 
 	  @proyecto = @actividad.proyecto
   end
 

@@ -61,6 +61,11 @@ class Usuario < ActiveRecord::Base
 	  Postulacion.where(usuario: self, proyecto: proyecto, aceptado: false).count 
   end
 
+  def participando_actividad(actividad)
+	  AsignacionActividad.where(usuario: self, actividad: actividad, vigente: true).count
+  	
+  end
+
   def self.search query: nil, limit: false
     result = Usuario.order 'apellido_nombre ASC'
     if query.present?
