@@ -5,7 +5,7 @@
 <% if @asignacion_actividades.count > 0 %>
 
 	<% if current_usuario.participando_actividad(@actividad) > 0 %>
-		<%= link_to 'New Reporte', new_reporte_path(:actividad_id => @actividad.id) %> |
+		<%= link_to 'Nuevo Reporte', new_reporte_path(:actividad_id => @actividad.id) %> |
 	<% else %>
 	<%		notice = "No puede generar Reportes hasta ser asignado a la actividad" %>    |
 	<% end %>
