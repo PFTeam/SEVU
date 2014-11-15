@@ -122,8 +122,11 @@ end
   def gestionar_nota_P
     
    @voluntario = Voluntario.find(params[:id])
+    #no lo veo muy seguro por eso pongo lo siguiente:
+    #@voluntario = Usuario.find(current_usuario.id)
     #@notap = Nota.where(voluntario_id: params[:id])
    @notap = @voluntario.notas
+   # @notap = Nota.all.where(usuario_id: current_usuario.id)
 
   end
   # GET /voluntarios/1

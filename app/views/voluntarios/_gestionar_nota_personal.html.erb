@@ -1,40 +1,53 @@
-          <!--El panel panel-primary pone un cuadro -->
-          <div class="panel panel-primary">
-          	<!--Pone el cuadro de color azul -->
+          <!--El panel panel-primary pone un cuadro 
+ <!--         <div class="panel panel-primary">
+          	<!--Pone el cuadro de color azul 
             <div class="panel-heading">
-            	<!-- Titulo Cabecera  !-->
-  <h1 class="panel-title">
-<h1>Gestionar Nota Voluntario <small>Modulo Voluntario</small></h1>
-</div>
+            	<!-- Titulo Cabecera  !
+                <h1 class="panel-title">-->
+<h1>Gestionar Nota Voluntario <small> Administracion de las notas</small></h1>
+<!--</div>-->
 
 	<!-- Cuerpo del panel  !-->
 <div class="panel-body">
 
-    <% if @notap.nil? then %>
-      <h4> No existen Notas Personales  </h4>
+    <% if @notap.empty? then %>
+      <h4> Actualmente no existen Notas Personales  </h4>
     <% else %>  
  
  
  <% @notap.each do |nota|%>
- <div class="panel panel-primary">
+<!-- <div class="panel panel-primary">
      
- <div class="panel-heading">                     
-<p><%= "Titulo: "+ nota.titulo %></p>
-</div>
-<div class="panel-body">
-
-<p><%= "Descripcion: "+nota.descripcion %></p>
+  <div class="panel-heading">                     -->
+        <div class="col-lg-6">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h4 class="panel-title"> 
+                <%=nota.titulo %>
+                <small>
+                  <td><%= link_to content_tag(:i, fa_icon("trash 2x", text: "")), nota, method: :delete, data: { confirm: 'Esta seguro?' }, :style=>'padding-left: 6px;color:#FFFFFF;float:right', title: "Eliminar" %></td>
+                  <td><%= link_to content_tag(:i, fa_icon("pencil-square-o 2x", text: "")), edit_nota_path(nota), :style=>'padding-left: 6px;color:#FFFFFF;float:right', title: "Editar" %></td>
+                </small>
+              </h4>
+            </div>
+            <div class="panel-body">
+              <h4> Usuario: </h4>
+              <p><%= nota.usuario.apellido_nombre %></h4>
+            <h4> Descripción: </h4>
+            <p><%= nota.descripcion %></p>
 <%= link_to 'Editar', edit_nota_path(nota) %>
 <%= link_to 'Borrar', nota, method: :delete, data: { confirm: 'Seguro?' } %>
 </div>
 </div>
 <% end %>
 <% end %>
- <div class="col-lg-12">
+</div></div>
+</br>
+ <div class="col-lg-12" align="center">
 <div class="row">
     <div class="field">
 
-  	  <%= link_to "Generar Nota", new_voluntario_nota_path(@voluntario), class: "btn btn-primary btn-lg" %> 
+  	  <%= link_to "Agregar Nota", new_voluntario_nota_path(@voluntario), class: "btn btn-primary btn-lg" %> 
   </div> 
     </div> 
     </div>    
