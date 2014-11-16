@@ -36,7 +36,8 @@
       <th>Nombre de Usuario   </th>
       <th>Apellido y Nombre   </th>
       <th>Email   </th>
-      <th>HABILIDADES   </th>
+      <th>Habilidades   </th>
+      <th>Estado Académico </th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -64,10 +65,14 @@
 				  
 
       
+
+        
+	</td>
+	<td>
+		<%= link_to 'Ver Estado Académico', estado_academicos_path(:usuario_id => usuario.id), remote: true, data: { target: 'modal', modal: true } %> 
+	</td>
+        
     <% end %>
-        
-        </td>
-        
       </tr> 
       
   </tbody>

@@ -4,7 +4,10 @@ class EstadoAcademicosController < ApplicationController
   # GET /estado_academicos
   # GET /estado_academicos.json
   def index
-    @estado_academicos = EstadoAcademico.all
+    @estado_academicos = EstadoAcademico.where(usuario_id: params[:usuario_id])
+    respond_to do |format|
+      format.js {render partial: 'index', content_type: 'text/html'}
+    end
   end
 
   # GET /estado_academicos/1

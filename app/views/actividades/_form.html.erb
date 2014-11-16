@@ -23,7 +23,7 @@
 		<%= f.input :repetitiva, :as => :boolean , :html => {:style => "width: 100px" } %>
 
 
-		<%= f.input :frecuencia, :as => :radio_buttons, :collection => [['Por Semana', 'Por Semana'], ['Por Mes','Por Mes']], :disabled => true %>
+		<%= f.input :frecuencia, :as => :radio_buttons, :collection => [['Por Semana', 'Por Semana'], ['Por Mes','Por Mes']] %>
 
           
                 <label><h3>Descripción</h3>
@@ -135,17 +135,3 @@
 <% end %>
 
 
-<script>
-$('#actividad_repetitiva').click(function(){
-		alert(this.checked);
-		if($(this).checked == true){
-			$('#actividad_frecuencia_por_semana').removeAttribute("disabled");
-		} else {
-                        if ($('#actividad_frecuencia_por_semana').disabled == true) {
-				$('#actividad_frecuencia_por_semana').setAttribute("disabled","true");
-			}
-		}
-		       //      $('#actividad_frecuencia_por_semana').attr("disabled","disabled");   
-	     });
-
-</script>
