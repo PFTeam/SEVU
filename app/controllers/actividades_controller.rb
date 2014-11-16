@@ -20,6 +20,7 @@ class ActividadesController < ApplicationController
   # GET /actividades/new
   def new
 		authorize! :new, Actividad
+    @objetivo_especifico = ObjetivoEspecifico.find(params[:objetivo_especifico_id])
     @actividad = Actividad.new(:objetivo_especifico_id => params[:objetivo_especifico_id])
     @proyecto = @actividad.objetivo_especifico.objetivo_general.proyecto
     @habilidades = Habilidad.all
@@ -41,6 +42,41 @@ class ActividadesController < ApplicationController
 		authorize! :create, Actividad
     @actividad = Actividad.new(actividad_params)
     @actividad.historial_estado_actividades.new(estado_actividad_id: EstadoActividad.find_by(nombre: 'Creada').id, actividad_id: @actividad.id)
+
+    if params[:actividad][:repetitiva] == "1"
+      @actividad.repetitiva = true      
+      if params[:actividad][:frecuencia] == 'Por Semana'
+	      @actividad.frecuencia = 'Por Semana'
+	      case params[:actividad][:dia_semana]
+	      when "1"
+		      @actividad.dia_semana = 'Lunes'
+	      when "2"
+		      @actividad.dia_semana = 'Martes'
+	      when "3"
+		      @actividad.dia_semana = 'Miércoles'
+	      when "4"
+		      @actividad.dia_semana = 'Jueves'
+	      when "5"
+		      @actividad.dia_semana = 'Viernes'
+	      when "6"
+		      @actividad.dia_semana = 'Sábado'
+	      when "7"
+		      @actividad.dia_semana = 'Domingo'
+	      else
+		      @actividad.dia_semana = 'No Seleccionado'
+	      end
+      elsif params[:actividad][:frecuencia] == 'Por Mes'
+	      @actividad.frecuencia = 'Por Mes'
+      else
+	      @actividad.frecuencia = 'No Seleccionado'
+      end
+    else
+      @actividad.repetitiva = false
+      @actividad.frecuancia = 'No es Repetitiva'
+      @actividad.dia_semana = 'No es Reetitiva'
+
+    end
+
 
     respond_to do |format|
       if @actividad.save

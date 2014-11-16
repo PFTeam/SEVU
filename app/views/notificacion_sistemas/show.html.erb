@@ -1,39 +1,32 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Esactiva:</strong>
-  <%= @notificacion_sistema.esActiva %>
-</p>
-
-<p>
   <strong>Mensaje:</strong>
   <%= @notificacion_sistema.mensaje %>
 </p>
 
 <p>
-  <strong>Notificado:</strong>
-  <%= @notificacion_sistema.notificado %>
+  <strong>Usuario Creador:</strong>
+  <%= @notificacion_sistema.usuario_creador %>
 </p>
 
-<p>
-  <strong>Usuariocreador:</strong>
-  <%= @notificacion_sistema.usuarioCreador %>
-</p>
 
 <p>
-  <strong>Usuariodestino:</strong>
-  <%= @notificacion_sistema.usuarioDestino %>
-</p>
-
-<p>
-  <strong>Evento publico:</strong>
-  <%= @notificacion_sistema.evento_publico %>
+  <strong>Evento Público:</strong>
+  <% if @notificacion_sistema.evento_publico.blank? %>
+	  No hay Evento Público Vinculado
+  <% else %>
+	  <%= @notificacion_sistema.evento_publico %>
+  <% end %>
 </p>
 
 <p>
   <strong>Proyecto:</strong>
-  <%= @notificacion_sistema.proyecto %>
+  <% if @notificacion_sistema.proyecto.blank? %>
+	  No hay Proyecto Vinculado
+  <% else %>
+	  <%= @notificacion_sistema.proyecto %>
+  <% end %>
 </p>
 
-<%= link_to 'Editar', edit_notificacion_sistema_path(@notificacion_sistema) %> |
 <%= link_to 'Atrás', notificacion_sistemas_path %>

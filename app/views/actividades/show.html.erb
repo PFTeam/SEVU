@@ -21,6 +21,18 @@
           <strong>Duración Estimada</strong>:</br>
           <%= @actividad.duracion %>
       </p>
+      <p>
+          <strong>Repetitiva</strong>:</br>
+          <%= @actividad.es_repetitiva %>
+      </p>
+      <p>
+          <strong>Frecuencia de Repetición</strong>:</br>
+          <%= @actividad.frecuencia %>
+      </p>
+      <p>
+          <strong>Día de la Semana</strong>:</br>
+          <%= @actividad.dia_semana %>
+      </p>
 
 
     </div> 
@@ -57,8 +69,12 @@
             <%= @proyecto.justificacionImpacto %>
           </p>
           <p>
-            <strong>Tipo de Actividad</strong>:</br>
-            <%= @actividad.tipo_actividad %>
+	  <strong>Tipo de Actividad</strong>:</br>
+	  <% if !@actividad.tipo_actividad.blank? %>
+		  <%= @actividad.tipo_actividad %>
+	  <% else %>
+		   "No se ha seleccionado ningun Tipo de Actividad"
+	  <% end %>
           </p>
           <p>
             <strong>Estado Actividad</strong>:</br>
@@ -78,8 +94,8 @@
 <%= link_to 'Editar', edit_actividad_path(@actividad) %> |
 <%= link_to 'Agregar Requisitos', new_requisito_path(:actividad_id => @actividad.id) %> |
 <%= link_to 'Ver Historial', historial_estado_actividades_path(:actividad_id => @actividad.id)%> |
-<%= link_to 'Ver Reportes', reportes_path(:actividad_id => @actividad.id)%> |
 <%= link_to 'Asignación de Recursos', asignacion_actividades_path(:actividad_id => @actividad.id)%> |
+<%= link_to 'Ver Reportes', reportes_path(:actividad_id => @actividad.id)%> |
 <%= link_to 'Atrás', @actividad.objetivo_especifico %>
 
 

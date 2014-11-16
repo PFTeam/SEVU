@@ -1,4 +1,6 @@
-<%= form_for [@voluntario, @nota] do |f| %>
+
+<%@notaaus=Nota.find(params[:id]) %>
+<%= form_for @nota do |f| %>
  
   <% if @nota.errors.any? %>
    <div class="alert alert-danger">
@@ -19,33 +21,35 @@
 <div class="well">
   <div class="field">
     <%= f.label :titulo %><br>
-    <%= f.text_field :titulo %>
+    <%= f.text_field :titulo , :value =>"Re: "+ @notaaus.titulo %>
   </div>
   <div class="field">
     <%= f.label :descripcion %><br>
-    <%= f.text_area :descripcion , :cols => 50, :rows => 10  %>
+    <%= f.text_area :descripcion , :cols => 50, :rows => 10 , :value =>"Re: "+ @notaaus.descripcion  %>
   </div>
   <div class="field">
   	<% if @voluntario.nil? then %>
       <%#= f.label :voluntario_id %><br>
     <%= f.text_field :voluntario_id %>
     <% else %>
-       <%= f.hidden_field :voluntario_id, :value => @voluntario.id %>
+       <%= f.hidden_field :voluntario_id, :value => @notaaus.usuario_id %>
  	<%end%>
   </div>
+    <div class="field">
+    <%= f.label :usuario_id %><br>
+    <%= f.text_field :usuario_id, :value => @notaaus.voluntario_id %>
+   </div>
    
-   <div class="field">
+   
+ <!--   <div class="field">
     <%#= f.label :usuario_id %><br>
     <label>Para el Usuario</label>
-    <%@usuario=Usuario.all%>
+    <%#@usuario=Usuario.all%>
     
-   <%= f.collection_select(:usuario_id , @usuario, :id,:nombreUsuario,{prompt: "Usuario..." }, {class:"form-control"}) %>
+   <%#= f.collection_select(:usuario_id , @usuario, :id,:nombreUsuario,{prompt: "Usuario..." }, {class:"form-control"}) %>
         </div>
-  <div class="field">
-    <%#= f.label :usuario_id %><br>
-    <%#= f.text_field :usuario_id %>
-   </div>
-
+ 
+-->
     
   <div class="actions">
     <%= f.submit :class => "btn btn-default" %>

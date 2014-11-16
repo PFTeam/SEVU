@@ -1,6 +1,6 @@
-<h1>Editing nota</h1>
+<h1>Editar nota</h1>
 
 <%= render 'form' %>
 
 <%= link_to 'Ver', @nota %> |
-<%= link_to 'Atrás', gestionar_nota_P_path(@voluntario)%>
+<%= link_to 'Atrás', gestionar_nota_P_path(current_usuario)%>

@@ -6,7 +6,6 @@
 
 <div class="row">
   <div class="col-lg-12">
-    <!--<form role="form">-->
       <label><h2> <%= @informe_gasto.proyecto.nombre %> </h2></label></br>
       <div class="form-group">
         <label>
@@ -57,11 +56,27 @@
                     <div class="col-lg-6">
                       <div class="panel panel-default">
                         <div class="panel-heading">
-                          <h4 class="panel-title"> <%= detalle.titulo %> <small> <td><%= link_to '(Eliminar)', [@informe_gasto, detalle], method: :delete, data: { confirm: 'Esta seguro?' } %></td></small>
+                          <h4 class="panel-title"> <%= detalle.titulo %> <!--<small> <td><%#= link_to '(Eliminar)', [@informe_gasto, detalle], method: :delete, data: { confirm: 'Esta seguro?' } %></td></small>-->
                           <!--<td> <%#= link_to '#', :class => "fa fa-trash-o" do %>
                             <i class="icon-remove"></i>
                           <%# end %> </i>
                         <i class="fa fa-trash-o"></i></td>-->
+                        <small>
+                                                      <% if !detalle.comprobante.nil? then %>
+                                  
+                                  <%= link_to content_tag(:i, fa_icon("file-text-o 2x", text: "")), comprobante_path(detalle.comprobante), method: :get, :style=>'padding-left: 6px;float:right', title: "Ver comprobante" %>
+                                    <%#= link_to '(Ver comprobante)', comprobante_path(detalle.comprobante), method: :get %>
+                            <% else %>
+
+                                  <%= link_to content_tag(:i, fa_icon("paperclip 2x", text: "")), new_comprobante_path(:detalle_gasto_id => detalle.id), :style=>'padding-left: 6px;float:right', title: "Agregar comprobante" %>
+                                    <%#= link_to '(Agregar comprobante)', new_comprobante_path(:detalle_gasto_id => detalle.id) %>  
+                            <% end %>
+                               <%= link_to content_tag(:i, fa_icon("trash 2x", text: "")), [@informe_gasto, detalle], method: :delete, data: { confirm: 'Esta seguro?' }, :style=>'padding-left: 6px;float:right', title: "Eliminar" %>
+                                                    <%= link_to content_tag(:i, fa_icon("pencil-square-o 2x", text: "")), edit_detalle_gasto_path(detalle), :style=>'padding-left: 6px;float:right', title: "Editar" %>
+                         
+                                  <%#= link_to '(Editar)',  edit_detalle_gasto_path(detalle) %> 
+                                  <%#= link_to '(X)', [@informe_gasto, detalle], method: :delete, data: { confirm: 'Esta seguro?' }%>
+</small>
                           </h4> 
                         </div>
                         <div class="panel-body">
@@ -103,20 +118,23 @@
                   <% @informe_gasto.detalle_gastos.uniq.each_with_index do |detalle, index|%>
                     <% if detalle.concepto_gasto_id == concepto.id then %>
                       <tr>
-                        <td><%= detalle.titulo %></td>                          <!--<td> <%#=', :class => "fa fa-trash-o" do %>
-                            <i class="icon-remove"></i>
-                          <%# end %> </i>
-                        <i class="fa fa-trash-o"></i></td>-->
+                        <td><%= detalle.titulo %></td>
                         <td>$ <%= number_with_precision(detalle.monto, :precision => 2) %></td>
                         <% sumatoria += detalle.monto %>
                         <td>
-                          <%= link_to '(Editar)',  edit_detalle_gasto_path(detalle) %> 
-                          <%= link_to '(X)', [@informe_gasto, detalle], method: :delete, data: { confirm: 'Esta seguro?' }%>
-                          <% if !detalle.comprobante.nil? then %>
-                            <%= link_to '(Ver comprobante)', comprobante_path(detalle.comprobante), method: :get %>
-                          <% else %>
-                            <%= link_to '(Agregar comprobante)', new_comprobante_path(:detalle_gasto_id => detalle.id) %>  
-                          <% end %>
+                          <small>
+                            <%= link_to content_tag(:i, fa_icon("pencil-square-o 2x", text: "")), edit_detalle_gasto_path(detalle), title: "Editar" %>&nbsp;
+                            <%= link_to content_tag(:i, fa_icon("trash 2x", text: "")), [@informe_gasto, detalle], method: :delete, data: { confirm: 'Esta seguro?' }, title: "Eliminar" %>&nbsp;
+                                  <%#= link_to '(Editar)',  edit_detalle_gasto_path(detalle) %> 
+                                  <%#= link_to '(X)', [@informe_gasto, detalle], method: :delete, data: { confirm: 'Esta seguro?' }%>
+                            <% if !detalle.comprobante.nil? then %>
+                                  <%= link_to content_tag(:i, fa_icon("file-text-o 2x", text: "")), comprobante_path(detalle.comprobante), method: :get, title: "Ver comprobante" %>
+                                    <%#= link_to '(Ver comprobante)', comprobante_path(detalle.comprobante), method: :get %>
+                            <% else %>
+                                  <%= link_to content_tag(:i, fa_icon("paperclip 2x", text: "")), new_comprobante_path(:detalle_gasto_id => detalle.id), title: "Agregar comprobante" %>
+                                    <%#= link_to '(Agregar comprobante)', new_comprobante_path(:detalle_gasto_id => detalle.id) %>  
+                            <% end %>
+                          </small>
                         </td>
                     <% end %>
                   <% end %>
@@ -151,8 +169,9 @@
     <% end %>
   </div>
 </div>
+
 <br></br>
-    <div class="form-group input-group">
+    <div class="col-lg-12 form-group input-group">
       <span class="input-group-addon">
           Monto total acumulado  $
       </span>

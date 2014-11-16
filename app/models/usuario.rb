@@ -28,6 +28,8 @@ class Usuario < ActiveRecord::Base
   has_many :notificacion_recibidas, :class_name => "Notificacion"
   has_many :notificacion_enviadas, :class_name => "Notificacion"
   has_many :necesidades
+  
+  has_many :estado_academicos
 
   has_attached_file :foto,
 	 :styles => { :small => "50x50!" },
@@ -59,6 +61,11 @@ class Usuario < ActiveRecord::Base
 	  Postulacion.where(usuario: self, proyecto: proyecto, aceptado: false).count 
   end
 
+  def participando_actividad(actividad)
+	  AsignacionActividad.where(usuario: self, actividad: actividad, vigente: true).count
+  	
+  end
+
   def self.search query: nil, limit: false
     result = Usuario.order 'apellido_nombre ASC'
     if query.present?
@@ -67,5 +74,8 @@ class Usuario < ActiveRecord::Base
 
     limit ? result.limit(10) : result
   end
-
+  
+  def to_a
+	  [self]
+  end
 end

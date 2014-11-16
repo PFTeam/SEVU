@@ -16,6 +16,7 @@ class DetallePresupuestosController < ApplicationController
   def show
 		authorize! :show, DetallePresupuesto
     @detalle_presupuestos = DetallePresupuesto.all
+    @proyecto = @detalle_presupuesto.presupuesto.proyecto
   end
 
   # GET /detalle_presupuestos/new
@@ -23,6 +24,7 @@ class DetallePresupuestosController < ApplicationController
 		authorize! :new, DetallePresupuesto
     @detalle_presupuesto = @presupuesto.detalle_presupuestos.new
     @concepto_gastos = ConceptoGasto.all
+    @proyecto = @detalle_presupuesto.presupuesto.proyecto
   end
 
   # GET /detalle_presupuestos/1/edit
@@ -30,6 +32,7 @@ class DetallePresupuestosController < ApplicationController
 		authorize! :edit, DetallePresupuesto
     #@detalle_presupuesto = @presupuesto.detalle_presupuestos.new #@detalle_presupuesto = DetallePresupuesto.new
     @concepto_gastos = ConceptoGasto.all 
+    @proyecto = @detalle_presupuesto.presupuesto.proyecto
   end
 
   # POST /detalle_presupuestos

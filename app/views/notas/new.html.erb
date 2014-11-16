@@ -1,22 +1,22 @@
-   <!--El panel panel-primary pone un cuadro -->
+   <!--El panel panel-primary pone un cuadro 
           <div class="panel panel-primary">
-          	<!--Pone el cuadro de color azul -->
+          	<!--Pone el cuadro de color azul 
             <div class="panel-heading">
-            	<!-- Titulo Cabecera  !-->
+            	<!-- Titulo Cabecera  
   <h1 class="panel-title">
-
+    -->
 <h1>Nueva nota</h1>
-</div>
-	<!-- Cuerpo del panel  !-->
-<div class="panel-body">
-	<div class="panel-heading"> 
+<!--</div>-->
+      <!-- Cuerpo del panel  !-->
+<!--<div class="panel-body">
+  <div class="panel-heading"> -->
 <%= render 'form' %>
 <p>&nbsp;
 &nbsp;
 &nbsp; </p>
 
 
-<%= link_to 'Atrás', gestionar_nota_P_path(@voluntario) %>
+<%= link_to 'Atrás', gestionar_nota_P_path(current_usuario) %>
 </div>
 </div>
 </div>

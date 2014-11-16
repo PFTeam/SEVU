@@ -1,4 +1,4 @@
-<%= simple_form_for(@actividad , html: actividad_form_html_options) do |f| %>
+<%= simple_form_for(@actividad , html: actividad_form_html_options, wrapper_mappings: {checkboxes: :horizontal_radio_and_checkboxes, boolean: :horizontal_boolean}) do |f| %>
   <% if @actividad.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@actividad.errors.count, "error") %> prohibited this actividad from being saved:</h2>
@@ -19,24 +19,11 @@
                 <%= f.input :nombre %>
                 
             
-          
-          	<label><h5>Repetitiva   </h5></label>  
-                    <input type="checkbox" value="" disabled>
-			
-            <div class="form-group">
-                <div class="radio-inline" disabled>
-                  <label>
-                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-                    Por Semana
-                  </label>
-                </div>
-               <div class="radio-inline" disabled>
-                  <label>
-                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-                    Por Mes
-                  </label>
-                </div>
-             </div>
+                </br>
+		<%= f.input :repetitiva, :as => :boolean , :html => {:style => "width: 100px" } %>
+
+
+		<%= f.input :frecuencia, :as => :radio_buttons, :collection => [['Por Semana', 'Por Semana'], ['Por Mes','Por Mes']] %>
 
           
                 <label><h3>Descripción</h3>
@@ -94,17 +81,8 @@
             
           <label><h5>Día de la Semana</h5></label> 
 
-	<div class="form-group">
-                        <select name="select2" class="form-control" disabled>
-                                <option>Lunes</option>
-                                <option>Martes</option>
-                                <option>Miercoles</option>
-                                <option>Jueves</option>
-                                <option>Viernes</option>
-                                <option>Sábado</option>
-                                <option>Domingo</option>
-                              </select>
-	</div>
+
+	  <%= f.input :dia_semana, :collection => [['Lunes',1],['Martes',2],['Miércoles',3],['Jueves',4],['Viernes',5],['Sábado',6],['Domingo',7]]  %>
 
             </div>
 </div>
@@ -155,3 +133,5 @@
 
 
 <% end %>
+
+

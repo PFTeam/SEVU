@@ -7,7 +7,8 @@ class AsignacionActividadesController < ApplicationController
   def index
 		authorize! :index, AsignacionActividad
 	  @actividad = Actividad.find(params[:actividad_id])
-	  @asignacion_actividades = AsignacionActividad.where('actividad_id =?', @actividad.id ) 
+	  @asignacion_actividades = @actividad.asignacion_actividades
+	  #@asignacion_actividades = AsignacionActividad.where('actividad_id =?', @actividad.id ) 
 	  @proyecto = @actividad.proyecto
   end
 
@@ -21,6 +22,7 @@ class AsignacionActividadesController < ApplicationController
   def new
 		authorize! :new, AsignacionActividad
 	  @actividad = Actividad.find(params[:actividad_id])
+	@proyecto = @actividad.proyecto
     @asignacion_actividad = AsignacionActividad.new
   end
 
@@ -33,17 +35,14 @@ class AsignacionActividadesController < ApplicationController
   # POST /asignacion_actividades.json
   def create
 		authorize! :create, AsignacionActividad
-		p "BLANK Y TO_S :" + params[:usuario_id].to_s.blank?.to_s
-		p "SOLO BLANK? :" + params[:usuario_id].blank?.to_s
-		p "presence? :" + params[:usuario_id].presence.to_s
-		p "defined? :" + defined? params[:usuario_id]
-		p "has_key? :" + params.has_key?(:usuario_id).to_s
-		p params[:usuario_id]
-		if params[:asignacion_actividad][:usuario_id].to_s.blank? #(!defined? (params[:usuario_id])) && (defined? params[:usuario])
-                p "VACIOOO"
 		@actividad = Actividad.find(params[:asignacion_actividad][:actividad_id])
+	@proyecto = @actividad.proyecto
+
+	if params[:asignacion_actividad][:usuario_id].to_s.blank? #(!defined? (params[:usuario_id])) && (defined? params[:usuario])
+                p "VACIOOO"
+
 		@asignacion_actividad= AsignacionActividad.new
-	        @usuarios = Usuario.page(params[:page]).search query: params[:usuario]
+	        @usuarios = Usuario.page(params[:page]).search query: params[:asignacion_actividad][:usuario]
 		respond_to do |format|
 			format.html { render '/asignacion_actividades/busqueda_filtrada', :actividad_id => @actividad.id, :usuario => params[:usuario] }
 	        end
@@ -128,6 +127,23 @@ class AsignacionActividadesController < ApplicationController
        @asignacion_actividad = AsignacionActividad.find(params[:id])
        @usuarios = Usuario.page(params[:page]).search query: params[:usuario]
 	
+  end
+
+  def busqueda_por_habilidad
+      @actividad = Actividad.find(params[:actividad_id])
+      @requisito = Requisito.new
+      
+      if !params[:requisito][:habilidad].to_s.blank?
+          
+
+      else
+
+	      redirect_to 'busqueda_por_habilidad', :actividad_id => @actividad.id
+
+
+
+      end
+  	
   end
 
   private

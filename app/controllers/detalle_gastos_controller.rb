@@ -14,6 +14,7 @@ class DetalleGastosController < ApplicationController
   # GET /detalle_gastos/1.json
   def show
 		authorize! :show, DetalleGasto
+    @proyecto = @detalle_gasto.informe_gasto.proyecto
   end
 
   # GET /detalle_gastos/new
@@ -24,6 +25,7 @@ class DetalleGastosController < ApplicationController
     #@detalle_gasto.informe_gastos_id = @informe_gasto.id
     @concepto_gastos = ConceptoGasto.all
     @detalle_gasto.voluntario_id = current_usuario.id
+    @proyecto = @detalle_gasto.informe_gasto.proyecto
 
   end
 
@@ -31,6 +33,7 @@ class DetalleGastosController < ApplicationController
   def edit
 		authorize! :edit, DetalleGasto
     @concepto_gastos = ConceptoGasto.all
+    @proyecto = @detalle_gasto.informe_gasto.proyecto
     
   end
 

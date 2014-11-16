@@ -5,5 +5,11 @@
     <li>
       <%= link_to 'Visualizar Eventos Públicos', evento_publicos_path %>
     </li>
+    <li>
+    <% if @evento_publico && !@evento_publico.id.nil? %>
+	    <%= link_to 'Generar Notificación', new_notificacion_path(:evento_publico_id => @evento_publico.id) %>
+    <% end %>
+    </li>
+
   </ul>    
 

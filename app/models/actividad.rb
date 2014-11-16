@@ -32,4 +32,11 @@ class Actividad < ActiveRecord::Base
 def to_s
 	nombre
 end
+def es_repetitiva
+	if self.repetitiva == true
+		"Sí"
+	else
+		"No"
+	end
+end
 end

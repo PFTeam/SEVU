@@ -1,5 +1,10 @@
-<h1>New notificacion</h1>
-
 <%= render 'form' %>
 
-<%= link_to 'Atrás', notificaciones_path %>
+
+<% if !params[:proyecto_id].blank? %>
+<%= link_to 'Atrás', Proyecto.find(params[:proyecto_id]) %>
+<% elsif !params[:evento_publico_id].blank? %>
+<%= link_to 'Atrás', EventoPublico.find(params[:evento_publico_id]) %>
+<%else %>
+<%= link_to 'Atrás', notificacion_sistemas_path %>
+<%end%>

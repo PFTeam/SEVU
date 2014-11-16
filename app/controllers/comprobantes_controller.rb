@@ -13,6 +13,7 @@ class ComprobantesController < ApplicationController
   # GET /comprobantes/1.json
   def show
 		authorize! :show, Comprobante
+    @proyecto = @comprobant.detalle_gasto.informe_gasto.proyecto
   end
 
   # GET /comprobantes/new
@@ -20,12 +21,15 @@ class ComprobantesController < ApplicationController
 		authorize! :new, Comprobante
     @comprobant = Comprobante.new
     @detalle_gasto = DetalleGasto.find params[:detalle_gasto_id]
+    @comprobant.detalle_gasto = @detalle_gasto
+    @proyecto = @comprobant.detalle_gasto.informe_gasto.proyecto
     #@comprobant.detalle_gasto_id = params[:detalle_gasto_id]# @detalle_gasto.id
   end
 
   # GET /comprobantes/1/edit
   def edit
 		authorize! :edit, Comprobante
+    @proyecto = @comprobant.detalle_gasto.informe_gasto.proyecto
   end
 
   # POST /comprobantes

@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Cantidad materias regulares:</strong>
+  <%= @estado_academico.cantidad_materias_regulares %>
+</p>
+
+<p>
+  <strong>Cantidad materias aprobadas:</strong>
+  <%= @estado_academico.cantidad_materias_aprobadas %>
+</p>
+
+<p>
+  <strong>Cantidad materias cursando:</strong>
+  <%= @estado_academico.cantidad_materias_cursando %>
+</p>
+
+<p>
+  <strong>Usuario:</strong>
+  <%= @estado_academico.usuario %>
+</p>
+
+<%= link_to 'Edit', edit_estado_academico_path(@estado_academico) %> |
+<%= link_to 'Back', estado_academicos_path %>

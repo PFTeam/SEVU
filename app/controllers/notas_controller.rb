@@ -16,8 +16,8 @@ class NotasController < ApplicationController
   end
 
 def Responder
-   @voluntario = Voluntario.find(params[:voluntario_id])
-   
+   #@voluntario = Voluntario.find(params[:voluntario_id])
+   @voluntario=current_usuario 
    @nota= @voluntario.notas.new
   
 end
