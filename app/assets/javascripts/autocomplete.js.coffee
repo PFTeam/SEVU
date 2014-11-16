@@ -29,6 +29,7 @@ class Autocomplete
     if item.apellido_nombre
         # Si tiene nombre y apellido quiere decir que es un usuario, y entra a este bloque
         item.label ||= item.apellido_nombre
+        #item.foto ||= item.foto.url
     if item.descripcion
         # Esto significa que es una necesidad
         item.label ||= item.descripcion
@@ -36,7 +37,11 @@ class Autocomplete
         # Esto significa que tiene nombre, y entra aca, es IMPORTANTE QUE ESTE AL SER MAS GENERICO VAYA ABAJO
         item.label ||= item.nombre
 
-
+    #<img src="/assets/usuarios/58/original/PoweredByGNULinux.png?1414849573" alt="Poweredbygnulinux"></img>
+    #if item.apellido_nombre
+        #newImage = new Image()
+        #newImage.src = "https://www.google.com/images/srpr/logo3w.png"
+        #newImage.draw
     content.append $('<span class="title"></span>').text item.label
     content.append $('<small></small>').text item.informal if item.informal
 

@@ -18,6 +18,11 @@ def buscar_usuario
 
 end  
 
+def mis_notas
+  
+end
+  
+
 def buscar_voluntario
  
      @voluntario = Voluntario.where(nombreUsuario: params[:usuario_bucar]) 

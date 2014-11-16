@@ -15,14 +15,25 @@ class NotasController < ApplicationController
 
   end
 
+def Responder
+   @voluntario = Voluntario.find(params[:voluntario_id])
+   
+   @nota= @voluntario.notas.new
+  
+end
+
+
+
   # GET /notas/new
+
+
   def new
 
 		authorize! :new, Nota
     #@nota = Nota.new
    # @nota = Nota.new
    @voluntario = Voluntario.find(params[:voluntario_id])
-   @usuario=Usuario.all
+   #@usuario=Usuario.all
    
    @nota= @voluntario.notas.new
   end

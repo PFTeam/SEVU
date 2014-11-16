@@ -164,6 +164,8 @@ Rails.application.routes.draw do
   resources :estado_proyectos
  #match 'usuarios/buscar_por_legajo/:legajo' => 'usuarios#buscar_por_legajo'
   get 'adminitrar_estado_usuario/'  => 'voluntarios#adminitrar_estado_usuario',:as => 'adminitrar_estado_usuario'
+  get 'mis_notas/'  => 'voluntarios#mis_notas',:as => 'mis_notas'
+  get 'Responder/' => 'notas#Responder',:as =>'Responder'
   get 'buscarusuario/'  => 'voluntarios#buscarusuario',:as => 'buscarusuario'
   get 'buscarusuario/'  => 'voluntarios#buscar_usuario'
 

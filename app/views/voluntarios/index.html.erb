@@ -75,16 +75,22 @@
                   <%= link_to 'Gestionar Nota Persona', gestionar_nota_P_path(voluntario) %>
                   </li>
                   <li class="divider"></li>
-                  <li class="dropdown-header">--------------------------------------------------</li>
+                  <li class="dropdown-header">--------------------------------------------</li>
                   <li>
                   
                   <%=link_to 'Cambiar Estado', new_historial_estado_usuario_path(:usuario_id => voluntario.id) %>
                   
-                  </a></li>
+                  </li>
+                  
+                   <li>
+                  <%=link_to 'Notas hacia Mi', mis_notas_path %>
+                  
+                  </li>
+                  
+                  
           
                 </ul>
-              </li>
-            </ul>
+             
           </div><!--/.nav-collapse -->
         </div>
       	 		
