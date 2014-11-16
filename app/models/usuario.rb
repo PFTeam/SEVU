@@ -74,5 +74,8 @@ class Usuario < ActiveRecord::Base
 
     limit ? result.limit(10) : result
   end
-
+  
+  def to_a
+	  [self]
+  end
 end

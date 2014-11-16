@@ -17,7 +17,19 @@ class NotificacionesController < ApplicationController
   # GET /notificaciones/new
   def new
 		authorize! :new, Notificacion
+	if !params[:proyecto_id].to_s.blank?
+		p "NO ES BLANK"
+		@asignaciones = AsignacionRol.where(proyecto_id: params[:proyecto_id])
+                @usuarios = []
+		@asignaciones.each do |asignacion|
+			@usuarios = @usuarios + asignacion.usuario.to_a
+		end
+                @usuarios = @usuarios.uniq
+	else
+		p "BLANK"
 		@usuarios = Usuario.all
+	end
+
     @notificacion = Notificacion.new
   end
 
@@ -30,62 +42,95 @@ class NotificacionesController < ApplicationController
   # POST /notificaciones.json
   def create
     authorize! :create, Notificacion
-    @notificacion = Notificacion.new(notificacion_params)
-    p "Notificacion.destino: " + params[:notificacion][:usuaroi_creador_id].to_s
-    @notificacion.usuario_creador = current_usuario
-    case @notificacion.type
-    when "NotificacionEmail"
-	    # ENVIAR EMAIL Y CAMBIAR A NOTIFICADO 
-	    respond_to do |format|
-	      if @notificacion.save
-		NotificacionMailer.enviar_notificacion(@notificacion).deliver
-		format.html { redirect_to :controller => 'notificacion_sistemas', :action => 'index' 
-		                      flash[:notice] =  'Notificacion fue creado satisfactoriamente.' }
-		format.json { render :show, status: :created, location: @notificacion }
-	      else
-		format.html { render :new }
-		format.json { render json: @notificacion.errors, status: :unprocessable_entity }
-	      end
-	    end
-         
-    when "NotificacionSistema"
-	    @notificacion.notificado = false
-	    @notificacion.esActiva = true
-	    respond_to do |format|
-	      if @notificacion.save
-		format.html { redirect_to :controller => 'notificacion_sistemas', :action => 'index' 
-		                      flash[:notice] =  'Notificacion fue creado satisfactoriamente.' }
-		format.json { render :show, status: :created, location: @notificacion }
-	      else
-		format.html { render :new }
-		format.json { render json: @notificacion.errors, status: :unprocessable_entity }
-	      end
-	    end
 
-    when "Ambos"
-		@notificacion_sistema = Notificacion.new(notificacion_params)
-		@notificacion_sistema.type = "NotificacionSistema"
-		@notificacion_email = Notificacion.new(notificacino_params)
-		@notificacion_email.type = "NotificacionEmail"
-		@notificacion_email.usuario_creador = current_usuario
-		@notificacion_sistema.usuario_creador = current_usuario
-		@notificacion_sistema.notificado = false
-		@notificacion_sistema.esActiva = true
-		respond_to do |format|
-			if @notificacion_sistema.save && @notificacion_email.save
-				NotificacionMailer.enviar_notificacion(@notificacion_email).deliver
-				format.html { redirect_to :controller => 'notificacion_sistemas', :action => 'index' 
-		                      flash[:notice] =  'Notificacion fue creado satisfactoriamente.' }
-				format.json { render :show, status: :created, location: @notificacion }
-			else
-				format.html { render :new }
-				format.json { render json: @notificacion.errors, status: :unprocessable_entity }
-			end
-		end
-    else 
+    p "Notificacion.destino: " + params[:notificacion][:usuario_creador_id].to_s
+    if !params[:notificacion][:usuario_destino_ids].blank?
 
+	    if params[:notificacion][:type].to_s.blank?
+				   respond_to do |format|
+					    if !params[:notificacion][:proyecto_id].to_s.blank?
+        					format.html { redirect_to :controller => 'notificaciones', :action => 'new', :proyecto_id => params[:notificacion][:proyecto_id]
+        								      flash[:notice] =  'Debe ingresar un tipo de notificación' }
+					    elsif !params[:notificacion][:evento_publico_id].to_s.blank?
+        					format.html { redirect_to :controller => 'notificaciones', :action => 'new' , :evento_publico_id => params[:notificacion][:evento_publico_id]
+        								      flash[:notice] =  'Debe ingresar un tipo de notificación' }
+					    else
+        					format.html { redirect_to :controller => 'notificaciones', :action => 'new' 
+        								      flash[:notice] =  'Debe ingresar un tipo de notificación' }
+					    end
+				    end
+	    end
+	    params[:notificacion][:usuario_destino_ids].each do |usuario_destino|
+  		    @notificacion = Notificacion.new(notificacion_params)
+  		    @notificacion.usuario_creador = current_usuario
+  			  @notificacion.usuario_destino = Usuario.find(usuario_destino) 
+  			  if !params[:evento_publico_id].blank?
+  			       @notificacion.evento_publico_id = params[:evento_publico_id]
+  			  elsif !params[:eproyecto_id].blank?
+  			       @notificacion.proyecto_id = params[:proyecto_id]
+  			  end
+  			  case @notificacion.type
+      			  when "NotificacionEmail"
+      				      @notificacion.save
+      					    NotificacionMailer.enviar_notificacion(@notificacion).deliver
+      				 
+      			  when "NotificacionSistema"
+      				      @notificacion.notificado = false
+      				      @notificacion.esActiva = true
+      				      @notificacion.save
+      
+      			  when "Ambos"
+      			     if !params[:evento_publico_id].blank?
+                    @notificacion_sistema.evento_publico_id = params[:evento_publico_id]
+                    @notificacion_sistema.evento_publico_id = params[:evento_publico_id]
+                 elsif !params[:eproyecto_id].blank?
+                    @notificacion_email.proyecto_id = params[:proyecto_id]
+                    @notificacion_email.proyecto_id = params[:proyecto_id]
+                 end
+      			    
+      				    @notificacion_sistema.usuario_destino = Usuario.find(usuario_destino)
+      				    @notificacion_email.usuario_destino = Usuario.find(usuario_destino)
+        					@notificacion_sistema = Notificacion.new(notificacion_params)
+        					@notificacion_sistema.type = "NotificacionSistema"
+        					@notificacion_email = Notificacion.new(notificacino_params)
+        					@notificacion_email.type = "NotificacionEmail"
+        					@notificacion_email.usuario_creador = current_usuario
+        					@notificacion_sistema.usuario_creador = current_usuario
+        					@notificacion_sistema.notificado = false
+        					@notificacion_sistema.esActiva = true
+      						@notificacion_sistema.save 
+      						@notificacion_email.save
+      						NotificacionMailer.enviar_notificacion(@notificacion_email).deliver
+      			  else 
+      
+      
+      			  end
+	       end
+	      
+	      
+	       respond_to do |format|
+              format.html { redirect_to :controller => 'notificacion_sistemas', :action => 'index' 
+                         flash[:notice] =  'Notificacion fue creado satisfactoriamente.' }
+	      end
+	      
+	      
+    else
+	    respond_to do |format|
+		    if !params[:notificacion][:proyecto_id].blank?
+		format.html { redirect_to :controller => 'notificaciones', :action => 'new', :proyecto_id => params[:notificacion][:proyecto_id]
+					      flash[:notice] =  'Debe ingresar al menos un usuario destino' }
+		    elsif !params[:notificacion][:evento_publico_id].blank?
+		format.html { redirect_to :controller => 'notificaciones', :action => 'new' , :evento_publico_id => params[:notificacion][:evento_publico_id]
+					      flash[:notice] =  'Debe ingresar al menos un usuario destino' }
+
+		    else
+		format.html { redirect_to :controller => 'notificaciones', :action => 'new' 
+					      flash[:notice] =  'Debe ingresar al menos un usuario destino' }
+
+		    end
+
+	    end
     end
-
 
   end
 
@@ -123,6 +168,6 @@ class NotificacionesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def notificacion_params
-      params.require(:notificacion).permit(:esActiva, :mensaje, :notificado, :usuario_creador_id, :usuario_destino_id, :evento_publico_id, :proyecto_id, :type)
+      params.require(:notificacion).permit(:esActiva, :mensaje, :notificado, :usuario_creador_id, :usuario_destino_id, :evento_publico_id, :proyecto_id, :type, :usuario_destino_ids, :evento_publico_id)
     end
 end

@@ -1,4 +1,4 @@
-<%= simple_form_for(@notificacion) do |f| %>
+<%= form_for(@notificacion) do |f| %>
   <% if @notificacion.errors.any? %>
     <div class="col-lg-12">
       <div class="col-lg-4"></div>
@@ -18,7 +18,7 @@
   <% end %>
 
 
-
+<p id="notice"><%= notice %></p>
    
       
 
@@ -42,32 +42,62 @@
               <div class="panel-body">
               	
 
-                <label>Método de Notificación</label>
-                <label class="radio inline">
-                	<%= f.input :type , :as => :radio_buttons, :collection => [['Email', 'NotificacionEmail'], ['Sistema', 'NotificacionSistema'], ['Ambos', 'Ambos']], label:"Tipo de envío:" %>
+                <h4>Método de Notificación</h4><br/>
+<!--                <label class="radio inline">
+                	<%#= f.input :type , :as => :radio_buttons, :collection => [['Email', 'NotificacionEmail'], ['Sistema', 'NotificacionSistema'], ['Ambos', 'Ambos']], label:"Tipo de envío:" %>
                 </label>
 
+<%= f.text_field :type  %><br/>-->
+    
+					 <%=   radio_button("notificacion", "type", "NotificacionEmail")%>
+					 <%= label_tag(:type, "Notificacion Email") %><br/>
+					 <%=   radio_button("notificacion", "type", "NotificacionSistema", :checked => 'checked')%>
+					 <%= label_tag(:type, "Notificacion Sistema") %><br/>
+					 <%=   radio_button("notificacion", "type", "Ambos")%>
+					 <%= label_tag(:type, "Ambos") %><br/>
+
+    
+    
+    
               
-                <label>Destinatario</label>
+                <h4>Destinatarios</h4>
                 <div class="form-group input-group">
-			<span class="input-group-addon">@</span>
+
+     <% if !params[:proyecto_id].blank? %>
+           <%=  hidden_field_tag("notificacion[proyecto_id][]", params[:proyecto_id] ) %>
+     <% elsif !params[:evento_publico_id].blank?%>
+     		<%=  hidden_field_tag(:evento_publico_id, params[:evento_publico_id] ) %>
+     <% end %>
+
+
 
 			<%#= f.input :usuario_destino, as: :autocomplete, label: false, url: usuarios_path, input_html: { autofocus: true  }  %>
-
-			<%= f.association :usuario_destino, :collection => Usuario.all, input_html: { class: 'multiselectuser'}, :label => false  %>
+  
+  			<% for usuario in @usuarios %>
+  			<div>
+  				<%= check_box_tag "notificacion[usuario_destino_ids][]", usuario.id, @usuarios.include?(usuario) %>
+  				<%= usuario.apellido_nombre %>
+  			</div>
+            <% end %>
+  
+			<%#= f.association :usuario_destino, :collection => Usuario.all, input_html: { class: 'multiselectuser'}, :label => false  %>
 		<%#= collection_select(:usuario_destino, Usuario.all, :usuario_destino_id, {}, { :multiple => true } )%>
               	</div>
                 
                 
-                <label>Descripción de la Notificación</label>
-                <%= f.input :mensaje,:as => :text, :input_html => {:rows => 10}, :placeholder => 'descripción de la notificación...'  %>
+                <label>Descripción de la Notificación</label><br/>
+                <%#= text_field :mensaje,:as => :text, :input_html => {:rows => 10}, :placeholder => 'descripción de la notificación...'  %>
+                <%= f.text_area :mensaje, { :style => 'width: 100%; height: 155px'  }  %>
 
               </div>
             </div>
           </div>
   </div>
-
-          <%= f.button :submit, :class => 'btn btn-primary', :value => 'Confirmar' %>
+            
+  <div class="actions">
+    <%= f.submit 'Confirmar',  :class => 'btn btn-primary' %>
+  </div>
+          <%#= f.button :submit, :class => 'btn btn-primary', :value => 'Confirmar' %>
 
   
 <% end %>
