@@ -325,6 +325,8 @@ ActiveRecord::Schema.define(version: 20141108160551) do
     t.boolean  "esActiva"
     t.text     "mensaje"
     t.boolean  "notificado"
+    t.integer  "usuarioCreador_id"
+    t.integer  "usuarioDestino_id"
     t.integer  "evento_publico_id"
     t.integer  "proyecto_id"
     t.datetime "created_at"
@@ -339,6 +341,8 @@ ActiveRecord::Schema.define(version: 20141108160551) do
 
   add_index "notificaciones", ["evento_publico_id"], name: "index_notificaciones_on_evento_publico_id", using: :btree
   add_index "notificaciones", ["proyecto_id"], name: "index_notificaciones_on_proyecto_id", using: :btree
+  add_index "notificaciones", ["usuarioCreador_id"], name: "index_notificaciones_on_usuarioCreador_id", using: :btree
+  add_index "notificaciones", ["usuarioDestino_id"], name: "index_notificaciones_on_usuarioDestino_id", using: :btree
   add_index "notificaciones", ["usuario_creador_id"], name: "index_notificaciones_on_usuario_creador_id", using: :btree
   add_index "notificaciones", ["usuario_destino_id"], name: "index_notificaciones_on_usuario_destino_id", using: :btree
 

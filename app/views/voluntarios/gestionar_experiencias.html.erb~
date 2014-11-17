@@ -35,10 +35,11 @@ Gestionar Experiencia Voluntarios <small>Modulo Voluntario</small></h1>
         <td> &nbsp;<%= experiencia.cantidadExperiencia%></td>
         
         <td>
-
+<<<<<<< HEAD
         	<span class="label label-danger"><%= link_to 'Eliminar', experiencia, method: :delete, data: { confirm: 'Estas Seguro de eliminar?' } %>
-
-
+=======
+        	<span class="label label-danger"><%= link_to 'Eliminar', experiencia, method: :delete, data: { confirm: 'Seguro?' } %>
+>>>>>>> e83138c81a1317b71bd34c64da6e294f5fd9f84f
         	</span>
         	
        </td>

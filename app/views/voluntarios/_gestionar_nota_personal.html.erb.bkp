@@ -1,4 +1,12 @@
-
+<<<<<<< HEAD
+<!--El panel panel-primary pone un cuadro -->
+<div class="panel panel-primary">
+	<!--Pone el cuadro de color azul -->
+	<div class="panel-heading">
+		<!-- Titulo Cabecera  !-->
+		<h1 class="panel-title"><h1> <%= image_tag @voluntario.foto.url(:small) %> Gestionar Nota Voluntario <small>Modulo Voluntario</small></h1><h1><small>Notas Generadas </small></h1>
+	</div>
+=======
           <!--El panel panel-primary pone un cuadro 
  <!--         <div class="panel panel-primary">
           	<!--Pone el cuadro de color azul 
@@ -7,21 +15,54 @@
                 <h1 class="panel-title">-->
 <h1>Gestionar Nota Voluntario <small> Administracion de las notas</small></h1>
 <!--</div>-->
+>>>>>>> a97e03546b9e67ef3121f15a9142c0a4d8741116
 
 	<!-- Cuerpo del panel  !-->
 	<div class="panel-body">
 
+<<<<<<< HEAD
+		<% if @notap.nil? then %>
+		<h4> No existen Notas Personales </h4>
+		<% else %>
 
+		<% @notap.each do |nota|%>
+		<div class="panel panel-primary">
+
+			<div class="panel-heading">
+				<p>
+				<strong>	<%= "Titulo: "+ nota.titulo +   " Dentinatario: "+ Usuario.find(nota.usuario_id).nombreUsuario%> </strong>
+				</p>
+			</div>
+			<div class="panel-body">
+
+				<p>
+					<%= "Descripcion: "+nota.descripcion %>
+				</p>
+				<%= link_to 'Editar', edit_nota_path(nota) %>
+				<%= link_to 'Borrar', nota, method: :delete, data: { confirm: 'Seguro?' } %>
+			</div>
+		</div>
+		<% end %>
+		<% end %>
+		<div class="col-lg-12">
+			<div class="row">
+				<div class="field">
+
+					<%= link_to "Generar Nota", new_voluntario_nota_path(@voluntario), class: "btn btn-primary btn-lg" %>
+				</div>
+			</div>
+		</div>
+=======
     <% if @notap.empty? then %>
       <h4> Actualmente no existen Notas Personales  </h4>
     <% else %>  
- <!-- <div class="panel panel-primary">
+ 
+ 
+ <% @notap.each do |nota|%>
+<!-- <div class="panel panel-primary">
      
   <div class="panel-heading">                     -->
         <div class="col-lg-6">
- 
- <% @notap.each do |nota|%>
-
           <div class="panel panel-primary">
             <div class="panel-heading">
               <h4 class="panel-title"> 
@@ -43,7 +84,6 @@
 </div>
 <% end %>
 <% end %>
-</div>
 </div></div>
 </br>
  <div class="col-lg-12" align="center">
@@ -54,4 +94,4 @@
   </div> 
     </div> 
     </div>    
-
+>>>>>>> a97e03546b9e67ef3121f15a9142c0a4d8741116

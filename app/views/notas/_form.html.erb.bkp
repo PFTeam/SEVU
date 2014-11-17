@@ -1,4 +1,18 @@
+<<<<<<< HEAD
+<%= form_for [@voluntario, @nota] do |f| %>
+ 
+  <% if @nota.errors.any? %>
+   <div class="alert alert-danger">
+             <a class="close" data-dismiss="alert">x</a>
+    <div id="error_explanation">
+      <h2><%= pluralize(@nota.errors.count, "error") %> prohibited this nota from being saved:</h2>
 
+      <ul>
+      <% @nota.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+=======
 <%= simple_form_for([@voluntario, @nota],
     wrapper_mappings: {
     check_boxes: :horizontal_radio_and_checkboxes,
@@ -21,23 +35,36 @@
           </div>
         </div>
       </div>
-    
+>>>>>>> a97e03546b9e67ef3121f15a9142c0a4d8741116
+    </div>
+    </div>
+    </div>
   <% end %>
-   <div class="well">
+<<<<<<< HEAD
+  
+<div class="well">
+=======
   <div class="row" align="center">
     <div class="col-lg-3" align="center"></div>
     <div class="col-lg-6" align="center">
       <div class="form-inputs">
-      	<div class="field">
         <%= f.input :titulo, :label => 'Título del concepto', :placeholder => 'Título...' %>
-         </div>
-      
-         <div class="field">
-         <%= f.input :descripcion,:as => :text, :input_html => {:rows => 6}, :label => 'Breve Descripción', :placeholder => 'Descripción del concepto...'  %>   
-         </div>
+         <br></br>
          
+         <%= f.input :descripcion,:as => :text, :input_html => {:rows => 6}, :label => 'Breve Descripción', :placeholder => 'Descripción del concepto...'  %>   
+         
+         <br></br>
 
-
+<!--<div class="well">
+>>>>>>> a97e03546b9e67ef3121f15a9142c0a4d8741116
+  <div class="field">
+    <%#= f.label :titulo %><br>
+    <%#= f.text_field :titulo %>
+  </div>
+  <div class="field">
+    <%#= f.label :descripcion %><br>
+    <%#= f.text_area :descripcion , :cols => 50, :rows => 10  %>
+  </div>-->
   <div class="field">
   	<% if @voluntario.nil? then %>
       <%#= f.label :voluntario_id %><br>
@@ -47,17 +74,42 @@
  	<%end%>
   </div>
    
-  <!-- 
+<<<<<<< HEAD
+   <div class="field">
+    <%#= f.label :usuario_id %><br>
+    <label>Para el Usuario</label>
+    <%@usuario=Usuario.all%>
+    
+   <%= f.collection_select(:usuario_id , @usuario, :id,:nombreUsuario,{prompt: "Usuario..." }, {class:"form-control"}) %>
+        </div>
+  <div class="field">
+    <%#= f.label :usuario_id %><br>
+    <%#= f.text_field :usuario_id %>
+   </div>
+
+    
+  <div class="actions">
+    <%= f.submit :class => "btn btn-default" %>
+=======
+  <!-- <div class="field">
     <%#= f.label :usuario_id %><br>
    <%#= f.collection_select(:usuario_id , @usuario, :id,:nombreUsuario,{prompt: "Usuario..." }, {class:"form-control"}) %>
  </div>-->
-<div class="field">
   <strong> Usuario </strong>
    <%= f.input :usuario, as: :autocomplete, label: false, url: usuarios_path, input_html: { autofocus: true  }  %>
-</div>
- <br></br>
+  <!--<div class="field">
+    <%#= f.label :usuario_id %><br>
+    <%#= f.text_field :usuario_id %>
+  </div>-->
+  </br>
      <div class="actions">
      <%= f.button :submit, :class => 'btn btn-primary btn-lg center', :value => 'Confirmar' %>
-   <% end %>
+    <%#= f.submit %>
+>>>>>>> a97e03546b9e67ef3121f15a9142c0a4d8741116
+  </div>
+ 
+<!--  <div class="actions">
+    <%#= f.submit %>
+  </div>-->
+<% end %>
  </div>
-</div>

@@ -1,42 +1,99 @@
-<%= form_for ([@voluntario, @horario_disponible]) do |f| %>
-  <% if @horario_disponible.errors.any? %>
-    
-    <div id="error_explanation">
-      <h2><%= pluralize(@horario_disponible.errors.count, "error") %> prohibited this horario_disponibl from being saved:</h2>
-      <ul>
-      <% @horario_disponible.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <div class="well">
-  <div class="field">
-    <%= f.label :diaSemana %><br>
-    <%= f.select :diaSemana, [['Domingo', 0], ['Lunes', 1], ['Martes', 2], ['Miercoles', 3], ['Jueves', 4], ['Viernes', 5], ['Sabado', 6]] %>
-    </div> 
-  <div class="field">
-    <%= f.label :horaDesde %><br>
-    <%= f.time_select :horaDesde %>
-  </div>
-  <div class="field">
-    <%= f.label :horaHasta %><br>
-    <%= f.time_select :horaHasta %>
-    
-  </div>
-    <%= f.label @voluntario.id %><br>
-    <div class="field">
-   <%= f.label :voluntario_id %>
- 
-    <%=f.text_field  :voluntario_id, :value =>@voluntario.id %>
 
+<div class="row">
+	<div class="col-sm-4">
+		<%= form_for ([@voluntario, @horario_disponible]) do |f| %>
+		
+		
+		
+		
+		<% if @horario_disponible.errors.any?%>
 
- </div>
-    
-  
-  <div class="actions">
-    <%= f.submit %>
+          <div class="alert alert-danger">
+             <a class="close" data-dismiss="alert">x</a>
+             <strong><%= pluralize(@horario_disponible.errors.count, "Error") %> en la creacion Horario:</strong>
+             <ul>
+               <% @horario_disponible.errors.full_messages.each do |message| %>
+                 <li><%= message %></li>
+               <% end %>
+             </ul>
+         
+   
   </div>
-  
-   </div>
 <% end %>
+		
+		
+		
+	
+		
+		
+		
+		
+		
+		<div class="well">
+			<div class="field">
+				<%= f.label :diaSemana %>
+				<br>
+				<%= f.select :diaSemana, [['Domingo', 0], ['Lunes', 1], ['Martes', 2], ['Miercoles', 3], ['Jueves', 4], ['Viernes', 5], ['Sabado', 6]] %>
+			</div>
+			<div class="field">
+				<%= f.label :horaDesde %>
+				<br>
+				<%= f.time_select :horaDesde %>
+			</div>
+			
+			<div class="field">
+				<%= f.label :horaHasta %>
+			<br>
+				<%= f.time_select :horaHasta %>
+           </br>
+			</div>
+			<%#= f.label @voluntario.id %>
+			
+			<div class="field">
+				<%#= f.label :voluntario_id %>
+				<%=f.hidden_field :voluntario_id, :value =>@voluntario.id %>
+			</div>
+
+			<div class="actions">
+			
+				<%= f.submit :class => "btn btn-default"%>
+			</div>
+		</div>
+	</div>
+	<% @horario_disponibles=HorarioDisponible.where(voluntario_id: @voluntario.id).order(:diaSemana) %>
+	<% itemlist =[['Domingo', 0], ['Lunes', 1], ['Martes', 2], ['Miercoles', 3], ['Jueves', 4], ['Viernes', 5], ['Sabado', 6]] %>
+
+	<div class="row">
+		<div class="col-sm-4">
+			<% if @horario_disponibles.nil? then %>
+			<h2>NO HAY HORARIOS</h2>
+			<% else %>
+			<label>Horarios Ya creados </label>
+			<% @horario_disponibles.each do |horario| %>
+
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<strong>Dia de la semana: </strong>
+						 
+					
+					<%= itemlist[horario.diaSemana.to_i][0]%>
+				</div>
+				<div class="panel-body">
+
+					
+					<n>
+						Hora Desde:&nbsp;
+					</n>
+					<%= horario.horaDesde.strftime("%H:%M") %>
+					<n>
+						Hora hasta:&nbsp;
+					</n>
+					<%= horario.horaHasta.strftime("%H:%M") %>
+				</div>
+			</div>
+			<%end%>
+			<%end%>
+		</div>
+		<% end %>
+	</div>
+</div>

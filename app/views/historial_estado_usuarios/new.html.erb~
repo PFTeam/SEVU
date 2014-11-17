@@ -2,7 +2,9 @@
 
 <%= render 'form' %>
 
-
+<<<<<<< HEAD
 <%#= link_to 'Back', historial_estado_usuarios_path %>
 <%= link_to 'Back', voluntarios_path%>
-
+=======
+<%= link_to 'Atrás', historial_estado_usuarios_path %>
+>>>>>>> e83138c81a1317b71bd34c64da6e294f5fd9f84f

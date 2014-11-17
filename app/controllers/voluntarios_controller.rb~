@@ -18,11 +18,6 @@ def buscar_usuario
 
 end  
 
-def mis_notas
-  
-end
-  
-
 def buscar_voluntario
  
      @voluntario = Voluntario.where(nombreUsuario: params[:usuario_bucar]) 
@@ -56,9 +51,14 @@ end
 
   end
 
-end
+<<<<<<< HEAD
+ end
 
- def buscar_por_legajo
+=======
+
+   end
+>>>>>>> e83138c81a1317b71bd34c64da6e294f5fd9f84f
+  def buscar_por_legajo
    #empleado = Empleado.select("id, nombre, apellido").where(:legajo => params[:legajo]);
   # @usuario =Usuario.select("id, nombreUsuario, apellido_nombre").where(:legajo => params[:legajo]);
     usuario =Usuario.where(:legajo => params[:legajo])
@@ -125,11 +125,8 @@ end
   def gestionar_nota_P
     
    @voluntario = Voluntario.find(params[:id])
-    #no lo veo muy seguro por eso pongo lo siguiente:
-    #@voluntario = Usuario.find(current_usuario.id)
     #@notap = Nota.where(voluntario_id: params[:id])
    @notap = @voluntario.notas
-   # @notap = Nota.all.where(usuario_id: current_usuario.id)
 
   end
   

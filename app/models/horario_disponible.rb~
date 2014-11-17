@@ -1,9 +1,9 @@
 class HorarioDisponible < ActiveRecord::Base
   belongs_to :voluntario
-
+<<<<<<< HEAD
   
    validates :diaSemana,:horaDesde,:horaHasta,:voluntario_id, presence: true
-
+=======
 
   before_save :superpuesto, :horarios_acordes
 
@@ -32,7 +32,7 @@ class HorarioDisponible < ActiveRecord::Base
   	end
   end
 
-
+>>>>>>> 3fec4344e805da9c64231a325cc15e4c9704574f
 
 end
 

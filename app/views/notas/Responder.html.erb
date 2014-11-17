@@ -1,0 +1,58 @@
+
+<%@notaaus=Nota.find(params[:id]) %>
+<%= form_for @nota do |f| %>
+ 
+  <% if @nota.errors.any? %>
+   <div class="alert alert-danger">
+             <a class="close" data-dismiss="alert">x</a>
+    <div id="error_explanation">
+      <h2><%= pluralize(@nota.errors.count, "error") %> prohibited this nota from being saved:</h2>
+
+      <ul>
+      <% @nota.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+    </div>
+    </div>
+  <% end %>
+  
+<div class="well">
+  <div class="field">
+    <%= f.label :titulo %><br>
+    <%= f.text_field :titulo , :value =>"Re: "+ @notaaus.titulo %>
+  </div>
+  <div class="field">
+    <%= f.label :descripcion %><br>
+    <%= f.text_area :descripcion , :cols => 50, :rows => 10 , :value =>"Re: "+ @notaaus.descripcion  %>
+  </div>
+  <div class="field">
+  	<% if @voluntario.nil? then %>
+      <%#= f.label :voluntario_id %><br>
+    <%= f.text_field :voluntario_id %>
+    <% else %>
+       <%= f.hidden_field :voluntario_id, :value => @notaaus.usuario_id %>
+ 	<%end%>
+  </div>
+    <div class="field">
+    <%= f.label :usuario_id %><br>
+    <%= f.text_field :usuario_id, :value => @notaaus.voluntario_id %>
+   </div>
+   
+   
+ <!--   <div class="field">
+    <%#= f.label :usuario_id %><br>
+    <label>Para el Usuario</label>
+    <%#@usuario=Usuario.all%>
+    
+   <%#= f.collection_select(:usuario_id , @usuario, :id,:nombreUsuario,{prompt: "Usuario..." }, {class:"form-control"}) %>
+        </div>
+ 
+-->
+    
+  <div class="actions">
+    <%= f.submit :class => "btn btn-default" %>
+  </div>
+<% end %>
+ </div>

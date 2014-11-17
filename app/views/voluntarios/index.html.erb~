@@ -22,13 +22,18 @@
       	
       	 	 <div class="panel panel-primary">
 <div class="panel-heading">
+<<<<<<< HEAD
+	
+
 	
 	<%#usuarioss=Usuario.find(voluntario.id) %>
 	
 	
 	<h3> <%= image_tag voluntario.foto.url(:small) %>  Voluntario: <%= voluntario.nombreUsuario %> Legajo:	<%= voluntario.legajo %> Direccion: <%= voluntario.direccion %> </h3>
       	
-
+=======
+	<h3>Voluntario: <%= voluntario.apellido_nombre %> Legajo:	<%= voluntario.legajo %> Direccion: <%= voluntario.direccion %> </h3>
+>>>>>>> e83138c81a1317b71bd34c64da6e294f5fd9f84f
       	<h4>
       	 </div>
       	 	<div class="panel-body">
@@ -75,22 +80,16 @@
                   <%= link_to 'Gestionar Nota Persona', gestionar_nota_P_path(voluntario) %>
                   </li>
                   <li class="divider"></li>
-                  <li class="dropdown-header">--------------------------------------------</li>
+                  <li class="dropdown-header">--------------------------------------------------</li>
                   <li>
                   
-                  <%=link_to 'Cambiar Estado', new_historial_estado_usuario_path(:usuario_id => voluntario.id,:pepito=>"pepito" ) %>
+                  <%=link_to 'Cambiar Estado', new_historial_estado_usuario_path(:usuario_id => voluntario.id) %>
                   
-                  </li>
-                  
-                   <li>
-                  <%=link_to 'Notas hacia Mi', mis_notas_path %>
-                  
-                  </li>
-                  
-                  
+                  </a></li>
           
                 </ul>
-             
+              </li>
+            </ul>
           </div><!--/.nav-collapse -->
         </div>
       	 		

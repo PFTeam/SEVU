@@ -22,6 +22,7 @@ class AsignacionActividadesController < ApplicationController
   def new
 		authorize! :new, AsignacionActividad
 	  @actividad = Actividad.find(params[:actividad_id])
+	@proyecto = @actividad.proyecto
     @asignacion_actividad = AsignacionActividad.new
   end
 
@@ -34,9 +35,12 @@ class AsignacionActividadesController < ApplicationController
   # POST /asignacion_actividades.json
   def create
 		authorize! :create, AsignacionActividad
-		if params[:asignacion_actividad][:usuario_id].to_s.blank? #(!defined? (params[:usuario_id])) && (defined? params[:usuario])
-                p "VACIOOO"
 		@actividad = Actividad.find(params[:asignacion_actividad][:actividad_id])
+	@proyecto = @actividad.proyecto
+
+	if params[:asignacion_actividad][:usuario_id].to_s.blank? #(!defined? (params[:usuario_id])) && (defined? params[:usuario])
+                p "VACIOOO"
+
 		@asignacion_actividad= AsignacionActividad.new
 	        @usuarios = Usuario.page(params[:page]).search query: params[:asignacion_actividad][:usuario]
 		respond_to do |format|
@@ -123,6 +127,23 @@ class AsignacionActividadesController < ApplicationController
        @asignacion_actividad = AsignacionActividad.find(params[:id])
        @usuarios = Usuario.page(params[:page]).search query: params[:usuario]
 	
+  end
+
+  def busqueda_por_habilidad
+      @actividad = Actividad.find(params[:actividad_id])
+      @requisito = Requisito.new
+      
+      if !params[:requisito][:habilidad].to_s.blank?
+          
+
+      else
+
+	      redirect_to 'busqueda_por_habilidad', :actividad_id => @actividad.id
+
+
+
+      end
+  	
   end
 
   private

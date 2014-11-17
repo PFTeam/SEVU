@@ -1,6 +1,52 @@
-<h1>Editing historial_estado_usuario</h1>
+<h1>Editar Estado Usuario</h1>
 
-<%= render 'form' %>
+<%= form_for(@historial_estado_usuario) do |f| %>
+  <% if @historial_estado_usuario.errors.any? %>
+  
+    <div id="error_explanation">
+      <h2><%= pluralize(@historial_estado_usuario.errors.count, "error") %> prohibited this historial_estado_usuario from being saved:</h2>
+
+      <ul>
+      <% @historial_estado_usuario.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="well">
+   
+ <div class="field">
+   <%= f.label :usuario_id   %>
+
+   <%=f.hidden_field :usuario_id, :value =>@historial_estado_usuario.usuario_id %>
+   
+   <%=@user=Usuario.find(@historial_estado_usuario.usuario_id) %>
+   <p>
+   	<label>El ultimo Estado: </label>
+   	<label><%=EstadoUsuario.find(HistorialEstadoUsuario.where(usuario_id: @historial_estado_usuario.usuario_id).last.estado_usuario_id).nombre%> </label> </p>
+   
+  
+        </div>
+         
+         
+ 
+ 
+  <div class="field"> 	
+    <%= f.label 'Estado Usuario' %><br>
+   <%= f.collection_select(:estado_usuario_id, @estado_usuarios, :id,:nombre,{prompt: "Estado Posible de Usuario..." }, {class:"form-control"}) %>
+
+  </div>
+ 
+
+  
+    <div class="actions">
+    <%= f.submit %>
+    
+  </div>
+    </div>
+<% end %>
+
 
 <%= link_to 'Ver', @historial_estado_usuario %> |
 <%= link_to 'Atrás', historial_estado_usuarios_path %>

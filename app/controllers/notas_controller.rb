@@ -15,14 +15,25 @@ class NotasController < ApplicationController
 
   end
 
+def Responder
+   #@voluntario = Voluntario.find(params[:voluntario_id])
+   @voluntario=current_usuario 
+   @nota= @voluntario.notas.new
+  
+end
+
+
+
   # GET /notas/new
+
+
   def new
 
 		authorize! :new, Nota
     #@nota = Nota.new
    # @nota = Nota.new
    @voluntario = Voluntario.find(params[:voluntario_id])
-   @usuario=Usuario.all
+   #@usuario=Usuario.all
    
    @nota= @voluntario.notas.new
   end
@@ -33,7 +44,7 @@ class NotasController < ApplicationController
 
 		authorize! :edit, Nota
            @usuario=Usuario.where(id: @nota.usuario_id)
-    @voluntario =Voluntario.find(@nota.usuario_id)
+    @voluntario =Voluntario.find(@nota.voluntario_id)
 
   end
 
