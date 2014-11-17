@@ -119,16 +119,24 @@ class PresupuestosController < ApplicationController
   def evaluar_presupuestos_pendientes
 		authorize! :evaluar_presupuestos_pendientes, Presupuesto
     @presupuestos = Presupuesto.all.select { |m| m.evaluado == false }
+    @presupuestos.each do |presupuesto|
+        presupuesto.montoTotal = presupuesto.detalle_presupuestos.sum(:monto)
+    end
   end
 
   def presupuestos_evaluados
 		authorize! :presupuestos_evaluados, Presupuesto
     @presupuestos = Presupuesto.all.select { |m| m.evaluado == true }
+    @presupuestos.each do |presupuesto|
+        presupuesto.montoTotal = presupuesto.detalle_presupuestos.sum(:monto)
+    end
   end
 
   def evaluar_presupuesto
 		authorize! :evaluar_presupuesto, Presupuesto
     @presupuesto = Presupuesto.find params[:id]
+    @presupuesto.montoTotal = @presupuesto.detalle_presupuestos.sum(:monto)
+    @proyecto = @presupuesto.proyecto
   end
 
 

@@ -23,12 +23,17 @@
             <% else %>
                    <p> <%= @presupuesto.proyecto.necesidad.descripcion %> </p>
             <% end %>
-              <h4> Objetivos Generales: </h4>
+              <h4> Objetivos Generales y Específicos: </h4>
               <% if @presupuesto.proyecto.objetivo_generales.empty? %>
                 <p>(El proyecto no posee Objetivos)</p>
               <% else %>
                 <% @presupuesto.proyecto.objetivo_generales.each do |obj| %>
-                  <p> - <%= obj.titulo %> </p>
+                  <p> <%= fa_icon("chevron-right", text: "")%> <%= obj.titulo %> </p>
+                  <% if !obj.objetivo_especificos.empty? then %>
+                      <% obj.objetivo_especificos.each do |obesp| %>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%= fa_icon("caret-right", text: "")%> <%= obesp.titulo %></p>
+                      <% end %>
+                      <% end %>
                 <% end %>
               <% end %>
               <h4> Monto total: </h4>
@@ -58,7 +63,7 @@
     <br></br>
     <div id="my-tab-content" class="tab-content">
       <div class="tab-pane" id="paneles">
-        <% @presupuesto.concepto_gastos.each do |concepto|%>
+        <% @presupuesto.concepto_gastos.uniq.each do |concepto|%>
           <div class="col-lg-12">
             <div class="panel panel-primary">
               <div class="panel-heading">
@@ -100,7 +105,7 @@
       <div class="tab-pane active" id="lista">
         <div class="col-lg-1"></div>
         <div class="col-lg-10">
-          <% @presupuesto.concepto_gastos.each do |concepto|%>
+          <% @presupuesto.concepto_gastos.uniq.each do |concepto|%>
             <h3><%= concepto.titulo %></h3>
           <div class="table-responsive">
             <table class="table table-hover table-striped">
