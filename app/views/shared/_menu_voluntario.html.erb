@@ -1,0 +1,25 @@
+          <ul class="nav navbar-nav side-nav">
+
+                          <li>
+                              <%= link_to 'Horarios disponibles', gestion_horarios_disponibles_path(current_usuario.id) %>
+                          </li>
+                          <li>
+                              <%= link_to 'Gestionar experiencia', gestionar_experiencias_path(current_usuario.id) %>
+                          </li>
+                          <% if can? :create, EstadoUsuario then %>
+                            <li>
+                              <%= link_to 'Gestionar experiencia', gestionar_experiencias_path(current_usuario.id) %>
+                            </li>
+                          <% end %>
+                          <%# if can? :create, Nota then %>
+                            <!--  <li>
+                              <%#= link_to 'Escribir nota', gestionar_nota_P_path(current_usuario) %>
+                            </li>-->
+                          <%# end %>
+                            <li>
+                              <%= link_to 'Mis notas', mis_notas_path(current_usuario.id) %>
+                            </li>
+
+
+</ul>    
+
