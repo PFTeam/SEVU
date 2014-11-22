@@ -13,180 +13,78 @@
 	<br />
 <div class="col-lg-12">
 	<div class="panel panel-primary">
-    <div class="panel-heading">
-      
-		<% if params[:tipo_rep]== '1' %>
-		
+    <div class="panel-heading">      
+		<% if params[:tipo_rep]== '1' %>		
 				<% case item
-
-					
 						when '1' 
 						 %>
 						<h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Voluntarios en estado suspendido</h3>
     				</div>
     				<div class="panel-body">
-							<%= line_chart params[:u_ids].map{|user|
-   											 {name: Usuario.find(user).nombreUsuario, data: [
-																			[Time.new(params[:anio][:year],1,15), (HistorialEstadoUsuario.where("usuario_id = ? AND estado_usuario_id = ? AND created_at BETWEEN ? AND ? ",user, EstadoUsuario.where("nombre = ?", 'Suspendido').first.id ,Time.new(params[:anio][:year],1,1), Time.new(params[:anio][:year],1,31).end_of_day).first.nil? ? 0 : 1)], 
-																			[Time.new(params[:anio][:year],2,15), (HistorialEstadoUsuario.where("usuario_id = ? AND estado_usuario_id = ? AND created_at BETWEEN ? AND ? ",user, EstadoUsuario.where("nombre = ?", 'Suspendido').first.id ,Time.new(params[:anio][:year],2,1), Time.new(params[:anio][:year],2,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],3,15), (HistorialEstadoUsuario.where("usuario_id = ? AND estado_usuario_id = ? AND created_at BETWEEN ? AND ? ",user, EstadoUsuario.where("nombre = ?", 'Suspendido').first.id ,Time.new(params[:anio][:year],3,1), Time.new(params[:anio][:year],3,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],4,15), (HistorialEstadoUsuario.where("usuario_id = ? AND estado_usuario_id = ? AND created_at BETWEEN ? AND ? ",user, EstadoUsuario.where("nombre = ?", 'Suspendido').first.id ,Time.new(params[:anio][:year],4,1), Time.new(params[:anio][:year],4,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],5,15), (HistorialEstadoUsuario.where("usuario_id = ? AND estado_usuario_id = ? AND created_at BETWEEN ? AND ? ",user, EstadoUsuario.where("nombre = ?", 'Suspendido').first.id ,Time.new(params[:anio][:year],5,1), Time.new(params[:anio][:year],5,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],6,15), (HistorialEstadoUsuario.where("usuario_id = ? AND estado_usuario_id = ? AND created_at BETWEEN ? AND ? ",user, EstadoUsuario.where("nombre = ?", 'Suspendido').first.id ,Time.new(params[:anio][:year],6,1), Time.new(params[:anio][:year],6,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],7,15), (HistorialEstadoUsuario.where("usuario_id = ? AND estado_usuario_id = ? AND created_at BETWEEN ? AND ? ",user, EstadoUsuario.where("nombre = ?", 'Suspendido').first.id ,Time.new(params[:anio][:year],7,1), Time.new(params[:anio][:year],7,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],8,15), (HistorialEstadoUsuario.where("usuario_id = ? AND estado_usuario_id = ? AND created_at BETWEEN ? AND ? ",user, EstadoUsuario.where("nombre = ?", 'Suspendido').first.id ,Time.new(params[:anio][:year],8,1), Time.new(params[:anio][:year],8,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],9,15), (HistorialEstadoUsuario.where("usuario_id = ? AND estado_usuario_id = ? AND created_at BETWEEN ? AND ? ",user, EstadoUsuario.where("nombre = ?", 'Suspendido').first.id ,Time.new(params[:anio][:year],9,1), Time.new(params[:anio][:year],9,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],10,15), (HistorialEstadoUsuario.where("usuario_id = ? AND estado_usuario_id = ? AND created_at BETWEEN ? AND ? ",user, EstadoUsuario.where("nombre = ?", 'Suspendido').first.id ,Time.new(params[:anio][:year],10,1), Time.new(params[:anio][:year],10,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],11,15), (HistorialEstadoUsuario.where("usuario_id = ? AND estado_usuario_id = ? AND created_at BETWEEN ? AND ? ",user, EstadoUsuario.where("nombre = ?", 'Suspendido').first.id ,Time.new(params[:anio][:year],11,1), Time.new(params[:anio][:year],11,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],12,15), (HistorialEstadoUsuario.where("usuario_id = ? AND estado_usuario_id = ? AND created_at BETWEEN ? AND ? ",user, EstadoUsuario.where("nombre = ?", 'Suspendido').first.id ,Time.new(params[:anio][:year],12,1), Time.new(params[:anio][:year],12,31).end_of_day).first.nil? ? 0 : 1)],
-												 ]}
+							<%= line_chart params[:u_ids].to_enum(:each_with_index).map{|user,i|
+   											 {name: @name_voluntarios[i], data: @datos_voluntarios_suspendidos[i]}
 									},{library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>
-
-
-
 				<% when '2' %>
-			<h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Voluntarios en estado activo</h3>
+						<h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Voluntarios en estado activo</h3>
     				</div>
     				<div class="panel-body">
-				<%= line_chart params[:u_ids].map{|user|
-   											 {name: Usuario.find(user).nombreUsuario, data: [
-																			[Time.new(params[:anio][:year],1,15), (HistorialEstadoUsuario.where("usuario_id = ? AND estado_usuario_id = ? AND created_at BETWEEN ? AND ? ",user, EstadoUsuario.where("nombre = ?", 'Activo').first.id ,Time.new(params[:anio][:year],1,1), Time.new(params[:anio][:year],1,31).end_of_day).first.nil? ? 0 : 1)], 
-																			[Time.new(params[:anio][:year],2,15), (HistorialEstadoUsuario.where("usuario_id = ? AND estado_usuario_id = ? AND created_at BETWEEN ? AND ? ",user, EstadoUsuario.where("nombre = ?", 'Activo').first.id ,Time.new(params[:anio][:year],2,1), Time.new(params[:anio][:year],2,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],3,15), (HistorialEstadoUsuario.where("usuario_id = ? AND estado_usuario_id = ? AND created_at BETWEEN ? AND ? ",user, EstadoUsuario.where("nombre = ?", 'Activo').first.id ,Time.new(params[:anio][:year],3,1), Time.new(params[:anio][:year],3,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],4,15), (HistorialEstadoUsuario.where("usuario_id = ? AND estado_usuario_id = ? AND created_at BETWEEN ? AND ? ",user, EstadoUsuario.where("nombre = ?", 'Activo').first.id ,Time.new(params[:anio][:year],4,1), Time.new(params[:anio][:year],4,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],5,15), (HistorialEstadoUsuario.where("usuario_id = ? AND estado_usuario_id = ? AND created_at BETWEEN ? AND ? ",user, EstadoUsuario.where("nombre = ?", 'Activo').first.id ,Time.new(params[:anio][:year],5,1), Time.new(params[:anio][:year],5,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],6,15), (HistorialEstadoUsuario.where("usuario_id = ? AND estado_usuario_id = ? AND created_at BETWEEN ? AND ? ",user, EstadoUsuario.where("nombre = ?", 'Activo').first.id ,Time.new(params[:anio][:year],6,1), Time.new(params[:anio][:year],6,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],7,15), (HistorialEstadoUsuario.where("usuario_id = ? AND estado_usuario_id = ? AND created_at BETWEEN ? AND ? ",user, EstadoUsuario.where("nombre = ?", 'Activo').first.id ,Time.new(params[:anio][:year],7,1), Time.new(params[:anio][:year],7,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],8,15), (HistorialEstadoUsuario.where("usuario_id = ? AND estado_usuario_id = ? AND created_at BETWEEN ? AND ? ",user, EstadoUsuario.where("nombre = ?", 'Activo').first.id ,Time.new(params[:anio][:year],8,1), Time.new(params[:anio][:year],8,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],9,15), (HistorialEstadoUsuario.where("usuario_id = ? AND estado_usuario_id = ? AND created_at BETWEEN ? AND ? ",user, EstadoUsuario.where("nombre = ?", 'Activo').first.id ,Time.new(params[:anio][:year],9,1), Time.new(params[:anio][:year],9,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],10,15), (HistorialEstadoUsuario.where("usuario_id = ? AND estado_usuario_id = ? AND created_at BETWEEN ? AND ? ",user, EstadoUsuario.where("nombre = ?", 'Activo').first.id ,Time.new(params[:anio][:year],10,1), Time.new(params[:anio][:year],10,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],11,15), (HistorialEstadoUsuario.where("usuario_id = ? AND estado_usuario_id = ? AND created_at BETWEEN ? AND ? ",user, EstadoUsuario.where("nombre = ?", 'Activo').first.id ,Time.new(params[:anio][:year],11,1), Time.new(params[:anio][:year],11,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],12,15), (HistorialEstadoUsuario.where("usuario_id = ? AND estado_usuario_id = ? AND created_at BETWEEN ? AND ? ",user, EstadoUsuario.where("nombre = ?", 'Activo').first.id ,Time.new(params[:anio][:year],12,1), Time.new(params[:anio][:year],12,31).end_of_day).first.nil? ? 0 : 1)],
-												 ]}
+							<%= line_chart params[:u_ids].to_enum(:each_with_index).map{|user,i|
+													{name: @name_voluntarios[i], data: @datos_voluntarios_activos[i]}
 									},{library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>
 
 				<% when '3' %>
 						<h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de actividades en estado creada asociado a cada voluntario</h3>
     				</div>
     				<div class="panel-body">
-						<%= line_chart params[:u_ids].map{|user|
-   											 {name: Usuario.find(user).nombreUsuario, data: [
-																			[Time.new(params[:anio][:year],1,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Creada').first.id,Time.new(params[:anio][:year],1,1), Time.new(params[:anio][:year],1,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],2,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Creada').first.id,Time.new(params[:anio][:year],2,1), Time.new(params[:anio][:year],2,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],3,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Creada').first.id,Time.new(params[:anio][:year],3,1), Time.new(params[:anio][:year],3,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],4,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Creada').first.id,Time.new(params[:anio][:year],4,1), Time.new(params[:anio][:year],4,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],5,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Creada').first.id,Time.new(params[:anio][:year],5,1), Time.new(params[:anio][:year],5,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],6,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Creada').first.id,Time.new(params[:anio][:year],6,1), Time.new(params[:anio][:year],6,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],7,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Creada').first.id,Time.new(params[:anio][:year],7,1), Time.new(params[:anio][:year],7,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],8,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Creada').first.id,Time.new(params[:anio][:year],8,1), Time.new(params[:anio][:year],8,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],9,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Creada').first.id,Time.new(params[:anio][:year],9,1), Time.new(params[:anio][:year],9,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],10,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Creada').first.id,Time.new(params[:anio][:year],10,1), Time.new(params[:anio][:year],10,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],11,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Creada').first.id,Time.new(params[:anio][:year],11,1), Time.new(params[:anio][:year],11,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],12,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Creada').first.id,Time.new(params[:anio][:year],12,1), Time.new(params[:anio][:year],12,31).end_of_day).first, user).count]
-												]}
+							<%= line_chart params[:u_ids].to_enum(:each_with_index).map{|user,i|
+													{name: @name_voluntarios[i], data: @datos_act_creadas[i]}
 									},{library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>
 
 				<% when '4' %>
 										<h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de actividades en estado planificada asociado a cada voluntario</h3>
     				</div>
     				<div class="panel-body">
-						<%= line_chart params[:u_ids].map{|user|
-   											 {name: Usuario.find(user).nombreUsuario, data: [
-																			[Time.new(params[:anio][:year],1,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Planificada').first.id,Time.new(params[:anio][:year],1,1), Time.new(params[:anio][:year],1,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],2,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Planificada').first.id,Time.new(params[:anio][:year],2,1), Time.new(params[:anio][:year],2,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],3,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Planificada').first.id,Time.new(params[:anio][:year],3,1), Time.new(params[:anio][:year],3,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],4,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Planificada').first.id,Time.new(params[:anio][:year],4,1), Time.new(params[:anio][:year],4,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],5,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Planificada').first.id,Time.new(params[:anio][:year],5,1), Time.new(params[:anio][:year],5,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],6,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Planificada').first.id,Time.new(params[:anio][:year],6,1), Time.new(params[:anio][:year],6,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],7,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Planificada').first.id,Time.new(params[:anio][:year],7,1), Time.new(params[:anio][:year],7,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],8,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Planificada').first.id,Time.new(params[:anio][:year],8,1), Time.new(params[:anio][:year],8,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],9,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Planificada').first.id,Time.new(params[:anio][:year],9,1), Time.new(params[:anio][:year],9,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],10,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Planificada').first.id,Time.new(params[:anio][:year],10,1), Time.new(params[:anio][:year],10,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],11,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Planificada').first.id,Time.new(params[:anio][:year],11,1), Time.new(params[:anio][:year],11,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],12,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Planificada').first.id,Time.new(params[:anio][:year],12,1), Time.new(params[:anio][:year],12,31).end_of_day).first, user).count]
-												]}
+						<%= line_chart params[:u_ids].to_enum(:each_with_index).map{|user,i|
+													{name: @name_voluntarios[i], data: @datos_act_plan[i]}
 									},{library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>
-
 
 				<% when '5' %>
 		
 				<h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de actividades en estado ejecutada asociado a cada voluntario</h3>
     				</div>
     				<div class="panel-body">
-						<%= line_chart params[:u_ids].map{|user|
-   											 {name: Usuario.find(user).nombreUsuario, data: [
-																			[Time.new(params[:anio][:year],1,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Ejecutada').first.id,Time.new(params[:anio][:year],1,1), Time.new(params[:anio][:year],1,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],2,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Ejecutada').first.id,Time.new(params[:anio][:year],2,1), Time.new(params[:anio][:year],2,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],3,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Ejecutada').first.id,Time.new(params[:anio][:year],3,1), Time.new(params[:anio][:year],3,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],4,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Ejecutada').first.id,Time.new(params[:anio][:year],4,1), Time.new(params[:anio][:year],4,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],5,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Ejecutada').first.id,Time.new(params[:anio][:year],5,1), Time.new(params[:anio][:year],5,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],6,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Ejecutada').first.id,Time.new(params[:anio][:year],6,1), Time.new(params[:anio][:year],6,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],7,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Ejecutada').first.id,Time.new(params[:anio][:year],7,1), Time.new(params[:anio][:year],7,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],8,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Ejecutada').first.id,Time.new(params[:anio][:year],8,1), Time.new(params[:anio][:year],8,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],9,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Ejecutada').first.id,Time.new(params[:anio][:year],9,1), Time.new(params[:anio][:year],9,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],10,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Ejecutada').first.id,Time.new(params[:anio][:year],10,1), Time.new(params[:anio][:year],10,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],11,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Ejecutada').first.id,Time.new(params[:anio][:year],11,1), Time.new(params[:anio][:year],11,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],12,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Ejecutada').first.id,Time.new(params[:anio][:year],12,1), Time.new(params[:anio][:year],12,31).end_of_day).first, user).count]
-												]}
+						<%= line_chart params[:u_ids].to_enum(:each_with_index).map{|user,i|
+													{name: @name_voluntarios[i], data: @datos_act_ejec[i]}
 									},{library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>
-
 
 				<% when '6' %>
 					
 				<h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de actividades en estado terminada asociado a cada voluntario</h3>
     				</div>
-    				<div class="panel-body">   <!--  .actividad_id, user).count]     PONERLO ASI, ME TIRA QUE NO DEBE ESTAR EN NULL-->
-						<%= line_chart params[:u_ids].map{|user|
-   											 {name: Usuario.find(user).nombreUsuario, data: [
-																			[Time.new(params[:anio][:year],1,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Terminada').first.id,Time.new(params[:anio][:year],1,1), Time.new(params[:anio][:year],1,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],2,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Terminada').first.id,Time.new(params[:anio][:year],2,1), Time.new(params[:anio][:year],2,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],3,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Terminada').first.id,Time.new(params[:anio][:year],3,1), Time.new(params[:anio][:year],3,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],4,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Terminada').first.id,Time.new(params[:anio][:year],4,1), Time.new(params[:anio][:year],4,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],5,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Terminada').first.id,Time.new(params[:anio][:year],5,1), Time.new(params[:anio][:year],5,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],6,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Terminada').first.id,Time.new(params[:anio][:year],6,1), Time.new(params[:anio][:year],6,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],7,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Terminada').first.id,Time.new(params[:anio][:year],7,1), Time.new(params[:anio][:year],7,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],8,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Terminada').first.id,Time.new(params[:anio][:year],8,1), Time.new(params[:anio][:year],8,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],9,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Terminada').first.id,Time.new(params[:anio][:year],9,1), Time.new(params[:anio][:year],9,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],10,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Terminada').first.id,Time.new(params[:anio][:year],10,1), Time.new(params[:anio][:year],10,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],11,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Terminada').first.id,Time.new(params[:anio][:year],11,1), Time.new(params[:anio][:year],11,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],12,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Terminada').first.id,Time.new(params[:anio][:year],12,1), Time.new(params[:anio][:year],12,31).end_of_day).first, user).count]
-												]}
+    				<div class="panel-body">   
+						<%= line_chart params[:u_ids].to_enum(:each_with_index).map{|user,i|
+													{name: @name_voluntarios[i], data: @datos_act_term[i]}
 									},{library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>
-
 
 				<% when '7' %>
 	
 				<h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de actividades en estado cancelada asociado a cada voluntario</h3>
     				</div>
     				<div class="panel-body">
-						<%= line_chart params[:u_ids].map{|user|
-   											 {name: Usuario.find(user).nombreUsuario, data: [
-																			[Time.new(params[:anio][:year],1,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Cancelada').first.id,Time.new(params[:anio][:year],1,1), Time.new(params[:anio][:year],1,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],2,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Cancelada').first.id,Time.new(params[:anio][:year],2,1), Time.new(params[:anio][:year],2,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],3,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Cancelada').first.id,Time.new(params[:anio][:year],3,1), Time.new(params[:anio][:year],3,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],4,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Cancelada').first.id,Time.new(params[:anio][:year],4,1), Time.new(params[:anio][:year],4,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],5,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Cancelada').first.id,Time.new(params[:anio][:year],5,1), Time.new(params[:anio][:year],5,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],6,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Cancelada').first.id,Time.new(params[:anio][:year],6,1), Time.new(params[:anio][:year],6,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],7,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Cancelada').first.id,Time.new(params[:anio][:year],7,1), Time.new(params[:anio][:year],7,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],8,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Cancelada').first.id,Time.new(params[:anio][:year],8,1), Time.new(params[:anio][:year],8,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],9,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Cancelada').first.id,Time.new(params[:anio][:year],9,1), Time.new(params[:anio][:year],9,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],10,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Cancelada').first.id,Time.new(params[:anio][:year],10,1), Time.new(params[:anio][:year],10,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],11,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Cancelada').first.id,Time.new(params[:anio][:year],11,1), Time.new(params[:anio][:year],11,31).end_of_day).first, user).count],
-																			[Time.new(params[:anio][:year],12,15), AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Cancelada').first.id,Time.new(params[:anio][:year],12,1), Time.new(params[:anio][:year],12,31).end_of_day).first, user).count]
-												]}
+						<%= line_chart params[:u_ids].to_enum(:each_with_index).map{|user,i|
+													{name: @name_voluntarios[i], data: @datos_act_canc[i]}
 									},{library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>
 
 				 <% when '8' %>
 						<h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de horas efectivas realizadas por voluntario</h3>
     				</div>
     				<div class="panel-body">
-						<%= line_chart params[:u_ids].map{|user|
-   											 {name: Usuario.find(user).nombreUsuario, data: [
-																			[Time.new(params[:anio][:year],1,15), 2]
-									]}
+						<%= line_chart params[:u_ids].to_enum(:each_with_index).map{|user,i|
+   											 {name: @name_voluntarios[i], data: @datos_horas_voluntario[i]}
 									},{library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>
 	<%	end %>
 <%	end %>
+
 <% if params[:tipo_rep]== '2' %>
 	<% case item
 
@@ -196,21 +94,8 @@
 						<h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Proyectos en estado Creado</h3>
     				</div>
     				<div class="panel-body">
-							<%= line_chart params[:p_ids].map{|proyecto|
-   											 {name: Proyecto.find(proyecto).nombre, data: [
-																			[Time.new(params[:anio][:year],1,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Creado').first.id ,Time.new(params[:anio][:year],1,1), Time.new(params[:anio][:year],1,31).end_of_day).first.nil? ? 0 : 1)], 
-																			[Time.new(params[:anio][:year],2,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Creado').first.id ,Time.new(params[:anio][:year],2,1), Time.new(params[:anio][:year],2,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],3,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Creado').first.id  ,Time.new(params[:anio][:year],3,1), Time.new(params[:anio][:year],3,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],4,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Creado').first.id  ,Time.new(params[:anio][:year],4,1), Time.new(params[:anio][:year],4,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],5,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Creado').first.id  ,Time.new(params[:anio][:year],5,1), Time.new(params[:anio][:year],5,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],6,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Creado').first.id  ,Time.new(params[:anio][:year],6,1), Time.new(params[:anio][:year],6,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],7,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Creado').first.id  ,Time.new(params[:anio][:year],7,1), Time.new(params[:anio][:year],7,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],8,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Creado').first.id  ,Time.new(params[:anio][:year],8,1), Time.new(params[:anio][:year],8,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],9,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Creado').first.id  ,Time.new(params[:anio][:year],9,1), Time.new(params[:anio][:year],9,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],10,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Creado').first.id ,Time.new(params[:anio][:year],10,1), Time.new(params[:anio][:year],10,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],11,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Creado').first.id ,Time.new(params[:anio][:year],11,1), Time.new(params[:anio][:year],11,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],12,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Creado').first.id  ,Time.new(params[:anio][:year],12,1), Time.new(params[:anio][:year],12,31).end_of_day).first.nil? ? 0 : 1)],
-												 ]}
+							<%= line_chart params[:p_ids].to_enum(:each_with_index).map{|proy,i|
+   											 {name: @name_proyectos[i], data: @datos_proyectos_creados[i]}
 									},{library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>
 
 							<%	when '2'  %>
@@ -218,84 +103,32 @@
 						<h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Proyectos en estado Cancelado</h3>
     				</div>
     				<div class="panel-body">
-							<%= line_chart params[:p_ids].map{|proyecto|
-   											 {name: Proyecto.find(proyecto).nombre, data: [
-																			[Time.new(params[:anio][:year],1,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Cancelado').first.id ,Time.new(params[:anio][:year],1,1), Time.new(params[:anio][:year],1,31).end_of_day).first.nil? ? 0 : 1)], 
-																			[Time.new(params[:anio][:year],2,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Cancelado').first.id ,Time.new(params[:anio][:year],2,1), Time.new(params[:anio][:year],2,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],3,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Cancelado').first.id  ,Time.new(params[:anio][:year],3,1), Time.new(params[:anio][:year],3,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],4,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Cancelado').first.id  ,Time.new(params[:anio][:year],4,1), Time.new(params[:anio][:year],4,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],5,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Cancelado').first.id  ,Time.new(params[:anio][:year],5,1), Time.new(params[:anio][:year],5,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],6,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Cancelado').first.id  ,Time.new(params[:anio][:year],6,1), Time.new(params[:anio][:year],6,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],7,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Cancelado').first.id  ,Time.new(params[:anio][:year],7,1), Time.new(params[:anio][:year],7,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],8,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Cancelado').first.id  ,Time.new(params[:anio][:year],8,1), Time.new(params[:anio][:year],8,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],9,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Cancelado').first.id  ,Time.new(params[:anio][:year],9,1), Time.new(params[:anio][:year],9,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],10,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Cancelado').first.id ,Time.new(params[:anio][:year],10,1), Time.new(params[:anio][:year],10,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],11,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Cancelado').first.id ,Time.new(params[:anio][:year],11,1), Time.new(params[:anio][:year],11,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],12,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Cancelado').first.id  ,Time.new(params[:anio][:year],12,1), Time.new(params[:anio][:year],12,31).end_of_day).first.nil? ? 0 : 1)],
-												 ]}
+							<%= line_chart params[:p_ids].to_enum(:each_with_index).map{|proy,i|
+   											 {name: @name_proyectos[i], data: @datos_proyectos_canc[i]}
 									},{library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>
 					
 							<% when '3'  %>
 						<h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Proyectos en estado En Ejecución</h3>
     				</div>
     				<div class="panel-body">
-							<%= line_chart params[:p_ids].map{|proyecto|
-   											 {name: Proyecto.find(proyecto).nombre, data: [
-																			[Time.new(params[:anio][:year],1,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'En Ejecución').first.id ,Time.new(params[:anio][:year],1,1), Time.new(params[:anio][:year],1,31).end_of_day).first.nil? ? 0 : 1)], 
-																			[Time.new(params[:anio][:year],2,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'En Ejecución').first.id ,Time.new(params[:anio][:year],2,1), Time.new(params[:anio][:year],2,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],3,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'En Ejecución').first.id  ,Time.new(params[:anio][:year],3,1), Time.new(params[:anio][:year],3,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],4,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'En Ejecución').first.id  ,Time.new(params[:anio][:year],4,1), Time.new(params[:anio][:year],4,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],5,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'En Ejecución').first.id  ,Time.new(params[:anio][:year],5,1), Time.new(params[:anio][:year],5,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],6,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'En Ejecución').first.id  ,Time.new(params[:anio][:year],6,1), Time.new(params[:anio][:year],6,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],7,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'En Ejecución').first.id  ,Time.new(params[:anio][:year],7,1), Time.new(params[:anio][:year],7,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],8,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'En Ejecución').first.id  ,Time.new(params[:anio][:year],8,1), Time.new(params[:anio][:year],8,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],9,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'En Ejecución').first.id  ,Time.new(params[:anio][:year],9,1), Time.new(params[:anio][:year],9,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],10,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'En Ejecución').first.id ,Time.new(params[:anio][:year],10,1), Time.new(params[:anio][:year],10,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],11,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'En Ejecución').first.id ,Time.new(params[:anio][:year],11,1), Time.new(params[:anio][:year],11,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],12,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'En Ejecución').first.id  ,Time.new(params[:anio][:year],12,1), Time.new(params[:anio][:year],12,31).end_of_day).first.nil? ? 0 : 1)],
-												 ]}
+							<%= line_chart params[:p_ids].to_enum(:each_with_index).map{|proy,i|
+   											 {name: @name_proyectos[i], data: @datos_proyectos_ejec[i]}
 									},{library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>
 				
 								<%	when '4'  %>
 						<h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Proyectos en estado Terminado</h3>
     				</div>
     				<div class="panel-body">
-							<%= line_chart params[:p_ids].map{|proyecto|
-   											 {name: Proyecto.find(proyecto).nombre, data: [
-																			[Time.new(params[:anio][:year],1,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Terminado').first.id ,Time.new(params[:anio][:year],1,1), Time.new(params[:anio][:year],1,31).end_of_day).first.nil? ? 0 : 1)], 
-																			[Time.new(params[:anio][:year],2,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Terminado').first.id ,Time.new(params[:anio][:year],2,1), Time.new(params[:anio][:year],2,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],3,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Terminado').first.id  ,Time.new(params[:anio][:year],3,1), Time.new(params[:anio][:year],3,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],4,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Terminado').first.id  ,Time.new(params[:anio][:year],4,1), Time.new(params[:anio][:year],4,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],5,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Terminado').first.id  ,Time.new(params[:anio][:year],5,1), Time.new(params[:anio][:year],5,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],6,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Terminado').first.id  ,Time.new(params[:anio][:year],6,1), Time.new(params[:anio][:year],6,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],7,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Terminado').first.id  ,Time.new(params[:anio][:year],7,1), Time.new(params[:anio][:year],7,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],8,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Terminado').first.id  ,Time.new(params[:anio][:year],8,1), Time.new(params[:anio][:year],8,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],9,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Terminado').first.id  ,Time.new(params[:anio][:year],9,1), Time.new(params[:anio][:year],9,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],10,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Terminado').first.id ,Time.new(params[:anio][:year],10,1), Time.new(params[:anio][:year],10,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],11,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Terminado').first.id ,Time.new(params[:anio][:year],11,1), Time.new(params[:anio][:year],11,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],12,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Terminado').first.id  ,Time.new(params[:anio][:year],12,1), Time.new(params[:anio][:year],12,31).end_of_day).first.nil? ? 0 : 1)],
-												 ]}
+							<%= line_chart params[:p_ids].to_enum(:each_with_index).map{|proy,i|
+   											 {name: @name_proyectos[i], data: @datos_proyectos_term[i]}
 									},{library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>
 
 							<%	when '5' %>
 						<h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Proyectos en estado Suspendido</h3>
     				</div>
     				<div class="panel-body">
-							<%= line_chart params[:p_ids].map{|proyecto|
-   											 {name: Proyecto.find(proyecto).nombre, data: [
-																			[Time.new(params[:anio][:year],1,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Suspendido').first.id ,Time.new(params[:anio][:year],1,1), Time.new(params[:anio][:year],1,31).end_of_day).first.nil? ? 0 : 1)], 
-																			[Time.new(params[:anio][:year],2,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Suspendido').first.id ,Time.new(params[:anio][:year],2,1), Time.new(params[:anio][:year],2,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],3,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Suspendido').first.id  ,Time.new(params[:anio][:year],3,1), Time.new(params[:anio][:year],3,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],4,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Suspendido').first.id  ,Time.new(params[:anio][:year],4,1), Time.new(params[:anio][:year],4,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],5,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Suspendido').first.id  ,Time.new(params[:anio][:year],5,1), Time.new(params[:anio][:year],5,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],6,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Suspendido').first.id  ,Time.new(params[:anio][:year],6,1), Time.new(params[:anio][:year],6,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],7,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Suspendido').first.id  ,Time.new(params[:anio][:year],7,1), Time.new(params[:anio][:year],7,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],8,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Suspendido').first.id  ,Time.new(params[:anio][:year],8,1), Time.new(params[:anio][:year],8,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],9,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Suspendido').first.id  ,Time.new(params[:anio][:year],9,1), Time.new(params[:anio][:year],9,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],10,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Suspendido').first.id ,Time.new(params[:anio][:year],10,1), Time.new(params[:anio][:year],10,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],11,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Suspendido').first.id ,Time.new(params[:anio][:year],11,1), Time.new(params[:anio][:year],11,31).end_of_day).first.nil? ? 0 : 1)],
-																			[Time.new(params[:anio][:year],12,15), (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Suspendido').first.id  ,Time.new(params[:anio][:year],12,1), Time.new(params[:anio][:year],12,31).end_of_day).first.nil? ? 0 : 1)],
-												 ]}
+							<%= line_chart params[:p_ids].to_enum(:each_with_index).map{|proy,i|
+   											 {name: @name_proyectos[i], data: @datos_proyectos_susp[i]}
 									},{library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>
 
 							<% when '6' %>
@@ -303,21 +136,8 @@
 				<h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de actividades por proyecto en estado Creada</h3>
     				</div>
     				<div class="panel-body">
-						<%= line_chart params[:p_ids].map{|proyecto|
-   											 {name: Proyecto.find(proyecto).nombre, data: [
-																			[Time.new(params[:anio][:year],1,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Creada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],1,1), Time.new(params[:anio][:year],1,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],2,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Creada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],2,1), Time.new(params[:anio][:year],2,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],3,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Creada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],3,1), Time.new(params[:anio][:year],3,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],4,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Creada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],4,1), Time.new(params[:anio][:year],4,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],5,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Creada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],5,1), Time.new(params[:anio][:year],5,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],6,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Creada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],6,1), Time.new(params[:anio][:year],6,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],7,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Creada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],7,1), Time.new(params[:anio][:year],7,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],8,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Creada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],8,1), Time.new(params[:anio][:year],8,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],9,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Creada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],9,1), Time.new(params[:anio][:year],9,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],10,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Creada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],10,1), Time.new(params[:anio][:year],10,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],11,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Creada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],11,1), Time.new(params[:anio][:year],11,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],12,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Creada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],12,1), Time.new(params[:anio][:year],12,31).end_of_day).count]
-												]}
+						<%= line_chart params[:p_ids].to_enum(:each_with_index).map{|proy,i|
+   											 {name: @name_proyectos[i], data: @datos_act_creadas[i]}
 									},{library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>
 
 							<% when '7' %>
@@ -325,21 +145,8 @@
 				<h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de actividades por proyecto en estado Planificada</h3>
     				</div>
     				<div class="panel-body">
-						<%= line_chart params[:p_ids].map{|proyecto|
-   											 {name: Proyecto.find(proyecto).nombre, data: [
-																			[Time.new(params[:anio][:year],1,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Planificada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],1,1), Time.new(params[:anio][:year],1,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],2,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Planificada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],2,1), Time.new(params[:anio][:year],2,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],3,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Planificada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],3,1), Time.new(params[:anio][:year],3,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],4,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Planificada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],4,1), Time.new(params[:anio][:year],4,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],5,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Planificada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],5,1), Time.new(params[:anio][:year],5,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],6,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Planificada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],6,1), Time.new(params[:anio][:year],6,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],7,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Planificada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],7,1), Time.new(params[:anio][:year],7,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],8,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Planificada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],8,1), Time.new(params[:anio][:year],8,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],9,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Planificada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],9,1), Time.new(params[:anio][:year],9,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],10,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Planificada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],10,1), Time.new(params[:anio][:year],10,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],11,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Planificada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],11,1), Time.new(params[:anio][:year],11,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],12,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Planificada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],12,1), Time.new(params[:anio][:year],12,31).end_of_day).count]
-												]}
+						<%= line_chart params[:p_ids].to_enum(:each_with_index).map{|proy,i|
+   											 {name: @name_proyectos[i], data: @datos_act_plan[i]}
 									},{library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>
 
 							<% when '8' %>
@@ -347,21 +154,8 @@
 				<h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de actividades por proyecto en estado Terminada</h3>
     				</div>
     				<div class="panel-body">
-						<%= line_chart params[:p_ids].map{|proyecto|
-   											 {name: Proyecto.find(proyecto).nombre, data: [
-																			[Time.new(params[:anio][:year],1,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Terminada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],1,1), Time.new(params[:anio][:year],1,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],2,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Terminada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],2,1), Time.new(params[:anio][:year],2,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],3,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Terminada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],3,1), Time.new(params[:anio][:year],3,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],4,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Terminada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],4,1), Time.new(params[:anio][:year],4,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],5,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Terminada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],5,1), Time.new(params[:anio][:year],5,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],6,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Terminada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],6,1), Time.new(params[:anio][:year],6,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],7,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Terminada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],7,1), Time.new(params[:anio][:year],7,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],8,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Terminada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],8,1), Time.new(params[:anio][:year],8,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],9,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Terminada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],9,1), Time.new(params[:anio][:year],9,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],10,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Terminada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],10,1), Time.new(params[:anio][:year],10,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],11,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Terminada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],11,1), Time.new(params[:anio][:year],11,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],12,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Terminada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],12,1), Time.new(params[:anio][:year],12,31).end_of_day).count]
-												]}
+						<%= line_chart params[:p_ids].to_enum(:each_with_index).map{|proy,i|
+   											 {name: @name_proyectos[i], data: @datos_act_term[i]}
 									},{library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>
 
 							<% when '9' %>
@@ -369,76 +163,82 @@
 				<h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de actividades por proyecto en estado Cancelada</h3>
     				</div>
     				<div class="panel-body">
-						<%= line_chart params[:p_ids].map{|proyecto|
-   											 {name: Proyecto.find(proyecto).nombre, data: [
-																			[Time.new(params[:anio][:year],1,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Cancelada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],1,1), Time.new(params[:anio][:year],1,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],2,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Cancelada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],2,1), Time.new(params[:anio][:year],2,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],3,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Cancelada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],3,1), Time.new(params[:anio][:year],3,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],4,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Cancelada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],4,1), Time.new(params[:anio][:year],4,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],5,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Cancelada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],5,1), Time.new(params[:anio][:year],5,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],6,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Cancelada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],6,1), Time.new(params[:anio][:year],6,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],7,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Cancelada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],7,1), Time.new(params[:anio][:year],7,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],8,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Cancelada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],8,1), Time.new(params[:anio][:year],8,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],9,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Cancelada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],9,1), Time.new(params[:anio][:year],9,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],10,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Cancelada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],10,1), Time.new(params[:anio][:year],10,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],11,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Cancelada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],11,1), Time.new(params[:anio][:year],11,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],12,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Cancelada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],12,1), Time.new(params[:anio][:year],12,31).end_of_day).count]
-												]}
+						<%= line_chart params[:p_ids].to_enum(:each_with_index).map{|proy,i|
+   											 {name: @name_proyectos[i], data: @datos_act_canc[i]}
 									},{library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>
-
 
 							<% when '10' %>
 					
 				<h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de actividades por proyecto en estado Ejecutada</h3>
     				</div>
     				<div class="panel-body">
-						<%= line_chart params[:p_ids].map{|proyecto|
-   											 {name: Proyecto.find(proyecto).nombre, data: [
-																			[Time.new(params[:anio][:year],1,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Ejecutada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],1,1), Time.new(params[:anio][:year],1,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],2,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Ejecutada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],2,1), Time.new(params[:anio][:year],2,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],3,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Ejecutada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],3,1), Time.new(params[:anio][:year],3,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],4,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Ejecutada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],4,1), Time.new(params[:anio][:year],4,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],5,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Ejecutada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],5,1), Time.new(params[:anio][:year],5,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],6,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Ejecutada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],6,1), Time.new(params[:anio][:year],6,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],7,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Ejecutada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],7,1), Time.new(params[:anio][:year],7,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],8,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Ejecutada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],8,1), Time.new(params[:anio][:year],8,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],9,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Ejecutada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],9,1), Time.new(params[:anio][:year],9,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],10,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Ejecutada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],10,1), Time.new(params[:anio][:year],10,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],11,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Ejecutada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],11,1), Time.new(params[:anio][:year],11,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],12,15), HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Ejecutada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],12,1), Time.new(params[:anio][:year],12,31).end_of_day).count]
-												]}
+						<%= line_chart params[:p_ids].to_enum(:each_with_index).map{|proy,i|
+   											 {name: @name_proyectos[i], data: @datos_act_ejec[i]}
+									},{library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>	
+
+						 <% when '11' %>
+					
+				<h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de voluntarios por proyecto en estado suspendido</h3>
+    				</div>
+    				<div class="panel-body">
+						<%= line_chart params[:p_ids].to_enum(:each_with_index).map{|proy,i|
+   											 {name: @name_proyectos[i], data: @datos_vol_susp[i]}
+									},{library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>	
+
+						 <% when '12' %>
+					
+				<h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de voluntarios por proyecto en estado activo</h3>
+    				</div>
+    				<div class="panel-body">
+						<%= line_chart params[:p_ids].to_enum(:each_with_index).map{|proy,i|
+   											 {name: @name_proyectos[i], data: @datos_vol_act[i]}
+									},{library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>	
+
+						 <% when '13' %>
+					
+				<h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de presupuesto de cada proyecto</h3>
+    				</div>
+    				<div class="panel-body">
+						<%= line_chart params[:p_ids].to_enum(:each_with_index).map{|proy,i|
+   											 {name: @name_proyectos[i], data: @datos_cant_pres_proy[i]}
 									},{library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>
 
+						<% when '14' %>
+					
+				<h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de horas efectivas realizadas de voluntariado por proyecto</h3>
+    				</div>
+    				<div class="panel-body">
+						<%= line_chart params[:p_ids].to_enum(:each_with_index).map{|proy,i|
+   											 {name: @name_proyectos[i], data: @datos_horas_proy[i]}
+									},{library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>
 
+						<% when '15' %>
+							<h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de horas efectivas realizadas según tipo de actividad </h3>
+						  </div>
+								<% TipoActividad.all.to_enum(:each_with_index).each do |tipo,j| %>
+						 
+    				<div class="panel-body">
+						<%='Tipo de Actividad: '+tipo.nombre %>
+						<%= line_chart params[:p_ids].to_enum(:each_with_index).map{|proy,i|
+   											 {name: @name_proyectos[i], data: @datos_tipos[j][i]}
+									},{library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>
 
-
+								<%	end %>
+							</div>
+									
 <%	end %>
 <%	end %>
 <% if params[:tipo_rep]== '3' %>
 
 		<% case item
-
 					
 						when '1' 
 						 %>
 						<h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de proyectos por regional en estado Creado</h3>
     				</div>
     				<div class="panel-body">
-							<%= line_chart params[:r_ids].map{|regional|
-   											 {name: Regional.find(regional).nombre, data: [
-																			[Time.new(params[:anio][:year],1,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Creado').first.id ,Time.new(params[:anio][:year],1,1), Time.new(params[:anio][:year],1,31).end_of_day).count], 
-																			[Time.new(params[:anio][:year],2,15),HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Creado').first.id ,Time.new(params[:anio][:year],2,1), Time.new(params[:anio][:year],2,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],3,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Creado').first.id  ,Time.new(params[:anio][:year],3,1), Time.new(params[:anio][:year],3,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],4,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Creado').first.id  ,Time.new(params[:anio][:year],4,1), Time.new(params[:anio][:year],4,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],5,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Creado').first.id  ,Time.new(params[:anio][:year],5,1), Time.new(params[:anio][:year],5,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],6,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Creado').first.id  ,Time.new(params[:anio][:year],6,1), Time.new(params[:anio][:year],6,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],7,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Creado').first.id  ,Time.new(params[:anio][:year],7,1), Time.new(params[:anio][:year],7,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],8,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Creado').first.id  ,Time.new(params[:anio][:year],8,1), Time.new(params[:anio][:year],8,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],9,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Creado').first.id  ,Time.new(params[:anio][:year],9,1), Time.new(params[:anio][:year],9,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],10,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Creado').first.id ,Time.new(params[:anio][:year],10,1), Time.new(params[:anio][:year],10,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],11,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Creado').first.id ,Time.new(params[:anio][:year],11,1), Time.new(params[:anio][:year],11,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],12,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Creado').first.id ,Time.new(params[:anio][:year],12,1), Time.new(params[:anio][:year],12,31).end_of_day).count]
-												 ]}
+							<%= line_chart params[:r_ids].to_enum(:each_with_index).map{|proy,i|
+   											 {name: @name_regionales[i], data: @datos_proyectos_creados_reg[i]}
 									},{library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>
 
 
@@ -446,91 +246,96 @@
 						<h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de proyectos por regional en estado Cancelado</h3>
     				</div>
     				<div class="panel-body">
-							<%= line_chart params[:r_ids].map{|regional|
-   											 {name: Regional.find(regional).nombre, data: [
-																			[Time.new(params[:anio][:year],1,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Cancelado').first.id ,Time.new(params[:anio][:year],1,1), Time.new(params[:anio][:year],1,31).end_of_day).count], 
-																			[Time.new(params[:anio][:year],2,15),HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Cancelado').first.id ,Time.new(params[:anio][:year],2,1), Time.new(params[:anio][:year],2,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],3,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Cancelado').first.id  ,Time.new(params[:anio][:year],3,1), Time.new(params[:anio][:year],3,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],4,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Cancelado').first.id  ,Time.new(params[:anio][:year],4,1), Time.new(params[:anio][:year],4,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],5,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Cancelado').first.id  ,Time.new(params[:anio][:year],5,1), Time.new(params[:anio][:year],5,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],6,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Cancelado').first.id  ,Time.new(params[:anio][:year],6,1), Time.new(params[:anio][:year],6,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],7,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Cancelado').first.id  ,Time.new(params[:anio][:year],7,1), Time.new(params[:anio][:year],7,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],8,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Cancelado').first.id  ,Time.new(params[:anio][:year],8,1), Time.new(params[:anio][:year],8,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],9,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Cancelado').first.id  ,Time.new(params[:anio][:year],9,1), Time.new(params[:anio][:year],9,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],10,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Cancelado').first.id ,Time.new(params[:anio][:year],10,1), Time.new(params[:anio][:year],10,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],11,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Cancelado').first.id ,Time.new(params[:anio][:year],11,1), Time.new(params[:anio][:year],11,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],12,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Cancelado').first.id ,Time.new(params[:anio][:year],12,1), Time.new(params[:anio][:year],12,31).end_of_day).count]
-												 ]}
+							<%= line_chart params[:r_ids].to_enum(:each_with_index).map{|proy,i|
+   											 {name: @name_regionales[i], data: @datos_proyectos_canc_reg[i]}
 									},{library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>
+
 
 
 						<%	when '3' %>
 						<h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de proyectos por regional en estado Terminado</h3>
     				</div>
     				<div class="panel-body">
-							<%= line_chart params[:r_ids].map{|regional|
-   											 {name: Regional.find(regional).nombre, data: [
-																			[Time.new(params[:anio][:year],1,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Terminado').first.id ,Time.new(params[:anio][:year],1,1), Time.new(params[:anio][:year],1,31).end_of_day).count], 
-																			[Time.new(params[:anio][:year],2,15),HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Terminado').first.id ,Time.new(params[:anio][:year],2,1), Time.new(params[:anio][:year],2,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],3,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Terminado').first.id  ,Time.new(params[:anio][:year],3,1), Time.new(params[:anio][:year],3,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],4,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Terminado').first.id  ,Time.new(params[:anio][:year],4,1), Time.new(params[:anio][:year],4,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],5,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Terminado').first.id  ,Time.new(params[:anio][:year],5,1), Time.new(params[:anio][:year],5,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],6,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Terminado').first.id  ,Time.new(params[:anio][:year],6,1), Time.new(params[:anio][:year],6,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],7,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Terminado').first.id  ,Time.new(params[:anio][:year],7,1), Time.new(params[:anio][:year],7,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],8,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Terminado').first.id  ,Time.new(params[:anio][:year],8,1), Time.new(params[:anio][:year],8,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],9,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Terminado').first.id  ,Time.new(params[:anio][:year],9,1), Time.new(params[:anio][:year],9,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],10,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Terminado').first.id ,Time.new(params[:anio][:year],10,1), Time.new(params[:anio][:year],10,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],11,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Terminado').first.id ,Time.new(params[:anio][:year],11,1), Time.new(params[:anio][:year],11,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],12,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Terminado').first.id ,Time.new(params[:anio][:year],12,1), Time.new(params[:anio][:year],12,31).end_of_day).count]
-												 ]}
+							<%= line_chart params[:r_ids].to_enum(:each_with_index).map{|proy,i|
+   											 {name: @name_regionales[i], data: @datos_proyectos_term_reg[i]}
 									},{library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>
+
 
 
 						<%	when '4' %>
 						<h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de proyectos por regional en estado Suspendido</h3>
     				</div>
     				<div class="panel-body">
-							<%= line_chart params[:r_ids].map{|regional|
-   											 {name: Regional.find(regional).nombre, data: [
-																			[Time.new(params[:anio][:year],1,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Suspendido').first.id ,Time.new(params[:anio][:year],1,1), Time.new(params[:anio][:year],1,31).end_of_day).count], 
-																			[Time.new(params[:anio][:year],2,15),HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Suspendido').first.id ,Time.new(params[:anio][:year],2,1), Time.new(params[:anio][:year],2,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],3,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Suspendido').first.id  ,Time.new(params[:anio][:year],3,1), Time.new(params[:anio][:year],3,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],4,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Suspendido').first.id  ,Time.new(params[:anio][:year],4,1), Time.new(params[:anio][:year],4,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],5,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Suspendido').first.id  ,Time.new(params[:anio][:year],5,1), Time.new(params[:anio][:year],5,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],6,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Suspendido').first.id  ,Time.new(params[:anio][:year],6,1), Time.new(params[:anio][:year],6,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],7,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Suspendido').first.id  ,Time.new(params[:anio][:year],7,1), Time.new(params[:anio][:year],7,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],8,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Suspendido').first.id  ,Time.new(params[:anio][:year],8,1), Time.new(params[:anio][:year],8,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],9,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Suspendido').first.id  ,Time.new(params[:anio][:year],9,1), Time.new(params[:anio][:year],9,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],10,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Suspendido').first.id ,Time.new(params[:anio][:year],10,1), Time.new(params[:anio][:year],10,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],11,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Suspendido').first.id ,Time.new(params[:anio][:year],11,1), Time.new(params[:anio][:year],11,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],12,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Suspendido').first.id ,Time.new(params[:anio][:year],12,1), Time.new(params[:anio][:year],12,31).end_of_day).count]
-												 ]}
+							<%= line_chart params[:r_ids].to_enum(:each_with_index).map{|proy,i|
+   											 {name: @name_regionales[i], data: @datos_proyectos_susp_reg[i]}
 									},{library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>
-
 
 							<%	when '5' %>
 						<h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de proyectos por regional en estado En Ejecución</h3>
     				</div>
     				<div class="panel-body">
-							<%= line_chart params[:r_ids].map{|regional|
-   											 {name: Regional.find(regional).nombre, data: [
-																			[Time.new(params[:anio][:year],1,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'En Ejecución').first.id ,Time.new(params[:anio][:year],1,1), Time.new(params[:anio][:year],1,31).end_of_day).count], 
-																			[Time.new(params[:anio][:year],2,15),HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'En Ejecución').first.id ,Time.new(params[:anio][:year],2,1), Time.new(params[:anio][:year],2,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],3,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'En Ejecución').first.id  ,Time.new(params[:anio][:year],3,1), Time.new(params[:anio][:year],3,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],4,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'En Ejecución').first.id  ,Time.new(params[:anio][:year],4,1), Time.new(params[:anio][:year],4,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],5,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'En Ejecución').first.id  ,Time.new(params[:anio][:year],5,1), Time.new(params[:anio][:year],5,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],6,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'En Ejecución').first.id  ,Time.new(params[:anio][:year],6,1), Time.new(params[:anio][:year],6,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],7,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'En Ejecución').first.id  ,Time.new(params[:anio][:year],7,1), Time.new(params[:anio][:year],7,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],8,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'En Ejecución').first.id  ,Time.new(params[:anio][:year],8,1), Time.new(params[:anio][:year],8,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],9,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'En Ejecución').first.id  ,Time.new(params[:anio][:year],9,1), Time.new(params[:anio][:year],9,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],10,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'En Ejecución').first.id ,Time.new(params[:anio][:year],10,1), Time.new(params[:anio][:year],10,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],11,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'En Ejecución').first.id ,Time.new(params[:anio][:year],11,1), Time.new(params[:anio][:year],11,31).end_of_day).count],
-																			[Time.new(params[:anio][:year],12,15), HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'En Ejecución').first.id ,Time.new(params[:anio][:year],12,1), Time.new(params[:anio][:year],12,31).end_of_day).count]
-												 ]}
+							<%= line_chart params[:r_ids].to_enum(:each_with_index).map{|proy,i|
+   											 {name: @name_regionales[i], data: @datos_proyectos_ejec_reg[i]}
 									},{library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>
 
+							<%	when '6' %>
+						<h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de voluntarios por regional en estado suspendido</h3>
+    				</div>
+    				<div class="panel-body">
+							<%= line_chart params[:r_ids].to_enum(:each_with_index).map{|proy,i|
+   											 {name: @name_regionales[i], data: @datos_vol_susp_reg[i]}
+									},{library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>
 
+							<%	when '7' %>
+						<h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de voluntarios por regional en estado activo</h3>
+    				</div>
+    				<div class="panel-body">
+							<%= line_chart params[:r_ids].to_enum(:each_with_index).map{|proy,i|
+   											 {name: @name_regionales[i], data: @datos_vol_act_reg[i]}
+									},{library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>
 
+							<%	when '8' %>
+						<h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de proyectos por regional con presupuesto</h3>
+    				</div>
+    				<div class="panel-body">
+							<%= line_chart params[:r_ids].to_enum(:each_with_index).map{|proy,i|
+   											 {name: @name_regionales[i], data: @datos_pres_reg[i]}
+									},{library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>
+
+							<%	when '9' %>
+						<h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de proyectos por regional en evaluación de presupuestos</h3>
+    				</div>
+    				<div class="panel-body">
+							<%= line_chart params[:r_ids].to_enum(:each_with_index).map{|proy,i|
+   											 {name: @name_regionales[i], data: @datos_pres_eval_reg[i]}
+									},{library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>
+
+							<%	when '10' %>
+						<h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de presupuesto por regional</h3>
+    				</div>
+    				<div class="panel-body">
+							<%= line_chart params[:r_ids].to_enum(:each_with_index).map{|proy,i|
+   											 {name: @name_regionales[i], data: @datos_cant_pres_eval_reg[i]}
+									},{library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>
+
+						<%	when '11' %>
+						<h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de horas efectivas realizadas de voluntariado por regional</h3>
+    				</div>
+    				<div class="panel-body">
+							<%= line_chart params[:r_ids].to_enum(:each_with_index).map{|proy,i|
+   											 {name: @name_regionales[i], data: @datos_horas_reg[i]}
+									},{library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>
+
+						<%	when '12' %>
+						<h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de horas efectivas realizadas por regional según tipo de actividad</h3>
+    				</div>
+						<% TipoActividad.all.to_enum(:each_with_index).each do |tipo,j| %>
+    				<div class="panel-body">
+							<%='Tipo de Actividad: '+tipo.nombre %>
+							<%= line_chart params[:r_ids].to_enum(:each_with_index).map{|proy,i|
+   											 {name: @name_regionales[i], data: @datos_tipos[j][i]}
+									},{library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>
+							<%	end %>
 
 <%	end %>
 <%	end %>
@@ -548,7 +353,6 @@
        <div class="panel-body">
          <table class="table table-hover table-striped tablesorter">
                 <thead>
-									
                   <tr>
                     <th class="col-lg">Voluntario</th>
 										<%(1..12).each { |mes|%>
@@ -557,11 +361,11 @@
                   </tr>
                 </thead>
                 <tbody>
-						<% params[:u_ids].each { |user|%>
+						<% params[:u_ids].to_enum(:each_with_index).each { |user,i|%>
 							<tr>	
-								<td> <%= Usuario.find(user).nombreUsuario %> </td>
+								<td> <%= @name_voluntarios[i] %> </td>
 							<%(1..12).each { |mes|%>
-								<td><%= (HistorialEstadoUsuario.where("usuario_id = ? AND estado_usuario_id = ? AND created_at BETWEEN ? AND ? ",user, EstadoUsuario.where("nombre = ?", 'Suspendido').first.id ,Time.new(params[:anio][:year],1,1), Time.new(params[:anio][:year],1,31).end_of_day).first.nil? ? 0 : 1)%> </td>
+								<td><%= @datos_discretos_voluntarios_suspendidos[i][(mes-1)]%> </td>
 							<% } %>
 							</tr>
 						<% } %>
@@ -580,11 +384,11 @@
                   </tr>
                 </thead>
                 <tbody>
-						<% params[:u_ids].each { |user|%>
+						<% params[:u_ids].to_enum(:each_with_index).each { |user,i|%>
 							<tr>	
-								<td> <%= Usuario.find(user).nombreUsuario %> </td>
+								<td> <%=  @name_voluntarios[i] %> </td>
 							<%(1..12).each { |mes|%>
-								<td><%= (HistorialEstadoUsuario.where("usuario_id = ? AND estado_usuario_id = ? AND created_at BETWEEN ? AND ? ",user, EstadoUsuario.where("nombre = ?", 'Activo').first.id ,Time.new(params[:anio][:year],1,1), Time.new(params[:anio][:year],1,31).end_of_day).first.nil? ? 0 : 1)%> </td>
+								<td><%= @datos_discretos_voluntarios_activos[i][(mes-1)] %> </td>
 							<% } %>
 							</tr>
 						<% } %>
@@ -603,11 +407,11 @@
                   </tr>
                 </thead>
                 <tbody>
-						<% params[:u_ids].each { |user|%>
+						<% params[:u_ids].to_enum(:each_with_index).each { |user,i|%>
 							<tr>	
-								<td> <%= Usuario.find(user).nombreUsuario %> </td>
+								<td> <%=  @name_voluntarios[i] %> </td>
 							<%(1..12).each { |mes|%>
-								<td><%= AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Creada').first.id,Time.new(params[:anio][:year],1,1), Time.new(params[:anio][:year],1,31).end_of_day).first, user).count %> </td>
+								<td><%= @datos_discretos_act_creadas[i][(mes-1)] %> </td>
 							<% } %>
 							</tr>
 						<% } %>
@@ -627,11 +431,11 @@
                   </tr>
                 </thead>
                 <tbody>
-						<% params[:u_ids].each { |user|%>
+						<% params[:u_ids].to_enum(:each_with_index).each { |user,i|%>
 							<tr>	
-								<td> <%= Usuario.find(user).nombreUsuario %> </td>
+								<td> <%=  @name_voluntarios[i] %> </td>
 							<%(1..12).each { |mes|%>
-								<td><%= AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Planificada').first.id,Time.new(params[:anio][:year],1,1), Time.new(params[:anio][:year],1,31).end_of_day).first, user).count %> </td>
+								<td><%= @datos_discretos_act_plan[i][(mes-1)] %> </td>
 							<% } %>
 							</tr>
 						<% } %>
@@ -651,11 +455,11 @@
                   </tr>
                 </thead>
                 <tbody>
-						<% params[:u_ids].each { |user|%>
+						<% params[:u_ids].to_enum(:each_with_index).each { |user,i|%>
 							<tr>	
-								<td> <%= Usuario.find(user).nombreUsuario %> </td>
+								<td> <%=  @name_voluntarios[i] %> </td>
 							<%(1..12).each { |mes|%>
-								<td><%= AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Ejecutada').first.id,Time.new(params[:anio][:year],1,1), Time.new(params[:anio][:year],1,31).end_of_day).first, user).count %> </td>
+								<td><%= @datos_discretos_act_ejec[i][(mes-1)] %> </td>
 							<% } %>
 							</tr>
 						<% } %>
@@ -675,11 +479,11 @@
                   </tr>
                 </thead>
                 <tbody>
-						<% params[:u_ids].each { |user|%>
+						<% params[:u_ids].to_enum(:each_with_index).each { |user,i|%>
 							<tr>	
-								<td> <%= Usuario.find(user).nombreUsuario %> </td>
+								<td> <%=  @name_voluntarios[i] %> </td>
 							<%(1..12).each { |mes|%>
-								<td><%= AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Terminada').first.id,Time.new(params[:anio][:year],1,1), Time.new(params[:anio][:year],1,31).end_of_day).first, user).count %> </td>
+								<td><%= @datos_discretos_act_term[i][(mes-1)] %> </td>
 							<% } %>
 							</tr>
 						<% } %>
@@ -690,7 +494,6 @@
        <div class="panel-body">
          <table class="table table-hover table-striped tablesorter">
                 <thead>
-									
                   <tr>
                     <th class="col-lg">Voluntario</th>
 										<%(1..12).each { |mes|%>
@@ -699,22 +502,22 @@
                   </tr>
                 </thead>
                 <tbody>
-						<% params[:u_ids].each { |user|%>
+						<% params[:u_ids].to_enum(:each_with_index).each { |user,i|%>
 							<tr>	
-								<td> <%= Usuario.find(user).nombreUsuario %> </td>
+								<td> <%=  @name_voluntarios[i] %> </td>
 							<%(1..12).each { |mes|%>
-								<td><%= AsignacionActividad.where( "actividad_id = ? AND usuario_id = ?", HistorialEstadoActividad.where("estado_actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Cancelada').first.id,Time.new(params[:anio][:year],1,1), Time.new(params[:anio][:year],1,31).end_of_day).first, user).count %> </td>
+								<td><%= @datos_discretos_act_canc[i][(mes-1)] %> </td>
 							<% } %>
 							</tr>
 						<% } %>
 					
+
 					<%	when '8' %>
           <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de horas efectivas realizadas por voluntario</h3>
        </div>
        <div class="panel-body">
          <table class="table table-hover table-striped tablesorter">
                 <thead>
-									
                   <tr>
                     <th class="col-lg">Voluntario</th>
 										<%(1..12).each { |mes|%>
@@ -723,21 +526,20 @@
                   </tr>
                 </thead>
                 <tbody>
-						<% params[:u_ids].each { |user|%>
+						<% params[:u_ids].to_enum(:each_with_index).each { |user,i|%>
 							<tr>	
-								<td> <%= Usuario.find(user).nombreUsuario %> </td>
+								<td> <%= @name_voluntarios[i] %> </td>
 							<%(1..12).each { |mes|%>
-								<td><%= 
-
-																	%> </td>
+								<td><%= @datos_discretos_voluntarios_horas[i][(mes-1)]	%> </td>
 							<% } %>
 							</tr>
 						<% } %>
-
-			<%	end %>
+ 				<%	end %>
               </tbody>
-              </table>
-			<%	end %>
+        </table>
+	<%	end %>
+
+
 			<% if params[:tipo_rep]== '2' %>
 				
 				<% case item
@@ -756,11 +558,11 @@
                   </tr>
                 </thead>
                 <tbody>
-						<% params[:p_ids].each { |proyecto|%>
+						<% params[:p_ids].to_enum(:each_with_index).each { |proyecto,i|%>
 							<tr>	
-								<td> <%= Proyecto.find(proyecto).nombre %> </td>
+								<td> <%= @name_proyectos[i] %> </td>
 							<%(1..12).each { |mes|%>
-								<td><%= (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Creado').first.id  ,Time.new(params[:anio][:year],mes,1), Time.new(params[:anio][:year],mes,31).end_of_day).first.nil? ? 0 : 1)%> </td>
+								<td><%= @datos_discretos_proyectos_creados[i][(mes-1)] %> </td>
 							<% } %>
 							</tr>
 						<% } %>
@@ -780,11 +582,11 @@
                   </tr>
                 </thead>
                 <tbody>
-						<% params[:p_ids].each { |proyecto|%>
+						<% params[:p_ids].to_enum(:each_with_index).each { |proyecto,i|%>
 							<tr>	
-								<td> <%= Proyecto.find(proyecto).nombre %> </td>
+								<td> <%= @name_proyectos[i] %> </td>
 							<%(1..12).each { |mes|%>
-								<td><%= (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Cancelado').first.id  ,Time.new(params[:anio][:year],mes,1), Time.new(params[:anio][:year],mes,31).end_of_day).first.nil? ? 0 : 1)%> </td>
+								<td><%= @datos_discretos_proyectos_canc[i][(mes-1)] %> </td>
 							<% } %>
 							</tr>
 						<% } %>
@@ -804,11 +606,11 @@
                   </tr>
                 </thead>
                 <tbody>
-						<% params[:p_ids].each { |proyecto|%>
+						<% params[:p_ids].to_enum(:each_with_index).each { |proyecto,i|%>
 							<tr>	
-								<td> <%= Proyecto.find(proyecto).nombre %> </td>
+								<td> <%= @name_proyectos[i] %> </td>
 							<%(1..12).each { |mes|%>
-								<td><%= (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'En Ejecución').first.id  ,Time.new(params[:anio][:year],mes,1), Time.new(params[:anio][:year],mes,31).end_of_day).first.nil? ? 0 : 1)%> </td>
+								<td><%= @datos_discretos_proyectos_ejec[i][(mes-1)] %> </td>
 							<% } %>
 							</tr>
 						<% } %>
@@ -828,11 +630,11 @@
                   </tr>
                 </thead>
                 <tbody>
-						<% params[:p_ids].each { |proyecto|%>
+						<% params[:p_ids].to_enum(:each_with_index).each { |proyecto,i|%>
 							<tr>	
-								<td> <%= Proyecto.find(proyecto).nombre %> </td>
+								<td> <%= @name_proyectos[i] %> </td>
 							<%(1..12).each { |mes|%>
-								<td><%= (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Terminado').first.id  ,Time.new(params[:anio][:year],mes,1), Time.new(params[:anio][:year],mes,31).end_of_day).first.nil? ? 0 : 1)%> </td>
+								<td><%= @datos_discretos_proyectos_term[i][(mes-1)] %> </td>
 							<% } %>
 							</tr>
 						<% } %>
@@ -852,14 +654,14 @@
                   </tr>
                 </thead>
                 <tbody>
-						<% params[:p_ids].each { |proyecto|%>
+						<% params[:p_ids].to_enum(:each_with_index).each { |proyecto,i|%>
 							<tr>	
-								<td> <%= Proyecto.find(proyecto).nombre %> </td>
+								<td> <%= @name_proyectos[i] %> </td>
 							<%(1..12).each { |mes|%>
-								<td><%= (HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",proyecto, EstadoProyecto.where("nombre = ?", 'Suspendido').first.id  ,Time.new(params[:anio][:year],mes,1), Time.new(params[:anio][:year],mes,31).end_of_day).first.nil? ? 0 : 1)%> </td>
+								<td><%= @datos_discretos_proyectos_susp[i][(mes-1)] %> </td>
 							<% } %>
 							</tr>
-						<% } %>			
+						<% } %>		
 
 									<% when '6' %>
           <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de actividades por proyecto en estado Creada</h3>
@@ -876,11 +678,11 @@
                   </tr>
                 </thead>
                 <tbody>
-						<% params[:p_ids].each { |proyecto|%>
+						<% params[:p_ids].to_enum(:each_with_index).each { |proyecto,i|%>
 							<tr>	
-								<td> <%= Proyecto.find(proyecto).nombre %> </td>
+								<td> <%= @name_proyectos[i] %> </td>
 							<%(1..12).each { |mes|%>
-								<td><%= (HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Creada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],mes,1), Time.new(params[:anio][:year],mes,31).end_of_day).count) %> </td>
+								<td><%= @datos_discretos_act_creadas[i][(mes-1)] %> </td>
 							<% } %>
 							</tr>
 						<% } %>			
@@ -900,14 +702,14 @@
                   </tr>
                 </thead>
                 <tbody>
-						<% params[:p_ids].each { |proyecto|%>
+						<% params[:p_ids].to_enum(:each_with_index).each { |proyecto,i|%>
 							<tr>	
-								<td> <%= Proyecto.find(proyecto).nombre %> </td>
+								<td> <%= @name_proyectos[i] %> </td>
 							<%(1..12).each { |mes|%>
-								<td><%= (HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Planificada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],mes,1), Time.new(params[:anio][:year],mes,31).end_of_day).count) %> </td>
+								<td><%= @datos_discretos_act_plan[i][(mes-1)] %> </td>
 							<% } %>
 							</tr>
-						<% } %>			
+						<% } %>				
 
 									<% when '8' %>
           <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de actividades por proyecto en estado Terminada</h3>
@@ -924,14 +726,14 @@
                   </tr>
                 </thead>
                 <tbody>
-						<% params[:p_ids].each { |proyecto|%>
+						<% params[:p_ids].to_enum(:each_with_index).each { |proyecto,i|%>
 							<tr>	
-								<td> <%= Proyecto.find(proyecto).nombre %> </td>
+								<td> <%= @name_proyectos[i] %> </td>
 							<%(1..12).each { |mes|%>
-								<td><%= (HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Terminada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],mes,1), Time.new(params[:anio][:year],mes,31).end_of_day).count) %> </td>
+								<td><%= @datos_discretos_act_term[i][(mes-1)] %> </td>
 							<% } %>
 							</tr>
-						<% } %>			
+						<% } %>		
 
 									<% when '9' %>
           <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de actividades por proyecto en estado Cancelada</h3>
@@ -948,15 +750,14 @@
                   </tr>
                 </thead>
                 <tbody>
-						<% params[:p_ids].each { |proyecto|%>
+						<% params[:p_ids].to_enum(:each_with_index).each { |proyecto,i|%>
 							<tr>	
-								<td> <%= Proyecto.find(proyecto).nombre %> </td>
+								<td> <%= @name_proyectos[i] %> </td>
 							<%(1..12).each { |mes|%>
-								<td><%= (HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Cancelada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],mes,1), Time.new(params[:anio][:year],mes,31).end_of_day).count) %> </td>
+								<td><%= @datos_discretos_proyectos_canc[i][(mes-1)] %> </td>
 							<% } %>
 							</tr>
-						<% } %>			
-
+						<% } %>		
 
 									<% when '10' %>
           <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de actividades por proyecto en estado Ejecutada</h3>
@@ -973,16 +774,136 @@
                   </tr>
                 </thead>
                 <tbody>
-						<% params[:p_ids].each { |proyecto|%>
+						<% params[:p_ids].to_enum(:each_with_index).each { |proyecto,i|%>
 							<tr>	
-								<td> <%= Proyecto.find(proyecto).nombre %> </td>
+								<td> <%= @name_proyectos[i] %> </td>
 							<%(1..12).each { |mes|%>
-								<td><%= (HistorialEstadoActividad.where("estado_actividad_id = ? AND actividad_id = ? AND created_at BETWEEN ? AND ?  ", EstadoActividad.where("nombre = ?", 'Ejecutada').first.id, Actividad.where("proyecto_id = ?" , proyecto).first, Time.new(params[:anio][:year],mes,1), Time.new(params[:anio][:year],mes,31).end_of_day).count) %> </td>
+								<td><%= @datos_discretos_proyectos_ejec[i][(mes-1)] %> </td>
 							<% } %>
 							</tr>
-						<% } %>			
+						<% } %>				
 
-			
+										<% when '11' %>
+          <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de voluntarios por proyecto en estado suspendido</h3>
+       </div>
+       <div class="panel-body">
+         <table class="table table-hover table-striped tablesorter">
+                <thead>
+									
+                  <tr>
+                    <th class="col-lg">Proyecto</th>
+										<%(1..12).each { |mes|%>
+                    <th class="col-lg-1"><%= mes %> | <%= params[:anio][:year] %></th>
+										<% } %> 
+                  </tr>
+                </thead>
+                <tbody>
+						<% params[:p_ids].to_enum(:each_with_index).each { |proyecto,i|%>
+							<tr>	
+								<td> <%= @name_proyectos[i] %> </td>
+							<%(1..12).each { |mes|%>
+								<td><%= @datos_discretos_vol_susp[i][(mes-1)] %> </td>
+							<% } %>
+							</tr>
+						<% } %>				
+
+										<% when '12' %>
+          <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de voluntarios por proyecto en estado activo</h3>
+       </div>
+       <div class="panel-body">
+         <table class="table table-hover table-striped tablesorter">
+                <thead>
+									
+                  <tr>
+                    <th class="col-lg">Proyecto</th>
+										<%(1..12).each { |mes|%>
+                    <th class="col-lg-1"><%= mes %> | <%= params[:anio][:year] %></th>
+										<% } %> 
+                  </tr>
+                </thead>
+                <tbody>
+						<% params[:p_ids].to_enum(:each_with_index).each { |proyecto,i|%>
+							<tr>	
+								<td> <%= @name_proyectos[i] %> </td>
+							<%(1..12).each { |mes|%>
+								<td><%= @datos_discretos_vol_act[i][(mes-1)] %> </td>
+							<% } %>
+							</tr>
+						<% } %>				
+
+					<% when '13' %>
+          <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de presupuesto de cada proyecto</h3>
+       </div>
+       <div class="panel-body">
+         <table class="table table-hover table-striped tablesorter">
+                <thead>
+									
+                  <tr>
+                    <th class="col-lg">Proyecto</th>
+										<%(1..12).each { |mes|%>
+                    <th class="col-lg-1"><%= mes %> | <%= params[:anio][:year] %></th>
+										<% } %> 
+                  </tr>
+                </thead>
+                <tbody>
+						<% params[:p_ids].to_enum(:each_with_index).each { |proyecto,i|%>
+							<tr>	
+								<td> <%= @name_proyectos[i] %> </td>
+							<%(1..12).each { |mes|%>
+								<td><%= @datos_discretos_cant_pres_proy[i][(mes-1)] %> </td>
+							<% } %>
+							</tr>
+						<% } %>
+
+							<% when '14' %>
+          <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de actividades por proyecto en estado Ejecutada</h3>
+       </div>
+       <div class="panel-body">
+         <table class="table table-hover table-striped tablesorter">
+                <thead>
+                  <tr>
+                    <th class="col-lg">Proyecto</th>
+										<%(1..12).each { |mes|%>
+                    <th class="col-lg-1"><%= mes %> | <%= params[:anio][:year] %></th>
+										<% } %> 
+                  </tr>
+                </thead>
+                <tbody>
+						<% params[:p_ids].to_enum(:each_with_index).each { |proyecto,i|%>
+							<tr>	
+								<td> <%= @name_proyectos[i] %> </td>
+							<%(1..12).each { |mes|%>
+								<td><%= @datos_discretos_horas_proy[i][(mes-1)] %> </td>
+							<% } %>
+							</tr>
+						<% } %>				
+
+						<% when '15' %>
+          <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de actividades por proyecto en estado Ejecutada</h3>
+       </div>
+       <div class="panel-body">
+				<% TipoActividad.all.to_enum(:each_with_index).each do |tipo,j| %>
+         <table class="table table-hover table-striped tablesorter">
+						<%='Tipo de Actividad: '+tipo.nombre %>
+                <thead>
+									
+                  <tr>
+                    <th class="col-lg">Proyecto</th>
+										<%(1..12).each { |mes|%>
+                    <th class="col-lg-1"><%= mes %> | <%= params[:anio][:year] %></th>
+										<% } %> 
+                  </tr>
+                </thead>
+                <tbody>
+						<% params[:p_ids].to_enum(:each_with_index).each { |proyecto,i|%>
+							<tr>	
+								<td> <%= @name_proyectos[i] %> </td>
+							<%(1..12).each { |mes|%>
+								<td><%= @datos_discretos_tipos[j][i][(mes-1)] %> </td>
+							<% } %>
+							</tr>
+						<% } %>				
+				<%	end %>
 
 
 
@@ -1007,14 +928,18 @@
                   </tr>
                 </thead>
                 <tbody>
-						<% params[:r_ids].each { |regional|%>
+						<% params[:r_ids].to_enum(:each_with_index).each { |reg,i|%>
 							<tr>	
-								<td> <%= Regional.find(regional).nombre %> </td>
+								<td> <%= @name_regionales[i] %> </td>
 							<%(1..12).each { |mes|%>
-								<td><%= HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Creado').first.id ,Time.new(params[:anio][:year],mes,1), Time.new(params[:anio][:year],mes,31).end_of_day).count %> </td>
+								<td><%= @datos_discretos_proyectos_creados_reg[i][(mes-1)] %> </td>
 							<% } %>
 							</tr>
-						<% } %>
+						<% } %>		
+
+
+
+
 
 			<% when '2' %>
           <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de proyectos por regional en estado Cancelado</h3>
@@ -1031,14 +956,14 @@
                   </tr>
                 </thead>
                 <tbody>
-						<% params[:r_ids].each { |regional|%>
+						<% params[:r_ids].to_enum(:each_with_index).each { |reg,i|%>
 							<tr>	
-								<td> <%= Regional.find(regional).nombre %> </td>
+								<td> <%= @name_regionales[i] %> </td>
 							<%(1..12).each { |mes|%>
-								<td><%= HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Cancelado').first.id ,Time.new(params[:anio][:year],mes,1), Time.new(params[:anio][:year],mes,31).end_of_day).count %> </td>
+								<td><%= @datos_discretos_proyectos_canc_reg[i][(mes-1)] %> </td>
 							<% } %>
 							</tr>
-						<% } %>
+						<% } %>		
 
 
 					<% when '3' %>
@@ -1056,14 +981,14 @@
                   </tr>
                 </thead>
                 <tbody>
-						<% params[:r_ids].each { |regional|%>
+						<% params[:r_ids].to_enum(:each_with_index).each { |reg,i|%>
 							<tr>	
-								<td> <%= Regional.find(regional).nombre %> </td>
+								<td> <%= @name_regionales[i] %> </td>
 							<%(1..12).each { |mes|%>
-								<td><%= HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Terminado').first.id ,Time.new(params[:anio][:year],mes,1), Time.new(params[:anio][:year],mes,31).end_of_day).count %> </td>
+								<td><%= @datos_discretos_proyectos_term_reg[i][(mes-1)] %> </td>
 							<% } %>
 							</tr>
-						<% } %>
+						<% } %>		
 
 					<% when '4' %>
           <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de proyectos por regional en estado Suspendido</h3>
@@ -1080,14 +1005,14 @@
                   </tr>
                 </thead>
                 <tbody>
-						<% params[:r_ids].each { |regional|%>
+						<% params[:r_ids].to_enum(:each_with_index).each { |reg,i|%>
 							<tr>	
-								<td> <%= Regional.find(regional).nombre %> </td>
+								<td> <%= @name_regionales[i] %> </td>
 							<%(1..12).each { |mes|%>
-								<td><%= HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'Suspendido').first.id ,Time.new(params[:anio][:year],mes,1), Time.new(params[:anio][:year],mes,31).end_of_day).count %> </td>
+								<td><%= @datos_discretos_proyectos_susp_reg[i][(mes-1)] %> </td>
 							<% } %>
 							</tr>
-						<% } %>
+						<% } %>		
 	
 					<% when '5' %>
           <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de proyectos por regional en estado En Ejecución</h3>
@@ -1104,15 +1029,185 @@
                   </tr>
                 </thead>
                 <tbody>
-						<% params[:r_ids].each { |regional|%>
+						<% params[:r_ids].to_enum(:each_with_index).each { |reg,i|%>
 							<tr>	
-								<td> <%= Regional.find(regional).nombre %> </td>
+								<td> <%= @name_regionales[i] %> </td>
 							<%(1..12).each { |mes|%>
-								<td><%= HistorialEstadoProyecto.where("proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",Proyecto.where("regional_id = ? ", regional).first, EstadoProyecto.where("nombre = ?", 'En Ejecución').first.id ,Time.new(params[:anio][:year],mes,1), Time.new(params[:anio][:year],mes,31).end_of_day).count %> </td>
+								<td><%= @datos_discretos_proyectos_ejec_reg[i][(mes-1)] %> </td>
 							<% } %>
 							</tr>
-						<% } %>
+						<% } %>		
 
+					<% when '6' %>
+          <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de voluntarios por regional en estado suspendido</h3>
+       </div>
+       <div class="panel-body">
+         <table class="table table-hover table-striped tablesorter">
+                <thead>
+									
+                  <tr>
+                    <th class="col-lg">Regional</th>
+										<%(1..12).each { |mes|%>
+                    <th class="col-lg-1"><%= mes %> | <%= params[:anio][:year] %></th>
+										<% } %> 
+                  </tr>
+                </thead>
+                <tbody>
+						<% params[:r_ids].to_enum(:each_with_index).each { |reg,i|%>
+							<tr>	
+								<td> <%= @name_regionales[i] %> </td>
+							<%(1..12).each { |mes|%>
+								<td><%= @datos_discretos_vol_susp_reg[i][(mes-1)] %> </td>
+							<% } %>
+							</tr>
+						<% } %>		
+
+				<% when '7' %>
+          <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de voluntarios por regional en estado activo</h3>
+       </div>
+       <div class="panel-body">
+         <table class="table table-hover table-striped tablesorter">
+                <thead>
+									
+                  <tr>
+                    <th class="col-lg">Regional</th>
+										<%(1..12).each { |mes|%>
+                    <th class="col-lg-1"><%= mes %> | <%= params[:anio][:year] %></th>
+										<% } %> 
+                  </tr>
+                </thead>
+                <tbody>
+						<% params[:r_ids].to_enum(:each_with_index).each { |reg,i|%>
+							<tr>	
+								<td> <%= @name_regionales[i] %> </td>
+							<%(1..12).each { |mes|%>
+								<td><%= @datos_discretos_vol_act_reg[i][(mes-1)] %> </td>
+							<% } %>
+							</tr>
+						<% } %>		
+
+				<% when '8' %>
+          <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de proyectos por regional con presupuesto</h3>
+       </div>
+       <div class="panel-body">
+         <table class="table table-hover table-striped tablesorter">
+                <thead>
+									
+                  <tr>
+                    <th class="col-lg">Regional</th>
+										<%(1..12).each { |mes|%>
+                    <th class="col-lg-1"><%= mes %> | <%= params[:anio][:year] %></th>
+										<% } %> 
+                  </tr>
+                </thead>
+                <tbody>
+						<% params[:r_ids].to_enum(:each_with_index).each { |reg,i|%>
+							<tr>	
+								<td> <%= @name_regionales[i] %> </td>
+							<%(1..12).each { |mes|%>
+								<td><%= @datos_discretos_pres_reg[i][(mes-1)] %> </td>
+							<% } %>
+							</tr>
+						<% } %>		
+	
+					<% when '9' %>
+          <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de proyectos por regional en evaluación de presupuestos</h3>
+       </div>
+       <div class="panel-body">
+         <table class="table table-hover table-striped tablesorter">
+                <thead>
+									
+                  <tr>
+                    <th class="col-lg">Regional</th>
+										<%(1..12).each { |mes|%>
+                    <th class="col-lg-1"><%= mes %> | <%= params[:anio][:year] %></th>
+										<% } %> 
+                  </tr>
+                </thead>
+                <tbody>
+						<% params[:r_ids].to_enum(:each_with_index).each { |reg,i|%>
+							<tr>	
+								<td> <%= @name_regionales[i] %> </td>
+							<%(1..12).each { |mes|%>
+								<td><%= @datos_discretos_pres_eval_reg[i][(mes-1)] %> </td>
+							<% } %>
+							</tr>
+						<% } %>		
+
+					<% when '10' %>
+          <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de presupuesto por regional</h3>
+       </div>
+       <div class="panel-body">
+         <table class="table table-hover table-striped tablesorter">
+                <thead>
+									
+                  <tr>
+                    <th class="col-lg">Regional</th>
+										<%(1..12).each { |mes|%>
+                    <th class="col-lg-1"><%= mes %> | <%= params[:anio][:year] %></th>
+										<% } %> 
+                  </tr>
+                </thead>
+                <tbody>
+						<% params[:r_ids].to_enum(:each_with_index).each { |reg,i|%>
+							<tr>	
+								<td> <%= @name_regionales[i] %> </td>
+							<%(1..12).each { |mes|%>
+								<td><%= @datos_discretos_cant_pres_eval_reg[i][(mes-1)] %> </td>
+							<% } %>
+							</tr>
+						<% } %>	
+
+					<% when '11' %>
+          <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de horas efectivas realizadas de voluntariado por regional</h3>
+       </div>
+       <div class="panel-body">
+         <table class="table table-hover table-striped tablesorter">
+                <thead>
+									
+                  <tr>
+                    <th class="col-lg">Regional</th>
+										<%(1..12).each { |mes|%>
+                    <th class="col-lg-1"><%= mes %> | <%= params[:anio][:year] %></th>
+										<% } %> 
+                  </tr>
+                </thead>
+                <tbody>
+						<% params[:r_ids].to_enum(:each_with_index).each { |reg,i|%>
+							<tr>	
+								<td> <%= @name_regionales[i] %> </td>
+							<%(1..12).each { |mes|%>
+								<td><%= @datos_discretos_horas_reg[i][(mes-1)] %> </td>
+							<% } %>
+							</tr>
+						<% } %>	
+
+					<% when '12' %>
+          <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Cantidad de horas efectivas realizadas por regional según tipo de actividad</h3>
+       </div>
+       <div class="panel-body">
+				<% TipoActividad.all.to_enum(:each_with_index).each do |tipo,j| %>
+         <table class="table table-hover table-striped tablesorter">
+						<%='Tipo de Actividad: '+tipo.nombre %>
+                <thead>
+									
+                  <tr>
+                    <th class="col-lg">Regional</th>
+										<%(1..12).each { |mes|%>
+                    <th class="col-lg-1"><%= mes %> | <%= params[:anio][:year] %></th>
+										<% } %> 
+                  </tr>
+                </thead>
+                <tbody>
+						<% params[:r_ids].to_enum(:each_with_index).each { |reg,i|%>
+							<tr>	
+								<td> <%= @name_regionales[i] %> </td>
+							<%(1..12).each { |mes|%>
+								<td><%= @datos_discretos_tipos[j][i][(mes-1)] %> </td>
+							<% } %>
+							</tr>
+						<% } %>	
+						<%	end %>
 
 			<%	end %>
 			</tbody>
