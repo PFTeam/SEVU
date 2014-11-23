@@ -4,7 +4,7 @@ ActionMailer::Base.smtp_settings = {
 	    :port                 => 587,
 	      :domain               => "gmail.com",
 	      :user_name            => "argentina.sevu.soporte@gmail.com",
-		  :password             => "sevu2015",
+		  :password             => "sevu2016",
 		    :authentication       => "plain",
 		      :enable_starttls_auto => true
 }

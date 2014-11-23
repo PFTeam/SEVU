@@ -19,7 +19,11 @@
         <td><%= asignacion_funcion.created_at %></td>
         <td><%= asignacion_funcion.esActual %></td>
         <td><%= asignacion_funcion.descripcion %></td>
+				<%if asignacion_funcion.usuario != nil %>
         <td><%= Usuario.find(asignacion_funcion.usuario).nombreUsuario %></td>
+				<% else  %>
+				<td></td>
+				<% end  %>
         <td><%= Rol.find(asignacion_funcion.rol).nombre %></td>
         <td><%= link_to 'Editar', edit_asignacion_funcion_path(asignacion_funcion) %></td>
         <td><%= link_to 'Eliminar', asignacion_funcion, method: :delete, data: { confirm: 'Seguro?' } %></td>
