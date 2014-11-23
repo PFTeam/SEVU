@@ -19,11 +19,21 @@
 
 <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
   <div class="form-inputs">
+  	<% if params[:type] then %>
+	  	<div class ="well">
+	  		<h4>Por favor ingrese su legajo</h4>
+			<%= f.input :legajo, label: 'Legajo', placeholder: 'Legajo...', :required => true, :autofocus => true %>
+			<%= f.input :type,:as => :hidden, input_html: {value: params[:type]} %>
+		</div>
+	<% end %>
+	<% if !current_usuario.type.nil? then %>
+		<%= f.input :legajo, label: 'Legajo',  disabled: true %>
+	<% end %>
     <%= f.input :email, label: 'Correo Electrónico', disabled: true %>
 		<%= f.input :nombreUsuario, label: 'Nombre de Usuario',  disabled: true %>
 		<%= f.input :apellido_nombre, label: 'Apellido, Nombre', disabled: true %>
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+      <p>Esperando confirmacion para: <%= resource.unconfirmed_email %></p>
     <% end %>
 		<%= f.input :direccion, label: 'Dirección',  disabled: true %>	 
 			<br />

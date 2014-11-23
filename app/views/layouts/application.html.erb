@@ -87,6 +87,9 @@
 			<% if puede_configurar? then %>
 				<li><%= link_to content_tag(:i, fa_icon("gear", text: "Configuraciones grales.")), configuraciones_generales_path %></li>
 			<% end %>
+                <% if current_usuario.type.nil? then %>
+                    <li><%= link_to content_tag(:i, fa_icon("child", text: "Darse de alta como voluntario")), edit_usuario_registration_path(:type => "Voluntario") %></li>
+                <% end %>
 	      <!--<li class="divider"></li>-->
 	      <li><%= link_to content_tag(:i, fa_icon("power-off", text: "Desconectarse")), destroy_usuario_session_path, method: :delete, style: "padding-right: 5px;"  %></li>
 	     </ul>

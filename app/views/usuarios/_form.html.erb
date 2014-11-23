@@ -11,6 +11,10 @@
 
 	<div class="col-lg-6">
 		<div class="inputs">
+			<% if params[:type] then %>
+				<%= f.input :legajo, label: 'Legajo', placeholder: 'Legajo...', :required => true, :autofocus => true %>
+				<%= f.input :type,:as => :hidden, input_html: {value: params[:type]} %>
+			<% end %>
 			<%= f.input :nombreUsuario, label: 'Nombre de Usuario', placeholder: 'Usuario...', :required => true, :autofocus => true %>
 			<br></br> 
 			<%= f.input :encrypted_password , label: 'Contraseña', disabled: true, placeholder: 'Contraseña...', :required => true, :autofocus => true %>
