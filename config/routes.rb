@@ -209,7 +209,7 @@ Rails.application.routes.draw do
 
 	get 'control_fecha' => 'transacciones#control_fecha', :as => 'control_fecha'
 
-	root :to => "necesidades#index"
+	root :to => "evento_publicos#index"
 
   get 'gestionar_concepto_gastos' => 'concepto_gastos#gestionar_concepto_gastos', :as => 'gestionar_concepto_gastos'
 
