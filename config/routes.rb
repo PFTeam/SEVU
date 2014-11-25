@@ -170,6 +170,7 @@ Rails.application.routes.draw do
   get 'Responder/' => 'notas#Responder',:as =>'Responder'
   get 'buscarusuario/'  => 'voluntarios#buscarusuario',:as => 'buscarusuario'
   get 'buscarusuario/'  => 'voluntarios#buscar_usuario'
+  get 'dar_alta_voluntario' => 'usuarios#dar_alta_voluntario', :as => 'dar_alta_voluntario'
 
   get 'mis_proyectos', :as => 'proyectos/mis_proyectos', :controller => :proyectos
   get 'mis_necesidades', :as => 'necesidades/mis_necesidades', :controller => :necesidades

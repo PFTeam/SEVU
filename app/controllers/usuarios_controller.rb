@@ -4,7 +4,9 @@ class UsuariosController < ApplicationController
   # GET /usuarios
   # GET /usuarios.json
 
-
+  def dar_alta_voluntario
+      @usuario = @current_usuario
+  end
 
   
   
@@ -56,7 +58,7 @@ class UsuariosController < ApplicationController
 		authorize! :update, Usuario
     respond_to do |format|
       if @usuario.update(usuario_params)
-        format.html { redirect_to @usuario, notice: 'Usuario actualizado correctamente.' }
+        format.html { redirect_to :root, notice: "Usuario actualizado correctamente" }#@usuario, notice: 'Usuario actualizado correctamente.' }
         format.json { render :show, status: :ok, location: @usuario }
       else
         format.html { render :edit }
