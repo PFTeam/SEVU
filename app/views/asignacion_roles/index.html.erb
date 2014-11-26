@@ -37,5 +37,5 @@
                     <% end %>
  </tbody>
 </table>
-                    <%= link_to 'Agregar Recurso' , new_asignacion_rol_path( :proyecto_id => params[:proyecto_id])  %>
+                    <%= link_to content_tag(:i, fa_icon("plus", text: ""))+" Agregar Recurso" , new_asignacion_rol_path( :proyecto_id => params[:proyecto_id]), :class => "btn btn-primary"  %>
 
