@@ -99,18 +99,32 @@ class AsignacionRolesController < ApplicationController
   # DELETE /asignacion_roles/1.json
   def destroy
 		authorize! :destroy, AsignacionRol
-    @proyecto_id = @asignacion_rol.proyecto.id
-            sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
-            Transaccion.create!(
-		    descripcion: 'Borrado de una asignacion rol id:' + @asignacion_rol.id.to_s,
-		    sesion_id: sesion.id ,
-		    proyecto_id: @asignacion_rol.proyecto.id)
-    @asignacion_rol.destroy
+
+	    @proyecto_id = @asignacion_rol.proyecto.id
+    if AsignacionActividad.where(usuario: @asignacion_rol.usuario).count == 0 	
+	    p "NO TIENE ACTIVIDADES"
+
+		    sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+		    Transaccion.create!(
+			    descripcion: 'Borrado de una asignacion rol id:' + @asignacion_rol.id.to_s,
+			    sesion_id: sesion.id ,
+			    proyecto_id: @asignacion_rol.proyecto.id)
+	    @asignacion_rol.destroy
+	    respond_to do |format|
+	      format.html { redirect_to :controller => 'asignacion_roles', :action => 'index', :proyecto_id => @proyecto_id
+			    flash[:notice] = 'El usuario fue desasignado de su rol.' }
+	      format.json { head :no_content }
+	    end
+    else
+	    p "TIENE ACTIVIDADES"
     respond_to do |format|
       format.html { redirect_to :controller => 'asignacion_roles', :action => 'index', :proyecto_id => @proyecto_id
-		    flash[:notice] = 'El usuario fue desasignado de su rol.' }
+		    flash[:notice] = 'El usuario se encuentra asignado a por lo menos una actividad.' }
       format.json { head :no_content }
     end
+
+    end
+
   end
 
   def dar_baja 
