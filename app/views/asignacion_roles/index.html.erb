@@ -22,13 +22,15 @@
                         <td><%= asignacion_rol.actual %></td>
                         <td><%= asignacion_rol.rol %></td>
                         <td>
-                            <%= link_to 'Editar', edit_asignacion_rol_path(asignacion_rol) %> | 
+
 			    <%= link_to 'Quitar', asignacion_rol, method: :delete, data: { confirm: 'Está seguro?' } %> | 
 			    <% if asignacion_rol.actual == "No" %>
-				    Dar Baja 
+				    Dar Baja | Editar
 			    <% else %>
-				    <%= link_to 'Dar Baja', asignacion_rol_dar_baja_path(:id => asignacion_rol.id), disabled: true, data: {confirm: 'Seguro?'} %>
+				    <%= link_to 'Dar Baja', asignacion_rol_dar_baja_path(:id => asignacion_rol.id), disabled: true, data: {confirm: 'Seguro?'} %> | 
+				    <%= link_to 'Editar', edit_asignacion_rol_path(asignacion_rol) %>
 			    <% end %>
+
                         </td>
                         <td>
                              <i class="fa fa-minus"></i>
