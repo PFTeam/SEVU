@@ -170,6 +170,7 @@ Rails.application.routes.draw do
   get 'Responder/' => 'notas#Responder',:as =>'Responder'
   get 'buscarusuario/'  => 'voluntarios#buscarusuario',:as => 'buscarusuario'
   get 'buscarusuario/'  => 'voluntarios#buscar_usuario'
+  get 'dar_alta_voluntario' => 'usuarios#dar_alta_voluntario', :as => 'dar_alta_voluntario'
 
   get 'mis_proyectos', :as => 'proyectos/mis_proyectos', :controller => :proyectos
   get 'mis_necesidades', :as => 'necesidades/mis_necesidades', :controller => :necesidades
@@ -209,7 +210,7 @@ Rails.application.routes.draw do
 
 	get 'control_fecha' => 'transacciones#control_fecha', :as => 'control_fecha'
 
-	root :to => "necesidades#index"
+	root :to => "evento_publicos#index"
 
   get 'gestionar_concepto_gastos' => 'concepto_gastos#gestionar_concepto_gastos', :as => 'gestionar_concepto_gastos'
 
