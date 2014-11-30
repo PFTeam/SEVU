@@ -70,7 +70,33 @@ class TransaccionesController < ApplicationController
 
 	def control_usuario
 		authorize! :control_usuario, Transaccion
+		@user = params[:user_id].to_i
+		if @user != 0
+			@trans = []
+			@usuario = Usuario.find(@user).nombreUsuario 
+			Transaccion.all.each do |transaccion|
+			if transaccion.sesion_id != nil && Sesion.find(transaccion.sesion_id).usuario_id == @user
+				if transaccion.proyecto_id != nil
+				 	proyecto =  Proyecto.find(transaccion.proyecto_id)
+				end
+				if (proyecto != nil)
+					nombre_proyecto = proyecto.nombre
+				else
+				  nombre_proyecto = '-'
+				end
+				
+						 @trans << {
+        fecha: transaccion.created_at,
+				descripcion: transaccion.descripcion,
+				proyecto: nombre_proyecto
+      		}
+				end
+			end
+		end
 	end
+
+
+
 	def control_fecha
 		authorize! :control_fecha, Transaccion
 				if params[:f_inicio]
@@ -91,13 +117,54 @@ class TransaccionesController < ApplicationController
   			else
     				@fecha_fin = Date.today.end_of_day
   			end
+		@trans = []
+		Transaccion.all.each do |transaccion|
+		if transaccion.created_at.between?(@fecha_inicio, @fecha_fin)
+			if transaccion.proyecto_id != nil
+			 proyecto =  Proyecto.find(transaccion.proyecto_id)
+			end
+				if (proyecto != nil)
+					nombre_proyecto = proyecto.nombre
+				else
+				  nombre_proyecto = '-'
+				end
+			 @trans << {
+        fecha: transaccion.created_at,
+        usuario: Usuario.find(Sesion.find(transaccion.sesion_id).usuario_id).nombreUsuario,
+				descripcion: transaccion.descripcion,
+				proyecto: nombre_proyecto
+      }
+		end
+		end
 	end
+
+
+
 	def control_proyecto
 		authorize! :control_proyecto, Transaccion
+		@proyect = params[:proyecto_id].to_i
+		if @proyect != 0
+			@trans = []
+			@proyecto = Proyecto.find(@proyect)
+			Transaccion.all.each do |transaccion|
+				if transaccion.proyecto_id != nil && transaccion.proyecto_id == @proyect
+						 @trans << {
+        fecha: transaccion.created_at,
+        usuario: Usuario.find(Sesion.find(transaccion.sesion_id).usuario_id).nombreUsuario,
+				descripcion: transaccion.descripcion
+      		}
+				end
+			end
+		end
 	end
+
+
+
 	def auditoria
 		authorize! :auditoria, Transaccion
 	end
+
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -6,6 +6,14 @@ class AsignacionRolPredefinidosController < ApplicationController
   def index
 		authorize! :index, AsignacionRolPredefinido
     @asignacion_rol_predefinidos = AsignacionRolPredefinido.all
+		@rol_priv = []
+		@asignacion_rol_predefinidos.each do |asignacion_rol_predefinido|
+			@rol_priv << {
+        rol: Rol.find(asignacion_rol_predefinido.rol).nombre,
+        privilegio: Privilegio.find(asignacion_rol_predefinido.privilegio).nombre
+      		}
+		end
+
   end
 
   # GET /asignacion_rol_predefinidos/1

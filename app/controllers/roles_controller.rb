@@ -6,6 +6,27 @@ class RolesController < ApplicationController
   def index
 		authorize! :index, Rol
     @roles = Rol.all
+		@tipo_roles = []
+			@roles.each do |rol| 
+				@tipo_roles << TipoRol.find(rol.tipo_rol_id).nombre
+			end
+		@rol_id = params[:rol_id].to_i
+		if @rol_id != 0
+			@rol = Rol.find(@rol_id)
+			@arp = []
+			AsignacionRolPredefinido.all.each do |asignacionrolpredefinido|
+				if Rol.find(asignacionrolpredefinido.rol).id == @rol_id
+					privilegio = Privilegio.find(asignacionrolpredefinido.privilegio)
+					@arp << {
+        nombre: privilegio.nombre,
+        descripcion: privilegio.descripcion,
+				actual: asignacionrolpredefinido.esActual,
+				id: asignacionrolpredefinido.id
+      		}
+
+				end
+			end
+		end
   end
 
   # GET /roles/1

@@ -34,17 +34,15 @@
 		      </tr>
 		   </thead>
 		   <tbody>			
-				<% Transaccion.all.each do |transaccion| %>
-				 <% if transaccion.created_at.between?(@fecha_inicio, @fecha_fin) %> 
+				<% @trans.to_enum(:each_with_index).each do |transaccion,i| %>
 		     <tr>
-		     	 <td><%= transaccion.created_at %></td>
-					 <td><%= Usuario.find(Sesion.find(transaccion.sesion_id).usuario_id).nombreUsuario  %></td> 
-					 <td><%= transaccion.descripcion %></td>
-						 <% if transaccion.proyecto_id != nil %> 
-					 <td><%= Proyecto.find(transaccion.proyecto_id).nombre %></td>
+		     	 <td><%= @trans[i][:fecha] %></td>
+					 <td><%= @trans[i][:usuario]  %></td> 
+					 <td><%= @trans[i][:descripcion] %></td>
+						 <% if @trans[i][:proyecto] != nil %> 
+					 <td><%= @trans[i][:proyecto] %></td>
 						<% end %>   
 		     </tr>
-				 <% end %>
 				<% end %>
 		   </tbody>
 		 </table> 

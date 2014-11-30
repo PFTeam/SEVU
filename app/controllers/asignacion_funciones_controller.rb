@@ -6,6 +6,18 @@ class AsignacionFuncionesController < ApplicationController
   def index
 		authorize! :index, AsignacionFuncion
     @asignacion_funciones = AsignacionFuncion.all
+		@usuario_rol = []
+		@asignacion_funciones.each do |asignacion_funcion|
+			if asignacion_funcion.usuario !=nil
+				user=Usuario.find(asignacion_funcion.usuario_id).nombreUsuario
+			else 
+				user = '-'
+			end
+			@usuario_rol << {
+        usuario: user ,
+        rol: Rol.find(asignacion_funcion.rol_id).nombre
+      		}
+		end
   end
 
   # GET /asignacion_funciones/1
@@ -18,11 +30,13 @@ class AsignacionFuncionesController < ApplicationController
   def new
 		authorize! :new, AsignacionFuncion
     @asignacion_funcion = AsignacionFuncion.new
+		@roles = Rol.where(tipo_rol: TipoRol.where(nombre:'Sistema'))
   end
 
   # GET /asignacion_funciones/1/edit
   def edit
 		authorize! :edit, AsignacionFuncion
+		@roles = Rol.where(tipo_rol: TipoRol.where(nombre:'Sistema'))
   end
 
   # POST /asignacion_funciones

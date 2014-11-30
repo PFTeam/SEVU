@@ -13,7 +13,7 @@
 		<div class="inputs">
 			<br></br>
 			<%= f.label 'Rol: ' %>
-			<%= f.collection_select :rol_id, Rol.where(tipo_rol: TipoRol.where(nombre:'Sistema')), :id, :nombre, :prompt => true, :required => true %><br></br>
+			<%= f.collection_select :rol_id, @roles, :id, :nombre, :prompt => true, :required => true %><br></br>
 			<%= f.label 'Usuario: ' %>
 			<%= f.collection_select :usuario_id, Usuario.all, :id, :nombreUsuario,  :prompt => true, :required => true %><br></br>
 			<%= f.label 'Descripcion: ' %><br></br>

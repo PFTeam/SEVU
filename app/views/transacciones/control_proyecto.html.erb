@@ -1,12 +1,12 @@
-<% proyect = params[:proyecto_id].to_i %>
+<!----->
 <h2>Control de Proyecto</h2>
-<% if proyect != 0%>
+<% if @proyect != 0%>
 <div class="table-fluid col-lg-12" align="center" >	
 	<%= link_to "Atrás", :back, :class => "btn btn-default btn-lg" %>
 	<a href="#" class="btn btn-primary btn-lg active"  role="button" onclick="window.print()">Imprimir</a>
 </div>
 <% end %>
-<% if proyect == 0 %>
+<% if @proyect == 0 %>
 <div class="col-lg-12">
     <h3>Proyectos Disponibles</h3>
     <table class="table table-hover table-striped tablesorter">
@@ -29,7 +29,7 @@
  <% else %>
    <div class="table-responsive  col-lg-12">
 
-     <h3>Transacciones de <%= Proyecto.find(proyect).nombre %></h3>
+     <h3>Transacciones de <%= @proyecto.nombre %></h3>
      <table class="table table-hover table-striped tablesorter" align="right">
        <thead>
          <tr>
@@ -40,21 +40,19 @@
          </tr>
        </thead>
        <tbody>
-				<% Transaccion.all.each do |transaccion| %>
-				<% if transaccion.proyecto_id != nil && transaccion.proyecto_id == proyect %>
+				<% @trans.to_enum(:each_with_index).each do |transaccion,i| %>			
        	<tr>
-        	 <td><%= transaccion.created_at %></td>
-					 <td><%= Usuario.find(Sesion.find(transaccion.sesion_id).usuario_id).nombreUsuario %> </td>
-        	 <td><%= transaccion.descripcion %></td>
+        	 <td><%= @trans[i][:fecha] %></td>
+					 <td><%= @trans[i][:usuario]  %></td> 
+					 <td><%= @trans[i][:descripcion] %></td>
        	</tr>
-				<% end %>
 				<% end %>
      	</tbody>
    	</table>
 		<% end %>
  	</div>
 </div>
-<% if proyect != 0 %>
+<% if @proyect != 0 %>
 <div class="col-lg-12" align="center">
 	<%= link_to "Atrás", :back, :class => "btn btn-default btn-lg"  %>
 	<a href="#" class="btn btn-primary btn-lg active"  role="button" onclick="window.print()">Imprimir</a>

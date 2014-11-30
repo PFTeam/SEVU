@@ -1,13 +1,14 @@
+<!----->
 <% user = params[:user_id].to_i %>
 <h2>Control de Usuario</h2>
-<% if user != 0%>
+<% if @user != 0%>
 
 <div class="col-lg-12" align="center">	
 	<%= link_to "Atrás", :back, :class => "btn btn-default btn-lg" %>
 	<a href="#" class="btn btn-primary btn-lg active"  role="button" onclick="window.print()">Imprimir</a>
 </div>
 <% end %>
-<% if user == 0 %>
+<% if @user == 0 %>
   <div class="table-fluid col-lg-12">
 	<h3>Usuarios Disponibles</h3>
 		<table class="table table-hover table-striped tablesorter">
@@ -31,9 +32,9 @@
 	</div>
 	<% end %>
 
-	<% if user != 0 %>
+	<% if @user != 0 %>
    <div class="table-fluid col-lg-12">
-	<!--<a href="#" class="btn btn-primary btn-lg active pull-right"  role="button" onclick="window.print()">Imprimir</a> -->
+
      <h3>Transacciones de <%= Usuario.find(user).nombreUsuario %></h3>
      <table class="table table-hover table-striped tablesorter" align="right">
        <thead>
@@ -46,24 +47,20 @@
        </thead>
 				
        <tbody>
-				<% Transaccion.all.each do |transaccion| %>
-				<% if transaccion.sesion_id != nil && Sesion.find(transaccion.sesion_id).usuario_id == user %> 
+				<% @trans.to_enum(:each_with_index).each do |transaccion,i| %>
        	<tr>
-        	 <td><%= transaccion.created_at %></td>
-        	 <td><%= transaccion.descripcion %></td>
-					  <% if transaccion.proyecto_id != nil %> 
-				 <td><%= Proyecto.find(transaccion.proyecto_id).nombre %></td>
-				 <% else %>
-				 <td align="center">-</td>
-					<% end %>  
+        	 <td><%= @trans[i][:fecha] %></td>
+					 <td><%= @trans[i][:descripcion] %></td>
+						 <% if @trans[i][:proyecto] != nil %> 
+					 <td><%= @trans[i][:proyecto] %></td>
+						<% end %>   
        	</tr>
-				<% end %>
 				<% end %>
      	</tbody>
    	</table>
 		<% end %>
  	</div>
-<% if user != 0 %>
+<% if @user != 0 %>
 <div class="col-lg-12" align="center">
 	<%= link_to "Atrás", :back, :class => "btn btn-default btn-lg"  %>
 	<a href="#" class="btn btn-primary btn-lg active"  role="button" onclick="window.print()">Imprimir</a>

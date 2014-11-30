@@ -13,10 +13,10 @@
     		</tr>
   		</thead>
     	<tbody>
-       	<% @roles.each do |rol| %>
+       	<% @roles.to_enum(:each_with_index).each do |rol,i| %>
       		<tr>
        	 		<td><%= link_to rol.nombre, roles_path(:rol_id => rol.id) %></td>
-						<td><%= TipoRol.find(rol.tipo_rol_id).nombre  %></td>
+						<td><%= @tipo_roles[i]  %></td>
        	 		<td><%= rol.descripcion %></td>
         		<td><%= link_to 'Editar', edit_rol_path(rol) %>  <%= link_to 'Eliminar', rol, method: :delete, data: { confirm: 'Esta seguro de eliminar el rol?' } %></td>
       		</tr>
@@ -24,11 +24,10 @@
     	</tbody>
     </table>
   </div>
-  
-	<% rol = params[:rol_id].to_i %>
-	<% if rol != 0 %>
+
+	<% if @rol_id != 0 %>
   <div class="table-responsive  col-lg-7">
-    <h3>Privilegios de Rol de <%= Rol.find(rol).nombre %></h3>
+    <h3>Privilegios de Rol de <%= @rol.nombre %></h3>
 	  <table class="table table-hover table-striped tablesorter">
 			<thead>
     		<tr>
@@ -38,15 +37,13 @@
     		</tr>
   		</thead>
       <tbody>
-			<% AsignacionRolPredefinido.all.each do |asignacionrolpredefinido| %>
-				<% if Rol.find(asignacionrolpredefinido.rol).id == rol %> 
+			<% @arp.each do |arp| %>
 				<tr>
-        	 <td><%= Privilegio.find(asignacionrolpredefinido.privilegio).nombre %></td>
-        	 <td><%= Privilegio.find(asignacionrolpredefinido.privilegio).descripcion %></td>
-					<td><%= asignacionrolpredefinido.esActual %></td>
-					<td><%= link_to 'Editar', edit_asignacion_rol_predefinido_path(asignacionrolpredefinido) %> </td>
+        	 <td><%= arp[:nombre] %></td>
+        	 <td><%= arp[:descripcion] %></td>
+					<td><%= arp[:actual] %></td>
+					<td><%= link_to 'Editar', edit_asignacion_rol_predefinido_path(arp[:id]) %> </td>
        	</tr>
-				<% end %>
 				<% end %>
       </tbody>
     </table>

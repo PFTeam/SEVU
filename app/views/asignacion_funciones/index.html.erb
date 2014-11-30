@@ -14,17 +14,17 @@
     		</tr>
   		</thead>
     <tbody>
-    <% @asignacion_funciones.each do |asignacion_funcion| %>
+    <% @asignacion_funciones.to_enum(:each_with_index).each do |asignacion_funcion,i| %>
       <tr>
         <td><%= asignacion_funcion.created_at %></td>
         <td><%= asignacion_funcion.esActual %></td>
         <td><%= asignacion_funcion.descripcion %></td>
 				<%if asignacion_funcion.usuario != nil %>
-        <td><%= Usuario.find(asignacion_funcion.usuario).nombreUsuario %></td>
+        <td><%= @usuario_rol[i][:usuario] %></td>
 				<% else  %>
 				<td></td>
 				<% end  %>
-        <td><%= Rol.find(asignacion_funcion.rol).nombre %></td>
+        <td><%= @usuario_rol[i][:rol]  %></td>
         <td><%= link_to 'Editar', edit_asignacion_funcion_path(asignacion_funcion) %></td>
         <td><%= link_to 'Eliminar', asignacion_funcion, method: :delete, data: { confirm: 'Seguro?' } %></td>
       </tr>

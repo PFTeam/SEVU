@@ -6,6 +6,11 @@ class PrivilegiosController < ApplicationController
   def index
 		authorize! :index, Privilegio
     @privilegios = Privilegio.all
+		@tipos = []
+		@privilegios.each do |privilegio| 
+			@tipos << TipoPrivilegio.find(privilegio.tipo_privilegio_id).nombre
+	end
+
   end
 
   # GET /privilegios/1

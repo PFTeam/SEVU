@@ -12,11 +12,11 @@
     		</tr>
   		</thead>
     	<tbody>
-       	<% @privilegios.each do |privilegio| %>
+       	<% @privilegios.to_enum(:each_with_index).each do |privilegio,i| %>
       		<tr>
        	 		<td><%= privilegio.nombre %></td>
        	 		<td><%= privilegio.descripcion %></td>
-						<td><%= TipoPrivilegio.find(privilegio.tipo_privilegio_id).nombre %></td>
+						<td><%= @tipos[i] %></td>
         		<td><%= link_to 'Editar', edit_privilegio_path(privilegio) %></td>
       	 		<td><%= link_to 'Eliminar', privilegio, method: :delete, data: { confirm: 'Esta seguro de eliminar el privilegio?' } %></td>
       		</tr>
