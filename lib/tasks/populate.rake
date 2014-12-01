@@ -33,10 +33,14 @@ namespace :db do
 			pa11diego=Privilegio.create(nombre: 'horarios_disponibles', descripcion: "Permite manejar los horarios disponibles del voluntario", tipo_privilegio: psdiego)
 			pa12diego=Privilegio.create(nombre: "experiencia", descripcion: "Permite manejar las experiencias", tipo_privilegio: psdiego)
 			pa13diego=Privilegio.create(nombre: "proyecto", descripcion: "Permite manejar proyectos", tipo_privilegio: psdiego)
-			pa14diego=Privilegio.create(nombre: "asignacion_rol", descripcion: "Permite manejar las asignaciones de roles", tipo_privilegio: psdiego)			
-			pa15diego=Privilegio.create(nombre: "edit_update_usuario", descripcion: "Permite editar el usuario", tipo_privilegio: psdiego)		
+			pa14diego=Privilegio.create(nombre: "asignacion_rol", descripcion: "Permite manejar las asignaciones de roles", tipo_privilegio: psdiego)				
 			pa15diego=Privilegio.create(nombre: "edit_update_usuario", descripcion: "Permite editar el usuario", tipo_privilegio: psdiego)
 			pa16diego=Privilegio.create(nombre: "notificacion_sistema", descripcion: "Permite manejar notificaciones", tipo_privilegio: psdiego)
+			pa17diego=Privilegio.create(nombre: "notificacion_email", descripcion: "Permite manejar las notificaciones de emails", tipo_privilegio: psdiego)
+			pa18diego=Privilegio.create(nombre: "notificaciones", descripcion: "Permite manejar notificaciones", tipo_privilegio: psdiego)
+			pa20diego=Privilegio.create(nombre: "notificacion_mailer", descripcion: "Permite manejar las notificaciones del mailer", tipo_privilegio: psdiego)
+			pa21diego=Privilegio.create(nombre: "notificacion_predeterminadas", descripcion: "Permite manejar las notificaciones predeterminadas", tipo_privilegio: psdiego)
+		
 
 			pap1diego=Privilegio.create(nombre: "detalle_presupuestos", descripcion: "Permite manejar los detalles de presupuesto", tipo_privilegio: ppdiego)
 			pap2diego=Privilegio.create(nombre: "asignacion_roles", descripcion: "Permite manejar las asignaciones de roles", tipo_privilegio: ppdiego)
@@ -73,8 +77,7 @@ namespace :db do
 			pap33diego=Privilegio.create(nombre: "requisito", descripcion: "Permite manejar los requisitos", tipo_privilegio: ppdiego)
 			pap34diego=Privilegio.create(nombre: "comprobante", descripcion: "Permite manejar los comprobantes", tipo_privilegio: ppdiego)
 			pap35diego=Privilegio.create(nombre: "create_show_presupuestos", descripcion: "Permite crear y ver presupuestos", tipo_privilegio: ppdiego)
-			pap36diego=Privilegio.create(nombre: "notificacion_email", descripcion: "Permite manejar las notificaciones de emails", tipo_privilegio: ppdiego)
-			pap37diego=Privilegio.create(nombre: "notificaciones", descripcion: "Permite manejar notificaciones", tipo_privilegio: ppdiego)
+			
 
 			pap39diego=Privilegio.create(nombre: "detalle_gasto", descripcion: "Permite manejar los detalles de los gastos", tipo_privilegio: ppdiego)
 			pap40diego=Privilegio.create(nombre: "proyecto_director", descripcion: "Permite ver y editar un proyecto", tipo_privilegio: ppdiego)
@@ -86,7 +89,7 @@ namespace :db do
 			pap47diego=Privilegio.create(nombre: "index_show_asignacion_roles", descripcion: "Permite ver la asignacion de roles", tipo_privilegio: ppdiego)
 			pap48diego=Privilegio.create(nombre: "index_show_objetivos", descripcion: "Permite ver los objetivos de un proyecto", tipo_privilegio: ppdiego)
 			pap49diego=Privilegio.create(nombre: "show_index_informe_gasto", descripcion: "Permite ver los informes de gastos", tipo_privilegio: ppdiego)
-			pap50diego=Privilegio.create(nombre: "notificacion_mailer", descripcion: "Permite manejar las notificaciones del mailer", tipo_privilegio: ppdiego)
+			
 			pap51diego=Privilegio.create(nombre: "show_index_historial_estado_proyecto", descripcion: "Permite mostrar los historiales de estado de proyecto", tipo_privilegio: ppdiego)
 			pap52diego=Privilegio.create(nombre: "show_index_historial_estado_usuario", descripcion: "Permite mostrar los historiales de estado de usuario", tipo_privilegio: ppdiego)
 			pap53diego=Privilegio.create(nombre: "show_index_historial_estado_actividad", descripcion: "Permite mostrar los historiales de estado de actividad", tipo_privilegio: ppdiego)
@@ -108,14 +111,18 @@ namespace :db do
 			ard10diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pa15diego , rol: rsdiego)
 			ard11diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pa16diego , rol: rsdiego)
 
+			rd13diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pa17diego , rol: rsdiego)
+			rd14diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pa18diego , rol: rsdiego)
+			rd15diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pa20diego , rol: rsdiego)
+			rd16diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pa21diego , rol: rsdiego)
+
 
 		#DIRECTOR
 			arc1diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap23diego, rol: director)
-			arc2diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap36diego , rol: director)
 			arc3diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap22diego , rol: director)
-			arc4diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap37diego , rol: director)
+
 			arc5diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap2diego , rol: director)
-			arc6diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap14diego , rol: director)
+
 			arc7diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap38diego , rol: director)
 			arc8diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap24diego , rol: director)
 			arc9diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap31diego , rol: director)
@@ -141,7 +148,7 @@ namespace :db do
 			arcc1diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap23diego, rol: coordinador)
 			arcc2diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap36diego , rol: coordinador)
 			arcc3diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap22diego , rol: coordinador)
-			arcc4diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap37diego , rol: coordinador)
+
 			arcc5diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap2diego , rol: coordinador)
 			arcc6diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap14diego , rol: coordinador)
 			arcc7diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap38diego , rol: coordinador)
@@ -182,7 +189,6 @@ namespace :db do
 		arv8diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap49diego  , rol: voluntario)
 		arv9diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap36diego  , rol: voluntario)
 		arv10diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap37diego  , rol: voluntario)
-		arv11diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap50diego , rol: voluntario)
 		arv12diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap38diego  , rol: voluntario)
 		arv13diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap52diego  , rol: voluntario)
 		arv14diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap53diego  , rol: voluntario)

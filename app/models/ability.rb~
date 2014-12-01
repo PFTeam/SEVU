@@ -19,6 +19,9 @@ class Ability
 								can :mis_proyectos, Proyecto
 								can :show, Proyecto
 						end
+						if asignacionrolpredefinido.rol==asignacionfuncion.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'notificacion_sistema').id 
+								can :manage, NotificacionSistema
+						end
 						if asignacionrolpredefinido.rol==asignacionfuncion.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'proyecto').id 						
 								can :manage, Proyecto
 								can :agregar_necesidad, Proyecto
@@ -142,9 +145,7 @@ class Ability
 								can :gestionar_notificaciones, NotificacionPredeterminada
 								can :notificaciones_predeterminadas, NotificacionPredeterminada
 						end
-						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'notificacion_sistema').id 
-								can :manage, NotificacionSistema
-						end
+						
 						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'new_presupuesto').id 
 								can :new, Presupuesto
 						end

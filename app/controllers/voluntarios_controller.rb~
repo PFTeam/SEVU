@@ -8,7 +8,6 @@ class VoluntariosController < ApplicationController
   before_action :BuscarTipoHabilidad, only: [:gestionar_experiencias ]
 
 def buscarusuario 
-		
     @usuarios = Usuario.where(nombreUsuario: params[:usuario_bucar])
 end
 
@@ -20,7 +19,7 @@ def buscar_usuario
 end  
 
 def mis_notas
-  authorize! :mis_notas, Usuario
+  
 end
   
 
