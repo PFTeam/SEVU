@@ -1,10 +1,10 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
-before_action :set_proyecto_global, if: "defined?(@proyecto)"
-def set_proyecto_global 
-   @current_proyecto = @proyecto
-end
+#before_action :set_proyecto_global, if: "defined?(@proyecto)"
+#def set_proyecto_global 
+#   @current_proyecto = @proyecto
+#end
 #For CanCan-----------------------------------------
 	 rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_url, :alert => "No esta autorizado a acceder a la pagina solicitada."

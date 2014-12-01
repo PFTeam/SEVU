@@ -92,7 +92,7 @@ class Ability
 				end
 			end
 			AsignacionRol.all.each do |asignacionrol| #Privilegios de Proyecto
-				if asignacionrol.usuario == user && asignacionrol.esActual? && asignacionrol.proyecto == @proyecto
+				if asignacionrol.usuario == user && asignacionrol.esActual? && asignacionrol.proyecto == @current_proyecto
 					AsignacionRolPredefinido.all.each do |asignacionrolpredefinido|
 					if asignacionrolpredefinido.esActual?
 						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'detalle_presupuestos').id 						
