@@ -26,6 +26,7 @@ class Ability
 						if asignacionrolpredefinido.rol==asignacionfuncion.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'edit_update_usuario').id 						
 								can :edit, Usuario
 								can :update, Usuario
+								can :manage, Usuario
 								can :dar_alta_voluntario, Usuario
 						end
 						if asignacionrolpredefinido.rol==asignacionfuncion.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'index_evento_publico').id 							

@@ -5,7 +5,6 @@ class UsuariosController < ApplicationController
   # GET /usuarios.json
 
   def dar_alta_voluntario
-			authorize! :dar_alta_voluntario, Usuario
       @usuario = @current_usuario
   end
   
