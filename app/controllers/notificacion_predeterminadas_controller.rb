@@ -5,7 +5,7 @@ class NotificacionPredeterminadasController < ApplicationController
   # GET /notificacion_predeterminadas
   # GET /notificacion_predeterminadas.json
   def index
-		authorize! :index, Notificacion
+		authorize! :index, NotificacionPredeterminada
     #@notificacion_predeterminadas = NotificacionPredeterminada.all
     @notificacion_predeterminadas = @proyecto.notificacion_predeterminadas
   end
@@ -13,12 +13,12 @@ class NotificacionPredeterminadasController < ApplicationController
   # GET /notificacion_predeterminadas/1
   # GET /notificacion_predeterminadas/1.json
   def show
-		authorize! :show, Notificacion
+		authorize! :show, NotificacionPredeterminada
   end
 
   # GET /notificacion_predeterminadas/new
   def new
-		authorize! :new, Notificacion
+		authorize! :new, NotificacionPredeterminada
     #@notificacion_predeterminada = NotificacionPredeterminada.new
     @notificacion_predeterminada = @proyecto.notificacion_predeterminadas.new
     
@@ -26,13 +26,13 @@ class NotificacionPredeterminadasController < ApplicationController
 
   # GET /notificacion_predeterminadas/1/edit
   def edit
-		authorize! :edit, Notificacion
+		authorize! :edit, NotificacionPredeterminada
   end
 
   # POST /notificacion_predeterminadas
   # POST /notificacion_predeterminadas.json
   def create
-		authorize! :create, Notificacion
+		authorize! :create, NotificacionPredeterminada
     #@notificacion_predeterminada = NotificacionPredeterminada.new(notificacion_predeterminada_params)
     @notificacion_predeterminada = @proyecto.notificacion_predeterminadas.new(notificacion_predeterminada_params)
 
@@ -50,7 +50,7 @@ class NotificacionPredeterminadasController < ApplicationController
   # PATCH/PUT /notificacion_predeterminadas/1
   # PATCH/PUT /notificacion_predeterminadas/1.json
   def update
-		authorize! :update, Notificacion
+		authorize! :update, NotificacionPredeterminada
     respond_to do |format|
       if @notificacion_predeterminada.update(notificacion_predeterminada_params)
         format.html { redirect_to @notificacion_predeterminada, notice: 'Notificacion predeterminada fue actualizado satisfactoriamente.' }
@@ -65,7 +65,7 @@ class NotificacionPredeterminadasController < ApplicationController
   # DELETE /notificacion_predeterminadas/1
   # DELETE /notificacion_predeterminadas/1.json
   def destroy
-		authorize! :destroy, Notificacion
+		authorize! :destroy, NotificacionPredeterminada
     @notificacion_predeterminada.destroy
     respond_to do |format|
       format.html { redirect_to :back}#, notice: 'Notificacion predeterminada fue borrado satisfactoriamente.' }
@@ -74,11 +74,12 @@ class NotificacionPredeterminadasController < ApplicationController
   end
   
   def gestionar_notificaciones
+		authorize! :gestionar_notificaciones, NotificacionPredeterminada
     @proyectos = Proyecto.where(id: AsignacionRol.find_by(usuario_id: current_usuario.id, esActual: true, rol_id: Rol.find_by(nombre: 'Director').id).proyecto_id)
   end
 
   def notificaciones_predeterminadas 
-
+		authorize! :notificaciones_predeterminadas, NotificacionPredeterminada
     @notificaciones_no_usadas = TipoNotificacion.all - @proyecto.tipo_notificaciones   #resto las listas
     
   end

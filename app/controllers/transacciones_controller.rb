@@ -4,7 +4,7 @@ class TransaccionesController < ApplicationController
   # GET /transacciones
   # GET /transacciones.json
   def index
-		authorize! :index, Transaccion #Para cancan
+		authorize! :index, Transaccion 
     @transacciones = Transaccion.all
   end
 

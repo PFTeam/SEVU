@@ -71,7 +71,6 @@ class NotificacionSistemasController < ApplicationController
     end
   end
   def marcado_notificado
-		authorize! :marcado_notificado, NotificacionSistema
 	  #@notificacion_sistemas = NotificacionSistema.all.where(usuarioDestino: current_usuario)
 	  @notificacion_sistemas.each do |notificacion|
 		  if notificacion.notificado == false

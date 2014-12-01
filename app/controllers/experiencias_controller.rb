@@ -23,10 +23,6 @@ end
 
   # GET /experiencias/new
   def new
-
-  
-    
-
 		authorize! :new, Experiencia
     #@experiencia = Experiencia.new
   @experiencia = @voluntario.experiencias.new

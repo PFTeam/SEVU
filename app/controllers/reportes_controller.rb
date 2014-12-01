@@ -5,7 +5,7 @@ class ReportesController < ApplicationController
   # GET /reportes
   # GET /reportes.json
   def index
-#		authorize! :index, Reporte
+		authorize! :index, Reporte
 	  @asignacion_actividades = AsignacionActividad.where(actividad_id: params[:actividad_id]).to_a
 	  p @asignacion_actividades
 	  @actividad = Actividad.find(params[:actividad_id])
@@ -31,12 +31,12 @@ class ReportesController < ApplicationController
   # GET /reportes/1
   # GET /reportes/1.json
   def show
-#		authorize! :show, Reporte
+		authorize! :show, Reporte
   end
 
   # GET /reportes/new
   def new
-#		authorize! :new, Reporte
+		authorize! :new, Reporte
     @actividad = Actividad.find(params[:actividad_id])
     @proyecto = @actividad.proyecto
     @asignacion_actividad = @actividad.asignacion_actividades.where('vigente =? and usuario_id =?', 'true' , current_usuario.id).uniq.last
@@ -46,7 +46,7 @@ class ReportesController < ApplicationController
 
   # GET /reportes/1/edit
   def edit
-#		authorize! :edit, Reporte
+		authorize! :edit, Reporte
 	  #
 
      @asignacion_actividad = @reporte.asignacion_actividad
@@ -55,7 +55,7 @@ class ReportesController < ApplicationController
   # POST /reportes
   # POST /reportes.json
   def create
-#		authorize! :create, Reporte
+		authorize! :create, Reporte
     @reporte = Reporte.new(reporte_params)
 
     respond_to do |format|
@@ -73,7 +73,7 @@ class ReportesController < ApplicationController
   # PATCH/PUT /reportes/1
   # PATCH/PUT /reportes/1.json
   def update
-#		authorize! :update, Reporte
+		authorize! :update, Reporte
     respond_to do |format|
       if @reporte.update(reporte_params)
         format.html { redirect_to @reporte, notice: 'Reporte fue actualizado satisfactoriamente.' }
@@ -88,7 +88,7 @@ class ReportesController < ApplicationController
   # DELETE /reportes/1
   # DELETE /reportes/1.json
   def destroy
-#		authorize! :destroy, Reporte
+		authorize! :destroy, Reporte
     @reporte.destroy
     respond_to do |format|
       format.html { redirect_to reportes_url, notice: 'Reporte fue borrado satisfactoriamente.' }

@@ -7,8 +7,6 @@ class UsuariosController < ApplicationController
   def dar_alta_voluntario
       @usuario = @current_usuario
   end
-
-  
   
   def index
 		authorize! :index, Usuario

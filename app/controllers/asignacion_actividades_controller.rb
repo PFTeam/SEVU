@@ -87,7 +87,6 @@ class AsignacionActividadesController < ApplicationController
   end
 
   def dar_baja
-		authorize! :dar_baja, AsignacionActividad
     @asignacion_actividad = AsignacionActividad.find(params[:id])
     @asignacion_actividad.vigente = false
     respond_to do |format|
@@ -124,6 +123,7 @@ class AsignacionActividadesController < ApplicationController
   end
 
   def busqueda_filtrada
+				authorize! :busqueda_filtrada, AsignacionActividad
        @asignacion_actividad = AsignacionActividad.find(params[:id])
        @usuarios = Usuario.page(params[:page]).search query: params[:usuario]
 	

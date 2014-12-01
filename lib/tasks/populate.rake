@@ -87,6 +87,9 @@ namespace :db do
 			pap52diego=Privilegio.create(nombre: "show_index_historial_estado_usuario", descripcion: "Permite mostrar los historiales de estado de usuario", tipo_privilegio: ppdiego)
 			pap53diego=Privilegio.create(nombre: "show_index_historial_estado_actividad", descripcion: "Permite mostrar los historiales de estado de actividad", tipo_privilegio: ppdiego)
 
+			pap54diego=Privilegio.create(nombre: "gestionar_estado_presupuesto", descripcion: "Permite gestionar el estado de un presupuesto", tipo_privilegio: ppdiego)
+
+
 
     #USUARIO 
       ard1diego=AsignacionRolPredefinido.create(esActual: true, privilegio: padiego , rol: rsdiego)

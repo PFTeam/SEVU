@@ -83,7 +83,6 @@ class PostulacionesController < ApplicationController
   end
 
   def aceptar
-		authorize! :aceptar, Postulacion
     @postulacion = Postulacion.find(params[:id])
     @postulacion.aceptar
     @postulacion.save
