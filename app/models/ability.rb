@@ -26,7 +26,6 @@ class Ability
 						if asignacionrolpredefinido.rol==asignacionfuncion.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'edit_update_usuario').id 						
 								can :edit, Usuario
 								can :update, Usuario
-								can :manage, Usuario
 								can :dar_alta_voluntario, Usuario
 						end
 						if asignacionrolpredefinido.rol==asignacionfuncion.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'index_evento_publico').id 							
@@ -290,7 +289,13 @@ class Ability
 
 						end
 						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'voluntarios').id 						
-							
+								can :mis_notas, Voluntario
+								can :Responder, Voluntario
+								can :dar_alta_voluntario, Voluntario
+								can :gestionar_nota_P, Voluntario
+								can :gestion_horarios_disponibles, Voluntario
+								can :gestionar_estado_usuario, Voluntario
+								can :gestionar_habilidades, Voluntario
 
 						end
 					end

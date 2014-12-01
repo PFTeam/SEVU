@@ -91,6 +91,7 @@ namespace :db do
 			pap53diego=Privilegio.create(nombre: "show_index_historial_estado_actividad", descripcion: "Permite mostrar los historiales de estado de actividad", tipo_privilegio: ppdiego)
 
 			pap54diego=Privilegio.create(nombre: "gestionar_estado_presupuesto", descripcion: "Permite gestionar el estado de un presupuesto", tipo_privilegio: ppdiego)
+			pap55diego=Privilegio.create(nombre: "voluntarios", descripcion: "Permite gestionar los voluntarios", tipo_privilegio: ppdiego)
 
 
 
@@ -133,6 +134,7 @@ namespace :db do
 			arc23diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap51diego  , rol: director)
 			arc24diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap52diego  , rol: director)
 			arc25diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap53diego  , rol: director)
+			arc26diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap55diego  , rol: director)
 
 		#COORDINADOR
 			arcc1diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap23diego, rol: coordinador)
@@ -164,6 +166,7 @@ namespace :db do
 			arcc24diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap43diego , rol: coordinador)
 			arcc25diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap44diego , rol: coordinador)
 			arcc26diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap17diego , rol: coordinador)
+			arcc28diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap55diego , rol: coordinador)
 
 
 		#VOLUNTARIO
