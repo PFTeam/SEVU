@@ -22,7 +22,7 @@
          </tr>
       </thead>
 			<tbody>
-			<% Usuario.all.each do |usuario| %>
+			<% @voluntarios.each do |usuario| %>
 				<tr>
 					<td><%= usuario.nombreUsuario %></td>
 					<td><%= usuario.apellido_nombre %></td>					

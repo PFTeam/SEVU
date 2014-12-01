@@ -5,6 +5,7 @@ class ReporteGeneradosController < ApplicationController
 	
 	def reporte_voluntarios
 		authorize! :reporte_voluntarios, ReporteGenerado
+		@voluntarios=Usuario.where("type = ?", 'Voluntario')
 		if params[:usuario_ids].blank? || params[:item_ids].blank?  
     		@error = '1';
 		else
@@ -520,7 +521,9 @@ class ReporteGeneradosController < ApplicationController
 								end
 							 @asignaciones= AsignacionActividad.where("actividad_id IN (?) ", @actividades)
 								@asignaciones.each do |asig|
+									if (Usuario.find(asig.usuario_id).type == 'Voluntario')
 									@usuarios << asig.usuario_id
+									end
 								end
 								@usuarios = @usuarios.uniq
 							(1..12).each do |mes|
@@ -553,7 +556,9 @@ class ReporteGeneradosController < ApplicationController
 								end
 							 @asignaciones= AsignacionActividad.where("actividad_id IN (?) ", @actividades)
 								@asignaciones.each do |asig|
+									if (Usuario.find(asig.usuario_id).type == 'Voluntario')
 									@usuarios << asig.usuario_id
+									end
 								end
 								@usuarios = @usuarios.uniq
 							(1..12).each do |mes|
@@ -824,7 +829,9 @@ class ReporteGeneradosController < ApplicationController
 								end
 							 @asignaciones= AsignacionActividad.where("actividad_id IN (?) ", @actividades)
 								@asignaciones.each do |asig|
+									if (Usuario.find(asig.usuario_id).type == 'Voluntario')
 									@usuarios << asig.usuario_id
+									end
 								end
 								@usuarios = @usuarios.uniq
 							(1..12).each do |mes|
@@ -862,7 +869,9 @@ class ReporteGeneradosController < ApplicationController
 								end
 							 @asignaciones= AsignacionActividad.where("actividad_id IN (?) ", @actividades)
 								@asignaciones.each do |asig|
+									if (Usuario.find(asig.usuario_id).type == 'Voluntario')
 									@usuarios << asig.usuario_id
+									end
 								end
 								@usuarios = @usuarios.uniq
 							(1..12).each do |mes|
