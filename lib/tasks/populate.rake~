@@ -39,7 +39,7 @@ namespace :db do
 			pa17diego=Privilegio.create(nombre: "notificacion_email", descripcion: "Permite manejar las notificaciones de emails", tipo_privilegio: psdiego)
 			pa18diego=Privilegio.create(nombre: "notificaciones", descripcion: "Permite manejar notificaciones", tipo_privilegio: psdiego)
 			pa20diego=Privilegio.create(nombre: "notificacion_mailer", descripcion: "Permite manejar las notificaciones del mailer", tipo_privilegio: psdiego)
-			pa21diego=Privilegio.create(nombre: "notificacion_predeterminadas", descripcion: "Permite manejar las notificaciones del mailer", tipo_privilegio: psdiego)
+			pa21diego=Privilegio.create(nombre: "notificacion_predeterminadas", descripcion: "Permite manejar las notificaciones predeterminadas", tipo_privilegio: psdiego)
 		
 
 			pap1diego=Privilegio.create(nombre: "detalle_presupuestos", descripcion: "Permite manejar los detalles de presupuesto", tipo_privilegio: ppdiego)
@@ -114,6 +114,7 @@ namespace :db do
 			rd13diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pa17diego , rol: rsdiego)
 			rd14diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pa18diego , rol: rsdiego)
 			rd15diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pa20diego , rol: rsdiego)
+			rd16diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pa21diego , rol: rsdiego)
 
 
 		#DIRECTOR

@@ -22,7 +22,7 @@ end
 def mis_notas
   authorize! :mis_notas, Usuario
 end
-  
+
 
 def buscar_voluntario
  
@@ -102,6 +102,7 @@ end
   end
   
   def gestionar_estado_usuario
+	authorize! :gestionar_estado_usuario, Usuario
     @estado=EstadoUsuario.all
  @usuario=Usuario.all
  @voluntario=Voluntario.first
@@ -124,7 +125,7 @@ end
   
 #Pagina Nota Personal
   def gestionar_nota_P
-    
+    authorize! :gestionar_nota_P, Usuario
    @voluntario = Voluntario.find(params[:id])
     #no lo veo muy seguro por eso pongo lo siguiente:
     #@voluntario = Usuario.find(current_usuario.id)
@@ -201,7 +202,7 @@ end
   end
   
 def gestion_horarios_disponibles
-  
+  authorize! :gestion_horarios_disponibles, Voluntario
  @voluntario = Voluntario.find(params[:id])
  @horario_disponibles = HorarioDisponible.where(voluntario_id: @voluntario.id)
  

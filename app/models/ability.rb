@@ -92,7 +92,7 @@ class Ability
 				end
 			end
 			AsignacionRol.all.each do |asignacionrol| #Privilegios de Proyecto
-				if asignacionrol.usuario == user && asignacionrol.esActual? && asignacionrol.proyecto == @proyecto
+				if asignacionrol.usuario == user && asignacionrol.esActual? && asignacionrol.proyecto == @current_proyecto
 					AsignacionRolPredefinido.all.each do |asignacionrolpredefinido|
 					if asignacionrolpredefinido.esActual?
 						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'detalle_presupuestos').id 						
@@ -271,7 +271,6 @@ class Ability
 								can :show, HistorialEstadoProyecto
 								can :index, HistorialEstadoProyecto
 								can :modificar, HistorialEstadoProyecto
-
 						end
 						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'show_index_historial_estado_usuario').id 						
 								can :show, HistorialEstadoUsuario
@@ -290,12 +289,13 @@ class Ability
 						end
 						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'voluntarios').id 						
 								can :mis_notas, Voluntario
-								can :Responder, Voluntario
-								can :dar_alta_voluntario, Voluntario
 								can :gestionar_nota_P, Voluntario
 								can :gestion_horarios_disponibles, Voluntario
 								can :gestionar_estado_usuario, Voluntario
-								can :gestionar_habilidades, Voluntario
+								can :Responder, Voluntario #SIN autorize en controlador
+								can :dar_alta_voluntario, Voluntario #SIN autorize en controlador
+								can :gestionar_habilidades, Voluntario #SIN autorize en controlador
+								
 
 						end
 					end

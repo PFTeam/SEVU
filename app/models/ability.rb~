@@ -22,6 +22,20 @@ class Ability
 						if asignacionrolpredefinido.rol==asignacionfuncion.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'notificacion_sistema').id 
 								can :manage, NotificacionSistema
 						end
+						if asignacionrolpredefinido.rol==asignacionfuncion.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'notificacion_email').id 
+								can :manage, NotificacionEmail
+						end
+						if asignacionrolpredefinido.rol==asignacionfuncion.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'notificaciones').id 
+								can :manage, Notificacion
+						end
+						if asignacionrolpredefinido.rol==asignacionfuncion.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'notificacion_mailer').id 
+								can :manage, NotificacionMailer
+						end
+						if asignacionrolpredefinido.rol==asignacionfuncion.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'notificacion_predeterminadas').id 
+								can :manage, NotificacionPredeterminada
+								can :gestionar_notificaciones, NotificacionPredeterminada
+								can :notificaciones_predeterminadas, NotificacionPredeterminada
+						end
 						if asignacionrolpredefinido.rol==asignacionfuncion.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'proyecto').id 						
 								can :manage, Proyecto
 								can :agregar_necesidad, Proyecto
@@ -140,11 +154,7 @@ class Ability
 								can :manage, TipoHabilidad
 								can :gestionar_habilidades, TipoHabilidad
 						end
-						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'notificacion_predeterminadas').id 
-								can :manage, NotificacionPredeterminada
-								can :gestionar_notificaciones, NotificacionPredeterminada
-								can :notificaciones_predeterminadas, NotificacionPredeterminada
-						end
+						
 						
 						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'new_presupuesto').id 
 								can :new, Presupuesto
@@ -159,10 +169,6 @@ class Ability
 						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'show_new_postulacion').id 
 								can :show, Postulacion
 								can :new, Postulacion
-						end
-
-						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'notificacion_mailer').id 
-								can :manage, NotificacionMailer
 						end
 
 						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'index_show_actividad').id 
@@ -253,14 +259,7 @@ class Ability
 								can :presupuestos_evaluados, Presupuesto
 								can :evaluar_presupuesto, Presupuesto
 						end
-						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'notificacion_email').id 						
-								can :manage, NotificacionEmail
 
-						end
-						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'notificaciones').id 						
-								can :manage, Notificacion
-
-						end
 						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'transacciones').id 						
 								can :auditoria, Transaccion
 								can :control_fecha, Transaccion
@@ -272,7 +271,6 @@ class Ability
 								can :show, HistorialEstadoProyecto
 								can :index, HistorialEstadoProyecto
 								can :modificar, HistorialEstadoProyecto
-
 						end
 						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'show_index_historial_estado_usuario').id 						
 								can :show, HistorialEstadoUsuario
@@ -291,12 +289,13 @@ class Ability
 						end
 						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'voluntarios').id 						
 								can :mis_notas, Voluntario
-								can :Responder, Voluntario
-								can :dar_alta_voluntario, Voluntario
 								can :gestionar_nota_P, Voluntario
 								can :gestion_horarios_disponibles, Voluntario
 								can :gestionar_estado_usuario, Voluntario
-								can :gestionar_habilidades, Voluntario
+								can :Responder, Voluntario #SIN autorize en controlador
+								can :dar_alta_voluntario, Voluntario #SIN autorize en controlador
+								can :gestionar_habilidades, Voluntario #SIN autorize en controlador
+								
 
 						end
 					end
