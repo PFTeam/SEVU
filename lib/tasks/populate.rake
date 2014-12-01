@@ -33,7 +33,8 @@ namespace :db do
 			pa11diego=Privilegio.create(nombre: 'horarios_disponibles', descripcion: "Permite manejar los horarios disponibles del voluntario", tipo_privilegio: psdiego)
 			pa12diego=Privilegio.create(nombre: "experiencia", descripcion: "Permite manejar las experiencias", tipo_privilegio: psdiego)
 			pa13diego=Privilegio.create(nombre: "proyecto", descripcion: "Permite manejar proyectos", tipo_privilegio: psdiego)
-
+			pa14diego=Privilegio.create(nombre: "asignacion_rol", descripcion: "Permite manejar las asignaciones de roles", tipo_privilegio: psdiego)			
+		
 			pap1diego=Privilegio.create(nombre: "detalle_presupuestos", descripcion: "Permite manejar los detalles de presupuesto", tipo_privilegio: ppdiego)
 			pap2diego=Privilegio.create(nombre: "asignacion_roles", descripcion: "Permite manejar las asignaciones de roles", tipo_privilegio: ppdiego)
 			pap3diego=Privilegio.create(nombre: "show_organizacion_externas", descripcion: "Permite ver las organizaciones externas", tipo_privilegio: ppdiego)
@@ -151,6 +152,8 @@ namespace :db do
 			arcc21diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap5diego  , rol: coordinador)
 
 			arcc22diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pa13diego, rol: coordinadorsistema)
+			arcc27diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pa14diego , rol: coordinadorsistema)
+
 			arcc23diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap30diego  , rol: coordinador)
 			arcc24diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap43diego , rol: coordinador)
 			arcc25diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap44diego , rol: coordinador)
