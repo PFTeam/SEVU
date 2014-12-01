@@ -118,6 +118,7 @@ class Ability
 						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'informe_gastos').id 
 								can :manage, InformeGasto
 								can :gestionar_informe_gastos, InformeGasto
+
 						end
 						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'show_index_informe_gasto').id 
 								can :show, InformeGasto
@@ -174,14 +175,15 @@ class Ability
 						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'index_show_actividad').id 
 								can :show, Actividad
 								can :index, Actividad
+
 						end
 						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'index_show_asignacion_actividades').id 
-								can :show, Actividad
-								can :index, Actividad
+								can :show, AsignacionActividad
+								can :index, AsignacionActividad
 						end
 						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'index_show_asignacion_roles').id 
-								can :show, Actividad
-								can :index, Actividad
+								can :show, AsignacionRol
+								can :index, AsignacionRol
 						end
 						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'index_show_objetivos').id 
 								can :show, ObjetivoGeneral
@@ -285,6 +287,7 @@ class Ability
 						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'show_index_historial_estado_actividad').id 						
 								can :show, HistorialEstadoActividad
 								can :index, HistorialEstadoActividad
+
 
 						end
 						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'voluntarios').id 						

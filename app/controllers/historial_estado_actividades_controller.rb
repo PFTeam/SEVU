@@ -4,7 +4,7 @@ class HistorialEstadoActividadesController < ApplicationController
   # GET /historial_estado_actividades
   # GET /historial_estado_actividades.json
   def index
-		authorize! :index, Habilidad
+		authorize! :index, HistorialEstadoActividad
     @actividad = Actividad.find(params[:actividad_id])
     @proyecto = @actividad.proyecto
   end
@@ -12,18 +12,18 @@ class HistorialEstadoActividadesController < ApplicationController
   # GET /historial_estado_actividades/1
   # GET /historial_estado_actividades/1.json
   def show
-		authorize! :show, Habilidad
+		authorize! :show, HistorialEstadoActividad
   end
 
   # GET /historial_estado_actividades/new
   def new
-		authorize! :new, Habilidad
+		authorize! :new, HistorialEstadoActividad
     @historial_estado_actividad = HistorialEstadoActividad.new
   end
 
   # GET /historial_estado_actividades/1/edit
   def edit
-		authorize! :edit, Habilidad
+		authorize! :edit, HistorialEstadoActividad
 	  @proyecto = @historial_estado_actividad.actividad.proyecto
 	  @estados_posibles = EstadoActividad.estados_posibles(@historial_estado_actividad.actividad)
   end
@@ -31,7 +31,7 @@ class HistorialEstadoActividadesController < ApplicationController
   # POST /historial_estado_actividades
   # POST /historial_estado_actividades.json
   def create
-		authorize! :create, Habilidad
+		authorize! :create, HistorialEstadoActividad
     @historial_estado_actividad = HistorialEstadoActividad.new(historial_estado_actividad_params)
 
     respond_to do |format|
@@ -54,7 +54,7 @@ class HistorialEstadoActividadesController < ApplicationController
   # PATCH/PUT /historial_estado_actividades/1
   # PATCH/PUT /historial_estado_actividades/1.json
   def update
-		authorize! :update, Habilidad
+		authorize! :update, HistorialEstadoActividad
     @historial_estado_actividad_nuevo = HistorialEstadoActividad.new
     @historial_estado_actividad_nuevo.actividad_id = params[:historial_estado_actividad][:actividad_id]
     @historial_estado_actividad_nuevo.estado_actividad_id = params[:historial_estado_actividad][:estado_actividad_id]
@@ -78,7 +78,7 @@ class HistorialEstadoActividadesController < ApplicationController
   # DELETE /historial_estado_actividades/1
   # DELETE /historial_estado_actividades/1.json
   def destroy
-		authorize! :destroy, Habilidad
+		authorize! :destroy, HistorialEstadoActividad
     @historial_estado_actividad.destroy
     respond_to do |format|
       format.html { redirect_to historial_estado_actividades_url, notice: 'Historial estado actividad fue borrado satisfactoriamente.' }

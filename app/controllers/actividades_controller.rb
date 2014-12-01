@@ -150,7 +150,6 @@ class ActividadesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_actividad
-			authorize! :set_actividad, Actividad
       @actividad = Actividad.find(params[:id])
     end
 

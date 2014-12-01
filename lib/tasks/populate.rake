@@ -123,7 +123,7 @@ namespace :db do
 
 			arc5diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap2diego , rol: director)
 
-			arc7diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap38diego , rol: director)
+
 			arc8diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap24diego , rol: director)
 			arc9diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap31diego , rol: director)
 			arc10diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap34diego , rol: director)
@@ -146,12 +146,11 @@ namespace :db do
 
 		#COORDINADOR
 			arcc1diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap23diego, rol: coordinador)
-			arcc2diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap36diego , rol: coordinador)
+	
 			arcc3diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap22diego , rol: coordinador)
 
 			arcc5diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap2diego , rol: coordinador)
-			arcc6diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap14diego , rol: coordinador)
-			arcc7diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap38diego , rol: coordinador)
+
 			arcc8diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap24diego , rol: coordinador)
 			arcc9diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap31diego , rol: coordinador)
 			arcc10diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap34diego , rol: coordinador)
@@ -183,13 +182,11 @@ namespace :db do
 		arv2diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap46diego , rol: voluntario)
 		arv3diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap47diego , rol: voluntario)
 		arv4diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap48diego  , rol: voluntario)
-		arv5diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap7diego  , rol: voluntario)
+		arv5diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap7diego  , rol: voluntario)#problema con informe de gasto de los de abajo
 		arv6diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap21diego  , rol: voluntario)
-		arv7diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap39diego  , rol: voluntario)
-		arv8diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap49diego  , rol: voluntario)
-		arv9diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap36diego  , rol: voluntario)
-		arv10diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap37diego  , rol: voluntario)
-		arv12diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap38diego  , rol: voluntario)
+		arv7diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap39diego  , rol: voluntario)#problema de solapamiento de privilegios en la solapa finanzas
+		arv8diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap49diego  , rol: voluntario)#problema de solapamiento de privilegios en la solapa finanzas
+
 		arv13diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap52diego  , rol: voluntario)
 		arv14diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap53diego  , rol: voluntario)
 		arv15diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap51diego  , rol: voluntario)
