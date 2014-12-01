@@ -35,6 +35,7 @@ namespace :db do
 			pa13diego=Privilegio.create(nombre: "proyecto", descripcion: "Permite manejar proyectos", tipo_privilegio: psdiego)
 			pa14diego=Privilegio.create(nombre: "asignacion_rol", descripcion: "Permite manejar las asignaciones de roles", tipo_privilegio: psdiego)			
 			pa15diego=Privilegio.create(nombre: "edit_update_usuario", descripcion: "Permite editar el usuario", tipo_privilegio: psdiego)		
+			pa15diego=Privilegio.create(nombre: "edit_update_usuario", descripcion: "Permite editar el usuario", tipo_privilegio: psdiego)
 
 
 			pap1diego=Privilegio.create(nombre: "detalle_presupuestos", descripcion: "Permite manejar los detalles de presupuesto", tipo_privilegio: ppdiego)
@@ -50,7 +51,7 @@ namespace :db do
 			pap11diego=Privilegio.create(nombre: "tipo_proyectos", descripcion: "Permite manejar los tipos de proyectos", tipo_privilegio: ppdiego)
 			pap12diego=Privilegio.create(nombre: "habilidades", descripcion: "Permite manejar las habilidades", tipo_privilegio: ppdiego)
 			pap13diego=Privilegio.create(nombre: "tipo_habilidades", descripcion: "Permite manejar los tipos de habilidades", tipo_privilegio: ppdiego)
-			pap14diego=Privilegio.create(nombre: "notificacion_predeterminadas", descripcion: "Permite manejar las notificaciones predeterminadas", tipo_privilegio: ppdiego)
+			pap14diego=Privilegio.create(nombre: "notificacion_sistema", descripcion: "Permite manejar notificaciones", tipo_privilegio: ppdiego)
 
 			pap15diego=Privilegio.create(nombre: "new_presupuesto", descripcion: "Permite crear presupuestos", tipo_privilegio: ppdiego)
 			pap16diego=Privilegio.create(nombre: "edit_presupuesto", descripcion: "Permite editar presupuestos", tipo_privilegio: ppdiego)
@@ -74,7 +75,7 @@ namespace :db do
 			pap35diego=Privilegio.create(nombre: "create_show_presupuestos", descripcion: "Permite crear y ver presupuestos", tipo_privilegio: ppdiego)
 			pap36diego=Privilegio.create(nombre: "notificacion_email", descripcion: "Permite manejar las notificaciones de emails", tipo_privilegio: ppdiego)
 			pap37diego=Privilegio.create(nombre: "notificaciones", descripcion: "Permite manejar notificaciones", tipo_privilegio: ppdiego)
-			pap38diego=Privilegio.create(nombre: "notificacion_sistema", descripcion: "Permite manejar notificaciones", tipo_privilegio: ppdiego)
+
 			pap39diego=Privilegio.create(nombre: "detalle_gasto", descripcion: "Permite manejar los detalles de los gastos", tipo_privilegio: ppdiego)
 			pap40diego=Privilegio.create(nombre: "proyecto_director", descripcion: "Permite ver y editar un proyecto", tipo_privilegio: ppdiego)
 			pap41diego=Privilegio.create(nombre: "reporte", descripcion: "Permite manejar reportes", tipo_privilegio: ppdiego)
@@ -185,7 +186,7 @@ namespace :db do
 		arv12diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap38diego  , rol: voluntario)
 		arv13diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap52diego  , rol: voluntario)
 		arv14diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap53diego  , rol: voluntario)
-
+		arv15diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap51diego  , rol: voluntario)
 
 			EstadoUsuario.create(nombre: "Activo", descripcion: "El usuario se encuentra activo dentro del sistema")
 			EstadoUsuario.create(nombre: "Suspendido", descripcion: "El usuario se encuentra suspendido dentro del sistema")
