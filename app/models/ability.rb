@@ -37,7 +37,7 @@ class Ability
 						if asignacionrolpredefinido.rol==asignacionfuncion.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'horarios_disponibles').id 				
 								can :manage, HorarioDisponible
 						end
-						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'asignacion_rol_predefinido').id 				
+						if asignacionrolpredefinido.rol==asignacionfuncion.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'asignacion_rol_predefinido').id 				
 								can :manage, AsignacionRolPredefinido
 								can :configuraciones_generales, Rol
 						end
