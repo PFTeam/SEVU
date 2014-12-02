@@ -39,7 +39,7 @@ namespace :db do
 			pa17diego=Privilegio.create(nombre: "notificacion_email", descripcion: "Permite manejar las notificaciones de emails", tipo_privilegio: psdiego)
 			pa18diego=Privilegio.create(nombre: "notificaciones", descripcion: "Permite manejar notificaciones", tipo_privilegio: psdiego)
 			pa20diego=Privilegio.create(nombre: "notificacion_mailer", descripcion: "Permite manejar las notificaciones del mailer", tipo_privilegio: psdiego)
-			pa21diego=Privilegio.create(nombre: "notificacion_predeterminadas", descripcion: "Permite manejar las notificaciones predeterminadas", tipo_privilegio: psdiego)
+			
 		
 
 			pap1diego=Privilegio.create(nombre: "detalle_presupuestos", descripcion: "Permite manejar los detalles de presupuesto", tipo_privilegio: ppdiego)
@@ -97,7 +97,7 @@ namespace :db do
 			pap54diego=Privilegio.create(nombre: "gestionar_estado_presupuesto", descripcion: "Permite gestionar el estado de un presupuesto", tipo_privilegio: ppdiego)
 			pap55diego=Privilegio.create(nombre: "voluntarios", descripcion: "Permite gestionar los voluntarios", tipo_privilegio: ppdiego)
 			pap56diego=Privilegio.create(nombre: "gestionar_presupuesto", descripcion: "Permite gestionar el presupuesto", tipo_privilegio: ppdiego)
-
+			pap57diego=Privilegio.create(nombre: "notificacion_predeterminadas", descripcion: "Permite manejar las notificaciones predeterminadas", tipo_privilegio: ppdiego)
 
 
     #USUARIO 
@@ -110,20 +110,16 @@ namespace :db do
 			ard9diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pa9diego , rol: rsdiego)
 			ard10diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pa15diego , rol: rsdiego)
 			ard11diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pa16diego , rol: rsdiego)
-
 			rd13diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pa17diego , rol: rsdiego)
 			rd14diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pa18diego , rol: rsdiego)
 			rd15diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pa20diego , rol: rsdiego)
-			rd16diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pa21diego , rol: rsdiego)
+
 
 
 		#DIRECTOR
 			arc1diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap23diego, rol: director)
 			arc3diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap22diego , rol: director)
-
 			arc5diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap2diego , rol: director)
-
-
 			arc8diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap24diego , rol: director)
 			arc9diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap31diego , rol: director)
 			arc10diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap34diego , rol: director)
@@ -144,6 +140,9 @@ namespace :db do
 			arc25diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap53diego  , rol: director)
 			arc26diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap55diego  , rol: director)
 			arc27diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap56diego  , rol: director)
+			arc28diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap1diego, rol: director)
+			arc29diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap2diego, rol: director)
+			arc30diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap57diego, rol: director)
 	
 
 		#COORDINADOR
@@ -177,6 +176,8 @@ namespace :db do
 			arcc25diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap44diego , rol: coordinador)
 			arcc26diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap17diego , rol: coordinador)
 			arcc28diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap55diego , rol: coordinador)
+			arcc29diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap13diego  , rol: director)
+			arcc30diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap57diego, rol: director)
 
 
 		#VOLUNTARIO

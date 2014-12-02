@@ -32,6 +32,7 @@ class Ability
 								can :manage, NotificacionMailer
 						end
 						if asignacionrolpredefinido.rol==asignacionfuncion.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'notificacion_predeterminadas').id 
+								can :configuraciones_generales, Rol
 								can :manage, NotificacionPredeterminada
 								can :gestionar_notificaciones, NotificacionPredeterminada
 								can :notificaciones_predeterminadas, NotificacionPredeterminada
@@ -131,6 +132,7 @@ class Ability
 								can :manage, Comprobante
 						end
 						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'concepto_gastos').id 
+								can :configuraciones_generales, Rol
 								can :manage, ConceptoGasto
 								can :gestionar_concepto_gastos, ConceptoGasto
 						end
@@ -149,9 +151,11 @@ class Ability
 								can :manage, TipoProyecto
 						end
 						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'habilidades').id 
+								can :configuraciones_generales, Rol
 								can :manage, Habilidad
 						end
 						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'tipo_habilidades').id 
+								can :configuraciones_generales, Rol
 								can :manage, TipoHabilidad
 								can :gestionar_habilidades, TipoHabilidad
 						end
