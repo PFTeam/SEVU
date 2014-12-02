@@ -96,6 +96,7 @@ namespace :db do
 
 			pap54diego=Privilegio.create(nombre: "gestionar_estado_presupuesto", descripcion: "Permite gestionar el estado de un presupuesto", tipo_privilegio: ppdiego)
 			pap55diego=Privilegio.create(nombre: "voluntarios", descripcion: "Permite gestionar los voluntarios", tipo_privilegio: ppdiego)
+			pap56diego=Privilegio.create(nombre: "gestionar_presupuesto", descripcion: "Permite gestionar el presupuesto", tipo_privilegio: ppdiego)
 
 
 
@@ -142,6 +143,8 @@ namespace :db do
 			arc24diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap52diego  , rol: director)
 			arc25diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap53diego  , rol: director)
 			arc26diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap55diego  , rol: director)
+			arc27diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap56diego  , rol: director)
+	
 
 		#COORDINADOR
 			arcc1diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap23diego, rol: coordinador)

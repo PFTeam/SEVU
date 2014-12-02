@@ -261,7 +261,10 @@ class Ability
 								can :presupuestos_evaluados, Presupuesto
 								can :evaluar_presupuesto, Presupuesto
 						end
-
+					if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'gestionar_presupuesto').id 						
+								can :gestionar_presupuesto, Presupuesto
+						end
+						
 						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'transacciones').id 						
 								can :auditoria, Transaccion
 								can :control_fecha, Transaccion
