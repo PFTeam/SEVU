@@ -273,7 +273,6 @@ class Ability
 								can :show, HistorialEstadoProyecto
 								can :index, HistorialEstadoProyecto
 								can :modificar, HistorialEstadoProyecto
-								can :edit, HistorialEstadoProyecto
 						end
 						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'show_index_historial_estado_usuario').id 						
 								can :show, HistorialEstadoUsuario
@@ -288,7 +287,6 @@ class Ability
 						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'show_index_historial_estado_actividad').id 						
 								can :show, HistorialEstadoActividad
 								can :index, HistorialEstadoActividad
-								can :edit, HistorialEstadoActividad
 
 
 						end
