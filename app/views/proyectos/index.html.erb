@@ -29,11 +29,15 @@
 			No se ha cargado una descripción
 		<% end %>
                 </p>
-                <label>Director del Proyecto</label>
+                <label>Directores del Proyecto</label>
                 <p> <!-- #TODO: Agregar validación de un solo director -->
 
-		<% if !proyecto.director.blank? %>
-                    <i class="fa fa-user"></i><%= link_to proyecto.director.apellido_nombre.to_s, usuario_path(proyecto.director) %> 
+		<% if !proyecto.director.nil? %>
+                   <% for director in proyecto.director %>
+                   		<i class="fa fa-user"></i><%= link_to director.usuario.apellido_nombre.to_s, usuario_path(director) %> |   
+                   <% end %>
+
+                     
 		<% else %>
 			No se ha asignado un Director
 		<% end %>
