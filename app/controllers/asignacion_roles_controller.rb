@@ -17,7 +17,15 @@ class AsignacionRolesController < ApplicationController
   # GET /asignacion_roles/new
   def new
 		authorize! :new, AsignacionRol
-    @roles = Rol.all
+		@roles = []
+    @rols = Rol.where(tipo_rol: TipoRol.where(nombre:'Proyecto'))
+		coor_sist = Rol.where("nombre = ?", 'Coordinador Sistema').first
+		asig_func = AsignacionFuncion.where("usuario_id = ? AND rol_id = ?", current_usuario, coor_sist).first
+		@rols.each do |rol|
+		if rol.nombre != 'Coordinador' || asig_func != nil then
+			@roles << rol
+		end
+		end
     @proyecto = Proyecto.find(params[:proyecto_id])
     @asignacion_rol = AsignacionRol.new(:usuario_id => params[:usuario_id], :proyecto_id => :proyecto_id)
   end
@@ -25,7 +33,15 @@ class AsignacionRolesController < ApplicationController
   # GET /asignacion_roles/1/edit
   def edit
 		authorize! :edit, AsignacionRol
-    @roles = Rol.all
+    @roles = []
+    @rols = Rol.where(tipo_rol: TipoRol.where(nombre:'Proyecto'))
+		coor_sist = Rol.where("nombre = ?", 'Coordinador Sistema').first
+		asig_func = AsignacionFuncion.where("usuario_id = ? AND rol_id = ?", current_usuario, coor_sist).first
+		@rols.each do |rol|
+		if rol.nombre != 'Coordinador' || asig_func != nil then
+			@roles << rol
+		end
+		end
   end
 
   # POST /asignacion_roles

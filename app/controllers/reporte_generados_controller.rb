@@ -245,11 +245,7 @@ class ReporteGeneradosController < ApplicationController
 								horas =0
 								@asignaciones= AsignacionActividad.where("usuario_id = ?   ", user)
 								@asignaciones.each do |asig|
-									act= Actividad.where("id = ? AND fechaRealInicio BETWEEN ? AND ? ", asig.actividad_id, inicio, fin)
-									if act != nil
-										cant_horas=act.duracionReal
-									end
-									horas += cant_horas unless cant_horas.nil? 
+									horas += Actividad.where("id = ? AND fechaRealInicio BETWEEN ? AND ? ", asig.actividad_id, inicio, fin).duracionReal 
 								end
 								@datos_grafico << [Time.new(params[:anio][:year], mes, 15), horas]
 								@datos_discretos << horas
