@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20141108160551) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "actividades", force: true do |t|
+  create_table "actividades", force: :cascade do |t|
     t.string   "nombre"
     t.text     "descripcion"
     t.integer  "duracion"
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20141108160551) do
   add_index "actividades", ["proyecto_id"], name: "index_actividades_on_proyecto_id", using: :btree
   add_index "actividades", ["tipo_actividad_id"], name: "index_actividades_on_tipo_actividad_id", using: :btree
 
-  create_table "asignacion_actividades", force: true do |t|
+  create_table "asignacion_actividades", force: :cascade do |t|
     t.boolean  "vigente"
     t.integer  "actividad_id"
     t.integer  "usuario_id"
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 20141108160551) do
   add_index "asignacion_actividades", ["actividad_id"], name: "index_asignacion_actividades_on_actividad_id", using: :btree
   add_index "asignacion_actividades", ["usuario_id"], name: "index_asignacion_actividades_on_usuario_id", using: :btree
 
-  create_table "asignacion_funciones", force: true do |t|
+  create_table "asignacion_funciones", force: :cascade do |t|
     t.boolean  "esActual"
     t.text     "descripcion"
     t.integer  "usuario_id"
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 20141108160551) do
   add_index "asignacion_funciones", ["rol_id"], name: "index_asignacion_funciones_on_rol_id", using: :btree
   add_index "asignacion_funciones", ["usuario_id"], name: "index_asignacion_funciones_on_usuario_id", using: :btree
 
-  create_table "asignacion_rol_predefinidos", force: true do |t|
+  create_table "asignacion_rol_predefinidos", force: :cascade do |t|
     t.boolean  "esActual"
     t.integer  "privilegio_id"
     t.integer  "rol_id"
@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(version: 20141108160551) do
   add_index "asignacion_rol_predefinidos", ["privilegio_id"], name: "index_asignacion_rol_predefinidos_on_privilegio_id", using: :btree
   add_index "asignacion_rol_predefinidos", ["rol_id"], name: "index_asignacion_rol_predefinidos_on_rol_id", using: :btree
 
-  create_table "asignacion_roles", force: true do |t|
+  create_table "asignacion_roles", force: :cascade do |t|
     t.boolean  "esActual"
     t.integer  "rol_id"
     t.integer  "proyecto_id"
@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(version: 20141108160551) do
   add_index "asignacion_roles", ["rol_id"], name: "index_asignacion_roles_on_rol_id", using: :btree
   add_index "asignacion_roles", ["usuario_id"], name: "index_asignacion_roles_on_usuario_id", using: :btree
 
-  create_table "asistencia_eventos", force: true do |t|
+  create_table "asistencia_eventos", force: :cascade do |t|
     t.integer  "evento_publico_id"
     t.integer  "usuario_id"
     t.datetime "created_at"
@@ -98,7 +98,7 @@ ActiveRecord::Schema.define(version: 20141108160551) do
   add_index "asistencia_eventos", ["evento_publico_id"], name: "index_asistencia_eventos_on_evento_publico_id", using: :btree
   add_index "asistencia_eventos", ["usuario_id"], name: "index_asistencia_eventos_on_usuario_id", using: :btree
 
-  create_table "colaboradores", force: true do |t|
+  create_table "colaboradores", force: :cascade do |t|
     t.integer  "organizacion_externa_id"
     t.integer  "proyecto_id"
     t.datetime "created_at"
@@ -108,7 +108,7 @@ ActiveRecord::Schema.define(version: 20141108160551) do
   add_index "colaboradores", ["organizacion_externa_id"], name: "index_colaboradores_on_organizacion_externa_id", using: :btree
   add_index "colaboradores", ["proyecto_id"], name: "index_colaboradores_on_proyecto_id", using: :btree
 
-  create_table "comprobantes", force: true do |t|
+  create_table "comprobantes", force: :cascade do |t|
     t.integer  "numero"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -121,14 +121,14 @@ ActiveRecord::Schema.define(version: 20141108160551) do
 
   add_index "comprobantes", ["detalle_gasto_id"], name: "index_comprobantes_on_detalle_gasto_id", using: :btree
 
-  create_table "concepto_gastos", force: true do |t|
+  create_table "concepto_gastos", force: :cascade do |t|
     t.string   "titulo"
     t.text     "descripcion"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "detalle_gastos", force: true do |t|
+  create_table "detalle_gastos", force: :cascade do |t|
     t.string   "titulo"
     t.text     "descripcion"
     t.float    "monto"
@@ -143,7 +143,7 @@ ActiveRecord::Schema.define(version: 20141108160551) do
   add_index "detalle_gastos", ["informe_gasto_id"], name: "index_detalle_gastos_on_informe_gasto_id", using: :btree
   add_index "detalle_gastos", ["voluntario_id"], name: "index_detalle_gastos_on_voluntario_id", using: :btree
 
-  create_table "detalle_presupuestos", force: true do |t|
+  create_table "detalle_presupuestos", force: :cascade do |t|
     t.string   "titulo"
     t.text     "descripcion"
     t.float    "monto"
@@ -156,7 +156,7 @@ ActiveRecord::Schema.define(version: 20141108160551) do
   add_index "detalle_presupuestos", ["concepto_gasto_id"], name: "index_detalle_presupuestos_on_concepto_gasto_id", using: :btree
   add_index "detalle_presupuestos", ["presupuesto_id"], name: "index_detalle_presupuestos_on_presupuesto_id", using: :btree
 
-  create_table "estado_academicos", force: true do |t|
+  create_table "estado_academicos", force: :cascade do |t|
     t.integer  "cantidad_materias_regulares"
     t.integer  "cantidad_materias_aprobadas"
     t.integer  "cantidad_materias_cursando"
@@ -167,35 +167,35 @@ ActiveRecord::Schema.define(version: 20141108160551) do
 
   add_index "estado_academicos", ["usuario_id"], name: "index_estado_academicos_on_usuario_id", using: :btree
 
-  create_table "estado_actividades", force: true do |t|
+  create_table "estado_actividades", force: :cascade do |t|
     t.string   "nombre"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "descripcion"
   end
 
-  create_table "estado_presupuestos", force: true do |t|
+  create_table "estado_presupuestos", force: :cascade do |t|
     t.string   "nombre"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "descripcion"
   end
 
-  create_table "estado_proyectos", force: true do |t|
+  create_table "estado_proyectos", force: :cascade do |t|
     t.string   "nombre"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "descripcion"
   end
 
-  create_table "estado_usuarios", force: true do |t|
+  create_table "estado_usuarios", force: :cascade do |t|
     t.string   "nombre"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "descripcion"
   end
 
-  create_table "evento_publicos", force: true do |t|
+  create_table "evento_publicos", force: :cascade do |t|
     t.string   "nombre"
     t.text     "descripcion"
     t.datetime "fechaRealizacion"
@@ -206,7 +206,7 @@ ActiveRecord::Schema.define(version: 20141108160551) do
 
   add_index "evento_publicos", ["usuario_id"], name: "index_evento_publicos_on_usuario_id", using: :btree
 
-  create_table "experiencias", force: true do |t|
+  create_table "experiencias", force: :cascade do |t|
     t.boolean  "tieneExperiencia"
     t.integer  "cantidadExperiencia"
     t.integer  "habilidad_id"
@@ -218,7 +218,7 @@ ActiveRecord::Schema.define(version: 20141108160551) do
   add_index "experiencias", ["habilidad_id"], name: "index_experiencias_on_habilidad_id", using: :btree
   add_index "experiencias", ["voluntario_id"], name: "index_experiencias_on_voluntario_id", using: :btree
 
-  create_table "habilidades", force: true do |t|
+  create_table "habilidades", force: :cascade do |t|
     t.string   "nombre"
     t.text     "descripcion"
     t.integer  "tipo_habilidad_id"
@@ -228,7 +228,7 @@ ActiveRecord::Schema.define(version: 20141108160551) do
 
   add_index "habilidades", ["tipo_habilidad_id"], name: "index_habilidades_on_tipo_habilidad_id", using: :btree
 
-  create_table "historial_estado_actividades", force: true do |t|
+  create_table "historial_estado_actividades", force: :cascade do |t|
     t.integer  "actividad_id"
     t.integer  "estado_actividad_id"
     t.datetime "created_at"
@@ -238,7 +238,7 @@ ActiveRecord::Schema.define(version: 20141108160551) do
   add_index "historial_estado_actividades", ["actividad_id"], name: "index_historial_estado_actividades_on_actividad_id", using: :btree
   add_index "historial_estado_actividades", ["estado_actividad_id"], name: "index_historial_estado_actividades_on_estado_actividad_id", using: :btree
 
-  create_table "historial_estado_presupuestos", force: true do |t|
+  create_table "historial_estado_presupuestos", force: :cascade do |t|
     t.integer  "presupuesto_id"
     t.integer  "estado_presupuesto_id"
     t.datetime "created_at"
@@ -248,7 +248,7 @@ ActiveRecord::Schema.define(version: 20141108160551) do
   add_index "historial_estado_presupuestos", ["estado_presupuesto_id"], name: "index_historial_estado_presupuestos_on_estado_presupuesto_id", using: :btree
   add_index "historial_estado_presupuestos", ["presupuesto_id"], name: "index_historial_estado_presupuestos_on_presupuesto_id", using: :btree
 
-  create_table "historial_estado_proyectos", force: true do |t|
+  create_table "historial_estado_proyectos", force: :cascade do |t|
     t.integer  "estado_proyecto_id"
     t.integer  "proyecto_id"
     t.datetime "created_at"
@@ -258,7 +258,7 @@ ActiveRecord::Schema.define(version: 20141108160551) do
   add_index "historial_estado_proyectos", ["estado_proyecto_id"], name: "index_historial_estado_proyectos_on_estado_proyecto_id", using: :btree
   add_index "historial_estado_proyectos", ["proyecto_id"], name: "index_historial_estado_proyectos_on_proyecto_id", using: :btree
 
-  create_table "historial_estado_usuarios", force: true do |t|
+  create_table "historial_estado_usuarios", force: :cascade do |t|
     t.integer  "usuario_id"
     t.integer  "estado_usuario_id"
     t.datetime "created_at"
@@ -268,7 +268,7 @@ ActiveRecord::Schema.define(version: 20141108160551) do
   add_index "historial_estado_usuarios", ["estado_usuario_id"], name: "index_historial_estado_usuarios_on_estado_usuario_id", using: :btree
   add_index "historial_estado_usuarios", ["usuario_id"], name: "index_historial_estado_usuarios_on_usuario_id", using: :btree
 
-  create_table "horario_disponibles", force: true do |t|
+  create_table "horario_disponibles", force: :cascade do |t|
     t.string   "diaSemana"
     t.time     "horaDesde"
     t.time     "horaHasta"
@@ -279,7 +279,7 @@ ActiveRecord::Schema.define(version: 20141108160551) do
 
   add_index "horario_disponibles", ["voluntario_id"], name: "index_horario_disponibles_on_voluntario_id", using: :btree
 
-  create_table "informe_gastos", force: true do |t|
+  create_table "informe_gastos", force: :cascade do |t|
     t.float    "montoTotal"
     t.integer  "proyecto_id"
     t.datetime "created_at"
@@ -288,7 +288,7 @@ ActiveRecord::Schema.define(version: 20141108160551) do
 
   add_index "informe_gastos", ["proyecto_id"], name: "index_informe_gastos_on_proyecto_id", using: :btree
 
-  create_table "necesidades", force: true do |t|
+  create_table "necesidades", force: :cascade do |t|
     t.text     "descripcion"
     t.text     "ambitoAplicacion"
     t.integer  "usuario_id"
@@ -299,7 +299,7 @@ ActiveRecord::Schema.define(version: 20141108160551) do
 
   add_index "necesidades", ["usuario_id"], name: "index_necesidades_on_usuario_id", using: :btree
 
-  create_table "notas", force: true do |t|
+  create_table "notas", force: :cascade do |t|
     t.string   "titulo"
     t.text     "descripcion"
     t.integer  "voluntario_id"
@@ -311,7 +311,7 @@ ActiveRecord::Schema.define(version: 20141108160551) do
   add_index "notas", ["usuario_id"], name: "index_notas_on_usuario_id", using: :btree
   add_index "notas", ["voluntario_id"], name: "index_notas_on_voluntario_id", using: :btree
 
-  create_table "notificacion_predeterminadas", force: true do |t|
+  create_table "notificacion_predeterminadas", force: :cascade do |t|
     t.integer  "proyecto_id"
     t.integer  "tipo_notificacion_id"
     t.datetime "created_at"
@@ -321,7 +321,7 @@ ActiveRecord::Schema.define(version: 20141108160551) do
   add_index "notificacion_predeterminadas", ["proyecto_id"], name: "index_notificacion_predeterminadas_on_proyecto_id", using: :btree
   add_index "notificacion_predeterminadas", ["tipo_notificacion_id"], name: "index_notificacion_predeterminadas_on_tipo_notificacion_id", using: :btree
 
-  create_table "notificaciones", force: true do |t|
+  create_table "notificaciones", force: :cascade do |t|
     t.boolean  "esActiva"
     t.text     "mensaje"
     t.boolean  "notificado"
@@ -346,7 +346,7 @@ ActiveRecord::Schema.define(version: 20141108160551) do
   add_index "notificaciones", ["usuario_creador_id"], name: "index_notificaciones_on_usuario_creador_id", using: :btree
   add_index "notificaciones", ["usuario_destino_id"], name: "index_notificaciones_on_usuario_destino_id", using: :btree
 
-  create_table "objetivo_especificos", force: true do |t|
+  create_table "objetivo_especificos", force: :cascade do |t|
     t.string   "titulo"
     t.text     "descripcion"
     t.integer  "objetivo_general_id"
@@ -356,7 +356,7 @@ ActiveRecord::Schema.define(version: 20141108160551) do
 
   add_index "objetivo_especificos", ["objetivo_general_id"], name: "index_objetivo_especificos_on_objetivo_general_id", using: :btree
 
-  create_table "objetivo_generales", force: true do |t|
+  create_table "objetivo_generales", force: :cascade do |t|
     t.string   "titulo"
     t.text     "descripcion"
     t.integer  "proyecto_id"
@@ -366,7 +366,7 @@ ActiveRecord::Schema.define(version: 20141108160551) do
 
   add_index "objetivo_generales", ["proyecto_id"], name: "index_objetivo_generales_on_proyecto_id", using: :btree
 
-  create_table "organizacion_externas", force: true do |t|
+  create_table "organizacion_externas", force: :cascade do |t|
     t.string   "sigla"
     t.string   "denominacion"
     t.string   "cuit"
@@ -380,7 +380,7 @@ ActiveRecord::Schema.define(version: 20141108160551) do
     t.datetime "updated_at"
   end
 
-  create_table "postulaciones", force: true do |t|
+  create_table "postulaciones", force: :cascade do |t|
     t.boolean  "aceptado"
     t.integer  "proyecto_id"
     t.integer  "usuario_id"
@@ -391,7 +391,7 @@ ActiveRecord::Schema.define(version: 20141108160551) do
   add_index "postulaciones", ["proyecto_id"], name: "index_postulaciones_on_proyecto_id", using: :btree
   add_index "postulaciones", ["usuario_id"], name: "index_postulaciones_on_usuario_id", using: :btree
 
-  create_table "presupuestos", force: true do |t|
+  create_table "presupuestos", force: :cascade do |t|
     t.datetime "fechaPresentacion"
     t.integer  "montoTotal"
     t.boolean  "aprobado"
@@ -405,7 +405,7 @@ ActiveRecord::Schema.define(version: 20141108160551) do
   add_index "presupuestos", ["proyecto_id"], name: "index_presupuestos_on_proyecto_id", using: :btree
   add_index "presupuestos", ["usuario_id"], name: "index_presupuestos_on_usuario_id", using: :btree
 
-  create_table "privilegios", force: true do |t|
+  create_table "privilegios", force: :cascade do |t|
     t.string   "nombre"
     t.text     "descripcion"
     t.integer  "tipo_privilegio_id"
@@ -415,7 +415,7 @@ ActiveRecord::Schema.define(version: 20141108160551) do
 
   add_index "privilegios", ["tipo_privilegio_id"], name: "index_privilegios_on_tipo_privilegio_id", using: :btree
 
-  create_table "proyectos", force: true do |t|
+  create_table "proyectos", force: :cascade do |t|
     t.string   "nombre"
     t.text     "breveDescripcion"
     t.date     "fechaInicio"
@@ -437,7 +437,7 @@ ActiveRecord::Schema.define(version: 20141108160551) do
   add_index "proyectos", ["regional_id"], name: "index_proyectos_on_regional_id", using: :btree
   add_index "proyectos", ["tipo_proyecto_id"], name: "index_proyectos_on_tipo_proyecto_id", using: :btree
 
-  create_table "regionales", force: true do |t|
+  create_table "regionales", force: :cascade do |t|
     t.string   "nombre"
     t.string   "domicilio"
     t.string   "nombre_contacto"
@@ -446,7 +446,7 @@ ActiveRecord::Schema.define(version: 20141108160551) do
     t.string   "telefono_contacto"
   end
 
-  create_table "reportes", force: true do |t|
+  create_table "reportes", force: :cascade do |t|
     t.text     "descripcion"
     t.integer  "asignacion_actividad_id"
     t.datetime "created_at"
@@ -455,7 +455,7 @@ ActiveRecord::Schema.define(version: 20141108160551) do
 
   add_index "reportes", ["asignacion_actividad_id"], name: "index_reportes_on_asignacion_actividad_id", using: :btree
 
-  create_table "requisitos", force: true do |t|
+  create_table "requisitos", force: :cascade do |t|
     t.integer  "actividad_id"
     t.integer  "habilidad_id"
     t.datetime "created_at"
@@ -465,7 +465,7 @@ ActiveRecord::Schema.define(version: 20141108160551) do
   add_index "requisitos", ["actividad_id"], name: "index_requisitos_on_actividad_id", using: :btree
   add_index "requisitos", ["habilidad_id"], name: "index_requisitos_on_habilidad_id", using: :btree
 
-  create_table "restricciones", force: true do |t|
+  create_table "restricciones", force: :cascade do |t|
     t.boolean  "esActiva"
     t.datetime "fechaDesde"
     t.datetime "fechaHasta"
@@ -477,7 +477,7 @@ ActiveRecord::Schema.define(version: 20141108160551) do
 
   add_index "restricciones", ["concepto_gasto_id"], name: "index_restricciones_on_concepto_gasto_id", using: :btree
 
-  create_table "roles", force: true do |t|
+  create_table "roles", force: :cascade do |t|
     t.string   "nombre"
     t.text     "descripcion"
     t.integer  "tipo_rol_id"
@@ -487,7 +487,7 @@ ActiveRecord::Schema.define(version: 20141108160551) do
 
   add_index "roles", ["tipo_rol_id"], name: "index_roles_on_tipo_rol_id", using: :btree
 
-  create_table "sesiones", force: true do |t|
+  create_table "sesiones", force: :cascade do |t|
     t.datetime "fechaInicio"
     t.datetime "fechaFin"
     t.integer  "usuario_id"
@@ -497,54 +497,54 @@ ActiveRecord::Schema.define(version: 20141108160551) do
 
   add_index "sesiones", ["usuario_id"], name: "index_sesiones_on_usuario_id", using: :btree
 
-  create_table "tipo_actividades", force: true do |t|
+  create_table "tipo_actividades", force: :cascade do |t|
     t.string   "nombre"
     t.text     "descripcion"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "tipo_habilidades", force: true do |t|
+  create_table "tipo_habilidades", force: :cascade do |t|
     t.string   "nombre"
     t.text     "descripcion"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "tipo_notificaciones", force: true do |t|
+  create_table "tipo_notificaciones", force: :cascade do |t|
     t.string   "nombre"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "tipo_privilegios", force: true do |t|
-    t.string   "nombre"
-    t.text     "descripcion"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "tipo_proyectos", force: true do |t|
+  create_table "tipo_privilegios", force: :cascade do |t|
     t.string   "nombre"
     t.text     "descripcion"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "tipo_roles", force: true do |t|
+  create_table "tipo_proyectos", force: :cascade do |t|
     t.string   "nombre"
     t.text     "descripcion"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "tipo_transacciones", force: true do |t|
+  create_table "tipo_roles", force: :cascade do |t|
+    t.string   "nombre"
+    t.text     "descripcion"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tipo_transacciones", force: :cascade do |t|
     t.string   "descripcion"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "transacciones", force: true do |t|
+  create_table "transacciones", force: :cascade do |t|
     t.text     "descripcion"
     t.integer  "proyecto_id"
     t.integer  "tipo_transaccion_id"
@@ -557,7 +557,7 @@ ActiveRecord::Schema.define(version: 20141108160551) do
   add_index "transacciones", ["sesion_id"], name: "index_transacciones_on_sesion_id", using: :btree
   add_index "transacciones", ["tipo_transaccion_id"], name: "index_transacciones_on_tipo_transaccion_id", using: :btree
 
-  create_table "usuarios", force: true do |t|
+  create_table "usuarios", force: :cascade do |t|
     t.string   "nombreUsuario"
     t.string   "apellido_nombre"
     t.string   "direccion"

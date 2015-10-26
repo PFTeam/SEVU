@@ -2,6 +2,6 @@
 
 <p>Usted puede confirmar su correo electrónico a través del siguiente link:</p>
 
-<p><%= link_to 'Confirmar mi cuenta', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %></p>
+<p><%= link_to 'Confirmar mi cuenta', confirmation_url(@resource, confirmation_token: @token) %></p>
 
 <p>NO RESPONDER ESTE MAIL</p>

@@ -151,16 +151,16 @@ namespace :db do
 			arcc19diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap33diego   , rol: coordinador)
 			arcc20diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap12diego  , rol: coordinador)
 			arcc21diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap5diego  , rol: coordinador)
-			arcc22diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pa13diego, rol: coordinadorsistema)
-			arcc27diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pa14diego , rol: coordinadorsistema)
-			arcc29diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pa2diego , rol: coordinadorsistema)
+			arcc22diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pa13diego, rol: coordinador)
+			arcc27diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pa14diego , rol: coordinador)
+			arcc29diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pa2diego , rol: coordinador)
 			arcc23diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap30diego  , rol: coordinador)
 			arcc24diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap43diego , rol: coordinador)
 			arcc25diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap44diego , rol: coordinador)
 			arcc26diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap17diego , rol: coordinador)
 			arcc28diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap55diego , rol: coordinador)
-			arcc29diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap13diego  , rol: director)
-			arcc30diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap57diego, rol: director)
+			arcc29diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap13diego  , rol: coordinador)
+			arcc30diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap57diego, rol: coordinador)
 
 
 		#VOLUNTARIO
@@ -178,7 +178,7 @@ namespace :db do
 			EstadoUsuario.create(nombre: "Suspendido", descripcion: "El usuario se encuentra suspendido dentro del sistema")
 
 
-    u= Usuario.create!(nombreUsuario: "joel",
+    u= Usuario.new(nombreUsuario: "joel",
 								       password: password, 
 								       password_confirmation: password,  
 								       apellido_nombre: "Sierra, Adrian",
@@ -186,18 +186,13 @@ namespace :db do
 								       direccion: Faker::Address.street_address,
 								       telefono: Faker::PhoneNumber.cell_phone,
 								       fax: Faker::PhoneNumber.phone_number,
-                                                  foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample))
+                       foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample),
+											 confirmed_at: Time.now
+											 )
+		u.skip_confirmation! #u.confirm!
+		u.save!
 
-#    admin = Usuario.create!(nombreUsuario: "admin",
-#								       password: password, 
-#								       password_confirmation: password,  
-#								       apellido_nombre: "Sierra, Adrian",
-#								       email: "noguera.sistemas@gmail.com",
-#								       direccion: Faker::Address.street_address,
-#								       telefono: Faker::PhoneNumber.cell_phone,
-#								       fax: Faker::PhoneNumber.phone_number,
- #                                                 foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample))
-    u_otro = Usuario.create!(nombreUsuario: "adrian",
+    u_otro = Usuario.new(nombreUsuario: "adrian",
 								       password: password, 
 								       password_confirmation: password,  
 								       apellido_nombre: "Sierra, Adrian",
@@ -205,31 +200,55 @@ namespace :db do
 								       direccion: Faker::Address.street_address,
 								       telefono: Faker::PhoneNumber.cell_phone,
 								       fax: Faker::PhoneNumber.phone_number,
-                                                  foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample))
+                                                  foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample),
+											 confirmed_at: Time.now
+											 )
+		u_otro.skip_confirmation!
+		u_otro.save!
 
 
 
-    u1 =	Usuario.create!(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample))
+    u1 =	Usuario.new(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample), confirmed_at: Time.now)
+		u1.skip_confirmation!
+		u1.save!
 
-u2 =	Usuario.create!(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample))
+u2 =	Usuario.new(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample), confirmed_at: Time.now)
+		u2.skip_confirmation!
+		u2.save!
 
-u3 =	Usuario.create!(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample))
+u3 =	Usuario.new(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample),confirmed_at: Time.now)
+		u3.skip_confirmation!
+		u3.save!
 
-u4 =	Usuario.create!(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample))
+u4 =	Usuario.new(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample),confirmed_at: Time.now)
+		u4.skip_confirmation!
+		u4.save!
 
-u5 = 	Usuario.create(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password,  apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample))
+u5 = 	Usuario.new(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password,  apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample),confirmed_at: Time.now)
+		u5.skip_confirmation!
+		u5.save!
 
-u6 =	Usuario.create(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password,  apellido_nombre: Faker::Name.name, email:Faker::Internet.email, direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample))
+u6 =	Usuario.new(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password,  apellido_nombre: Faker::Name.name, email:Faker::Internet.email, direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample),confirmed_at: Time.now)
+		u6.skip_confirmation!
+		u6.save!
 
-u7 =	Usuario.create(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample))
+u7 =	Usuario.new(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample),confirmed_at: Time.now)
+		u7.skip_confirmation!
+		u7.save!
 
-u8 =	Usuario.create(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample))
+u8 =	Usuario.new(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample),confirmed_at: Time.now)
+		u8.skip_confirmation!
+		u8.save!
 
-u9 =	Usuario.create(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample))
+u9 =	Usuario.new(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample),confirmed_at: Time.now)
+		u9.skip_confirmation!
+		u9.save!
 
-u10 =	Usuario.create(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample))
+u10 =	Usuario.new(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample),confirmed_at: Time.now)
+		u10.skip_confirmation!
+		u10.save!
 
-v = Voluntario.create!(nombreUsuario: "agustin",
+v = Voluntario.new(nombreUsuario: "agustin",
        password: password, 
        password_confirmation: password,  
        apellido_nombre: "Serrano, Agustin",
@@ -237,9 +256,13 @@ v = Voluntario.create!(nombreUsuario: "agustin",
        direccion: Faker::Address.street_address,
        telefono: Faker::PhoneNumber.cell_phone,
        fax: Faker::PhoneNumber.phone_number,
-	 legajo: 34587,
+	 		 legajo: 34587,
        type: 'Voluntario',
-      foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample))
+       foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample),
+			 confirmed_at: Time.now
+			 )
+		v.skip_confirmation!
+		v.save!
 
 
     creado = EstadoProyecto.create(nombre: "Creado", descripcion: "El proyecto se encuentra en estado creado")
@@ -275,10 +298,27 @@ v = Voluntario.create!(nombreUsuario: "agustin",
 		    localizacionGeografica: "Mendoza",
 		    tipo_proyecto: tipo_proyecto ,
 		    necesidad: n)
-		     
 
-      AsignacionRol.create(proyecto: p , usuario: u, rol: director , esActual: true).save
-      AsignacionRol.create(proyecto: p , usuario: u, rol: voluntario, esActual: true).save
+			#PRIVILEGIOS DE SISTEMA
+ 			AsignacionFuncion.create!(usuario: u, rol: rsdiego, esActual: true, descripcion: "default")
+			AsignacionFuncion.create!(usuario: u_otro, rol: rsdiego, esActual: true, descripcion: "default")
+			AsignacionFuncion.create!(usuario: u1, rol: rsdiego, esActual: true, descripcion: "default")
+			AsignacionFuncion.create!(usuario: u2, rol: rsdiego, esActual: true, descripcion: "default")
+			AsignacionFuncion.create!(usuario: u3, rol: rsdiego, esActual: true, descripcion: "default")
+			AsignacionFuncion.create!(usuario: u4, rol: rsdiego, esActual: true, descripcion: "default")
+			AsignacionFuncion.create!(usuario: u5, rol: rsdiego, esActual: true, descripcion: "default")
+			AsignacionFuncion.create!(usuario: u6, rol: rsdiego, esActual: true, descripcion: "default")
+			AsignacionFuncion.create!(usuario: u7, rol: rsdiego, esActual: true, descripcion: "default")
+			AsignacionFuncion.create!(usuario: u8, rol: rsdiego, esActual: true, descripcion: "default")
+			AsignacionFuncion.create!(usuario: u9, rol: rsdiego, esActual: true, descripcion: "default")
+			AsignacionFuncion.create!(usuario: u10, rol: rsdiego, esActual: true, descripcion: "default")
+			AsignacionFuncion.create!(usuario: v, rol: rsdiego, esActual: true, descripcion: "default")	
+
+			#PRIVILEGIOS DE PROYECTO
+			AsignacionRol.create!(proyecto: p , usuario: u, rol: director , esActual: true)
+      AsignacionRol.create!(proyecto: p , usuario: u, rol: voluntario, esActual: true)
+
+
 
       HistorialEstadoProyecto.create(proyecto: p, estado_proyecto: creado)
 
