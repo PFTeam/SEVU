@@ -86,6 +86,7 @@ namespace :db do
 			pap55diego=Privilegio.create(nombre: "voluntarios", descripcion: "Permite gestionar los voluntarios", tipo_privilegio: ppdiego)
 			pap56diego=Privilegio.create(nombre: "gestionar_presupuesto", descripcion: "Permite gestionar el presupuesto", tipo_privilegio: ppdiego)
 			pap57diego=Privilegio.create(nombre: "notificacion_predeterminadas", descripcion: "Permite manejar las notificaciones predeterminadas", tipo_privilegio: ppdiego)
+			pa58diego=Privilegio.create(nombre: "index_usuario", descripcion: "Permite ver los usuarios del sistema", tipo_privilegio: psdiego)
 
 
     #USUARIO 
@@ -129,7 +130,6 @@ namespace :db do
 			arc26diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap55diego  , rol: director)
 			arc27diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap56diego  , rol: director)
 			arc28diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap1diego, rol: director)
-			arc29diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap2diego, rol: director)
 			arc30diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap57diego, rol: director)
 	
 
@@ -158,9 +158,12 @@ namespace :db do
 			arcc24diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap43diego , rol: coordinador)
 			arcc25diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap44diego , rol: coordinador)
 			arcc26diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap17diego , rol: coordinador)
+			arcc27diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pa58diego, rol: coordinador)
 			arcc28diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap55diego , rol: coordinador)
 			arcc29diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap13diego  , rol: coordinador)
 			arcc30diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap57diego, rol: coordinador)
+
+
 
 
 		#VOLUNTARIO
@@ -200,11 +203,26 @@ namespace :db do
 								       direccion: Faker::Address.street_address,
 								       telefono: Faker::PhoneNumber.cell_phone,
 								       fax: Faker::PhoneNumber.phone_number,
-                                                  foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample),
+                       foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample),
 											 confirmed_at: Time.now
 											 )
 		u_otro.skip_confirmation!
 		u_otro.save!
+
+
+		uu = Usuario.new(nombreUsuario: "DiegoDiamante",
+								       password: password, 
+								       password_confirmation: password,  
+								       apellido_nombre: "DiegoDiamante",
+								       email: "diego@diego.com",
+								       direccion: Faker::Address.street_address,
+								       telefono: Faker::PhoneNumber.cell_phone,
+								       fax: Faker::PhoneNumber.phone_number,
+                       foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample),
+											 confirmed_at: Time.now
+											 )
+		uu.skip_confirmation!
+		uu.save!
 
 
 
@@ -301,6 +319,7 @@ v = Voluntario.new(nombreUsuario: "agustin",
 
 			#PRIVILEGIOS DE SISTEMA
  			AsignacionFuncion.create!(usuario: u, rol: rsdiego, esActual: true, descripcion: "default")
+			AsignacionFuncion.create!(usuario: uu, rol: rsdiego, esActual: true, descripcion: "default")
 			AsignacionFuncion.create!(usuario: u_otro, rol: rsdiego, esActual: true, descripcion: "default")
 			AsignacionFuncion.create!(usuario: u1, rol: rsdiego, esActual: true, descripcion: "default")
 			AsignacionFuncion.create!(usuario: u2, rol: rsdiego, esActual: true, descripcion: "default")
@@ -314,11 +333,18 @@ v = Voluntario.new(nombreUsuario: "agustin",
 			AsignacionFuncion.create!(usuario: u10, rol: rsdiego, esActual: true, descripcion: "default")
 			AsignacionFuncion.create!(usuario: v, rol: rsdiego, esActual: true, descripcion: "default")	
 
+
+			#PRIVILEGIOS DE COORDINADORSISTEMA
+					
+
 			#PRIVILEGIOS DE PROYECTO
 			AsignacionRol.create!(proyecto: p , usuario: u, rol: director , esActual: true)
       AsignacionRol.create!(proyecto: p , usuario: u, rol: voluntario, esActual: true)
+			AsignacionRol.create!(proyecto: p , usuario: u_otro, rol: coordinador , esActual: true)
+      AsignacionRol.create!(proyecto: p , usuario: u_otro, rol: voluntario, esActual: true)
 
 
+			
 
       HistorialEstadoProyecto.create(proyecto: p, estado_proyecto: creado)
 
