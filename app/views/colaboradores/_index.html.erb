@@ -9,6 +9,15 @@
   </thead>
 
   <tbody>
+    <% if @colaboradores.empty? then %>
+      <tr>
+        <td>
+        <p>
+          No hay Colaboradores asociados.
+        </p>
+        </td>
+      </tr>
+    <% end %>
     <% @colaboradores.each do |colaborador| %>
       <tr>
         <td><%= colaborador.organizacion_externa %></td>

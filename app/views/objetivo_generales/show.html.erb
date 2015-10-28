@@ -37,6 +37,12 @@
 
 
 	    <h2> Objetivos Específicos </h2>
+
+<% if @objetivo_general.objetivo_especificos.empty? then %>
+        <p>
+          No hay Objetivos Específicos creados
+        </p>
+    <% end %>
 <% @objetivo_general.objetivo_especificos.each do |obj| %>
             <div class="panel panel-primary">
               <div class="panel-heading">

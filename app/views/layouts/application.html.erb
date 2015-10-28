@@ -3,8 +3,8 @@
 <head>
   <title>S.E.V.U.</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= javascript_include_tag 'application', 'bootstrap' => true %>
-  <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
+  <%= javascript_include_tag 'application', 'bootstrap' => true, :cache => 'cached/all1' %>
+  <%= javascript_include_tag "//www.google.com/jsapi", "chartkick", :cache => 'cached/all2' %>
   <%= csrf_meta_tags %>
   <%= favicon_link_tag 'favicon.ico' %>
 </head>

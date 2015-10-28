@@ -1604,7 +1604,7 @@ textarea.form-control {
 }
 .radio + .radio,
 .checkbox + .checkbox {
-  margin-top: -5px;
+  margin-top: 0px;
 }
 .radio-inline,
 .checkbox-inline {

@@ -6,6 +6,9 @@ class OrganizacionExternasController < ApplicationController
   def index
 		authorize! :index, OrganizacionExterna
     @organizacion_externas = OrganizacionExterna.page(params[:page]).search query: params[:q]
+    if @organizacion_externas.nil?
+      @organizacion_externas = ["Nombre inexistente"]
+    end
   end
 
   # GET /organizacion_externas/1

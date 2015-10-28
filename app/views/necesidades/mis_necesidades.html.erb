@@ -3,6 +3,11 @@
 
 <div class="row">
   <div class="col-lg-12">
+  	<% if @necesidades.empty? then %>
+  		<p>
+  			No hay Necesidades creadas.
+  		</p>
+  	<% end %>
     <% @necesidades.each do |necesidad| %>
 
             <div class="panel panel-primary">

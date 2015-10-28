@@ -13,7 +13,7 @@
                   </tr>
                 </thead>
 
-                <tbody>
+                <tbody>           
                     <% @asignacion_actividades.each do |asignacion| %>
                     <tr>
                         <td><%= asignacion.usuario %></td>
@@ -30,7 +30,11 @@
                     <% end %>
  </tbody>
 </table>
-                  
+<% if @asignacion_actividades.empty? then %>
+  <p>
+    No se encuentra asignado ningun Usuario.
+  </p>
+<% end %>
 
 <%= link_to '+', new_asignacion_actividad_path(:actividad_id => @actividad.id) , :class => "classbtn btn-primary btn-sm" %> | 
 <%= link_to 'Atrás', @actividad %>

@@ -8,21 +8,21 @@
               
                       <% if can? :create, Proyecto then %>
                           <li>
-                            <a href="#">
+                              
                               <%= link_to 'Crear Proyectos', new_proyecto_path %>
-                            </a>
+                            
                           </li>
                       <% end %>            
               
                     <% if can? :index, Proyecto then %>
-                        <li><a href="#">
+                        <li>
                           <%= link_to 'Visualizar Proyectos', proyectos_path %>
-                        </a></li>
+                        </li>
                     <% end %>
 
-                    <li><a href="#">
+                    <li>
                       <%= link_to 'Mis Proyectos', proyectos_mis_proyectos_path %>
-                    </a></li>  
+                    </li>  
 
                     <% if defined?(@proyecto) && !@proyecto.id.nil? && (can? :show, Proyecto) %>
                           <li>

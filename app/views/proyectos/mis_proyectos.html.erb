@@ -1,16 +1,21 @@
 <h1>Lista de Proyectos</h1>
 <div class="row">
-          <div class="col-lg-12">
-          <% @proyectos.each do |proyecto| %>
+    <div class="col-lg-12">
+      <% if @proyectos.empty? then %>
+        <p>
+          No se encuentra participando en ningun Proyecto actualmente.
+        </p>
+      <% end %>
+    <% @proyectos.each do |proyecto| %>
 
-            <div class="panel panel-primary">
-              <div class="panel-heading">
-		<% if !proyecto.nombre.blank? %>
-		      <h3 class="panel-title">	<%= link_to proyecto.nombre, proyecto %>
-		      </h3>
-		<% else %>
-			No se ha asignado ningun nombre al proyecto
-		<% end %>
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+		      <% if !proyecto.nombre.blank? %>
+  		      <h3 class="panel-title">	<%= link_to proyecto.nombre, proyecto %>
+  		      </h3>
+		      <% else %>
+			       No se ha asignado ningun nombre al proyecto
+		      <% end %>
 
 
 

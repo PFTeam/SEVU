@@ -1,14 +1,19 @@
 <%= simple_form_for(@actividad , html: actividad_form_html_options, wrapper_mappings: {checkboxes: :horizontal_radio_and_checkboxes, boolean: :horizontal_boolean}) do |f| %>
   <% if @actividad.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@actividad.errors.count, "error") %> prohibited this actividad from being saved:</h2>
-
-      <ul>
-      <% @actividad.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
+    <div class="col-lg-12">
+      <div class="col-lg-4"></div>
+        <div id="error_explanation" class="col-lg-4">
+          <div class="alert alert-danger">
+            <a class="close" data-dismiss="alert">x</a>      
+            <strong><%= pluralize(@actividad.errors.count, "Error") %> en la creacion de la actividad:</strong>
+            <ul>
+              <% @actividad.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
   <% end %>
 
 <div class="row">
@@ -20,10 +25,10 @@
                 
             
                 </br>
-		<%= f.input :repetitiva, :as => :boolean , :html => {:style => "width: 100px" } %>
+		<%= f.input :repetitiva, inline_label: "Repetitiva", label: false, :as => :boolean , :input_html => {:style => "width: 10%; height: 25px" } %>
+    </br>
 
-
-		<%= f.input :frecuencia, :as => :radio_buttons, :collection => [['Por Semana', 'Por Semana'], ['Por Mes','Por Mes']] %>
+		<%= f.input :frecuencia, :as => :radio_buttons, :input_html => {:style => "width: 10%; height: 25px", :class => "radio-inline"}, :item_wrapper_class => 'inline', :collection => [['Por Semana', 'Por Semana'], ['Por Mes','Por Mes']] %>
 
           
                 <label><h3>Descripción</h3>

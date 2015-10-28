@@ -2,6 +2,11 @@
 <h1>Lista Eventos Públicos</h1>
 <div class="row">
   <div class="col-lg-12">
+  	<% if @evento_publicos.empty? then %>
+  		<p>
+  			No hay Eventos Públicos creados.
+  		</p>
+  	<% end %>
     <% @evento_publicos.each do |evento_publico| %>
 
             <div class="panel panel-primary">

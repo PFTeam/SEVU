@@ -178,10 +178,10 @@ namespace :db do
 			EstadoUsuario.create(nombre: "Suspendido", descripcion: "El usuario se encuentra suspendido dentro del sistema")
 
 
-    u= Usuario.new(nombreUsuario: "joel",
+    u= Usuario.new(nombreUsuario: "JoelNoguera",
 								       password: password, 
 								       password_confirmation: password,  
-								       apellido_nombre: "Sierra, Adrian",
+								       apellido_nombre: "Noguera, Joel",
 								       email: "one.last.heaven@gmail.com",
 								       direccion: Faker::Address.street_address,
 								       telefono: Faker::PhoneNumber.cell_phone,
@@ -192,7 +192,7 @@ namespace :db do
 		u.skip_confirmation! #u.confirm!
 		u.save!
 
-    u_otro = Usuario.new(nombreUsuario: "adrian",
+    u_otro = Usuario.new(nombreUsuario: "AdrianSierra",
 								       password: password, 
 								       password_confirmation: password,  
 								       apellido_nombre: "Sierra, Adrian",

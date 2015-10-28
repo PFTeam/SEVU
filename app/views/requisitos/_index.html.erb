@@ -1,5 +1,4 @@
 <h1>Lista de Requisitos</h1>
-
 <table>
   <thead>
     <tr>
@@ -18,6 +17,10 @@
     <% end %>
   </tbody>
 </table>
-
+<% if @requisitos.empty? then %>
+                      <p>
+                        No se encuentra asignado ningún requisito.
+                      </p>
+                    <% end %>
 <br>
 

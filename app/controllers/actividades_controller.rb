@@ -77,7 +77,7 @@ class ActividadesController < ApplicationController
       end
     else
       @actividad.repetitiva = false
-      @actividad.frecuancia = 'No es Repetitiva'
+      @actividad.frecuencia = 'No es Repetitiva'
       @actividad.dia_semana = 'No es Reetitiva'
 
     end

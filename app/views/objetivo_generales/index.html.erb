@@ -1,6 +1,10 @@
 <h1>Objetivos Generales</h1>
 
-
+    <% if @proyecto.objetivo_generales.empty? then %>
+        <p>
+          No hay Objetivos Generales creados
+        </p>
+    <% end %>
     <% @proyecto.objetivo_generales.each do |objetivo_general| %>
             <div class="panel panel-primary">
               <div class="panel-heading">

@@ -51,7 +51,7 @@ class Autocomplete
     if data.length
       response jQuery.map data, (item) => @_renderItem item
     else
-      emptyResultLabel = @element.data('emptyResultLabel') || '---'
+      emptyResultLabel = @element.data('emptyResultLabel') || '<span class="title">Sin resultados</span>'
 
       response [ label: emptyResultLabel, value: '', item: {} ]
 
