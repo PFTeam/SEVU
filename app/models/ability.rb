@@ -142,7 +142,7 @@ class Ability
 								can :manage, ConceptoGasto
 								can :gestionar_concepto_gastos, ConceptoGasto
 						end
-						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'proyecto_publico').id 
+						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'proyecto_voluntario').id 
 								can :show, Proyecto
 								can :show, Actividad
 								can :show, ObjetivoGeneral
@@ -192,7 +192,7 @@ class Ability
 								can :show, AsignacionRol
 								can :index, AsignacionRol
 						end
-						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'index_show_objetivos').id 
+						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'index_show_objetivos').id
 								can :show, ObjetivoGeneral
 								can :index, ObjetivoGeneral
 								can :show, ObjetivoEspecifico

@@ -47,7 +47,7 @@ namespace :db do
 			pap6diego=Privilegio.create(nombre: "show_detalle_gastos", descripcion: "Permite ver los detalles de gastos", tipo_privilegio: ppdiego)
 			pap7diego=Privilegio.create(nombre: "comprobantes", descripcion: "Permite manejar los comprobantes", tipo_privilegio: ppdiego)
 			pap8diego=Privilegio.create(nombre: "concepto_gastos", descripcion: "Permite manejar los conceptos de gastos", tipo_privilegio: ppdiego)
-			pap9diego=Privilegio.create(nombre: "proyecto_publico", descripcion: "Permite ver el proyecto, actividades, objetivos generales y específicos", tipo_privilegio: ppdiego)
+			pap9diego=Privilegio.create(nombre: "proyecto_voluntario", descripcion: "Permite ver el proyecto, actividades, objetivos generales y específicos", tipo_privilegio: ppdiego)
 			pap10diego=Privilegio.create(nombre: "edit_proyecto", descripcion: "Permite ver las organizaciones externas y editar el proyecto", tipo_privilegio: ppdiego)
 			pap11diego=Privilegio.create(nombre: "tipo_proyectos", descripcion: "Permite manejar los tipos de proyectos", tipo_privilegio: ppdiego)
 			pap12diego=Privilegio.create(nombre: "habilidades", descripcion: "Permite manejar las habilidades", tipo_privilegio: ppdiego)
@@ -177,10 +177,27 @@ namespace :db do
 		arv13diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap52diego  , rol: voluntario)
 		arv14diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap53diego  , rol: voluntario)
 		arv15diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap51diego  , rol: voluntario)
+		arv16diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap9diego  , rol: voluntario)
+
+
+
 
 			EstadoUsuario.create(nombre: "Activo", descripcion: "El usuario se encuentra activo dentro del sistema")
 			EstadoUsuario.create(nombre: "Suspendido", descripcion: "El usuario se encuentra suspendido dentro del sistema")
 
+		uuuu= Usuario.new(nombreUsuario: "admin",
+								       password: password, 
+								       password_confirmation: password,  
+								       apellido_nombre: "Administrador",
+								       email: "admin@sevu.com",
+								       direccion: Faker::Address.street_address,
+								       telefono: Faker::PhoneNumber.cell_phone,
+								       fax: Faker::PhoneNumber.phone_number,
+                       foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample),
+											 confirmed_at: Time.now
+											 )
+		uuuu.skip_confirmation! #u.confirm!
+		uuuu.save!
 
     u= Usuario.new(nombreUsuario: "JoelNoguera",
 								       password: password, 
@@ -224,6 +241,20 @@ namespace :db do
 											 )
 		uu.skip_confirmation!
 		uu.save!
+
+		uuu = Usuario.new(nombreUsuario: "Pepe",
+								       password: password, 
+								       password_confirmation: password,  
+								       apellido_nombre: "Voluntario",
+								       email: "voluntario@voluntario.com",
+								       direccion: Faker::Address.street_address,
+								       telefono: Faker::PhoneNumber.cell_phone,
+								       fax: Faker::PhoneNumber.phone_number,
+                       foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample),
+											 confirmed_at: Time.now
+											 )
+		uuu.skip_confirmation!
+		uuu.save!
 
 
 
@@ -333,6 +364,8 @@ v = Voluntario.new(nombreUsuario: "agustin",
 			AsignacionFuncion.create!(usuario: u9, rol: rsdiego, esActual: true, descripcion: "default")
 			AsignacionFuncion.create!(usuario: u10, rol: rsdiego, esActual: true, descripcion: "default")
 			AsignacionFuncion.create!(usuario: v, rol: rsdiego, esActual: true, descripcion: "default")	
+			AsignacionFuncion.create!(usuario: uuu, rol: rsdiego, esActual: true, descripcion: "default")
+			AsignacionFuncion.create!(usuario: uuuu, rol: rsdiego, esActual: true, descripcion: "default")
 
 
 			#PRIVILEGIOS DE COORDINADORSISTEMA
@@ -343,6 +376,7 @@ v = Voluntario.new(nombreUsuario: "agustin",
       AsignacionRol.create!(proyecto: p , usuario: u, rol: voluntario, esActual: true)
 			AsignacionRol.create!(proyecto: p , usuario: u_otro, rol: coordinador , esActual: true)
       AsignacionRol.create!(proyecto: p , usuario: u_otro, rol: voluntario, esActual: true)
+			 AsignacionRol.create!(proyecto: p , usuario: uuu, rol: voluntario, esActual: true)
 
 
 			
