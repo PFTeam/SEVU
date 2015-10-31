@@ -18,8 +18,10 @@ class Ability
 						if asignacionrolpredefinido.rol==asignacionfuncion.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'proyecto_publico').id 						
 								can :index, Proyecto
 								can :mis_proyectos, Proyecto
-								#can :show, Proyecto
-								
+								#can :show, Proyecto	
+						end
+						if asignacionrolpredefinido.rol==asignacionfuncion.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'new_postulacion').id 
+								can [:new, :create], Postulacion
 						end
 						if asignacionrolpredefinido.rol==asignacionfuncion.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'notificacion_sistema').id 
 								can :manage, NotificacionSistema
@@ -175,10 +177,7 @@ class Ability
 								can :manage, Restriccion
 								can :gestionar_restricciones, Restriccion
 						end
-						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'show_new_postulacion').id 
-								can :show, Postulacion
-								can :new, Postulacion
-						end
+						
 
 						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'index_show_actividad').id 
 								can :show, Actividad

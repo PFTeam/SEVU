@@ -55,7 +55,7 @@ namespace :db do
 			pap15diego=Privilegio.create(nombre: "new_presupuesto", descripcion: "Permite crear presupuestos", tipo_privilegio: ppdiego)
 			pap16diego=Privilegio.create(nombre: "edit_presupuesto", descripcion: "Permite editar presupuestos", tipo_privilegio: ppdiego)
 			pap17diego=Privilegio.create(nombre: "restricciones", descripcion: "Permite manejar las restricciones", tipo_privilegio: ppdiego)
-			pap18diego=Privilegio.create(nombre: "show_new_postulacion", descripcion: "Permite mostrar y crear las postulaciones", tipo_privilegio: ppdiego)			
+			pap18diego=Privilegio.create(nombre: "new_postulacion", descripcion: "Permite mostrar y crear las postulaciones", tipo_privilegio: ppdiego)			
 			pap20diego=Privilegio.create(nombre: "edit_actividad", descripcion: "Permite editar la actividad y manejar detalles de gastos, comprobantes y reportes", tipo_privilegio: ppdiego)
 			pap21diego=Privilegio.create(nombre: "manage_postulacion", descripcion: "Permite manejar las postulaciones", tipo_privilegio: ppdiego)
 			pap22diego=Privilegio.create(nombre: "asignacion_actividad", descripcion: "Permite manejar las asignaciones de actividades", tipo_privilegio: ppdiego)
@@ -102,6 +102,7 @@ namespace :db do
 			rd13diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pa17diego , rol: rsdiego)
 			rd14diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pa18diego , rol: rsdiego)
 			rd15diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pa20diego , rol: rsdiego)
+			rd16diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap18diego , rol: rsdiego)
 
 
 
