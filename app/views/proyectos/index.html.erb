@@ -12,7 +12,12 @@
               <div class="panel-heading">
 
 		<% if !proyecto.nombre.blank? %>
-		      <h3 class="panel-title">	<%= link_to proyecto.nombre, proyecto %>
+		      <h3 class="panel-title">	
+						<% if can? :show, Proyecto;%>	
+							<%= link_to proyecto.nombre, proyecto %>
+						<% else %>
+							<%= proyecto.nombre %>
+						<% end %>
 		      </h3>
 		<% else %>
 			No se ha asignado ningun nombre al proyecto
