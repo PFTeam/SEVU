@@ -37,9 +37,7 @@ class ProyectosController < ApplicationController
     @tipoProyectos = TipoProyecto.all
   
     #Se renderiza el modal de 'edit' mediante js 
-    respond_to do |format|
-      format.js {render partial: 'edit', content_type: 'text/html'}
-    end
+
 
   end
 
@@ -53,8 +51,13 @@ class ProyectosController < ApplicationController
 
     #Se hacen un new con los parámetros recibidos
     @proyecto = Proyecto.new(proyecto_params)
-    
 
+    #Se cargan los TipoProyecto existentes para poder visualizarlos en la view
+    @tipoProyectos = TipoProyecto.all
+
+    #Se cargan los EstadosProyectos que son posibles para estado 'Creado'
+    @estadosPosibles = [EstadoProyecto.find_by(nombre: 'Creado')]
+    @coordinador_rol = Rol.find_by(nombre: "Coordinador")
 
 
     #Se crea un HistorialEstadoProyecto con el Estado 'Creado'.
@@ -63,6 +66,8 @@ class ProyectosController < ApplicationController
     #Se renderiza según el formato 'html' o 'js' las respectivas vistas según los casos de éxito y fracaso.
     respond_to do |format|
       if @proyecto.save
+        @coordinador = AsignacionRol.new(rol: @coordinador_rol, usuario: current_usuario, proyecto: @proyecto, active: true, esActual: true)
+        @coordinador.save
             sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
             Transaccion.create!(
 		    descripcion: 'Creación del Proyecto:' + @proyecto.nombre ,
@@ -72,7 +77,7 @@ class ProyectosController < ApplicationController
         format.json { render :show, status: :created, location: @proyecto }
       else
         format.html { render :new }
-	format.json { render json: @proyecto.errors, status: :unprocessable_entity}
+	      format.json { render json: @proyecto.errors, status: :unprocessable_entity}
       end
     end
   end
@@ -81,6 +86,11 @@ class ProyectosController < ApplicationController
   # PATCH/PUT /proyectos/1.json
   def update
     authorize! :update, Proyecto
+    #Se cargan los TipoProyecto existentes para poder visualizarlos en la view
+    @tipoProyectos = TipoProyecto.all
+
+    #Se cargan los EstadosProyectos que son posibles para estado 'Creado'
+    @estadosPosibles = [EstadoProyecto.find_by(nombre: 'Creado')]
 
     #Se renderiza según el formato 'html' o 'js' las respectivas vistas según los casos de éxito y fracaso.
     respond_to do |format|
@@ -96,7 +106,7 @@ class ProyectosController < ApplicationController
       else
         #format.js {render partial: 'edit_form'}
         format.js { render partial: 'edit', status: :unprocessable_entity }
-        format.html { render partial: 'edit', status: :unprocessable_entity }
+        format.html { render 'edit'}
         format.json { render json: @proyecto.errors, status: :unprocessable_entity }
       end
     end
@@ -133,6 +143,7 @@ class ProyectosController < ApplicationController
 	  #Se setea el proyecto actual con el parametro :id que recibe
 	  set_proyecto 
   end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -36,39 +36,47 @@ class AsignacionActividadesController < ApplicationController
   def create
 		authorize! :create, AsignacionActividad
 		@actividad = Actividad.find(params[:asignacion_actividad][:actividad_id])
-	@proyecto = @actividad.proyecto
+  	@proyecto = @actividad.proyecto
 
-	if params[:asignacion_actividad][:usuario_id].to_s.blank? #(!defined? (params[:usuario_id])) && (defined? params[:usuario])
-                p "VACIOOO"
+  	if params[:asignacion_actividad][:usuario_id].to_s.blank? #(!defined? (params[:usuario_id])) && (defined? params[:usuario])
+      p "VACIOOO"
 
-		@asignacion_actividad= AsignacionActividad.new
-	        @usuarios = Usuario.page(params[:page]).search query: params[:asignacion_actividad][:usuario]
-		respond_to do |format|
-			format.html { render '/asignacion_actividades/busqueda_filtrada', :actividad_id => @actividad.id, :usuario => params[:usuario] }
-	        end
-	else
-		p "NOOO VACIOOO"
-	        @asignacion_actividad = AsignacionActividad.new(actividad_id: params[:asignacion_actividad][:actividad_id], usuario_id: params[:asignacion_actividad][:usuario_id])
-		@asignacion_actividad.vigente = true
-	        if unica(@asignacion_actividad.usuario_id,@asignacion_actividad.actividad_id) == true
+  		@asignacion_actividad= AsignacionActividad.new
+      @usuarios = Usuario.page(params[:page]).search query: params[:asignacion_actividad][:usuario]
+  		respond_to do |format|
+  			format.html { render '/asignacion_actividades/busqueda_filtrada', :actividad_id => @actividad.id, :usuario => params[:usuario] }
+      end
+  	else
+  		p "NOOO VACIOOO"
+      #aca agregar revision asignacion proyecto
+      if en_proyecto(params[:asignacion_actividad][:usuario_id], @proyecto.id)
+        @asignacion_actividad = AsignacionActividad.new(actividad_id: params[:asignacion_actividad][:actividad_id], usuario_id: params[:asignacion_actividad][:usuario_id])
+    		@asignacion_actividad.vigente = true
+        if unica(@asignacion_actividad.usuario_id,@asignacion_actividad.actividad_id) == true
 
-		    respond_to do |format|
-			    if  @asignacion_actividad.save
-			      format.html { redirect_to :controller => 'asignacion_actividades', :action => 'index', :actividad_id => @asignacion_actividad.actividad.id
-				      flash[:notice] = 'Asignacion actividad fue creado satisfactoriamente.' }
-			      format.json { render :show, status: :created, location: @asignacion_actividad }
-			    else
-				format.html { render :new }
-				format.json { render json: @asignacion_actividad.errors, status: :unprocessable_entity }
-			    end
-		     end
-		else
-		    respond_to do |format|
-		    format.html { redirect_to :controller => 'asignacion_actividades', :action => 'index', :actividad_id => @asignacion_actividad.actividad.id
-		             flash[:notice] = 'El usuario ya se encuentra asignado' } 
-	            end
-		end
-	end
+    	    respond_to do |format|
+      	    if  @asignacion_actividad.save
+      	      format.html { redirect_to :controller => 'asignacion_actividades', :action => 'index', :actividad_id => @asignacion_actividad.actividad.id
+      		      flash[:notice] = 'Asignacion actividad fue creado satisfactoriamente.' }
+      	      format.json { render :show, status: :created, location: @asignacion_actividad }
+      	    else
+      				format.html { render :new }
+      				format.json { render json: @asignacion_actividad.errors, status: :unprocessable_entity }
+      	    end
+          end    
+    		else
+    	    respond_to do |format|
+    		    format.html { redirect_to :controller => 'asignacion_actividades', :action => 'index', :actividad_id => @asignacion_actividad.actividad.id
+    		             flash[:notice] = 'El usuario ya se encuentra asignado' } 
+          end
+    		end
+      else 
+        respond_to do |format|
+            format.html { redirect_to :controller => 'asignacion_actividades', :action => 'index', :actividad_id => params[:asignacion_actividad][:actividad_id]
+                     flash[:notice] = 'El usuario no se encuentra asignado al Proyecto' } 
+        end  
+      end 
+  	end
   end
 
   # PATCH/PUT /asignacion_actividades/1
@@ -113,14 +121,25 @@ class AsignacionActividadesController < ApplicationController
   end
 
   def unica( usuario, actividad) 
-	if AsignacionActividad.all.where(usuario_id: usuario, actividad_id: actividad,vigente: true ).count == 0
-		p true
-		true
-	else
-		p false
-		false
-	end
+  	if AsignacionActividad.all.where(usuario_id: usuario, actividad_id: actividad,vigente: true ).count == 0
+  		p true
+  		true
+  	else
+  		p false
+  		false
+  	end
   end
+
+  def en_proyecto( usuario, proyecto)
+    if AsignacionRol.all.where(usuario_id: usuario, proyecto_id: proyecto).count == 0
+      p false
+      false
+    else
+      p true
+      true
+    end
+  end
+
 
   def busqueda_filtrada
 				authorize! :busqueda_filtrada, AsignacionActividad

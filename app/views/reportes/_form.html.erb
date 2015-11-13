@@ -1,20 +1,29 @@
 <%= simple_form_for(@reporte) do |f| %>
   <% if @reporte.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@reporte.errors.count, "error") %> prohibited this report from being saved:</h2>
-
-      <ul>
-      <% @reporte.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
+    <div class="col-lg-12">
+      <div class="col-lg-4"></div>
+       
+          <div class="alert alert-danger col-lg-4">
+            <a class="close" data-dismiss="alert">x</a>      
+            <strong><%= pluralize(@reporte.errors.count, "Error") %> en la creacion del Reporte:</strong>
+            <ul>
+              <% @reporte.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        
+      </div>
   <% end %>
 
+      
+<div class="col-lg-12">
   <%= f.input :descripcion %><br>
     
   <%= f.input :asignacion_actividad_id,:as => :hidden, input_html: {value: @asignacion_actividad.id} %>
     
+
+    </div>
   <div class="modal-footer">
           <%= f.button :submit, :class => 'btn btn-primary', :value => 'Confirmar' %>
   </div>

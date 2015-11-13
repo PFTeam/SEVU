@@ -1,4 +1,3 @@
-<!----->
 <%= simple_form_for(@asignacion_rol, html: asignacion_rol_form_html_options) do |f| %>
   <% if @asignacion_rol.errors.any? %>
     <div id="error_explanation">
@@ -8,6 +7,7 @@
         <li><%= message %></li>
       <% end %>
       </ul>
+    </div>
     </div>
   <% end %>
 
@@ -26,7 +26,7 @@
 
   <% unless @asignacion_rol.usuario.presence %>
   <strong> Usuario </strong>
-   <%= f.input :usuario, as: :autocomplete, label: false, url: usuarios_path, input_html: { autofocus: true  }  %>
+   <%= f.input :usuario, as: :autocomplete, label: false, url: usuarios_proyecto_path , input_html: { autofocus: true  }  %>
   <% else %>
     <%= f.input :usuario_id,:as => :hidden, input_html: {value: params[:usuario_id]} %>
   <% end %>

@@ -7,7 +7,8 @@
   <thead>
     <tr>
       <th>Estado Proyecto</th>
-      <th>Fecha Cambio Estado</th>
+      <th>Fecha Inicio Estado</th>
+      <th>Fecha Fin Estado</th>
       <th>Es Actual</th>
       <th colspan="3"></th>
     </tr>
@@ -15,15 +16,21 @@
 
   <tbody>
     <% @proyecto.historial_estado_proyectos.each_with_index do |historial_estado_proyecto, index| %>
-      <tr>
+      <% if index+1 == @proyecto.historial_estado_proyectos.size %>
+                    <tr style="color: black">
+                    <%else %>
+                    <tr style="font-style: italic">
+                    <% end %>
 	      <td><%= historial_estado_proyecto.estado_proyecto %></td>
 	      <td><%= historial_estado_proyecto.created_at.to_formatted_s(:long_ordinal) %></td>
+        <td><%= historial_estado_proyecto.updated_at.to_formatted_s(:long_ordinal) %></td>
 	      <td><% if index+1 == @proyecto.historial_estado_proyectos.size %> Sí <% else %> No <% end %></td>
 	      <td><%=  %> </td>
       </tr>
 	<% if index+1 == @proyecto.historial_estado_proyectos.size %>
 		<%= link_to 'Modificar Ultimo Estado', edit_historial_estado_proyecto_path(historial_estado_proyecto, :proyecto_id => @proyecto.id) %> |
 	<% end %>
+    <%= link_to 'Atras', proyecto_path(@proyecto) %>
     <% end %>
   </tbody>
 </table>

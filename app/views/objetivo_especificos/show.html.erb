@@ -6,7 +6,7 @@
               <div class="panel-heading">
 
 		<% if !@objetivo_especifico.titulo.blank? %>
-		      <h3 class="panel-title">Objetivo Específico: <%= link_to @objetivo_especifico.titulo%>
+		      <h3 class="panel-title">Objetivo Específico: <%= link_to @objetivo_especifico.titulo , :style => "font-size: 22px;"%>
 		      </h3>
 		<% else %>
 			No se ha asignado ningun nombre al Objetivo Específico
@@ -32,7 +32,7 @@
               </div>
       </div>
 
-<%= link_to 'Editar', edit_objetivo_especifico_path(@objetivo_especifico, :objetivo_general_id => @objetivo_especifico.objetivo_general_id), remote: true, data: { target: 'modal', modal: true } %> |
+<%= link_to 'Editar', edit_objetivo_especifico_path(@objetivo_especifico, :objetivo_general_id => @objetivo_especifico.objetivo_general_id) %> |
         <%= link_to 'Borrar', @objetivo_especifico, method: :delete, data: { confirm: 'Esta seguro?' } %> |
 <%= link_to 'Atrás', @objetivo_especifico.objetivo_general %>
 <h2> Actividades </h2>
@@ -46,7 +46,7 @@
               <div class="panel-heading">
 
 		<% if !actividad.nombre.blank? %>
-			<h3 class="panel-title">Actividades: <%= link_to actividad.nombre, actividad%>
+			<h3 class="panel-title">Actividad: <%= link_to actividad.nombre, actividad , :style => "font-size: 22px;"%>
 			<%= link_to 'Borrar', actividad, method: :delete, data: { confirm: 'Seguro?' } %>
 		      </h3>
 		<% else %>
@@ -73,7 +73,7 @@
               </div>
             </div>
  <% end %>
-<%= link_to 'Nuevo Actividad', new_actividad_path(:objetivo_especifico_id => @objetivo_especifico.id, :proyecto_id => @objetivo_especifico.objetivo_general.proyecto.id) %>
+<%= link_to 'Nueva Actividad', new_actividad_path(:objetivo_especifico_id => @objetivo_especifico.id, :proyecto_id => @objetivo_especifico.objetivo_general.proyecto.id) %>
 
 </div>
 

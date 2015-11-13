@@ -66,7 +66,7 @@
         </table>
 
 <% if params[:proyecto_id] %>
-	<%= link_to 'Atrás', '/proyectos/' + params[:proyecto_id] %>
+	<%= link_to 'Atrás', '/colaboradores/new?proyecto_id=' + params[:proyecto_id] %>
 <% else %>
-	<%= link_to 'Atrás', organizacion_externas_path %>
+	<%= link_to 'Atrás', :back %>
 <% end %>

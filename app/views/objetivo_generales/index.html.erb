@@ -10,7 +10,7 @@
               <div class="panel-heading">
 
 		<% if !objetivo_general.titulo.blank? %>
-		      <h3 class="panel-title">Objetivo General: <%= link_to objetivo_general.titulo, objetivo_general %>
+		      <h3 class="panel-title">Objetivo General: <%= link_to objetivo_general.titulo, objetivo_general, :style => "font-size: 22px;" %>
 		      </h3>
 		<% else %>
 			No se ha asignado ningun nombre al Objetivo General

@@ -21,7 +21,7 @@
     <% @colaboradores.each do |colaborador| %>
       <tr>
         <td><%= colaborador.organizacion_externa %></td>
-        <td><%= link_to 'Ver', colaborador.organizacion_externa , :proyecto_id => colaborador.proyecto_id  %>  |  <!-- NO PASA EL PARAM -->
+        <td><%= link_to 'Ver', organizacion_externa_path(colaborador.organizacion_externa, :proyecto_id => colaborador.proyecto_id) %>  |  <!-- NO PASA EL PARAM -->
         <%= link_to 'Borrar', colaborador , method: :delete, data: { confirm: 'Seguro?' } %></td>
       </tr>
     <% end %>

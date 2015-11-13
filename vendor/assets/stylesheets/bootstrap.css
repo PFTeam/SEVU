@@ -118,6 +118,7 @@ textarea {
   font-family: inherit;
   font-size: 100%;
   margin: 0;
+  resize: vertical;
 }
 button,
 input {
@@ -5897,4 +5898,7 @@ td.visible-print {
   td.hidden-print {
     display: none !important;
   }
+}
+div { 
+  overflow-wrap: break-word;
 }

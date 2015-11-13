@@ -12,9 +12,9 @@
               <div class="panel-heading">
 
 		<% if !proyecto.nombre.blank? %>
-		      <h3 class="panel-title">	
+		      <h3 class="panel-title" style='overflow-wrap: break-word;'>	
 						<% if can? :show, Proyecto;%>	
-							<%= link_to proyecto.nombre, proyecto %>
+							<%= link_to proyecto.nombre, proyecto, :style=>'overflow-wrap: break-word;' %>
 						<% else %>
 							<%= proyecto.nombre %>
 						<% end %>
@@ -29,7 +29,7 @@
               <div class="panel-body">
                 
                 <label>Descripción del Proyecto</label>
-                <p> 
+                <p  style='overflow-wrap: break-word;'> 
 		<% if !proyecto.breveDescripcion.blank? %>
 			<%= proyecto.breveDescripcion %>
 		<% else %>
@@ -40,8 +40,9 @@
                 <p> <!-- #TODO: Agregar validación de un solo director -->
 
 		<% if !proyecto.director.nil? %>
+		 |
                    <% for director in proyecto.director %>
-                   		<i class="fa fa-user"></i><%= link_to director.usuario.apellido_nombre.to_s, usuario_path(director) %> |   
+                   		 <i class="fa fa-user"></i><%= link_to director.apellido_nombre.to_s, usuario_path(director) %>  |
                    <% end %>
 
                      

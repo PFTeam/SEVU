@@ -5,7 +5,7 @@
               <div class="panel-heading">
 
 		<% if !@objetivo_general.titulo.blank? %>
-		      <h3 class="panel-title">Objetivo General: <%= link_to @objetivo_general.titulo%>
+		      <h3 class="panel-title">Objetivo General: <%= link_to @objetivo_general.titulo , :style => "font-size: 22px;"%>
 		      </h3>
 		<% else %>
 			No se ha asignado ningun nombre al Objetivo Específico
@@ -31,7 +31,7 @@
               </div>
       </div>
 
-      <%= link_to 'Editar', edit_objetivo_general_path(@objetivo_general, :proyecto_id => params[:proyecto_id]), remote: true, data: { target: 'modal', modal: true } %> |
+      <%= link_to 'Editar', edit_objetivo_general_path(@objetivo_general, :proyecto_id => params[:proyecto_id]) %> |
         <%= link_to 'Borrar', @objetivo_general, method: :delete, data: { confirm: 'Esta seguro?' } %> |
 <%= link_to 'Atrás', objetivo_generales_path(:proyecto_id => @objetivo_general.proyecto.id) %>
 
@@ -48,8 +48,7 @@
               <div class="panel-heading">
 
 		<% if !obj.titulo.blank? %>
-		      <h3 class="panel-title">Objetivo Específico: <%= link_to obj.titulo, obj%>
-		      </h3>
+		      <h3 class="panel-title">Objetivo Específico: <%= link_to obj.titulo, obj, :style => "font-size: 22px;" %></h3>
 		<% else %>
 			No se ha asignado ningun nombre al Objetivo Específico
 		<% end %>

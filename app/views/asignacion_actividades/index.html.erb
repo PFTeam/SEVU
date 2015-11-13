@@ -5,7 +5,8 @@
                 <thead>
                   <tr>
                     <th class="col-lg-3">Apellido y Nombre</th>
-                    <th class="col-lg-3">Fecha Asignación </th>
+                    <th class="col-lg-2">Fecha Asignación </th>
+                    <th class="col-lg-2">Ultima Fecha Cambio </th>
                     <th class="col-lg-3">Vigente</th>
                     <th class="col-lg-3">Acciones</th>
                     <th class="col-lg-3"></th>
@@ -15,12 +16,23 @@
 
                 <tbody>           
                     <% @asignacion_actividades.each do |asignacion| %>
-                    <tr>
+                    <% if asignacion.es_vigente == "Si" %>
+                    <tr style="color: black">
+                    <%else %>
+                    <tr style="font-style: italic">
+                    <% end %>
                         <td><%= asignacion.usuario %></td>
                         <td><%= asignacion.created_at.to_formatted_s(:long_ordinal)%></td>
+                        <td><%= asignacion.updated_at.to_formatted_s(:long_ordinal)%></td>
                         <td><%= asignacion.es_vigente %></td>
-                         <td><%= link_to 'Dar Baja', asignacion_actividad_dar_baja_path(:id => asignacion.id), data: {confirm: 'Seguro?'} %> | 
-                        <%= link_to 'Borrar', asignacion, method: :delete, data: { confirm: 'Seguro?' } %> </td>
+                        <td>
+                        <% if asignacion.es_vigente == "No" %>
+                          Dar Baja </td>
+                        <% else %>
+                          <%= link_to 'Dar Baja', asignacion_actividad_dar_baja_path(:id => asignacion.id), data: {confirm: 'Seguro?'} %> 
+                        <% end %>
+                         
+                         <%#= | link_to 'Borrar', asignacion, method: :delete, data: { confirm: 'Seguro?' } %> </td>
                         <td>
                         </td>
                         <td>

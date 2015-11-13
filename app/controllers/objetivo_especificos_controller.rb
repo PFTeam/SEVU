@@ -27,9 +27,10 @@ class ObjetivoEspecificosController < ApplicationController
   # GET /objetivo_especificos/1/edit
   def edit
 		authorize! :edit, ObjetivoEspecifico
-    respond_to do |format|
-      format.js {render partial: 'edit', content_type: 'text/html' }
-    end
+    #respond_to do |format|
+    #  format.js {render partial: 'edit', content_type: 'text/html' }
+    @proyecto = @objetivo_especifico.objetivo_general.proyecto
+    #end
   end
 
   # POST /objetivo_especificos
@@ -44,6 +45,7 @@ class ObjetivoEspecificosController < ApplicationController
 		      flash[:notice] = 'Objetivo especifico fue creado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @objetivo_especifico }
       else
+        @proyecto = @objetivo_general.proyecto
         format.html { render :new }
         format.json { render json: @objetivo_especifico.errors, status: :unprocessable_entity }
       end
@@ -54,14 +56,19 @@ class ObjetivoEspecificosController < ApplicationController
   # PATCH/PUT /objetivo_especificos/1.json
   def update
 		authorize! :update, ObjetivoEspecifico
+
+    @objetivo_general = @objetivo_especifico.objetivo_general
+    @proyecto = @objetivo_especifico.objetivo_general.proyecto
+
     respond_to do |format|
       if @objetivo_especifico.update(objetivo_especifico_params)
         format.html { redirect_to @objetivo_especifico, notice: 'Objetivo especifico fue actualizado satisfactoriamente.' }
-        format.json { render :show, status: :ok, location: @objetivo_especifico }
+        #format.json { render :show, status: :ok, location: @objetivo_especifico }
         format.js   { render :show, content_type: 'text/html' }
       else
         format.html { render :edit }
-        format.json { render json: @objetivo_especifico.errors, status: :unprocessable_entity }
+        #format.json { render json: @objetivo_especifico.errors, status: :unprocessable_entity }
+        format.js {render partial: 'edit', content_type: 'text/html' }
       end
     end
   end

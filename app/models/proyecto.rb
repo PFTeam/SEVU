@@ -80,10 +80,11 @@ class Proyecto < ActiveRecord::Base
   def director
     @directores = []
     self.asignacion_roles.each do |asignacion|
-      if (asignacion.rol.nombre.to_s == 'Director') && (asignacion.rol.tipo_rol.nombre == 'Proyecto') && (asignacion.esActual == true)   #TODO: Hacerlo menos hardcodeado?
+      if (asignacion.rol.nombre == 'Director') && (asignacion.rol.tipo_rol.nombre == 'Proyecto') && (asignacion.esActual == true) && (asignacion.active == true)   #TODO: Hacerlo menos hardcodeado?
 	      @directores = @directores + asignacion.usuario.to_a
       end
     end
+    return @directores
   end
 
   #Se realiza la busqueda del usuario que está cumpliendo el rol de 'Coordinador' en el  proyecto

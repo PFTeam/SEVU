@@ -57,7 +57,9 @@ class ReportesController < ApplicationController
   def create
 		authorize! :create, Reporte
     @reporte = Reporte.new(reporte_params)
-
+    @asignacion_actividad = @reporte.asignacion_actividad
+    @actividad = @asignacion_actividad.actividad
+    @proyecto = @actividad.proyecto
     respond_to do |format|
       if @reporte.save
 	      format.html { redirect_to :action => 'index', :actividad_id => @reporte.asignacion_actividad.actividad.id 
@@ -74,6 +76,9 @@ class ReportesController < ApplicationController
   # PATCH/PUT /reportes/1.json
   def update
 		authorize! :update, Reporte
+    @asignacion_actividad = @reporte.asignacion_actividad
+    @actividad = @asignacion_actividad.actividad
+    @proyecto = @actividad.proyecto
     respond_to do |format|
       if @reporte.update(reporte_params)
         format.html { redirect_to @reporte, notice: 'Reporte fue actualizado satisfactoriamente.' }

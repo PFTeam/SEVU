@@ -1,3 +1,5 @@
+<p id="notice"><%= notice %></p>
+
 <%= simple_form_for(@colaborador) do |f| %>
 
 
@@ -7,6 +9,7 @@
 	<%= f.input :proyecto_id,:as => :hidden, input_html: {value: params[:proyecto_id]} %>
   	
   	<div class="modal-footer">
+      <%= link_to content_tag(:i, fa_icon("plus", text: ""))+" Nueva Organización Externa", new_organizacion_externa_path(:proyecto_id => params[:proyecto_id] ) , :style => "float: left", :class => "btn btn-primary" %>
       <%= f.button :submit, :class => 'btn btn-primary', :value => 'Confirmar' %>
       <%= link_to 'Atrás', '/proyectos/' + params[:proyecto_id] %>
   	</div>

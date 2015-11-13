@@ -256,45 +256,54 @@ namespace :db do
 		uuu.skip_confirmation!
 		uuu.save!
 
-
-
-    u1 =	Usuario.new(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample), confirmed_at: Time.now)
+		un1= Faker::Name.name
+		un2= Faker::Name.name
+		un3= Faker::Name.name
+		un4= Faker::Name.name
+		un5= Faker::Name.name
+		un6= Faker::Name.name
+		un7= Faker::Name.name
+		un8= Faker::Name.name
+		un9= Faker::Name.name
+		un10= Faker::Name.name
+		
+    u1 =	Usuario.new(nombreUsuario: Faker::Internet.user_name(un1), password: password, password_confirmation: password, apellido_nombre: un1, email: Faker::Internet.email(un1), direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample), confirmed_at: Time.now)
 		u1.skip_confirmation!
 		u1.save!
 
-u2 =	Usuario.new(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample), confirmed_at: Time.now)
+u2 =	Usuario.new(nombreUsuario: Faker::Internet.user_name(un2), password: password, password_confirmation: password, apellido_nombre: un2, email: Faker::Internet.email(un2), direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample), confirmed_at: Time.now)
 		u2.skip_confirmation!
 		u2.save!
 
-u3 =	Usuario.new(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample),confirmed_at: Time.now)
+u3 =	Usuario.new(nombreUsuario: Faker::Internet.user_name(un3), password: password, password_confirmation: password, apellido_nombre: un3, email: Faker::Internet.email(un3), direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample),confirmed_at: Time.now)
 		u3.skip_confirmation!
 		u3.save!
 
-u4 =	Usuario.new(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample),confirmed_at: Time.now)
+u4 =	Usuario.new(nombreUsuario: Faker::Internet.user_name(un4), password: password, password_confirmation: password, apellido_nombre: un4, email: Faker::Internet.email(un4), direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample),confirmed_at: Time.now)
 		u4.skip_confirmation!
 		u4.save!
 
-u5 = 	Usuario.new(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password,  apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample),confirmed_at: Time.now)
+u5 = 	Usuario.new(nombreUsuario: Faker::Internet.user_name(un5), password: password, password_confirmation: password,  apellido_nombre: un5, email: Faker::Internet.email(un5), direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample),confirmed_at: Time.now)
 		u5.skip_confirmation!
 		u5.save!
 
-u6 =	Usuario.new(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password,  apellido_nombre: Faker::Name.name, email:Faker::Internet.email, direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample),confirmed_at: Time.now)
+u6 =	Usuario.new(nombreUsuario: Faker::Internet.user_name(un6), password: password, password_confirmation: password,  apellido_nombre: un6, email:Faker::Internet.email(un6), direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample),confirmed_at: Time.now)
 		u6.skip_confirmation!
 		u6.save!
 
-u7 =	Usuario.new(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample),confirmed_at: Time.now)
+u7 =	Usuario.new(nombreUsuario: Faker::Internet.user_name(un7), password: password, password_confirmation: password, apellido_nombre: un7, email: Faker::Internet.email(un7), direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample),confirmed_at: Time.now)
 		u7.skip_confirmation!
 		u7.save!
 
-u8 =	Usuario.new(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample),confirmed_at: Time.now)
+u8 =	Usuario.new(nombreUsuario: Faker::Internet.user_name(un8), password: password, password_confirmation: password, apellido_nombre: un8, email: Faker::Internet.email(un8), direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample),confirmed_at: Time.now)
 		u8.skip_confirmation!
 		u8.save!
 
-u9 =	Usuario.new(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample),confirmed_at: Time.now)
+u9 =	Usuario.new(nombreUsuario: Faker::Internet.user_name(un9), password: password, password_confirmation: password, apellido_nombre: un9, email: Faker::Internet.email(un9), direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample),confirmed_at: Time.now)
 		u9.skip_confirmation!
 		u9.save!
 
-u10 =	Usuario.new(nombreUsuario: Faker::Internet.user_name, password: password, password_confirmation: password, apellido_nombre: Faker::Name.name, email: Faker::Internet.email, direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample),confirmed_at: Time.now)
+u10 =	Usuario.new(nombreUsuario: Faker::Internet.user_name(un10), password: password, password_confirmation: password, apellido_nombre: un10, email: Faker::Internet.email(un10), direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample),confirmed_at: Time.now)
 		u10.skip_confirmation!
 		u10.save!
 
@@ -333,7 +342,8 @@ v = Voluntario.new(nombreUsuario: "agustin",
     
 
 
-    tipo_proyecto = TipoProyecto.create(nombre: "voluntariado", descripcion: "Proyecto sin remuneración económica")
+    tipo_proyecto = TipoProyecto.create(nombre: "Voluntariado", descripcion: "Proyecto sin remuneración económica")
+    TipoProyecto.create(nombre: "Extensión", descripcion: "Proyecto con remuneración económica")
 
     n= Necesidad.create(descripcion: "Queremos comenzar con la investigación en el manejo de autos juntos con la UNC",
 			usuario: u,
@@ -372,11 +382,11 @@ v = Voluntario.new(nombreUsuario: "agustin",
 					
 
 			#PRIVILEGIOS DE PROYECTO
-			AsignacionRol.create!(proyecto: p , usuario: u, rol: director , esActual: true)
-      AsignacionRol.create!(proyecto: p , usuario: u, rol: voluntario, esActual: true)
-			AsignacionRol.create!(proyecto: p , usuario: u_otro, rol: coordinador , esActual: true)
-      AsignacionRol.create!(proyecto: p , usuario: u_otro, rol: voluntario, esActual: true)
-			 AsignacionRol.create!(proyecto: p , usuario: uuu, rol: voluntario, esActual: true)
+			AsignacionRol.create!(proyecto: p , usuario: u, rol: director , esActual: true, active: true)
+      AsignacionRol.create!(proyecto: p , usuario: u, rol: voluntario, esActual: true, active: true)
+			AsignacionRol.create!(proyecto: p , usuario: u_otro, rol: coordinador , esActual: true, active: true)
+      AsignacionRol.create!(proyecto: p , usuario: u_otro, rol: voluntario, esActual: true, active: true)
+			 AsignacionRol.create!(proyecto: p , usuario: uuu, rol: voluntario, esActual: true, active: true)
 
 
 			
@@ -384,6 +394,19 @@ v = Voluntario.new(nombreUsuario: "agustin",
       HistorialEstadoProyecto.create(proyecto: p, estado_proyecto: creado)
 
       OrganizacionExterna.create(denominacion: Faker::Company.name, sigla: Faker::Company.suffix, cuit: "30-1651654-9", fax: Faker::PhoneNumber.cell_phone, telefono: Faker::PhoneNumber.cell_phone, direccion: Faker::Address.street_address, cargoResponsable: Faker::Name.title, numeroContactoResponsable: Faker::PhoneNumber.cell_phone, nombreResponsable: Faker::Name.name)
+      OrganizacionExterna.create(denominacion: Faker::Company.name, sigla: Faker::Company.suffix, cuit: "30-1621312-9", fax: Faker::PhoneNumber.cell_phone, telefono: Faker::PhoneNumber.cell_phone, direccion: Faker::Address.street_address, cargoResponsable: Faker::Name.title, numeroContactoResponsable: Faker::PhoneNumber.cell_phone, nombreResponsable: Faker::Name.name)
+      OrganizacionExterna.create(denominacion: Faker::Company.name, sigla: Faker::Company.suffix, cuit: "30-1213154-9", fax: Faker::PhoneNumber.cell_phone, telefono: Faker::PhoneNumber.cell_phone, direccion: Faker::Address.street_address, cargoResponsable: Faker::Name.title, numeroContactoResponsable: Faker::PhoneNumber.cell_phone, nombreResponsable: Faker::Name.name)
+      OrganizacionExterna.create(denominacion: Faker::Company.name, sigla: Faker::Company.suffix, cuit: "30-1651154-9", fax: Faker::PhoneNumber.cell_phone, telefono: Faker::PhoneNumber.cell_phone, direccion: Faker::Address.street_address, cargoResponsable: Faker::Name.title, numeroContactoResponsable: Faker::PhoneNumber.cell_phone, nombreResponsable: Faker::Name.name)
+      OrganizacionExterna.create(denominacion: Faker::Company.name, sigla: Faker::Company.suffix, cuit: "30-1651654-9", fax: Faker::PhoneNumber.cell_phone, telefono: Faker::PhoneNumber.cell_phone, direccion: Faker::Address.street_address, cargoResponsable: Faker::Name.title, numeroContactoResponsable: Faker::PhoneNumber.cell_phone, nombreResponsable: Faker::Name.name)
+      OrganizacionExterna.create(denominacion: Faker::Company.name, sigla: Faker::Company.suffix, cuit: "30-1623254-9", fax: Faker::PhoneNumber.cell_phone, telefono: Faker::PhoneNumber.cell_phone, direccion: Faker::Address.street_address, cargoResponsable: Faker::Name.title, numeroContactoResponsable: Faker::PhoneNumber.cell_phone, nombreResponsable: Faker::Name.name)
+	  OrganizacionExterna.create(denominacion: Faker::Company.name, sigla: Faker::Company.suffix, cuit: "30-1128654-2", fax: Faker::PhoneNumber.cell_phone, telefono: Faker::PhoneNumber.cell_phone, direccion: Faker::Address.street_address, cargoResponsable: Faker::Name.title, numeroContactoResponsable: Faker::PhoneNumber.cell_phone, nombreResponsable: Faker::Name.name)
+	  OrganizacionExterna.create(denominacion: Faker::Company.name, sigla: Faker::Company.suffix, cuit: "30-1654254-3", fax: Faker::PhoneNumber.cell_phone, telefono: Faker::PhoneNumber.cell_phone, direccion: Faker::Address.street_address, cargoResponsable: Faker::Name.title, numeroContactoResponsable: Faker::PhoneNumber.cell_phone, nombreResponsable: Faker::Name.name)
+	  OrganizacionExterna.create(denominacion: Faker::Company.name, sigla: Faker::Company.suffix, cuit: "30-1321654-4", fax: Faker::PhoneNumber.cell_phone, telefono: Faker::PhoneNumber.cell_phone, direccion: Faker::Address.street_address, cargoResponsable: Faker::Name.title, numeroContactoResponsable: Faker::PhoneNumber.cell_phone, nombreResponsable: Faker::Name.name)
+	  OrganizacionExterna.create(denominacion: Faker::Company.name, sigla: Faker::Company.suffix, cuit: "30-1651454-5", fax: Faker::PhoneNumber.cell_phone, telefono: Faker::PhoneNumber.cell_phone, direccion: Faker::Address.street_address, cargoResponsable: Faker::Name.title, numeroContactoResponsable: Faker::PhoneNumber.cell_phone, nombreResponsable: Faker::Name.name)
+	  OrganizacionExterna.create(denominacion: Faker::Company.name, sigla: Faker::Company.suffix, cuit: "30-1636654-6
+	  	", fax: Faker::PhoneNumber.cell_phone, telefono: Faker::PhoneNumber.cell_phone, direccion: Faker::Address.street_address, cargoResponsable: Faker::Name.title, numeroContactoResponsable: Faker::PhoneNumber.cell_phone, nombreResponsable: Faker::Name.name)
+
+
 
       concepto1 = ConceptoGasto.create(titulo: "Viáticos", descripcion: "Gastos realizando en viáticos")
       concepto2 = ConceptoGasto.create(titulo: "Librería", descripcion: "Gastos realizando en librería")
@@ -401,11 +424,28 @@ v = Voluntario.new(nombreUsuario: "agustin",
       DetalleGasto.create(titulo: "Cuadernos", descripcion: "Se gastó en un cuaderno para escribir", monto: 5, informe_gasto_id: informe_gasto.id, concepto_gasto: concepto2)
       TipoHabilidad.create(nombre: "Programación", descripcion: "Conocimiento referidos a la programación")
       TipoHabilidad.create(nombre: "Manualidades", descripcion: "Conocimiento vinculado con actividades creativas")
+      TipoHabilidad.create(nombre: "Administracion", descripcion: "Conocimiento vinculado con actividades creativas")
+      TipoHabilidad.create(nombre: "Oratoria", descripcion: "Conocimiento vinculado con actividades creativas")
       Habilidad.create(nombre: "Pintar", descripcion: "Saber pintar con cualquier elemento", tipo_habilidad: TipoHabilidad.find_by(nombre: "Manualidades"))
       Habilidad.create(nombre: "Programación en Java", descripcion: "Programación en el lenguaje Java", tipo_habilidad: TipoHabilidad.find_by(nombre: "Programación"))
+      Habilidad.create(nombre: "Programación en Python", descripcion: "Programación en el lenguaje Python", tipo_habilidad: TipoHabilidad.find_by(nombre: "Programación"))
+      Habilidad.create(nombre: "Programación en C/C++", descripcion: "Programación en el lenguaje C/C++", tipo_habilidad: TipoHabilidad.find_by(nombre: "Programación"))
+      Habilidad.create(nombre: "Programación en PHP", descripcion: "Programación en el lenguaje PHP", tipo_habilidad: TipoHabilidad.find_by(nombre: "Programación"))
+      Habilidad.create(nombre: "Programación en MySQL", descripcion: "Programación en el lenguaje MySQL", tipo_habilidad: TipoHabilidad.find_by(nombre: "Programación"))
+      Habilidad.create(nombre: "Presentación de Discursos", descripcion: "Habilidad para llevar a delante una charla", tipo_habilidad: TipoHabilidad.find_by(nombre: "Oratoria"))
+      Habilidad.create(nombre: "Armado de Presentaciones", descripcion: "Desarrollo de material audiovisual", tipo_habilidad: TipoHabilidad.find_by(nombre: "Oratoria"))
+      Habilidad.create(nombre: "Contabilidad", descripcion: "Conocimientos de cantabilidad y administracion contable", tipo_habilidad: TipoHabilidad.find_by(nombre: "Administracion"))
+      Habilidad.create(nombre: "Armado de Cartelería", descripcion: "Armado de afiches y posters", tipo_habilidad: TipoHabilidad.find_by(nombre: "Manualidades"))
+
 
       TipoActividad.create(nombre: "Reunión", descripcion: "Actividades destinadas a las reuniones de cualquier índole")
       TipoActividad.create(nombre: "Voluntariado", descripcion: "Actividades destinadas a realizar trabajo de voluntariado")
+
+      TipoActividad.create(nombre: "Propaganda", descripcion: "Actividades destinadas a realizar trabajo de Propaganda")
+      TipoActividad.create(nombre: "Control", descripcion: "Actividades destinadas a realizar trabajo de Control de Gestion")
+      TipoActividad.create(nombre: "Trabajo de Campo", descripcion: "Actividades destinadas a realizar trabajo de Campo fuera de la Facultad")
+      TipoActividad.create(nombre: "Busqueda de Financimiento", descripcion: "Actividades destinadas a realizar busqueda de posible financiamiento")
+      TipoActividad.create(nombre: "Busqueda de Voluntarios", descripcion: "Actividades destinadas a realizar buesqueda de nuevos voluntarios")
 
 
 

@@ -8,8 +8,8 @@
   <% if @detalle_presupuesto.errors.any? %>
     <div class="col-lg-12">
       <div class="col-lg-4"></div>
-        <div id="error_explanation" class="col-lg-4">
-          <div class="alert alert-danger">
+        
+          <div class="alert alert-danger col-lg-4">
             <a class="close" data-dismiss="alert">x</a>
             <strong><%= pluralize(@detalle_presupuesto.errors.count, "Error") %> en la creacion del detalle:</strong>
             <ul>
@@ -18,7 +18,7 @@
               <% end %>
             </ul>
           </div>
-        </div>
+        
       </div>
     </div>
   <% end %>

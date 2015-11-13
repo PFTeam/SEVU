@@ -4,22 +4,35 @@
     <div class="col-lg-6">
 
 
-      <p>
-      <strong>Título del Proyecto</strong>:</br>
-        <%= @proyecto.nombre%>
-      </p>
-      <p>
+      <div style="overflow-wrap: break-word;">
+        <strong>Título del Proyecto</strong>:</br>
+          <%= @proyecto.nombre%>
+      </div>
+      <div class="modal-footer">
+      </div>
+      <div style="overflow-wrap: break-word;">
           <strong>Breve Descripción</strong>:</br>
           <%= @proyecto.breveDescripcion  %>
-      </p>
-      <p>
+      </div>
+      <div class="modal-footer">
+      </div>
+      <div style="overflow-wrap: break-word;">
           <strong>Antecedentes Proyecto</strong>:</br>
           <%= @proyecto.antecedentes %>
-      </p>
-      <p>
-          <br><strong>Justificación</strong>:</br>
+      </div>
+      <div class="modal-footer">
+      </div>
+      <div style="overflow-wrap: break-word;">
+          <strong>Justificación</strong>:</br>
           <%= @proyecto.justificacionProyecto %>
-      </p>
+      </div>
+      <div class="modal-footer">
+      </div style="overflow-wrap: break-word;">
+      <div style="overflow-wrap: break-word;">
+        <strong>Justificación del Impacto</strong>:</br>
+        <%= @proyecto.justificacionImpacto %>
+      </div>
+          
 
 
     </div> 
@@ -27,38 +40,44 @@
 
     <div class="col-lg-6">
 
-          <p> 
+          <div> 
             <strong>Tipo de Proyecto</strong>:</br>
             <%=  @proyecto.tipo_proyecto %>
-          </p>
-          <p>
-            <strong>Fecha Inicio</strong>:</br>
-            <%= @proyecto.fechaInicio %>
-          </p>
-          <p>
+          </div>
+          <div class="modal-footer">
+          </div>
+          <div class="col-lg-6" style="margin-left: -15px;">
+              <strong>Fecha Inicio</strong>:</br>
+              <%= @proyecto.fechaInicio %>
+          </div>
+          <div>
             <strong>Fecha Fin</strong>:</br>
             <%= @proyecto.fechaFin %>
-          </p>
-          <p>
+          </div>
+          <div class="modal-footer">
+          </div>
+          <div style="overflow-wrap: break-word;">
             <strong>Localización Geográfica</strong>:</br>
             <%= @proyecto.localizacionGeografica %>
-          </p>
-          <p>
+          </div>
+          <div class="modal-footer">
+          </div>
+          <div class="col-lg-6" style="margin-left: -15px;">
+          <div>
             <strong>Cantidad de Beneficiarios Directos</strong>:</br>
             <%= @proyecto.cantidadBeneficiariosDirectos %>
-          </p>
-          <p>
+          </div>
+          </div>
+          <div>
             <strong>Cantidad de Beneficiarios Indirectos</strong>:</br>
             <%= @proyecto.cantidadBeneficiariosIndirectos %> 
-          </p>
-          <p>
-            <strong>Justificación del Impacto</strong>:</br>
-            <%= @proyecto.justificacionImpacto %>
-          </p>
-          <p>
+          </div>
+          <div class="modal-footer">
+          </div>
+          <div>
             <strong>Estado Actual del Proyecto</strong>:</br>
             <%= @proyecto.historial_estado_proyectos.last.estado_proyecto %>
-          </p>
+          </div>
     </div>
   </div><!-- /.row -->
 <div class="modal-footer">

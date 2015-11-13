@@ -1,7 +1,12 @@
-<h1>Nuevo organizacion_externa</h1>
+<h1>Nueva Organización Externa</h1>
 
 <%= render 'form' %>
 
 
-<%= link_to 'Crear Organizacion Externa', crear_organizacion_externa_path, remote: true, data: { target: 'modal', modal: true } %> |
-<%= link_to 'Atrás', organizacion_externas_path %>
+<%#= link_to 'Crear Organizacion Externa', crear_organizacion_externa_path, remote: true, data: { target: 'modal', modal: true } %>
+<% if params[:proyecto_id] %>
+	<%= link_to 'Atrás', '/proyectos/' + params[:proyecto_id] + "/colaboradores/new" %>
+<% else %>
+
+	<%= link_to 'Atrás', :back %>
+<% end %>

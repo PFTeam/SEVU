@@ -6,6 +6,8 @@ class AsignacionRolesController < ApplicationController
   def index
 		authorize! :index, AsignacionRol
     @proyecto = Proyecto.find(params[:proyecto_id])
+    @asignacion_roles = AsignacionRol.where("active = ? AND proyecto_id = ?", true, params[:proyecto_id])
+    #@proyecto = AsignacionRol.where("active = ? AND proyecto_id = ?", true, params[:proyecto_id])
   end
 
   # GET /asignacion_roles/1
@@ -50,24 +52,35 @@ class AsignacionRolesController < ApplicationController
 		authorize! :create, AsignacionRol
     @asignacion_rol = AsignacionRol.new(asignacion_rol_params)
     @asignacion_rol.esActual = true
+    @asignacion_rol.active = true
+    @proyecto = @asignacion_rol.proyecto
+          @roles = []
+          @rols = Rol.where(tipo_rol: TipoRol.where(nombre:'Proyecto'))
+          coor_sist = Rol.where("nombre = ?", 'Coordinador Sistema').first
+          asig_func = AsignacionFuncion.where("usuario_id = ? AND rol_id = ?", current_usuario, coor_sist).first
+          @rols.each do |rol|
+          if rol.nombre != 'Coordinador' || asig_func != nil then
+            @roles << rol
+          end
+          end
     if unica(@asignacion_rol.usuario_id,@asignacion_rol.proyecto_id, @asignacion_rol.rol_id) == true
 	    respond_to do |format|
 	      if @asignacion_rol.save
             sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
             Transaccion.create!(
-		    descripcion: 'Creación de una asignacion rol id:' + @asignacion_rol.id.to_s,
-		    sesion_id: sesion.id ,
-		    proyecto_id: @asignacion_rol.proyecto.id)
+      		    descripcion: 'Creación de una asignacion rol id:' + @asignacion_rol.id.to_s,
+      		    sesion_id: sesion.id ,
+      		    proyecto_id: @asignacion_rol.proyecto.id)
 		format.html {redirect_to :controller => 'asignacion_roles', :action => 'index',:proyecto_id => @asignacion_rol.proyecto.id } 
 		format.json { render :show, status: :created, location: @asignacion_rol }
 	      else
-		format.html { render :new }
-		format.json { render json: @asignacion_rol.errors, status: :unprocessable_entity }
+          params[:usuario_id] = @asignacion_rol.usuario_id
+      		format.html { render :new }
+      		format.json { render json: @asignacion_rol.errors, status: :unprocessable_entity }
 	      end
 	    end
     else
 	    respond_to do |format|
-
 		    format.html { redirect_to :controller => 'asignacion_roles', :action => 'index', :proyecto_id => @asignacion_rol.proyecto.id
 		             flash[:notice] = 'El usuario ya se encuentra asignado' } 
 	    end
@@ -125,7 +138,9 @@ class AsignacionRolesController < ApplicationController
 			    descripcion: 'Borrado de una asignacion rol id:' + @asignacion_rol.id.to_s,
 			    sesion_id: sesion.id ,
 			    proyecto_id: @asignacion_rol.proyecto.id)
-	    @asignacion_rol.destroy
+	    @asignacion_rol.active = false
+      @asignacion_rol.esActual = false
+      @asignacion_rol.save
 	    respond_to do |format|
 	      format.html { redirect_to :controller => 'asignacion_roles', :action => 'index', :proyecto_id => @proyecto_id
 			    flash[:notice] = 'El usuario fue desasignado de su rol.' }
@@ -156,14 +171,23 @@ class AsignacionRolesController < ApplicationController
   end
 
   def unica( usuario, proyecto, rol) 
-	if AsignacionRol.all.where(usuario_id: usuario, proyecto_id: proyecto, rol_id: rol ,esActual: true ).count == 0
-		p true
-		true
-	else
-		p false
-		false
-	end
+  	if AsignacionRol.all.where(usuario_id: usuario, proyecto_id: proyecto, rol_id: rol ,esActual: true ).count == 0
+  		p true
+  		true
+  	else
+  		p false
+  		false
+  	end
   end
+
+
+  def usuarios_proyecto
+    #@usuarios_locales = @proyecto.asignacion_roles
+    @usuarios = Usuario.page(params[:page]).search query: params[:q]
+
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_asignacion_rol

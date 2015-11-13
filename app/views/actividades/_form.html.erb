@@ -2,8 +2,8 @@
   <% if @actividad.errors.any? %>
     <div class="col-lg-12">
       <div class="col-lg-4"></div>
-        <div id="error_explanation" class="col-lg-4">
-          <div class="alert alert-danger">
+       
+          <div class="alert alert-danger col-lg-4">
             <a class="close" data-dismiss="alert">x</a>      
             <strong><%= pluralize(@actividad.errors.count, "Error") %> en la creacion de la actividad:</strong>
             <ul>
@@ -12,48 +12,59 @@
               <% end %>
             </ul>
           </div>
-        </div>
+        
       </div>
   <% end %>
 
 <div class="row">
-<div class="col-lg-6">
-          
-          
-                <label><h3>Titulo de la Actividad</h3></label></br>
-                <%= f.input :nombre %>
-                
+  <div class="col-lg-6">
             
-                </br>
-		<%= f.input :repetitiva, inline_label: "Repetitiva", label: false, :as => :boolean , :input_html => {:style => "width: 10%; height: 25px" } %>
-    </br>
+              <div class="form-group">
+                  <label><h3>Titulo de la Actividad</h3></label>
+                  <%= f.input :nombre %>
+                  
+              </div>
+            <div class="row">
+              <div class="form-group col-lg-6">
+  		<%= f.input :repetitiva, inline_label: "Repetitiva", label: false, :as => :boolean , :input_html => {:style => "width: 10%; height: 25px" } %>
+      
 
-		<%= f.input :frecuencia, :as => :radio_buttons, :input_html => {:style => "width: 10%; height: 25px", :class => "radio-inline"}, :item_wrapper_class => 'inline', :collection => [['Por Semana', 'Por Semana'], ['Por Mes','Por Mes']] %>
+  		<%= f.input :frecuencia, :as => :radio_buttons, :input_html => {:style => "width: 10%; height: 25px", :class => "radio-inline"}, :item_wrapper_class => 'inline', :collection => [['Por Semana', 'Por Semana'], ['Por Mes','Por Mes']] %>
 
-          
-                <label><h3>Descripción</h3>
-                </label>
-                <%= f.input :descripcion, :as => :text, :input_html => {:rows => 10}, label: false %>
-          
-          
+            </div>
+        <div class="form-group col-lg-6">
+                    
+                             
+                    
+                  <label><h5>Día de la Semana</h5></label> 
 
-                <label><h3>Resultados Esperados</h3>
-                </label>
-                <%= f.input :resultadosEsperados, :as => :text, :input_html => {:rows => 10}, label: false %>
+            <%= f.input :dia_semana, :label => false, :collection => [['Lunes',1],['Martes',2],['Miércoles',3],['Jueves',4],['Viernes',5],['Sábado',6],['Domingo',7]]  %>
 
+                   
+        </div>
 
-                <label><h3>Metodologías de Intervención</h3>
-                </label>
-                <%= f.input :metodologiasIntervencion, :as => :text, :input_html => {:rows => 10}, label: false %>
-     
-				<label><h3>Estrategias de Intervención</h3>
-                </label>
-                <%= f.input :estrategiasIntervencion, :as => :text, :input_html => {:rows => 10}, label: false %>        
+</div>
 
- 
+                  <label><h3>Descripción</h3>
+                  </label>
+                  <%= f.input :descripcion, :as => :text, label: false, :input_html => {:style => "resize: vertical"} %>
+            
+            
 
-	 </div>
+                  
 
+                  <label><h3>Metodologías de Intervención</h3>
+                  </label>
+                  <%= f.input :metodologiasIntervencion, :as => :text, label: false, :input_html => {:style => "resize: vertical"} %>
+       
+  				<label><h3>Estrategias de Intervención</h3>
+                  </label>
+                  <%= f.input :estrategiasIntervencion, :as => :text, label: false, :input_html => {:style => "resize: vertical"} %>        
+
+   
+
+  	 </div>
+  
 
 
 <div class="col-lg-6">
@@ -73,24 +84,24 @@
 
 
                                 <label><h5>Duración Estimada</h5></label>
-                                <%= f.input :duracion, label: false %>
+                                <%= f.input :duracion, label: false, :input_html => {:style => "width: 50%"}, :placeholder => "horas" %>
                         </div>
 	</div>
             
             
-            <div class="col-lg-6">
-          	<div class="form-group">
-            <h4>Repetitiva</h4>
-            
-            
-            
-          <label><h5>Día de la Semana</h5></label> 
+            <div class="form-group col-lg-6">
+          	
 
-
-	  <%= f.input :dia_semana, :collection => [['Lunes',1],['Martes',2],['Miércoles',3],['Jueves',4],['Viernes',5],['Sábado',6],['Domingo',7]]  %>
+   
+    
+      <label><h5>Fecha Real</h5></label>
+      <%= f.input :fechaRealInicio, label: false,  :as => :date %>
+ 
+      <label><h5>Duración Real</h5></label>
+      
+         <%= f.input :duracionReal, label: false, :input_html => {:style => "width: 50%"}, :placeholder => "horas" %>
 
             </div>
-</div>
             
             
             
@@ -103,21 +114,14 @@
 
                     <%= f.input :tipo_actividad_id, collection: @tipoActividades, label: false %>
 
-    <h2>Cargar Planificación Real</h2>
-   
     
-    	<label><h5>Fecha Real</h5></label>
-    	<%= f.input :fechaRealInicio, label: false,  :as => :date %>
-
-		  <label><h5>Duración Real</h5></label>
-	<%= f.input :duracionReal, label: false %>
-	
+	    
 	
 	
           
                 <label><h3>Mecanismo de Evaluación</h3>
                 </label>
-                <%= f.input :mecanismoEvaluacion, :as => :text, :input_html => {:rows => 10}, label: false %>         
+                <%= f.input :mecanismoEvaluacion, :as => :text, label: false, :input_html => {:style => "resize: vertical"} %>         
           
 		<% if params[:proyecto_id] %>
 			<%= f.input :objetivo_especifico_id, :as => :hidden, input_html: {value: params[:objetivo_especifico_id]} %> 
@@ -126,15 +130,41 @@
 			<%= f.input :objetivo_especifico_id, :as => :hidden, input_html: {value: @actividad.objetivo_especifico.id } %> 
 			<%= f.input :proyecto_id,:as => :hidden, input_html: {value: @actividad.proyecto.id } %>
 		<% end %>
+
+
+    <label><h3>Resultados Esperados</h3>
+                  </label>
+                  <%= f.input :resultadosEsperados, :as => :text, label: false, :input_html => {:style => "resize: vertical"} %>
+
  </div>
 
 </div>
 
 
 
+
+
         <div class="modal-footer">
           <%= f.button :submit, :class => 'btn btn-primary', :value => 'Confirmar' %>
         </div>
+
+
+<script>
+
+$("#actividad_descripcion").elastic();
+$("#actividad_metodologiasIntervencion").elastic();
+$("#actividad_estrategiasIntervencion").elastic();
+$("#actividad_mecanismoEvaluacion").elastic();
+$("#actividad_resultadosEsperados").elastic();
+
+
+</script>
+
+
+
+
+
+
 
 
 <% end %>

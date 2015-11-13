@@ -184,6 +184,7 @@ Rails.application.routes.draw do
   get 'agregar_habilidad', :controller => :actividades
   get 'historial_estado_proyectos/modificar', to: 'historial_estado_proyectos#modificar'
   
+  get 'usuarios_proyecto', :controller => :asignacion_roles
   
   get 'asignacion_actividad/dar_baja', to: 'asignacion_actividades#dar_baja'
   get 'asignacion_rol/dar_baja', to: 'asignacion_roles#dar_baja'

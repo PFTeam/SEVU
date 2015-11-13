@@ -1,11 +1,11 @@
-<!----->
 <h2>Recursos del Proyecto</h2>
 <p id="notice"><%= notice %></p>
               <table class="table table-hover table-striped tablesorter">
                 <thead>
                   <tr>
                     <th class="col-lg-3">Apellido y Nombre</th>
-                    <th class="col-lg-3">Fecha Asignación </th>
+                    <th class="col-lg-2">Fecha Asignación </th>
+                    <th class="col-lg-2">Ultima Fecha Cambio </th>
                     <th class="col-lg-2">Vigente</th>
                     <th class="col-lg-2">Rol</th>
                     <th class="col-lg-5"></th>
@@ -14,10 +14,15 @@
                 </thead>
 
                 <tbody>
-                    <% @proyecto.asignacion_roles.each do |asignacion_rol| %>
-                    <tr>
+                    <% @asignacion_roles.each do |asignacion_rol| %>
+                    <% if asignacion_rol.actual == "Si" %>
+                    <tr style="color: black">
+                    <%else %>
+                    <tr style="font-style: italic">
+                    <% end %>
                         <td><%= asignacion_rol.usuario %></td>
                         <td><%= asignacion_rol.created_at.to_formatted_s(:long_ordinal)  %></td>
+                        <td><%= asignacion_rol.updated_at.to_formatted_s(:long_ordinal)  %></td>
                         <td><%= asignacion_rol.actual %></td>
                         <td><%= asignacion_rol.rol %></td>
                         <td>

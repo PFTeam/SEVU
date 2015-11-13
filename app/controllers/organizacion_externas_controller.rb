@@ -21,6 +21,7 @@ class OrganizacionExternasController < ApplicationController
   def new
 		authorize! :new, OrganizacionExterna
     @organizacion_externa = OrganizacionExterna.new
+    @proyecto = Proyecto.find(params[:proyecto_id]) if params[:proyecto_id]
   end
 
   # GET /organizacion_externas/1/edit
@@ -33,14 +34,16 @@ class OrganizacionExternasController < ApplicationController
   def create
 		authorize! :create, OrganizacionExterna
     @organizacion_externa = OrganizacionExterna.new(organizacion_externa_params)
-
+    @proyecto = Proyecto.find(params[:proyecto_id]) if params[:proyecto_id]
     respond_to do |format|
       if @organizacion_externa.save
         format.js {render partial: 'proyectos/crear_organizacion_externa', content_type: 'text/html'}
-        format.html { redirect_to @organizacion_externa, notice: 'Organizacion externa fue creado satisfactoriamente.' }
+        format.html { redirect_to '/colaboradores/new?proyecto_id=' + @proyecto.id.to_s, notice: 'Organizacion externa creada satisfactoriamente.' } if @proyecto
+        format.html { redirect_to @organizacion_externa, notice: 'Organizacion externa creada satisfactoriamente.' }
         format.json { render :show, status: :created, location: @organizacion_externa }
 
       else
+        format.html { render :new, :proyecto_id => @proyecto.id } if @proyecto
         format.html { render :new }
         format.json { render json: @organizacion_externa.errors, status: :unprocessable_entity }
       end
@@ -53,7 +56,7 @@ class OrganizacionExternasController < ApplicationController
 		authorize! :update, OrganizacionExterna
     respond_to do |format|
       if @organizacion_externa.update(organizacion_externa_params)
-        format.html { redirect_to @organizacion_externa, notice: 'Organizacion externa fue actualizado satisfactoriamente.' }
+        format.html { redirect_to @organizacion_externa, notice: 'Organizacion externa actualizada satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @organizacion_externa }
       else
         format.html { render :edit }

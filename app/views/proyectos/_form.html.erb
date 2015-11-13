@@ -2,8 +2,8 @@
   <% if @proyecto.errors.any? %>
     <div class="col-lg-12">
       <div class="col-lg-4"></div>
-        <div id="error_explanation" class="col-lg-4">
-          <div class="alert alert-danger">
+        
+          <div class="alert alert-danger col-lg-4">
             <a class="close" data-dismiss="alert">x</a>      
             <strong><%= pluralize(@proyecto.errors.count, "Error") %> en la creacion del proyecto:</strong>
             <ul>
@@ -12,9 +12,9 @@
               <% end %>
             </ul>
           </div>
-        </div>
+        
       </div>
-    </div>
+    
   <% end %>
 
   <div class="row">
@@ -27,12 +27,13 @@
           <%= f.input :nombre , :label => 'Nombre del Proyecto', :placeholder => 'nombre del proyecto...' %>
 
 
-          <%= f.input :breveDescripcion,:as => :text, :input_html => {:rows => 10}, :label => 'Breve Descripción', :placeholder => 'descripción del proyecto...'  %>
+          <%= f.input :breveDescripcion,:as => :text, :input_html => {:style => "resize: vertical"}, :label => 'Breve Descripción', :placeholder => 'descripción del proyecto...'  %>
           
-          <%= f.input :antecedentes,:as => :text, :input_html => {:rows => 10}, :label => 'Antecedentes Proyecto', :placeholder => 'escriba sobre los antecedentes del mismo'  %>
+          <%= f.input :antecedentes,:as => :text, :input_html => {:style => "resize: vertical"}, :label => 'Antecedentes Proyecto', :placeholder => 'escriba sobre los antecedentes del mismo'  %>
           
-          <%= f.input :justificacionProyecto,:as => :text, :input_html => {:rows => 10}, :label => 'Justificación', :placeholder => 'justificación del proyecto...'  %>
-    
+          <%= f.input :justificacionProyecto,:as => :text, :input_html => {:style => "resize: vertical"}, :label => 'Justificación', :placeholder => 'justificación del proyecto...' %>
+          <%= f.input :justificacionImpacto,:as => :text, :input_html => {:style => "resize: vertical"}, :label => 'Justificación del impacto', :placeholder => 'justifique el impacto del proyecto...'  %>
+
 
 
     </div> 
@@ -48,20 +49,19 @@
       <%= f.input :fechaFin, :as => :date, :label => 'Fecha Fin' %>
 
          
-      <%= f.input :localizacionGeografica, :label => 'Localización Geográfica', :placeholder => 'localización...' %>
+      <%= f.input :localizacionGeografica, :label => 'Localización Geográfica', :placeholder => 'localización...', :input_html => {:style => "resize: vertical"} %>
 
       <%= f.input :cantidadBeneficiariosDirectos, :label => 'Cantidad de Beneficiarios Directos', :placeholder => 'beneficiarios directos...' %>          
 
       <%= f.input :cantidadBeneficiariosIndirectos, :label => 'Cantidad de Beneficiarios Indirectos', :placeholder => 'beneficiarios indirectos...' %> 
 
-      <%= f.input :justificacionImpacto,:as => :text, :input_html => {:rows => 10}, :label => 'Justificación del impacto', :placeholder => 'justifique el impacto del proyecto...'  %>
-
+     
          
   
         
     </div>
 
-   
+   </div>
     
   </div><!-- /.row -->
 

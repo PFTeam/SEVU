@@ -11,7 +11,7 @@
       <div class="panel panel-primary">
         <div class="panel-heading">
 		      <% if !proyecto.nombre.blank? %>
-  		      <h3 class="panel-title">	<%= link_to proyecto.nombre, proyecto %>
+  		      <h3 class="panel-title">	<%= link_to proyecto.nombre, proyecto, :style=>'overflow-wrap: break-word;'  %>
   		      </h3>
 		      <% else %>
 			       No se ha asignado ningun nombre al proyecto
@@ -23,7 +23,7 @@
               <div class="panel-body">
                 
                 <label>Descripción del Proyecto</label>
-                <p> 
+                <p  style='overflow-wrap: break-word;'> 
 		<% if !proyecto.breveDescripcion.blank? %>
 			<%= proyecto.breveDescripcion %>
 		<% else %>
@@ -33,8 +33,9 @@
                 <label>Directores del Proyecto</label>
                 <p> <!-- #TODO: Agregar validación de un solo director -->
     <% if !proyecto.director.nil? %>
+     |
                    <% for director in proyecto.director %>
-                      <i class="fa fa-user"></i><%= link_to director.usuario.apellido_nombre.to_s, usuario_path(director) %> |   
+                       <i class="fa fa-user"></i><%= link_to director.apellido_nombre.to_s, usuario_path(director) %>  |
                    <% end %>
 
                      

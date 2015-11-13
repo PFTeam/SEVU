@@ -48,6 +48,8 @@ class ActividadesController < ApplicationController
     @actividad = Actividad.new(actividad_params)
     @actividad.historial_estado_actividades.new(estado_actividad_id: EstadoActividad.find_by(nombre: 'Creada').id, actividad_id: @actividad.id)
 
+    @habilidades = Habilidad.all
+    @tipoActividades = TipoActividad.all
     if params[:actividad][:repetitiva] == "1"
       @actividad.repetitiva = true      
       if params[:actividad][:frecuencia] == 'Por Semana'
@@ -82,7 +84,8 @@ class ActividadesController < ApplicationController
 
     end
 
-		
+		@objetivo_especifico = @actividad.objetivo_especifico
+    @proyecto = @actividad.proyecto
     respond_to do |format|
       if @actividad.save
             sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
@@ -104,6 +107,9 @@ class ActividadesController < ApplicationController
   # PATCH/PUT /actividades/1.json
   def update
 		authorize! :update, Actividad
+    @habilidades = Habilidad.all
+    @tipoActividades = TipoActividad.all
+    @proyecto = @actividad.proyecto
     respond_to do |format|
       if @actividad.update(actividad_params)
             sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)

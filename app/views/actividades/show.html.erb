@@ -5,81 +5,122 @@
     <div class="col-lg-6">
 
 
-      <p>
-      <strong>Título de la Actividad</strong>:</br>
+      <div>
+        <strong>Título de la Actividad</strong>:</br>
         <%= @actividad.nombre%>
-      </p>
-      <p>
+      </div>
+      <div class="modal-footer">
+      </div>
+      <div style="overflow-wrap: break-word;">
           <strong>Breve Descripción</strong>:</br>
-          <%= @actividad.descripcion  %>
-      </p>
-      <p>
-          <br><strong>Fecha Estimada Inicio</strong>:</br>
-          <%= @actividad.fechaEstimadaInicio%>
-      </p>
-      <p>
-          <strong>Duración Estimada</strong>:</br>
-          <%= @actividad.duracion %>
-      </p>
-      <p>
-          <strong>Repetitiva</strong>:</br>
-          <%= @actividad.es_repetitiva %>
-      </p>
-      <p>
-          <strong>Frecuencia de Repetición</strong>:</br>
-          <%= @actividad.frecuencia %>
-      </p>
-      <p>
-          <strong>Día de la Semana</strong>:</br>
-          <%= @actividad.dia_semana %>
-      </p>
-
+          <%= @actividad.descripcion %>
+      </div>
+      <div class="modal-footer">
+      </div>
+      <div class="row">
+        <div class="col-lg-4">
+        <div>
+            <strong>Repetitiva</strong>:</br>
+            <%= @actividad.es_repetitiva %>
+        </div>
+        
+        </div>
+        <div class="col-lg-4">
+        <div>
+            <strong>Frecuencia de Repetición</strong>:</br>
+            <%= @actividad.frecuencia %>
+        </div>
+        </div>
+        <div class="col-lg-4">
+          <div>
+              <strong>Día de la Semana</strong>:</br>
+              <%= @actividad.dia_semana %>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+      </div>
+      <div style="overflow-wrap: break-word;">
+        <strong>Mecanismos de Evaluación</strong>:</br>
+        <%= @actividad.mecanismoEvaluacion %>
+      </div>
+      <div class="modal-footer">
+      </div>
+      <div style="overflow-wrap: break-word;">
+        <strong>Resultados Esperados</strong>:</br>
+        <%= @actividad.mecanismoEvaluacion %> 
+      </div>
+      <div class="modal-footer">
+      </div>
+      <div style="overflow-wrap: break-word;">
+        <strong>Justificación del Impacto</strong>:</br>
+        <%= @proyecto.justificacionImpacto %>
+      </div>
 
     </div> 
    
 
     <div class="col-lg-6">
 
-          <p> 
+        <div class="row">
+          <div class="col-lg-6">
+            <div>
+                <strong>Fecha Estimada Inicio</strong>:</br>
+                <%= @actividad.fechaEstimadaInicio%>
+            </div>
+          </div>
+          <div class="col-lg-6">
+              <div>
+                  <strong>Duración Estimada</strong>:</br>
+                  <%= @actividad.duracion %>
+              </div>
+          </div>
+        </div>
+          <div class="modal-footer">
+          </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div>
+              <strong>Fecha Inicio Real</strong>:</br>
+              <%= @actividad.fechaRealInicio %>
+            </div>
+          </div>
+          <div> 
             <strong>Duración Real</strong>:</br>
             <%=  @actividad.duracionReal %>
-          </p>
-          <p>
-            <strong>Fecha Inicio Real</strong>:</br>
-            <%= @actividad.fechaRealInicio %>
-          </p>
-          <p>
+          </div>
+        </div>
+          <div class="modal-footer">
+          </div>
+          
+          
+          <div style="overflow-wrap: break-word;">
             <strong>Estrategia Intervención</strong>:</br>
             <%= @actividad.estrategiasIntervencion %>
-          </p>
-          <p>
+          </div>
+          <div class="modal-footer">
+          </div>
+          <div style="overflow-wrap: break-word;">
             <strong>Metodologías Intervención</strong>:</br>
             <%= @actividad.metodologiasIntervencion %>
-          </p>
-          <p>
-            <strong>Mecanismos de Evaluación</strong>:</br>
-            <%= @actividad.mecanismoEvaluacion %>
-          </p>
-          <p>
-            <strong>Resultados Esperados</strong>:</br>
-            <%= @actividad.mecanismoEvaluacion %> 
-          </p>
-          <p>
-            <strong>Justificación del Impacto</strong>:</br>
-            <%= @proyecto.justificacionImpacto %>
-          </p>
-          <p>
-	  <strong>Tipo de Actividad</strong>:</br>
-	  <% if !@actividad.tipo_actividad.blank? %>
-		  <%= @actividad.tipo_actividad %>
-	  <% else %>
-		   "No se ha seleccionado ningun Tipo de Actividad"
-	  <% end %>
-          </p>
-          <p>
+          </div>
+          <div class="modal-footer">
+          </div>
+          
+          <div>
+        	  <strong>Tipo de Actividad</strong>:</br>
+        	  <% if !@actividad.tipo_actividad.blank? %>
+        		  <%= @actividad.tipo_actividad %>
+        	  <% else %>
+        		   "No se ha seleccionado ningun Tipo de Actividad"
+        	  <% end %>
+          </div>
+          <div class="modal-footer">
+          </div>
+          <div>
             <strong>Estado Actividad</strong>:</br>
             <%= @actividad.historial_estado_actividades.last.estado_actividad %>
-          </p>
+          </div>
     </div>
   </div><!-- /.row -->
 <div class="modal-footer">

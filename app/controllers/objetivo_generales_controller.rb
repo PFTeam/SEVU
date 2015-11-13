@@ -25,9 +25,9 @@ class ObjetivoGeneralesController < ApplicationController
   # GET /objetivo_generales/1/edit
   def edit
 		authorize! :edit, ObjetivoGeneral
-    respond_to do |format|
-      format.js {render partial: 'edit', content_type: 'text/html' }
-    end
+    #respond_to do |format|
+    #  format.js {render partial: 'edit', content_type: 'text/html' }
+    #end
   end
 
   # POST /objetivo_generales
@@ -42,6 +42,9 @@ class ObjetivoGeneralesController < ApplicationController
 	      flash[:notice] = 'Objetivo general creado.' } 
         format.json { render :show, status: :created, location: @objetivo_general }
       else
+        #format.html { render :new , :proyecto_id => @objetivo_general.proyecto_id }
+        params[:proyecto_id] = @objetivo_general.proyecto_id
+        @proyecto = Proyecto.find(params[:proyecto_id])
         format.html { render :new }
         format.json { render json: @objetivo_general.errors, status: :unprocessable_entity }
       end
@@ -52,6 +55,7 @@ class ObjetivoGeneralesController < ApplicationController
   # PATCH/PUT /objetivo_generales/1.json
   def update
 		authorize! :update, ObjetivoGeneral
+    @proyecto = @objetivo_general.proyecto
     respond_to do |format|
       if @objetivo_general.update(objetivo_general_params)
         format.html { redirect_to @objetivo_general, notice: 'Objetivo general fue actualizado satisfactoriamente.' }
