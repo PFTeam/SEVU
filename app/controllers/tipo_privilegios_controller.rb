@@ -35,7 +35,7 @@ class TipoPrivilegiosController < ApplicationController
       if @tipo_privilegio.save
 						sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
 				Transaccion.create!(
-    				descripcion: 'Crear el tipo de privilegio  '+@tipo_privilegio.nombre,
+    				descripcion: "Creación del tipo de Privilegio : #{@tipo_privilegio.attributes}",
     				sesion_id: sesion.id
 				)
         format.html { redirect_to @tipo_privilegio, notice: 'Tipo privilegio fue creado satisfactoriamente.' }
@@ -55,7 +55,7 @@ class TipoPrivilegiosController < ApplicationController
       if @tipo_privilegio.update(tipo_privilegio_params)
 										sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
 				Transaccion.create!(
-    				descripcion: 'Actualizar el tipo de privilegio  '+@tipo_privilegio.nombre,
+    				descripcion:  "Actualización del tipo de privilegio: #{@tipo_privilegio.previous_changes}" ,
     				sesion_id: sesion.id
 				)
         format.html { redirect_to @tipo_privilegio, notice: 'Tipo privilegio fue actualizado satisfactoriamente.' }
@@ -73,7 +73,7 @@ class TipoPrivilegiosController < ApplicationController
 		authorize! :destroy, TipoPrivilegio
 								sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
 				Transaccion.create!(
-    				descripcion: 'Eliminar el tipo de privilegio  '+@tipo_privilegio.nombre,
+    				descripcion: "Eliminar el tipo de Privilegio : #{@tipo_privilegio.attributes}",
     				sesion_id: sesion.id
 				)
     @tipo_privilegio.destroy

@@ -10,3 +10,4 @@
 //= require bootstrap-datetimepicker
 //= require ../../../vendor/assets/javascripts/jquery-elastic-1.6.10/jquery.elastic.source
 
+

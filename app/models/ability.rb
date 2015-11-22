@@ -112,6 +112,9 @@ class Ability
 								can :reporte_regionales, ReporteGenerado
 							  can :reporte_generado, ReporteGenerado
 						end
+						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'estado_academico').id 						
+								can :index, EstadoAcademico
+						end
 						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'asignacion_roles').id 						
 								can :manage, AsignacionRol
 						end

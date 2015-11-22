@@ -57,7 +57,7 @@ class RolesController < ApplicationController
       if @rol.save
 				sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
 				Transaccion.create!(
-    				descripcion: 'Creación del rol  '+@rol.nombre,
+    				descripcion: "Creación del rol #{@rol.attributes}",
     				sesion_id: sesion.id
 				)
         format.html { redirect_to @rol, notice: 'El rol se ha creado exitosamente.' }
@@ -77,7 +77,7 @@ class RolesController < ApplicationController
       if @rol.update(rol_params)
 				sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
 				Transaccion.create!(
-    				descripcion: 'Actualización del rol  '+@rol.nombre,
+    				descripcion: "Actualización del rol: #{@rol.previous_changes}",
     				sesion_id: sesion.id
 				)
         format.html { redirect_to @rol, notice: 'Rol fue actualizado satisfactoriamente.' }
@@ -95,7 +95,7 @@ class RolesController < ApplicationController
 		authorize! :destroy, Rol
 		sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
 				Transaccion.create!(
-    				descripcion: 'Eliminar el rol  '+@rol.nombre,
+    				descripcion: "Borrado del rol #{@rol.attributes}",
     				sesion_id: sesion.id
 				)
     @rol.destroy

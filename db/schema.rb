@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141108160551) do
+ActiveRecord::Schema.define(version: 20151104202811) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(version: 20141108160551) do
     t.integer  "usuario_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "active"
   end
 
   add_index "asignacion_roles", ["proyecto_id"], name: "index_asignacion_roles_on_proyecto_id", using: :btree

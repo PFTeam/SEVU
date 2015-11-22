@@ -42,7 +42,7 @@ class AsignacionRolPredefinidosController < ApplicationController
     respond_to do |format|
 									sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
 				Transaccion.create!(
-    				descripcion: 'Asignar el privilegio '+Privilegio.find(@asignacion_rol_predefinido.privilegio_id).nombre + ' al rol ' + Rol.find(@asignacion_rol_predefinido.rol_id).nombre,
+    				descripcion: 'Creación asociación rol '+Rol.find(@asignacion_rol_predefinido.rol_id).nombre + 'al privilegio '+ Privilegio.find(@asignacion_rol_predefinido.privilegio_id).nombre + ': esActual = '+@asignacion_rol_predefinido.esActual,
     				sesion_id: sesion.id
 				)
       if @asignacion_rol_predefinido.save
@@ -63,7 +63,7 @@ class AsignacionRolPredefinidosController < ApplicationController
       if @asignacion_rol_predefinido.update(asignacion_rol_predefinido_params)
 				sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
 				Transaccion.create!(
-    				descripcion: 'Actualizar el privilegio '+Privilegio.find(@asignacion_rol_predefinido.privilegio_id).nombre + ' con el rol ' + Rol.find(@asignacion_rol_predefinido.rol_id).nombre,
+    				descripcion: 'Actualizar asociación rol '+Rol.find(@asignacion_rol_predefinido.rol_id).nombre + 'al privilegio '+ Privilegio.find(@asignacion_rol_predefinido.privilegio_id).nombre + ': esActual = '+@asignacion_rol_predefinido.esActual,
     				sesion_id: sesion.id
 				)
         format.html { redirect_to @asignacion_rol_predefinido, notice: 'Asignacion rol predefinido fue actualizado satisfactoriamente.' }
@@ -81,9 +81,10 @@ class AsignacionRolPredefinidosController < ApplicationController
 		authorize! :destroy, AsignacionRolPredefinido
 		sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
 				Transaccion.create!(
-    				descripcion: 'Eliminar asignación del privilegio '+Privilegio.find(@asignacion_rol_predefinido.privilegio_id).nombre + ' al rol ' + Rol.find(@asignacion_rol_predefinido.rol_id).nombre,
+    				descripcion: 'Eliminar asociación rol '+Rol.find(@asignacion_rol_predefinido.rol_id).nombre + 'al privilegio '+ Privilegio.find(@asignacion_rol_predefinido.privilegio_id).nombre + ': esActual = '+@asignacion_rol_predefinido.esActual,
     				sesion_id: sesion.id
 				)
+
     @asignacion_rol_predefinido.destroy
     respond_to do |format|
       format.html { redirect_to asignacion_rol_predefinidos_url, notice: 'Asignacion rol predefinido fue borrado satisfactoriamente.' }

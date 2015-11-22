@@ -49,7 +49,7 @@ class AsignacionFuncionesController < ApplicationController
       if @asignacion_funcion.save
 				sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
 				Transaccion.create!(
-    				descripcion: 'Asignar el rol '+Rol.find(@asignacion_funcion.rol_id).nombre + ' al usuario ' + Usuario.find(@asignacion_funcion.usuario_id).nombreUsuario,
+    				descripcion: 'Creación asociación rol '+Rol.find(@asignacion_funcion.rol_id).nombre + ' al usuario ' + Usuario.find(@asignacion_funcion.usuario_id).nombreUsuario + ': esActual = '+@asignacion_funcion.esActual,
     				sesion_id: sesion.id
 				)
         format.html { redirect_to @asignacion_funcion, notice: 'Asignacion funcion fue creado satisfactoriamente.' }
@@ -69,7 +69,7 @@ class AsignacionFuncionesController < ApplicationController
       if @asignacion_funcion.update(asignacion_funcion_params)
 						sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
 				Transaccion.create!(
-    				descripcion: 'Actualizar el rol '+Rol.find(@asignacion_funcion.rol_id).nombre + ' al usuario ' + Usuario.find(@asignacion_funcion.usuario_id).nombreUsuario,
+    				descripcion: 'Actualizar asociación rol '+Rol.find(@asignacion_funcion.rol_id).nombre + ' al usuario ' + Usuario.find(@asignacion_funcion.usuario_id).nombreUsuario + ': esActual = '+@asignacion_funcion.esActual,
     				sesion_id: sesion.id
 				)
         format.html { redirect_to @asignacion_funcion, notice: 'Asignacion funcion fue actualizado satisfactoriamente.' }
@@ -87,7 +87,7 @@ class AsignacionFuncionesController < ApplicationController
 		authorize! :destroy, AsignacionFuncion
 				sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
 				Transaccion.create!(
-    				descripcion: 'Eliminar la asignación del rol '+Rol.find(@asignacion_funcion.rol_id).nombre + ' al usuario ' + Usuario.find(@asignacion_funcion.usuario_id).nombreUsuario,
+    				descripcion: 'Eliminar asignación rol '+Rol.find(@asignacion_funcion.rol_id).nombre + ' al usuario ' + Usuario.find(@asignacion_funcion.usuario_id).nombreUsuario + ': esActual = '+@asignacion_funcion.esActual,
     				sesion_id: sesion.id
 				)
     @asignacion_funcion.destroy

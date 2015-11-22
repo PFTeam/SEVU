@@ -49,7 +49,7 @@
        <tbody>
 				<% @trans.to_enum(:each_with_index).each do |transaccion,i| %>
        	<tr>
-        	 <td><%= @trans[i][:fecha] %></td>
+        	 <td><%= l @trans[i][:fecha] %></td>
 					 <td><%= @trans[i][:descripcion] %></td>
 						 <% if @trans[i][:proyecto] != nil %> 
 					 <td><%= @trans[i][:proyecto] %></td>

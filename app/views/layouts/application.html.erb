@@ -204,15 +204,12 @@
 				<% if alert != nil %>
 					<p class="alert alert-dismissable alert-danger"><%= alert %></p> <!--PARA DEVISE (los mensajes se encuentran en devise.en.yml)-->
 					<% end %>
-
           <%= yield %>
           <!-- FIN INICIO MARCO CENTRAL   -->    
-
        </div> <!-- /#page-wrapper -->
   </div><!-- /#wrapper -->
   <!-- Modal -->
   <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div><!-- /.modal -->
   <%= javascript_include_tag 'application', 'bootstrap' => true, :cache => 'cached/all1' %>
-  <%= javascript_include_tag "//www.google.com/jsapi", "chartkick", :cache => 'cached/all2' %>
 </body>
 </html>
