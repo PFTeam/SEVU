@@ -14,8 +14,8 @@
   <tbody>
     <% @asignacion_rol_predefinidos.to_enum(:each_with_index).each do |asignacion_rol_predefinido,i| %>
       <tr>
-        <td><%= asignacion_rol_predefinido.created_at %></td>
-        <td><%= asignacion_rol_predefinido.esActual %></td>
+        <td><%= l asignacion_rol_predefinido.created_at %></td>
+        <td><%= t asignacion_rol_predefinido.esActual.to_s %></td>
 				<td><%= @rol_priv[i][:rol] %></td>
         <td><%= @rol_priv[i][:privilegio] %></td>
         <td><%= link_to 'Editar', edit_asignacion_rol_predefinido_path(asignacion_rol_predefinido) %></td>

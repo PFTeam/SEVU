@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 #end
 #For CanCan-----------------------------------------
 	 rescue_from CanCan::AccessDenied do |exception|
-    redirect_to root_path, :alert => "No esta autorizado a acceder a la pagina solicitada."
+    redirect_to :back, :alert => "No esta autorizado a acceder a la pagina solicitada."
   end
 =begin
 		rescue_from ActiveRecord::RecordNotFound, with: :error
