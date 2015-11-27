@@ -52,7 +52,8 @@ class AsignacionFuncionesController < ApplicationController
     				descripcion: 'Asignar el rol '+Rol.find(@asignacion_funcion.rol_id).nombre + ' al usuario ' + Usuario.find(@asignacion_funcion.usuario_id).nombreUsuario,
     				sesion_id: sesion.id
 				)
-        format.html { redirect_to @asignacion_funcion, notice: 'Asignacion funcion fue creado satisfactoriamente.' }
+        format.html { redirect_to @asignacion_funcion
+          flash[:success] = 'Asignacion funcion fue creado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @asignacion_funcion }
       else
         format.html { render :new }
@@ -72,7 +73,8 @@ class AsignacionFuncionesController < ApplicationController
     				descripcion: 'Actualizar el rol '+Rol.find(@asignacion_funcion.rol_id).nombre + ' al usuario ' + Usuario.find(@asignacion_funcion.usuario_id).nombreUsuario,
     				sesion_id: sesion.id
 				)
-        format.html { redirect_to @asignacion_funcion, notice: 'Asignacion funcion fue actualizado satisfactoriamente.' }
+        format.html { redirect_to @asignacion_funcion
+          flash[:success] = 'Asignacion funcion fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @asignacion_funcion }
       else
         format.html { render :edit }
@@ -92,7 +94,8 @@ class AsignacionFuncionesController < ApplicationController
 				)
     @asignacion_funcion.destroy
     respond_to do |format|
-      format.html { redirect_to asignacion_funciones_url, notice: 'Asignacion funcion fue borrado satisfactoriamente.' }
+      format.html { redirect_to asignacion_funciones_url
+        flash[:success] = 'Asignacion funcion fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end
   end

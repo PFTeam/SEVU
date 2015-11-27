@@ -8,5 +8,7 @@
 //= require raphael-min
 //= require_tree ../../../vendor/assets/javascripts/tablesorter
 //= require bootstrap-datetimepicker
+//= require bootstrap-datepicker
+//= require bootstrap-datepicker-rails
 //= require ../../../vendor/assets/javascripts/jquery-elastic-1.6.10/jquery.elastic.source
 

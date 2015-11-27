@@ -18,9 +18,9 @@
 
       
 <div class="col-lg-12">
-  <%= f.input :descripcion %><br>
+  <%= f.input :descripcion, :placeholder => 'ingrese una dresçripción de la experiencia vivida...' %><br>
     
-  <%= f.input :asignacion_actividad_id,:as => :hidden, input_html: {value: @asignacion_actividad.id} %>
+  <%= f.input :asignacion_actividad_id,:as => :hidden, input_html: {value: @asignacion_actividad.id}  %>
     
 
     </div>

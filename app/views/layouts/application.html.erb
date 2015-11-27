@@ -6,6 +6,7 @@
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= csrf_meta_tags %>
   <%= favicon_link_tag 'favicon.ico' %>
+  <%= javascript_include_tag 'application', 'bootstrap' => true, :cache => 'cached/all1' %>
 </head>
 <body>
   <div id="wrapper">
@@ -76,31 +77,14 @@
                </li>
           <% end %>
                <li>
-                   <a href="http://bootswatch.com/help/">Ayuda</a>
+                   <a href="">Ayuda</a>
                </li>
       </ul>
 
   
   <ul class="nav navbar-nav navbar-right">
-  <%#= render '/shared/notificaciones' %>
-    <li class="dropdown messages-dropdown">
-         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> Notificaciones <span class="badge"><%= @notificaciones.size %></span> <b class="caret"></b></a>
-           <ul class="dropdown-menu"> 
-             <li class="dropdown-header"><%= @notificaciones.size %> Notificaciones Nuevas</li>
-             <% @notificaciones.each do |notificacion| %>
-               <li class="message-preview">
-               <a href="/notificacion_sistemas/<%= notificacion.id %>">
-               <span class="avatar"></span>
-               <span class="name"><%= notificacion.usuario_creador%>:</span>
-               <span class="message"><%= notificacion.mensaje %></span>
-               <span class="time"><i class="fa fa-clock-o"></i><%= notificacion.created_at.to_formatted_s(:long_ordinal) %></span>
-               </a>
-               </li>
-               <li class="divider"></li>
-             <% end %>
-             <li><a href="/notificacion_sistemas">Ver todo <span class="badge"><%= @notificaciones.size %></span></a></li>
-           </ul>
-       </li>
+  <%= render '/shared/notificaciones' %>
+    
 
 
 	 <li class="dropdown user-dropdown">
@@ -131,7 +115,7 @@
 
 				<% end %>
 
-<!---------- MENU VERTICAL (Poner las opciones dentro de cada menu superior -------------------->
+<!-- MENU VERTICAL (Poner las opciones dentro de cada menu superior -->
 
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <% case controller_name 
@@ -197,13 +181,15 @@
 
       </nav>
       <div id="page-wrapper">
-			<% if notice =! '' %>
-						<p class="alert alert-dismissable alert-success"><%= notice %></p> 
-            <!-- PARA DEVISE (los mensajes se encuentran en devise.en.yml) -->
-			 <% end %>
-				<% if alert != nil %>
-					<p class="alert alert-dismissable alert-danger"><%= alert %></p> <!--PARA DEVISE (los mensajes se encuentran en devise.en.yml)-->
-					<% end %>
+
+
+
+
+  
+
+
+
+			
 
           <%= yield %>
           <!-- FIN INICIO MARCO CENTRAL   -->    
@@ -212,7 +198,6 @@
   </div><!-- /#wrapper -->
   <!-- Modal -->
   <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div><!-- /.modal -->
-  <%= javascript_include_tag 'application', 'bootstrap' => true, :cache => 'cached/all1' %>
   <%= javascript_include_tag "//www.google.com/jsapi", "chartkick", :cache => 'cached/all2' %>
 </body>
 </html>

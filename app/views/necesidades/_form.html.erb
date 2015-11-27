@@ -14,17 +14,12 @@
           </div>
         
       </div>
-    </div>
+  
   <% end %>
-  <br></br>
-  <br></br>
-  <br></br>
-  <div class="row">
-  <div class="col-lg-12">
 
-    <%= f.input :titulo %>
-    <%= f.input :descripcion %>
-    <%= f.input :ambitoAplicacion  %>
+    <%= f.input :titulo, :placeholder => 'ingrese un nombre para la necesidad...' %>
+    <%= f.input :descripcion, :placeholder => 'ingrese una breve explicación para la necesidad...'  %>
+    <%= f.input :ambitoAplicacion, :placeholder => 'ingrese en que ámbito se aplica la necesidad...'   %>
    <%= f.input :usuario_id,:as => :hidden, input_html: {value: current_usuario.id} %>
 
 
@@ -32,6 +27,5 @@
 	  <%= link_to 'Atrás', necesidades_path %>
           <%= f.button :submit, :class => 'btn btn-primary', :value => 'Confirmar' %>
         </div>
-</div>
-</div>
+
 <% end %>

@@ -82,7 +82,7 @@ class AsignacionRolesController < ApplicationController
     else
 	    respond_to do |format|
 		    format.html { redirect_to :controller => 'asignacion_roles', :action => 'index', :proyecto_id => @asignacion_rol.proyecto.id
-		             flash[:notice] = 'El usuario ya se encuentra asignado' } 
+		             flash[:danger] = 'El usuario ya se encuentra asignado' } 
 	    end
     end
   end
@@ -108,7 +108,7 @@ class AsignacionRolesController < ApplicationController
 		    sesion_id: sesion.id ,
 		    proyecto_id: @asignacion_rol.proyecto.id)
 		format.html   { redirect_to :controller => 'asignacion_roles', :action => 'index', :proyecto_id => @asignacion_rol.proyecto.id 
-		flash[:notice] = 'Asignacion rol fue actualizado satisfactoriamente.' }
+		flash[:success] = 'Asignacion rol fue actualizado satisfactoriamente.' }
 		format.json { render :show, status: :ok, location: @asignacion_rol }
 	      else
 		format.html { render :edit }
@@ -119,7 +119,7 @@ class AsignacionRolesController < ApplicationController
 	    respond_to do |format|
 
 		    format.html { redirect_to :controller => 'asignacion_roles', :action => 'index', :proyecto_id => @asignacion_rol.proyecto.id
-		             flash[:notice] = 'El usuario ya se encuentra asignado' } 
+		             flash[:danger] = 'El usuario ya se encuentra asignado' } 
 	    end
     end
   end
@@ -143,14 +143,14 @@ class AsignacionRolesController < ApplicationController
       @asignacion_rol.save
 	    respond_to do |format|
 	      format.html { redirect_to :controller => 'asignacion_roles', :action => 'index', :proyecto_id => @proyecto_id
-			    flash[:notice] = 'El usuario fue desasignado de su rol.' }
+			    flash[:success] = 'El usuario fue desasignado de su rol.' }
 	      format.json { head :no_content }
 	    end
     else
 	    p "TIENE ACTIVIDADES"
     respond_to do |format|
       format.html { redirect_to :controller => 'asignacion_roles', :action => 'index', :proyecto_id => @proyecto_id
-		    flash[:notice] = 'El usuario se encuentra asignado a por lo menos una actividad.' }
+		    flash[:danger] = 'El usuario se encuentra asignado a por lo menos una actividad.' }
       format.json { head :no_content }
     end
 
@@ -164,8 +164,8 @@ class AsignacionRolesController < ApplicationController
     @asignacion_rol.esActual = false
     @asignacion_rol.save
     respond_to do |format|
-      format.html { redirect_to :controller => 'asignacion_roles', :action => 'index', :proyecto_id => @asignacion_rol.proyecto.id, notice: 'El usuario fue desasignado de su rol.'
-		     flash[:notice] = 'La asignación fue dada de baja satisfactoriamente.' }
+      format.html { redirect_to :controller => 'asignacion_roles', :action => 'index', :proyecto_id => @asignacion_rol.proyecto.id
+		     flash[:success] = 'La asignación fue dada de baja satisfactoriamente.' }
       format.json { head :no_content }
     end
   end

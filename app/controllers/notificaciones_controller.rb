@@ -18,6 +18,7 @@ class NotificacionesController < ApplicationController
   def new
 		authorize! :new, Notificacion
 	if !params[:proyecto_id].to_s.blank?
+    @proyecto = Proyecto.find(params[:proyecto_id])
 		p "NO ES BLANK"
 		@asignaciones = AsignacionRol.where(proyecto_id: params[:proyecto_id])
                 @usuarios = []
@@ -44,94 +45,138 @@ class NotificacionesController < ApplicationController
     authorize! :create, Notificacion
 
     p "Notificacion.destino: " + params[:notificacion][:usuario_creador_id].to_s
-    if !params[:notificacion][:usuario_destino_ids].blank?
 
-	    if params[:notificacion][:type].to_s.blank?
-				   respond_to do |format|
-					    if !params[:notificacion][:proyecto_id].to_s.blank?
-        					format.html { redirect_to :controller => 'notificaciones', :action => 'new', :proyecto_id => params[:notificacion][:proyecto_id]
-        								      flash[:notice] =  'Debe ingresar un tipo de notificación' }
-					    elsif !params[:notificacion][:evento_publico_id].to_s.blank?
-        					format.html { redirect_to :controller => 'notificaciones', :action => 'new' , :evento_publico_id => params[:notificacion][:evento_publico_id]
-        								      flash[:notice] =  'Debe ingresar un tipo de notificación' }
-					    else
-        					format.html { redirect_to :controller => 'notificaciones', :action => 'new' 
-        								      flash[:notice] =  'Debe ingresar un tipo de notificación' }
-					    end
-				    end
-	    end
-	    params[:notificacion][:usuario_destino_ids].each do |usuario_destino|
-  		    @notificacion = Notificacion.new(notificacion_params)
-  		    @notificacion.usuario_creador = current_usuario
-  			  @notificacion.usuario_destino = Usuario.find(usuario_destino) 
-  			  if !params[:evento_publico_id].blank?
-  			       @notificacion.evento_publico_id = params[:evento_publico_id]
-  			  elsif !params[:eproyecto_id].blank?
-  			       @notificacion.proyecto_id = params[:proyecto_id]
-  			  end
-  			  case @notificacion.type
-      			  when "NotificacionEmail"
-      				      @notificacion.save
-      					    NotificacionMailer.enviar_notificacion(@notificacion).deliver
-      				 
-      			  when "NotificacionSistema"
-      				      @notificacion.notificado = false
-      				      @notificacion.esActiva = true
-      				      @notificacion.save
-      
-      			  when "Ambos"
-      			     if !params[:evento_publico_id].blank?
-                    @notificacion_sistema.evento_publico_id = params[:evento_publico_id]
-                    @notificacion_sistema.evento_publico_id = params[:evento_publico_id]
-                 elsif !params[:eproyecto_id].blank?
-                    @notificacion_email.proyecto_id = params[:proyecto_id]
-                    @notificacion_email.proyecto_id = params[:proyecto_id]
-                 end
-      			    
-      				    @notificacion_sistema.usuario_destino = Usuario.find(usuario_destino)
-      				    @notificacion_email.usuario_destino = Usuario.find(usuario_destino)
-        					@notificacion_sistema = Notificacion.new(notificacion_params)
-        					@notificacion_sistema.type = "NotificacionSistema"
-        					@notificacion_email = Notificacion.new(notificacino_params)
-        					@notificacion_email.type = "NotificacionEmail"
-        					@notificacion_email.usuario_creador = current_usuario
-        					@notificacion_sistema.usuario_creador = current_usuario
-        					@notificacion_sistema.notificado = false
-        					@notificacion_sistema.esActiva = true
-      						@notificacion_sistema.save 
-      						@notificacion_email.save
-      						NotificacionMailer.enviar_notificacion(@notificacion_email).deliver
-      			  else 
-      
-      
-      			  end
-	       end
-	      
-	      
-	       respond_to do |format|
-              format.html { redirect_to :controller => 'notificacion_sistemas', :action => 'index' 
-                         flash[:notice] =  'Notificacion fue creado satisfactoriamente.' }
-	      end
-	      
-	      
+    if params[:notificacion][:mensaje].blank?
+
+      respond_to do |format|
+
+          if !params[:notificacion][:proyecto_id].blank?
+              @proyecto = Proyecto.find(params[:notificacion][:proyecto_id][0])
+              params[:proyecto_id] = @proyecto.id
+              format.html { redirect_to :controller => 'notificaciones', :action => 'new', :proyecto_id => params[:notificacion][:proyecto_id][0]
+                          flash[:danger] =  'El Mensaje no puede estar vacío' }
+                          
+          elsif !params[:notificacion][:evento_publico_id].blank?
+              format.html { redirect_to :controller => 'notificaciones', :action => 'new' , :evento_publico_id => params[:notificacion][:evento_publico_id][0]
+                          flash[:danger] =  'El Mensaje no puede estar vacío' }
+                          
+          else
+              format.html { redirect_to :controller => 'notificaciones', :action => 'new' 
+                          flash[:danger] =  'El Mensaje no puede estar vacío' }
+
+
+          end
+
+      end
+
+
+
     else
-	    respond_to do |format|
-		    if !params[:notificacion][:proyecto_id].blank?
-		format.html { redirect_to :controller => 'notificaciones', :action => 'new', :proyecto_id => params[:notificacion][:proyecto_id]
-					      flash[:notice] =  'Debe ingresar al menos un usuario destino' }
-		    elsif !params[:notificacion][:evento_publico_id].blank?
-		format.html { redirect_to :controller => 'notificaciones', :action => 'new' , :evento_publico_id => params[:notificacion][:evento_publico_id]
-					      flash[:notice] =  'Debe ingresar al menos un usuario destino' }
+      if !params[:notificacion][:usuario_destino_ids].blank?
 
-		    else
-		format.html { redirect_to :controller => 'notificaciones', :action => 'new' 
-					      flash[:notice] =  'Debe ingresar al menos un usuario destino' }
+  	    if params[:notificacion][:type].to_s.blank?
+  				   respond_to do |format|
+  					    if !params[:notificacion][:proyecto_id].to_s.blank?
+          					format.html { redirect_to :controller => 'notificaciones', :action => 'new', :proyecto_id => params[:notificacion][:proyecto_id][0]
+          								      flash[:danger] =  'Debe ingresar un tipo de notificación' }
+  					    elsif !params[:notificacion][:evento_publico_id].to_s.blank?
+          					format.html { redirect_to :controller => 'notificaciones', :action => 'new' , :evento_publico_id => params[:notificacion][:evento_publico_id][0]
+          								      flash[:danger] =  'Debe ingresar un tipo de notificación' }
+  					    else
+          					format.html { redirect_to :controller => 'notificaciones', :action => 'new' 
+          								      flash[:danger] =  'Debe ingresar un tipo de notificación' }
+  					    end
+  				    end
+  	    end
+  	    params[:notificacion][:usuario_destino_ids].each do |usuario_destino|
+    		    @notificacion = Notificacion.new(notificacion_params)
+    		    @notificacion.usuario_creador = current_usuario
+    			  @notificacion.usuario_destino = Usuario.find(usuario_destino) 
+    			  if !params[:evento_publico_id].blank?
+    			       @notificacion.evento_publico_id = params[:evento_publico_id]
+    			  elsif !params[:eproyecto_id].blank?
+                @proyecto = Proyecto.find(params[:notificacion][:proyecto_id][0])
+    			       @notificacion.proyecto_id = params[:proyecto_id]
+    			  end
+    			  case @notificacion.type
+        			  when "NotificacionEmail"
+        				      @notificacion.save
+        					    NotificacionMailer.enviar_notificacion(@notificacion).deliver
+        				 
+        			  when "NotificacionSistema"
+        				      @notificacion.notificado = false
+        				      @notificacion.esActiva = true
+        				      @notificacion.save
+        
+        			  when "Ambos"
+        			     if !params[:evento_publico_id].blank?
+                      @notificacion_sistema.evento_publico_id = params[:evento_publico_id]
+                      @notificacion_sistema.evento_publico_id = params[:evento_publico_id]
+                   elsif !params[:eproyecto_id].blank?
+                      @notificacion_email.proyecto_id = params[:proyecto_id]
+                      @notificacion_email.proyecto_id = params[:proyecto_id]
+                   end
+        			    
+        				    @notificacion_sistema.usuario_destino = Usuario.find(usuario_destino)
+        				    @notificacion_email.usuario_destino = Usuario.find(usuario_destino)
+          					@notificacion_sistema = Notificacion.new(notificacion_params)
+          					@notificacion_sistema.type = "NotificacionSistema"
+          					@notificacion_email = Notificacion.new(notificacino_params)
+          					@notificacion_email.type = "NotificacionEmail"
+          					@notificacion_email.usuario_creador = current_usuario
+          					@notificacion_sistema.usuario_creador = current_usuario
+          					@notificacion_sistema.notificado = false
+          					@notificacion_sistema.esActiva = true
+        						@notificacion_sistema.save 
+        						@notificacion_email.save
+        						NotificacionMailer.enviar_notificacion(@notificacion_email).deliver
+        			  else 
+        
+        
+        			  end
+  	       end
+  	      
+  	      
+  	       respond_to do |format|
 
-		    end
 
-	    end
+
+              if !params[:notificacion][:proyecto_id].blank?
+                format.html { redirect_to :controller => 'notificaciones', :action => 'new', :proyecto_id => params[:notificacion][:proyecto_id][0]
+                            flash[:success] =  'Notificacion fue creado satisfactoriamente.' }
+              elsif !params[:notificacion][:evento_publico_id].blank?
+                @evento_publico = EventoPublico.find(params[:notificacion][:evento_publico_id][0])
+                format.html { redirect_to @evento_publico
+                            flash[:success] =  'Notificacion fue creada satisfactoriamente.' }
+
+              else
+                format.html { redirect_to :controller => 'notificacion_sistemas', :action => 'index' 
+                           flash[:success] =  'Notificacion fue creado satisfactoriamente.' }
+
+              end
+
+               
+  	      end
+  	      
+  	      
+      else
+  	    respond_to do |format|
+  		    if !params[:notificacion][:proyecto_id].blank?
+  		format.html { redirect_to :controller => 'notificaciones', :action => 'new', :proyecto_id => params[:notificacion][:proyecto_id][0]
+  					      flash[:danger] =  'Debe ingresar al menos un usuario destino' }
+  		    elsif !params[:notificacion][:evento_publico_id].blank?
+  		format.html { redirect_to :controller => 'notificaciones', :action => 'new' , :evento_publico_id => params[:notificacion][:evento_publico_id][0]
+  					      flash[:danger] =  'Debe ingresar al menos un usuario destino' }
+
+  		    else
+  		format.html { redirect_to :controller => 'notificaciones', :action => 'new' 
+  					      flash[:danger] =  'Debe ingresar al menos un usuario destino' }
+
+  		    end
+
+  	    end
+      end
     end
-
   end
 
   # PATCH/PUT /notificaciones/1

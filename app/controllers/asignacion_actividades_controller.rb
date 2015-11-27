@@ -57,7 +57,7 @@ class AsignacionActividadesController < ApplicationController
     	    respond_to do |format|
       	    if  @asignacion_actividad.save
       	      format.html { redirect_to :controller => 'asignacion_actividades', :action => 'index', :actividad_id => @asignacion_actividad.actividad.id
-      		      flash[:notice] = 'Asignacion actividad fue creado satisfactoriamente.' }
+      		      flash[:success] = 'Asignacion actividad fue creado satisfactoriamente.' }
       	      format.json { render :show, status: :created, location: @asignacion_actividad }
       	    else
       				format.html { render :new }
@@ -67,13 +67,13 @@ class AsignacionActividadesController < ApplicationController
     		else
     	    respond_to do |format|
     		    format.html { redirect_to :controller => 'asignacion_actividades', :action => 'index', :actividad_id => @asignacion_actividad.actividad.id
-    		             flash[:notice] = 'El usuario ya se encuentra asignado' } 
+    		             flash[:danger] = 'El usuario ya se encuentra asignado' } 
           end
     		end
       else 
         respond_to do |format|
             format.html { redirect_to :controller => 'asignacion_actividades', :action => 'index', :actividad_id => params[:asignacion_actividad][:actividad_id]
-                     flash[:notice] = 'El usuario no se encuentra asignado al Proyecto' } 
+                     flash[:danger] = 'El usuario no se encuentra asignado al Proyecto' } 
         end  
       end 
   	end
@@ -85,7 +85,8 @@ class AsignacionActividadesController < ApplicationController
 		authorize! :update, AsignacionActividad
     respond_to do |format|
       if @asignacion_actividad.update(asignacion_actividad_params)
-        format.html { redirect_to @asignacion_actividad, notice: 'Asignacion actividad fue actualizado satisfactoriamente.' }
+        format.html { redirect_to @asignacion_actividad
+          flash[:success] = 'Asignacion actividad fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @asignacion_actividad }
       else
         format.html { render :edit }
@@ -100,7 +101,7 @@ class AsignacionActividadesController < ApplicationController
     respond_to do |format|
       if @asignacion_actividad.save
 	      format.html { redirect_to :controller => 'asignacion_actividades', :action => 'index', :actividad_id => @asignacion_actividad.actividad.id
-		     flash[:notice] = 'La asignación fue dada de baja satisfactoriamente.' }
+		     flash[:success] = 'La asignación fue dada de baja satisfactoriamente.' }
         format.json { render :show, status: :created, location: @asignacion_actividad }
       end
     end
@@ -114,8 +115,9 @@ class AsignacionActividadesController < ApplicationController
     @asignacion_actividad.destroy
     respond_to do |format|
 	      format.html { redirect_to :controller => 'asignacion_actividades', :action => 'index', :actividad_id => @actividad_id
-		      flash[:notice] = 'Asignacion actividad fue borrado satisfactoriamente.' }
-      format.html { redirect_to asignacion_actividades_url, notice: 'Asignacion actividad fue borrado satisfactoriamente.' }
+		      flash[:success] = 'Asignacion actividad fue borrado satisfactoriamente.' }
+      format.html { redirect_to asignacion_actividades_url
+       flash[:success] = 'Asignacion actividad fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end
   end
@@ -131,12 +133,12 @@ class AsignacionActividadesController < ApplicationController
   end
 
   def en_proyecto( usuario, proyecto)
-    if AsignacionRol.all.where(usuario_id: usuario, proyecto_id: proyecto).count == 0
-      p false
-      false
-    else
-      p true
+    #oras += Actividad.where("id = ? AND fechaRealInicio BETWEEN ? AND ? ", asig.actividad_id, inicio, fin).duracionReal
+    #if (AsignacionRol.all.where(usuario_id: usuario, proyecto_id: proyecto).count == 0)
+    if (AsignacionRol.all.where("usuario_id = ? AND proyecto_id = ? AND (active = ? AND 'esActual' = ?)", usuario , proyecto, true, true).count == 0)
       true
+    else
+      false
     end
   end
 

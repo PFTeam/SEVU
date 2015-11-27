@@ -46,7 +46,8 @@ class AsignacionRolPredefinidosController < ApplicationController
     				sesion_id: sesion.id
 				)
       if @asignacion_rol_predefinido.save
-        format.html { redirect_to @asignacion_rol_predefinido, notice: 'Asignacion rol predefinido fue creado satisfactoriamente.' }
+        format.html { redirect_to @asignacion_rol_predefinido
+          flash[:success] = 'Asignacion rol predefinido fue creado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @asignacion_rol_predefinido }
       else
         format.html { render :new }
@@ -66,7 +67,8 @@ class AsignacionRolPredefinidosController < ApplicationController
     				descripcion: 'Actualizar el privilegio '+Privilegio.find(@asignacion_rol_predefinido.privilegio_id).nombre + ' con el rol ' + Rol.find(@asignacion_rol_predefinido.rol_id).nombre,
     				sesion_id: sesion.id
 				)
-        format.html { redirect_to @asignacion_rol_predefinido, notice: 'Asignacion rol predefinido fue actualizado satisfactoriamente.' }
+        format.html { redirect_to @asignacion_rol_predefinido
+         flash[:success] = 'Asignacion rol predefinido fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @asignacion_rol_predefinido }
       else
         format.html { render :edit }
@@ -86,7 +88,8 @@ class AsignacionRolPredefinidosController < ApplicationController
 				)
     @asignacion_rol_predefinido.destroy
     respond_to do |format|
-      format.html { redirect_to asignacion_rol_predefinidos_url, notice: 'Asignacion rol predefinido fue borrado satisfactoriamente.' }
+      format.html { redirect_to asignacion_rol_predefinidos_url
+      flash[:success] = 'Asignacion rol predefinido fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end
   end

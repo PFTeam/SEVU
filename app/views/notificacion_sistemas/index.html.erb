@@ -1,14 +1,19 @@
 
-<p id="notice"><%= notice %></p>
+<% flash.each do |key, value| %>
+  <div class="alert alert-<%= key %> alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <%= value %>
+   </div>
+<% end %>
 <h1>Lista de Notificaciones</h1>
 
-             	 <% @notificacion_sistemas.each do |notificacion| %>
+             	 <% @notificacion_sistemas.order('created_at DESC').each do |notificacion| %>
 <br>
             <div class="panel panel-primary">
               <div class="panel-body">
                 <b><%= link_to notificacion.usuario_creador, notificacion.usuario_creador %></b>      <br>
               <label><h5><b> Notificación:</b></h5></label> 
-				<%= notificacion.created_at %>
+				<%= notificacion.created_at.to_formatted_s(:rfc822) %>
                 <br>
                 <label>Mensaje</label>
                 <p>

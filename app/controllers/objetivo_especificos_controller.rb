@@ -42,7 +42,7 @@ class ObjetivoEspecificosController < ApplicationController
     respond_to do |format|
       if @objetivo_especifico.save
         format.html { redirect_to @objetivo_general
-		      flash[:notice] = 'Objetivo especifico fue creado satisfactoriamente.' }
+		      flash[:success] = 'Objetivo especifico fue creado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @objetivo_especifico }
       else
         @proyecto = @objetivo_general.proyecto
@@ -62,7 +62,8 @@ class ObjetivoEspecificosController < ApplicationController
 
     respond_to do |format|
       if @objetivo_especifico.update(objetivo_especifico_params)
-        format.html { redirect_to @objetivo_especifico, notice: 'Objetivo especifico fue actualizado satisfactoriamente.' }
+        format.html { redirect_to @objetivo_especifico
+flash[:success] = 'Objetivo especifico fue actualizado satisfactoriamente.' }
         #format.json { render :show, status: :ok, location: @objetivo_especifico }
         format.js   { render :show, content_type: 'text/html' }
       else

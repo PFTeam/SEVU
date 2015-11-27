@@ -1,12 +1,17 @@
 <h2>Recursos del Proyecto</h2>
-<p id="notice"><%= notice %></p>
+<% flash.each do |key, value| %>
+  <div class="alert alert-<%= key %> alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <%= value %>
+   </div>
+<% end %>
               <table class="table table-hover table-striped tablesorter">
                 <thead>
                   <tr>
                     <th class="col-lg-3">Apellido y Nombre</th>
                     <th class="col-lg-2">Fecha Asignación </th>
                     <th class="col-lg-2">Ultima Fecha Cambio </th>
-                    <th class="col-lg-2">Vigente</th>
+                    <th class="col-lg-1">Vigente</th>
                     <th class="col-lg-2">Rol</th>
                     <th class="col-lg-5"></th>
                     <th></th>

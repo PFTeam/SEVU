@@ -34,7 +34,7 @@ class AsistenciaEventosController < ApplicationController
     respond_to do |format|
       if @asistencia_evento.save
 	format.html {redirect_to :controller => 'evento_publicos', :action => 'index'
-	      flash[:notice] = 'Se ha registrado tu participación'  } 
+	      flash[:success] = 'Se ha registrado tu participación'  } 
         format.json { render :show, status: :created, location: @asistencia_evento }
       else
         format.html { render :new }
@@ -49,7 +49,8 @@ class AsistenciaEventosController < ApplicationController
 		authorize! :update, AsistenciaEvento
     respond_to do |format|
       if @asistencia_evento.update(asistencia_evento_params)
-        format.html { redirect_to @asistencia_evento, notice: 'Asistencia evento fue actualizado satisfactoriamente.' }
+        format.html { redirect_to @asistencia_evento
+flash[:success] = 'Asistencia evento fue actualizada satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @asistencia_evento }
       else
         format.html { render :edit }
@@ -64,7 +65,8 @@ class AsistenciaEventosController < ApplicationController
 		authorize! :destroy, AsistenciaEvento
     @asistencia_evento.destroy
     respond_to do |format|
-      format.html { redirect_to asistencia_eventos_url, notice: 'Asistencia evento fue borrado satisfactoriamente.' }
+      format.html { redirect_to asistencia_eventos_url
+flash[:success] = 'Asistencia evento fue borrada satisfactoriamente.' }
       format.json { head :no_content }
     end
   end

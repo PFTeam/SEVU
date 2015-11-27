@@ -1,6 +1,6 @@
 class HistorialEstadoProyectosController < ApplicationController
   before_action :set_historial_estado_proyecto, only: [:show, :edit, :update, :destroy]
-
+  after_action :notificar_cambio, only: [:create, :update]
   # GET /historial_estado_proyectos
   # GET /historial_estado_proyectos.json
   def index
@@ -42,7 +42,7 @@ class HistorialEstadoProyectosController < ApplicationController
 		    sesion_id: sesion.id ,
 		    proyecto_id: @historial_estado_proyecto.proyecto.id)
         format.html { redirect_to @historial_estado_proyecto
-		     flash[:notice] = 'Historial estado proyecto fue creado satisfactoriamente.' }
+		     flash[:success] = 'Historial estado proyecto fue creado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @historial_estado_proyecto }
       else
         format.html { render :new }
@@ -67,7 +67,7 @@ class HistorialEstadoProyectosController < ApplicationController
 		    sesion_id: sesion.id ,
 		    proyecto_id: @historial_estado_proyecto_nuevo.proyecto.id)
 		    format.html { redirect_to action: 'index', proyecto_id: @historial_estado_proyecto.proyecto.id
-		    flash[:notice] = 'Historial estado proyecto fue actualizado satisfactoriamente.' }
+		    flash[:success] = 'Historial estado proyecto fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @historial_estado_proyecto }
       else
         format.html { render :edit }
@@ -82,7 +82,8 @@ class HistorialEstadoProyectosController < ApplicationController
 		authorize! :destroy, HistorialEstadoProyecto
     @historial_estado_proyecto.destroy
     respond_to do |format|
-      format.html { redirect_to historial_estado_proyectos_url, notice: 'Historial estado proyecto fue borrado satisfactoriamente.' }
+      format.html { redirect_to historial_estado_proyectos_url
+flash[:success] = 'Historial estado proyecto fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end
   end
@@ -104,4 +105,31 @@ class HistorialEstadoProyectosController < ApplicationController
     def historial_estado_proyecto_params
       params.require(:historial_estado_proyecto).permit(:fechaCambioEstado, :esActual, :estado_proyecto_id, :proyecto_id)
     end
+
+    def notificar_cambio 
+      @proyecto = @historial_estado_proyecto.proyecto
+
+      @usuarios = []
+
+      @proyecto.asignacion_roles.each do |asignacion|
+        if asignacion.active == true && asignacion.esActual == true
+          @usuarios = @usuarios + asignacion.usuario.to_a
+        end
+      end
+
+      @usuarios.uniq.each do |usuario|
+        p usuario.apellido_nombre
+        @notificacion = Notificacion.new()
+        @notificacion.usuario_creador = current_usuario
+        @notificacion.usuario_destino = usuario
+        @notificacion.type = "NotificacionSistema"
+        @notificacion.notificado = false
+        @notificacion.esActiva = true
+        @notificacion.mensaje = "El Estado del Proyecto " + @proyecto.nombre.to_s + " ha sido establecido en " + @historial_estado_proyecto.estado_proyecto.nombre.to_s + "."
+        @notificacion.save
+      end
+    end
+
+
+
 end

@@ -1,6 +1,10 @@
 
-<p id="notice"><%= notice %></p>
-
+<% flash.each do |key, value| %>
+  <div class="alert alert-<%= key %> alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <%= value %>
+   </div>
+<% end %>
 
 <h1>Lista de Historial Estado Actividades</h1>
 
@@ -18,21 +22,26 @@
   <tbody>
     <% @actividad.historial_estado_actividades.each_with_index do |historial_estado_actividad, index| %>
     <% if index+1 == @actividad.historial_estado_actividades.size %>
-                    <tr style="color: black">
-                    <%else %>
-                    <tr style="font-style: italic">
-                    <% end %>
-  
-        <td><%= historial_estado_actividad.estado_actividad %></td>
-        <td><%= historial_estado_actividad.created_at.to_formatted_s(:long_ordinal) %></td>
-        <% if historial_estado_actividad.created_at == historial_estado_actividad.updated_at %>
-          <td>Actualidad</td>
-        <% else %>
-          <td><%= historial_estado_actividad.updated_at.to_formatted_s(:long_ordinal) %></td>
-        <% end %>
-	<td><% if index+1 == @actividad.historial_estado_actividades.size %> Sí <% else %> No <% end %></td>
-	<% if index+1 == @actividad.historial_estado_actividades.size %>
-		<%= link_to 'Modificar Ultimo Estado', edit_historial_estado_actividad_path(historial_estado_actividad) %> |
+      <tr style="color: black">
+    <%else %>
+      <tr style="font-style: italic">
+    <% end %>
+    <td><%= historial_estado_actividad.estado_actividad %></td>
+    <td><%= historial_estado_actividad.created_at.to_formatted_s(:long_ordinal) %></td>
+    <% if index+1 == @actividad.historial_estado_actividades.size %>
+      <td>Actualidad</td>
+    <% else %>
+      <td><%= historial_estado_actividad.updated_at.to_formatted_s(:long_ordinal) %></td>
+    <% end %>
+	  <td>
+      <% if index+1 == @actividad.historial_estado_actividades.size %>
+        Sí 
+      <% else %>
+        No 
+      <% end %>
+    </td>
+  	<% if index+1 == @actividad.historial_estado_actividades.size %>
+  		<%= link_to 'Modificar Ultimo Estado', edit_historial_estado_actividad_path(historial_estado_actividad) %> |
 	<% end %>
   
       </tr>

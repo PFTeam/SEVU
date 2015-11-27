@@ -1,26 +1,36 @@
 <%= simple_form_for(@evento_publico) do |f| %>
   <% if @evento_publico.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@evento_publico.errors.count, "error") %> prohibited this evento_publico from being saved:</h2>
-
-      <ul>
-      <% @evento_publico.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
+    <div class="row">
+    <div class="col-lg-12">
+      <div class="col-lg-4"></div>
+       
+          <div class="alert alert-danger col-lg-4">
+            <a class="close" data-dismiss="alert">x</a>      
+            <strong><%= pluralize(@evento_publico.errors.count, "Error") %> en la creacion del Evento Público:</strong>
+            <ul>
+              <% @evento_publico.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        
+      </div>
+     </div>
   <% end %>
+
+
+
 
 <div class="row">
           <div class="col-lg-12">
             <div class="panel panel-primary">
               <div class="panel-heading">
-                <h3 class="panel-title"><%= f.input :nombre %><br></h3>
+                <h3 class="panel-title"><%= f.input :nombre , :placeholder => 'ingrese un nombre para el evento...' %><br></h3>
               </div>
               <div class="panel-body">
                 
-                <label>Descripción del Evento Público</label>
-                <%= f.input :descripcion,:as => :text, :input_html => {:rows => 10}, :label => false, :placeholder => 'descripción del evento...'  %>
+                
+                <%= f.input :descripcion,:as => :text, :input_html => {:rows => 10},  :placeholder => 'descripción del evento...', :required => true  %>
    				<p> 
                 <div class="input-append date" id="dp3" data-date="15-06-2014" data-date-format="dd-mm-yyyy">
                 <label>Fecha de Realización</label>

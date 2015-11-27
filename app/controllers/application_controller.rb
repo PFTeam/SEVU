@@ -60,7 +60,7 @@ helper_method :puede_configurar?
   end
 
   def cargar_notificaciones
-	  @notificaciones = NotificacionSistema.find_by(usuario_destino_id: current_usuario, notificado: false).to_a
+	  @notificaciones = NotificacionSistema.where(usuario_destino_id: current_usuario, notificado: false).to_a
 	  #@notificaciones = NotificacionSistema.all
     
   	

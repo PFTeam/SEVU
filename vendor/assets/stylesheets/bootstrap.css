@@ -634,6 +634,10 @@ pre code {
   max-height: 340px;
   overflow-y: scroll;
 }
+.pre-scrollable2 {
+  max-height: 600px;
+  overflow-y: scroll;
+}
 .container {
   margin-right: auto;
   margin-left: auto;
@@ -4358,15 +4362,15 @@ a.thumbnail:focus {
   right: -21px;
   color: inherit;
 }
-.alert-success {
+.alert-success,.alert-notice {
   background-color: #dff0d8;
   border-color: #d6e9c6;
   color: #468847;
 }
-.alert-success hr {
+.alert-success, .alert-notice hr {
   border-top-color: #c9e2b3;
 }
-.alert-success .alert-link {
+.alert-success .alert-link, .alert-notice {
   color: #356635;
 }
 .alert-info {
@@ -4391,15 +4395,15 @@ a.thumbnail:focus {
 .alert-warning .alert-link {
   color: #a47e3c;
 }
-.alert-danger {
+.alert-danger, .alert-alert {
   background-color: #f2dede;
   border-color: #eed3d7;
   color: #b94a48;
 }
-.alert-danger hr {
+.alert-danger, .alert-alert  hr {
   border-top-color: #e6c1c7;
 }
-.alert-danger .alert-link {
+.alert-danger .alert-link, .alert-alert  {
   color: #953b39;
 }
 @-webkit-keyframes progress-bar-stripes {
