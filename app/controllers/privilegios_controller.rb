@@ -40,7 +40,7 @@ class PrivilegiosController < ApplicationController
       if @privilegio.save
 						sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
 				Transaccion.create!(
-    				descripcion: 'Crear el privilegio  '+@privilegio.nombre,
+    				descripcion: "Creación del Privilegio: #{@privilegio.attributes}",
     				sesion_id: sesion.id
 				)
         format.html { redirect_to @privilegio, notice: 'Privilegio fue creado satisfactoriamente.' }
@@ -60,7 +60,7 @@ class PrivilegiosController < ApplicationController
       if @privilegio.update(privilegio_params)
 						sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
 				Transaccion.create!(
-    				descripcion: 'Actualizar el privilegio  '+@privilegio.nombre,
+    				descripcion: "Actualizar el Privilegio: #{@privilegio.previous_changes}",
     				sesion_id: sesion.id
 				)
         format.html { redirect_to @privilegio, notice: 'Privilegio fue actualizado satisfactoriamente.' }
@@ -78,7 +78,7 @@ class PrivilegiosController < ApplicationController
 		authorize! :destroy, Privilegio
 		sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
 				Transaccion.create!(
-    				descripcion: 'Eliminar el privilegio  '+@privilegio.nombre,
+    				descripcion: "Eliminar el Privilegio: #{@privilegio.attributes}",
     				sesion_id: sesion.id
 				)
     @privilegio.destroy

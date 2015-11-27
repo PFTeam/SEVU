@@ -36,7 +36,7 @@ class TipoRolesController < ApplicationController
       if @tipo_rol.save
 				sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
 				Transaccion.create!(
-    				descripcion: 'Creacion del tipo de rol  '+@tipo_rol.nombre,
+    				descripcion: "Creacion del tipo de rol  #{@tipo_rol.attributes}",
     				sesion_id: sesion.id
 				)
         format.html { redirect_to @tipo_rol, notice: 'Tipo rol fue creado satisfactoriamente.' }
@@ -55,7 +55,7 @@ class TipoRolesController < ApplicationController
     respond_to do |format|
 			sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
 				Transaccion.create!(
-    				descripcion: 'Actualización del tipo de rol  '+@tipo_rol.nombre,
+    				descripcion: "Actualización del tipo de rol:  #{@tipo_rol.previous_changes}",
     				sesion_id: sesion.id
 				)
       if @tipo_rol.update(tipo_rol_params)
@@ -74,7 +74,7 @@ class TipoRolesController < ApplicationController
 		authorize! :destroy, TipoRol
 		sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
 				Transaccion.create!(
-    				descripcion: 'Eliminar el tipo de rol  '+@tipo_rol.nombre,
+    				descripcion: "Eliminar tipo de rol  #{@tipo_rol.attributes}",
     				sesion_id: sesion.id
 				)
     @tipo_rol.destroy

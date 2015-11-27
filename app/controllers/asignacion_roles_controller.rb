@@ -68,7 +68,7 @@ class AsignacionRolesController < ApplicationController
 	      if @asignacion_rol.save
             sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
             Transaccion.create!(
-      		    descripcion: 'Creación de una asignacion rol id:' + @asignacion_rol.id.to_s,
+      		    descripcion: 'Creación asociación rol '+Rol.find(@asignacion_rol.rol_id).nombre + ' al usuario ' + Usuario.find(@asignacion_rol.usuario_id).nombreUsuario +' del proyecto ' +Proyecto.find(@asignacion_rol.proyecto_id).nombre+ ': esActual = ' + @asignacion_rol.esActual,
       		    sesion_id: sesion.id ,
       		    proyecto_id: @asignacion_rol.proyecto.id)
 		format.html {redirect_to :controller => 'asignacion_roles', :action => 'index',:proyecto_id => @asignacion_rol.proyecto.id } 
@@ -104,7 +104,7 @@ class AsignacionRolesController < ApplicationController
 	      if @asignacion_rol_viejo.save
             sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
             Transaccion.create!(
-		    descripcion: 'Edición de una asignacion rol id:' + @asignacion_rol.id.to_s,
+		    descripcion: 'Actualizar asociación rol '+Rol.find(@asignacion_rol.rol_id).nombre + ' al usuario ' + Usuario.find(@asignacion_rol.usuario_id).nombreUsuario +' del proyecto ' +Proyecto.find(@asignacion_rol.proyecto_id).nombre+ ': esActual = ' + @asignacion_rol.esActual,
 		    sesion_id: sesion.id ,
 		    proyecto_id: @asignacion_rol.proyecto.id)
 		format.html   { redirect_to :controller => 'asignacion_roles', :action => 'index', :proyecto_id => @asignacion_rol.proyecto.id 
@@ -135,7 +135,7 @@ class AsignacionRolesController < ApplicationController
 
 		    sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
 		    Transaccion.create!(
-			    descripcion: 'Borrado de una asignacion rol id:' + @asignacion_rol.id.to_s,
+			    descripcion: 'Eliminar asociación rol '+Rol.find(@asignacion_rol.rol_id).nombre + ' al usuario ' + Usuario.find(@asignacion_rol.usuario_id).nombreUsuario +' del proyecto ' +Proyecto.find(@asignacion_rol.proyecto_id).nombre+ ': esActual = ' + @asignacion_rol.esActual,
 			    sesion_id: sesion.id ,
 			    proyecto_id: @asignacion_rol.proyecto.id)
 	    @asignacion_rol.active = false

@@ -48,6 +48,7 @@ class Ability
 						if asignacionrolpredefinido.rol==asignacionfuncion.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'edit_update_usuario').id 						
 								can :edit, Usuario
 								can :update, Usuario
+								
 								can :dar_alta_voluntario, Usuario
 						end
 						if asignacionrolpredefinido.rol==asignacionfuncion.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'index_evento_publico').id 							
@@ -111,6 +112,9 @@ class Ability
 								can :reporte_proyectos, ReporteGenerado	
 								can :reporte_regionales, ReporteGenerado
 							  can :reporte_generado, ReporteGenerado
+						end
+						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'estado_academico').id 						
+								can :index, EstadoAcademico
 						end
 						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'asignacion_roles').id 						
 								can :manage, AsignacionRol
@@ -221,6 +225,7 @@ class Ability
 						end
 						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'actividad').id 
 								can :manage, Actividad
+								can :show, Usuario
 								can :agregar_habilidad, Actividad
 								can :set_actividad, Actividad
 						end
@@ -236,6 +241,7 @@ class Ability
 						end
 						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'proyecto').id 				
 								can :manage, Proyecto
+								can :show, Usuario
 								can :agregar_necesidad, Proyecto
 						end
 						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'proyecto_director').id 				
@@ -284,6 +290,7 @@ class Ability
 								can :index, HistorialEstadoProyecto
 								can :modificar, HistorialEstadoProyecto
 								can :edit, HistorialEstadoProyecto
+								can :update, HistorialEstadoProyecto
 						end
 						if asignacionrolpredefinido.rol==asignacionrol.rol && asignacionrolpredefinido.privilegio.id==(Privilegio.find_by! nombre: 'show_index_historial_estado_usuario').id 						
 								can :show, HistorialEstadoUsuario
@@ -299,6 +306,7 @@ class Ability
 								can :show, HistorialEstadoActividad
 								can :index, HistorialEstadoActividad
 								can :edit, HistorialEstadoActividad
+								can :update, HistorialEstadoActividad
 
 
 						end

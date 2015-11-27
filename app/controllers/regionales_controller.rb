@@ -34,7 +34,7 @@ class RegionalesController < ApplicationController
       if @regional.save
 				sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
 				Transaccion.create!(
-    				descripcion: 'Creacion de Regional '+@regional.nombre,
+    				descripcion: "Creación de la Regional #{@regional.attributes}",
     				sesion_id: sesion.id
 				)
         format.html { redirect_to @regional, notice: 'Regional was successfully created.' }
@@ -53,7 +53,7 @@ class RegionalesController < ApplicationController
     respond_to do |format|
 			sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
 				Transaccion.create!(
-    				descripcion: 'Actualización de Regional '+@regional.nombre,
+    				descripcion: "Actualización de la Regional: #{@regional.previous_changes}",
     				sesion_id: sesion.id
 				)
       if @regional.update(regional_params)
@@ -72,7 +72,7 @@ class RegionalesController < ApplicationController
 		authorize! :destroy, Regional
 		sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
 				Transaccion.create!(
-    				descripcion: 'Eliminar la Regional '+@regional.nombre,
+    				descripcion: "Borrado de la Regional #{@regional.attributes}",
     				sesion_id: sesion.id
 				)
     @regional.destroy

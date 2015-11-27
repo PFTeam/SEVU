@@ -7,9 +7,14 @@ class ApplicationController < ActionController::Base
 #end
 #For CanCan-----------------------------------------
 	 rescue_from CanCan::AccessDenied do |exception|
-    redirect_to root_path, :alert => "No esta autorizado a acceder a la pagina solicitada."
+    redirect_to :back, :alert => "No esta autorizado a acceder a la pagina solicitada."
   end
-
+=begin
+		rescue_from ActiveRecord::RecordNotFound, with: :error
+		rescue_from NameError, with: :error
+		rescue_from ActionController::RoutingError, with: :error
+		rescue_from Exception, with: :error
+=end
 #def current_ability
 #	if Rails.env.test? then
 #	  @current_ability ||= Ability.new(Usuario.find_by(nombreUsuario: "admin"))
@@ -18,6 +23,7 @@ class ApplicationController < ActionController::Base
 #    end
 #end
 
+	
 
 	def current_ability
 		 @current_ability ||= Ability.new(current_usuario)
@@ -65,4 +71,11 @@ helper_method :puede_configurar?
     
   	
   end
+
+	private
+
+	#def error
+		#render plain: "404 Not Found", status: 404
+	#end
+
 end

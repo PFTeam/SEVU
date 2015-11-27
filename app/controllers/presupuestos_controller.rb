@@ -35,7 +35,7 @@ class PresupuestosController < ApplicationController
       if @presupuesto.save
          sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
 
-        Transaccion.create!(descripcion: "Creacion del presupuesto del proyecto "+@presupuesto.proyecto.nombre,
+        Transaccion.create!(descripcion: "Creación del presupuesto del proyecto #{@presupuesto.proyecto.nombre}: #{@presupuesto.attributes}",
                   sesion_id: sesion.id, 
                   proyecto_id: @presupuesto.proyecto.id)
 
@@ -97,7 +97,7 @@ class PresupuestosController < ApplicationController
     @presupuesto.destroy
     respond_to do |format|
       Transaccion.create!(
-          descripcion: "Destruccion del presupuesto del proyecto "+@presupuesto.proyecto.nombre,
+          descripcion: "Eliminar el presupuesto del proyecto #{@presupuesto.proyecto.nombre}: #{@presupuesto.attributes}",
           sesion_id: sesion.id, 
           proyecto_id: @presupuesto.proyecto.id)
       format.html { redirect_to presupuestos_url, notice: 'Presupuesto fue borrado satisfactoriamente.' }

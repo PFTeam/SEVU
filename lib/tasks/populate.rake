@@ -87,6 +87,7 @@ namespace :db do
 			pap56diego=Privilegio.create(nombre: "gestionar_presupuesto", descripcion: "Permite gestionar el presupuesto", tipo_privilegio: ppdiego)
 			pap57diego=Privilegio.create(nombre: "notificacion_predeterminadas", descripcion: "Permite manejar las notificaciones predeterminadas", tipo_privilegio: ppdiego)
 			pa58diego=Privilegio.create(nombre: "index_usuario", descripcion: "Permite ver los usuarios del sistema", tipo_privilegio: psdiego)
+			pap59diego=Privilegio.create(nombre: "estado_academico", descripcion: "Permite ver los estados academicos de los voluntarios", tipo_privilegio: ppdiego)
 
 
     #USUARIO 
@@ -132,6 +133,7 @@ namespace :db do
 			arc27diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap56diego  , rol: director)
 			arc28diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap1diego, rol: director)
 			arc30diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap57diego, rol: director)
+			arc31diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap59diego, rol: director)
 	
 
 		#COORDINADOR
@@ -163,7 +165,7 @@ namespace :db do
 			arcc28diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap55diego , rol: coordinador)
 			arcc29diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap13diego  , rol: coordinador)
 			arcc30diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap57diego, rol: coordinador)
-
+			arcc31diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap59diego, rol: coordinador)
 
 
 
@@ -426,16 +428,16 @@ v = Voluntario.new(nombreUsuario: "agustin",
       TipoHabilidad.create(nombre: "Manualidades", descripcion: "Conocimiento vinculado con actividades creativas")
       TipoHabilidad.create(nombre: "Administracion", descripcion: "Conocimiento vinculado con actividades creativas")
       TipoHabilidad.create(nombre: "Oratoria", descripcion: "Conocimiento vinculado con actividades creativas")
-      Habilidad.create(nombre: "Pintar", descripcion: "Saber pintar con cualquier elemento", tipo_habilidad: TipoHabilidad.find_by(nombre: "Manualidades"))
-      Habilidad.create(nombre: "Programación en Java", descripcion: "Programación en el lenguaje Java", tipo_habilidad: TipoHabilidad.find_by(nombre: "Programación"))
-      Habilidad.create(nombre: "Programación en Python", descripcion: "Programación en el lenguaje Python", tipo_habilidad: TipoHabilidad.find_by(nombre: "Programación"))
-      Habilidad.create(nombre: "Programación en C/C++", descripcion: "Programación en el lenguaje C/C++", tipo_habilidad: TipoHabilidad.find_by(nombre: "Programación"))
-      Habilidad.create(nombre: "Programación en PHP", descripcion: "Programación en el lenguaje PHP", tipo_habilidad: TipoHabilidad.find_by(nombre: "Programación"))
-      Habilidad.create(nombre: "Programación en MySQL", descripcion: "Programación en el lenguaje MySQL", tipo_habilidad: TipoHabilidad.find_by(nombre: "Programación"))
-      Habilidad.create(nombre: "Presentación de Discursos", descripcion: "Habilidad para llevar a delante una charla", tipo_habilidad: TipoHabilidad.find_by(nombre: "Oratoria"))
-      Habilidad.create(nombre: "Armado de Presentaciones", descripcion: "Desarrollo de material audiovisual", tipo_habilidad: TipoHabilidad.find_by(nombre: "Oratoria"))
-      Habilidad.create(nombre: "Contabilidad", descripcion: "Conocimientos de cantabilidad y administracion contable", tipo_habilidad: TipoHabilidad.find_by(nombre: "Administracion"))
-      Habilidad.create(nombre: "Armado de Cartelería", descripcion: "Armado de afiches y posters", tipo_habilidad: TipoHabilidad.find_by(nombre: "Manualidades"))
+      h1 = Habilidad.create(nombre: "Pintar", descripcion: "Saber pintar con cualquier elemento", tipo_habilidad: TipoHabilidad.find_by(nombre: "Manualidades"))
+      h2 = Habilidad.create(nombre: "Programación en Java", descripcion: "Programación en el lenguaje Java", tipo_habilidad: TipoHabilidad.find_by(nombre: "Programación"))
+      h3 = Habilidad.create(nombre: "Programación en Python", descripcion: "Programación en el lenguaje Python", tipo_habilidad: TipoHabilidad.find_by(nombre: "Programación"))
+      h4 = Habilidad.create(nombre: "Programación en C/C++", descripcion: "Programación en el lenguaje C/C++", tipo_habilidad: TipoHabilidad.find_by(nombre: "Programación"))
+      h5 = Habilidad.create(nombre: "Programación en PHP", descripcion: "Programación en el lenguaje PHP", tipo_habilidad: TipoHabilidad.find_by(nombre: "Programación"))
+      h6 = Habilidad.create(nombre: "Programación en MySQL", descripcion: "Programación en el lenguaje MySQL", tipo_habilidad: TipoHabilidad.find_by(nombre: "Programación"))
+      h7 = Habilidad.create(nombre: "Presentación de Discursos", descripcion: "Habilidad para llevar a delante una charla", tipo_habilidad: TipoHabilidad.find_by(nombre: "Oratoria"))
+      h8 = Habilidad.create(nombre: "Armado de Presentaciones", descripcion: "Desarrollo de material audiovisual", tipo_habilidad: TipoHabilidad.find_by(nombre: "Oratoria"))
+      h9 = Habilidad.create(nombre: "Contabilidad", descripcion: "Conocimientos de cantabilidad y administracion contable", tipo_habilidad: TipoHabilidad.find_by(nombre: "Administracion"))
+      h10 = Habilidad.create(nombre: "Armado de Cartelería", descripcion: "Armado de afiches y posters", tipo_habilidad: TipoHabilidad.find_by(nombre: "Manualidades"))
 
 
       TipoActividad.create(nombre: "Reunión", descripcion: "Actividades destinadas a las reuniones de cualquier índole")
@@ -447,6 +449,9 @@ v = Voluntario.new(nombreUsuario: "agustin",
       TipoActividad.create(nombre: "Busqueda de Financimiento", descripcion: "Actividades destinadas a realizar busqueda de posible financiamiento")
       TipoActividad.create(nombre: "Busqueda de Voluntarios", descripcion: "Actividades destinadas a realizar buesqueda de nuevos voluntarios")
 
+			Experiencia.create(tieneExperiencia: true, cantidadExperiencia: 1, habilidad: h1, voluntario: v)
+			Experiencia.create(tieneExperiencia: true, cantidadExperiencia: 2, habilidad: h2, voluntario: v)
+			Experiencia.create(tieneExperiencia: true, cantidadExperiencia: 3, habilidad: h3, voluntario: v)
 
 
 

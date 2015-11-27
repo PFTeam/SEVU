@@ -91,7 +91,7 @@ class ActividadesController < ApplicationController
       if @actividad.save
             sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
             Transaccion.create!(
-		    descripcion: 'Creación de la Actividad id :' + @actividad.id.to_s ,
+		    descripcion: "Creación de la Actividad : #{@actividad.attributes}",
 		    sesion_id: sesion.id ,
 		    proyecto_id: @actividad.proyecto.id)
 	      format.html { redirect_to @actividad,:objetivo_especifico_id => @actividad.objetivo_especifico_id 
@@ -152,7 +152,7 @@ class ActividadesController < ApplicationController
       if @actividad.save
             sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
             Transaccion.create!(
-		    descripcion: 'Actualización de la Actividad id :' + @actividad.id.to_s ,
+		    descripcion: "Actualización de la Actividad #{@actividad.nombre}: #{@actividad.previous_changes}" ,
 		    sesion_id: sesion.id ,
 		    proyecto_id: @actividad.proyecto.id)
         format.html { redirect_to @actividad
@@ -174,7 +174,7 @@ class ActividadesController < ApplicationController
     respond_to do |format|
             sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
             Transaccion.create!(
-		    descripcion: 'Borrado de la Actividad id :' + @actividad.id.to_s ,
+		    descripcion: "Borrado de la Actividad #{@actividad.attributes}" ,
 		    sesion_id: sesion.id ,
 		    proyecto_id: @actividad.proyecto.id)
       format.html { redirect_to @objetivo_especifico

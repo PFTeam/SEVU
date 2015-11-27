@@ -70,7 +70,7 @@ class ProyectosController < ApplicationController
         @coordinador.save
             sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
             Transaccion.create!(
-		    descripcion: 'Creación del Proyecto:' + @proyecto.nombre ,
+		    descripcion: "Creación del Proyecto #{@proyecto.attributes}" ,
 		    sesion_id: sesion.id ,
 		    proyecto_id: @proyecto.id)
         format.html { redirect_to @proyecto
@@ -97,7 +97,7 @@ flash[:success] = 'Proyecto fue creado satisfactoriamente.' }
     respond_to do |format|
             sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
             Transaccion.create!(
-		    descripcion: 'Edición del Proyecto:' + @proyecto.nombre ,
+		    descripcion: "Actualización del Proyecto: #{@proyecto.previous_changes}"  ,
 		    sesion_id: sesion.id ,
 		    proyecto_id: @proyecto.id)
       if @proyecto.update(proyecto_params)
@@ -120,7 +120,7 @@ flash[:success] = 'Proyecto fue creado satisfactoriamente.' }
     authorize! :destroy, Proyecto
             sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
             Transaccion.create!(
-		    descripcion: 'Borrado del Proyecto:' + @proyecto.nombre ,
+		    descripcion: "Borrado del Proyecto #{@proyecto.attributes}" ,
 		    sesion_id: sesion.id ,
 		    proyecto_id: @proyecto.id)
     @proyecto.destroy
