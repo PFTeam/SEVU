@@ -68,7 +68,7 @@ class AsignacionRolesController < ApplicationController
 	      if @asignacion_rol.save
             sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
             Transaccion.create!(
-      		    descripcion: 'Creación asociación rol '+Rol.find(@asignacion_rol.rol_id).nombre + ' al usuario ' + Usuario.find(@asignacion_rol.usuario_id).nombreUsuario +' del proyecto ' +Proyecto.find(@asignacion_rol.proyecto_id).nombre+ ': esActual = ' + @asignacion_rol.esActual,
+      		    descripcion: "Creación asociación rol #{@asignacion_rol.rol.nombre} al usuario #{@asignacion_rol.usuario.nombreUsuario} del proyecto #{@asignacion_rol.proyecto.nombre} : actual = #{ t @asignacion_rol.esActual.to_s}",
       		    sesion_id: sesion.id ,
       		    proyecto_id: @asignacion_rol.proyecto.id)
 		format.html {redirect_to :controller => 'asignacion_roles', :action => 'index',:proyecto_id => @asignacion_rol.proyecto.id } 
@@ -104,7 +104,7 @@ class AsignacionRolesController < ApplicationController
 	      if @asignacion_rol_viejo.save
             sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
             Transaccion.create!(
-		    descripcion: 'Actualizar asociación rol '+Rol.find(@asignacion_rol.rol_id).nombre + ' al usuario ' + Usuario.find(@asignacion_rol.usuario_id).nombreUsuario +' del proyecto ' +Proyecto.find(@asignacion_rol.proyecto_id).nombre+ ': esActual = ' + @asignacion_rol.esActual,
+		    descripcion: "Actualizar asociación rol #{@asignacion_rol.rol.nombre} al usuario #{@asignacion_rol.usuario.nombreUsuario} del proyecto #{@asignacion_rol.proyecto.nombre} : actual = #{ t @asignacion_rol.esActual.to_s}",
 		    sesion_id: sesion.id ,
 		    proyecto_id: @asignacion_rol.proyecto.id)
 		format.html   { redirect_to :controller => 'asignacion_roles', :action => 'index', :proyecto_id => @asignacion_rol.proyecto.id 
@@ -133,14 +133,16 @@ class AsignacionRolesController < ApplicationController
     if AsignacionActividad.where(usuario: @asignacion_rol.usuario).count == 0 	
 	    p "NO TIENE ACTIVIDADES"
 
-		    sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
-		    Transaccion.create!(
-			    descripcion: 'Eliminar asociación rol '+Rol.find(@asignacion_rol.rol_id).nombre + ' al usuario ' + Usuario.find(@asignacion_rol.usuario_id).nombreUsuario +' del proyecto ' +Proyecto.find(@asignacion_rol.proyecto_id).nombre+ ': esActual = ' + @asignacion_rol.esActual,
-			    sesion_id: sesion.id ,
-			    proyecto_id: @asignacion_rol.proyecto.id)
+		    
+		   
 	    @asignacion_rol.active = false
       @asignacion_rol.esActual = false
       @asignacion_rol.save
+			sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+			 Transaccion.create!(
+			    descripcion: "Desactivar asociación rol #{@asignacion_rol.rol.nombre} al usuario #{@asignacion_rol.usuario.nombreUsuario} del proyecto #{@asignacion_rol.proyecto.nombre} : actual = #{ t @asignacion_rol.esActual.to_s}",
+			    sesion_id: sesion.id ,
+			    proyecto_id: @asignacion_rol.proyecto.id)
 	    respond_to do |format|
 	      format.html { redirect_to :controller => 'asignacion_roles', :action => 'index', :proyecto_id => @proyecto_id
 			    flash[:notice] = 'El usuario fue desasignado de su rol.' }

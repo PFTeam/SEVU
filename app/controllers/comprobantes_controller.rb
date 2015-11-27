@@ -42,7 +42,7 @@ class ComprobantesController < ApplicationController
       if @comprobant.save
                  sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
 
-        Transaccion.create!(descripcion: "Adjunto del comprobante para el gasto "+@comprobant.detalle_gasto.titulo,
+        Transaccion.create!(descripcion: "Adjunto del comprobante para el gasto #{@comprobant.detalle_gasto.titulo}",
                   sesion_id: sesion.id, 
                   proyecto_id: @comprobant.detalle_gasto.informe_gasto.proyecto.id)
         format.html { redirect_to gestionar_informe_gastos_path(@comprobant.detalle_gasto.informe_gasto) }#@comprobant, notice: 'Comprobante fue creado satisfactoriamente.' }
@@ -61,7 +61,7 @@ class ComprobantesController < ApplicationController
     respond_to do |format|
       if @comprobant.update(comprobant_params)
         sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
-        Transaccion.create!(descripcion: "Modificación del comprobante para el gasto "+@comprobant.detalle_gasto.titulo,
+        Transaccion.create!(descripcion: "Actualización del comprobante para el gasto #{@comprobant.detalle_gasto.titulo}",
                   sesion_id: sesion.id, 
                   proyecto_id: @comprobant.detalle_gasto.informe_gasto.proyecto.id)
         format.html { redirect_to @comprobant, notice: 'Comprobante fue actualizado satisfactoriamente.' }
@@ -79,7 +79,7 @@ class ComprobantesController < ApplicationController
 		authorize! :destroy, Comprobante
     @comprobant.destroy
     sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
-        Transaccion.create!(descripcion: "Eliminación del comprobante para el gasto "+@comprobant.detalle_gasto.titulo,
+        Transaccion.create!(descripcion: "Eliminar comprobante para el gasto #{@comprobant.detalle_gasto.titulo}",
                   sesion_id: sesion.id, 
                   proyecto_id: @comprobant.detalle_gasto.informe_gasto.proyecto.id)
     respond_to do |format|

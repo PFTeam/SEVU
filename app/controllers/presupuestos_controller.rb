@@ -64,12 +64,12 @@ class PresupuestosController < ApplicationController
         sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
         if @presupuesto.evaluado then #el presupuesto fue evaluado
           if @presupuesto.aprobado then #el presupuesto fue aprobado
-            description = "El presupuesto del proyecto "+@presupuesto.proyecto.nombre+" fue Aprobado."
+            description = "El presupuesto del proyecto #{@presupuesto.proyecto.nombre} fue Aprobado."
           else
-            description = "El presupuesto del proyecto "+@presupuesto.proyecto.nombre+" fue Rechazado."
+            description = "El presupuesto del proyecto #{@presupuesto.proyecto.nombre} fue Rechazado."
           end
         else
-          description = "El presupuesto del proyecto "+@presupuesto.proyecto.nombre+" fue puesto para evaluar nuevamente."
+          description = "El presupuesto del proyecto #{@presupuesto.proyecto.nombre} fue puesto para evaluar nuevamente."
         end
         # Creacion de la transaccion con mensaje personalizado
         Transaccion.create!(descripcion: description,
@@ -93,13 +93,13 @@ class PresupuestosController < ApplicationController
   def destroy
 		authorize! :destroy, Presupuesto
          sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
-
-    @presupuesto.destroy
-    respond_to do |format|
-      Transaccion.create!(
+				 Transaccion.create!(
           descripcion: "Eliminar el presupuesto del proyecto #{@presupuesto.proyecto.nombre}: #{@presupuesto.attributes}",
           sesion_id: sesion.id, 
           proyecto_id: @presupuesto.proyecto.id)
+    @presupuesto.destroy
+    respond_to do |format|
+     
       format.html { redirect_to presupuestos_url, notice: 'Presupuesto fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end

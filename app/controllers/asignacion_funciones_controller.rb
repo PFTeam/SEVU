@@ -49,7 +49,7 @@ class AsignacionFuncionesController < ApplicationController
       if @asignacion_funcion.save
 				sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
 				Transaccion.create!(
-    				descripcion: 'Creación asociación rol '+Rol.find(@asignacion_funcion.rol_id).nombre + ' al usuario ' + Usuario.find(@asignacion_funcion.usuario_id).nombreUsuario + ': esActual = '+@asignacion_funcion.esActual,
+    				descripcion: "Creación asociación rol #{@asignacion_funcion.rol.nombre} al usuario #{@asignacion_funcion.usuario.nombreUsuario}: actual = #{ t @asignacion_funcion.esActual.to_s}",
     				sesion_id: sesion.id
 				)
         format.html { redirect_to @asignacion_funcion, notice: 'Asignacion funcion fue creado satisfactoriamente.' }
@@ -69,7 +69,7 @@ class AsignacionFuncionesController < ApplicationController
       if @asignacion_funcion.update(asignacion_funcion_params)
 						sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
 				Transaccion.create!(
-    				descripcion: 'Actualizar asociación rol '+Rol.find(@asignacion_funcion.rol_id).nombre + ' al usuario ' + Usuario.find(@asignacion_funcion.usuario_id).nombreUsuario + ': esActual = '+@asignacion_funcion.esActual,
+    				descripcion: "Actualizar asociación rol #{@asignacion_funcion.rol.nombre} al usuario #{@asignacion_funcion.usuario.nombreUsuario}: actual = #{ t @asignacion_funcion.esActual.to_s}",
     				sesion_id: sesion.id
 				)
         format.html { redirect_to @asignacion_funcion, notice: 'Asignacion funcion fue actualizado satisfactoriamente.' }
@@ -87,7 +87,7 @@ class AsignacionFuncionesController < ApplicationController
 		authorize! :destroy, AsignacionFuncion
 				sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
 				Transaccion.create!(
-    				descripcion: 'Eliminar asignación rol '+Rol.find(@asignacion_funcion.rol_id).nombre + ' al usuario ' + Usuario.find(@asignacion_funcion.usuario_id).nombreUsuario + ': esActual = '+@asignacion_funcion.esActual,
+    				descripcion: "Eliminar asociación rol #{@asignacion_funcion.rol.nombre} al usuario #{@asignacion_funcion.usuario.nombreUsuario}: actual = #{ t @asignacion_funcion.esActual.to_s}",
     				sesion_id: sesion.id
 				)
     @asignacion_funcion.destroy

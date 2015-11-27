@@ -38,7 +38,7 @@ class HistorialEstadoActividadesController < ApplicationController
       if @historial_estado_actividad.save
             sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
             Transaccion.create!(
-		    descripcion: 'Creación del Historial Estado Actividad de la actividad ' + @historial_estado_actividad_nuevo.actividad.nombre+ ' al estado actividad '+ @historial_estado_actividad_nuevo.estado_actividad.nombre+ ': '+ @historial_estado_actividad_nuevo.attributes ,
+		    descripcion: "Creación del Historial Estado Actividad de la actividad #{@historial_estado_actividad.actividad.nombre} al estado actividad #{@historial_estado_actividad.estado_actividad.nombre}: #{@historial_estado_actividad.attributes}" ,
 		    sesion_id: sesion.id ,
 		    proyecto_id: @historial_estado_actividad.actividad.proyecto.id)
         format.html { redirect_to @historial_estado_actividad 
@@ -62,7 +62,7 @@ class HistorialEstadoActividadesController < ApplicationController
       if @historial_estado_actividad_nuevo.save
             sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
             Transaccion.create!(
-		    descripcion: 'Actualización del Historial Estado Actividad de la actividad ' + @historial_estado_actividad_nuevo.actividad.nombre+ ' al estado actividad '+ @historial_estado_actividad_nuevo.estado_actividad.nombre+ ': '+ @historial_estado_actividad_nuevo.previous_changes ,
+		    descripcion: "Actualización del Historial Estado Actividad de la actividad #{@historial_estado_actividad_nuevo.actividad.nombre} al estado actividad #{@historial_estado_actividad_nuevo.estado_actividad.nombre}: #{@historial_estado_actividad_nuevo.previous_changes}",
 		    sesion_id: sesion.id ,
 		    proyecto_id: @historial_estado_actividad_nuevo.actividad.proyecto.id)
 	      format.html { redirect_to action: 'index', actividad_id: @historial_estado_actividad.actividad.id 

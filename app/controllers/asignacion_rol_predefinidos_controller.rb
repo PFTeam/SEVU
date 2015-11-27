@@ -40,12 +40,14 @@ class AsignacionRolPredefinidosController < ApplicationController
     @asignacion_rol_predefinido = AsignacionRolPredefinido.new(asignacion_rol_predefinido_params)
 
     respond_to do |format|
-									sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+									
+				
+      if @asignacion_rol_predefinido.save
+				sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
 				Transaccion.create!(
-    				descripcion: 'Creación asociación rol '+Rol.find(@asignacion_rol_predefinido.rol_id).nombre + 'al privilegio '+ Privilegio.find(@asignacion_rol_predefinido.privilegio_id).nombre + ': esActual = '+@asignacion_rol_predefinido.esActual,
+    				descripcion: "Creación asociación rol #{@asignacion_rol_predefinido.rol.nombre} al privilegio #{@asignacion_rol_predefinido.privilegio.nombre}: actual = #{ t @asignacion_rol_predefinido.esActual.to_s}",
     				sesion_id: sesion.id
 				)
-      if @asignacion_rol_predefinido.save
         format.html { redirect_to @asignacion_rol_predefinido, notice: 'Asignacion rol predefinido fue creado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @asignacion_rol_predefinido }
       else
@@ -63,7 +65,7 @@ class AsignacionRolPredefinidosController < ApplicationController
       if @asignacion_rol_predefinido.update(asignacion_rol_predefinido_params)
 				sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
 				Transaccion.create!(
-    				descripcion: 'Actualizar asociación rol '+Rol.find(@asignacion_rol_predefinido.rol_id).nombre + 'al privilegio '+ Privilegio.find(@asignacion_rol_predefinido.privilegio_id).nombre + ': esActual = '+@asignacion_rol_predefinido.esActual,
+    				descripcion: "Actualizar asociación rol #{@asignacion_rol_predefinido.rol.nombre} al privilegio #{@asignacion_rol_predefinido.privilegio.nombre}: actual = #{ t @asignacion_rol_predefinido.esActual.to_s}",
     				sesion_id: sesion.id
 				)
         format.html { redirect_to @asignacion_rol_predefinido, notice: 'Asignacion rol predefinido fue actualizado satisfactoriamente.' }
@@ -81,7 +83,7 @@ class AsignacionRolPredefinidosController < ApplicationController
 		authorize! :destroy, AsignacionRolPredefinido
 		sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
 				Transaccion.create!(
-    				descripcion: 'Eliminar asociación rol '+Rol.find(@asignacion_rol_predefinido.rol_id).nombre + 'al privilegio '+ Privilegio.find(@asignacion_rol_predefinido.privilegio_id).nombre + ': esActual = '+@asignacion_rol_predefinido.esActual,
+    				descripcion: "Eliminar asociación rol #{@asignacion_rol_predefinido.rol.nombre} al privilegio #{@asignacion_rol_predefinido.privilegio.nombre}: actual = #{ t @asignacion_rol_predefinido.esActual.to_s}",
     				sesion_id: sesion.id
 				)
 

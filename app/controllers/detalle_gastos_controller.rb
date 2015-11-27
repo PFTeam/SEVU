@@ -46,7 +46,7 @@ class DetalleGastosController < ApplicationController
     respond_to do |format|
       if @detalle_gasto.save
         sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
-        Transaccion.create!(descripcion: 'Creación del detalle gasto '+@detalle_gasto.titulo+' , descripcion: '+ @detalle_gasto.descripcion+ ', con monto ' + @detalle_gasto.monto + ', concepto_gasto: ' + @detalle_gasto.concepto_gasto.titulo + ', voluntario: ' + @detalle_gasto.voluntario.nombre + ', comprobante: ' + @detalle_gasto.comprobante.numero,
+        Transaccion.create!(descripcion: "Creación del detalle gasto #{@detalle_gasto.titulo}, descripcion: #{@detalle_gasto.descripcion}, con monto #{@detalle_gasto.monto}, concepto_gasto: #{@detalle_gasto.concepto_gasto.titulo}, voluntario: #{@detalle_gasto.voluntario.nombre}, comprobante: #{@detalle_gasto.comprobante.numero}",
                   sesion_id: sesion.id, 
                   proyecto_id: @detalle_gasto.informe_gasto.proyecto.id)
         #format.html { redirect_to gestionar_informe_gastos_path(@detalle_gasto.informe_gasto)} #@detalle_gasto, notice: 'Detalle gasto fue creado satisfactoriamente.' }
@@ -66,7 +66,7 @@ class DetalleGastosController < ApplicationController
     respond_to do |format|
       if @detalle_gasto.update(detalle_gasto_params)
         sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
-        Transaccion.create!(descripcion: 'Actualización del detalle gasto '+@detalle_gasto.titulo+' , descripcion: '+ @detalle_gasto.descripcion+ ', con monto ' + @detalle_gasto.monto + ', concepto_gasto: ' + @detalle_gasto.concepto_gasto.titulo + ', voluntario: ' + @detalle_gasto.voluntario.nombre + ', comprobante: ' + @detalle_gasto.comprobante.numero,
+        Transaccion.create!(descripcion: "Actualización del detalle gasto #{@detalle_gasto.titulo}, descripcion: #{@detalle_gasto.descripcion}, con monto #{@detalle_gasto.monto}, concepto_gasto: #{@detalle_gasto.concepto_gasto.titulo}, voluntario: #{@detalle_gasto.voluntario.nombre}, comprobante: #{@detalle_gasto.comprobante.numero}",
                   sesion_id: sesion.id, 
                   proyecto_id: @detalle_gasto.informe_gasto.proyecto.id)
         format.html { redirect_to gestionar_informe_gastos_path(@detalle_gasto.informe_gasto)} #@detalle_gasto, notice: 'Detalle gasto fue actualizado satisfactoriamente.' }
@@ -82,11 +82,12 @@ class DetalleGastosController < ApplicationController
   # DELETE /detalle_gastos/1.json
   def destroy
 		authorize! :destroy, DetalleGasto
-    @detalle_gasto.destroy
-    sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
-        Transaccion.create!(descripcion: 'Eliminación del detalle gasto '+@detalle_gasto.titulo+' , descripcion: '+ @detalle_gasto.descripcion+ ', con monto ' + @detalle_gasto.monto + ', concepto_gasto: ' + @detalle_gasto.concepto_gasto.titulo + ', voluntario: ' + @detalle_gasto.voluntario.nombre + ', comprobante: ' + @detalle_gasto.comprobante.numero,
+		sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
+		Transaccion.create!(descripcion: "Eliminar detalle gasto #{@detalle_gasto.titulo}, descripcion: #{@detalle_gasto.descripcion}, con monto #{@detalle_gasto.monto}, concepto_gasto: #{@detalle_gasto.concepto_gasto.titulo}, voluntario: #{@detalle_gasto.voluntario.nombre}, comprobante: #{@detalle_gasto.comprobante.numero}",
                   sesion_id: sesion.id, 
                   proyecto_id: @detalle_gasto.informe_gasto.proyecto.id)
+    @detalle_gasto.destroy
+    
     respond_to do |format|
       format.html { redirect_to gestionar_informe_gastos_path(@informe_gastos)} #detalle_gastos_url, notice: 'Detalle gasto fue borrado satisfactoriamente.' }
       format.json { head :no_content }

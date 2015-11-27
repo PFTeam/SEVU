@@ -35,7 +35,7 @@ class InformeGastosController < ApplicationController
       if @informe_gasto.save
         sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
 
-        Transaccion.create!(descripcion: "Creacion del informe de gasto del proyecto "+@informe_gasto.proyecto.nombre+ ': '+@informe_gasto.attributes,
+        Transaccion.create!(descripcion: "Creacion del informe de gasto del proyecto #{@informe_gasto.proyecto.nombre}: #{@informe_gasto.attributes}",
                   sesion_id: sesion.id, 
                   proyecto_id: @informe_gasto.proyecto.id)
 
@@ -63,7 +63,7 @@ class InformeGastosController < ApplicationController
       if @informe_gasto.update(informe_gasto_params)
         sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
 
-        Transaccion.create!(descripcion: "Modificacion del informe de gasto del proyecto "+@informe_gasto.proyecto.nombre+' : '+ @informe_gasto.previous_changes,
+        Transaccion.create!(descripcion: "Actualización del informe de gasto del proyecto #{@informe_gasto.proyecto.nombre}: #{@informe_gasto.previous_changes}",
                   sesion_id: sesion.id, 
                   proyecto_id: @informe_gasto.proyecto.id)
 
@@ -89,7 +89,7 @@ class InformeGastosController < ApplicationController
 		authorize! :destroy, InformeGasto
     sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
 
-        Transaccion.create!(descripcion: "Eliminacion del informe de gasto del proyecto "+@informe_gasto.proyecto.nombre+ ': '+@informe_gasto.attributes,
+        Transaccion.create!(descripcion: "Eliminar el informe de gasto del proyecto #{@informe_gasto.proyecto.nombre}: #{@informe_gasto.attributes}",
                   sesion_id: sesion.id, 
                   proyecto_id: @informe_gasto.proyecto.id)
 
