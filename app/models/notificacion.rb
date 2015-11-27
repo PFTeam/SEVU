@@ -6,4 +6,8 @@ class Notificacion < ActiveRecord::Base
   belongs_to :usuario_destino, :class_name => "Usuario", :foreign_key => 'usuario_destino_id'
   belongs_to :evento_publico
   belongs_to :proyecto
+
+
+  validates :usuario_destino, :presence => true
+  validates :mensaje, :presence => true, :length => { :minimum => 1 }
 end

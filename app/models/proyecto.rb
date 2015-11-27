@@ -48,7 +48,9 @@ class Proyecto < ActiveRecord::Base
 
   #Se valida la presencia del atributo
   validates :fechaInicio, :presence => true
-  validates :fechaFin, :presence => true
+  #validates :fechaFin, :presence => true, date: { :after_or_equal_to => :fechaInicio}, on: :create
+  validates_date :fechaFin, :presence => true,  :after => :fechaInicio,
+                               :after_message => " debe ser posterior a Fecha Inicio"
 
   #Se valida que el atributo sea un integer mayor o igual a 0
   validates :cantidadBeneficiariosDirectos, :numericality => { :only_integer => true , :greater_equal_than => 0}

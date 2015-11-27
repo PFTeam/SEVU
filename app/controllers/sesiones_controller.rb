@@ -33,7 +33,8 @@ class SesionesController < ApplicationController
 
     respond_to do |format|
       if @sesion.save
-        format.html { redirect_to @sesion, notice: 'Sesion fue creado satisfactoriamente.' }
+        format.html { redirect_to @sesion
+          flash[:success] = 'Sesion fue creado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @sesion }
       else
         format.html { render :new }
@@ -48,7 +49,8 @@ class SesionesController < ApplicationController
 		authorize! :update, Sesion
     respond_to do |format|
       if @sesion.update(sesion_params)
-        format.html { redirect_to @sesion, notice: 'Sesion fue actualizado satisfactoriamente.' }
+        format.html { redirect_to @sesion
+          flash[:success] = 'Sesion fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @sesion }
       else
         format.html { render :edit }
@@ -63,7 +65,8 @@ class SesionesController < ApplicationController
 		authorize! :destroy, Sesion
     @sesion.destroy
     respond_to do |format|
-      format.html { redirect_to sesiones_url, notice: 'Sesion fue borrado satisfactoriamente.' }
+      format.html { redirect_to sesiones_url
+          flash[:success] = 'Sesion fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end
   end

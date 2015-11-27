@@ -37,10 +37,10 @@ class RequisitosController < ApplicationController
     respond_to do |format|
 	    if @requisito.unico && @requisito.save
 	      format.html { redirect_to :action => 'new', :actividad_id => @requisito.actividad
-		    flash[:notice] = 'Requisito fue creado satisfactoriamente.' }
+		    flash[:success] = 'Requisito fue creado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @requisito }
       else
-	      flash[:notice] = 'Por favor ingrese alguna habilidad correcta'
+	      flash[:danger] = 'Por favor ingrese alguna habilidad correcta'
         format.html { redirect_to :action => 'new', :actividad_id => params[:requisito][:actividad_id] }
         format.json { render json: @requisito.errors, status: :unprocessable_entity }
       end
@@ -54,7 +54,7 @@ class RequisitosController < ApplicationController
     respond_to do |format|
       if @requisito.update(requisito_params)
 	      format.html { redirect_to :action => 'new', :actividad_id => @requisito.actividad
-		    flash[:notice] = 'Requisito fue actualizado satisfactoriamente.' }
+		    flash[:success] = 'Requisito fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @requisito }
       else
         format.html { render :edit }
@@ -71,7 +71,7 @@ class RequisitosController < ApplicationController
     @requisito.destroy
     respond_to do |format|
 	      format.html { redirect_to :action => 'new', :actividad_id => @actividad_id
-		    flash[:notice] = 'Requisito fue borrado satisfactoriamente.' }
+		    flash[:success] = 'Requisito fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end
   end

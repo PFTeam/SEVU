@@ -1,11 +1,16 @@
-<p id="notice"><%= notice %></p>
+<% flash.each do |key, value| %>
+  <div class="alert alert-<%= key %> alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <%= value %>
+   </div>
+<% end %>
 
 <div id="<%= dom_id(@objetivo_general) %>">
             <div class="panel panel-primary">
               <div class="panel-heading">
 
 		<% if !@objetivo_general.titulo.blank? %>
-		      <h3 class="panel-title">Objetivo General: <%= link_to @objetivo_general.titulo , :style => "font-size: 22px;"%>
+		      <h3 class="panel-title">Objetivo General: <%= link_to @objetivo_general.titulo, @objetivo_general , :style => "font-size: 22px;"%>
 		      </h3>
 		<% else %>
 			No se ha asignado ningun nombre al Objetivo Específico

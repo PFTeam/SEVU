@@ -1,17 +1,24 @@
 <%= simple_form_for(@asignacion_rol, html: asignacion_rol_form_html_options) do |f| %>
   <% if @asignacion_rol.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@asignacion_rol.errors.count, "error") %> prohibited this asignacion_rol from being saved:</h2>
-      <ul>
-      <% @asignacion_rol.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-    </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="col-lg-4"></div>
+       
+          <div class="alert alert-danger col-lg-4">
+            <a class="close" data-dismiss="alert">x</a>      
+            <strong><%= pluralize(@asignacion_rol.errors.count, "Error") %> en la asignación del rol:</strong>
+            <ul>
+              <% @asignacion_rol.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        
+      </div>
+      </div>
   <% end %>
 
-  <%= f.input :rol_id, collection: @roles, :label => 'Rol' %>
+  <%= f.input :rol_id, collection: @roles, :label => 'Rol', :required => true %>
 
   <% if params[:proyecto_id] %>
    <%= f.input :proyecto_id,:as => :hidden, input_html: {value: params[:proyecto_id]} %>

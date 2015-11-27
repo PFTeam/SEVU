@@ -36,7 +36,8 @@ class NotificacionSistemasController < ApplicationController
 
     respond_to do |format|
       if @notificacion_sistema.save
-        format.html { redirect_to @notificacion_sistema, notice: 'Notificacion sistema fue creado satisfactoriamente.' }
+        format.html { redirect_to @notificacion_sistema
+flash[:success] = 'Notificacion sistema fue creada satisfactoriamente.' }
         format.json { render :show, status: :created, location: @notificacion_sistema }
       else
         format.html { render :new }
@@ -51,7 +52,8 @@ class NotificacionSistemasController < ApplicationController
 		authorize! :update, NotificacionSistema
     respond_to do |format|
       if @notificacion_sistema.update(notificacion_sistema_params)
-        format.html { redirect_to @notificacion_sistema, notice: 'Notificacion sistema fue actualizado satisfactoriamente.' }
+        format.html { redirect_to @notificacion_sistema
+flash[:success] = 'Notificacion sistema fue actualizada satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @notificacion_sistema }
       else
         format.html { render :edit }
@@ -66,7 +68,8 @@ class NotificacionSistemasController < ApplicationController
 		authorize! :destroy, NotificacionSistema
     @notificacion_sistema.destroy
     respond_to do |format|
-      format.html { redirect_to notificacion_sistemas_url, notice: 'Notificacion sistema fue borrado satisfactoriamente.' }
+      format.html { redirect_to notificacion_sistemas_url
+flash[:success] = 'Notificacion sistema fue borrada satisfactoriamente.' }
       format.json { head :no_content }
     end
   end

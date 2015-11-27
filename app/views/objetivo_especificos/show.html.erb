@@ -1,4 +1,9 @@
-<p id="notice"><%= notice %></p>
+<% flash.each do |key, value| %>
+  <div class="alert alert-<%= key %> alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <%= value %>
+   </div>
+<% end %>
 
 <div id="<%= dom_id(@objetivo_especifico) %>">
 
@@ -6,7 +11,7 @@
               <div class="panel-heading">
 
 		<% if !@objetivo_especifico.titulo.blank? %>
-		      <h3 class="panel-title">Objetivo Específico: <%= link_to @objetivo_especifico.titulo , :style => "font-size: 22px;"%>
+		      <h3 class="panel-title">Objetivo Específico: <%= link_to @objetivo_especifico.titulo, @objetivo_especifico , :style => "font-size: 22px;"%>
 		      </h3>
 		<% else %>
 			No se ha asignado ningun nombre al Objetivo Específico

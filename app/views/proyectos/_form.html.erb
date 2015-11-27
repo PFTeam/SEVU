@@ -43,11 +43,14 @@
 
      
           <!-- Se muestra los TipoProyectos que se cargaron en el controlador --> 
-          <%= f.input :tipo_proyecto_id, collection: @tipoProyectos, :label => 'Tipo de Proyecto' %>
+          <%= f.input :tipo_proyecto_id, collection: @tipoProyectos, :label => 'Tipo de Proyecto', :required => true %>
     
       <%= f.input :fechaInicio, :as => :date, :label => 'Fecha Inicio' %>
-      <%= f.input :fechaFin, :as => :date, :label => 'Fecha Fin' %>
-
+      <%= f.input :fechaFin, :as => :date, :label => 'Fecha Fin', :required => true %>
+      <%#= f.input :fechaInicio, as: :string, input_html: { class: "datepicker", value: Time.now.strftime('%d-%m-%Y') } %> 
+      <%#= f.input :fechaFin, as: :date_picker, :input_html => { :value => Date.today} %>
+      <%#= f.input :fechaFin, as: :bootstrap_datepicker %>
+      <%#= f.input :fechaInicio, as: :bootstrap_datepicker, input_html: { format: :long } %>
          
       <%= f.input :localizacionGeografica, :label => 'Localización Geográfica', :placeholder => 'localización...', :input_html => {:style => "resize: vertical"} %>
 

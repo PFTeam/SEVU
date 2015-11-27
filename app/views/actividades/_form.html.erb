@@ -21,7 +21,7 @@
             
               <div class="form-group">
                   <label><h3>Titulo de la Actividad</h3></label>
-                  <%= f.input :nombre %>
+                  <%= f.input :nombre , :placeholder => 'ingrese un nombre para la actividad...' %>
                   
               </div>
             <div class="row">
@@ -29,7 +29,7 @@
   		<%= f.input :repetitiva, inline_label: "Repetitiva", label: false, :as => :boolean , :input_html => {:style => "width: 10%; height: 25px" } %>
       
 
-  		<%= f.input :frecuencia, :as => :radio_buttons, :input_html => {:style => "width: 10%; height: 25px", :class => "radio-inline"}, :item_wrapper_class => 'inline', :collection => [['Por Semana', 'Por Semana'], ['Por Mes','Por Mes']] %>
+  		<%= f.input :frecuencia, :as => :radio_buttons, :input_html => {:style => "width: 10%; height: 25px", :class => "radio-inline"}, :item_wrapper_class => 'inline', :collection => [['Por Semana', 'Por Semana'], ['Por Mes','Por Mes']], :disabled => true %>
 
             </div>
         <div class="form-group col-lg-6">
@@ -38,28 +38,27 @@
                     
                   <label><h5>Día de la Semana</h5></label> 
 
-            <%= f.input :dia_semana, :label => false, :collection => [['Lunes',1],['Martes',2],['Miércoles',3],['Jueves',4],['Viernes',5],['Sábado',6],['Domingo',7]]  %>
+            <%= f.input :dia_semana, :label => false, :collection => [['Lunes',1],['Martes',2],['Miércoles',3],['Jueves',4],['Viernes',5],['Sábado',6],['Domingo',7]], :disabled => true %>
 
                    
         </div>
 
 </div>
 
-                  <label><h3>Descripción</h3>
-                  </label>
-                  <%= f.input :descripcion, :as => :text, label: false, :input_html => {:style => "resize: vertical"} %>
-            
+                  
+                  <%= f.input :descripcion, :as => :text, :input_html => {:style => "resize: vertical"}, :label => "Descripción", :label_html => { :class => 'h3' }, :placeholder => 'ingrese una descripción para la actividad...'  %>
+          
             
 
                   
 
                   <label><h3>Metodologías de Intervención</h3>
                   </label>
-                  <%= f.input :metodologiasIntervencion, :as => :text, label: false, :input_html => {:style => "resize: vertical"} %>
+                  <%= f.input :metodologiasIntervencion, :as => :text, label: false, :input_html => {:style => "resize: vertical"}, :placeholder => 'ingrese aquellas metodologías que seran utilizadas...'  %>
        
   				<label><h3>Estrategias de Intervención</h3>
                   </label>
-                  <%= f.input :estrategiasIntervencion, :as => :text, label: false, :input_html => {:style => "resize: vertical"} %>        
+                  <%= f.input :estrategiasIntervencion, :as => :text, label: false, :input_html => {:style => "resize: vertical"}, :placeholder => 'ingrese la estrategia de intervención a utilizar...'  %>        
 
    
 
@@ -121,7 +120,7 @@
           
                 <label><h3>Mecanismo de Evaluación</h3>
                 </label>
-                <%= f.input :mecanismoEvaluacion, :as => :text, label: false, :input_html => {:style => "resize: vertical"} %>         
+                <%= f.input :mecanismoEvaluacion, :as => :text, label: false, :input_html => {:style => "resize: vertical"}, :placeholder => 'ingrese el mecanismo de evluación de los objetivos...'  %>         
           
 		<% if params[:proyecto_id] %>
 			<%= f.input :objetivo_especifico_id, :as => :hidden, input_html: {value: params[:objetivo_especifico_id]} %> 
@@ -134,7 +133,7 @@
 
     <label><h3>Resultados Esperados</h3>
                   </label>
-                  <%= f.input :resultadosEsperados, :as => :text, label: false, :input_html => {:style => "resize: vertical"} %>
+                  <%= f.input :resultadosEsperados, :as => :text, label: false, :input_html => {:style => "resize: vertical"}, :placeholder => 'ingrese los resultados que se esperarán...'  %>
 
  </div>
 
@@ -150,14 +149,34 @@
 
 
 <script>
+    if ($("#actividad_repetitiva").is(':checked')){
 
-$("#actividad_descripcion").elastic();
-$("#actividad_metodologiasIntervencion").elastic();
-$("#actividad_estrategiasIntervencion").elastic();
-$("#actividad_mecanismoEvaluacion").elastic();
-$("#actividad_resultadosEsperados").elastic();
+      document.getElementById('actividad_dia_semana').disabled = false;
+      document.getElementById('actividad_frecuencia_por_semana').disabled = false;
+      document.getElementById('actividad_frecuencia_por_mes').disabled = false;
+    } else {
+        document.getElementById('actividad_dia_semana').disabled = true;
+        document.getElementById('actividad_frecuencia_por_semana').disabled = true;
+        document.getElementById('actividad_frecuencia_por_mes').disabled = true;
+    }
 
 
+    $("#actividad_repetitiva").change(function() {
+    if(this.checked) {
+      document.getElementById('actividad_dia_semana').disabled = false;
+      document.getElementById('actividad_frecuencia_por_semana').disabled = false;
+      document.getElementById('actividad_frecuencia_por_mes').disabled = false;
+    } else {
+        document.getElementById('actividad_dia_semana').disabled = true;
+        document.getElementById('actividad_frecuencia_por_semana').disabled = true;
+        document.getElementById('actividad_frecuencia_por_mes').disabled = true;
+    }
+    });
+
+    
+
+
+    
 </script>
 
 

@@ -1,6 +1,6 @@
 class HistorialEstadoActividadesController < ApplicationController
   before_action :set_historial_estado_actividad, only: [:show, :edit, :update, :destroy]
-
+  after_action :notificar_cambio, only: [:create, :update]
   # GET /historial_estado_actividades
   # GET /historial_estado_actividades.json
   def index
@@ -42,7 +42,7 @@ class HistorialEstadoActividadesController < ApplicationController
 		    sesion_id: sesion.id ,
 		    proyecto_id: @historial_estado_actividad.actividad.proyecto.id)
         format.html { redirect_to @historial_estado_actividad 
-		      flash[:notice] = 'Historial estado actividad fue creado satisfactoriamente.' }
+		      flash[:success] = 'Historial estado actividad fue creado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @historial_estado_actividad }
       else
         format.html { render :new }
@@ -66,7 +66,7 @@ class HistorialEstadoActividadesController < ApplicationController
 		    sesion_id: sesion.id ,
 		    proyecto_id: @historial_estado_actividad_nuevo.actividad.proyecto.id)
 	      format.html { redirect_to action: 'index', actividad_id: @historial_estado_actividad.actividad.id 
-		    flash[:notice] = 'Historial estado actividad fue actualizado satisfactoriamente.' }
+		    flash[:success] = 'Historial estado actividad fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @historial_estado_actividad }
       else
         format.html { render :edit}
@@ -81,7 +81,8 @@ class HistorialEstadoActividadesController < ApplicationController
 		authorize! :destroy, HistorialEstadoActividad
     @historial_estado_actividad.destroy
     respond_to do |format|
-      format.html { redirect_to historial_estado_actividades_url, notice: 'Historial estado actividad fue borrado satisfactoriamente.' }
+      format.html { redirect_to historial_estado_actividades_url
+flash[:success] = 'Historial estado actividad fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end
   end
@@ -96,4 +97,19 @@ class HistorialEstadoActividadesController < ApplicationController
     def historial_estado_actividad_params
       params.require(:historial_estado_actividad).permit(:fechaCambioEstado, :esActual, :actividad_id, :estado_actividad_id)
     end
+    def notificar_cambio 
+      @usuarios = @historial_estado_actividad.usuarios_actividad
+      @usuarios.each do |usuario|
+        p usuario.apellido_nombre
+        @notificacion = Notificacion.new()
+        @notificacion.usuario_creador = current_usuario
+        @notificacion.usuario_destino = usuario
+        @notificacion.type = "NotificacionSistema"
+        @notificacion.notificado = false
+        @notificacion.esActiva = true
+        @notificacion.mensaje = "El Estado de la Actividad " + @historial_estado_actividad.actividad.to_s + " ha sido establecido en " + @historial_estado_actividad.estado_actividad.nombre.to_s + "."
+        @notificacion.save
+      end
+    end
+
 end

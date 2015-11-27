@@ -73,7 +73,8 @@ class ProyectosController < ApplicationController
 		    descripcion: "Creación del Proyecto #{@proyecto.attributes}" ,
 		    sesion_id: sesion.id ,
 		    proyecto_id: @proyecto.id)
-        format.html { redirect_to @proyecto, notice: 'Proyecto fue creado satisfactoriamente.' }
+        format.html { redirect_to @proyecto
+flash[:success] = 'Proyecto fue creado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @proyecto }
       else
         format.html { render :new }
@@ -100,7 +101,8 @@ class ProyectosController < ApplicationController
 		    sesion_id: sesion.id ,
 		    proyecto_id: @proyecto.id)
       if @proyecto.update(proyecto_params)
-        format.html { redirect_to @proyecto, notice: 'Proyecto fue actualizado satisfactoriamente.' }
+        format.html { redirect_to @proyecto
+         flash[:success] = 'Proyecto fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @proyecto }
         format.js   { render partial: 'proyecto_show', content_type: 'text/html' }
       else
@@ -125,7 +127,8 @@ class ProyectosController < ApplicationController
 
     #Se renderiza según el formato 'html' o 'js' las respectivas vistas según los casos de éxito y fracaso.
     respond_to do |format|
-      format.html { redirect_to proyectos_url, notice: 'Proyecto fue borrado satisfactoriamente.' }
+      format.html { redirect_to proyectos_url
+flash[:success] = 'Proyecto fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end
   end

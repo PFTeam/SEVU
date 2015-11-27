@@ -42,7 +42,7 @@ class PostulacionesController < ApplicationController
 		    sesion_id: sesion.id ,
 		    proyecto_id: @postulacion.proyecto.id)
 	format.html {redirect_to :controller => 'proyectos', :action => 'index'
-	      flash[:notice] = 'Se ha registrado tu participación'  } 
+	      flash[:success] = 'Se ha registrado tu participación'  } 
         format.json { render :show, status: :created, location: @postulacion }
       else
         format.html { render :new }
@@ -62,7 +62,8 @@ class PostulacionesController < ApplicationController
 		    descripcion: "Actualización de la Postulación al proyecto #{@postulacion.proyecto.nombre} del usuario #{@postulacion.usuario.nombreUsuario}: #{@postulacion.previous_changes}" ,
 		    sesion_id: sesion.id ,
 		    proyecto_id: @postulacion.proyecto.id)
-        format.html { redirect_to @postulacion, notice: 'Postulacion fue actualizado satisfactoriamente.' }
+        format.html { redirect_to @postulacion
+flash[:success] = 'Postulacion fue actualizada satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @postulacion }
       else
         format.html { render :edit }
@@ -77,7 +78,8 @@ class PostulacionesController < ApplicationController
 		authorize! :destroy, Postulacion
     @postulacion.destroy
     respond_to do |format|
-      format.html { redirect_to postulaciones_url, notice: 'Postulacion fue borrado satisfactoriamente.' }
+      format.html { redirect_to postulaciones_url
+flash[:success] = 'Postulacion fue borrada satisfactoriamente.' }
       format.json { head :no_content }
     end
   end
@@ -92,7 +94,8 @@ class PostulacionesController < ApplicationController
 		    sesion_id: sesion.id ,
 		    proyecto_id: @postulacion.proyecto.id)
     respond_to do |format|
-	    format.html {redirect_to :controller => 'asignacion_roles', :action => 'new', notice: 'Se ha registrado tu participación', :proyecto_id => @postulacion.proyecto.id, :usuario_id => @postulacion.usuario.id  } 
+	    format.html {redirect_to :controller => 'asignacion_roles', :action => 'new'
+flash[:success] = 'Se ha registrado tu participación', :proyecto_id => @postulacion.proyecto.id, :usuario_id => @postulacion.usuario.id  } 
     end
   end
 

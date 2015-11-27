@@ -36,12 +36,12 @@ class ColaboradoresController < ApplicationController
 
     respond_to do |format|
 	    if @colaborador.unico && @colaborador.save
-        format.js { render 'show', notice: 'El Colaborador fue agregado satisfactoriamente', content_type: 'text/html' }
+        
 	format.html { redirect_to :action => 'new', :proyecto_id => @colaborador.proyecto_id
-		      flash[:notice] =  'Colaborador fue creado satisfactoriamente.' }
+		      flash[:success] =  'Colaborador fue creado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @colaborador }
       else
-	      flash[:notice] = 'Por favor ingresa alguna organización externa correcto'
+	      flash[:danger] = 'Por favor ingresa alguna organización externa correcto'
 	      format.html { redirect_to :action => 'new', :proyecto_id => @colaborador.proyecto_id }
         format.json { render json: @colaborador.errors, status: :unprocessable_entity }
       end
@@ -55,7 +55,7 @@ class ColaboradoresController < ApplicationController
     respond_to do |format|
       if @colaborador.update(colaborador_params)
 	format.html { redirect_to :action => 'new', :proyecto_id => @colaborador.proyecto_id
-                                   flash[:notice] = 'Colaborador fue actualizado satisfactoriamente.' }
+                                   flash[:success] = 'Colaborador fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @colaborador }
       else
         format.html { render :edit }
@@ -75,7 +75,7 @@ class ColaboradoresController < ApplicationController
     @colaborador.destroy
     respond_to do |format|
 	format.html { redirect_to :action => 'new', :proyecto_id => @proyecto_id
-		      flash[:notice] =  'Colaborador fue borrado satisfactoriamente.' }
+		      flash[:success] =  'Colaborador fue borrado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @colaborador }
       format.json { head :no_content }
     end

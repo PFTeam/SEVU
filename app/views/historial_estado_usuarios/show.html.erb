@@ -6,7 +6,12 @@
           	<!--Pone el cuadro de color azul -->
             <div class="panel-heading">
             	<!-- Titulo Cabecera  !-->
- <p id="notice"><%= notice %></p>
+ <% flash.each do |key, value| %>
+  <div class="alert alert-<%= key %> alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <%= value %>
+   </div>
+<% end %>
   </div>
 
 

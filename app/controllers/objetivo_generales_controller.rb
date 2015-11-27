@@ -39,7 +39,7 @@ class ObjetivoGeneralesController < ApplicationController
     respond_to do |format|
       if @objetivo_general.save
 	format.html {redirect_to :controller => 'objetivo_generales', :action => 'index',:proyecto_id => @objetivo_general.proyecto_id
-	      flash[:notice] = 'Objetivo general creado.' } 
+	      flash[:success] = 'Objetivo general creado.' } 
         format.json { render :show, status: :created, location: @objetivo_general }
       else
         #format.html { render :new , :proyecto_id => @objetivo_general.proyecto_id }
@@ -58,7 +58,8 @@ class ObjetivoGeneralesController < ApplicationController
     @proyecto = @objetivo_general.proyecto
     respond_to do |format|
       if @objetivo_general.update(objetivo_general_params)
-        format.html { redirect_to @objetivo_general, notice: 'Objetivo general fue actualizado satisfactoriamente.' }
+        format.html { redirect_to @objetivo_general
+flash[:success] = 'Objetivo general fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @objetivo_general }
         format.js   { render :show, content_type: 'text/html' }
       else
@@ -77,7 +78,7 @@ class ObjetivoGeneralesController < ApplicationController
     @objetivo_general.destroy
     respond_to do |format|
 	    format.html { redirect_to objetivo_generales_path(:proyecto_id => @proyecto.id)
-		    flash[:notice] = 'Objetivo general fue borrado satisfactoriamente.' }
+		    flash[:success] = 'Objetivo general fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end
   end

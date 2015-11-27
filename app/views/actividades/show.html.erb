@@ -1,4 +1,9 @@
-<p id="notice"><%= notice %></p>
+<% flash.each do |key, value| %>
+  <div class="alert alert-<%= key %> alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <%= value %>
+   </div>
+<% end %>
 
   <div class="row">
 
@@ -25,18 +30,22 @@
         </div>
         
         </div>
+        <% if !@actividad.frecuencia.blank? %>
         <div class="col-lg-4">
         <div>
             <strong>Frecuencia de Repetición</strong>:</br>
             <%= @actividad.frecuencia %>
         </div>
         </div>
+        <% end %>
+        <% if !@actividad.dia_semana.blank? %>
         <div class="col-lg-4">
           <div>
-              <strong>Día de la Semana</strong>:</br>
-              <%= @actividad.dia_semana %>
+              <strong>Día de la Semana</strong>:</br>    
+                <%= @actividad.dia_semana %> 
           </div>
         </div>
+        <% end %>
       </div>
       <div class="modal-footer">
       </div>

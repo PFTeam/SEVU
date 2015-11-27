@@ -1,5 +1,10 @@
 <div class="page-header">
-<p id="notice"><%= notice %></p>
+<% flash.each do |key, value| %>
+  <div class="alert alert-<%= key %> alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <%= value %>
+   </div>
+<% end %>
 </div>
 <p>
   <strong>Tieneexperiencia:</strong>

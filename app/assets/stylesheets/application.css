@@ -21,6 +21,10 @@
 *= require SrBuj
   *= require datepicker
  */
+
+@import "bootstrap-responsive";
+@import "bootstrap-datepicker";
+
 .pull-right {
   float: right;
   padding-left: 4px;

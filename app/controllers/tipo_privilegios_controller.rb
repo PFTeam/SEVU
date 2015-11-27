@@ -38,7 +38,8 @@ class TipoPrivilegiosController < ApplicationController
     				descripcion: "Creación del tipo de Privilegio : #{@tipo_privilegio.attributes}",
     				sesion_id: sesion.id
 				)
-        format.html { redirect_to @tipo_privilegio, notice: 'Tipo privilegio fue creado satisfactoriamente.' }
+        format.html { redirect_to @tipo_privilegio
+flash[:success] = 'Tipo privilegio fue creado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @tipo_privilegio }
       else
         format.html { render :new }
@@ -58,7 +59,8 @@ class TipoPrivilegiosController < ApplicationController
     				descripcion:  "Actualización del tipo de privilegio: #{@tipo_privilegio.previous_changes}" ,
     				sesion_id: sesion.id
 				)
-        format.html { redirect_to @tipo_privilegio, notice: 'Tipo privilegio fue actualizado satisfactoriamente.' }
+        format.html { redirect_to @tipo_privilegio
+flash[:success] = 'Tipo privilegio fue actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @tipo_privilegio }
       else
         format.html { render :edit }
@@ -78,7 +80,8 @@ class TipoPrivilegiosController < ApplicationController
 				)
     @tipo_privilegio.destroy
     respond_to do |format|
-      format.html { redirect_to tipo_privilegios_url, notice: 'Tipo privilegio fue borrado satisfactoriamente.' }
+      format.html { redirect_to tipo_privilegios_url
+flash[:success] = 'Tipo privilegio fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end
   end
