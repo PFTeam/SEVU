@@ -15,7 +15,7 @@ class AsignacionActividadesController < ApplicationController
   # GET /asignacion_actividades/1
   # GET /asignacion_actividades/1.json
   def show
-		authorize! :show, AsignacionActividad
+		raise CanCan::AccessDenied if !AsignacionActividad.accessible_by(current_ability, :show).include?(@asignacion_actividad) 
   end
 
   # GET /asignacion_actividades/new
@@ -28,7 +28,7 @@ class AsignacionActividadesController < ApplicationController
 
   # GET /asignacion_actividades/1/edit
   def edit
-		authorize! :edit, AsignacionActividad
+		raise CanCan::AccessDenied if !AsignacionActividad.accessible_by(current_ability, :edit).include?(@asignacion_actividad) 
   end
 
   # POST /asignacion_actividades
@@ -82,7 +82,7 @@ class AsignacionActividadesController < ApplicationController
   # PATCH/PUT /asignacion_actividades/1
   # PATCH/PUT /asignacion_actividades/1.json
   def update
-		authorize! :update, AsignacionActividad
+		raise CanCan::AccessDenied if !AsignacionActividad.accessible_by(current_ability, :update).include?(@asignacion_actividad) 
     respond_to do |format|
       if @asignacion_actividad.update(asignacion_actividad_params)
         format.html { redirect_to @asignacion_actividad
@@ -97,6 +97,7 @@ class AsignacionActividadesController < ApplicationController
 
   def dar_baja
     @asignacion_actividad = AsignacionActividad.find(params[:id])
+		raise CanCan::AccessDenied if !AsignacionActividad.accessible_by(current_ability, :dar_baja).include?(@asignacion_actividad) 
     @asignacion_actividad.vigente = false
     respond_to do |format|
       if @asignacion_actividad.save
@@ -110,7 +111,7 @@ class AsignacionActividadesController < ApplicationController
   # DELETE /asignacion_actividades/1
   # DELETE /asignacion_actividades/1.json
   def destroy
-		authorize! :destroy, AsignacionActividad
+		raise CanCan::AccessDenied if !AsignacionActividad.accessible_by(current_ability, :destroy).include?(@asignacion_actividad) 
     @actividad_id = @asignacion_actividad.actividad_id
     @asignacion_actividad.destroy
     respond_to do |format|
@@ -144,8 +145,8 @@ class AsignacionActividadesController < ApplicationController
 
 
   def busqueda_filtrada
-				authorize! :busqueda_filtrada, AsignacionActividad
        @asignacion_actividad = AsignacionActividad.find(params[:id])
+				raise CanCan::AccessDenied if !AsignacionActividad.accessible_by(current_ability, :busqueda_filtrada).include?(@asignacion_actividad) 
        @usuarios = Usuario.page(params[:page]).search query: params[:usuario]
 	
   end

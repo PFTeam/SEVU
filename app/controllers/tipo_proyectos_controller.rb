@@ -11,7 +11,7 @@ class TipoProyectosController < ApplicationController
   # GET /tipo_proyectos/1
   # GET /tipo_proyectos/1.json
   def show
-		authorize! :show, TipoProyecto
+		raise CanCan::AccessDenied if !TipoProyecto.accessible_by(current_ability, :show).include?(@tipo_proyecto) 
   end
 
   # GET /tipo_proyectos/new
@@ -22,7 +22,7 @@ class TipoProyectosController < ApplicationController
 
   # GET /tipo_proyectos/1/edit
   def edit
-		authorize! :edit, TipoProyecto
+		raise CanCan::AccessDenied if !TipoProyecto.accessible_by(current_ability, :edit).include?(@tipo_proyecto) 
   end
 
   # POST /tipo_proyectos
@@ -45,7 +45,7 @@ class TipoProyectosController < ApplicationController
   # PATCH/PUT /tipo_proyectos/1
   # PATCH/PUT /tipo_proyectos/1.json
   def update
-		authorize! :update, TipoProyecto
+		raise CanCan::AccessDenied if !TipoProyecto.accessible_by(current_ability, :update).include?(@tipo_proyecto) 
     respond_to do |format|
       if @tipo_proyecto.update(tipo_proyecto_params)
         format.html { redirect_to @tipo_proyecto, notice: 'Tipo proyecto fue actualizado satisfactoriamente.' }
@@ -60,7 +60,7 @@ class TipoProyectosController < ApplicationController
   # DELETE /tipo_proyectos/1
   # DELETE /tipo_proyectos/1.json
   def destroy
-		authorize! :destroy, TipoProyecto
+		raise CanCan::AccessDenied if !TipoProyecto.accessible_by(current_ability, :destroy).include?(@tipo_proyecto) 
     @tipo_proyecto.destroy
     respond_to do |format|
       format.html { redirect_to tipo_proyectos_url, notice: 'Tipo proyecto fue borrado satisfactoriamente.' }

@@ -7,8 +7,12 @@ class ApplicationController < ActionController::Base
 #end
 #For CanCan-----------------------------------------
 	 rescue_from CanCan::AccessDenied do |exception|
+		begin
+    	redirect_to :back
+		rescue ActionController::RedirectBackError
+			redirect_to '/'
+		end
 		flash.alert = "No esta autorizado a acceder a la pagina solicitada."
-    redirect_to :back
   end
 =begin
 		rescue_from ActiveRecord::RecordNotFound, with: :error

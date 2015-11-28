@@ -14,7 +14,7 @@ class DetallePresupuestosController < ApplicationController
   # GET /detalle_presupuestos/1
   # GET /detalle_presupuestos/1.json
   def show
-		authorize! :show, DetallePresupuesto
+		raise CanCan::AccessDenied if !DetallePresupuesto.accessible_by(current_ability, :show).include?(@detalle_presupuesto) 
     @detalle_presupuestos = DetallePresupuesto.all
     @proyecto = @detalle_presupuesto.presupuesto.proyecto
   end
@@ -29,7 +29,7 @@ class DetallePresupuestosController < ApplicationController
 
   # GET /detalle_presupuestos/1/edit
   def edit
-		authorize! :edit, DetallePresupuesto
+		raise CanCan::AccessDenied if !DetallePresupuesto.accessible_by(current_ability, :edit).include?(@detalle_presupuesto) 
     #@detalle_presupuesto = @presupuesto.detalle_presupuestos.new #@detalle_presupuesto = DetallePresupuesto.new
     @concepto_gastos = ConceptoGasto.all 
     @proyecto = @detalle_presupuesto.presupuesto.proyecto
@@ -58,7 +58,7 @@ class DetallePresupuestosController < ApplicationController
   # PATCH/PUT /detalle_presupuestos/1
   # PATCH/PUT /detalle_presupuestos/1.json
   def update
-		authorize! :update, DetallePresupuesto
+		raise CanCan::AccessDenied if !DetallePresupuesto.accessible_by(current_ability, :update).include?(@detalle_presupuesto) 
     respond_to do |format|
       if @detalle_presupuesto.update(detalle_presupuesto_params)
         format.html { redirect_to  gestionar_presupuesto_path(@detalle_presupuesto.presupuesto) }
@@ -73,7 +73,7 @@ class DetallePresupuestosController < ApplicationController
   # DELETE /detalle_presupuestos/1
   # DELETE /detalle_presupuestos/1.json
   def destroy
-		authorize! :destroy, DetallePresupuesto
+		raise CanCan::AccessDenied if !DetallePresupuesto.accessible_by(current_ability, :destroy).include?(@detalle_presupuesto) 
     @detalle_presupuesto.destroy
     respond_to do |format|
       format.html { redirect_to gestionar_presupuesto_path(@presupuesto), notice: 'Detalle eliminado correctamente '}

@@ -1,6 +1,6 @@
 class ProyectosController < ApplicationController
   #layout 'proyectos'
-  before_action :set_proyecto, only: [:show, :edit, :update, :destroy]
+  before_action :set_proyecto, only: [:show, :edit, :update, :destroy, :agregar_necesidad]
 
   # GET /proyectos
   # GET /proyectos.json
@@ -13,7 +13,7 @@ class ProyectosController < ApplicationController
   # GET /proyectos/1
   # GET /proyectos/1.json
   def show
-    authorize! :show, Proyecto
+		raise CanCan::AccessDenied if !Proyecto.accessible_by(current_ability, :show).include?(@proyecto) 
   end
 
   # GET /proyectos/new
@@ -31,8 +31,7 @@ class ProyectosController < ApplicationController
 
   # GET /proyectos/1/edit
   def edit
-    authorize! :edit, Proyecto
-    
+    raise CanCan::AccessDenied if !Proyecto.accessible_by(current_ability, :edit).include?(@proyecto) 
     #Se cargan los TipoProyecto existentes para poder visualizarlos en la view
     @tipoProyectos = TipoProyecto.all
   
@@ -45,9 +44,6 @@ class ProyectosController < ApplicationController
   # POST /proyectos.json
   def create
     authorize! :create, Proyecto
-   
-
-
 
     #Se hacen un new con los parámetros recibidos
     @proyecto = Proyecto.new(proyecto_params)
@@ -86,7 +82,7 @@ flash[:success] = 'Proyecto fue creado satisfactoriamente.' }
   # PATCH/PUT /proyectos/1
   # PATCH/PUT /proyectos/1.json
   def update
-    authorize! :update, Proyecto
+    raise CanCan::AccessDenied if !Proyecto.accessible_by(current_ability, :update).include?(@proyecto) 
     #Se cargan los TipoProyecto existentes para poder visualizarlos en la view
     @tipoProyectos = TipoProyecto.all
 
@@ -117,7 +113,7 @@ flash[:success] = 'Proyecto fue creado satisfactoriamente.' }
   # DELETE /proyectos/1
   # DELETE /proyectos/1.json
   def destroy
-    authorize! :destroy, Proyecto
+    raise CanCan::AccessDenied if !Proyecto.accessible_by(current_ability, :destroy).include?(@proyecto) 
             sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
             Transaccion.create!(
 		    descripcion: "Borrado del Proyecto #{@proyecto.attributes}" ,
@@ -141,10 +137,7 @@ flash[:success] = 'Proyecto fue borrado satisfactoriamente.' }
   end
 
   def agregar_necesidad
-	  authorize! :agregar_necesidad, Proyecto
-
-	  #Se setea el proyecto actual con el parametro :id que recibe
-	  set_proyecto 
+	  raise CanCan::AccessDenied if !Proyecto.accessible_by(current_ability, :agregar_necesidad).include?(@proyecto) 
   end
 
 

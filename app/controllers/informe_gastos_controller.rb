@@ -11,7 +11,7 @@ class InformeGastosController < ApplicationController
   # GET /informe_gastos/1
   # GET /informe_gastos/1.json
   def show
-		authorize! :show, InformeGasto
+		raise CanCan::AccessDenied if !InformeGasto.accessible_by(current_ability, :show).include?(@informe_gasto) 
   end
 
   # GET /informe_gastos/new
@@ -22,7 +22,7 @@ class InformeGastosController < ApplicationController
 
   # GET /informe_gastos/1/edit
   def edit
-		authorize! :edit, InformeGasto
+		raise CanCan::AccessDenied if !InformeGasto.accessible_by(current_ability, :edit).include?(@informe_gasto) 
   end
 
   # POST /informe_gastos
@@ -58,7 +58,7 @@ class InformeGastosController < ApplicationController
   # PATCH/PUT /informe_gastos/1
   # PATCH/PUT /informe_gastos/1.json
   def update
-		authorize! :update, InformeGasto
+		raise CanCan::AccessDenied if !InformeGasto.accessible_by(current_ability, :update).include?(@informe_gasto) 
     respond_to do |format|
       if @informe_gasto.update(informe_gasto_params)
         sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
@@ -86,7 +86,7 @@ class InformeGastosController < ApplicationController
   # DELETE /informe_gastos/1
   # DELETE /informe_gastos/1.json
   def destroy
-		authorize! :destroy, InformeGasto
+		raise CanCan::AccessDenied if !InformeGasto.accessible_by(current_ability, :destroy).include?(@informe_gasto) 
     sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
 
         Transaccion.create!(descripcion: "Eliminar el informe de gasto del proyecto #{@informe_gasto.proyecto.nombre}: #{@informe_gasto.attributes}",
@@ -108,7 +108,7 @@ class InformeGastosController < ApplicationController
   def gestionar_informe_gastos
 
     puts "************************ "
-		authorize! :gestionar_informe_gastos, InformeGasto
+		raise CanCan::AccessDenied if !InformeGasto.accessible_by(current_ability, :gestionar_informe_gastos).include?(@informe_gasto) 
     #@detalles_gasto = DetalleGasto.where(informe_gasto_id: params[:id]).order(:monto).reverse_order
     #@detalles_gasto = @informe_gasto.detalle_gastos
     @proyecto = @informe_gasto.proyecto

@@ -11,7 +11,7 @@ class ObjetivoGeneralesController < ApplicationController
   # GET /objetivo_generales/1
   # GET /objetivo_generales/1.json
   def show
-		authorize! :show, ObjetivoGeneral
+		raise CanCan::AccessDenied if !ObjetivoGeneral.accessible_by(current_ability, :show).include?(@objetivo_general) 
     @proyecto = Proyecto.find(@objetivo_general.proyecto.id)
   end
 
@@ -24,7 +24,7 @@ class ObjetivoGeneralesController < ApplicationController
 
   # GET /objetivo_generales/1/edit
   def edit
-		authorize! :edit, ObjetivoGeneral
+		raise CanCan::AccessDenied if !ObjetivoGeneral.accessible_by(current_ability, :edit).include?(@objetivo_general) 
     #respond_to do |format|
     #  format.js {render partial: 'edit', content_type: 'text/html' }
     #end
@@ -54,7 +54,7 @@ class ObjetivoGeneralesController < ApplicationController
   # PATCH/PUT /objetivo_generales/1
   # PATCH/PUT /objetivo_generales/1.json
   def update
-		authorize! :update, ObjetivoGeneral
+		raise CanCan::AccessDenied if !ObjetivoGeneral.accessible_by(current_ability, :update).include?(@objetivo_general) 
     @proyecto = @objetivo_general.proyecto
     respond_to do |format|
       if @objetivo_general.update(objetivo_general_params)
@@ -72,7 +72,7 @@ flash[:success] = 'Objetivo general fue actualizado satisfactoriamente.' }
   # DELETE /objetivo_generales/1
   # DELETE /objetivo_generales/1.json
   def destroy
-		authorize! :destroy, ObjetivoGeneral
+		raise CanCan::AccessDenied if !ObjetivoGeneral.accessible_by(current_ability, :destroy).include?(@objetivo_general) 
     @proyecto = @objetivo_general.proyecto
     p @proyecto.id
     @objetivo_general.destroy

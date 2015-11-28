@@ -4,40 +4,46 @@
     <%= value %>
    </div>
 <% end %>
+	<div class="col-lg-3">
+		<h2>Datos de Usuario:</h2> 
+	</div>
 
-<p>
-  <!-- Foto -->
-  <%= image_tag @usuario.foto.url %>
-</p>
-<p>
-  <strong>Nombre de usuario: </strong>
-  <%= @usuario.nombreUsuario %>
-</p>
+<div class="col-lg-4">
+</br></br>
+<table class="table table-hover table-striped tablesorter">
+  <tbody>
+		<tr>
+			<td><b>Foto   </b></td>
+    	<td><%= image_tag @usuario.foto.url %></td>
+		</tr>
+		<tr>
+			<td><b>Nombre de Usuario  </b></td>
+    	<td><%= @usuario.nombreUsuario %></td>
+		</tr>
+		<tr>
+			<td><b>Apellido, Nombre   </b></td>
+    	<td><%= @usuario.apellido_nombre %></td>
+		</tr>
+		<tr>
+			<td><b>Email   </b></td>
+    	<td><%= @usuario.email %></td>
+		</tr>
+		<tr>
+			<td><b>Dirección   </b></td>
+    	<td><%= @usuario.direccion %></td>
+		</tr>
+		<tr>
+			<td><b>Fecha de Registro   </b></td>
+    	<td><%= l @usuario.created_at %></td>
+		</tr>
+		<tr>
+			<td><b>Fecha de Actualización   </b></td>
+    	<td><%= l @usuario.updated_at %></td>
+		</tr>
+  </tbody>
+</table>
+</br>
+<%= link_to 'Volver', :back, class:"pull-right" %>
+</div>
 
-<p>
-  <strong>Contraseña: </strong>
-  <%= @usuario.encrypted_password %>
-</p>
 
-<p>
-  <strong>Apellido, Nombre: </strong>
-  <%= @usuario.apellido_nombre %>
-</p>
-
-<p>
-  <strong>Email: </strong>
-  <%= @usuario.email %>
-</p>
-
-<p>
-  <strong>Direccion: </strong>
-  <%= @usuario.direccion %>
-</p>
-
-<p>
-  <strong>Fecha registro: </strong>
-  <%= @usuario.created_at %>
-</p>
-
-<%= link_to 'Editar', edit_usuario_path(@usuario) %> |
-<%= link_to 'Volver', control_usuario_path %>

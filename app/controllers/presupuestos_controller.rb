@@ -11,7 +11,7 @@ class PresupuestosController < ApplicationController
   # GET /presupuestos/1
   # GET /presupuestos/1.json
   def show
-		authorize! :show, Presupuesto
+		raise CanCan::AccessDenied if !Presupuesto.accessible_by(current_ability, :show).include?(@presupuesto) 
   end
 
   # GET /presupuestos/new
@@ -22,7 +22,7 @@ class PresupuestosController < ApplicationController
 
   # GET /presupuestos/1/edit
   def edit
-		authorize! :edit, Presupuesto
+		raise CanCan::AccessDenied if !Presupuesto.accessible_by(current_ability, :edit).include?(@presupuesto) 
   end
 
   # POST /presupuestos
@@ -58,7 +58,7 @@ class PresupuestosController < ApplicationController
   # PATCH/PUT /presupuestos/1
   # PATCH/PUT /presupuestos/1.json
   def update
-		authorize! :update, Presupuesto
+		raise CanCan::AccessDenied if !Presupuesto.accessible_by(current_ability, :update).include?(@presupuesto) 
     respond_to do |format|
       if @presupuesto.update(presupuesto_params)
         sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
@@ -91,7 +91,7 @@ class PresupuestosController < ApplicationController
   # DELETE /presupuestos/1
   # DELETE /presupuestos/1.json
   def destroy
-		authorize! :destroy, Presupuesto
+		raise CanCan::AccessDenied if !Presupuesto.accessible_by(current_ability, :destroy).include?(@presupuesto) 
          sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
 				 Transaccion.create!(
           descripcion: "Eliminar el presupuesto del proyecto #{@presupuesto.proyecto.nombre}: #{@presupuesto.attributes}",
@@ -106,8 +106,8 @@ class PresupuestosController < ApplicationController
   end
 
   def gestionar_presupuesto
-    authorize! :gestionar_presupuesto, Presupuesto
     @presupuesto = Presupuesto.find(params[:id])
+		raise CanCan::AccessDenied if !Presupuesto.accessible_by(current_ability, :gestionar_presupuesto).include?(@presupuesto) 
     @detalles_presupuesto = DetallePresupuesto.where(presupuesto_id: params[:id]).order(:monto).reverse_order
     @presupuesto.montoTotal = @detalles_presupuesto.sum(:monto)
     @conceptos = @presupuesto.concepto_gastos.uniq
@@ -133,8 +133,8 @@ class PresupuestosController < ApplicationController
   end
 
   def evaluar_presupuesto
-		authorize! :evaluar_presupuesto, Presupuesto
     @presupuesto = Presupuesto.find params[:id]
+		raise CanCan::AccessDenied if !Presupuesto.accessible_by(current_ability, :evaluar_presupuesto).include?(@presupuesto) 
     @presupuesto.montoTotal = @presupuesto.detalle_presupuestos.sum(:monto)
     @proyecto = @presupuesto.proyecto
   end
