@@ -66,6 +66,9 @@ class Ability
 								can :manage, AsistenciaEvento
 							when 'index_usuario'
 								can :index, Usuario
+							when 'gestion_notificacion'
+								can :gestionar_notificaciones, NotificacionPredeterminada
+								can :notificaciones_predeterminadas, NotificacionPredeterminada
 						end
 					end
 				end
@@ -241,8 +244,6 @@ class Ability
 						when 'notificacion_predeterminadas'
 								can :configuraciones_generales, Rol
 								can :manage, NotificacionPredeterminada
-								can :gestionar_notificaciones, NotificacionPredeterminada
-								can :notificaciones_predeterminadas, NotificacionPredeterminada
 					end
 				end
 			end

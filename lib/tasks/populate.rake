@@ -39,7 +39,7 @@ namespace :db do
 			pa20diego=Privilegio.create(nombre: "notificacion_mailer", descripcion: "Permite manejar las notificaciones del mailer", tipo_privilegio: psdiego)
 			pap18diego=Privilegio.create(nombre: "new_postulacion", descripcion: "Permite mostrar y crear las postulaciones", tipo_privilegio: psdiego)	
 			pa58diego=Privilegio.create(nombre: "index_usuario", descripcion: "Permite ver los usuarios del sistema", tipo_privilegio: psdiego)
-			
+			pap60diego=Privilegio.create(nombre: "gestion_notificacion", descripcion: "Permite la gestión de las notificaciones", tipo_privilegio: psdiego)
 
 			pap57diego=Privilegio.create(nombre: "notificacion_predeterminadas", descripcion: "Permite manejar las notificaciones predeterminadas", tipo_privilegio: ppdiego)
 			pap1diego=Privilegio.create(nombre: "detalle_presupuestos", descripcion: "Permite manejar los detalles de presupuesto", tipo_privilegio: ppdiego)
@@ -104,6 +104,7 @@ namespace :db do
 			rd14diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pa18diego , rol: rsdiego)
 			rd15diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pa20diego , rol: rsdiego)
 			rd16diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap18diego , rol: rsdiego)
+			rd17diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap60diego , rol: rsdiego)
 
 
 
