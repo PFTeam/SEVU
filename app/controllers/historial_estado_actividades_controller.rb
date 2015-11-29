@@ -108,6 +108,7 @@ flash[:success] = 'Historial estado actividad fue borrado satisfactoriamente.' }
         @notificacion.notificado = false
         @notificacion.esActiva = true
         @notificacion.mensaje = "El Estado de la Actividad " + @historial_estado_actividad.actividad.to_s + " ha sido establecido en " + @historial_estado_actividad.estado_actividad.nombre.to_s + "."
+        @notificacion.proyecto_id = @historial_estado_actividad.actividad.proyecto_id
         @notificacion.save
       end
     end

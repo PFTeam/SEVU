@@ -36,8 +36,11 @@
               </div>
       </div>
 
-      <%= link_to 'Editar', edit_objetivo_general_path(@objetivo_general, :proyecto_id => params[:proyecto_id]) %> |
-        <%= link_to 'Borrar', @objetivo_general, method: :delete, data: { confirm: 'Esta seguro?' } %> |
+      <%= link_to 'Editar', edit_objetivo_general_path(@objetivo_general, :proyecto_id => params[:proyecto_id]) %> | 
+
+<% if @objetivo_general.borrable %>
+       <%= link_to 'Borrar', @objetivo_general, method: :delete, data: { confirm: 'Esta seguro?' } %> |
+<% end %>      
 <%= link_to 'Atrás', objetivo_generales_path(:proyecto_id => @objetivo_general.proyecto.id) %>
 
 
@@ -48,7 +51,7 @@
           No hay Objetivos Específicos creados
         </p>
     <% end %>
-<% @objetivo_general.objetivo_especificos.each do |obj| %>
+<% @objetivo_general.objetivo_especificos.where(active: true).each do |obj| %>
             <div class="panel panel-primary">
               <div class="panel-heading">
 

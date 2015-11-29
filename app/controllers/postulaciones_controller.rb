@@ -94,8 +94,8 @@ flash[:success] = 'Postulacion fue borrada satisfactoriamente.' }
 		    sesion_id: sesion.id ,
 		    proyecto_id: @postulacion.proyecto.id)
     respond_to do |format|
-	    format.html {redirect_to :controller => 'asignacion_roles', :action => 'new'
-flash[:success] = 'Se ha registrado tu participación', :proyecto_id => @postulacion.proyecto.id, :usuario_id => @postulacion.usuario.id  } 
+	    format.html {redirect_to :controller => 'asignacion_roles', :action => 'new', :proyecto_id => @postulacion.proyecto.id, :usuario_id => @postulacion.usuario.id
+        flash[:success] = 'Se ha registrado tu participación'  } 
     end
   end
 

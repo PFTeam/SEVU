@@ -13,7 +13,7 @@
     </div>
   <% end %>
   <% if @estados_posibles != [] %>
-  <%= f.input :estado_proyecto_id, collection: @estados_posibles, :label => 'Estados' %>
+  <%= f.input :estado_proyecto_id, collection: @estados_posibles, :label => 'Estado', :include_blank => false %>
         <div class="modal-footer">
   <%= f.button :submit, :class => 'btn btn-primary', :value => 'Confirmar' %><br>
         </div>

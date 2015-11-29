@@ -39,6 +39,7 @@ class ObjetivoEspecificosController < ApplicationController
 		authorize! :create, ObjetivoEspecifico
     @objetivo_especifico = ObjetivoEspecifico.new(objetivo_especifico_params)
     @objetivo_general = @objetivo_especifico.objetivo_general
+    @objetivo_especifico.active = true
     respond_to do |format|
       if @objetivo_especifico.save
         format.html { redirect_to @objetivo_general
@@ -79,10 +80,11 @@ flash[:success] = 'Objetivo especifico fue actualizado satisfactoriamente.' }
   def destroy
 		raise CanCan::AccessDenied if !ObjetivoEspecifico.accessible_by(current_ability, :destroy).include?(@objetivo_especifico) 
     @objetivo_general = @objetivo_especifico.objetivo_general
-    @objetivo_especifico.destroy
+    @objetivo_especifico.active = false
+    @objetivo_especifico.save
     respond_to do |format|
       format.html { redirect_to @objetivo_general
-		    flash[notice] = 'Objetivo especifico fue borrado satisfactoriamente.' }
+		    flash[:success] = 'Objetivo especifico fue borrado satisfactoriamente.' }
       format.json { head :no_content }
     end
   end

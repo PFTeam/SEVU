@@ -5,33 +5,31 @@
    </div>
 <% end %>
 
-<p>
-  <strong>Mensaje:</strong>
-  <%= @notificacion_sistema.mensaje %>
-</p>
+<div class="panel panel-primary">
+              <div class="panel-body">
+                <b><%= link_to @notificacion_sistema.usuario_creador, @notificacion_sistema.usuario_creador %></b>      <br>
+              <label><h5><b> Notificación:</b></h5></label> 
+        <%= @notificacion_sistema.created_at.to_formatted_s(:long) %>
+                <br>
+                <label>Mensaje</label>
+                <p>
+                <%= @notificacion_sistema.mensaje %>
+                </p>
+                <p><b>Proyecto/Evento Publico:</b><br> 
+                  <% if !@notificacion_sistema.proyecto.nil? %>
+                    <%= @notificacion_sistema.proyecto %>
+                  <% elsif !@notificacion_sistema.evento_publico.nil? %>
+                      <%= @notificacion_sistema.evento_publico %>
+                  <% else %>
+                      No se encuentra ningún Proyecto/Evento Público vinculado
+                  <% end %>
+                </p>
+              </div>
+      </div>
 
-<p>
-  <strong>Usuario Creador:</strong>
-  <%= @notificacion_sistema.usuario_creador %>
-</p>
 
 
-<p>
-  <strong>Evento Público:</strong>
-  <% if @notificacion_sistema.evento_publico.blank? %>
-	  No hay Evento Público Vinculado
-  <% else %>
-	  <%= @notificacion_sistema.evento_publico %>
-  <% end %>
-</p>
 
-<p>
-  <strong>Proyecto:</strong>
-  <% if @notificacion_sistema.proyecto.blank? %>
-	  No hay Proyecto Vinculado
-  <% else %>
-	  <%= @notificacion_sistema.proyecto %>
-  <% end %>
-</p>
+
 
 <%= link_to 'Atrás', notificacion_sistemas_path %>

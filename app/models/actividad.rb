@@ -22,9 +22,9 @@ class Actividad < ActiveRecord::Base
   before_save :actualizar_estado
 
   def actualizar_estado
-	  if ( self.duracionReal_changed? && self.fechaRealInicio_changed? && (self.historial_estado_actividades.last.estado_actividad.nombre == 'Creada' || self.historial_estado_actividades.last.estado_actividad.nombre == 'Planificada' ))
+	  if ( !self.duracionReal.nil? && !self.fechaRealInicio.nil? && (self.historial_estado_actividades.last.estado_actividad.nombre == 'Creada' || self.historial_estado_actividades.last.estado_actividad.nombre == 'Planificada' ))
 	    self.historial_estado_actividades.new(actividad: self, estado_actividad: EstadoActividad.find_by(nombre: 'Ejecutada')) 
-	  elsif ( self.duracion_changed? && self.fechaEstimadaInicio_changed? && (self.historial_estado_actividades.last.estado_actividad.nombre == 'Creada' ))
+	  elsif ( !self.duracion.nil? && !self.fechaEstimadaInicio.nil? && (self.historial_estado_actividades.last.estado_actividad.nombre == 'Creada' ))
 	    self.historial_estado_actividades.new(actividad: self, estado_actividad: EstadoActividad.find_by(nombre: 'Planificada')) 
     end
 	  # FALTA CUANDO SE CARGA EL REPORTE PASAR A TERMINADA

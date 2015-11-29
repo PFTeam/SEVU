@@ -9,4 +9,11 @@ class ObjetivoEspecifico < ActiveRecord::Base
   def to_s
 	  titulo
   end
+  def borrable
+  	count = 0
+  	self.actividades.each do |actividad|
+  		return false if not actividad.borrable 
+  	end
+  	true
+  end
 end

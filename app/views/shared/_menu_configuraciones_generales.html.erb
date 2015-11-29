@@ -21,11 +21,11 @@
                            <%= link_to 'Gestionar Restricciones', gestionar_restricciones_path %>
                       </li>
                 <% end %>
-                <% if can? :manage, NotificacionPredeterminada%>
+                <%# if can? :manage, NotificacionPredeterminada%>
                      <li>
                           <%= link_to 'Gestionar notificaciones predeterminadas', gestionar_notificaciones_path %>
                      </li>
-                <% end %>
+                <%# end %>
           </ul>
       </li>
       <% if (can? :index, Rol) & (can? :index, TipoRol) then %>
