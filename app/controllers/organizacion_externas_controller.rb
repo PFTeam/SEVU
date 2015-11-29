@@ -14,7 +14,7 @@ class OrganizacionExternasController < ApplicationController
   # GET /organizacion_externas/1
   # GET /organizacion_externas/1.json
   def show
-		authorize! :show, OrganizacionExterna
+		raise CanCan::AccessDenied if !OrganizacionExterna.accessible_by(current_ability, :show).include?(@organizacion_externa) 
   end
 
   # GET /organizacion_externas/new
@@ -26,7 +26,7 @@ class OrganizacionExternasController < ApplicationController
 
   # GET /organizacion_externas/1/edit
   def edit
-		authorize! :edit, OrganizacionExterna
+		raise CanCan::AccessDenied if !OrganizacionExterna.accessible_by(current_ability, :edit).include?(@organizacion_externa) 
   end
 
   # POST /organizacion_externas
@@ -55,7 +55,7 @@ flash[:success] = 'Organizacion externa creada satisfactoriamente.' }
   # PATCH/PUT /organizacion_externas/1
   # PATCH/PUT /organizacion_externas/1.json
   def update
-		authorize! :update, OrganizacionExterna
+		raise CanCan::AccessDenied if !OrganizacionExterna.accessible_by(current_ability, :update).include?(@organizacion_externa) 
     respond_to do |format|
       if @organizacion_externa.update(organizacion_externa_params)
         format.html { redirect_to @organizacion_externa
@@ -71,7 +71,7 @@ flash[:success] = 'Organizacion externa actualizada satisfactoriamente.' }
   # DELETE /organizacion_externas/1
   # DELETE /organizacion_externas/1.json
   def destroy
-		authorize! :destroy, OrganizacionExterna
+		raise CanCan::AccessDenied if !OrganizacionExterna.accessible_by(current_ability, :destroy).include?(@organizacion_externa) 
     @organizacion_externa.destroy
     respond_to do |format|
       format.html { redirect_to organizacion_externas_url

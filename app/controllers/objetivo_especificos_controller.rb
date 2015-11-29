@@ -12,7 +12,7 @@ class ObjetivoEspecificosController < ApplicationController
   # GET /objetivo_especificos/1
   # GET /objetivo_especificos/1.json
   def show
-		authorize! :show, ObjetivoEspecifico
+		raise CanCan::AccessDenied if !ObjetivoEspecifico.accessible_by(current_ability, :show).include?(@objetivo_especifico) 
 	  @proyecto = Proyecto.find(@objetivo_especifico.objetivo_general.proyecto.id)
   end
 
@@ -26,7 +26,7 @@ class ObjetivoEspecificosController < ApplicationController
 
   # GET /objetivo_especificos/1/edit
   def edit
-		authorize! :edit, ObjetivoEspecifico
+		raise CanCan::AccessDenied if !ObjetivoEspecifico.accessible_by(current_ability, :edit).include?(@objetivo_especifico) 
     #respond_to do |format|
     #  format.js {render partial: 'edit', content_type: 'text/html' }
     @proyecto = @objetivo_especifico.objetivo_general.proyecto
@@ -55,7 +55,7 @@ class ObjetivoEspecificosController < ApplicationController
   # PATCH/PUT /objetivo_especificos/1
   # PATCH/PUT /objetivo_especificos/1.json
   def update
-		authorize! :update, ObjetivoEspecifico
+		raise CanCan::AccessDenied if !ObjetivoEspecifico.accessible_by(current_ability, :update).include?(@objetivo_especifico) 
 
     @objetivo_general = @objetivo_especifico.objetivo_general
     @proyecto = @objetivo_especifico.objetivo_general.proyecto
@@ -77,7 +77,7 @@ flash[:success] = 'Objetivo especifico fue actualizado satisfactoriamente.' }
   # DELETE /objetivo_especificos/1
   # DELETE /objetivo_especificos/1.json
   def destroy
-		authorize! :destroy, ObjetivoEspecifico
+		raise CanCan::AccessDenied if !ObjetivoEspecifico.accessible_by(current_ability, :destroy).include?(@objetivo_especifico) 
     @objetivo_general = @objetivo_especifico.objetivo_general
     @objetivo_especifico.destroy
     respond_to do |format|

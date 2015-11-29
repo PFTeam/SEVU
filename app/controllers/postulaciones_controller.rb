@@ -12,7 +12,7 @@ class PostulacionesController < ApplicationController
   # GET /postulaciones/1
   # GET /postulaciones/1.json
   def show
-		authorize! :show, Postulacion
+		raise CanCan::AccessDenied if !Postulacion.accessible_by(current_ability, :show).include?(@postulacion) 
   end
 
   # GET /postulaciones/new
@@ -24,7 +24,7 @@ class PostulacionesController < ApplicationController
 
   # GET /postulaciones/1/edit
   def edit
-		authorize! :edit, Postulacion
+		raise CanCan::AccessDenied if !Postulacion.accessible_by(current_ability, :edit).include?(@postulacion)
   end
 
   # POST /postulaciones
@@ -38,7 +38,7 @@ class PostulacionesController < ApplicationController
       if @postulacion.save
             sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
             Transaccion.create!(
-		    descripcion: 'Creación de la Postulación al proyecto ' +@postulacion.proyecto.nombre +' del usuario '+ @postulacion.usuario.nombreUsuario+ ': aceptado = ' +@postulacion.aceptado,
+		    descripcion: "Creación de la Postulación al proyecto #{@postulacion.proyecto.nombre} del usuario #{@postulacion.usuario.nombreUsuario}: aceptado = #{@postulacion.aceptado}",
 		    sesion_id: sesion.id ,
 		    proyecto_id: @postulacion.proyecto.id)
 	format.html {redirect_to :controller => 'proyectos', :action => 'index'
@@ -54,12 +54,12 @@ class PostulacionesController < ApplicationController
   # PATCH/PUT /postulaciones/1
   # PATCH/PUT /postulaciones/1.json
   def update
-		authorize! :update, Postulacion
+		raise CanCan::AccessDenied if !Postulacion.accessible_by(current_ability, :update).include?(@postulacion)
     respond_to do |format|
       if @postulacion.update(postulacion_params)
             sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
             Transaccion.create!(
-		    descripcion: 'Actualización de la Postulación al proyecto ' +@postulacion.proyecto.nombre +' del usuario '+ @postulacion.usuario.nombreUsuario+ ': ' +@postulacion.previous_changes ,
+		    descripcion: "Actualización de la Postulación al proyecto #{@postulacion.proyecto.nombre} del usuario #{@postulacion.usuario.nombreUsuario}: #{@postulacion.previous_changes}" ,
 		    sesion_id: sesion.id ,
 		    proyecto_id: @postulacion.proyecto.id)
         format.html { redirect_to @postulacion
@@ -75,7 +75,7 @@ flash[:success] = 'Postulacion fue actualizada satisfactoriamente.' }
   # DELETE /postulaciones/1
   # DELETE /postulaciones/1.json
   def destroy
-		authorize! :destroy, Postulacion
+		raise CanCan::AccessDenied if !Postulacion.accessible_by(current_ability, :destroy).include?(@postulacion)
     @postulacion.destroy
     respond_to do |format|
       format.html { redirect_to postulaciones_url
@@ -90,7 +90,7 @@ flash[:success] = 'Postulacion fue borrada satisfactoriamente.' }
     @postulacion.save
             sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
             Transaccion.create!(
-		    descripcion: 'Aceptación de la Postulación al proyecto ' +@postulacion.proyecto.nombre +' del usuario '+ @postulacion.usuario.nombreUsuario+ ': aceptado = ' +@postulacion.aceptado ,
+		    descripcion: "Aceptación de la Postulación al proyecto #{@postulacion.proyecto.nombre} del usuario #{@postulacion.usuario.nombreUsuario}: aceptado = #{@postulacion.aceptado}" ,
 		    sesion_id: sesion.id ,
 		    proyecto_id: @postulacion.proyecto.id)
     respond_to do |format|

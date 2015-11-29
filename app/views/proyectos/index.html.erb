@@ -13,7 +13,7 @@
 
 		<% if !proyecto.nombre.blank? %>
 		      <h3 class="panel-title" style='overflow-wrap: break-word;'>	
-						<% if can? :show, Proyecto;%>	
+						<% if Proyecto.accessible_by(current_ability, :show).include?(proyecto) %>	
 							<%= link_to proyecto.nombre, proyecto, :style=>'overflow-wrap: break-word;' %>
 						<% else %>
 							<%= proyecto.nombre %>

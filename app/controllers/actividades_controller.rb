@@ -5,26 +5,25 @@ class ActividadesController < ApplicationController
   # GET /actividades
   # GET /actividades.json
   def index
+		authorize! :index, Actividad
     @actividades = Actividad.all
     @proyecto = @actividades.last.proyecto
-		authorize! :index, Actividad
   end
 
   # GET /actividades/1
   # GET /actividades/1.json
   def show
-		
+		raise CanCan::AccessDenied if !Actividad.accessible_by(current_ability, :show).include?( @actividad) 
     @proyecto = @actividad.proyecto
-		authorize! :show, Actividad
+		
   end
-
+		
   # GET /actividades/new
   def new
-		
+		authorize! :new, Actividad
     @objetivo_especifico = ObjetivoEspecifico.find(params[:objetivo_especifico_id])
     @actividad = Actividad.new(:objetivo_especifico_id => params[:objetivo_especifico_id])
     @proyecto = @actividad.objetivo_especifico.objetivo_general.proyecto
-		authorize! :new, Actividad
     @habilidades = Habilidad.all
     @tipoActividades = TipoActividad.all
     @actividad.requisitos.build
@@ -33,9 +32,8 @@ class ActividadesController < ApplicationController
 
   # GET /actividades/1/edit
   def edit
-		
+		raise CanCan::AccessDenied if !Actividad.accessible_by(current_ability, :edit).include?( @actividad) 
     @proyecto = @actividad.objetivo_especifico.objetivo_general.proyecto
-		authorize! :edit, Actividad
     @habilidades = Habilidad.all
     @tipoActividades = TipoActividad.all
 		
@@ -47,7 +45,6 @@ class ActividadesController < ApplicationController
 		authorize! :create, Actividad
     @actividad = Actividad.new(actividad_params)
     @actividad.historial_estado_actividades.new(estado_actividad_id: EstadoActividad.find_by(nombre: 'Creada').id, actividad_id: @actividad.id)
-
     @habilidades = Habilidad.all
     @tipoActividades = TipoActividad.all
     if params[:actividad][:repetitiva] == "1"
@@ -107,7 +104,7 @@ class ActividadesController < ApplicationController
   # PATCH/PUT /actividades/1
   # PATCH/PUT /actividades/1.json
   def update
-		authorize! :update, Actividad
+		raise CanCan::AccessDenied if !Actividad.accessible_by(current_ability, :update).include?( @actividad) 
     @habilidades = Habilidad.all
     @tipoActividades = TipoActividad.all
     @proyecto = @actividad.proyecto
@@ -168,7 +165,7 @@ class ActividadesController < ApplicationController
   # DELETE /actividades/1
   # DELETE /actividades/1.json
   def destroy
-		authorize! :destroy, Actividad
+		raise CanCan::AccessDenied if !Actividad.accessible_by(current_ability, :destroy).include?( @actividad) 
     @objetivo_especifico = @actividad.objetivo_especifico
     @actividad.destroy
     respond_to do |format|

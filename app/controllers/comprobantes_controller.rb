@@ -12,7 +12,7 @@ class ComprobantesController < ApplicationController
   # GET /comprobantes/1
   # GET /comprobantes/1.json
   def show
-		authorize! :show, Comprobante
+		raise CanCan::AccessDenied if !Comprobante.accessible_by(current_ability, :show).include?(@comprobant) 
     @proyecto = @comprobant.detalle_gasto.informe_gasto.proyecto
   end
 
@@ -28,7 +28,7 @@ class ComprobantesController < ApplicationController
 
   # GET /comprobantes/1/edit
   def edit
-		authorize! :edit, Comprobante
+		raise CanCan::AccessDenied if !Comprobante.accessible_by(current_ability, :edit).include?(@comprobant) 
     @proyecto = @comprobant.detalle_gasto.informe_gasto.proyecto
   end
 
@@ -42,7 +42,7 @@ class ComprobantesController < ApplicationController
       if @comprobant.save
                  sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
 
-        Transaccion.create!(descripcion: "Adjunto del comprobante para el gasto "+@comprobant.detalle_gasto.titulo,
+        Transaccion.create!(descripcion: "Adjunto del comprobante para el gasto #{@comprobant.detalle_gasto.titulo}",
                   sesion_id: sesion.id, 
                   proyecto_id: @comprobant.detalle_gasto.informe_gasto.proyecto.id)
         format.html { redirect_to gestionar_informe_gastos_path(@comprobant.detalle_gasto.informe_gasto) }#@comprobant, notice: 'Comprobante fue creado satisfactoriamente.' }
@@ -57,11 +57,11 @@ class ComprobantesController < ApplicationController
   # PATCH/PUT /comprobantes/1
   # PATCH/PUT /comprobantes/1.json
   def update
-		authorize! :update, Comprobante
+		raise CanCan::AccessDenied if !Comprobante.accessible_by(current_ability, :update).include?(@comprobant) 
     respond_to do |format|
       if @comprobant.update(comprobant_params)
         sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
-        Transaccion.create!(descripcion: "Modificación del comprobante para el gasto "+@comprobant.detalle_gasto.titulo,
+        Transaccion.create!(descripcion: "Actualización del comprobante para el gasto #{@comprobant.detalle_gasto.titulo}",
                   sesion_id: sesion.id, 
                   proyecto_id: @comprobant.detalle_gasto.informe_gasto.proyecto.id)
         format.html { redirect_to @comprobant, notice: 'Comprobante fue actualizado satisfactoriamente.' }
@@ -76,10 +76,10 @@ class ComprobantesController < ApplicationController
   # DELETE /comprobantes/1
   # DELETE /comprobantes/1.json
   def destroy
-		authorize! :destroy, Comprobante
+		raise CanCan::AccessDenied if !Comprobante.accessible_by(current_ability, :destroy).include?(@comprobant) 
     @comprobant.destroy
     sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
-        Transaccion.create!(descripcion: "Eliminación del comprobante para el gasto "+@comprobant.detalle_gasto.titulo,
+        Transaccion.create!(descripcion: "Eliminar comprobante para el gasto #{@comprobant.detalle_gasto.titulo}",
                   sesion_id: sesion.id, 
                   proyecto_id: @comprobant.detalle_gasto.informe_gasto.proyecto.id)
     respond_to do |format|
