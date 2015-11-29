@@ -44,7 +44,7 @@ class ReporteGeneradosController < ApplicationController
 					 when '1' 
 						@datos_voluntarios_suspendidos = []
 						@datos_discretos_voluntarios_suspendidos = []
-						@estado = EstadoUsuario.where("nombre = ?", 'Suspendido').first
+						@estado = EstadoUsuario.find_by(nombre:'Suspendido')
 						@users.each do |user|
 							@datos_grafico = []
 							@datos_discretos = []
@@ -55,8 +55,8 @@ class ReporteGeneradosController < ApplicationController
 									"usuario_id = ? AND estado_usuario_id = ? AND created_at BETWEEN ? AND ? ",
 									user.id, @estado.id, inicio, fin
 								)
-								@datos_grafico << [Time.new(params[:anio][:year], mes, 15), historial_estados.exists? ? 1 : 0]
-								@datos_discretos << (historial_estados.exists? ? 1 : 0)			 
+								@datos_grafico << [Time.new(params[:anio][:year], mes, 15), historial_estados.present? ? 1 : 0]
+								@datos_discretos << (historial_estados.present? ? 1 : 0)			 
 							end
 								@datos_voluntarios_suspendidos << @datos_grafico
 								@datos_discretos_voluntarios_suspendidos <<	@datos_discretos
@@ -65,7 +65,7 @@ class ReporteGeneradosController < ApplicationController
 						when '2'
 						@datos_voluntarios_activos = []
 						@datos_discretos_voluntarios_activos = []
-						@estado = EstadoUsuario.where("nombre = ?", 'Activo').first
+						@estado = EstadoUsuario.find_by(nombre:'Activo')
 						@users.each do |user|
 							@datos_grafico = []
 							@datos_discretos = []
@@ -76,8 +76,8 @@ class ReporteGeneradosController < ApplicationController
 									"usuario_id = ? AND estado_usuario_id = ? AND created_at BETWEEN ? AND ? ",
 									user.id, @estado.id, inicio, fin
 								)
-								@datos_grafico << [Time.new(params[:anio][:year], mes, 15), historial_estados.exists? ? 1 : 0]
-								@datos_discretos << (historial_estados.exists? ? 1 : 0)			 
+								@datos_grafico << [Time.new(params[:anio][:year], mes, 15), historial_estados.present? ? 1 : 0]
+								@datos_discretos << (historial_estados.present? ? 1 : 0)			 
 							end
 								@datos_voluntarios_activos << @datos_grafico
 								@datos_discretos_voluntarios_activos << @datos_discretos
@@ -86,7 +86,7 @@ class ReporteGeneradosController < ApplicationController
 						when '3'
 						@datos_discretos_act_creadas= []
 						@datos_act_creadas= []
-						@estado = EstadoActividad.where("nombre = ?", 'Creada').first
+						@estado = EstadoActividad.find_by(nombre:'Creada')
 						@users.each do |user|
 							@datos_grafico = []
 							@datos_discretos = []
@@ -116,7 +116,7 @@ class ReporteGeneradosController < ApplicationController
 						when '4'
 						@datos_discretos_act_plan= []
 						@datos_act_plan= []
-						@estado = EstadoActividad.where("nombre = ?", 'Planificada').first
+						@estado = EstadoActividad.find_by(nombre:'Planificada')
 						@users.each do |user|
 							@datos_grafico = []
 							@datos_discretos = []
@@ -146,7 +146,7 @@ class ReporteGeneradosController < ApplicationController
 						when '5'
 						@datos_discretos_act_ejec= []
 						@datos_act_ejec= []
-						@estado = EstadoActividad.where("nombre = ?", 'Ejecutada').first
+						@estado = EstadoActividad.find_by(nombre:'Ejecutada')
 						@users.each do |user|
 							@datos_grafico = []
 							@datos_discretos = []
@@ -176,7 +176,7 @@ class ReporteGeneradosController < ApplicationController
 						when '6'
 						@datos_discretos_act_term= []
 						@datos_act_term= []
-						@estado = EstadoActividad.where("nombre = ?", 'Terminada').first
+						@estado = EstadoActividad.find_by(nombre:'Terminada')
 						@users.each do |user|
 							@datos_grafico = []
 							@datos_discretos = []
@@ -206,7 +206,7 @@ class ReporteGeneradosController < ApplicationController
 						when '7'
 						@datos_discretos_act_canc= []
 						@datos_act_canc= []
-						@estado = EstadoActividad.where("nombre = ?", 'Cancelada').first
+						@estado = EstadoActividad.find_by(nombre:'Cancelada')
 						@users.each do |user|
 							@datos_grafico = []
 							@datos_discretos = []
@@ -268,7 +268,7 @@ class ReporteGeneradosController < ApplicationController
 					 when '1' 
 						@datos_proyectos_creados = []
 						@datos_discretos_proyectos_creados = []
-						@estado = EstadoProyecto.where("nombre = ?", 'Creado').first
+						@estado = EstadoProyecto.find_by(nombre:'Creado')
 						@proyect.each do |proy|
 							@datos_grafico = []
 							@datos_discretos = []
@@ -279,8 +279,8 @@ class ReporteGeneradosController < ApplicationController
 									"proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",
 									proy, @estado.id, inicio, fin
 								)
-								@datos_grafico << [Time.new(params[:anio][:year], mes, 15), historial_estados.exists? ? 1 : 0]
-								@datos_discretos << (historial_estados.exists? ? 1 : 0)			 
+								@datos_grafico << [Time.new(params[:anio][:year], mes, 15), historial_estados.present? ? 1 : 0]
+								@datos_discretos << (historial_estados.present? ? 1 : 0)			 
 							end
 								@datos_proyectos_creados << @datos_grafico
 								@datos_discretos_proyectos_creados << @datos_discretos
@@ -289,7 +289,7 @@ class ReporteGeneradosController < ApplicationController
 						when '2' 
 						@datos_proyectos_canc = []
 						@datos_discretos_proyectos_canc = []
-						@estado = EstadoProyecto.where("nombre = ?", 'Cancelado').first
+						@estado = EstadoProyecto.find_by(nombre:'Cancelado')
 						@proyect.each do |proy|
 							@datos_grafico = []
 							@datos_discretos = []
@@ -300,8 +300,8 @@ class ReporteGeneradosController < ApplicationController
 									"proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",
 									proy, @estado.id, inicio, fin
 								)
-								@datos_grafico << [Time.new(params[:anio][:year], mes, 15), historial_estados.exists? ? 1 : 0]
-								@datos_discretos << (historial_estados.exists? ? 1 : 0)			 
+								@datos_grafico << [Time.new(params[:anio][:year], mes, 15), historial_estados.present? ? 1 : 0]
+								@datos_discretos << (historial_estados.present? ? 1 : 0)			 
 							end
 								@datos_proyectos_canc << @datos_grafico
 								@datos_discretos_proyectos_canc << @datos_discretos
@@ -310,7 +310,7 @@ class ReporteGeneradosController < ApplicationController
 						when '3' 
 						@datos_proyectos_ejec = []
 						@datos_discretos_proyectos_ejec = []
-						@estado = EstadoProyecto.where("nombre = ?", 'En Ejecución').first
+						@estado = EstadoProyecto.find_by(nombre:'En Ejecución')
 						@proyect.each do |proy|
 							@datos_grafico = []
 							@datos_discretos = []
@@ -321,8 +321,8 @@ class ReporteGeneradosController < ApplicationController
 									"proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",
 									proy, @estado.id, inicio, fin
 								)
-								@datos_grafico << [Time.new(params[:anio][:year], mes, 15), historial_estados.exists? ? 1 : 0]
-								@datos_discretos << (historial_estados.exists? ? 1 : 0)			 
+								@datos_grafico << [Time.new(params[:anio][:year], mes, 15), historial_estados.present? ? 1 : 0]
+								@datos_discretos << (historial_estados.present? ? 1 : 0)			 
 							end
 								@datos_proyectos_ejec << @datos_grafico
 								@datos_discretos_proyectos_ejec << @datos_discretos
@@ -331,7 +331,7 @@ class ReporteGeneradosController < ApplicationController
 						when '4' 
 						@datos_proyectos_term = []
 						@datos_discretos_proyectos_term = []
-						@estado = EstadoProyecto.where("nombre = ?", 'Terminado').first
+						@estado = EstadoProyecto.find_by(nombre:'Terminado')
 						@proyect.each do |proy|
 							@datos_grafico = []
 							@datos_discretos = []
@@ -342,8 +342,8 @@ class ReporteGeneradosController < ApplicationController
 									"proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",
 									proy, @estado.id, inicio, fin
 								)
-								@datos_grafico << [Time.new(params[:anio][:year], mes, 15), historial_estados.exists? ? 1 : 0]
-								@datos_discretos << (historial_estados.exists? ? 1 : 0)			 
+								@datos_grafico << [Time.new(params[:anio][:year], mes, 15), historial_estados.present? ? 1 : 0]
+								@datos_discretos << (historial_estados.present? ? 1 : 0)			 
 							end
 								@datos_proyectos_term << @datos_grafico
 								@datos_discretos_proyectos_term << @datos_discretos
@@ -352,7 +352,7 @@ class ReporteGeneradosController < ApplicationController
 						when '5' 
 						@datos_proyectos_susp = []
 						@datos_discretos_proyectos_susp = []
-						@estado = EstadoProyecto.where("nombre = ?", 'Suspendido').first
+						@estado = EstadoProyecto.find_by(nombre:'Suspendido')
 						@proyect.each do |proy|
 							@datos_grafico = []
 							@datos_discretos = []
@@ -363,8 +363,8 @@ class ReporteGeneradosController < ApplicationController
 									"proyecto_id = ? AND estado_proyecto_id = ? AND created_at BETWEEN ? AND ? ",
 									proy, @estado.id, inicio, fin
 								)
-								@datos_grafico << [Time.new(params[:anio][:year], mes, 15), historial_estados.exists? ? 1 : 0]
-								@datos_discretos << (historial_estados.exists? ? 1 : 0)			 
+								@datos_grafico << [Time.new(params[:anio][:year], mes, 15), historial_estados.present? ? 1 : 0]
+								@datos_discretos << (historial_estados.present? ? 1 : 0)			 
 							end
 								@datos_proyectos_susp << @datos_grafico
 								@datos_discretos_proyectos_susp << @datos_discretos
@@ -373,7 +373,7 @@ class ReporteGeneradosController < ApplicationController
 						when '6'
 						@datos_act_creadas = []
 						@datos_discretos_act_creadas = []
-						@estado = EstadoActividad.where("nombre = ?", 'Creada').first
+						@estado = EstadoActividad.find_by(nombre:'Creada')
 						@proyect.each do |proy|
 							@datos_grafico = []
 							@datos_discretos = []
@@ -400,7 +400,7 @@ class ReporteGeneradosController < ApplicationController
 						when '7'
 						@datos_act_plan = []
 						@datos_discretos_act_plan = []
-						@estado = EstadoActividad.where("nombre = ?", 'Planificada').first
+						@estado = EstadoActividad.find_by(nombre:'Planificada')
 						@proyect.each do |proy|
 							@datos_grafico = []
 							@datos_discretos = []
@@ -427,7 +427,7 @@ class ReporteGeneradosController < ApplicationController
 						when '8' 
 						@datos_act_term = []
 						@datos_discretos_act_term = []
-						@estado = EstadoActividad.where("nombre = ?", 'Terminada').first
+						@estado = EstadoActividad.find_by(nombre:'Terminada')
 						@proyect.each do |proy|
 							@datos_grafico = []
 							@datos_discretos = []
@@ -454,7 +454,7 @@ class ReporteGeneradosController < ApplicationController
 						when '9' 
 						@datos_act_canc = []
 						@datos_discretos_act_canc = []
-						@estado = EstadoActividad.where("nombre = ?", 'Cancelada').first
+						@estado = EstadoActividad.find_by(nombre:'Cancelada')
 						@proyect.each do |proy|
 							@datos_grafico = []
 							@datos_discretos = []
@@ -482,7 +482,7 @@ class ReporteGeneradosController < ApplicationController
 						when '10' 
 						@datos_act_ejec = []
 						@datos_discretos_act_ejec = []
-						@estado = EstadoActividad.where("nombre = ?", 'Ejecutada').first
+						@estado = EstadoActividad.find_by(nombre:'Ejecutada')
 						@proyect.each do |proy|
 							@datos_grafico = []
 							@datos_discretos = []
@@ -509,7 +509,7 @@ class ReporteGeneradosController < ApplicationController
 						when '11' 
 						@datos_vol_susp = []
 						@datos_discretos_vol_susp = []
-						@estado = EstadoUsuario.where("nombre = ?", 'Suspendido').first
+						@estado = EstadoUsuario.find_by(nombre:'Suspendido')
 						@proyect.each do |proy|
 							@datos_grafico = []
 							@datos_discretos = []
@@ -544,7 +544,7 @@ class ReporteGeneradosController < ApplicationController
 						when '12' 
 						@datos_vol_act = []
 						@datos_discretos_vol_act = []
-						@estado = EstadoUsuario.where("nombre = ?", 'Activo').first
+						@estado = EstadoUsuario.find_by(nombre:'Activo')
 						@proyect.each do |proy|
 							@datos_grafico = []
 							@datos_discretos = []
@@ -585,10 +585,10 @@ class ReporteGeneradosController < ApplicationController
 							(1..12).each do |mes|
 								inicio = Time.new(params[:anio][:year], mes, 1)
 								fin = Time.new(params[:anio][:year], mes, 31).end_of_day
-								pres =Presupuesto.where(
+								pres =Presupuesto.find_by(
 									"proyecto_id = ? AND aprobado = ? AND updated_at BETWEEN ? AND ? ", 
 									 proy, true, inicio, fin
-								).first
+								)
 								if pres == nil
 									monto=0
 								else
@@ -674,7 +674,7 @@ class ReporteGeneradosController < ApplicationController
 					 when '1' 
 						@datos_proyectos_creados_reg = []
 						@datos_discretos_proyectos_creados_reg = []
-						@estado = EstadoProyecto.where("nombre = ?", 'Creado').first
+						@estado = EstadoProyecto.find_by(nombre:'Creado')
 						@regio.each do |reg|
 							@datos_grafico = []
 							@datos_discretos = []
@@ -701,7 +701,7 @@ class ReporteGeneradosController < ApplicationController
 						when '2'
 						@datos_proyectos_canc_reg = []
 						@datos_discretos_proyectos_canc_reg = []
-						@estado = EstadoProyecto.where("nombre = ?", 'Cancelado').first
+						@estado = EstadoProyecto.find_by(nombre:'Cancelado')
 						@regio.each do |reg|
 							@datos_grafico = []
 						  @datos_discretos = []
@@ -729,7 +729,7 @@ class ReporteGeneradosController < ApplicationController
 						when '3'
 						@datos_proyectos_term_reg = []
 						@datos_discretos_proyectos_term_reg = []
-						@estado = EstadoProyecto.where("nombre = ?", 'Terminado').first
+						@estado = EstadoProyecto.find_by(nombre:'Terminado')
 						@regio.each do |reg|
 							@datos_grafico = []
 							@datos_discretos = []
@@ -757,7 +757,7 @@ class ReporteGeneradosController < ApplicationController
 						when '4'
 						@datos_proyectos_susp_reg = []
 						@datos_discretos_proyectos_susp_reg = []
-						@estado = EstadoProyecto.where("nombre = ?", 'Suspendido').first
+						@estado = EstadoProyecto.find_by(nombre:'Suspendido')
 						@regio.each do |reg|
 							@datos_grafico = []
 							@datos_discretos = []
@@ -785,7 +785,7 @@ class ReporteGeneradosController < ApplicationController
 						when '5'
 						@datos_proyectos_ejec_reg = []
 						@datos_discretos_proyectos_ejec_reg = []
-						@estado = EstadoProyecto.where("nombre = ?", 'En Ejecución').first
+						@estado = EstadoProyecto.find_by(nombre:'En Ejecución')
 						@regio.each do |reg|
 							@datos_grafico = []
 							@datos_discretos = []
@@ -812,7 +812,7 @@ class ReporteGeneradosController < ApplicationController
 						when '6' 
 						@datos_vol_susp_reg = []
 						@datos_discretos_vol_susp_reg = []
-						@estado = EstadoUsuario.where("nombre = ?", 'Suspendido').first
+						@estado = EstadoUsuario.find_by(nombre:'Suspendido')
 						@regio.each do |reg|
 							@datos_grafico = []
 							@datos_discretos = []
@@ -852,7 +852,7 @@ class ReporteGeneradosController < ApplicationController
 						when '7' 
 						@datos_vol_act_reg = []
 						@datos_discretos_vol_act_reg = []
-						@estado = EstadoUsuario.where("nombre = ?", 'Activo').first
+						@estado = EstadoUsuario.find_by(nombre:'Activo')
 						@regio.each do |reg|
 							@datos_grafico = []
 							@datos_discretos = []

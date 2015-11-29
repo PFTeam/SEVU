@@ -13,7 +13,7 @@ class DetalleGastosController < ApplicationController
   # GET /detalle_gastos/1
   # GET /detalle_gastos/1.json
   def show
-		authorize! :show, DetalleGasto
+		raise CanCan::AccessDenied if !DetalleGasto.accessible_by(current_ability, :show).include?(@detalle_gasto)
     @proyecto = @detalle_gasto.informe_gasto.proyecto
   end
 
@@ -31,7 +31,7 @@ class DetalleGastosController < ApplicationController
 
   # GET /detalle_gastos/1/edit
   def edit
-		authorize! :edit, DetalleGasto
+		raise CanCan::AccessDenied if !DetalleGasto.accessible_by(current_ability, :edit).include?(@detalle_gasto)
     @concepto_gastos = ConceptoGasto.all
     @proyecto = @detalle_gasto.informe_gasto.proyecto
     
@@ -62,7 +62,7 @@ class DetalleGastosController < ApplicationController
   # PATCH/PUT /detalle_gastos/1
   # PATCH/PUT /detalle_gastos/1.json
   def update
-		authorize! :update, DetalleGasto
+		raise CanCan::AccessDenied if !DetalleGasto.accessible_by(current_ability, :update).include?(@detalle_gasto)
     respond_to do |format|
       if @detalle_gasto.update(detalle_gasto_params)
         sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
@@ -81,7 +81,7 @@ class DetalleGastosController < ApplicationController
   # DELETE /detalle_gastos/1
   # DELETE /detalle_gastos/1.json
   def destroy
-		authorize! :destroy, DetalleGasto
+		raise CanCan::AccessDenied if !DetalleGasto.accessible_by(current_ability, :destroy).include?(@detalle_gasto)
 		sesion = Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
 		Transaccion.create!(descripcion: "Eliminar detalle gasto #{@detalle_gasto.titulo}, descripcion: #{@detalle_gasto.descripcion}, con monto #{@detalle_gasto.monto}, concepto_gasto: #{@detalle_gasto.concepto_gasto.titulo}, voluntario: #{@detalle_gasto.voluntario.nombre}, comprobante: #{@detalle_gasto.comprobante.numero}",
                   sesion_id: sesion.id, 
