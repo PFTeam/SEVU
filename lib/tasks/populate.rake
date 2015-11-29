@@ -23,7 +23,6 @@ namespace :db do
       pa1diego=Privilegio.create(nombre: "index_evento_publico", descripcion: "Permite ver los eventos públicos", tipo_privilegio: psdiego)
 			pa2diego=Privilegio.create(nombre: "evento_publicos", descripcion: "Permite manejar los eventos públicos", tipo_privilegio: psdiego)
 			pa3diego=Privilegio.create(nombre: "proyecto_publico", descripcion: "Permite ver los proyectos actuales", tipo_privilegio: psdiego)		
-			pa5diego=Privilegio.create(nombre: "auditoria", descripcion: "Permite la auditoria de sistema", tipo_privilegio: psdiego)
       pa6diego=Privilegio.create(nombre: "configuraciones_generales", descripcion: "Permite la gestion general del sistema", tipo_privilegio: psdiego)
 			pa7diego=Privilegio.create(nombre: "asignacion_rol_predefinido", descripcion: "Permite manejar las asignaciones de privilegios a roles", tipo_privilegio: psdiego)
 			pa8diego=Privilegio.create(nombre: "regional", descripcion: "Permite manejar las regionales", tipo_privilegio: psdiego)
@@ -38,7 +37,11 @@ namespace :db do
 			pa17diego=Privilegio.create(nombre: "notificacion_email", descripcion: "Permite manejar las notificaciones de emails", tipo_privilegio: psdiego)
 			pa18diego=Privilegio.create(nombre: "notificaciones", descripcion: "Permite manejar notificaciones", tipo_privilegio: psdiego)
 			pa20diego=Privilegio.create(nombre: "notificacion_mailer", descripcion: "Permite manejar las notificaciones del mailer", tipo_privilegio: psdiego)
+			pap18diego=Privilegio.create(nombre: "new_postulacion", descripcion: "Permite mostrar y crear las postulaciones", tipo_privilegio: psdiego)	
+			pa58diego=Privilegio.create(nombre: "index_usuario", descripcion: "Permite ver los usuarios del sistema", tipo_privilegio: psdiego)
+			
 
+			pap57diego=Privilegio.create(nombre: "notificacion_predeterminadas", descripcion: "Permite manejar las notificaciones predeterminadas", tipo_privilegio: ppdiego)
 			pap1diego=Privilegio.create(nombre: "detalle_presupuestos", descripcion: "Permite manejar los detalles de presupuesto", tipo_privilegio: ppdiego)
 			pap2diego=Privilegio.create(nombre: "asignacion_roles", descripcion: "Permite manejar las asignaciones de roles", tipo_privilegio: ppdiego)
 			pap3diego=Privilegio.create(nombre: "show_organizacion_externas", descripcion: "Permite ver las organizaciones externas", tipo_privilegio: ppdiego)
@@ -54,8 +57,7 @@ namespace :db do
 			pap13diego=Privilegio.create(nombre: "tipo_habilidades", descripcion: "Permite manejar los tipos de habilidades", tipo_privilegio: ppdiego)
 			pap15diego=Privilegio.create(nombre: "new_presupuesto", descripcion: "Permite crear presupuestos", tipo_privilegio: ppdiego)
 			pap16diego=Privilegio.create(nombre: "edit_presupuesto", descripcion: "Permite editar presupuestos", tipo_privilegio: ppdiego)
-			pap17diego=Privilegio.create(nombre: "restricciones", descripcion: "Permite manejar las restricciones", tipo_privilegio: ppdiego)
-			pap18diego=Privilegio.create(nombre: "new_postulacion", descripcion: "Permite mostrar y crear las postulaciones", tipo_privilegio: ppdiego)			
+			pap17diego=Privilegio.create(nombre: "restricciones", descripcion: "Permite manejar las restricciones", tipo_privilegio: ppdiego)		
 			pap20diego=Privilegio.create(nombre: "edit_actividad", descripcion: "Permite editar la actividad y manejar detalles de gastos, comprobantes y reportes", tipo_privilegio: ppdiego)
 			pap21diego=Privilegio.create(nombre: "manage_postulacion", descripcion: "Permite manejar las postulaciones", tipo_privilegio: ppdiego)
 			pap22diego=Privilegio.create(nombre: "asignacion_actividad", descripcion: "Permite manejar las asignaciones de actividades", tipo_privilegio: ppdiego)
@@ -85,8 +87,6 @@ namespace :db do
 			pap54diego=Privilegio.create(nombre: "gestionar_estado_presupuesto", descripcion: "Permite gestionar el estado de un presupuesto", tipo_privilegio: ppdiego)
 			pap55diego=Privilegio.create(nombre: "voluntarios", descripcion: "Permite gestionar los voluntarios", tipo_privilegio: ppdiego)
 			pap56diego=Privilegio.create(nombre: "gestionar_presupuesto", descripcion: "Permite gestionar el presupuesto", tipo_privilegio: ppdiego)
-			pap57diego=Privilegio.create(nombre: "notificacion_predeterminadas", descripcion: "Permite manejar las notificaciones predeterminadas", tipo_privilegio: ppdiego)
-			pa58diego=Privilegio.create(nombre: "index_usuario", descripcion: "Permite ver los usuarios del sistema", tipo_privilegio: psdiego)
 			pap59diego=Privilegio.create(nombre: "estado_academico", descripcion: "Permite ver los estados academicos de los voluntarios", tipo_privilegio: ppdiego)
 
 
@@ -156,7 +156,6 @@ namespace :db do
 			arcc21diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap5diego  , rol: coordinador)
 			arcc22diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pa13diego, rol: coordinador)
 			arcc27diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pa14diego , rol: coordinador)
-			arcc29diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pa2diego , rol: coordinador)
 			arcc23diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap30diego  , rol: coordinador)
 			arcc24diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap43diego , rol: coordinador)
 			arcc25diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap44diego , rol: coordinador)
@@ -168,6 +167,8 @@ namespace :db do
 			arcc31diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap59diego, rol: coordinador)
 
 
+		#COORDINADORSISTEMA
+			arcc29diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pa2diego , rol: coordinadorsistema)
 
 		#VOLUNTARIO
 
@@ -378,6 +379,7 @@ v = Voluntario.new(nombreUsuario: "agustin",
 			AsignacionFuncion.create!(usuario: v, rol: rsdiego, esActual: true, descripcion: "default")	
 			AsignacionFuncion.create!(usuario: uuu, rol: rsdiego, esActual: true, descripcion: "default")
 			AsignacionFuncion.create!(usuario: uuuu, rol: rsdiego, esActual: true, descripcion: "default")
+			AsignacionFuncion.create!(usuario: u_otro, rol: coordinadorsistema, esActual: true, descripcion: "default")
 
 
 			#PRIVILEGIOS DE COORDINADORSISTEMA

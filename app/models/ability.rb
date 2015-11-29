@@ -1,6 +1,8 @@
 class Ability
   include CanCan::Ability
 	def initialize(user)
+		alias_action :update, :show, :edit, :destroy, :to => :used
+		alias_action :create, :new, :index, :to => :cin
 		user ||= Usuario.new
 		if user.nombreUsuario== 'admin'# Superusuario
 			can :manage, :all
@@ -24,11 +26,6 @@ class Ability
 								can :manage, Notificacion
 							when 'notificacion_mailer'
 								can :manage, NotificacionMailer
-							when 'notificacion_predeterminadas'
-								can :configuraciones_generales, Rol
-								can :manage, NotificacionPredeterminada
-								can :gestionar_notificaciones, NotificacionPredeterminada
-								can :notificaciones_predeterminadas, NotificacionPredeterminada
 							when 'proyecto'
 								can :manage, Proyecto
 								can :agregar_necesidad, Proyecto
@@ -76,7 +73,8 @@ class Ability
 				asignacionrol.rol.asignacion_rol_predefinidos.where(esActual: true).each do |asignacionrolpredefinido|
 					case asignacionrolpredefinido.privilegio.nombre
 						when 'detalle_presupuestos'
-							can :manage, DetallePresupuesto, presupuesto: asignacionrol.proyecto.presupuesto
+							can :used, DetallePresupuesto, presupuesto: asignacionrol.proyecto.presupuesto
+							can :cin, DetallePresupuesto
 						when 'reporte_generado'
 							can :reporte_new, ReporteGenerado
 							can :reporte_voluntarios, ReporteGenerado
@@ -93,15 +91,17 @@ class Ability
 							can :show, HistorialEstadoProyecto, proyecto: asignacionrol.proyecto
 							can :edit, EstadoProyecto
 						when 'informe_gastos'
-							can :manage, InformeGasto, proyecto: asignacionrol.proyecto
+							can [:used,:gestionar_informe_gastos], InformeGasto, proyecto: asignacionrol.proyecto
+							can :cin, InformeGasto
 							can :gestionar_informe_gastos, InformeGasto, proyecto: asignacionrol.proyecto
 						when 'show_index_informe_gasto'
 							can :show, InformeGasto, proyecto: asignacionrol.proyecto
 							can :index, InformeGasto, proyecto: asignacionrol.proyecto
 						when 'show_detalle_gastos'
-							can :show, DetalleGasto, id: asignacionrol.proyecto.informe_gasto.detalle_gastos.pluck(:id)
+							can :show, DetalleGasto, id: asignacionrol.proyecto.informe_gasto.detalle_gastos.pluck(:id) if asignacionrol.proyecto.informe_gasto.present?
 						when 'comprobantes'
-							can :manage, Comprobante, detalle_gasto: asignacionrol.proyecto.informe_gasto.detalle_gastos.pluck(:id)
+							can :used, Comprobante, detalle_gasto: asignacionrol.proyecto.informe_gasto.detalle_gastos.pluck(:id)
+							can :cin, Comprobante
 						when 'concepto_gastos'
 							can :configuraciones_generales, Rol
 							can :manage, ConceptoGasto
@@ -116,7 +116,7 @@ class Ability
 							can :agregar_necesidad, Proyecto, id: asignacionrol.proyecto
 							can :show, OrganizacionExterna, id: asignacionrol.proyecto.organizacion_externas.pluck(:id)
 						when 'tipo_proyectos'
-							can :manage, TipoProyecto, id: asignacionrol.proyecto.tipo_proyecto
+							can :manage, TipoProyecto
 						when 'habilidades'
 							can :configuraciones_generales, Rol
 							can :manage, Habilidad
@@ -146,33 +146,42 @@ class Ability
 							can :show, ObjetivoEspecifico, objetivo_general: asignacionrol.proyecto.objetivo_generales.pluck(:id)
 							can :index, ObjetivoEspecifico, objetivo_general: asignacionrol.proyecto.objetivo_generales.pluck(:id)
 						when 'edit_actividad'
-							can :edit, Actividad, proyecto: asignacionrol.proyecto
-							can :show, Actividad, proyecto: asignacionrol.proyecto
-							can :manage, DetalleGasto, id: asignacionrol.proyecto.informe_gasto.detalle_gastos.pluck(:id)
+							can :edit, Actividad, proyecto: asignacionrol.proyecto	
+							can :show, Actividad, proyecto: asignacionrol.proyecto					
+							can :used, DetalleGasto, id: asignacionrol.proyecto.informe_gasto.detalle_gastos.pluck(:id) if asignacionrol.proyecto.informe_gasto.present?
+							can :cin, DetalleGasto
 							can :manage, Comprobante
 							can :manage, Reporte
 						when 'reporte'
 							can :manage, Reporte
 						when 'detalle_gasto'
-							can :manage, DetalleGasto, id: asignacionrol.proyecto.informe_gasto.detalle_gastos.pluck(:id)
+							can :used, DetalleGasto, id: asignacionrol.proyecto.informe_gasto.detalle_gastos.pluck(:id) if asignacionrol.proyecto.informe_gasto.present?
+							can :cin, DetalleGasto
 						when 'manage_postulacion'
-							can :manage, Postulacion, proyecto: asignacionrol.proyecto
+							can :used, Postulacion, proyecto: asignacionrol.proyecto
+							can :cin, Postulacion
 						when 'asignacion_actividad'
-							can :manage, AsignacionActividad, actividad: asignacionrol.proyecto.actividades.pluck(:id)
+							can [:used,:busqueda_filtrada,:dar_baja], AsignacionActividad, actividad: asignacionrol.proyecto.actividades.pluck(:id)
+							can :cin, AsignacionActividad
 							can :busqueda_filtrada, AsignacionActividad, actividad: asignacionrol.proyecto.actividades.pluck(:id)
 						when 'actividad'
-							can :manage, Actividad, proyecto: asignacionrol.proyecto
+							can :used, Actividad, proyecto: asignacionrol.proyecto
+							can [:cin, :agregar_habilidad], Actividad
 							can :show, Usuario
 							can :agregar_habilidad, Actividad
 						when 'objetivos'
-							can :manage, ObjetivoGeneral, proyecto: asignacionrol.proyecto
-							can :manage, ObjetivoEspecifico, objetivo_general: asignacionrol.proyecto.objetivo_generales.pluck(:id)
+							can :used, ObjetivoGeneral, proyecto: asignacionrol.proyecto
+							can :cin, ObjetivoGeneral
+							can :used, ObjetivoEspecifico, objetivo_general: asignacionrol.proyecto.objetivo_generales.pluck(:id)
+							can :cin, ObjetivoEspecifico
 						when 'organizacion_externas'
-							can :manage, OrganizacionExterna, id: asignacionrol.proyecto.organizacion_externas.pluck(:id)
+							can :used, OrganizacionExterna, id: asignacionrol.proyecto.organizacion_externas.pluck(:id)
+							can :cin, OrganizacionExterna
 						when 'tipo_actividad'
 							can :manage, TipoActividad
 						when 'proyecto'
-							can :manage, Proyecto, id: asignacionrol.proyecto
+							can [:used,:agregar_necesidad], Proyecto, id: asignacionrol.proyecto
+							can [:cin, :mis_proyectos], Proyecto
 							can :show, Usuario
 							can :agregar_necesidad, Proyecto, id: asignacionrol.proyecto
 						when 'proyecto_director'
@@ -182,7 +191,8 @@ class Ability
 						when 'reporte_generado'
 							can :manage, ReporteGenerado
 						when 'colaborador'
-							can :manage, Colaborador, proyecto: asignacionrol.proyecto
+							can :used, Colaborador, proyecto: asignacionrol.proyecto
+							can :cin, Colaborador
 						when 'requisito'
 							can :manage, Requisito
 						when 'comprobante'
@@ -191,7 +201,8 @@ class Ability
 							can :create, Presupuesto, id: asignacionrol.proyecto.presupuesto
 							can :show, Presupuesto, id: asignacionrol.proyecto.presupuesto
 						when 'presupuestos'
-							can :manage, Presupuesto, id: asignacionrol.proyecto.presupuesto
+							can :used, Presupuesto, id: asignacionrol.proyecto.presupuesto
+							can :cin, Presupuesto
 							can :gestionar_presupuesto, Presupuesto, id: asignacionrol.proyecto.presupuesto
 							can :evaluar_presupuestos_pendientes, Presupuesto
 							can :presupuestos_evaluados, Presupuesto
@@ -227,6 +238,11 @@ class Ability
 							can :Responder, Voluntario #SIN autorize en controlador
 							can :dar_alta_voluntario, Voluntario #SIN autorize en controlador
 							can :gestionar_habilidades, Voluntario #SIN autorize en controlador
+						when 'notificacion_predeterminadas'
+								can :configuraciones_generales, Rol
+								can :manage, NotificacionPredeterminada
+								can :gestionar_notificaciones, NotificacionPredeterminada
+								can :notificaciones_predeterminadas, NotificacionPredeterminada
 					end
 				end
 			end
