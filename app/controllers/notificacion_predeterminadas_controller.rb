@@ -5,7 +5,7 @@ class NotificacionPredeterminadasController < ApplicationController
   # GET /notificacion_predeterminadas
   # GET /notificacion_predeterminadas.json
   def index
-		authorize! :index, NotificacionPredeterminada
+		#authorize! :index, NotificacionPredeterminada
     #@notificacion_predeterminadas = NotificacionPredeterminada.all
     @notificacion_predeterminadas = @proyecto.notificacion_predeterminadas
   end
@@ -13,7 +13,7 @@ class NotificacionPredeterminadasController < ApplicationController
   # GET /notificacion_predeterminadas/1
   # GET /notificacion_predeterminadas/1.json
   def show
-		authorize! :show, NotificacionPredeterminada
+		#authorize! :show, NotificacionPredeterminada
   end
 
   # GET /notificacion_predeterminadas/new
@@ -74,7 +74,7 @@ class NotificacionPredeterminadasController < ApplicationController
   end
   
   def gestionar_notificaciones
-		authorize! :gestionar_notificaciones, NotificacionPredeterminada
+		#authorize! :gestionar_notificaciones, NotificacionPredeterminada
     @proyectos = Proyecto.where(id: AsignacionRol.find_by(usuario_id: current_usuario.id, esActual: true, rol_id: Rol.find_by(nombre: 'Director').id).proyecto_id)
   end
 

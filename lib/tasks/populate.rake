@@ -453,7 +453,9 @@ v = Voluntario.new(nombreUsuario: "agustin",
 			Experiencia.create(tieneExperiencia: true, cantidadExperiencia: 2, habilidad: h2, voluntario: v)
 			Experiencia.create(tieneExperiencia: true, cantidadExperiencia: 3, habilidad: h3, voluntario: v)
 
-
+	  TipoNotificacion.new(nombre: "Email")
+	  TipoNotificacion.new(nombre: "Sistema")
+	  TipoNotificacion.new(nombre: "Ambos")
 
   end
 

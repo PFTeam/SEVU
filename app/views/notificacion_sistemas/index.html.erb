@@ -13,7 +13,7 @@
               <div class="panel-body">
                 <b><%= link_to notificacion.usuario_creador, notificacion.usuario_creador %></b>      <br>
               <label><h5><b> Notificación:</b></h5></label> 
-				<%= notificacion.created_at.to_formatted_s(:rfc822) %>
+				<%= notificacion.created_at.to_formatted_s(:long) %>
                 <br>
                 <label>Mensaje</label>
                 <p>

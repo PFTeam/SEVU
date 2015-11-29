@@ -36,6 +36,7 @@ class ObjetivoGeneralesController < ApplicationController
 		authorize! :create, ObjetivoGeneral
     @objetivo_general = ObjetivoGeneral.new(objetivo_general_params)
     p @objetivo_general.proyecto_id
+    @objetivo_general.active = true
     respond_to do |format|
       if @objetivo_general.save
 	format.html {redirect_to :controller => 'objetivo_generales', :action => 'index',:proyecto_id => @objetivo_general.proyecto_id
@@ -75,7 +76,8 @@ flash[:success] = 'Objetivo general fue actualizado satisfactoriamente.' }
 		raise CanCan::AccessDenied if !ObjetivoGeneral.accessible_by(current_ability, :destroy).include?(@objetivo_general) 
     @proyecto = @objetivo_general.proyecto
     p @proyecto.id
-    @objetivo_general.destroy
+    @objetivo_general.active = false
+    @objetivo_general.save
     respond_to do |format|
 	    format.html { redirect_to objetivo_generales_path(:proyecto_id => @proyecto.id)
 		    flash[:success] = 'Objetivo general fue borrado satisfactoriamente.' }

@@ -81,7 +81,7 @@ class ActividadesController < ApplicationController
       @actividad.dia_semana = nil
 
     end
-
+    @actividad.active = true
 		@objetivo_especifico = @actividad.objetivo_especifico
     @proyecto = @actividad.proyecto
     respond_to do |format|
@@ -167,7 +167,8 @@ class ActividadesController < ApplicationController
   def destroy
 		raise CanCan::AccessDenied if !Actividad.accessible_by(current_ability, :destroy).include?( @actividad) 
     @objetivo_especifico = @actividad.objetivo_especifico
-    @actividad.destroy
+    @actividad.active = false
+    @actividad.save
     respond_to do |format|
             sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
             Transaccion.create!(
