@@ -1,4 +1,4 @@
-<%= simple_form_for(@actividad , html: actividad_form_html_options, wrapper_mappings: {checkboxes: :horizontal_radio_and_checkboxes, boolean: :horizontal_boolean}) do |f| %>
+<%= simple_form_for(@actividad , html: actividad_form_html_options, wrapper_mappings: {checkboxes: :horizontal_radio_and_checkboxes}) do |f| %>
   <% if @actividad.errors.any? %>
     <div class="col-lg-12">
       <div class="col-lg-4"></div>
