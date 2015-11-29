@@ -15,7 +15,7 @@ class EstadoProyecto < ActiveRecord::Base
 		    estadosPosibles = [EstadoProyecto.find_by(nombre: 'Cancelado')]
 	    end
     elsif proyecto.historial_estado_proyectos.last.estado_proyecto.nombre == 'En Ejecución'
-	    if !proyecto.fechaFin.blank? && ( proyecto.fechaFin <= Time.now )
+	    if (!proyecto.fechaFin.blank?) && ( proyecto.fechaFin <= Time.now )
 		    estadosPosibles = [EstadoProyecto.find_by(nombre: 'Terminado'), EstadoProyecto.find_by(nombre: 'Suspendido'), EstadoProyecto.find_by(nombre: 'Cancelado')]
 	    else
 		    estadosPosibles = [EstadoProyecto.find_by(nombre: 'Suspendido'), EstadoProyecto.find_by(nombre: 'Cancelado')]

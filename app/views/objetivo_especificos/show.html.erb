@@ -52,7 +52,11 @@
 
 		<% if !actividad.nombre.blank? %>
 			<h3 class="panel-title">Actividad: <%= link_to actividad.nombre, actividad , :style => "font-size: 22px;"%>
-			<%= link_to 'Borrar', actividad, method: :delete, data: { confirm: 'Seguro?' } %>
+      <% if actividad.borrable %>
+			 <%= link_to 'Borrar', actividad, method: :delete, data: { confirm: 'Seguro?' } %>
+      <% else %>
+        Borrar
+      <% end %>
 		      </h3>
 		<% else %>
 			No se ha asignado ningun nombre a la Actividad

@@ -39,4 +39,11 @@ def es_repetitiva
 		"No"
 	end
 end
+def borrable
+  if ( self.historial_estado_actividades.last.estado_actividad.nombre == "Creada" ) || ( self.historial_estado_actividades.last.estado_actividad.nombre == "Planificada" ) or ( self.historial_estado_actividades.last.estado_actividad.nombre == "Cancelada" ) 
+    return true
+  else
+    return false
+  end
+end
 end

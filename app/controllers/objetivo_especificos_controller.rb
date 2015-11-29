@@ -12,7 +12,7 @@ class ObjetivoEspecificosController < ApplicationController
   # GET /objetivo_especificos/1
   # GET /objetivo_especificos/1.json
   def show
-		raise CanCan::AccessDenied if !ObjetivoEspecifico.accessible_by(current_ability, :show).include?(@objetivo_especifico) 
+		#raise CanCan::AccessDenied if !ObjetivoEspecifico.accessible_by(current_ability, :show).include?(@objetivo_especifico) 
 	  @proyecto = Proyecto.find(@objetivo_especifico.objetivo_general.proyecto.id)
   end
 

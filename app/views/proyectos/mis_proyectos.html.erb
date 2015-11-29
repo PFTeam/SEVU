@@ -32,7 +32,7 @@
                 </p>
                 <label>Directores del Proyecto</label>
                 <p> <!-- #TODO: Agregar validación de un solo director -->
-    <% if !proyecto.director.nil? %>
+    <% if not proyecto.director == [] %>
      |
                    <% for director in proyecto.director %>
                        <i class="fa fa-user"></i><%= link_to director.apellido_nombre.to_s, usuario_path(director) %>  |
