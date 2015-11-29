@@ -13,7 +13,7 @@ class ActividadesController < ApplicationController
   # GET /actividades/1
   # GET /actividades/1.json
   def show
-		raise CanCan::AccessDenied if !Actividad.accessible_by(current_ability, :show).include?( @actividad) 
+		raise CanCan::AccessDenied if !Actividad.accessible_by(current_ability, :show).include?(@actividad) 
     @proyecto = @actividad.proyecto
 		
   end
@@ -32,7 +32,7 @@ class ActividadesController < ApplicationController
 
   # GET /actividades/1/edit
   def edit
-		raise CanCan::AccessDenied if !Actividad.accessible_by(current_ability, :edit).include?( @actividad) 
+		raise CanCan::AccessDenied if !Actividad.accessible_by(current_ability, :edit).include?(@actividad) 
     @proyecto = @actividad.objetivo_especifico.objetivo_general.proyecto
     @habilidades = Habilidad.all
     @tipoActividades = TipoActividad.all
