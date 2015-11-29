@@ -192,6 +192,11 @@ class ActividadesController < ApplicationController
      end
   end
 
+  def cronograma_actividades
+    @proyecto = Proyecto.find(params[:proyecto_id])
+    @actividades = @proyecto.actividades.order(:objetivo_especifico_id)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_actividad

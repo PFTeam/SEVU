@@ -131,6 +131,8 @@ Rails.application.routes.draw do
   
    get 'buscar_voluntario'=>'voluntarios#buscar_usuario'
 
+  get 'cronograma_actividades'=>'actividades#cronograma_actividades'
+
   resources :usuarios do
       resources :notificacion_sistemas
   end

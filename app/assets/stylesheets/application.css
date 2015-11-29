@@ -29,3 +29,11 @@
   float: right;
   padding-left: 4px;
 }
+
+
+.actividades > thead > tr > th {
+	border-right: 1px dashed #333;
+}
+.actividades > tbody > tr > td {
+	border-right: 1px dashed #333;
+}
