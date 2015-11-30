@@ -32,7 +32,7 @@
           <div class="col-lg-12">
             <h1>Generar Notificación <small>Creación de una notificación.</small></h1>
             <ol class="breadcrumb">
-              <li><a href="index.html"><i class="icon-dashboard"></i> Notificaciones</a></li>
+              <li><a href="/notificacion_sistemas"><i class="icon-dashboard"></i> Notificaciones</a></li>
               <li class="active"><i class="icon-file-alt"></i> Generar Notificación</li>
             </ol>
           </div>
@@ -67,15 +67,15 @@
 
            <% if @proyecto.notificacion_predeterminadas.where(tipo_notificacion_id: @sistema_notificacion_id).any? %>
              <%=   radio_button("notificacion", "type", "NotificacionSistema", :checked => 'checked')%>
-             <%= label_tag(:type, "Notificacion Sistema2") %><br/>
+             <%= label_tag(:type, "Notificacion Sistema") %><br/>
            <% end %>
            <% if @proyecto.notificacion_predeterminadas.where(tipo_notificacion_id: @email_notificacion_id).any? %>
              <%=   radio_button("notificacion", "type", "NotificacionEmail")%>
-             <%= label_tag(:type, "Notificacion Email2") %><br/>
+             <%= label_tag(:type, "Notificacion Email") %><br/>
            <% end %>
            <% if @proyecto.notificacion_predeterminadas.where(tipo_notificacion_id: @email_notificacion_id).any? && @proyecto.notificacion_predeterminadas.where(tipo_notificacion_id: @sistema_notificacion_id).any? %>
              <%=   radio_button("notificacion", "type", "Ambos")%>
-             <%= label_tag(:type, "Ambos2") %><br/>
+             <%= label_tag(:type, "Ambos") %><br/>
            <% end %>
 
         <% end %>
