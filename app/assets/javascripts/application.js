@@ -11,5 +11,5 @@
 //= require bootstrap-datepicker
 //= require bootstrap-datepicker-rails
 //= require ../../../vendor/assets/javascripts/jquery-elastic-1.6.10/jquery.elastic.source
-
+//= require bootstrap-multiselect
 

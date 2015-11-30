@@ -75,7 +75,31 @@ class NotificacionPredeterminadasController < ApplicationController
   
   def gestionar_notificaciones
 		#authorize! :gestionar_notificaciones, NotificacionPredeterminada
-    @proyectos = Proyecto.where(id: AsignacionRol.find_by(usuario_id: current_usuario.id, esActual: true, rol_id: Rol.find_by(nombre: 'Director').id).proyecto_id)
+    #asignaciones = 
+    #@proyectos = Proyecto.joins(asignacion_roles: {:rol}).where('asignacion_roles.usuario_id =? AND (asignacion_roles.rol.nombre =? OR asignacion_roles.rol.nombre =?)', current_usuario, 'Director', 'Coordinador').uniq
+    #@proyectos = Proyecto.joins(asignacion_roles: :rol).where('asignacion_roles.usuario_id =? AND (asignacion_roles.rol.nombre =? OR asignacion_roles.rol.nombre =?)', current_usuario, 'Director', 'Coordinador').uniq
+    #@proyectos = Proyecto.includes(asignacion_roles: :rol).where(asignacion_rol: {usuario_id: current_usuario}, rol: {nombre: 'Director'})
+    #@asignaciones = AsignacionRol.find_by(usuario: current_usuario, esActual: true, active: true, rol_id: Rol.find_by('nombre = ?','Coordinador'))
+   #if !@asignaciones.blank?
+    #  @asignaciones do |asignacion|
+    #    @proyectos = @proyectos + asignacion.proyecto
+#
+    #  end 
+    #end
+    @proyectos = []
+    @asignaciones = AsignacionRol.find_by(usuario_id: current_usuario.id, esActual: true, active: true, rol_id: Rol.find_by('nombre = ?','Director').id)
+    if !@asignaciones.blank?
+      [*@asignaciones].each do |asignacion|
+        @proyectos = @proyectos + Proyecto.where(id: asignacion.proyecto_id)
+      end
+    end
+    @asignaciones = AsignacionRol.find_by(usuario_id: current_usuario.id, esActual: true, active: true, rol_id: Rol.find_by('nombre = ?','Coordinador').id)
+    if !@asignaciones.blank?
+      [*@asignaciones].each do |asignacion|
+        @proyectos = @proyectos + Proyecto.where(id: asignacion.proyecto_id)
+      end
+    end
+    #@proyectos = Proyecto.where(id: AsignacionRol.find_by(usuario_id: current_usuario.id, esActual: true, active: true, rol_id: Rol.find_by('nombre = ?','Coordinador').id).proyecto_id)
   end
 
   def notificaciones_predeterminadas 

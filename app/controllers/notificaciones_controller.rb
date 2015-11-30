@@ -17,6 +17,8 @@ class NotificacionesController < ApplicationController
   # GET /notificaciones/new
   def new
 		authorize! :new, Notificacion
+    @email_notificacion_id = TipoNotificacion.find_by(nombre: 'Email').id
+    @sistema_notificacion_id = TipoNotificacion.find_by(nombre: 'Sistema').id
 	if !params[:proyecto_id].to_s.blank?
     @proyecto = Proyecto.find(params[:proyecto_id])
 		p "NO ES BLANK"
@@ -72,7 +74,7 @@ class NotificacionesController < ApplicationController
 
 
     else
-      if !params[:notificacion][:usuario_destino_ids].blank?
+      if !params[:notificacion][:usuario_destino_id].blank?
 
   	    if params[:notificacion][:type].to_s.blank?
   				   respond_to do |format|
@@ -88,10 +90,11 @@ class NotificacionesController < ApplicationController
   					    end
   				    end
   	    end
-  	    params[:notificacion][:usuario_destino_ids].each do |usuario_destino|
+  	    params[:notificacion][:usuario_destino_id].each do |usuario_destino|
     		    @notificacion = Notificacion.new(notificacion_params)
     		    @notificacion.usuario_creador = current_usuario
-    			  @notificacion.usuario_destino = Usuario.find(usuario_destino) 
+            p "IMPRIMIENDO USUAROI DESTINOOOO" + usuario_destino
+    			  @notificacion.usuario_destino = Usuario.find_by(apellido_nombre: usuario_destino) 
     			  if !params[:evento_publico_id].blank?
     			       @notificacion.evento_publico_id = params[:evento_publico_id]
     			  elsif !params[:eproyecto_id].blank?
@@ -117,8 +120,8 @@ class NotificacionesController < ApplicationController
                       @notificacion_email.proyecto_id = params[:proyecto_id]
                    end
         			    
-        				    @notificacion_sistema.usuario_destino = Usuario.find(usuario_destino)
-        				    @notificacion_email.usuario_destino = Usuario.find(usuario_destino)
+        				    @notificacion_sistema.usuario_destino = Usuario.find_by(apellido_nombre: usuario_destino)
+        				    @notificacion_email.usuario_destino = Usuario.find_by(apellido_nombre: usuario_destino)
           					@notificacion_sistema = Notificacion.new(notificacion_params)
           					@notificacion_sistema.type = "NotificacionSistema"
           					@notificacion_email = Notificacion.new(notificacino_params)
@@ -213,6 +216,6 @@ class NotificacionesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def notificacion_params
-      params.require(:notificacion).permit(:esActiva, :mensaje, :notificado, :usuario_creador_id, :usuario_destino_id, :evento_publico_id, :proyecto_id, :type, :usuario_destino_ids, :evento_publico_id)
+      params.require(:notificacion).permit(:esActiva, :mensaje, :notificado, :usuario_creador_id, :usuario_destino_id, :usuario_destino_ids, :evento_publico_id, :proyecto_id, :type, :usuario_destino_ids, :evento_publico_id)
     end
 end
