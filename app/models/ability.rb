@@ -242,6 +242,7 @@ class Ability
 							can :dar_alta_voluntario, Voluntario #SIN autorize en controlador
 							can :gestionar_habilidades, Voluntario #SIN autorize en controlador
 							can :index, Voluntario
+							can :gestionar_nota_P, Voluntario
 						when 'notificacion_predeterminadas'
 								can :configuraciones_generales, Rol
 								can :manage, NotificacionPredeterminada
