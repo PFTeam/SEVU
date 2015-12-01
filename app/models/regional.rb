@@ -4,4 +4,10 @@ validates :nombre, :uniqueness => { :message => 'No pueden existir dos regionale
 validates :domicilio, :presence => true, :length => { :maximum => 250 }
 validates :telefono_contacto, :presence => true
 validates :nombre_contacto, :presence => true, :length => { :maximum => 250 }
+
+
+
+def to_s
+nombre
+end
 end
