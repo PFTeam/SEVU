@@ -79,7 +79,7 @@
                         
                                 <label><h5>Fecha Estimada</h5></label> 
 
-                                <%= f.input :fechaEstimadaInicio, label: false,  :as => :date %>
+                                <%= f.input :fechaEstimadaInicio, label: false,  :as => :date, prompt: {day: 'Día', month:'Mes', year: 'Año'} %>
 
 
                                 <label><h5>Duración Estimada</h5></label>
@@ -94,7 +94,7 @@
    
     
       <label><h5>Fecha Real</h5></label>
-      <%= f.input :fechaRealInicio, label: false,  :as => :date %>
+      <%= f.input :fechaRealInicio, label: false,  :as => :date, prompt: {day: 'Día', month:'Mes', year: 'Año'} %>
  
       <label><h5>Duración Real</h5></label>
       

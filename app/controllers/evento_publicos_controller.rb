@@ -12,6 +12,7 @@ class EventoPublicosController < ApplicationController
   # GET /evento_publicos/1.json
   def show
 		authorize! :show, EventoPublico
+    @postulaciones = AsistenciaEvento.where(evento_publico: @evento_publico.id)
   end
 
   # GET /evento_publicos/new

@@ -38,7 +38,16 @@
 		<% else %>
 			No se ha cargado una descripción
 		<% end %>                
-		                
+		             </p>  
+
+                <label>Usuarios Interesados</label>
+                <p>
+                   <% @postulaciones.each do |postulacion| %>
+                      <i class="fa fa-user"></i><%= link_to postulacion.usuario.apellido_nombre, usuario_path(postulacion.usuario) %></br>
+                   <% end %>
+                </p>
+
+
               </div>
             </div>      
   </div>

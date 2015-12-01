@@ -12,9 +12,9 @@
 
             <div class="panel panel-primary">
               <div class="panel-heading">
-		      <h3 class="panel-title"> <%= link_to necesidad.titulo, necesidad %> | 
+		      <h3 class="panel-title"> <%= link_to necesidad.titulo, necesidad %> 
 			      <% if (necesidad.created_at > Time.now - 160.hours) && (necesidad.usuario == current_usuario) %> 
-				      <%= link_to 'Editar', edit_necesidad_path(necesidad) %>
+				       | <%= link_to 'Editar', edit_necesidad_path(necesidad) %>
 			      <% end %>
 		      </h3>
               </div>
