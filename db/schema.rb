@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151104202811) do
+ActiveRecord::Schema.define(version: 20151129204755) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20151104202811) do
     t.boolean  "repetitiva"
     t.string   "frecuencia"
     t.string   "dia_semana"
+    t.boolean  "active"
   end
 
   add_index "actividades", ["objetivo_especifico_id"], name: "index_actividades_on_objetivo_especifico_id", using: :btree
@@ -353,6 +354,7 @@ ActiveRecord::Schema.define(version: 20151104202811) do
     t.integer  "objetivo_general_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "active"
   end
 
   add_index "objetivo_especificos", ["objetivo_general_id"], name: "index_objetivo_especificos_on_objetivo_general_id", using: :btree
@@ -363,6 +365,7 @@ ActiveRecord::Schema.define(version: 20151104202811) do
     t.integer  "proyecto_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "active"
   end
 
   add_index "objetivo_generales", ["proyecto_id"], name: "index_objetivo_generales_on_proyecto_id", using: :btree
