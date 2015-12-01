@@ -518,6 +518,8 @@ u10 =	Voluntario.new(nombreUsuario: Faker::Internet.user_name(un10), password: p
 
 
 		#PROYECTO 1
+
+			regional=Regional.create(nombre:"UTN-FRM", domicilio: "Rodriguez 505, Mendoza", nombre_contacto: "Beto", telefono_contacto:"0303456")
     p = Proyecto.create(nombre: "Creación de un sistema confiable para Autos", breveDescripcion: "Se desarrollará un sistema para poder manejar un auto sin errores y poder dirigirlo de manera autónoma",
 		    fechaInicio: 9.month.ago,
 		    fechaFin: DateTime.new(2015, 12, 14, 11, 0, 0),
@@ -527,7 +529,7 @@ u10 =	Voluntario.new(nombreUsuario: Faker::Internet.user_name(un10), password: p
 		    justificacionImpacto: "Se está realizando en conjunto con un grpo de la UNC el cual permitirá la divulgación del proyecto y por ende su impacto",
 		    localizacionGeografica: "Mendoza",
 		    tipo_proyecto: tipo_proyecto ,
-		    necesidad: n)
+		    necesidad: n, regional: regional)
 
 							#POSTULACIONES
 
@@ -552,7 +554,7 @@ u10 =	Voluntario.new(nombreUsuario: Faker::Internet.user_name(un10), password: p
 							ogg1=ObjetivoGeneral.create(descripcion: "Se analiza los limites, alcances, objetivos y metas del sistema",titulo: "Análisis de requerimientos del sistema" , proyecto: p, active: true)
 								oe1=ObjetivoEspecifico.create(descripcion: "Se analizará que información obtener para comprender el sistema",titulo: "Comprender los alcances del sistema",objetivo_general: ogg1, active: true)
 								oe2=ObjetivoEspecifico.create(descripcion: "Se analizará quienes son los beneficiarios y cuales son sus necesidades",titulo: "Comprender los objetivos del sistema",objetivo_general: ogg1, active: true)
-									a11=Actividad.create(nombre: "Entrevista con el departamento de electronica de la UTN FRM", descripcion: "Se realizarán preguntas a los tecnicos especializados en el tema" , objetivo_especifico: oe1 , proyecto: p, fechaEstimadaInicio: DateTime.new(2015, 1, 15, 12, 0, 0) , duracion: 3 )
+									a11=Actividad.create(nombre: "Entrevista con el departamento de electronica de la UTN FRM", descripcion: "Se realizarán preguntas a los tecnicos especializados en el tema" , objetivo_especifico: oe1 , proyecto: p, fechaEstimadaInicio: DateTime.new(2015, 1, 15, 12, 0, 0) , duracion: 3, active: true )
 									a12=Actividad.create(nombre: "Documentación de los límites", descripcion: "Se realizará la documentación correspondiente." , objetivo_especifico: oe1 , proyecto: p, active: true, fechaEstimadaInicio: DateTime.new(2015, 2, 15, 12, 0, 0) , duracion: 3 )
 								a13=Actividad.create(nombre: "Documentación de los alcances", descripcion: "Se realizará la documentación correspondiente." , objetivo_especifico: oe1 , proyecto: p, active: true , fechaEstimadaInicio: DateTime.new(2015, 3, 15, 12, 0, 0) , duracion: 3)
 							a14=Actividad.create(nombre: "Documentación de los objetivos", descripcion: "Se realizará la documentación correspondiente." , objetivo_especifico: oe1 , proyecto: p, active: true , fechaEstimadaInicio: DateTime.new(2015, 4, 15, 12, 0, 0) , duracion: 3)
@@ -565,6 +567,8 @@ u10 =	Voluntario.new(nombreUsuario: Faker::Internet.user_name(un10), password: p
 							HistorialEstadoActividad.create(actividad:  a13, estado_actividad: eaa1 , created_at: DateTime.new(2015, 3, 15, 12, 0, 0)  )
 							HistorialEstadoActividad.create(actividad:  a14, estado_actividad: eaa1, created_at: DateTime.new(2015, 4, 15, 12, 0, 0)   )
 							HistorialEstadoActividad.create(actividad:  a15, estado_actividad: eaa1 , created_at: DateTime.new(2015, 5, 15, 12, 0, 0)  )
+
+							Requisito.create(actividad: a11, habilidad: h7)
 
 							#PRESUPUESTO 
 							presupuesto = Presupuesto.create(fechaPresentacion: 1.year.from_now, montoTotal: 23, aprobado: false, proyecto: p, usuario: u)
