@@ -206,7 +206,7 @@ namespace :db do
     u= Usuario.new(nombreUsuario: "JoelNoguera",
 								       password: password, 
 								       password_confirmation: password,  
-								       apellido_nombre: "Noguera, Joel",
+								       apellido_nombre: "Noguera Joel",
 								       email: "one.last.heaven@gmail.com",
 								       direccion: Faker::Address.street_address,
 								       telefono: Faker::PhoneNumber.cell_phone,
@@ -220,7 +220,7 @@ namespace :db do
     u_otro = Usuario.new(nombreUsuario: "AdrianSierra",
 								       password: password, 
 								       password_confirmation: password,  
-								       apellido_nombre: "Sierra, Adrian",
+								       apellido_nombre: "Sierra Adrian",
 								       email: "adrian@email.com",
 								       direccion: Faker::Address.street_address,
 								       telefono: Faker::PhoneNumber.cell_phone,
@@ -456,9 +456,8 @@ v = Voluntario.new(nombreUsuario: "agustin",
 			Experiencia.create(tieneExperiencia: true, cantidadExperiencia: 2, habilidad: h2, voluntario: v)
 			Experiencia.create(tieneExperiencia: true, cantidadExperiencia: 3, habilidad: h3, voluntario: v)
 
-	  TipoNotificacion.new(nombre: "Email")
-	  TipoNotificacion.new(nombre: "Sistema")
-	  TipoNotificacion.new(nombre: "Ambos")
+	  TipoNotificacion.create(nombre: "Email")
+	  TipoNotificacion.create(nombre: "Sistema")
 
   end
 

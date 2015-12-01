@@ -1,3 +1,4 @@
+
 <%= form_for(@notificacion) do |f| %>
   <% if @notificacion.errors.any? %>
     <div class="col-lg-12">
@@ -31,7 +32,7 @@
           <div class="col-lg-12">
             <h1>Generar Notificación <small>Creación de una notificación.</small></h1>
             <ol class="breadcrumb">
-              <li><a href="index.html"><i class="icon-dashboard"></i> Notificaciones</a></li>
+              <li><a href="/notificacion_sistemas"><i class="icon-dashboard"></i> Notificaciones</a></li>
               <li class="active"><i class="icon-file-alt"></i> Generar Notificación</li>
             </ol>
           </div>
@@ -53,16 +54,41 @@
                 </label>
 
 <%= f.text_field :type  %><br/>-->
-    
+      <% if !params[:proyecto_id].blank? %>
+        <% if !params[:proyecto_id].blank? && @proyecto.notificacion_predeterminadas.blank? %>
+
+           <%=   radio_button("notificacion", "type", "NotificacionSistema", :checked => 'checked')%>
+           <%= label_tag(:type, "Notificacion Sistema") %><br/>
 					 <%=   radio_button("notificacion", "type", "NotificacionEmail")%>
 					 <%= label_tag(:type, "Notificacion Email") %><br/>
-					 <%=   radio_button("notificacion", "type", "NotificacionSistema", :checked => 'checked')%>
-					 <%= label_tag(:type, "Notificacion Sistema") %><br/>
 					 <%=   radio_button("notificacion", "type", "Ambos")%>
 					 <%= label_tag(:type, "Ambos") %><br/>
+        <% else %>
 
-    
-    
+           <% if @proyecto.notificacion_predeterminadas.where(tipo_notificacion_id: @sistema_notificacion_id).any? %>
+             <%=   radio_button("notificacion", "type", "NotificacionSistema", :checked => 'checked')%>
+             <%= label_tag(:type, "Notificacion Sistema") %><br/>
+           <% end %>
+           <% if @proyecto.notificacion_predeterminadas.where(tipo_notificacion_id: @email_notificacion_id).any? %>
+             <%=   radio_button("notificacion", "type", "NotificacionEmail")%>
+             <%= label_tag(:type, "Notificacion Email") %><br/>
+           <% end %>
+           <% if @proyecto.notificacion_predeterminadas.where(tipo_notificacion_id: @email_notificacion_id).any? && @proyecto.notificacion_predeterminadas.where(tipo_notificacion_id: @sistema_notificacion_id).any? %>
+             <%=   radio_button("notificacion", "type", "Ambos")%>
+             <%= label_tag(:type, "Ambos") %><br/>
+           <% end %>
+
+        <% end %>
+
+      <% else %>
+         <%=   radio_button("notificacion", "type", "NotificacionSistema", :checked => 'checked')%>
+         <%= label_tag(:type, "Notificacion Sistema") %><br/>
+         <%=   radio_button("notificacion", "type", "NotificacionEmail")%>
+         <%= label_tag(:type, "Notificacion Email") %><br/>
+         <%=   radio_button("notificacion", "type", "Ambos")%>
+         <%= label_tag(:type, "Ambos") %><br/>
+
+      <% end %>
     
               
                 <h4>Destinatarios</h4>
@@ -80,10 +106,12 @@
   
   			<% for usuario in @usuarios %>
   			<div>
-  				<%= check_box_tag "notificacion[usuario_destino_ids][]", usuario.id, @usuarios.include?(usuario) %>
-  				<%= usuario.apellido_nombre %>
+  				<%#= check_box_tag "notificacion[usuario_destino_ids][]", usuario.id, @usuarios.include?(usuario) %>
+  				<%#= usuario.apellido_nombre %>
+          
   			</div>
             <% end %>
+            <%= select_tag "notificacion[usuario_destino_id][]", options_for_select(@usuarios),{:class=>'multiselect-all',:multiple=>'multiple'}%>
   
 			<%#= f.association :usuario_destino, :collection => Usuario.all, input_html: { class: 'multiselectuser'}, :label => false  %>
 		<%#= collection_select(:usuario_destino, Usuario.all, :usuario_destino_id, {}, { :multiple => true } )%>
@@ -106,3 +134,10 @@
 
   
 <% end %>
+
+
+<script type="text/javascript">
+    
+        $('#notificacion_usuario_destino_id_').multiselect();
+    
+</script>

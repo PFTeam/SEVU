@@ -19,8 +19,10 @@
 *= require sb-admin
 *= require bootstrap-datetimepicker
 *= require SrBuj
+*= require bootstrap-multiselect
   *= require datepicker
  */
+
 
 @import "bootstrap-responsive";
 @import "bootstrap-datepicker";

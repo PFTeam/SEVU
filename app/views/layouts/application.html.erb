@@ -77,7 +77,7 @@
                </li>
           <% end %>
                <li>
-                   <a href="">Ayuda</a>
+                   <%= link_to 'Ayuda', ayudas_path %>
                </li>
       </ul>
 
@@ -173,6 +173,7 @@
                 <% when 'estado_usuarios' %><%= render '/shared/menu_voluntario' %>			 
                 <% when 'experiencias' %><%= render '/shared/menu_voluntario' %>
                 <% when 'notas' %><%= render '/shared/menu_voluntario' %>
+                <% when 'ayudas' %><%= render '/shared/menu_ayuda' %>
 
           <% end %>
         </div><!-- /.navbar-collapse -->
