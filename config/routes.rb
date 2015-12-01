@@ -242,6 +242,9 @@ Rails.application.routes.draw do
       get 'gestionar_notificaciones' => 'notificacion_predeterminadas#gestionar_notificaciones', :as => 'gestionar_notificaciones'
 	 get 'configuraciones_generales' => 'roles#configuraciones_generales', :as => 'configuraciones_generales'
 
+  
+  resources :ayudas
+  
 
   #get 'gestionarPresupuesto', :controller => :presupuestos
   # The priority is based upon order of creation: first created -> highest priority.

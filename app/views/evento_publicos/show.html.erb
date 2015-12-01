@@ -44,7 +44,9 @@
   </div>
 </div>
 
+<% if can? :evento_publico_edit, EventoPublico; %>
+      <%= link_to 'Editar', edit_evento_publico_path(@evento_publico) %> |
+      <%= link_to 'Borrar', @evento_publico, method: :delete, data: { confirm: 'Seguro?' } %> |
+<% end %>  
 
-<%= link_to 'Editar', edit_evento_publico_path(@evento_publico) %> |
-<%= link_to 'Borrar', @evento_publico, method: :delete, data: { confirm: 'Seguro?' } %> |
 <%= link_to 'Atrás', evento_publicos_path %>

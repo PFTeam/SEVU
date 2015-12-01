@@ -6,27 +6,48 @@
 <% end %>
 
 
-<p>
-  <strong>Título:</strong>
-  <%= @necesidad.titulo %>
-</p>
+ <div class="panel panel-primary">
+              <div class="panel-heading">
+          <h3 class="panel-title"> <%= @necesidad.titulo %>
+          </h3>
+              </div>
+              <div class="panel-body">
+                
+                <label>Descripción de la Necesidad</label>
+                <p> 
+    <% if !@necesidad.descripcion.blank? %>
+      <%= @necesidad.descripcion%>
+    <% else %>
+      No se ha cargado una descripción
+    <% end %>
+                </p>
+                <label>Ámbito de Aplicación</label>
+                <p>
+    <% if !@necesidad.ambitoAplicacion.blank? %>
+      <%= @necesidad.ambitoAplicacion %>
+    <% else %>
+      No se ha cargado una descripción
+    <% end %>
+                </p>
+                <label>Nombre Responsable</label>
+                <p> 
+                  <%= link_to @necesidad.usuario, @necesidad.usuario %>
+                </p>
+                
+                
+                
+                            
+                
+              </div>
+            </div>
 
 
-<p>
-  <strong>Descripcion:</strong>
-  <%= @necesidad.descripcion %>
-</p>
 
 
-<p>
-  <strong>Ambitoaplicacion:</strong>
-  <%= @necesidad.ambitoAplicacion %>
-</p>
 
-<p>
-  <strong>Usuario:</strong>
-  <%= @necesidad.usuario %>
-</p>
+
+
+
 
 <% if @necesidad.created_at > Time.now - 160.hours and @necesidad.usuario == current_usuario %> 
       <%= link_to 'Editar', edit_necesidad_path(@necesidad) %> | 

@@ -126,7 +126,8 @@ class NotificacionesController < ApplicationController
                     @notificacion_email.save
                     begin
                         NotificacionMailer.enviar_notificacion(@notificacion_email).deliver
-                      rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError, SocketError => e    
+                      #rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError, SocketError, Net::OpenTimeout => e    
+                      rescue Exception => e
                         p e         
                           respond_to do |format|
                             if !params[:notificacion][:proyecto_id].blank?
@@ -178,7 +179,8 @@ class NotificacionesController < ApplicationController
 
                       begin
                         NotificacionMailer.enviar_notificacion(@notificacion).deliver
-                      rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError, SocketError => e    
+                      #rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError, SocketError, Net::OpenTimeout => e    
+                      rescue Exception => e
                           p e        
                           respond_to do |format|
                             if !params[:notificacion][:proyecto_id].blank?
