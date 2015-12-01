@@ -26,6 +26,7 @@ class ProyectosController < ApplicationController
 
     #Se cargan los EstadosProyectos que son posibles para estado 'Creado'
     @estadosPosibles = [EstadoProyecto.find_by(nombre: 'Creado')]
+    @regionales = Regional.all
 
   end
 
@@ -55,7 +56,7 @@ class ProyectosController < ApplicationController
     @estadosPosibles = [EstadoProyecto.find_by(nombre: 'Creado')]
     @coordinador_rol = Rol.find_by(nombre: "Coordinador")
 
-
+    
     #Se crea un HistorialEstadoProyecto con el Estado 'Creado'.
     @proyecto.historial_estado_proyectos.new(estado_proyecto_id: EstadoProyecto.find_by(nombre: 'Creado').id, proyecto_id: @proyecto.id)
 

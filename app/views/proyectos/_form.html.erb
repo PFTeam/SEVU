@@ -45,8 +45,8 @@
           <!-- Se muestra los TipoProyectos que se cargaron en el controlador --> 
           <%= f.input :tipo_proyecto_id, collection: @tipoProyectos, :label => 'Tipo de Proyecto', :required => true %>
     
-      <%= f.input :fechaInicio, :as => :date, :label => 'Fecha Inicio' %>
-      <%= f.input :fechaFin, :as => :date, :label => 'Fecha Fin', :required => true %>
+      <%= f.input :fechaInicio, :as => :date, :label => 'Fecha Inicio', prompt: {day: 'Día', month:'Mes', year: 'Año'} %>
+      <%= f.input :fechaFin, :as => :date, :label => 'Fecha Fin', :required => true, prompt: {day: 'Día', month:'Mes', year: 'Año'} %>
       <%#= f.input :fechaInicio, as: :string, input_html: { class: "datepicker", value: Time.now.strftime('%d-%m-%Y') } %> 
       <%#= f.input :fechaFin, as: :date_picker, :input_html => { :value => Date.today} %>
       <%#= f.input :fechaFin, as: :bootstrap_datepicker %>
@@ -59,7 +59,7 @@
       <%= f.input :cantidadBeneficiariosIndirectos, :label => 'Cantidad de Beneficiarios Indirectos', :placeholder => 'beneficiarios indirectos...' %> 
 
      
-         
+      <%= f.input :regional_id, collection: @regionales, :label => 'Regional'%>   
   
         
     </div>
