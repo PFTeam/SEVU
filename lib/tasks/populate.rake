@@ -185,10 +185,11 @@ namespace :db do
 
 
 
-
+		#ESTADOS_USUARIO
 			EstadoUsuario.create(nombre: "Activo", descripcion: "El usuario se encuentra activo dentro del sistema")
 			EstadoUsuario.create(nombre: "Suspendido", descripcion: "El usuario se encuentra suspendido dentro del sistema")
 
+		#USUARIOS
 		uuuu= Usuario.new(nombreUsuario: "admin",
 								       password: password, 
 								       password_confirmation: password,  
@@ -200,7 +201,7 @@ namespace :db do
                        foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample),
 											 confirmed_at: Time.now
 											 )
-		uuuu.skip_confirmation! #u.confirm!
+		uuuu.skip_confirmation!
 		uuuu.save!
 
     u= Usuario.new(nombreUsuario: "JoelNoguera",
@@ -214,7 +215,7 @@ namespace :db do
                        foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample),
 											 confirmed_at: Time.now
 											 )
-		u.skip_confirmation! #u.confirm!
+		u.skip_confirmation!
 		u.save!
 
     u_otro = Usuario.new(nombreUsuario: "AdrianSierra",
@@ -230,7 +231,6 @@ namespace :db do
 											 )
 		u_otro.skip_confirmation!
 		u_otro.save!
-
 
 		uu = Usuario.new(nombreUsuario: "DiegoDiamante",
 								       password: password, 
