@@ -13,7 +13,7 @@ module ExceptionHandler
 
     def show
       @layout = self.send(:_layout)
-      @message = @status == 404 ? "Disculpe, esta página no existe." : details[:message]
+      @message = @status == 404 ? "Disculpe, esta página no existe  :)" : details[:message]
       render status: @status
     end
 
