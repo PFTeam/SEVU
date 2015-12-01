@@ -7,18 +7,23 @@ namespace :db do
     
     [Actividad, AsignacionActividad,AsignacionFuncion, AsignacionRolPredefinido, AsignacionRol,AsistenciaEvento,Colaborador,Comprobante, ConceptoGasto, DetalleGasto, DetallePresupuesto, EstadoActividad, EstadoPresupuesto, EstadoProyecto, EstadoUsuario, EventoPublico, Experiencia, Habilidad, HistorialEstadoActividad, HistorialEstadoPresupuesto, HistorialEstadoProyecto, HistorialEstadoUsuario, HorarioDisponible, InformeGasto, Necesidad, Nota, NotificacionEmail, NotificacionPredeterminada, Notificacion, NotificacionSistema, ObjetivoEspecifico, ObjetivoGeneral, OrganizacionExterna, Postulacion, Presupuesto, Privilegio, Proyecto, Reporte, Requisito, Restriccion, Rol, Sesion, TipoActividad, TipoHabilidad, TipoNotificacion, TipoPrivilegio, TipoProyecto, TipoRol, Transaccion, Usuario, Voluntario].each(&:delete_all)
    
+
+			#TIPO PRIVILEGIOS
       ppdiego=TipoPrivilegio.create(nombre: "Proyecto", descripcion: "Privilegio para la utilización de un modulo o funcionalidad del sistema")
       psdiego=TipoPrivilegio.create(nombre: "Sistema", descripcion: "Privilegio para la utilización de un modulo o funcionalidad dentro de un proyecto")
 
+			#TIPO ROL
       trpdiego=TipoRol.create(nombre: "Proyecto", descripcion: "Privilegio para la utilización de un modulo o funcionalidad del sistema")
       trsdiego=TipoRol.create(nombre: "Sistema", descripcion: "Privilegio para la utilización de un modulo o funcionalidad dentro de un proyecto")
 
+			#ROL
 			director = Rol.create(nombre: "Director", descripcion: "Responsable del proyecto", tipo_rol: trpdiego)
 			coordinador = Rol.create(nombre: "Coordinador", descripcion: "Responsable de llevar a cabo el proyecto", tipo_rol: trpdiego)
 			coordinadorsistema = Rol.create(nombre: "Coordinador Sistema", descripcion: "Responsable de llevar a cabo la creación de proyectos", tipo_rol: trsdiego)
     	voluntario = Rol.create(nombre: "Voluntario", descripcion: "Colaborador del proyecto", tipo_rol: trpdiego)
       rsdiego=Rol.create(nombre: "Default", descripcion: "Privilegio para la utilización de un modulo o funcionalidad dentro de un proyecto", tipo_rol: trsdiego)
 
+			#PRIVILEGIO
       padiego=Privilegio.create(nombre: "necesidad_publico", descripcion: "Permite la visualizacion de las necesidades para el publico general", tipo_privilegio: psdiego)
       pa1diego=Privilegio.create(nombre: "index_evento_publico", descripcion: "Permite ver los eventos públicos", tipo_privilegio: psdiego)
 			pa2diego=Privilegio.create(nombre: "evento_publicos", descripcion: "Permite manejar los eventos públicos", tipo_privilegio: psdiego)
@@ -139,6 +144,7 @@ namespace :db do
 
 		#COORDINADOR
 			arcc1diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap23diego, rol: coordinador)
+			arc31diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap51diego  , rol: coordinador)
 			arcc3diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap22diego , rol: coordinador)
 			arcc5diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap2diego , rol: coordinador)
 			arcc8diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap24diego , rol: coordinador)
@@ -180,14 +186,87 @@ namespace :db do
 		arv6diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap21diego  , rol: voluntario)
 		arv13diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap52diego  , rol: voluntario)
 		arv14diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap53diego  , rol: voluntario)
-		arv15diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap51diego  , rol: voluntario)
 		arv16diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap9diego  , rol: voluntario)
 
 
 
 		#ESTADOS_USUARIO
-			EstadoUsuario.create(nombre: "Activo", descripcion: "El usuario se encuentra activo dentro del sistema")
-			EstadoUsuario.create(nombre: "Suspendido", descripcion: "El usuario se encuentra suspendido dentro del sistema")
+			eu1=EstadoUsuario.create(nombre: "Activo", descripcion: "El usuario se encuentra activo dentro del sistema")
+			eu2=EstadoUsuario.create(nombre: "Suspendido", descripcion: "El usuario se encuentra suspendido dentro del sistema")
+
+		#ESTADO PROYECTO
+    creado = EstadoProyecto.create(nombre: "Creado", descripcion: "El proyecto se encuentra en estado creado")
+    enejec= EstadoProyecto.create(nombre: "En Ejecución", descripcion: "El proyecto se encuentra en ejecución")
+    EstadoProyecto.create(nombre: "Suspendido", descripcion: "El proyecto se encuentra momentaneamente suspendido")
+    EstadoProyecto.create(nombre: "Cancelado", descripcion: "El proyecto se encuentra definitivamente cancelado")
+    EstadoProyecto.create(nombre: "Terminado", descripcion: "El proyecto ha terminado")
+
+		#ESTADO ACTIVIDAD
+    eaa1=EstadoActividad.create(nombre: "Creada", descripcion: "La actividad se encuentra creada")
+    eaa2=EstadoActividad.create(nombre: "Planificada", descripcion: "La actividad se encuentra planificada")
+    eaa3=EstadoActividad.create(nombre: "Ejecutada", descripcion: "La actividad se encuentra actualmente en ejecución")
+    eaa4=EstadoActividad.create(nombre: "Terminada", descripcion: "La actividad ha terminado")
+    eaa5=EstadoActividad.create(nombre: "Cancelada", descripcion: "La actividad ha sido cancelada")
+
+    
+
+    #TIPO ACTIVIDAD
+      TipoActividad.create(nombre: "Reunión", descripcion: "Actividades destinadas a las reuniones de cualquier índole")
+      TipoActividad.create(nombre: "Voluntariado", descripcion: "Actividades destinadas a realizar trabajo de voluntariado")
+      TipoActividad.create(nombre: "Propaganda", descripcion: "Actividades destinadas a realizar trabajo de Propaganda")
+      TipoActividad.create(nombre: "Control", descripcion: "Actividades destinadas a realizar trabajo de Control de Gestion")
+      TipoActividad.create(nombre: "Trabajo de Campo", descripcion: "Actividades destinadas a realizar trabajo de Campo fuera de la Facultad")
+      TipoActividad.create(nombre: "Busqueda de Financimiento", descripcion: "Actividades destinadas a realizar busqueda de posible financiamiento")
+      TipoActividad.create(nombre: "Busqueda de Voluntarios", descripcion: "Actividades destinadas a realizar buesqueda de nuevos voluntarios")
+
+		#TIPO PROYECTO
+    tipo_proyecto = TipoProyecto.create(nombre: "Voluntariado", descripcion: "Proyecto sin remuneración económica")
+    TipoProyecto.create(nombre: "Extensión", descripcion: "Proyecto con remuneración económica")
+
+		
+		#TIPO NOTIFICACION
+	  TipoNotificacion.create(nombre: "Email")
+	  TipoNotificacion.create(nombre: "Sistema")
+
+		#TIPO HABILIDAD
+      TipoHabilidad.create(nombre: "Programación", descripcion: "Conocimiento referidos a la programación")
+      TipoHabilidad.create(nombre: "Manualidades", descripcion: "Conocimiento vinculado con actividades creativas")
+      TipoHabilidad.create(nombre: "Administracion", descripcion: "Conocimiento vinculado con actividades creativas")
+      TipoHabilidad.create(nombre: "Oratoria", descripcion: "Conocimiento vinculado con actividades creativas")
+
+		#CONCEPTOS GASTOS
+			concepto1 = ConceptoGasto.create(titulo: "Viáticos", descripcion: "Gastos realizando en viáticos")
+			concepto2 = ConceptoGasto.create(titulo: "Librería", descripcion: "Gastos realizando en librería")
+			concepto3 = ConceptoGasto.create(titulo: "Transporte", descripcion: "Gastos realizando en transporte")
+
+		#HABILIDAD
+			h1 = Habilidad.create(nombre: "Pintar", descripcion: "Saber pintar con cualquier elemento", tipo_habilidad: TipoHabilidad.find_by(nombre: "Manualidades"))
+			h2 = Habilidad.create(nombre: "Programación en Java", descripcion: "Programación en el lenguaje Java", tipo_habilidad: TipoHabilidad.find_by(nombre: "Programación"))
+			h3 = Habilidad.create(nombre: "Programación en Python", descripcion: "Programación en el lenguaje Python", tipo_habilidad: TipoHabilidad.find_by(nombre: "Programación"))
+			h4 = Habilidad.create(nombre: "Programación en C/C++", descripcion: "Programación en el lenguaje C/C++", tipo_habilidad: TipoHabilidad.find_by(nombre: "Programación"))
+			h5 = Habilidad.create(nombre: "Programación en PHP", descripcion: "Programación en el lenguaje PHP", tipo_habilidad: TipoHabilidad.find_by(nombre: "Programación"))
+			h6 = Habilidad.create(nombre: "Programación en MySQL", descripcion: "Programación en el lenguaje MySQL", tipo_habilidad: TipoHabilidad.find_by(nombre: "Programación"))
+			h7 = Habilidad.create(nombre: "Presentación de Discursos", descripcion: "Habilidad para llevar a delante una charla", tipo_habilidad: TipoHabilidad.find_by(nombre: "Oratoria"))
+			h8 = Habilidad.create(nombre: "Armado de Presentaciones", descripcion: "Desarrollo de material audiovisual", tipo_habilidad: TipoHabilidad.find_by(nombre: "Oratoria"))
+			h9 = Habilidad.create(nombre: "Contabilidad", descripcion: "Conocimientos de cantabilidad y administracion contable", tipo_habilidad: TipoHabilidad.find_by(nombre: "Administracion"))
+			h10 = Habilidad.create(nombre: "Armado de Cartelería", descripcion: "Armado de afiches y posters", tipo_habilidad: TipoHabilidad.find_by(nombre: "Manualidades"))
+
+
+
+		#ORGANIZACIONES EXTERNAS
+      OrganizacionExterna.create(denominacion: Faker::Company.name, sigla: Faker::Company.suffix, cuit: "30-1651654-9", fax: Faker::PhoneNumber.cell_phone, telefono: Faker::PhoneNumber.cell_phone, direccion: Faker::Address.street_address, cargoResponsable: Faker::Name.title, numeroContactoResponsable: Faker::PhoneNumber.cell_phone, nombreResponsable: Faker::Name.name)
+      OrganizacionExterna.create(denominacion: Faker::Company.name, sigla: Faker::Company.suffix, cuit: "30-1621312-9", fax: Faker::PhoneNumber.cell_phone, telefono: Faker::PhoneNumber.cell_phone, direccion: Faker::Address.street_address, cargoResponsable: Faker::Name.title, numeroContactoResponsable: Faker::PhoneNumber.cell_phone, nombreResponsable: Faker::Name.name)
+      OrganizacionExterna.create(denominacion: Faker::Company.name, sigla: Faker::Company.suffix, cuit: "30-1213154-9", fax: Faker::PhoneNumber.cell_phone, telefono: Faker::PhoneNumber.cell_phone, direccion: Faker::Address.street_address, cargoResponsable: Faker::Name.title, numeroContactoResponsable: Faker::PhoneNumber.cell_phone, nombreResponsable: Faker::Name.name)
+      OrganizacionExterna.create(denominacion: Faker::Company.name, sigla: Faker::Company.suffix, cuit: "30-1651154-9", fax: Faker::PhoneNumber.cell_phone, telefono: Faker::PhoneNumber.cell_phone, direccion: Faker::Address.street_address, cargoResponsable: Faker::Name.title, numeroContactoResponsable: Faker::PhoneNumber.cell_phone, nombreResponsable: Faker::Name.name)
+      OrganizacionExterna.create(denominacion: Faker::Company.name, sigla: Faker::Company.suffix, cuit: "30-1651654-9", fax: Faker::PhoneNumber.cell_phone, telefono: Faker::PhoneNumber.cell_phone, direccion: Faker::Address.street_address, cargoResponsable: Faker::Name.title, numeroContactoResponsable: Faker::PhoneNumber.cell_phone, nombreResponsable: Faker::Name.name)
+      OrganizacionExterna.create(denominacion: Faker::Company.name, sigla: Faker::Company.suffix, cuit: "30-1623254-9", fax: Faker::PhoneNumber.cell_phone, telefono: Faker::PhoneNumber.cell_phone, direccion: Faker::Address.street_address, cargoResponsable: Faker::Name.title, numeroContactoResponsable: Faker::PhoneNumber.cell_phone, nombreResponsable: Faker::Name.name)
+	  OrganizacionExterna.create(denominacion: Faker::Company.name, sigla: Faker::Company.suffix, cuit: "30-1128654-2", fax: Faker::PhoneNumber.cell_phone, telefono: Faker::PhoneNumber.cell_phone, direccion: Faker::Address.street_address, cargoResponsable: Faker::Name.title, numeroContactoResponsable: Faker::PhoneNumber.cell_phone, nombreResponsable: Faker::Name.name)
+	  OrganizacionExterna.create(denominacion: Faker::Company.name, sigla: Faker::Company.suffix, cuit: "30-1654254-3", fax: Faker::PhoneNumber.cell_phone, telefono: Faker::PhoneNumber.cell_phone, direccion: Faker::Address.street_address, cargoResponsable: Faker::Name.title, numeroContactoResponsable: Faker::PhoneNumber.cell_phone, nombreResponsable: Faker::Name.name)
+	  OrganizacionExterna.create(denominacion: Faker::Company.name, sigla: Faker::Company.suffix, cuit: "30-1321654-4", fax: Faker::PhoneNumber.cell_phone, telefono: Faker::PhoneNumber.cell_phone, direccion: Faker::Address.street_address, cargoResponsable: Faker::Name.title, numeroContactoResponsable: Faker::PhoneNumber.cell_phone, nombreResponsable: Faker::Name.name)
+	  OrganizacionExterna.create(denominacion: Faker::Company.name, sigla: Faker::Company.suffix, cuit: "30-1651454-5", fax: Faker::PhoneNumber.cell_phone, telefono: Faker::PhoneNumber.cell_phone, direccion: Faker::Address.street_address, cargoResponsable: Faker::Name.title, numeroContactoResponsable: Faker::PhoneNumber.cell_phone, nombreResponsable: Faker::Name.name)
+	  OrganizacionExterna.create(denominacion: Faker::Company.name, sigla: Faker::Company.suffix, cuit: "30-1636654-6
+	  	", fax: Faker::PhoneNumber.cell_phone, telefono: Faker::PhoneNumber.cell_phone, direccion: Faker::Address.street_address, cargoResponsable: Faker::Name.title, numeroContactoResponsable: Faker::PhoneNumber.cell_phone, nombreResponsable: Faker::Name.name)
+
 
 		#USUARIOS
 		uuuu= Usuario.new(nombreUsuario: "admin",
@@ -246,7 +325,7 @@ namespace :db do
 		uu.skip_confirmation!
 		uu.save!
 
-		uuu = Usuario.new(nombreUsuario: "Pepe",
+		uuu = Voluntario.new(nombreUsuario: "Pepe",
 								       password: password, 
 								       password_confirmation: password,  
 								       apellido_nombre: "Voluntario",
@@ -255,7 +334,8 @@ namespace :db do
 								       telefono: Faker::PhoneNumber.cell_phone,
 								       fax: Faker::PhoneNumber.phone_number,
                        foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample),
-											 confirmed_at: Time.now
+											 confirmed_at: Time.now,
+												legajo: 32901
 											 )
 		uuu.skip_confirmation!
 		uuu.save!
@@ -295,23 +375,26 @@ u6 =	Usuario.new(nombreUsuario: Faker::Internet.user_name(un6), password: passwo
 		u6.skip_confirmation!
 		u6.save!
 
-u7 =	Usuario.new(nombreUsuario: Faker::Internet.user_name(un7), password: password, password_confirmation: password, apellido_nombre: un7, email: Faker::Internet.email(un7), direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample),confirmed_at: Time.now)
+u7 =	Voluntario.new(nombreUsuario: Faker::Internet.user_name(un7), password: password, password_confirmation: password, apellido_nombre: un7, email: Faker::Internet.email(un7), direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample),confirmed_at: Time.now, legajo: 34532)
 		u7.skip_confirmation!
 		u7.save!
 
-u8 =	Usuario.new(nombreUsuario: Faker::Internet.user_name(un8), password: password, password_confirmation: password, apellido_nombre: un8, email: Faker::Internet.email(un8), direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample),confirmed_at: Time.now)
+u8 =	Voluntario.new(nombreUsuario: Faker::Internet.user_name(un8), password: password, password_confirmation: password, apellido_nombre: un8, email: Faker::Internet.email(un8), direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample),confirmed_at: Time.now, legajo: 34581)
 		u8.skip_confirmation!
 		u8.save!
 
-u9 =	Usuario.new(nombreUsuario: Faker::Internet.user_name(un9), password: password, password_confirmation: password, apellido_nombre: un9, email: Faker::Internet.email(un9), direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample),confirmed_at: Time.now)
+u9 =	Voluntario.new(nombreUsuario: Faker::Internet.user_name(un9), password: password, password_confirmation: password, apellido_nombre: un9, email: Faker::Internet.email(un9), direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample),confirmed_at: Time.now, legajo: 34582)
 		u9.skip_confirmation!
 		u9.save!
 
-u10 =	Usuario.new(nombreUsuario: Faker::Internet.user_name(un10), password: password, password_confirmation: password, apellido_nombre: un10, email: Faker::Internet.email(un10), direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample),confirmed_at: Time.now)
+u10 =	Voluntario.new(nombreUsuario: Faker::Internet.user_name(un10), password: password, password_confirmation: password, apellido_nombre: un10, email: Faker::Internet.email(un10), direccion: Faker::Address.street_address,  telefono: Faker::PhoneNumber.cell_phone, fax: Faker::PhoneNumber.phone_number, foto: File.open(Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample),confirmed_at: Time.now,legajo: 34583)
 		u10.skip_confirmation!
 		u10.save!
 
-v = Voluntario.new(nombreUsuario: "agustin",
+
+	#VOLUNTARIOS
+
+	v = Voluntario.new(nombreUsuario: "agustin",
        password: password, 
        password_confirmation: password,  
        apellido_nombre: "Serrano, Agustin",
@@ -327,137 +410,179 @@ v = Voluntario.new(nombreUsuario: "agustin",
 		v.skip_confirmation!
 		v.save!
 
+		#ESTADO ACADEMICOS
 
-    creado = EstadoProyecto.create(nombre: "Creado", descripcion: "El proyecto se encuentra en estado creado")
-    EstadoProyecto.create(nombre: "En Ejecución", descripcion: "El proyecto se encuentra en ejecución")
-    EstadoProyecto.create(nombre: "Suspendido", descripcion: "El proyecto se encuentra momentaneamente suspendido")
-    EstadoProyecto.create(nombre: "Cancelado", descripcion: "El proyecto se encuentra definitivamente cancelado")
-    EstadoProyecto.create(nombre: "Terminado", descripcion: "El proyecto ha terminado")
+		EstadoAcademico.create(cantidad_materias_aprobadas: 5, cantidad_materias_regulares: 2, cantidad_materias_cursando: 6, usuario: uu)
+		EstadoAcademico.create(cantidad_materias_aprobadas: 6, cantidad_materias_regulares: 2, cantidad_materias_cursando: 6, usuario: uuu)
+		EstadoAcademico.create(cantidad_materias_aprobadas: 7, cantidad_materias_regulares: 2, cantidad_materias_cursando: 6, usuario: u)
+		EstadoAcademico.create(cantidad_materias_aprobadas: 8, cantidad_materias_regulares: 2, cantidad_materias_cursando: 6, usuario: v)
+		EstadoAcademico.create(cantidad_materias_aprobadas: 9, cantidad_materias_regulares: 2, cantidad_materias_cursando: 6, usuario: u_otro)
+		EstadoAcademico.create(cantidad_materias_aprobadas: 10, cantidad_materias_regulares: 2, cantidad_materias_cursando: 6, usuario: u1)
+		EstadoAcademico.create(cantidad_materias_aprobadas: 0, cantidad_materias_regulares: 2, cantidad_materias_cursando: 6, usuario: u2)
+		EstadoAcademico.create(cantidad_materias_aprobadas: 2, cantidad_materias_regulares: 2, cantidad_materias_cursando: 6, usuario: u3)
+		EstadoAcademico.create(cantidad_materias_aprobadas: 3, cantidad_materias_regulares: 2, cantidad_materias_cursando: 6, usuario: u4)
+		EstadoAcademico.create(cantidad_materias_aprobadas: 21, cantidad_materias_regulares: 2, cantidad_materias_cursando: 6, usuario: u5)
+		EstadoAcademico.create(cantidad_materias_aprobadas: 40, cantidad_materias_regulares: 2, cantidad_materias_cursando: 6, usuario: u6)
+		EstadoAcademico.create(cantidad_materias_aprobadas: 30, cantidad_materias_regulares: 2, cantidad_materias_cursando: 6, usuario: u7)
+		EstadoAcademico.create(cantidad_materias_aprobadas: 2, cantidad_materias_regulares: 2, cantidad_materias_cursando: 6, usuario: u8)
+		EstadoAcademico.create(cantidad_materias_aprobadas: 3, cantidad_materias_regulares: 2, cantidad_materias_cursando: 6, usuario: u9)
+		EstadoAcademico.create(cantidad_materias_aprobadas: 41, cantidad_materias_regulares: 2, cantidad_materias_cursando: 6, usuario: u10)
+
+		#HISTORIAL ESTADO USUARIO
+
+		HistorialEstadoUsuario.create(usuario: v,estado_usuario: eu1, created_at: DateTime.new(2015, 1, 15, 18, 0, 0))
+		HistorialEstadoUsuario.create(usuario: u7,estado_usuario: eu2, created_at: DateTime.new(2015, 1, 15, 18, 0, 0))
+		HistorialEstadoUsuario.create(usuario: u8,estado_usuario: eu2, created_at: DateTime.new(2015, 1, 15, 18, 0, 0))
+		HistorialEstadoUsuario.create(usuario: u9,estado_usuario: eu2, created_at: DateTime.new(2015, 1, 15, 18, 0, 0))
+		HistorialEstadoUsuario.create(usuario: u10,estado_usuario: eu2, created_at: DateTime.new(2015, 1, 15, 18, 0, 0))
+		HistorialEstadoUsuario.create(usuario: uuu,estado_usuario: eu1, created_at: DateTime.new(2015, 1, 15, 18, 0, 0))
+		
+
+		#PRIVILEGIOS DE SISTEMA
+		AsignacionFuncion.create!(usuario: u, rol: rsdiego, esActual: true, descripcion: "default")
+		AsignacionFuncion.create!(usuario: uu, rol: rsdiego, esActual: true, descripcion: "default")
+		AsignacionFuncion.create!(usuario: u_otro, rol: rsdiego, esActual: true, descripcion: "default")
+		AsignacionFuncion.create!(usuario: u1, rol: rsdiego, esActual: true, descripcion: "default")
+		AsignacionFuncion.create!(usuario: u2, rol: rsdiego, esActual: true, descripcion: "default")
+		AsignacionFuncion.create!(usuario: u3, rol: rsdiego, esActual: true, descripcion: "default")
+		AsignacionFuncion.create!(usuario: u4, rol: rsdiego, esActual: true, descripcion: "default")
+		AsignacionFuncion.create!(usuario: u5, rol: rsdiego, esActual: true, descripcion: "default")
+		AsignacionFuncion.create!(usuario: u6, rol: rsdiego, esActual: true, descripcion: "default")
+		AsignacionFuncion.create!(usuario: u7, rol: rsdiego, esActual: true, descripcion: "default")
+		AsignacionFuncion.create!(usuario: u8, rol: rsdiego, esActual: true, descripcion: "default")
+		AsignacionFuncion.create!(usuario: u9, rol: rsdiego, esActual: true, descripcion: "default")
+		AsignacionFuncion.create!(usuario: u10, rol: rsdiego, esActual: true, descripcion: "default")
+		AsignacionFuncion.create!(usuario: v, rol: rsdiego, esActual: true, descripcion: "default")	
+		AsignacionFuncion.create!(usuario: uuu, rol: rsdiego, esActual: true, descripcion: "default")
+		AsignacionFuncion.create!(usuario: uuuu, rol: rsdiego, esActual: true, descripcion: "default")
+		
+
+		#PRIVILEGIOS DE COORDINADORSISTEMA
+		AsignacionFuncion.create!(usuario: u_otro, rol: coordinadorsistema, esActual: true, descripcion: "default")
 
 
-    EstadoActividad.create(nombre: "Creada", descripcion: "La actividad se encuentra creada")
-    EstadoActividad.create(nombre: "Planificada", descripcion: "La actividad se encuentra planificada")
-    EstadoActividad.create(nombre: "Ejecutada", descripcion: "La actividad se encuentra actualmente en ejecución")
-    EstadoActividad.create(nombre: "Terminada", descripcion: "La actividad ha terminado")
-    EstadoActividad.create(nombre: "Cancelada", descripcion: "La actividad ha sido cancelada")
-    EstadoActividad.create(nombre: "Creada", descripcion: "")
-    
 
-    
+		#EXPERIENCIA
+		e1=Experiencia.create(tieneExperiencia: true, cantidadExperiencia: "Baja", habilidad: h1, voluntario: v)
+		e2=Experiencia.create(tieneExperiencia: true, cantidadExperiencia: "Media", habilidad: h2, voluntario: uuu)
+		e3=Experiencia.create(tieneExperiencia: true, cantidadExperiencia: "Alta", habilidad: h3, voluntario: u7)
 
 
-    tipo_proyecto = TipoProyecto.create(nombre: "Voluntariado", descripcion: "Proyecto sin remuneración económica")
-    TipoProyecto.create(nombre: "Extensión", descripcion: "Proyecto con remuneración económica")
+		e1=Experiencia.create(tieneExperiencia: true, cantidadExperiencia: "Alta", habilidad: h1, voluntario: u8)
+		e2=Experiencia.create(tieneExperiencia: true, cantidadExperiencia:  "Media", habilidad: h2, voluntario: u9)
+		e3=Experiencia.create(tieneExperiencia: true, cantidadExperiencia: "Baja", habilidad: h3, voluntario: u10)
 
+		e1=Experiencia.create(tieneExperiencia: true, cantidadExperiencia: "Alta", habilidad: h1, voluntario: uuu)
+		e2=Experiencia.create(tieneExperiencia: true, cantidadExperiencia: "Baja", habilidad: h2, voluntario: u7)
+		e3=Experiencia.create(tieneExperiencia: true, cantidadExperiencia:  "Media", habilidad: h3, voluntario: u8)
+
+
+		#HORARIOS DISPONIBLES
+
+		hd1 = HorarioDisponible.create(diaSemana: '5', horaDesde: DateTime.new(2015, 1, 15, 12, 0, 0), horaHasta: DateTime.new(2015, 1, 15, 18, 0, 0), voluntario: v)
+		hd2 = HorarioDisponible.create(diaSemana: '6', horaDesde: DateTime.new(2015, 2, 15, 12, 0, 0), horaHasta: DateTime.new(2015, 2, 15, 17, 0, 0),voluntario: uuu)
+		hd3 = HorarioDisponible.create(diaSemana: '7', horaDesde: DateTime.new(2015, 3, 15, 12, 0, 0), horaHasta: DateTime.new(2015, 3, 15, 16, 0, 0),voluntario: u8)
+		hd4 = HorarioDisponible.create(diaSemana: '4', horaDesde: DateTime.new(2015, 4, 15, 12, 0, 0), horaHasta: DateTime.new(2015, 4, 15, 15, 0, 0),voluntario: u7)
+		hd5 = HorarioDisponible.create(diaSemana: '3', horaDesde: DateTime.new(2015, 5, 15, 12, 0, 0), horaHasta: DateTime.new(2015, 5, 15, 14, 0, 0),voluntario: u10)
+		hd6 = HorarioDisponible.create(diaSemana: '15', horaDesde: DateTime.new(2015, 6, 15, 12, 0, 0), horaHasta: DateTime.new(2015, 6, 15, 18, 0, 0),voluntario: u9)
+		hd7 = HorarioDisponible.create(diaSemana: '24', horaDesde: DateTime.new(2015, 7, 15, 12, 0, 0), horaHasta: DateTime.new(2015, 7, 15, 17, 0, 0),voluntario: v)
+		hd8 = HorarioDisponible.create(diaSemana: '2', horaDesde: DateTime.new(2015, 8, 15, 12, 0, 0), horaHasta:  DateTime.new(2015, 8, 15, 16, 0, 0),voluntario: v)
+
+
+		#NECESIDAD
     n= Necesidad.create(descripcion: "Queremos comenzar con la investigación en el manejo de autos juntos con la UNC",
 			usuario: u,
-		    titulo: "Sistema de manejo de auto confiable")
-    p = Proyecto.create(nombre: "Creación de un sistema confiable Autos", breveDescripcion: "Se desarrollará un sistema para poder administrador un auto sin errores y poder dirigirlo de manera autónoma",
-		    fechaInicio: 1.month.ago,
-		    fechaFin: 1.year.from_now,
+		    titulo: "Sistema de manejo de auto confiable", ambitoAplicacion: "UTN-FRM")
+		n1= Necesidad.create(descripcion: "Debido a la instalación de aires acondicionados y nuevos cableados de redes, las paredes no han quedado en buen estado. Se necesitaría pintarlos.",
+			usuario: uu,
+		    titulo: "Pintado de laboratorio JAVA", ambitoAplicacion:"Área Sistemas - UTN FRM")
+		n2= Necesidad.create(descripcion: "Nos insteresaría poder realizar algún evento de cine para directores independientes.",
+			usuario: u_otro,
+		    titulo: "Generar algún evento para los amantes de cine casero", ambitoAplicacion: "Secretaría de cultura de la ciudad de Mendoza")
+		n3= Necesidad.create(descripcion: "Para la asociación murialdo estamos buscando recolectar juguetes y alimentos para ir a pasar el día con los chicos. Ademas, se permite brindar algún tipo de curso para motivar a los chicos para entrar a la universidad",
+			usuario: u_otro,
+		    titulo: "Colecta de alimentos y juguetes para el día del niño", ambitoAplicacion: "Club Murialdo")
+
+		#EVENTOS PUBLICOS
+
+		ep1=EventoPublico.create(nombre: "Colecta de alimentos y juguetes", descripcion: "Colecta para los chicos de la asociación murialdo y pasar el dia del niño con ellos.", usuario: u_otro, fechaRealizacion: DateTime.new(2015, 8, 15, 14, 0, 0))
+
+		ep2=EventoPublico.create(nombre: "Pintada masiva del laboratorio de redes", descripcion: "Se necesita mano de obra para pintar el laboratorio de redes", usuario: u_otro, fechaRealizacion: DateTime.new(2015, 12, 3, 16, 30, 0))
+
+	#ASISTENCIA EVENTO PUBLICO
+
+		AsistenciaEvento.create(usuario: v,evento_publico: ep1)
+		AsistenciaEvento.create(usuario: uu,evento_publico: ep1)
+		AsistenciaEvento.create(usuario: uuu,evento_publico: ep2)
+		AsistenciaEvento.create(usuario: u,evento_publico: ep2)
+
+
+		#PROYECTO 1
+    p = Proyecto.create(nombre: "Creación de un sistema confiable para Autos", breveDescripcion: "Se desarrollará un sistema para poder manejar un auto sin errores y poder dirigirlo de manera autónoma",
+		    fechaInicio: 9.month.ago,
+		    fechaFin: DateTime.new(2015, 12, 14, 11, 0, 0),
 		    antecedentes: "Ninguno",
-		    justificacionProyecto: "Se desea avanzar ene l campo de la automaticación en cuanto al tema vehicular",
+		    justificacionProyecto: "Se desea avanzar en el campo de la automaticación en cuanto al tema vehicular",
 		    cantidadBeneficiariosDirectos: 100, cantidadBeneficiariosIndirectos: 200,
 		    justificacionImpacto: "Se está realizando en conjunto con un grpo de la UNC el cual permitirá la divulgación del proyecto y por ende su impacto",
 		    localizacionGeografica: "Mendoza",
 		    tipo_proyecto: tipo_proyecto ,
 		    necesidad: n)
 
-			#PRIVILEGIOS DE SISTEMA
- 			AsignacionFuncion.create!(usuario: u, rol: rsdiego, esActual: true, descripcion: "default")
-			AsignacionFuncion.create!(usuario: uu, rol: rsdiego, esActual: true, descripcion: "default")
-			AsignacionFuncion.create!(usuario: u_otro, rol: rsdiego, esActual: true, descripcion: "default")
-			AsignacionFuncion.create!(usuario: u1, rol: rsdiego, esActual: true, descripcion: "default")
-			AsignacionFuncion.create!(usuario: u2, rol: rsdiego, esActual: true, descripcion: "default")
-			AsignacionFuncion.create!(usuario: u3, rol: rsdiego, esActual: true, descripcion: "default")
-			AsignacionFuncion.create!(usuario: u4, rol: rsdiego, esActual: true, descripcion: "default")
-			AsignacionFuncion.create!(usuario: u5, rol: rsdiego, esActual: true, descripcion: "default")
-			AsignacionFuncion.create!(usuario: u6, rol: rsdiego, esActual: true, descripcion: "default")
-			AsignacionFuncion.create!(usuario: u7, rol: rsdiego, esActual: true, descripcion: "default")
-			AsignacionFuncion.create!(usuario: u8, rol: rsdiego, esActual: true, descripcion: "default")
-			AsignacionFuncion.create!(usuario: u9, rol: rsdiego, esActual: true, descripcion: "default")
-			AsignacionFuncion.create!(usuario: u10, rol: rsdiego, esActual: true, descripcion: "default")
-			AsignacionFuncion.create!(usuario: v, rol: rsdiego, esActual: true, descripcion: "default")	
-			AsignacionFuncion.create!(usuario: uuu, rol: rsdiego, esActual: true, descripcion: "default")
-			AsignacionFuncion.create!(usuario: uuuu, rol: rsdiego, esActual: true, descripcion: "default")
-			AsignacionFuncion.create!(usuario: u_otro, rol: coordinadorsistema, esActual: true, descripcion: "default")
+							#POSTULACIONES
+
+							Postulacion.create(usuario: u7,proyecto: p, aceptado: false)
+							Postulacion.create(usuario: v,proyecto: p, aceptado: false)
+							Postulacion.create(usuario: u8,proyecto: p, aceptado: false)
 
 
-			#PRIVILEGIOS DE COORDINADORSISTEMA
-					
+							#PRIVILEGIOS DE PROYECTO
+							AsignacionRol.create!(proyecto: p , usuario: u, rol: director , esActual: true, active: true)
+							AsignacionRol.create!(proyecto: p , usuario: u, rol: voluntario, esActual: true, active: true)
+							AsignacionRol.create!(proyecto: p , usuario: u_otro, rol: coordinador , esActual: true, active: true)
+							AsignacionRol.create!(proyecto: p , usuario: u_otro, rol: voluntario, esActual: true, active: true)
+							AsignacionRol.create!(proyecto: p , usuario: uuu, rol: voluntario, esActual: true, active: true)
+				
+							#HISTORIAL ESTADO PROYECTO
+      				HistorialEstadoProyecto.create(proyecto: p, estado_proyecto: creado, created_at: 1.month.ago )
+							HistorialEstadoProyecto.create(proyecto: p, estado_proyecto: enejec)
 
-			#PRIVILEGIOS DE PROYECTO
-			AsignacionRol.create!(proyecto: p , usuario: u, rol: director , esActual: true, active: true)
-      AsignacionRol.create!(proyecto: p , usuario: u, rol: voluntario, esActual: true, active: true)
-			AsignacionRol.create!(proyecto: p , usuario: u_otro, rol: coordinador , esActual: true, active: true)
-      AsignacionRol.create!(proyecto: p , usuario: u_otro, rol: voluntario, esActual: true, active: true)
-			 AsignacionRol.create!(proyecto: p , usuario: uuu, rol: voluntario, esActual: true, active: true)
+							#OBJETIVOS
+							
+							ogg1=ObjetivoGeneral.create(descripcion: "Se analiza los limites, alcances, objetivos y metas del sistema",titulo: "Análisis de requerimientos del sistema" , proyecto: p, active: true)
+								oe1=ObjetivoEspecifico.create(descripcion: "Se analizará que información obtener para comprender el sistema",titulo: "Comprender los alcances del sistema",objetivo_general: ogg1, active: true)
+								oe2=ObjetivoEspecifico.create(descripcion: "Se analizará quienes son los beneficiarios y cuales son sus necesidades",titulo: "Comprender los objetivos del sistema",objetivo_general: ogg1, active: true)
+									a11=Actividad.create(nombre: "Entrevista con el departamento de electronica de la UTN FRM", descripcion: "Se realizarán preguntas a los tecnicos especializados en el tema" , objetivo_especifico: oe1 , proyecto: p, fechaEstimadaInicio: DateTime.new(2015, 1, 15, 12, 0, 0) , duracion: 3 )
+									a12=Actividad.create(nombre: "Documentación de los límites", descripcion: "Se realizará la documentación correspondiente." , objetivo_especifico: oe1 , proyecto: p, active: true, fechaEstimadaInicio: DateTime.new(2015, 2, 15, 12, 0, 0) , duracion: 3 )
+								a13=Actividad.create(nombre: "Documentación de los alcances", descripcion: "Se realizará la documentación correspondiente." , objetivo_especifico: oe1 , proyecto: p, active: true , fechaEstimadaInicio: DateTime.new(2015, 3, 15, 12, 0, 0) , duracion: 3)
+							a14=Actividad.create(nombre: "Documentación de los objetivos", descripcion: "Se realizará la documentación correspondiente." , objetivo_especifico: oe1 , proyecto: p, active: true , fechaEstimadaInicio: DateTime.new(2015, 4, 15, 12, 0, 0) , duracion: 3)
+						a15=Actividad.create(nombre: "Documentación de los metas", descripcion: "Se realizará la documentación correspondiente." , objetivo_especifico: oe1 , proyecto: p, active: true , fechaEstimadaInicio: DateTime.new(2015, 5, 15, 12, 0, 0) , duracion: 3)
 
+							og2=ObjetivoGeneral.create(descripcion: "Diseño de la arquitectura del sistema mediante prototipos",titulo: "Diseño del Sistema" , proyecto: p, active: true)
 
+							HistorialEstadoActividad.create(actividad:  a11, estado_actividad: eaa1, created_at: DateTime.new(2015, 1, 15, 12, 0, 0)  )
+							HistorialEstadoActividad.create(actividad:  a12, estado_actividad: eaa1, created_at: DateTime.new(2015, 2, 15, 12, 0, 0)   ) 
+							HistorialEstadoActividad.create(actividad:  a13, estado_actividad: eaa1 , created_at: DateTime.new(2015, 3, 15, 12, 0, 0)  )
+							HistorialEstadoActividad.create(actividad:  a14, estado_actividad: eaa1, created_at: DateTime.new(2015, 4, 15, 12, 0, 0)   )
+							HistorialEstadoActividad.create(actividad:  a15, estado_actividad: eaa1 , created_at: DateTime.new(2015, 5, 15, 12, 0, 0)  )
+
+							#PRESUPUESTO 
+							presupuesto = Presupuesto.create(fechaPresentacion: 1.year.from_now, montoTotal: 23, aprobado: false, proyecto: p, usuario: u)
+
+										#DETALLE PRESUPUESTO
+										DetallePresupuesto.create(titulo: "Almuerzo", descripcion: "Se gastará en un almuerzo", monto: 15, presupuesto: presupuesto, concepto_gasto: concepto1)
+										DetallePresupuesto.create(titulo: "Cuadernos", descripcion: "Se gastará en un cuaderno para escribir", monto: 8, presupuesto: presupuesto, concepto_gasto: concepto2)
+
+							#INFORME GASTOS
+							informe_gasto = InformeGasto.create(montoTotal: 23, proyecto: p)
+
+										#DETALLE GASTOS
+										DetalleGasto.create(titulo: "Almuerzo", descripcion: "Se gastó en un almuerzo", monto: 10, informe_gasto_id: informe_gasto.id, concepto_gasto: concepto1)
+										DetalleGasto.create(titulo: "Cuadernos", descripcion: "Se gastó en un cuaderno para escribir", monto: 5, informe_gasto_id: informe_gasto.id, concepto_gasto: concepto2)
 			
 
-      HistorialEstadoProyecto.create(proyecto: p, estado_proyecto: creado)
-
-      OrganizacionExterna.create(denominacion: Faker::Company.name, sigla: Faker::Company.suffix, cuit: "30-1651654-9", fax: Faker::PhoneNumber.cell_phone, telefono: Faker::PhoneNumber.cell_phone, direccion: Faker::Address.street_address, cargoResponsable: Faker::Name.title, numeroContactoResponsable: Faker::PhoneNumber.cell_phone, nombreResponsable: Faker::Name.name)
-      OrganizacionExterna.create(denominacion: Faker::Company.name, sigla: Faker::Company.suffix, cuit: "30-1621312-9", fax: Faker::PhoneNumber.cell_phone, telefono: Faker::PhoneNumber.cell_phone, direccion: Faker::Address.street_address, cargoResponsable: Faker::Name.title, numeroContactoResponsable: Faker::PhoneNumber.cell_phone, nombreResponsable: Faker::Name.name)
-      OrganizacionExterna.create(denominacion: Faker::Company.name, sigla: Faker::Company.suffix, cuit: "30-1213154-9", fax: Faker::PhoneNumber.cell_phone, telefono: Faker::PhoneNumber.cell_phone, direccion: Faker::Address.street_address, cargoResponsable: Faker::Name.title, numeroContactoResponsable: Faker::PhoneNumber.cell_phone, nombreResponsable: Faker::Name.name)
-      OrganizacionExterna.create(denominacion: Faker::Company.name, sigla: Faker::Company.suffix, cuit: "30-1651154-9", fax: Faker::PhoneNumber.cell_phone, telefono: Faker::PhoneNumber.cell_phone, direccion: Faker::Address.street_address, cargoResponsable: Faker::Name.title, numeroContactoResponsable: Faker::PhoneNumber.cell_phone, nombreResponsable: Faker::Name.name)
-      OrganizacionExterna.create(denominacion: Faker::Company.name, sigla: Faker::Company.suffix, cuit: "30-1651654-9", fax: Faker::PhoneNumber.cell_phone, telefono: Faker::PhoneNumber.cell_phone, direccion: Faker::Address.street_address, cargoResponsable: Faker::Name.title, numeroContactoResponsable: Faker::PhoneNumber.cell_phone, nombreResponsable: Faker::Name.name)
-      OrganizacionExterna.create(denominacion: Faker::Company.name, sigla: Faker::Company.suffix, cuit: "30-1623254-9", fax: Faker::PhoneNumber.cell_phone, telefono: Faker::PhoneNumber.cell_phone, direccion: Faker::Address.street_address, cargoResponsable: Faker::Name.title, numeroContactoResponsable: Faker::PhoneNumber.cell_phone, nombreResponsable: Faker::Name.name)
-	  OrganizacionExterna.create(denominacion: Faker::Company.name, sigla: Faker::Company.suffix, cuit: "30-1128654-2", fax: Faker::PhoneNumber.cell_phone, telefono: Faker::PhoneNumber.cell_phone, direccion: Faker::Address.street_address, cargoResponsable: Faker::Name.title, numeroContactoResponsable: Faker::PhoneNumber.cell_phone, nombreResponsable: Faker::Name.name)
-	  OrganizacionExterna.create(denominacion: Faker::Company.name, sigla: Faker::Company.suffix, cuit: "30-1654254-3", fax: Faker::PhoneNumber.cell_phone, telefono: Faker::PhoneNumber.cell_phone, direccion: Faker::Address.street_address, cargoResponsable: Faker::Name.title, numeroContactoResponsable: Faker::PhoneNumber.cell_phone, nombreResponsable: Faker::Name.name)
-	  OrganizacionExterna.create(denominacion: Faker::Company.name, sigla: Faker::Company.suffix, cuit: "30-1321654-4", fax: Faker::PhoneNumber.cell_phone, telefono: Faker::PhoneNumber.cell_phone, direccion: Faker::Address.street_address, cargoResponsable: Faker::Name.title, numeroContactoResponsable: Faker::PhoneNumber.cell_phone, nombreResponsable: Faker::Name.name)
-	  OrganizacionExterna.create(denominacion: Faker::Company.name, sigla: Faker::Company.suffix, cuit: "30-1651454-5", fax: Faker::PhoneNumber.cell_phone, telefono: Faker::PhoneNumber.cell_phone, direccion: Faker::Address.street_address, cargoResponsable: Faker::Name.title, numeroContactoResponsable: Faker::PhoneNumber.cell_phone, nombreResponsable: Faker::Name.name)
-	  OrganizacionExterna.create(denominacion: Faker::Company.name, sigla: Faker::Company.suffix, cuit: "30-1636654-6
-	  	", fax: Faker::PhoneNumber.cell_phone, telefono: Faker::PhoneNumber.cell_phone, direccion: Faker::Address.street_address, cargoResponsable: Faker::Name.title, numeroContactoResponsable: Faker::PhoneNumber.cell_phone, nombreResponsable: Faker::Name.name)
 
 
-
-      concepto1 = ConceptoGasto.create(titulo: "Viáticos", descripcion: "Gastos realizando en viáticos")
-      concepto2 = ConceptoGasto.create(titulo: "Librería", descripcion: "Gastos realizando en librería")
-      concepto3 = ConceptoGasto.create(titulo: "Transporte", descripcion: "Gastos realizando en transporte")
-
-      
-      presupuesto = Presupuesto.create(fechaPresentacion: 1.year.from_now, montoTotal: 23, aprobado: false, proyecto: p, usuario: u)
-
-      DetallePresupuesto.create(titulo: "Almuerzo", descripcion: "Se gastará en un almuerzo", monto: 15, presupuesto: presupuesto, concepto_gasto: concepto1)
-      DetallePresupuesto.create(titulo: "Cuadernos", descripcion: "Se gastará en un cuaderno para escribir", monto: 8, presupuesto: presupuesto, concepto_gasto: concepto2)
-
-      informe_gasto = InformeGasto.create(montoTotal: 23, proyecto: p)
-
-      DetalleGasto.create(titulo: "Almuerzo", descripcion: "Se gastó en un almuerzo", monto: 10, informe_gasto_id: informe_gasto.id, concepto_gasto: concepto1)
-      DetalleGasto.create(titulo: "Cuadernos", descripcion: "Se gastó en un cuaderno para escribir", monto: 5, informe_gasto_id: informe_gasto.id, concepto_gasto: concepto2)
-      TipoHabilidad.create(nombre: "Programación", descripcion: "Conocimiento referidos a la programación")
-      TipoHabilidad.create(nombre: "Manualidades", descripcion: "Conocimiento vinculado con actividades creativas")
-      TipoHabilidad.create(nombre: "Administracion", descripcion: "Conocimiento vinculado con actividades creativas")
-      TipoHabilidad.create(nombre: "Oratoria", descripcion: "Conocimiento vinculado con actividades creativas")
-      h1 = Habilidad.create(nombre: "Pintar", descripcion: "Saber pintar con cualquier elemento", tipo_habilidad: TipoHabilidad.find_by(nombre: "Manualidades"))
-      h2 = Habilidad.create(nombre: "Programación en Java", descripcion: "Programación en el lenguaje Java", tipo_habilidad: TipoHabilidad.find_by(nombre: "Programación"))
-      h3 = Habilidad.create(nombre: "Programación en Python", descripcion: "Programación en el lenguaje Python", tipo_habilidad: TipoHabilidad.find_by(nombre: "Programación"))
-      h4 = Habilidad.create(nombre: "Programación en C/C++", descripcion: "Programación en el lenguaje C/C++", tipo_habilidad: TipoHabilidad.find_by(nombre: "Programación"))
-      h5 = Habilidad.create(nombre: "Programación en PHP", descripcion: "Programación en el lenguaje PHP", tipo_habilidad: TipoHabilidad.find_by(nombre: "Programación"))
-      h6 = Habilidad.create(nombre: "Programación en MySQL", descripcion: "Programación en el lenguaje MySQL", tipo_habilidad: TipoHabilidad.find_by(nombre: "Programación"))
-      h7 = Habilidad.create(nombre: "Presentación de Discursos", descripcion: "Habilidad para llevar a delante una charla", tipo_habilidad: TipoHabilidad.find_by(nombre: "Oratoria"))
-      h8 = Habilidad.create(nombre: "Armado de Presentaciones", descripcion: "Desarrollo de material audiovisual", tipo_habilidad: TipoHabilidad.find_by(nombre: "Oratoria"))
-      h9 = Habilidad.create(nombre: "Contabilidad", descripcion: "Conocimientos de cantabilidad y administracion contable", tipo_habilidad: TipoHabilidad.find_by(nombre: "Administracion"))
-      h10 = Habilidad.create(nombre: "Armado de Cartelería", descripcion: "Armado de afiches y posters", tipo_habilidad: TipoHabilidad.find_by(nombre: "Manualidades"))
-
-
-      TipoActividad.create(nombre: "Reunión", descripcion: "Actividades destinadas a las reuniones de cualquier índole")
-      TipoActividad.create(nombre: "Voluntariado", descripcion: "Actividades destinadas a realizar trabajo de voluntariado")
-
-      TipoActividad.create(nombre: "Propaganda", descripcion: "Actividades destinadas a realizar trabajo de Propaganda")
-      TipoActividad.create(nombre: "Control", descripcion: "Actividades destinadas a realizar trabajo de Control de Gestion")
-      TipoActividad.create(nombre: "Trabajo de Campo", descripcion: "Actividades destinadas a realizar trabajo de Campo fuera de la Facultad")
-      TipoActividad.create(nombre: "Busqueda de Financimiento", descripcion: "Actividades destinadas a realizar busqueda de posible financiamiento")
-      TipoActividad.create(nombre: "Busqueda de Voluntarios", descripcion: "Actividades destinadas a realizar buesqueda de nuevos voluntarios")
-
-			Experiencia.create(tieneExperiencia: true, cantidadExperiencia: 1, habilidad: h1, voluntario: v)
-			Experiencia.create(tieneExperiencia: true, cantidadExperiencia: 2, habilidad: h2, voluntario: v)
-			Experiencia.create(tieneExperiencia: true, cantidadExperiencia: 3, habilidad: h3, voluntario: v)
-
-	  TipoNotificacion.create(nombre: "Email")
-	  TipoNotificacion.create(nombre: "Sistema")
 
   end
 
