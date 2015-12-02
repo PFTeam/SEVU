@@ -8,7 +8,9 @@
       </ul>
     </div>
   <% end %>
-
+<ol class="breadcrumb">
+	<%= link_to "Volver Atras", :back %>
+ </ol>
 	<div class="col-lg-6">
 		<div class="inputs">
 			<%= f.input :nombreUsuario, label: 'Nombre de Usuario', placeholder: 'Usuario...', :required => true, :autofocus => true %>
