@@ -32,7 +32,7 @@ class NotificacionPredeterminadasController < ApplicationController
   # POST /notificacion_predeterminadas
   # POST /notificacion_predeterminadas.json
   def create
-		authorize! :create, NotificacionPredeterminada
+		#authorize! :create, NotificacionPredeterminada
     #@notificacion_predeterminada = NotificacionPredeterminada.new(notificacion_predeterminada_params)
     @notificacion_predeterminada = @proyecto.notificacion_predeterminadas.new(notificacion_predeterminada_params)
 
@@ -65,7 +65,7 @@ class NotificacionPredeterminadasController < ApplicationController
   # DELETE /notificacion_predeterminadas/1
   # DELETE /notificacion_predeterminadas/1.json
   def destroy
-		authorize! :destroy, NotificacionPredeterminada
+		#authorize! :destroy, NotificacionPredeterminada
     @notificacion_predeterminada.destroy
     respond_to do |format|
       format.html { redirect_to :back}#, notice: 'Notificacion predeterminada fue borrado satisfactoriamente.' }
@@ -75,8 +75,8 @@ class NotificacionPredeterminadasController < ApplicationController
   
   def gestionar_notificaciones
 
-		authorize! :gestionar_notificaciones, NotificacionPredeterminada
-    @proyectos = Proyecto.where(id: AsignacionRol.find_by(usuario_id: current_usuario.id, esActual: true, rol_id: Rol.find_by(nombre: 'Director').id).proyecto_id)
+		  #authorize! :gestionar_notificaciones, NotificacionPredeterminada
+    #@proyectos = Proyecto.where(id: AsignacionRol.find_by(usuario_id: current_usuario.id, esActual: true, rol_id: Rol.find_by(nombre: 'Director').id).proyecto_id)
 
 		#authorize! :gestionar_notificaciones, NotificacionPredeterminada
     #asignaciones = 
@@ -104,7 +104,6 @@ class NotificacionPredeterminadasController < ApplicationController
       end
     end
     #@proyectos = Proyecto.where(id: AsignacionRol.find_by(usuario_id: current_usuario.id, esActual: true, active: true, rol_id: Rol.find_by('nombre = ?','Coordinador').id).proyecto_id)
->>>>>>> 46c363dbaf4dbdaa35c1de55e54cd3d79a98d2ba
   end
 
   def notificaciones_predeterminadas 
