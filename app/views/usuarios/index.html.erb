@@ -25,6 +25,7 @@
         <td><%= usuario.direccion %></td>
         <td><%= l usuario.created_at %></td>
         <td><%= l usuario.updated_at %></td>
+				<td><%= link_to "Editar", edit_usuario_path(usuario) %></td>
       </tr>
     <% end %>
   </tbody>
