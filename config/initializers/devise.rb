@@ -129,6 +129,9 @@ Devise.setup do |config|
   # Options to be passed to the created cookie. For instance, you can set
   # :secure => true in order to force SSL only cookies.
   # config.rememberable_options = {}
+		
+	# Invalidates all the remember me tokens when the user signs out.
+  config.expire_all_remember_me_on_sign_out = true
 
   # ==> Configuration for :validatable
   # Range for password length. Default is 8..128.
@@ -226,6 +229,10 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
+
+	 # When set to false, does not sign a user in automatically after their password is
+  # reset. Defaults to true, so a user is signed in automatically after a reset.
+  config.sign_in_after_reset_password = true
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
