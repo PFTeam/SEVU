@@ -13,17 +13,7 @@
  </ol>
 	<div class="col-lg-6">
 		<div class="inputs">
-		 
 
-		<% if current_usuario != @usuario%>
-			<%= f.input :nombreUsuario, label: 'Nombre de Usuario', placeholder: 'Usuario...', :required => true, :autofocus => true %>
-			<br></br>
-			<%= f.input :apellido_nombre, label: 'Apellido, Nombre', placeholder: 'Nombre...', :required => true, :autofocus => true, disabled: true %>
-			<br></br> 
-			<%= f.input :email , label: 'Correo Electronico', placeholder: 'E-mail...', :required => true, :autofocus => true %>
-			<br></br>
-			<%= f.input :direccion, label: 'Dirección', placeholder: 'Calle, N°, Localidad, Provincia', :required => true, :autofocus => true, disabled: true %>
-		<% else %>
 			<%= f.input :nombreUsuario, label: 'Nombre de Usuario', placeholder: 'Usuario...', :required => true, :autofocus => true %>
 			<br></br>
 			<%= f.input :apellido_nombre, label: 'Apellido, Nombre', placeholder: 'Nombre...', :required => true, :autofocus => true %>
@@ -33,7 +23,7 @@
 			<%= f.input :direccion, label: 'Dirección', placeholder: 'Calle, N°, Localidad, Provincia', :required => true, :autofocus => true %>
 			<br></br> 
 			<%= f.file_field :foto , label: 'Foto: ', :required => true, :autofocus => true %>
-		<% end %>
+
 			<br></br>
 		</div>
 		<div class="actions">

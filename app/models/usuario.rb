@@ -4,6 +4,7 @@ class Usuario < ActiveRecord::Base
   # :omniauthable
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable, :lockable, :timeoutable
+
   
   has_many :postulaciones
   has_many :asignacion_roles
