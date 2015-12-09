@@ -113,7 +113,7 @@ class Ability
 							can :show, Proyecto, id: asignacionrol.proyecto
 
 							can [:show, :edit, :update], Actividad, proyecto: asignacionrol.proyecto
-							can [:new, :create, :show], Requisito, actividad: asignacionrol.proyecto.actividades.pluck(:id)
+							can [:new, :create, :show, :destroy], Requisito, actividad: asignacionrol.proyecto.actividades.pluck(:id)
 							can [:show, :index, :new, :create], Reporte
 							can [:index], AsignacionActividad, actividad: asignacionrol.proyecto.actividades.pluck(:id)
 							can [:index, :show], Habilidad
