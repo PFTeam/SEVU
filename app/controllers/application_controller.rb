@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
 		end
 		flash.alert = "No esta autorizado a acceder a la pagina solicitada."
   end
+
 =begin
 		rescue_from ActiveRecord::RecordNotFound, with: :error
 		rescue_from NameError, with: :error

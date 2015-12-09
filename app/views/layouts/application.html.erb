@@ -47,25 +47,33 @@
         </div>
 
           
-		<% if controller_name != 'sessions' && controller_name != 'usuarios' && controller_name != 'confirmations' && controller_name != 'passwords' && controller_name != 'registrations' && controller_name != 'unlocks' %>
+
 
   <!-- MENU SUPERIOR -->
 
 
   <div class="navbar-collapse collapse" id="navbar-main">
       <ul class="nav navbar-nav">
+				<% if can? :index, Proyecto; %>
         <li>
             <%= link_to 'Proyectos', proyectos_path %>
          </li>
+				<% end %>
+				<% if can? :index, EventoPublico; %>
          <li>
             <%= link_to 'Eventos Públicos', evento_publicos_path %>
          </li>
+				<% end %>
+				<% if can? :index, Necesidad; %>
          <li>
             <%= link_to 'Necesidades', necesidades_path %>
          </li>
+					<% end %>
+					<% if can? :index, Voluntario; %>
          <li>
             <%= link_to 'Voluntarios', voluntarios_path %>
          </li>
+					<% end %>
     	     <% if can? :reporte_new, ReporteGenerado; %>
            <li>
            <%= link_to 'Reportes', reporte_new_path %>
@@ -76,12 +84,18 @@
                   <%= link_to 'Auditoría', auditoria_path %>
                </li>
           <% end %>
+					 <% if can? :index, Usuario; %>
+              <li>
+                  <%= link_to 'Usuarios', usuarios_path %>
+               </li>
+          <% end %>
+  		<% if usuario_signed_in? %>
                <li>
                    <%= link_to 'Ayuda', ayudas_path %>
                </li>
       </ul>
 
-  
+
   <ul class="nav navbar-nav navbar-right">
   <%= render '/shared/notificaciones' %>
     
@@ -91,7 +105,8 @@
 	     <a href="#" class="dropdown-toggle pull-right" data-toggle="dropdown"><i class="fa fa-user"></i> <%= current_usuario.nombreUsuario  %></a>
 	     <ul class="dropdown-menu">
     	      <!--<li><a href="#"><i class="fa fa-user"></i> Perfil</a></li>-->
-    			<li><%= link_to content_tag(:i, fa_icon("user", text: "Mi Perfil")), edit_usuario_registration_path %></li>
+    			<li><%= link_to content_tag(:i, fa_icon("key", text: "Mi perfil")), edit_usuario_registration_path %></li>
+					<li><%= link_to content_tag(:i, fa_icon("user", text: "Datos de usuario")), edit_usuario_path(current_usuario) %></li>
     	      <!--<li><a href="#"><i class="fa fa-gear"></i> Configuraciones</a></li>-->
     			<% if puede_configurar? then %>
     				<li><%= link_to content_tag(:i, fa_icon("gear", text: "Configuraciones grales.")), configuraciones_generales_path %></li>
@@ -111,9 +126,10 @@
 	
   
   </ul>
+	 <% end %>
            </div>
 
-				<% end %>
+
 
 <!-- MENU VERTICAL (Poner las opciones dentro de cada menu superior -->
 

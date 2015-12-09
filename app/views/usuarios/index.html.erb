@@ -1,37 +1,33 @@
-<h1>Lista de Usuarios</h1>
+<h2>Lista de Usuarios</h2>
+<ol class="breadcrumb">
+	<%= link_to "Volver Atras", :back %>
+ </ol>
 
-<table>
+<table class="table table-hover table-striped tablesorter">
   <thead>
     <tr>
       <th>Foto</th>
-      <th>Nombre de Usuario   </th>
-      <th>Contraseña   </th>
-      <th>Apellido y Nombre   </th>
-      <th>Email   </th>
-      <th>Direccion  </th>
-      <th>Fecharegistro</th>
-      <th colspan="3"></th>
+      <th>Nombre de Usuario</th>
+      <th>Apellido, Nombre</th>
+      <th>Email</th>
+      <th>Direccion</th>
+      <th>Fecha de Registro</th>
+      <th>Fecha de Actualización</th>
     </tr>
   </thead>
 
   <tbody>
     <% @usuarios.each do |usuario| %>
-      <!-- TODO: redimensionar imagen -->
       <td><%= image_tag usuario.foto.url(:thumb) %></td>
         <td><%= usuario.nombreUsuario %></td>
-        <td><%= usuario.encrypted_password %></td>
         <td><%= usuario.apellido_nombre %></td>
         <td><%= usuario.email %></td>
         <td><%= usuario.direccion %></td>
-        <td><%= usuario.created_at %></td>
-        <td><%= link_to 'Ver', usuario %></td>
-        <td><%= link_to 'Editar', edit_usuario_path(usuario) %></td>
-        <td><%= link_to 'Borrar', usuario, method: :delete, data: { confirm: 'Esta seguro?' } %></td>
+        <td><%= l usuario.created_at %></td>
+        <td><%= l usuario.updated_at %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
 
-<%= link_to 'Nuevo Usuario', new_usuario_path %>

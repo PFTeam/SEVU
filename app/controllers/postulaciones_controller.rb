@@ -38,7 +38,7 @@ class PostulacionesController < ApplicationController
       if @postulacion.save
             sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
             Transaccion.create!(
-		    descripcion: "Creación de la Postulación al proyecto #{@postulacion.proyecto.nombre} del usuario #{@postulacion.usuario.nombreUsuario}: aceptado = #{@postulacion.aceptado}",
+		    descripcion: "Creación de la Postulación al proyecto #{@postulacion.proyecto.nombre} del usuario #{@postulacion.usuario.nombreUsuario}: aceptado = #{t @postulacion.aceptado.to_s}",
 		    sesion_id: sesion.id ,
 		    proyecto_id: @postulacion.proyecto.id)
 	format.html {redirect_to :controller => 'proyectos', :action => 'index'
@@ -90,7 +90,7 @@ flash[:success] = 'Postulacion fue borrada satisfactoriamente.' }
     @postulacion.save
             sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
             Transaccion.create!(
-		    descripcion: "Aceptación de la Postulación al proyecto #{@postulacion.proyecto.nombre} del usuario #{@postulacion.usuario.nombreUsuario}: aceptado = #{@postulacion.aceptado}" ,
+		    descripcion: "Aceptación de la Postulación al proyecto #{@postulacion.proyecto.nombre} del usuario #{@postulacion.usuario.nombreUsuario}: aceptado = #{t @postulacion.aceptado.to_s}" ,
 		    sesion_id: sesion.id ,
 		    proyecto_id: @postulacion.proyecto.id)
     respond_to do |format|
