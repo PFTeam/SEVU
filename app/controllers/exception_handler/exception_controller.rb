@@ -13,7 +13,10 @@ module ExceptionHandler
 
     def show
       @layout = self.send(:_layout)
-      @message = @status == 404 ? "Disculpe, esta página no existe  :)" : details[:message]
+      @message = "Disculpe, esta página no existe  :)" if @status == 500
+      @message = "Disculpe, esta página no existe  :)" if @status == 404
+
+      #@message = "Disculpe, esta página no existe  :)"
       render status: @status
     end
 
@@ -36,7 +39,7 @@ module ExceptionHandler
         when 404
           ExceptionHandler.config.error_layout || nil #-> inherits ApplicationController layout
         else
-          ExceptionHandler.config.exception_layout || 'error'
+          ExceptionHandler.config.error_layout || nil #-> inherits ApplicationController layout
       end     
     end
 
