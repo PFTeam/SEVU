@@ -8,6 +8,7 @@ class ActividadesController < ApplicationController
 		authorize! :index, Actividad
     @actividades = Actividad.all
     @proyecto = @actividades.last.proyecto
+		raise CanCan::AccessDenied if !Actividad.accessible_by(current_ability, :index).include?(@actividades.first) 
   end
 
   # GET /actividades/1
@@ -20,9 +21,9 @@ class ActividadesController < ApplicationController
 		
   # GET /actividades/new
   def new
-		authorize! :new, Actividad
     @objetivo_especifico = ObjetivoEspecifico.find(params[:objetivo_especifico_id])
     @actividad = Actividad.new(:objetivo_especifico_id => params[:objetivo_especifico_id])
+		raise CanCan::AccessDenied if !Actividad.accessible_by(current_ability, :new).include?(@actividad) 
     @proyecto = @actividad.objetivo_especifico.objetivo_general.proyecto
     @habilidades = Habilidad.all
     @tipoActividades = TipoActividad.all
@@ -42,8 +43,8 @@ class ActividadesController < ApplicationController
   # POST /actividades
   # POST /actividades.json
   def create
-		authorize! :create, Actividad
     @actividad = Actividad.new(actividad_params)
+		raise CanCan::AccessDenied if !Actividad.accessible_by(current_ability, :create).include?(@actividad)
     @actividad.historial_estado_actividades.new(estado_actividad_id: EstadoActividad.find_by(nombre: 'Creada').id, actividad_id: @actividad.id)
     @habilidades = Habilidad.all
     @tipoActividades = TipoActividad.all

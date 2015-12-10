@@ -4,15 +4,16 @@ class HistorialEstadoActividadesController < ApplicationController
   # GET /historial_estado_actividades
   # GET /historial_estado_actividades.json
   def index
-		authorize! :index, HistorialEstadoActividad
+		
     @actividad = Actividad.find(params[:actividad_id])
+		raise CanCan::AccessDenied if !HistorialEstadoActividad.accessible_by(current_ability, :index).include?(@actividad.historial_estado_actividades.first)
     @proyecto = @actividad.proyecto
   end
 
   # GET /historial_estado_actividades/1
   # GET /historial_estado_actividades/1.json
   def show
-		authorize! :show, HistorialEstadoActividad
+		raise CanCan::AccessDenied if !HistorialEstadoActividad.accessible_by(current_ability, :show).include?(@historial_estado_actividad)
   end
 
   # GET /historial_estado_actividades/new
@@ -23,7 +24,7 @@ class HistorialEstadoActividadesController < ApplicationController
 
   # GET /historial_estado_actividades/1/edit
   def edit
-		authorize! :edit, HistorialEstadoActividad
+		raise CanCan::AccessDenied if !HistorialEstadoActividad.accessible_by(current_ability, :edit).include?(@historial_estado_actividad)
 	  @proyecto = @historial_estado_actividad.actividad.proyecto
 	  @estados_posibles = EstadoActividad.estados_posibles(@historial_estado_actividad.actividad)
   end
@@ -31,9 +32,9 @@ class HistorialEstadoActividadesController < ApplicationController
   # POST /historial_estado_actividades
   # POST /historial_estado_actividades.json
   def create
-		authorize! :create, HistorialEstadoActividad
+		
     @historial_estado_actividad = HistorialEstadoActividad.new(historial_estado_actividad_params)
-
+		raise CanCan::AccessDenied if !HistorialEstadoActividad.accessible_by(current_ability, :create).include?(@historial_estado_actividad)
     respond_to do |format|
       if @historial_estado_actividad.save
             sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
@@ -54,7 +55,7 @@ class HistorialEstadoActividadesController < ApplicationController
   # PATCH/PUT /historial_estado_actividades/1
   # PATCH/PUT /historial_estado_actividades/1.json
   def update
-		authorize! :update, HistorialEstadoActividad
+		raise CanCan::AccessDenied if !HistorialEstadoActividad.accessible_by(current_ability, :update).include?(@historial_estado_actividad)
     @historial_estado_actividad_nuevo = HistorialEstadoActividad.new
     @historial_estado_actividad_nuevo.actividad_id = params[:historial_estado_actividad][:actividad_id]
     @historial_estado_actividad_nuevo.estado_actividad_id = params[:historial_estado_actividad][:estado_actividad_id]
@@ -78,7 +79,7 @@ class HistorialEstadoActividadesController < ApplicationController
   # DELETE /historial_estado_actividades/1
   # DELETE /historial_estado_actividades/1.json
   def destroy
-		authorize! :destroy, HistorialEstadoActividad
+		raise CanCan::AccessDenied if !HistorialEstadoActividad.accessible_by(current_ability, :destroy).include?(@historial_estado_actividad)
     @historial_estado_actividad.destroy
     respond_to do |format|
       format.html { redirect_to historial_estado_actividades_url

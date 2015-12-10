@@ -7,7 +7,9 @@ class AsignacionActividadesController < ApplicationController
   def index
 		authorize! :index, AsignacionActividad
 	  @actividad = Actividad.find(params[:actividad_id])
+		
 	  @asignacion_actividades = @actividad.asignacion_actividades
+
 	  #@asignacion_actividades = AsignacionActividad.where('actividad_id =?', @actividad.id ) 
 	  @proyecto = @actividad.proyecto
   end
@@ -22,6 +24,7 @@ class AsignacionActividadesController < ApplicationController
   def new
 		authorize! :new, AsignacionActividad
 	  @actividad = Actividad.find(params[:actividad_id])
+		raise CanCan::AccessDenied if !AsignacionActividad.accessible_by(current_ability, :new).include?(@actividad.asignacion_actividades.first)
 	@proyecto = @actividad.proyecto
     @asignacion_actividad = AsignacionActividad.new
   end
@@ -34,8 +37,9 @@ class AsignacionActividadesController < ApplicationController
   # POST /asignacion_actividades
   # POST /asignacion_actividades.json
   def create
-		authorize! :create, AsignacionActividad
+		
 		@actividad = Actividad.find(params[:asignacion_actividad][:actividad_id])
+		raise CanCan::AccessDenied if !AsignacionActividad.accessible_by(current_ability, :create).include?(@actividad.asignacion_actividades.first)
   	@proyecto = @actividad.proyecto
 
   	if params[:asignacion_actividad][:usuario_id].to_s.blank? #(!defined? (params[:usuario_id])) && (defined? params[:usuario])

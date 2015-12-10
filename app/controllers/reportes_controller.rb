@@ -31,7 +31,7 @@ class ReportesController < ApplicationController
   # GET /reportes/1
   # GET /reportes/1.json
   def show
-		authorize! :show, Reporte
+		raise CanCan::AccessDenied if !Reporte.accessible_by(current_ability, :show).include?(@reporte)
   end
 
   # GET /reportes/new
@@ -55,8 +55,9 @@ class ReportesController < ApplicationController
   # POST /reportes
   # POST /reportes.json
   def create
-		authorize! :create, Reporte
+		
     @reporte = Reporte.new(reporte_params)
+		raise CanCan::AccessDenied if !Reporte.accessible_by(current_ability, :create).include?(@reporte)
     @asignacion_actividad = @reporte.asignacion_actividad
     @actividad = @asignacion_actividad.actividad
     @proyecto = @actividad.proyecto
@@ -75,7 +76,7 @@ class ReportesController < ApplicationController
   # PATCH/PUT /reportes/1
   # PATCH/PUT /reportes/1.json
   def update
-		authorize! :update, Reporte
+		raise CanCan::AccessDenied if !Reporte.accessible_by(current_ability, :update).include?(@reporte)
     @asignacion_actividad = @reporte.asignacion_actividad
     @actividad = @asignacion_actividad.actividad
     @proyecto = @actividad.proyecto
@@ -94,7 +95,7 @@ flash[:success] = 'Reporte fue actualizado satisfactoriamente.' }
   # DELETE /reportes/1
   # DELETE /reportes/1.json
   def destroy
-		authorize! :destroy, Reporte
+		raise CanCan::AccessDenied if !Reporte.accessible_by(current_ability, :destroy).include?(@reporte)
     @reporte.destroy
     respond_to do |format|
       format.html { redirect_to reportes_url

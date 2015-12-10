@@ -11,29 +11,28 @@ class RequisitosController < ApplicationController
   # GET /requisitos/1
   # GET /requisitos/1.json
   def show
-		authorize! :show, Requisito
+		raise CanCan::AccessDenied if !Requisito.accessible_by(current_ability, :show).include?(@requisito)
   end
 
   # GET /requisitos/new
   def new
-		authorize! :new, Requisito
     @actividad = Actividad.find(params[:actividad_id])
     @proyecto = @actividad.proyecto
     @requisitos = Requisito.all.where(actividad: @actividad)
-    @requisito = Requisito.new
+    @requisito = Requisito.new(actividad: @actividad)
+		raise CanCan::AccessDenied if !Requisito.accessible_by(current_ability, :new).include?(@requisito)
   end
 
   # GET /requisitos/1/edit
   def edit
-		authorize! :edit, Requisito
+		raise CanCan::AccessDenied if !Requisito.accessible_by(current_ability, :edit).include?(@requisito.actividad)
   end
 
   # POST /requisitos
   # POST /requisitos.json
   def create
-		authorize! :create, Requisito
     @requisito = Requisito.new(requisito_params)
-
+		raise CanCan::AccessDenied if !Requisito.accessible_by(current_ability, :create).include?(@requisito.actividad)
     respond_to do |format|
 	    if @requisito.unico && @requisito.save
 	      format.html { redirect_to :action => 'new', :actividad_id => @requisito.actividad
@@ -50,7 +49,7 @@ class RequisitosController < ApplicationController
   # PATCH/PUT /requisitos/1
   # PATCH/PUT /requisitos/1.json
   def update
-		authorize! :update, Requisito
+		raise CanCan::AccessDenied if !Requisito.accessible_by(current_ability, :update).include?(@requisito.actividad)
     respond_to do |format|
       if @requisito.update(requisito_params)
 	      format.html { redirect_to :action => 'new', :actividad_id => @requisito.actividad
@@ -66,7 +65,7 @@ class RequisitosController < ApplicationController
   # DELETE /requisitos/1
   # DELETE /requisitos/1.json
   def destroy
-		authorize! :destroy, Requisito
+		raise CanCan::AccessDenied if !Requisito.accessible_by(current_ability, :destroy).include?(@requisito.actividad)
 	@actividad_id = @requisito.actividad_id
     @requisito.destroy
     respond_to do |format|
