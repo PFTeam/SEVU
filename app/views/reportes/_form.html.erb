@@ -1,5 +1,6 @@
 <%= simple_form_for(@reporte) do |f| %>
   <% if @reporte.errors.any? %>
+  <div class="row">
     <div class="col-lg-12">
       <div class="col-lg-4"></div>
        
@@ -13,6 +14,7 @@
             </ul>
           </div>
         
+      </div>
       </div>
   <% end %>
 
