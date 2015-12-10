@@ -563,10 +563,15 @@ u10 =	Voluntario.new(nombreUsuario: Faker::Internet.user_name(un10), password: p
 							og2=ObjetivoGeneral.create(descripcion: "Diseño de la arquitectura del sistema mediante prototipos",titulo: "Diseño del Sistema" , proyecto: p, active: true)
 
 							HistorialEstadoActividad.create(actividad:  a11, estado_actividad: eaa1, created_at: DateTime.new(2015, 1, 15, 12, 0, 0)  )
+							HistorialEstadoActividad.create(actividad:  a11, estado_actividad: eaa2, created_at: DateTime.new(2015, 1, 16, 12, 0, 0)   ) 
 							HistorialEstadoActividad.create(actividad:  a12, estado_actividad: eaa1, created_at: DateTime.new(2015, 2, 15, 12, 0, 0)   ) 
+							HistorialEstadoActividad.create(actividad:  a12, estado_actividad: eaa2, created_at: DateTime.new(2015, 2, 16, 12, 0, 0)   ) 
 							HistorialEstadoActividad.create(actividad:  a13, estado_actividad: eaa1 , created_at: DateTime.new(2015, 3, 15, 12, 0, 0)  )
+							HistorialEstadoActividad.create(actividad:  a13, estado_actividad: eaa2, created_at: DateTime.new(2015, 3, 16, 12, 0, 0)   ) 
 							HistorialEstadoActividad.create(actividad:  a14, estado_actividad: eaa1, created_at: DateTime.new(2015, 4, 15, 12, 0, 0)   )
+							HistorialEstadoActividad.create(actividad:  a14, estado_actividad: eaa2, created_at: DateTime.new(2015, 4, 16, 12, 0, 0)   ) 
 							HistorialEstadoActividad.create(actividad:  a15, estado_actividad: eaa1 , created_at: DateTime.new(2015, 5, 15, 12, 0, 0)  )
+							HistorialEstadoActividad.create(actividad:  a15, estado_actividad: eaa2, created_at: DateTime.new(2015, 5, 16, 12, 0, 0)   ) 
 
 							Requisito.create(actividad: a11, habilidad: h7)
 
