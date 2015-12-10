@@ -107,7 +107,7 @@ class NotificacionPredeterminadasController < ApplicationController
   end
 
   def notificaciones_predeterminadas 
-		authorize! :notificaciones_predeterminadas, NotificacionPredeterminada
+		#authorize! :notificaciones_predeterminadas, NotificacionPredeterminada
     @notificaciones_no_usadas = TipoNotificacion.all - @proyecto.tipo_notificaciones   #resto las listas
     
   end
