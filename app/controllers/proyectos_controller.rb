@@ -35,7 +35,7 @@ class ProyectosController < ApplicationController
     raise CanCan::AccessDenied if !Proyecto.accessible_by(current_ability, :edit).include?(@proyecto) 
     #Se cargan los TipoProyecto existentes para poder visualizarlos en la view
     @tipoProyectos = TipoProyecto.all
-  
+    @regionales = Regional.all
     #Se renderiza el modal de 'edit' mediante js 
 
 
@@ -56,7 +56,7 @@ class ProyectosController < ApplicationController
     @estadosPosibles = [EstadoProyecto.find_by(nombre: 'Creado')]
     @coordinador_rol = Rol.find_by(nombre: "Coordinador")
 
-    
+    @regionales = Regional.all
     #Se crea un HistorialEstadoProyecto con el Estado 'Creado'.
     @proyecto.historial_estado_proyectos.new(estado_proyecto_id: EstadoProyecto.find_by(nombre: 'Creado').id, proyecto_id: @proyecto.id)
 

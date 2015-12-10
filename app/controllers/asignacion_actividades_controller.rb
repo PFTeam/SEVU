@@ -125,10 +125,10 @@ class AsignacionActividadesController < ApplicationController
 
   def unica( usuario, actividad) 
   	if AsignacionActividad.all.where(usuario_id: usuario, actividad_id: actividad,vigente: true ).count == 0
-  		p true
+  		#p true
   		true
   	else
-  		p false
+  		#p false
   		false
   	end
   end
@@ -136,10 +136,10 @@ class AsignacionActividadesController < ApplicationController
   def en_proyecto( usuario, proyecto)
     #oras += Actividad.where("id = ? AND fechaRealInicio BETWEEN ? AND ? ", asig.actividad_id, inicio, fin).duracionReal
     #if (AsignacionRol.all.where(usuario_id: usuario, proyecto_id: proyecto).count == 0)
-    if (AsignacionRol.all.where("usuario_id = ? AND proyecto_id = ? AND (active = ? AND 'esActual' = ?)", usuario , proyecto, true, true).count == 0)
-      true
-    else
+    if (AsignacionRol.all.where(usuario_id: usuario, proyecto_id: proyecto, active: true, esActual: true).count == 0)
       false
+    else
+      true
     end
   end
 
