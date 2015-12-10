@@ -36,12 +36,13 @@ class ReportesController < ApplicationController
 
   # GET /reportes/new
   def new
-		authorize! :new, Reporte
+
     @actividad = Actividad.find(params[:actividad_id])
     @proyecto = @actividad.proyecto
     @asignacion_actividad = @actividad.asignacion_actividades.where('vigente =? and usuario_id =?', 'true' , current_usuario.id).uniq.last
     @asignacion_actividad_id = @asignacion_actividad.id
-    @reporte = Reporte.new
+    @reporte = Reporte.new(asignacion_actividad: @asignacion_actividad)
+		raise CanCan::AccessDenied if !Reporte.accessible_by(current_ability, :new).include?(@reporte)
   end
 
   # GET /reportes/1/edit
