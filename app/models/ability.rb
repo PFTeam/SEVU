@@ -113,10 +113,10 @@ class Ability
 						when 'proyecto_voluntario'
 							can :show, Proyecto, id: proyecto
 							can :show, Actividad, proyecto: proyecto
-							can [:edit, :update], Actividad, proyecto: proyecto, id: user.asignacion_actividades.pluck(:actividad_id)
-							can [:new, :create, :show, :destroy], Requisito, actividad: user.asignacion_actividades.pluck(:actividad_id)
+							can [:edit, :update], Actividad, proyecto: proyecto
+							can [:new, :create, :show, :destroy], Requisito, actividad: proyecto.actividades.pluck(:id)
 							can [:show, :index, :new, :create], Reporte, actividad: proyecto.actividades.pluck(:id)
-							can [:index], AsignacionActividad, actividad: proyecto.actividades.pluck(:id), id: user.asignacion_actividades
+							can [:index], AsignacionActividad, actividad: proyecto.actividades.pluck(:id)
 							can [:index, :show], Habilidad
 
 							can :show, ObjetivoGeneral, proyecto: proyecto
