@@ -31,16 +31,26 @@ class AsignacionActividadesController < ApplicationController
 
   # GET /asignacion_actividades/new
   def new
-		authorize! :new, AsignacionActividad
-	  @actividad = Actividad.find(params[:actividad_id])
-		
-	@proyecto = @actividad.proyecto
-    @asignacion_actividad = AsignacionActividad.new
+		 @actividad = Actividad.find(params[:actividad_id])
+		@proyecto = @actividad.proyecto
+    
+		if current_usuario.asignacion_roles.where(esActual: true, id: Rol.where(nombre: "Voluntario"), proyecto: @proyecto) && current_usuario.asignacion_roles.where(esActual: true, proyecto: @proyecto).count == 1
+			raise CanCan::AccessDenied if !AsignacionActividad.accessible_by(current_ability, :new).include?(@actividad.asignacion_actividades.first)
+		else
+			authorize! :new, AsignacionActividad
+		end
+	 
+			@asignacion_actividad = AsignacionActividad.new
+	
   end
 
   # GET /asignacion_actividades/1/edit
   def edit
-		raise CanCan::AccessDenied if !AsignacionActividad.accessible_by(current_ability, :edit).include?(@asignacion_actividad) 
+		if current_usuario.asignacion_roles.where(esActual: true, id: Rol.where(nombre: "Voluntario"), proyecto: @asignacion_actividad.actividad.proyecto) && current_usuario.asignacion_roles.where(esActual: true, proyecto: @asignacion_actividad.actividad.proyecto).count == 1
+			raise CanCan::AccessDenied if !AsignacionActividad.accessible_by(current_ability, :edit).include?(@asignacion_actividad)
+		else
+			authorize! :edit, AsignacionActividad
+		end
   end
 
   # POST /asignacion_actividades
@@ -49,7 +59,11 @@ class AsignacionActividadesController < ApplicationController
 		
 		@actividad = Actividad.find(params[:asignacion_actividad][:actividad_id])
   	@proyecto = @actividad.proyecto
-
+		if current_usuario.asignacion_roles.where(esActual: true, id: Rol.where(nombre: "Voluntario"), proyecto: @proyecto) && current_usuario.asignacion_roles.where(esActual: true, proyecto: @proyecto).count == 1
+			raise CanCan::AccessDenied if !AsignacionActividad.accessible_by(current_ability, :create).include?(@actividad.asignacion_actividades.first)
+		else
+			authorize! :create, AsignacionActividad
+		end
   	if params[:asignacion_actividad][:usuario_id].to_s.blank? #(!defined? (params[:usuario_id])) && (defined? params[:usuario])
       p "VACIOOO"
 
@@ -94,7 +108,11 @@ class AsignacionActividadesController < ApplicationController
   # PATCH/PUT /asignacion_actividades/1
   # PATCH/PUT /asignacion_actividades/1.json
   def update
-		raise CanCan::AccessDenied if !AsignacionActividad.accessible_by(current_ability, :update).include?(@asignacion_actividad) 
+		if current_usuario.asignacion_roles.where(esActual: true, id: Rol.where(nombre: "Voluntario"), proyecto: @asignacion_actividad.actividad.proyecto) && current_usuario.asignacion_roles.where(esActual: true, proyecto: @asignacion_actividad.actividad.proyecto).count == 1
+			raise CanCan::AccessDenied if !AsignacionActividad.accessible_by(current_ability, :update).include?(@asignacion_actividad)
+		else
+			authorize! :update, AsignacionActividad
+		end
     respond_to do |format|
       if @asignacion_actividad.update(asignacion_actividad_params)
         format.html { redirect_to @asignacion_actividad
@@ -123,7 +141,11 @@ class AsignacionActividadesController < ApplicationController
   # DELETE /asignacion_actividades/1
   # DELETE /asignacion_actividades/1.json
   def destroy
-		raise CanCan::AccessDenied if !AsignacionActividad.accessible_by(current_ability, :destroy).include?(@asignacion_actividad) 
+		if current_usuario.asignacion_roles.where(esActual: true, id: Rol.where(nombre: "Voluntario"), proyecto: @asignacion_actividad.actividad.proyecto) && current_usuario.asignacion_roles.where(esActual: true, proyecto: @asignacion_actividad.actividad.proyecto).count == 1
+			raise CanCan::AccessDenied if !AsignacionActividad.accessible_by(current_ability, :destroy).include?(@asignacion_actividad)
+		else
+			authorize! :destroy, AsignacionActividad
+		end
     @actividad_id = @asignacion_actividad.actividad_id
     @asignacion_actividad.destroy
     respond_to do |format|
@@ -158,7 +180,11 @@ class AsignacionActividadesController < ApplicationController
 
   def busqueda_filtrada
        @asignacion_actividad = AsignacionActividad.find(params[:id])
-				raise CanCan::AccessDenied if !AsignacionActividad.accessible_by(current_ability, :busqueda_filtrada).include?(@asignacion_actividad) 
+				if current_usuario.asignacion_roles.where(esActual: true, id: Rol.where(nombre: "Voluntario"), proyecto: @asignacion_actividad.actividad.proyecto) && current_usuario.asignacion_roles.where(esActual: true, proyecto: @asignacion_actividad.actividad.proyecto).count == 1
+			raise CanCan::AccessDenied if !AsignacionActividad.accessible_by(current_ability, :busqueda_filtrada).include?(@asignacion_actividad)
+		else
+			authorize! :busqueda_filtrada, AsignacionActividad
+		end
        @usuarios = Usuario.page(params[:page]).search query: params[:usuario]
 	
   end

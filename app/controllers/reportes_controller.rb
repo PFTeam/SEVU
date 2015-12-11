@@ -46,8 +46,11 @@ class ReportesController < ApplicationController
     @proyecto = @actividad.proyecto
 
 
+			if current_usuario.asignacion_roles.where(esActual: true, id: Rol.where(nombre: "Voluntario"), proyecto: @proyecto) && current_usuario.asignacion_roles.where(esActual: true, proyecto: @proyecto).count == 1
+			raise CanCan::AccessDenied if !Reporte.accessible_by(current_ability, :new).include?(@actividad.reportes.first)
+		else
 			authorize! :new, Reporte
-
+		end
     @asignacion_actividad = @actividad.asignacion_actividades.where('vigente =? and usuario_id =?', 'true' , current_usuario.id).uniq.last
     @asignacion_actividad_id = @asignacion_actividad.id
     @reporte = Reporte.new
@@ -71,7 +74,11 @@ class ReportesController < ApplicationController
     @actividad = @asignacion_actividad.actividad
     @proyecto = @actividad.proyecto
 
+			if current_usuario.asignacion_roles.where(esActual: true, id: Rol.where(nombre: "Voluntario"), proyecto: @proyecto) && current_usuario.asignacion_roles.where(esActual: true, proyecto: @proyecto).count == 1
+			raise CanCan::AccessDenied if !Reporte.accessible_by(current_ability, :create).include?(@actividad.reportes.first)
+		else
 			authorize! :create, Reporte
+		end
 
     
     respond_to do |format|

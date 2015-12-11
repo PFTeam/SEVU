@@ -74,7 +74,7 @@ class HistorialEstadoActividadesController < ApplicationController
     @historial_estado_actividad_nuevo.actividad_id = params[:historial_estado_actividad][:actividad_id]
     @historial_estado_actividad_nuevo.estado_actividad_id = params[:historial_estado_actividad][:estado_actividad_id]
 		if current_usuario.asignacion_roles.where(esActual: true, id: Rol.where(nombre: "Voluntario"), proyecto: @historial_estado_actividad_nuevo.actividad.proyecto) && current_usuario.asignacion_roles.where(esActual: true, proyecto: @historial_estado_actividad_nuevo.actividad.proyecto).count == 1
-			raise CanCan::AccessDenied if !HistorialEstadoActividad.accessible_by(current_ability, :update).include?(@historial_estado_actividad_nuevo)
+			raise CanCan::AccessDenied if !HistorialEstadoActividad.accessible_by(current_ability, :update).include?(@historial_estado_actividad_nuevo.actividad.historial_estado_actividades.first)
 		else
 			authorize! :update, HistorialEstadoActividad
 		end
