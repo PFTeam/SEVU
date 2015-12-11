@@ -57,13 +57,9 @@
       </div>
       <div style="overflow-wrap: break-word;">
         <strong>Resultados Esperados</strong>:</br>
-        <%= @actividad.mecanismoEvaluacion %> 
+        <%= @actividad.resultadosEsperados %> 
       </div>
       <div class="modal-footer">
-      </div>
-      <div style="overflow-wrap: break-word;">
-        <strong>Justificación del Impacto</strong>:</br>
-        <%= @proyecto.justificacionImpacto %>
       </div>
 
     </div> 
@@ -138,17 +134,25 @@
 
 
 
-
-
-
-<%= link_to 'Editar', edit_actividad_path(@actividad) %> |
-<% if @actividad.borrable %>
-       <%= link_to 'Borrar', @actividad, method: :delete, data: { confirm: 'Seguro?' } %> |
+<% if (current_usuario.asignacion_roles.where(esActual: true, active: true, proyecto: @proyecto, rol: Rol.find_by(nombre: "Director")).count > 0) || (current_usuario.asignacion_roles.where(esActual: true, active: true, proyecto: @proyecto, rol: Rol.find_by(nombre: "Coordinador")).count > 0) %>
+  <%= link_to 'Editar', edit_actividad_path(@actividad) %> |
+  <% if @actividad.borrable %>
+         <%= link_to 'Borrar', @actividad, method: :delete, data: { confirm: 'Seguro?' } %> |
+  <% end %>
+  <%= link_to 'Agregar Requisitos', new_requisito_path(:actividad_id => @actividad.id) %> |
+  <%= link_to 'Ver Historial', historial_estado_actividades_path(:actividad_id => @actividad.id)%> |
+  <%= link_to 'Asignación de Recursos', asignacion_actividades_path(:actividad_id => @actividad.id)%> |
+  <%= link_to 'Ver Reportes', reportes_path(:actividad_id => @actividad.id)%> |
+<% elsif current_usuario.participando_actividad(@actividad) > 0 %>
+  <%= link_to 'Editar', edit_actividad_path(@actividad) %> |
+  <% if @actividad.borrable %>
+         <%= link_to 'Borrar', @actividad, method: :delete, data: { confirm: 'Seguro?' } %> |
+  <% end %>
+  <%= link_to 'Agregar Requisitos', new_requisito_path(:actividad_id => @actividad.id) %> |
+  <%= link_to 'Ver Historial', historial_estado_actividades_path(:actividad_id => @actividad.id)%> |
+  <%= link_to 'Asignación de Recursos', asignacion_actividades_path(:actividad_id => @actividad.id)%> |
+  <%= link_to 'Ver Reportes', reportes_path(:actividad_id => @actividad.id)%> |
 <% end %>
-<%= link_to 'Agregar Requisitos', new_requisito_path(:actividad_id => @actividad.id) %> |
-<%= link_to 'Ver Historial', historial_estado_actividades_path(:actividad_id => @actividad.id)%> |
-<%= link_to 'Asignación de Recursos', asignacion_actividades_path(:actividad_id => @actividad.id)%> |
-<%= link_to 'Ver Reportes', reportes_path(:actividad_id => @actividad.id)%> |
 <%= link_to 'Atrás', @actividad.objetivo_especifico %>
 
 
