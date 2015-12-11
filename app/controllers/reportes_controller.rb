@@ -31,18 +31,27 @@ class ReportesController < ApplicationController
   # GET /reportes/1
   # GET /reportes/1.json
   def show
-		raise CanCan::AccessDenied if !Reporte.accessible_by(current_ability, :show).include?(@reporte)
+		if current_usuario.asignacion_roles.where(esActual: true, id: Rol.where(nombre: "Voluntario"), proyecto: @reporte.actividad.proyecto) && current_usuario.asignacion_roles.where(esActual: true, proyecto: @reporte.actividad.proyecto).count == 1
+			raise CanCan::AccessDenied if !Reporte.accessible_by(current_ability, :show).include?(@reporte)
+		else
+			authorize! :show, Reporte
+		end
+
   end
 
   # GET /reportes/new
   def new
-
+		
     @actividad = Actividad.find(params[:actividad_id])
     @proyecto = @actividad.proyecto
+
+
+			authorize! :new, Reporte
+
     @asignacion_actividad = @actividad.asignacion_actividades.where('vigente =? and usuario_id =?', 'true' , current_usuario.id).uniq.last
     @asignacion_actividad_id = @asignacion_actividad.id
-    @reporte = Reporte.new(asignacion_actividad: @asignacion_actividad)
-		raise CanCan::AccessDenied if !Reporte.accessible_by(current_ability, :new).include?(@reporte)
+    @reporte = Reporte.new
+		
   end
 
   # GET /reportes/1/edit
@@ -58,10 +67,13 @@ class ReportesController < ApplicationController
   def create
 		
     @reporte = Reporte.new(reporte_params)
-		raise CanCan::AccessDenied if !Reporte.accessible_by(current_ability, :create).include?(@reporte)
-    @asignacion_actividad = @reporte.asignacion_actividad
+		@asignacion_actividad = @reporte.asignacion_actividad
     @actividad = @asignacion_actividad.actividad
     @proyecto = @actividad.proyecto
+
+			authorize! :create, Reporte
+
+    
     respond_to do |format|
       if @reporte.save
 	      format.html { redirect_to :action => 'index', :actividad_id => @reporte.asignacion_actividad.actividad.id 

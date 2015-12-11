@@ -6,14 +6,23 @@ class HistorialEstadoActividadesController < ApplicationController
   def index
 		
     @actividad = Actividad.find(params[:actividad_id])
-		raise CanCan::AccessDenied if !HistorialEstadoActividad.accessible_by(current_ability, :index).include?(@actividad.historial_estado_actividades.first)
     @proyecto = @actividad.proyecto
+		if current_usuario.asignacion_roles.where(esActual: true, id: Rol.where(nombre: "Voluntario"), proyecto: @proyecto) && current_usuario.asignacion_roles.where(esActual: true, proyecto: @proyecto).count == 1
+			raise CanCan::AccessDenied if !HistorialEstadoActividad.accessible_by(current_ability, :index).include?(@actividad.historial_estado_actividades.first)
+		else
+			authorize! :index, HistorialEstadoActividad
+		end
   end
 
   # GET /historial_estado_actividades/1
   # GET /historial_estado_actividades/1.json
   def show
-		raise CanCan::AccessDenied if !HistorialEstadoActividad.accessible_by(current_ability, :show).include?(@historial_estado_actividad)
+		if current_usuario.asignacion_roles.where(esActual: true, id: Rol.where(nombre: "Voluntario"), proyecto: @historial_estado_actividad.actividad.proyecto) && current_usuario.asignacion_roles.where(esActual: true, proyecto: @historial_estado_actividad.actividad.proyecto).count == 1
+			raise CanCan::AccessDenied if !HistorialEstadoActividad.accessible_by(current_ability, :show).include?(@historial_estado_actividad)
+		else
+			authorize! :show, HistorialEstadoActividad
+		end
+
   end
 
   # GET /historial_estado_actividades/new
@@ -24,8 +33,13 @@ class HistorialEstadoActividadesController < ApplicationController
 
   # GET /historial_estado_actividades/1/edit
   def edit
-		raise CanCan::AccessDenied if !HistorialEstadoActividad.accessible_by(current_ability, :edit).include?(@historial_estado_actividad)
-	  @proyecto = @historial_estado_actividad.actividad.proyecto
+		@proyecto = @historial_estado_actividad.actividad.proyecto
+		if current_usuario.asignacion_roles.where(esActual: true, id: Rol.where(nombre: "Voluntario"), proyecto: @proyecto) && current_usuario.asignacion_roles.where(esActual: true, proyecto: @proyecto).count == 1
+			raise CanCan::AccessDenied if !HistorialEstadoActividad.accessible_by(current_ability, :edit).include?(@historial_estado_actividad)
+		else
+			authorize! :edit, HistorialEstadoActividad
+		end
+	  
 	  @estados_posibles = EstadoActividad.estados_posibles(@historial_estado_actividad.actividad)
   end
 
@@ -55,10 +69,15 @@ class HistorialEstadoActividadesController < ApplicationController
   # PATCH/PUT /historial_estado_actividades/1
   # PATCH/PUT /historial_estado_actividades/1.json
   def update
-		raise CanCan::AccessDenied if !HistorialEstadoActividad.accessible_by(current_ability, :update).include?(@historial_estado_actividad)
+		
     @historial_estado_actividad_nuevo = HistorialEstadoActividad.new
     @historial_estado_actividad_nuevo.actividad_id = params[:historial_estado_actividad][:actividad_id]
     @historial_estado_actividad_nuevo.estado_actividad_id = params[:historial_estado_actividad][:estado_actividad_id]
+		if current_usuario.asignacion_roles.where(esActual: true, id: Rol.where(nombre: "Voluntario"), proyecto: @historial_estado_actividad_nuevo.actividad.proyecto) && current_usuario.asignacion_roles.where(esActual: true, proyecto: @historial_estado_actividad_nuevo.actividad.proyecto).count == 1
+			raise CanCan::AccessDenied if !HistorialEstadoActividad.accessible_by(current_ability, :update).include?(@historial_estado_actividad_nuevo)
+		else
+			authorize! :update, HistorialEstadoActividad
+		end
     respond_to do |format|
       if @historial_estado_actividad_nuevo.save
             sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)

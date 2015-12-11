@@ -5,26 +5,35 @@ class AsignacionActividadesController < ApplicationController
   # GET /asignacion_actividades
   # GET /asignacion_actividades.json
   def index
-		authorize! :index, AsignacionActividad
+		
 	  @actividad = Actividad.find(params[:actividad_id])
 		
 	  @asignacion_actividades = @actividad.asignacion_actividades
 
 	  #@asignacion_actividades = AsignacionActividad.where('actividad_id =?', @actividad.id ) 
 	  @proyecto = @actividad.proyecto
+		if current_usuario.asignacion_roles.where(esActual: true, id: Rol.where(nombre: "Voluntario"), proyecto: @proyecto) && current_usuario.asignacion_roles.where(esActual: true, proyecto: @proyecto).count == 1
+			raise CanCan::AccessDenied if !AsignacionActividad.accessible_by(current_ability, :index).include?(@asignacion_actividades.first)
+		else
+			authorize! :index, AsignacionActividad
+		end
   end
 
   # GET /asignacion_actividades/1
   # GET /asignacion_actividades/1.json
   def show
-		raise CanCan::AccessDenied if !AsignacionActividad.accessible_by(current_ability, :show).include?(@asignacion_actividad) 
+		if current_usuario.asignacion_roles.where(esActual: true, id: Rol.where(nombre: "Voluntario"), proyecto: @asignacion_actividad.actividad.proyecto) && current_usuario.asignacion_roles.where(esActual: true, proyecto: @asignacion_actividad.actividad.proyecto).count == 1
+			raise CanCan::AccessDenied if !AsignacionActividad.accessible_by(current_ability, :show).include?(@asignacion_actividad)
+		else
+			authorize! :show, AsignacionActividad
+		end
   end
 
   # GET /asignacion_actividades/new
   def new
 		authorize! :new, AsignacionActividad
 	  @actividad = Actividad.find(params[:actividad_id])
-		raise CanCan::AccessDenied if !AsignacionActividad.accessible_by(current_ability, :new).include?(@actividad.asignacion_actividades.first)
+		
 	@proyecto = @actividad.proyecto
     @asignacion_actividad = AsignacionActividad.new
   end
@@ -39,7 +48,6 @@ class AsignacionActividadesController < ApplicationController
   def create
 		
 		@actividad = Actividad.find(params[:asignacion_actividad][:actividad_id])
-		raise CanCan::AccessDenied if !AsignacionActividad.accessible_by(current_ability, :create).include?(@actividad.asignacion_actividades.first)
   	@proyecto = @actividad.proyecto
 
   	if params[:asignacion_actividad][:usuario_id].to_s.blank? #(!defined? (params[:usuario_id])) && (defined? params[:usuario])

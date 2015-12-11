@@ -23,7 +23,7 @@ class ActividadesController < ApplicationController
   def new
     @objetivo_especifico = ObjetivoEspecifico.find(params[:objetivo_especifico_id])
     @actividad = Actividad.new(:objetivo_especifico_id => params[:objetivo_especifico_id])
-		raise CanCan::AccessDenied if !Actividad.accessible_by(current_ability, :new).include?(@actividad) 
+		authorize! :new, Actividad 
     @proyecto = @actividad.objetivo_especifico.objetivo_general.proyecto
     @habilidades = Habilidad.all
     @tipoActividades = TipoActividad.all
@@ -33,8 +33,13 @@ class ActividadesController < ApplicationController
 
   # GET /actividades/1/edit
   def edit
-		raise CanCan::AccessDenied if !Actividad.accessible_by(current_ability, :edit).include?(@actividad) 
-    @proyecto = @actividad.objetivo_especifico.objetivo_general.proyecto
+		@proyecto = @actividad.objetivo_especifico.objetivo_general.proyecto
+		if current_usuario.asignacion_roles.where(esActual: true, id: Rol.where(nombre: "Voluntario"), proyecto: @proyecto) && current_usuario.asignacion_roles.where(esActual: true, proyecto: @proyecto).count == 1
+			raise CanCan::AccessDenied if !Actividad.accessible_by(current_ability, :edit).include?(@actividad)
+		else
+			authorize! :edit, Actividad
+		end
+    
     @habilidades = Habilidad.all
     @tipoActividades = TipoActividad.all
 		
@@ -44,7 +49,7 @@ class ActividadesController < ApplicationController
   # POST /actividades.json
   def create
     @actividad = Actividad.new(actividad_params)
-		raise CanCan::AccessDenied if !Actividad.accessible_by(current_ability, :create).include?(@actividad)
+		authorize! :create, Actividad
     @actividad.historial_estado_actividades.new(estado_actividad_id: EstadoActividad.find_by(nombre: 'Creada').id, actividad_id: @actividad.id)
     @habilidades = Habilidad.all
     @tipoActividades = TipoActividad.all
@@ -105,10 +110,15 @@ class ActividadesController < ApplicationController
   # PATCH/PUT /actividades/1
   # PATCH/PUT /actividades/1.json
   def update
-		raise CanCan::AccessDenied if !Actividad.accessible_by(current_ability, :update).include?( @actividad) 
+		@proyecto = @actividad.proyecto
+		if current_usuario.asignacion_roles.where(esActual: true, id: Rol.where(nombre: "Voluntario"), proyecto: @proyecto) && current_usuario.asignacion_roles.where(esActual: true, proyecto: @proyecto).count == 1
+			raise CanCan::AccessDenied if !Actividad.accessible_by(current_ability, :update).include?(@actividad)
+		else
+			authorize! :update, Actividad
+		end
     @habilidades = Habilidad.all
     @tipoActividades = TipoActividad.all
-    @proyecto = @actividad.proyecto
+    
     @actividad.assign_attributes(actividad_params)
     if params[:actividad][:repetitiva] == "1"
       @actividad.repetitiva = true      
@@ -166,7 +176,7 @@ class ActividadesController < ApplicationController
   # DELETE /actividades/1
   # DELETE /actividades/1.json
   def destroy
-		raise CanCan::AccessDenied if !Actividad.accessible_by(current_ability, :destroy).include?( @actividad) 
+		raise CanCan::AccessDenied if !Actividad.accessible_by(current_ability, :destroy).include?(@actividad) 
     @objetivo_especifico = @actividad.objetivo_especifico
     @actividad.active = false
     @actividad.save

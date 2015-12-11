@@ -19,7 +19,7 @@ class Actividad < ActiveRecord::Base
   validates :nombre, :length => { :maximum => 250 }, :presence => true
   validates :descripcion , :presence => true
   
-  #before_save :actualizar_estado
+  before_save :actualizar_estado
 
   def actualizar_estado
 	  if ( !self.duracionReal.nil? && !self.fechaRealInicio.nil? && (self.historial_estado_actividades.last.estado_actividad.nombre == 'Creada' || self.historial_estado_actividades.last.estado_actividad.nombre == 'Planificada' ))

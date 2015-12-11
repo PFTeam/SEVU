@@ -11,7 +11,11 @@ class RequisitosController < ApplicationController
   # GET /requisitos/1
   # GET /requisitos/1.json
   def show
-		raise CanCan::AccessDenied if !Requisito.accessible_by(current_ability, :show).include?(@requisito)
+		if current_usuario.asignacion_roles.where(esActual: true, id: Rol.where(nombre: "Voluntario"), proyecto: @requisito.actividad.proyecto) && current_usuario.asignacion_roles.where(esActual: true, proyecto: @requisito.actividad.proyecto).count == 1
+			raise CanCan::AccessDenied if !Requisito.accessible_by(current_ability, :show).include?(@requisito)
+		else
+			authorize! :show, Requisito
+		end
   end
 
   # GET /requisitos/new
@@ -20,19 +24,27 @@ class RequisitosController < ApplicationController
     @proyecto = @actividad.proyecto
     @requisitos = Requisito.all.where(actividad: @actividad)
     @requisito = Requisito.new(actividad: @actividad)
-		raise CanCan::AccessDenied if !Requisito.accessible_by(current_ability, :new).include?(@requisito)
+		if current_usuario.asignacion_roles.where(esActual: true, id: Rol.where(nombre: "Voluntario"), proyecto: @proyecto) && current_usuario.asignacion_roles.where(esActual: true, proyecto: @proyecto).count == 1
+			raise CanCan::AccessDenied if !Requisito.accessible_by(current_ability, :new).include?(@requisito)
+		else
+			authorize! :new, Requisito
+		end
   end
 
   # GET /requisitos/1/edit
   def edit
-		raise CanCan::AccessDenied if !Requisito.accessible_by(current_ability, :edit).include?(@requisito.actividad)
+		raise CanCan::AccessDenied if !Requisito.accessible_by(current_ability, :edit).include?(@requisito)
   end
 
   # POST /requisitos
   # POST /requisitos.json
   def create
     @requisito = Requisito.new(requisito_params)
-		raise CanCan::AccessDenied if !Requisito.accessible_by(current_ability, :create).include?(@requisito.actividad)
+		if current_usuario.asignacion_roles.where(esActual: true, id: Rol.where(nombre: "Voluntario"), proyecto: @requisito.actividad.proyecto) && current_usuario.asignacion_roles.where(esActual: true, proyecto: @requisito.actividad.proyecto).count == 1
+			raise CanCan::AccessDenied if !Requisito.accessible_by(current_ability, :create).include?(@requisito)
+		else
+			authorize! :create, Requisito
+		end
     respond_to do |format|
 	    if @requisito.unico && @requisito.save
 	      format.html { redirect_to :action => 'new', :actividad_id => @requisito.actividad
@@ -49,7 +61,7 @@ class RequisitosController < ApplicationController
   # PATCH/PUT /requisitos/1
   # PATCH/PUT /requisitos/1.json
   def update
-		raise CanCan::AccessDenied if !Requisito.accessible_by(current_ability, :update).include?(@requisito.actividad)
+		raise CanCan::AccessDenied if !Requisito.accessible_by(current_ability, :update).include?(@requisito)
     respond_to do |format|
       if @requisito.update(requisito_params)
 	      format.html { redirect_to :action => 'new', :actividad_id => @requisito.actividad
@@ -65,7 +77,11 @@ class RequisitosController < ApplicationController
   # DELETE /requisitos/1
   # DELETE /requisitos/1.json
   def destroy
-		raise CanCan::AccessDenied if !Requisito.accessible_by(current_ability, :destroy).include?(@requisito.actividad)
+		if current_usuario.asignacion_roles.where(esActual: true, id: Rol.where(nombre: "Voluntario"), proyecto: @requisito.actividad.proyecto) && current_usuario.asignacion_roles.where(esActual: true, proyecto: @requisito.actividad.proyecto).count == 1
+			raise CanCan::AccessDenied if !Requisito.accessible_by(current_ability, :destroy).include?(@requisito)
+		else
+			authorize! :destroy, Requisito
+		end
 	@actividad_id = @requisito.actividad_id
     @requisito.destroy
     respond_to do |format|
