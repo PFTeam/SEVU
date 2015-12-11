@@ -72,8 +72,11 @@ class Ability
 						end
 					end
 				end
-			user.asignacion_roles.where(esActual: true).each do |asignacionrol|
+			asig_rols = user.asignacion_roles.where(esActual: true)
+			asig_rols.each do |asignacionrol|
 				proyecto = asignacionrol.proyecto
+				count_rols = asig_rols.where(proyecto: proyecto).count
+				if (count_rols > 1 &&  asignacionrol.rol.nombre != 'Voluntario') || (count_rols == 1)
 				asignacionrol.rol.asignacion_rol_predefinidos.where(esActual: true).each do |asignacionrolpredefinido|
 					case asignacionrolpredefinido.privilegio.nombre
 						when 'detalle_presupuestos'
@@ -113,11 +116,14 @@ class Ability
 						when 'proyecto_voluntario'
 							can :show, Proyecto, id: proyecto
 							can :show, Actividad, proyecto: proyecto
-							can [:edit, :update], Actividad, proyecto: proyecto
-							can [:new, :create, :show, :destroy], Requisito, actividad: proyecto.actividades.pluck(:id)
-							can [:show, :index, :new, :create], Reporte, actividad: proyecto.actividades.pluck(:id)
-							can [:index], AsignacionActividad, actividad: proyecto.actividades.pluck(:id)
+
+							can [:edit, :update], Actividad, proyecto: proyecto, id: user.asignacion_actividades.where(vigente: true).pluck(:actividad_id)
+							can [:new, :create, :show, :destroy], Requisito, actividad: user.asignacion_actividades.where(vigente: true).pluck(:actividad_id) 
+							can [:show, :new, :create], Reporte, asignacion_actividad: user.asignacion_actividades.where(vigente: true).pluck(:id)
+							can :index, Reporte
+							can :index, AsignacionActividad, actividad: proyecto.actividades.pluck(:id), id: user.asignacion_actividades.where(vigente: true).pluck(:id)
 							can [:index, :show], Habilidad
+							can [:show, :index, :edit, :update], HistorialEstadoActividad, actividad: user.asignacion_actividades.where(vigente: true).pluck(:actividad_id)							
 
 							can :show, ObjetivoGeneral, proyecto: proyecto
 							can :show, ObjetivoEspecifico, objetivo_general: proyecto.objetivo_generales.pluck(:id)
@@ -156,7 +162,7 @@ class Ability
 							can :show, ObjetivoEspecifico, objetivo_general: proyecto.objetivo_generales.pluck(:id)
 							can :index, ObjetivoEspecifico, objetivo_general: proyecto.objetivo_generales.pluck(:id)
 						when 'edit_actividad'
-							can [:edit, :update], Actividad, proyecto: proyecto, id: user.asignacion_actividades.pluck(:actividad_id)
+							can [:edit, :update], Actividad
 							can :show, Actividad, proyecto: proyecto					
 							can :used, DetalleGasto, id: proyecto.informe_gasto.detalle_gastos.pluck(:id) if proyecto.informe_gasto.present?
 							can :cin, DetalleGasto
@@ -252,6 +258,7 @@ class Ability
 								can :manage, NotificacionPredeterminada
 					end
 				end
+			end
 			end
 		end
 	end

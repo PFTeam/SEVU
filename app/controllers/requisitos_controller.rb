@@ -25,7 +25,7 @@ class RequisitosController < ApplicationController
     @requisitos = Requisito.all.where(actividad: @actividad)
     @requisito = Requisito.new(actividad: @actividad)
 		if current_usuario.asignacion_roles.where(esActual: true, id: Rol.where(nombre: "Voluntario"), proyecto: @proyecto) && current_usuario.asignacion_roles.where(esActual: true, proyecto: @proyecto).count == 1
-			raise CanCan::AccessDenied if !Requisito.accessible_by(current_ability, :new).include?(@requisito)
+			raise CanCan::AccessDenied if !Requisito.accessible_by(current_ability, :new).include?(@requisitos.first)
 		else
 			authorize! :new, Requisito
 		end
@@ -41,7 +41,7 @@ class RequisitosController < ApplicationController
   def create
     @requisito = Requisito.new(requisito_params)
 		if current_usuario.asignacion_roles.where(esActual: true, id: Rol.where(nombre: "Voluntario"), proyecto: @requisito.actividad.proyecto) && current_usuario.asignacion_roles.where(esActual: true, proyecto: @requisito.actividad.proyecto).count == 1
-			raise CanCan::AccessDenied if !Requisito.accessible_by(current_ability, :create).include?(@requisito)
+			raise CanCan::AccessDenied if !Requisito.accessible_by(current_ability, :create).include?(Requisito.all.where(actividad: @requisito.actividad).first)
 		else
 			authorize! :create, Requisito
 		end

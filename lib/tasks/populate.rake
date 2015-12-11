@@ -151,6 +151,7 @@ namespace :db do
 			arcc9diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap31diego , rol: coordinador)
 			arcc10diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap34diego , rol: coordinador)
 			arcc11diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap25diego , rol: coordinador)
+			arccc12=AsignacionRolPredefinido.create(esActual: true, privilegio: pap53diego  , rol: coordinador)
 			arcc12diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap8diego , rol: coordinador)
 			arcc13diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap21diego  , rol: coordinador)
 			arcc14diego=AsignacionRolPredefinido.create(esActual: true, privilegio: pap39diego , rol: coordinador)
