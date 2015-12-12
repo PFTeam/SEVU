@@ -32,7 +32,7 @@
                </ul>
           </li>
 	    <% if defined?(@proyecto) && !@proyecto.id.nil? %>
-              <% if (can? :create, AsignacionRol) || (can? :index, Postulacion) then %>
+              <% if Proyecto.accessible_by(current_ability, :edit).include?(@proyecto) then %>
                 <li>
               <a class="collapsed" data-target="#recursos" data-toggle="collapse" href="javascript:;" aria-expanded="false">
                    Recursos
@@ -62,7 +62,7 @@
                   <%= link_to 'Objetivos Generales', objetivo_generales_path(:proyecto_id => @proyecto.id) %>
               </li>
             <% end %>
-            <% if (can? :create, Presupuesto) || (can? :create, InformeGasto) then %>
+            <% if Proyecto.accessible_by(current_ability, :edit).include?(@proyecto) then %>
             <li>
               <a class="collapsed" data-target="#finanzas" data-toggle="collapse" href="javascript:;" aria-expanded="false">
                    Finanzas

@@ -48,5 +48,6 @@
     <% end %>
 
 <br>
-
+<% if Proyecto.accessible_by(current_ability, :edit).include?(@proyecto) %>
 <%= link_to 'Nuevo Objetivo general', new_objetivo_general_path(:proyecto_id => params[:proyecto_id]) %>
+<% end %>

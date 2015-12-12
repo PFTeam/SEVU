@@ -82,8 +82,9 @@
               </div>
             </div>
  <% end %>
+<% if Proyecto.accessible_by(current_ability, :edit).include?(@proyecto) %>
 <%= link_to 'Nueva Actividad', new_actividad_path(:objetivo_especifico_id => @objetivo_especifico.id, :proyecto_id => @objetivo_especifico.objetivo_general.proyecto.id) %>
-
+ <% end %>
 </div>
 
 

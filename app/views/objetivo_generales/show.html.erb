@@ -82,8 +82,8 @@
             </div>
  <% end %>
 
-
+<% if Proyecto.accessible_by(current_ability, :edit).include?(@proyecto) %>
 <%= link_to 'Nuevo Objetivo especifico', new_objetivo_especifico_path(:objetivo_general_id => @objetivo_general.id) %>
-
+<% end %>
 
 </div>
