@@ -176,6 +176,7 @@ class Ability
 						when 'manage_postulacion'
 							can :used, Postulacion, proyecto: proyecto
 							can :cin, Postulacion
+							can :aceptar, Postulacion, proyecto: proyecto
 						when 'asignacion_actividad'
 							can [:used,:busqueda_filtrada,:dar_baja], AsignacionActividad, actividad: proyecto.actividades.pluck(:id)
 							can :cin, AsignacionActividad

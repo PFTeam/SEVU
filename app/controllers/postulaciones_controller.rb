@@ -85,7 +85,9 @@ flash[:success] = 'Postulacion fue borrada satisfactoriamente.' }
   end
 
   def aceptar
+		
     @postulacion = Postulacion.find(params[:id])
+		raise CanCan::AccessDenied if !Postulacion.accessible_by(current_ability, :aceptar).include?(@postulacion)
     @postulacion.aceptar
     @postulacion.save
             sesion= Sesion.find_by(usuario_id: current_usuario.id, fechaFin: nil)
