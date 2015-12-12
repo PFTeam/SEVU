@@ -246,7 +246,7 @@ class ReporteGeneradosController < ApplicationController
 								@asignaciones= AsignacionActividad.where("usuario_id = ?   ", user)
 								@asignaciones.each do |asig|
 									@act = Actividad.find_by(id: asig.actividad_id)
-									if @act.fechaRealInicio.between?(inicio,fin) && @act.duracionReal.present?
+									if @act.fechaRealInicio.present? && @act.fechaRealInicio.between?(inicio,fin) && @act.duracionReal.present?
 											horas += @act.duracionReal 
 									end
 								end
